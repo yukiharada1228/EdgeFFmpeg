@@ -5,6 +5,7 @@ import type {PixelArithmetic} from '@edge-ffmpeg/swscale';
 import {compileMultiFrameGraph} from './video-filter-graph.js';
 import type {Geometry} from './video-graph-formats.js';
 import {flipVideoFrame} from './video-flip.js';
+import {negateVideoFrame} from './video-negate.js';
 import {transposeVideoFrame} from './video-transpose.js';
 import {stackVideoFrames} from './video-stack.js';
 import {synchronizeFrames,synchronizationTimeBase} from './frame-sync.js';
@@ -40,7 +41,7 @@ export function createReplayVideoExecution(description:string,sources:readonly R
    if(joined){const sync=synchronizeFrames(inputs.map(input=>({frames:input.open(),timeBase:input.timeBase})),{shortest:step.shortest,maxPendingFrames:2*inputs.length,maxResidentBytes:limits.maxResidentBytes,signal,timestamp:frame=>frame.pts,retain(frame,available){const size=frame.planes.reduce((total,plane)=>total+plane.length,0);if(size>available)throw new Error('Join retained frame budget exceeded');return {value:frame,bytes:size,release(){}};}});
     for await(const event of sync){await advanceWork();const frames=event.frames.map(frame=>({...frame,pts:{value:event.pts.value,timeBase:event.pts.timeBase}}));yield stackVideoFrames(frames,step.name==='hstack'?'horizontal':'vertical',pixels);}return;
    }
-   for await(let frame of inputs[0]!.open()){await advanceWork();if(step.name==='hflip'||step.name==='vflip')frame=flipVideoFrame(frame,step.name==='hflip'?'horizontal':'vertical',pixels);else if(step.name==='transpose'){const skip=step.passthrough===1&&frame.width>=frame.height||step.passthrough===2&&frame.width<=frame.height;if(!skip)frame=transposeVideoFrame(frame,step.direction as 0|1|2|3,pixels);}else if(step.name==='scale')frame=convert(frame,geometry);yield frame;}
+   for await(let frame of inputs[0]!.open()){await advanceWork();if(step.name==='hflip'||step.name==='vflip')frame=flipVideoFrame(frame,step.name==='hflip'?'horizontal':'vertical',pixels);else if(step.name==='negate')frame=negateVideoFrame(frame,step,pixels);else if(step.name==='transpose'){const skip=step.passthrough===1&&frame.width>=frame.height||step.passthrough===2&&frame.width<=frame.height;if(!skip)frame=transposeVideoFrame(frame,step.direction as 0|1|2|3,pixels);}else if(step.name==='scale')frame=convert(frame,geometry);yield frame;}
   }};memo.set(index,flow);return flow;
  };
  const flows=graph.outputs.map((pad,index)=>adapt(nodeFlow(pad.node),plan.negotiated.sinks[index]!)),traversals=flows.reduce((sum,flow)=>sum+flow.traversals,0n),required=flows.reduce((sum,flow)=>sum+flow.frameBound+3n*BigInt(bytes(flow.geometry)),BigInt(plan.stateBytes));

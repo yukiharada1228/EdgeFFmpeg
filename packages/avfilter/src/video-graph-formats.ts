@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 // Adapted format negotiation and loss scoring; see ../NOTICE for provenance.
 import {stackGeometry} from './video-stack.js';
+import {negatePixelFormats} from './video-negate.js';
 interface Descriptor {kind:'gray'|'rgb'|'yuv';components:number;w:number;h:number;bits:number;alpha:boolean}
 const order=['yuv420p','rgb24','bgr24','yuv422p','yuv444p','gray','nv12','nv21','argb','rgba','abgr','bgra','yuva420p','gbrp'] as const;
 const descriptors:Readonly<Record<string,Descriptor>>={
@@ -60,7 +61,7 @@ export function negotiateVideoTopology(description:string,source:Geometry|readon
  const sources=Object.freeze(descriptions.map((geometry:Geometry)=>{const layout=pixelLayout(geometry.format,geometry.width,geometry.height);return Object.freeze({format:layout.pixelFormat,width:geometry.width,height:geometry.height});}));
  const inputOrder=options.inputRegistrationOrder??sources.map((_,index)=>index);if(inputOrder.length!==sources.length||new Set(inputOrder).size!==sources.length||inputOrder.some(index=>!Number.isInteger(index)||index<0||index>=sources.length))throw new Error('Invalid input registration order');
  const trims=Array.isArray(options.inputTrim)?options.inputTrim:sources.map(()=>options.inputTrim===true);if(trims.length!==sources.length||trims.some(value=>typeof value!=='boolean'))throw new Error('Invalid input trim bindings');
- const make=(step:Step,inputs:number,outputs:number):Node=>{const formats=step.name==='format'?step.pixelFormats??order:step.name==='transpose'?order.filter(format=>format!=='yuv422p'):order,common=group(formats);return {step,inputs:[],outputs:[],inputGroups:Array.from({length:inputs},()=>common),outputGroups:Array.from({length:outputs},()=>step.name==='scale'?group(order):common)};};
+ const make=(step:Step,inputs:number,outputs:number):Node=>{const formats=step.name==='format'?step.pixelFormats??order:step.name==='transpose'?order.filter(format=>format!=='yuv422p'):step.name==='negate'?order.filter(format=>negatePixelFormats.includes(format)):order,common=group(formats);return {step,inputs:[],outputs:[],inputGroups:Array.from({length:inputs},()=>common),outputGroups:Array.from({length:outputs},()=>step.name==='scale'?group(order):common)};};
  const nodes=topology.nodes.map(node=>make(node.configuration,node.inputs,node.outputs)),registration=[...nodes];
  const connect=(from:Node,fromPad:number,to:Node,toPad:number):Link=>{const link:Link={from,fromPad,to,toPad,selected:null,geometry:null};from.outputs[fromPad]=link;to.inputs[toPad]=link;return link;};
  for(const edge of topology.edges)connect(nodes[edge.from.node]!,edge.from.pad,nodes[edge.to.node]!,edge.to.pad);

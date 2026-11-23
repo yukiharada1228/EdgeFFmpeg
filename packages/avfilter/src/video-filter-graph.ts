@@ -5,6 +5,7 @@ import type {VideoFrameData} from '@edge-ffmpeg/avutil';
 import {resizeVideoFrame,pixelResizeStateBytes} from '@edge-ffmpeg/swscale';
 import type {PixelArithmetic} from '@edge-ffmpeg/swscale';
 import {flipVideoFrame} from './video-flip.js';
+import {negateMasks,negateVideoFrame} from './video-negate.js';
 import {transposeVideoFrame} from './video-transpose.js';
 import {parseFilterTopology,filterTopologyOrder} from './filter-topology.js';
 import {resolveVideoFilter} from './video-graph-resolver.js';
@@ -38,6 +39,7 @@ export function compileMultiFrameGraph(description:string){
    for(const [pad,geometry]of plan.inputs.entries()){const edge=incoming[index]![pad];account(edge?negotiated.nodes[edge.node]!.outputs[edge.pad]!:sources[sourceFor(index,pad)]!,geometry);}
    if(node.configuration.name==='hstack'||node.configuration.name==='vstack')account(input,output!,true);
    if(node.configuration.name==='hflip'||node.configuration.name==='vflip')account(input,output!,true);
+   else if(node.configuration.name==='negate'){negateMasks(input.format,node.configuration);account(input,output!,true);}
    else if(node.configuration.name==='transpose'){const step=node.configuration,skip=step.passthrough===1&&input.width>=input.height||step.passthrough===2&&input.width<=input.height;if(!skip)account(input,output!,true);}
    else if(node.configuration.name==='scale')account(input,output!);
   }
@@ -57,6 +59,7 @@ export function compileMultiFrameGraph(description:string){
      current=stackVideoFrames(synchronized,step.name==='hstack'?'horizontal':'vertical',pixels);
     }
     if(step.name==='hflip'||step.name==='vflip')current=flipVideoFrame(current,step.name==='hflip'?'horizontal':'vertical',pixels);
+    else if(step.name==='negate')current=negateVideoFrame(current,step,pixels);
     else if(step.name==='transpose'){const skip=step.passthrough===1&&current.width>=current.height||step.passthrough===2&&current.width<=current.height;if(!skip)current=transposeVideoFrame(current,step.direction as 0|1|2|3,pixels);}
     else if(step.name==='scale')current=convert(current,plan.outputs[0]!);
     values.set(index,current);
