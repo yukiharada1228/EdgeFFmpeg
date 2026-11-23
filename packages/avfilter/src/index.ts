@@ -2,11 +2,13 @@ import {parseTimeDuration} from '@edge-ffmpeg/avutil';
 import {padAudio,paddingDurationSamples} from './pad.js';
 import type {AudioPadFormat} from './pad.js';
 import { reframeAudio } from './reframe.js';
+import {audioDelayPlan,audioDelayPacketSamples,delayAudio,parseAudioDelay} from './delay.js';
+import type {AudioDelayStep} from './delay.js';
 import { convertAudioFrame, resampledSampleCount } from '@edge-ffmpeg/swresample';
 import type { AudioConversionOptions, AudioSampleFormat } from '@edge-ffmpeg/swresample';
 import type { AudioFrameData } from '@edge-ffmpeg/avutil';
 export class AudioFilterError extends Error {}
-export type AudioFilterStep = { readonly name: 'anull' } | {readonly name:'apad';readonly padSamples:bigint|null;readonly wholeSamples:bigint|null;readonly padDuration:bigint|null;readonly wholeDuration:bigint|null;readonly packetSamples:number} | { readonly name:'aformat';readonly sampleFormat:AudioSampleFormat|null;readonly sampleRate?:number;readonly channelLayout?:'mono'|'stereo' } | { readonly name: 'asetnsamples'; readonly samples: number; readonly pad: boolean } | { readonly name: 'asetrate'; readonly sampleRate: number } | { readonly name: 'volume'; readonly gain: number; readonly precision: 'fixed' | 'float' | 'double' };
+export type AudioFilterStep = { readonly name: 'anull' } | AudioDelayStep | {readonly name:'apad';readonly padSamples:bigint|null;readonly wholeSamples:bigint|null;readonly padDuration:bigint|null;readonly wholeDuration:bigint|null;readonly packetSamples:number} | { readonly name:'aformat';readonly sampleFormat:AudioSampleFormat|null;readonly sampleRate?:number;readonly channelLayout?:'mono'|'stereo' } | { readonly name: 'asetnsamples'; readonly samples: number; readonly pad: boolean } | { readonly name: 'asetrate'; readonly sampleRate: number } | { readonly name: 'volume'; readonly gain: number; readonly precision: 'fixed' | 'float' | 'double' };
 export interface AudioRateBoundary {
   readonly beforeStep:number;
   readonly inputRate:number;
@@ -15,7 +17,7 @@ export interface AudioRateBoundary {
   readonly outputFormat:AudioSampleFormat;
 }
 export type AudioCountRateBoundary = Pick<AudioRateBoundary, 'beforeStep' | 'inputRate' | 'outputRate'>;
-export interface AudioCountOptions {readonly rateBoundary?:AudioCountRateBoundary;readonly configuredInput?:boolean}
+export interface AudioCountOptions {readonly rateBoundary?:AudioCountRateBoundary;readonly configuredInput?:boolean;readonly channels?:number}
 export interface AudioFilterProcessOptions extends AudioConversionOptions {readonly inputFormat?:AudioPadFormat}
 export interface AudioStreamInsertion {
   readonly outputFormat?:AudioPadFormat;
@@ -38,7 +40,7 @@ export interface AudioFilterChain {
   outputSamples(inputSamples: bigint,inputRate?:number,options?:AudioCountOptions): bigint;
   requiredBufferSamples(inputSamples:bigint,inputRate?:number,options?:AudioCountOptions):readonly number[];
   outputPacketSamples(inputSpan: bigint): bigint;
-  packetSections(inputSamples:bigint,inputSpan:bigint,inputRate?:number,configuredInput?:boolean):readonly {readonly samples:bigint;readonly span:bigint}[];
+  packetSections(inputSamples:bigint,inputSpan:bigint,inputRate?:number,configuredInput?:boolean,channels?:number):readonly {readonly samples:bigint;readonly span:bigint}[];
   validateInputFormat(format:Pick<AudioPadFormat,'sampleRate'|'channels'|'channelLayout'>,insertion?:AudioStreamInsertion):void;
   resolvedSampleFormat(input:AudioSampleFormat):AudioSampleFormat;
   rateBoundary(input:AudioSampleFormat,inputRate:number,outputRate:number):AudioRateBoundary|null;
@@ -67,6 +69,7 @@ export function compileAudioFilterChain(description: string, negotiation: { read
   for (const token of tokens) {
     const text = token.trim();
     if (text === 'anull') { steps.push(Object.freeze({ name: 'anull' })); continue; }
+    if(text==='adelay'||text.startsWith('adelay=')){steps.push(parseAudioDelay(text));continue;}
     if(text==='apad'||text.startsWith('apad=')){
       let padSamples:bigint|null=null,wholeSamples:bigint|null=null,padDuration:bigint|null=null,wholeDuration:bigint|null=null,packetSamples=4096;
       if(text!=='apad')for(const [index,option]of text.slice(5).split(':').entries()){
@@ -171,18 +174,28 @@ export function compileAudioFilterChain(description: string, negotiation: { read
       if(step?.name==='asetrate')rate=step.sampleRate;
       else if(step?.name==='asetnsamples'){buffers.push(step.samples);if(step.pad)count=((count+BigInt(step.samples)-1n)/BigInt(step.samples))*BigInt(step.samples);}
       else if(step?.name==='apad'){const added=paddingCount(step,count,rate,options.configuredInput);if(added>0n)buffers.push(Number(added<BigInt(step.packetSamples)?added:BigInt(step.packetSamples)));count+=added;}
+      else if(step?.name==='adelay'){const {padding,flush}=audioDelayPlan(step,rate,options.channels),chunk=BigInt(audioDelayPacketSamples);if(padding>0n)buffers.push(Number(padding<chunk?padding:chunk));if(flush>0n)buffers.push(Number(flush));count+=padding+flush;}
       if(step)stages.push(Object.freeze({step,inputSamples:before,outputSamples:count,inputRate:rateBefore,outputRate:rate}));
     }
     return Object.freeze({samples:count,buffers:Object.freeze(buffers),stages:Object.freeze(stages)});
   };
   const isInteger = (format: AudioSampleFormat) => ['u8','s16','s32'].includes(packed(format));
+  const transparent=(step:AudioFilterStep)=>['anull','asetrate','asetnsamples','apad','adelay'].includes(step.name)||step.name==='aformat'&&step.sampleFormat===null||step.name==='volume'&&step.precision==='fixed';
+  const delayedComponent=(index:number)=>{let before=index-1;while(before>=0&&transparent(steps[before]!)&&steps[before]!.name!=='volume')if(steps[before--]!.name==='adelay')return true;for(let after=index+1;after<steps.length&&transparent(steps[after]!);after++)if(steps[after]!.name==='adelay')return true;return false;};
   const targets = (input: AudioSampleFormat, start=0): AudioSampleFormat[] => {
     let current = input;
     return steps.slice(start).map((step,localIndex) => {
       const index=start+localIndex;
       if(step.name==='aformat'){current=step.sampleFormat??current;return current;}
+      if(step.name==='adelay'){current=`${packed(current)}p` as AudioSampleFormat;return current;}
       if (step.name !== 'volume') return current;
       if (step.precision !== 'fixed') current = step.precision === 'double' ? 'dbl' : 'flt';
+      else if (!isInteger(current)&&delayedComponent(index)) {
+        // Planar-only adelay merged into the fixed-volume format set keeps the encoder format out; native then picks s32p from floating input.
+        const constraint=steps.slice(index+1).find(next=>!transparent(next));
+        if(constraint?.name==='aformat'&&isInteger(constraint.sampleFormat!))throw new AudioFilterError('adelay with fixed volume and an integer sample format constraint on floating input requires unimplemented format negotiation');
+        current='s32';
+      }
       else if (!isInteger(current)) {
         const nextConstraint=steps.slice(index+1).find(next=>next.name==='volume'&&next.precision!=='fixed'||next.name==='aformat'&&next.sampleFormat!==null);
         const laterFloat=nextConstraint?.name==='volume'||nextConstraint?.name==='aformat'&&!isInteger(nextConstraint.sampleFormat!);
@@ -219,7 +232,7 @@ export function compileAudioFilterChain(description: string, negotiation: { read
         options.signal?.throwIfAborted();
         if (step.name === 'anull') continue;
         if(step.name==='aformat'){if(step.sampleRate!==undefined&&step.sampleRate!==current.sampleRate)throw new AudioFilterError('aformat sample rate constraint requires an implicit conversion');if(step.channelLayout!==undefined&&(step.channelLayout!==current.channelLayout||current.channels!==(step.channelLayout==='mono'?1:2)))throw new AudioFilterError('aformat channel layout constraint requires an implicit conversion');if(step.sampleFormat)current=convertAudioFrame(current,step.sampleFormat,options);continue;}
-        if(step.name==='apad')throw new AudioFilterError('apad requires stream processing');
+        if(step.name==='apad'||step.name==='adelay')throw new AudioFilterError(`${step.name} requires stream processing`);
         if (step.name === 'asetnsamples') throw new AudioFilterError('asetnsamples requires stream processing');
         if (step.name === 'asetrate') {
           let pts = current.pts;
@@ -269,18 +282,19 @@ export function compileAudioFilterChain(description: string, negotiation: { read
   return Object.freeze({
     steps: Object.freeze(steps), maxBytesPerSample, outputSampleFormat,
     validateInputFormat:validateConstraints,
-    reframes:steps.some(step=>step.name==='asetnsamples'||step.name==='apad'),
+    reframes:steps.some(step=>step.name==='asetnsamples'||step.name==='apad'||step.name==='adelay'),
     maxBufferedSamples:Math.max(0,...steps.map(step=>step.name==='asetnsamples'?step.samples:step.name==='apad'?Number((step.padSamples??step.wholeSamples??BigInt(step.packetSamples))<BigInt(step.packetSamples)?(step.padSamples??step.wholeSamples??BigInt(step.packetSamples)):BigInt(step.packetSamples)):0)),
     planSamples:planCounts,
     outputSamples(inputSamples:bigint,inputRate?:number,options?:AudioCountOptions):bigint {return planCounts(inputSamples,inputRate,options).samples;},
     requiredBufferSamples(inputSamples:bigint,inputRate?:number,options?:AudioCountOptions){return planCounts(inputSamples,inputRate,options).buffers;},
-    packetSections(inputSamples:bigint,inputSpan:bigint,inputRate?:number,configuredInput?:boolean){
+    packetSections(inputSamples:bigint,inputSpan:bigint,inputRate?:number,configuredInput?:boolean,channels?:number){
       if(inputSamples<0n||inputSpan<1n)throw new AudioFilterError('Invalid packet section input');
       let count=inputSamples,rate=inputRate,sections=count?[{samples:count,span:inputSpan}]:[];
       for(const step of steps){
         if(step.name==='asetrate')rate=step.sampleRate;
         else if(step.name==='asetnsamples'){if(step.pad)count=((count+BigInt(step.samples)-1n)/BigInt(step.samples))*BigInt(step.samples);sections=count?[{samples:count,span:BigInt(step.samples)}]:[];}
         else if(step.name==='apad'){const added=paddingCount(step,count,rate,configuredInput);if(added>0n){sections.push({samples:added,span:BigInt(step.packetSamples)});count+=added;}}
+        else if(step.name==='adelay'){const {padding,flush}=audioDelayPlan(step,rate,channels),span=BigInt(audioDelayPacketSamples);if(padding>0n)sections.unshift({samples:padding,span});if(flush>0n)sections.push({samples:flush,span});count+=padding+flush;}
       }
       return Object.freeze(sections.map(section=>Object.freeze(section)));
     },
@@ -291,7 +305,7 @@ export function compileAudioFilterChain(description: string, negotiation: { read
       for (const target of targets(input)) { if (!isInteger(current) && isInteger(target)) required = true; current = target; }
       return required || (!isInteger(current) && isInteger(outputHint));
     },
-    apply(frame:AudioFrameData,options:AudioConversionOptions):AudioFrameData { validateConstraints(frame);if(steps.some(step=>step.name==='asetnsamples'||step.name==='apad'))throw new AudioFilterError('asetnsamples requires stream processing');return applyRange(frame,options,0,steps.length); },
+    apply(frame:AudioFrameData,options:AudioConversionOptions):AudioFrameData { validateConstraints(frame);if(steps.some(step=>step.name==='asetnsamples'||step.name==='apad'||step.name==='adelay'))throw new AudioFilterError('asetnsamples requires stream processing');return applyRange(frame,options,0,steps.length); },
     resolvedSampleFormat(input:AudioSampleFormat){return targets(input).at(-1)??input;},
     rateBoundary(input:AudioSampleFormat,inputRate:number,outputRate:number):AudioRateBoundary|null {
       if(!['u8','s16','s32','flt','dbl','u8p','s16p','s32p','fltp','dblp'].includes(input)||![inputRate,outputRate].every(rate=>Number.isInteger(rate)&&rate>0&&rate<=2147483647))throw new AudioFilterError('Invalid rate negotiation input');
@@ -299,6 +313,7 @@ export function compileAudioFilterChain(description: string, negotiation: { read
       let rate=inputRate,lastRateStep=-1;
       for(const [index,step]of steps.entries())if(step.name==='asetrate'){rate=step.sampleRate;lastRateStep=index;}
       if(rate===outputRate)return null;
+      if(steps.some(step=>step.name==='adelay'))throw new AudioFilterError('adelay with sample rate conversion is not implemented');
       // Rate constraints propagate backwards through format-preserving filters.
       // Each asetrate fixes its output rate and therefore stops that propagation.
       let beforeStep=steps.length,source=formats.at(-1)??input,target=outputHint;
@@ -321,6 +336,7 @@ export function compileAudioFilterChain(description: string, negotiation: { read
       for(const [index,step]of steps.entries()){
         if(boundary?.beforeStep===index){stream=boundary.transform(stream);configured=snapshot(boundary.outputFormat);}
         if(step.name==='apad')stream=padAudio(stream,{...options,...(configured?{emptyInput:configured}:{}),...(step.padSamples!==null?{padSamples:step.padSamples}:step.wholeSamples!==null?{wholeSamples:step.wholeSamples}:step.padDuration!==null?{padDurationMicros:step.padDuration}:{wholeDurationMicros:step.wholeDuration!}),packetSamples:step.packetSamples});
+        else if(step.name==='adelay')stream=delayAudio(stream,step,{...options,...(configured?{emptyInput:configured}:{})});
         else if(step.name==='asetnsamples')stream=reframeAudio(stream,step.samples,step.pad,options);
         else{
           const upstream=stream;
@@ -339,6 +355,8 @@ export function compileAudioFilterChain(description: string, negotiation: { read
 }
 export { reframeAudio, AudioReframeError } from './reframe.js';
 export { padAudio, AudioPadError } from './pad.js';
+export {delayAudio,parseAudioDelay,audioDelaySamples,audioDelayPlan,AudioDelayError} from './delay.js';
+export type {AudioDelayStep,AudioDelayValue,AudioDelayOptions} from './delay.js';
 export type { AudioPadOptions, AudioPadFormat } from './pad.js';
 
 export {compileVideoFilterChain,VideoFilterError} from './video.js';
