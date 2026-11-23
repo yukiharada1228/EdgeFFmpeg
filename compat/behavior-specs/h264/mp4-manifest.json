@@ -1,0 +1,466 @@
+{
+  "cases": 146,
+  "inputs": 26,
+  "sha256": "a380fe9ca13f85539e53bd408f09277c0585b406df536d59c111a7201772a119",
+  "origin": {
+    "legacy": {
+      "sha256": {
+        "cases.json": "5c90f3d9971263cc21231c8762c208e912841f63762652ce50f8d7f805a2c18e"
+      },
+      "nativeOrigin": {
+        "name": "h264-owned-frame-meta",
+        "source": "/Users/yukiharada/orca/EdgeFFmpeg/.build/promotions/h264-formal-candidate/native-frame-oracle.c",
+        "sourceSha256": "fc09b109207dd6ac3c1981dedc0672b55a9429f18a9e7a9118c0bcf722415647",
+        "reference": {
+          "artifacts": {
+            "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+            "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+          },
+          "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+          "platform": "darwin",
+          "arch": "arm64",
+          "flags": [
+            "--disable-autodetect",
+            "--disable-doc",
+            "--disable-debug",
+            "--disable-x86asm"
+          ],
+          "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+          "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+          "targetPlatformMatches": false,
+          "reproducibleToolchainPinned": false
+        },
+        "librarySha256": {
+          "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libavfilter/libavfilter.a": "65827c43c8ac4463e661bead3dcdd90f3c0018c7119fa52ad737c9c80c93f1f7",
+          "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libavformat/libavformat.a": "d1760cb51a34c69c6c664fa616e455ee5f90d96c8f2a7d82d02bd5707837d1cc",
+          "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libavcodec/libavcodec.a": "7570dfffaf568d1afeb7b4b002493f5d188470273819b7a4dd0521db75eb4ca9",
+          "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libswscale/libswscale.a": "fb03055c68d98b220dc46c7a58e60cedb233b37559d68cb24ccdc8bf5df5e050",
+          "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libswresample/libswresample.a": "053aa00bcf154fc88877406ddd492ffc68952977cb1c61fe31b353c2d6547b1f",
+          "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libavutil/libavutil.a": "b8864b177f1717ac38de58754a16ccee473e0fb7bf304398dcaffc1b6c89a598"
+        },
+        "compiler": "cc",
+        "compilerVersion": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+        "binarySha256": "52d5a5af20940cefb550c95c0e734bac33550c33ed323f41864c2ed4afdea186"
+      },
+      "codecModuleSha256": "cf0361a6c56f434878401ef0b94712805bca98e3c098eb6c936fd142561e200a",
+      "fixtureEncoderWasmSha256": "03884ab437ddfcabe2851090ade915d161df20737fd7e0c0908aa17d958f92ad",
+      "rawFrames": 36,
+      "cliCases": 40,
+      "externalSampleMedia": false,
+      "formalPromotion": false
+    },
+    "h264-x264-owned": {
+      "source": "x264 mathematical-image stream in MKV with timestamps; pinned Native FFmpeg stream-copy to MP4, no transcoding.",
+      "reference": {
+        "artifacts": {
+          "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+          "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+        },
+        "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+        "platform": "darwin",
+        "arch": "arm64",
+        "flags": [
+          "--disable-autodetect",
+          "--disable-doc",
+          "--disable-debug",
+          "--disable-x86asm"
+        ],
+        "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+        "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+        "targetPlatformMatches": false,
+        "reproducibleToolchainPinned": false
+      },
+      "cases": [
+        {
+          "name": "main-cavlc-spatial-none",
+          "bytes": 27318,
+          "sha256": "5816d7f186b1067a77c36cbd4168de83d07a81e9f46b325fcb939ca16e1aaa5c",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/main-cavlc-spatial-none.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/main-cavlc-spatial-none.mp4"
+          ]
+        },
+        {
+          "name": "main-cavlc-spatial-normal",
+          "bytes": 27396,
+          "sha256": "e8cbc24eb0271913e80b1958c1880783c6ae65b280ddf294f3a22f99133c547c",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/main-cavlc-spatial-normal.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/main-cavlc-spatial-normal.mp4"
+          ]
+        },
+        {
+          "name": "main-cavlc-temporal-none",
+          "bytes": 27356,
+          "sha256": "b9123713e377e40df38d038123e23d4c4b94861351121cf6c67bd7d832c88c42",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/main-cavlc-temporal-none.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/main-cavlc-temporal-none.mp4"
+          ]
+        },
+        {
+          "name": "main-cavlc-temporal-normal",
+          "bytes": 27502,
+          "sha256": "3e5b17be820e8d0a207efe863586ed292606d0136951d886d9adc12bd69495d3",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/main-cavlc-temporal-normal.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/main-cavlc-temporal-normal.mp4"
+          ]
+        },
+        {
+          "name": "main-cabac-spatial-none",
+          "bytes": 24335,
+          "sha256": "dec03720c04b7aaa3ecceca1fc3bb68a29325320ae57dea039cbbfb17428d2ce",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/main-cabac-spatial-none.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/main-cabac-spatial-none.mp4"
+          ]
+        },
+        {
+          "name": "main-cabac-spatial-normal",
+          "bytes": 24511,
+          "sha256": "47c471d930414e8f4d083588653d01f116df479c048656862376a16f70b4bf38",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/main-cabac-spatial-normal.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/main-cabac-spatial-normal.mp4"
+          ]
+        },
+        {
+          "name": "main-cabac-temporal-none",
+          "bytes": 24435,
+          "sha256": "bce750a8a229d58e5412fad4fa07d6491dbeb969fd28d1b58e8ca4175f7780e5",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/main-cabac-temporal-none.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/main-cabac-temporal-none.mp4"
+          ]
+        },
+        {
+          "name": "main-cabac-temporal-normal",
+          "bytes": 24595,
+          "sha256": "fbb83e9ec52113cecc31ac3e979b23e968693e8c8c961a6be76dd869186ab453",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/main-cabac-temporal-normal.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/main-cabac-temporal-normal.mp4"
+          ]
+        },
+        {
+          "name": "high-cavlc-spatial-none",
+          "bytes": 27370,
+          "sha256": "760f483a773bb617afb684e8620c4706da671551981936c50adf4001ef33f9cd",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/high-cavlc-spatial-none.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/high-cavlc-spatial-none.mp4"
+          ]
+        },
+        {
+          "name": "high-cavlc-spatial-normal",
+          "bytes": 27414,
+          "sha256": "dfbc1d766cfe0e27d68a49d8736b8bd4373361a5457920de65d3cad2f0bd2a23",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/high-cavlc-spatial-normal.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/high-cavlc-spatial-normal.mp4"
+          ]
+        },
+        {
+          "name": "high-cavlc-temporal-none",
+          "bytes": 27453,
+          "sha256": "8735e378d43b4f9617494250d9ebc6d17326a985bf1efc9ba23560ac91b3e27d",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/high-cavlc-temporal-none.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/high-cavlc-temporal-none.mp4"
+          ]
+        },
+        {
+          "name": "high-cavlc-temporal-normal",
+          "bytes": 27509,
+          "sha256": "b49ee66d9c4e52d9dd555b9233ca5aa1a3d62beab56d7047951c75f83b62e36b",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/high-cavlc-temporal-normal.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/high-cavlc-temporal-normal.mp4"
+          ]
+        },
+        {
+          "name": "high-cabac-spatial-none",
+          "bytes": 24353,
+          "sha256": "8538e2a655af486c6ba7e96c41e42396c74af0783d76b19e13e32dcc19c4339a",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/high-cabac-spatial-none.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/high-cabac-spatial-none.mp4"
+          ]
+        },
+        {
+          "name": "high-cabac-spatial-normal",
+          "bytes": 24558,
+          "sha256": "4d10b6901a147dcecf6af5fb9a1d96aca9fb19feb82933553ea707e5155afdf3",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/high-cabac-spatial-normal.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/high-cabac-spatial-normal.mp4"
+          ]
+        },
+        {
+          "name": "high-cabac-temporal-none",
+          "bytes": 24518,
+          "sha256": "7f35116a5e4611239784029a8ffcd87df2927ec3209c156a17a8efbb25c4b67d",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/high-cabac-temporal-none.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/high-cabac-temporal-none.mp4"
+          ]
+        },
+        {
+          "name": "high-cabac-temporal-normal",
+          "bytes": 24570,
+          "sha256": "a19331c582539c302635ebf15fb498bb2f6d547bd7015dcdefa0e476811f8205",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-owned/high-cabac-temporal-normal.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-owned/high-cabac-temporal-normal.mp4"
+          ]
+        }
+      ],
+      "reproducible": true
+    },
+    "h264-x264-hd": {
+      "source": "x264 mathematical-image stream in MKV with timestamps; pinned Native FFmpeg stream-copy to MP4, no transcoding.",
+      "reference": {
+        "artifacts": {
+          "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+          "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+        },
+        "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+        "platform": "darwin",
+        "arch": "arm64",
+        "flags": [
+          "--disable-autodetect",
+          "--disable-doc",
+          "--disable-debug",
+          "--disable-x86asm"
+        ],
+        "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+        "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+        "targetPlatformMatches": false,
+        "reproducibleToolchainPinned": false
+      },
+      "cases": [
+        {
+          "name": "main-cavlc-spatial-none",
+          "bytes": 5530283,
+          "sha256": "a99259fe8ddbc9fae9ff19b8dab7d64fe89ad42a46147bf58007144b8e2e81c4",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-hd/main-cavlc-spatial-none.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-hd/main-cavlc-spatial-none.mp4"
+          ]
+        },
+        {
+          "name": "high-cabac-temporal-normal",
+          "bytes": 4556677,
+          "sha256": "51688a88df8cfe97400f958786e4ce5d796efb5bc85fbdf202e3d04fbc9b00bb",
+          "muxArgs": [
+            "-v",
+            "error",
+            "-y",
+            "-i",
+            ".build/promotions/h264-x264-hd/high-cabac-temporal-normal.mkv",
+            "-map",
+            "0:v:0",
+            "-c:v",
+            "copy",
+            "-bitexact",
+            "-movflags",
+            "+faststart",
+            ".build/promotions/h264-x264-hd/high-cabac-temporal-normal.mp4"
+          ]
+        }
+      ],
+      "reproducible": true
+    }
+  },
+  "scope": "Self-owned MP4 inputs with Native rawvideo outputs; passthrough, stream maps and frame limits. Container serialization is an input fixture, not a mux conformance claim.",
+  "faultCases": 16,
+  "faultsSha256": "4af5776f258a944ac1af52a48d69f22ae86e1a1710223ac3155b07afdb2d1ec2"
+}

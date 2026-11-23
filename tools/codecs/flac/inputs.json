@@ -1,0 +1,18 @@
+{
+  "archiveSha256": "f2c1c76592a82ffff8413ba3c4a1299b6c7ab06c734dee03fd88630485c2b920",
+  "upstreamCommit": "1507800de4b70e21be71f38caa0d9079d0bc6e45",
+  "emsdkVersion": "7.0.0",
+  "emsdkCommit": "708dcbcc9ee23bc7d2dad44fc90db377e38b771c",
+  "wasmBytes": 69607,
+  "wasmSha256": "d5f5015f019ecb59fcbce62c915e695aa97c5141379e72c06e7acd9b4394f65f",
+  "files": {
+    "wrapper.c": "655597c3cd0a8d98c2784679b08fdd37a781cbb6b9a1ef8cdeafe90793ce9c9e",
+    "recipe.sh": "812db886f79270dd3a2ec6517248d729b7050b0a765fa9473479e2682f98e727",
+    "validate-wasm.mjs": "fd6e6098e6445dbd0fcb50c2875fe4d1ed49766713c183ee26ed749f7b71a7fd",
+    "COPYING.emscripten": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86",
+    "../../../packages/avcodec/COPYING.BSD.libFLAC": "7866ee98760fc1f0156b4fe6bf530257e02be487ab3fd94e2b63799dd32d6b2c",
+    "../../../packages/avcodec/NOTICE-FLAC-DECODER": "8f77bac55cc9618d4a82bf8f03bf1c8ee3e3a1c59c16d5983592e9c3e850219c",
+    "build.py": "6d8b9f1dd8186556c9fc72fa7bde598214f593e94c70560fc0a82b98ffad9de6",
+    "abi.json": "86ba173d4ed7a2437db56c8eb8b4b4d4862a52ef7366331ea1aa19dc97121c7a"
+  }
+}

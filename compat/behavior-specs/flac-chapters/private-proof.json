@@ -1,0 +1,53 @@
+{
+  "status": "private-Vorbis-comment-chapters-tested",
+  "testsPassed": 16,
+  "nativeChapterCases": 20,
+  "nativeProbeWallMs": 131.93629199999998,
+  "readCaps": [
+    1,
+    7,
+    34
+  ],
+  "chapterAndTagComparisons": 60,
+  "controls": [
+    "C scanf integer field widths/signs/ASCII whitespace",
+    "UTF8 key byte-length branch",
+    "name before time falls back to ordinary tag",
+    "duplicate chapter start clears previous title",
+    "creation order retained while end computation uses start/id ordering",
+    "equal starts and starts beyond duration",
+    "cross-comment-block title assignment",
+    "chapter count resource limit and unknown-duration source controls"
+  ],
+  "profile": "Native comparisons use consistent STREAMINFO257samples/8000Hz and default probing; no CUESHEET or unknown-format-duration Native proof",
+  "files": {
+    ".build/flac-header/generate-chapters-native.mjs": "80f51fae8c4518edfaa0a1f06c52259fd2e2aa815c8858124ef8937a6fce4c0e",
+    ".build/flac-header/native-chapters.json": "4563bf9c34dbc0af60e373fa1fef50359849da2bd23d1259a43e44548b316d19",
+    ".build/flac-header/vorbis-chapters.mjs": "7c8548f0138c8a064763c8a08a36cae654d574d0dd79f4401f40afaabe7440a7",
+    ".build/flac-header/vorbis-chapters.test.mjs": "058fc61c57bf0e32bb083564697ae626ee0602b67b92e49a78e5b81a317badbe",
+    ".build/flac-header/vorbis-comment.mjs": "12be91b5e1766ae09be55068aa524c03f20a9e87ae1e87a40169663da6ba282b",
+    ".build/flac-header/vorbis-comment-before-chapters.mjs": "5b4664a7d18945b5194c05122cf27f5a3494624053c2aa47d01a25224fd89b5b",
+    ".build/flac-header/vorbis-comment-stream.mjs": "d720e1d84a4c14d56e70b25358aed463bc2b61ad60a061bdb3879935fe3f324b",
+    ".build/flac-header/vorbis-comment-stream-before-chapters.mjs": "5e3d0e14cf1d89bf78a8c8fb4928e40c985351c29888ebbbb5af9d16d220af00",
+    ".build/flac-header/demux-comments.mjs": "ea5088f9e56cc80933e95298a846d4dd3c6cad2e3cbd08262893cfa62fba304c",
+    ".build/flac-header/demux-comments-before-chapters.mjs": "29461fca59d6a69e2f0d77dc410631286a80c255e3be8a2302b379a7a1dbf633",
+    ".build/flac-header/demux-comments.test.mjs": "4bb4dc7aad9e9b8d2de00b95179160fa7115b80656b54cd48485610abd4a9fa4",
+    ".build/flac-header/demux-comments.test-before-chapters.mjs": "1a687873f8680c061ce5a9bf831fa6a420ed71421ce5cf9cdd14f89c86de9bbd",
+    ".build/flac-header/chapters-tests.log": "1ee0bc71e04b4e5a9975a7a6a4f18fad7f3170af8cbcaa4b7b5a847000f5936c",
+    ".build/flac-header/NOTICE-chapters": "15f54dd574372bcb859022e03ec5665e081856cd491969c19594285913da1622"
+  },
+  "sourceSha256": {
+    "libavformat/oggparsevorbis.c": "a11ec3562e733f21565c491ab56b7f1d4a6865fc1ddbdc372ed9cb29b13ca7fb",
+    "libavformat/demux_utils.c": "4f1f7fea6a52dfac1a1d44058f776113672577ebbb107920b6e594f92fd068c1",
+    "libavformat/demux.c": "8bf6e79a1da4a5bf425211cdce36e018c5c8a782a254fa129a483e0d6c18b17b"
+  },
+  "remaining": [
+    "CUESHEET chapter interaction",
+    "Unknown/inferred duration Native parity",
+    "Pictures/invalidUTF8/complete metadata diagnostics",
+    "Actual comment-aware workerd/public integration"
+  ],
+  "preparedWorkerHashesStillMatch": true,
+  "rootModified": false,
+  "fullConformance": false
+}

@@ -1,0 +1,171 @@
+[
+  {
+    "name": "h264-io-faults-early-avcc",
+    "mode": "early-avcc",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": false
+  },
+  {
+    "name": "h264-io-faults-late-nal",
+    "mode": "late-nal",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": false
+  },
+  {
+    "name": "h264-io-faults-late-length",
+    "mode": "late-length",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": false
+  },
+  {
+    "name": "h264-io-faults-input-change",
+    "mode": "input-change",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": false
+  },
+  {
+    "name": "h264-io-faults-frame-budget",
+    "mode": "frame-budget",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": false
+  },
+  {
+    "name": "h264-io-faults-nal-budget",
+    "mode": "nal-budget",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": false
+  },
+  {
+    "name": "h264-io-faults-pending-budget",
+    "mode": "pending-budget",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": false
+  },
+  {
+    "name": "h264-io-faults-display-budget",
+    "mode": "display-budget",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": false
+  },
+  {
+    "name": "h264-io-faults-output-budget",
+    "mode": "output-budget",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": false
+  },
+  {
+    "name": "h264-io-faults-wasm-budget",
+    "limit": null,
+    "options": [
+      "-map",
+      "0:v:0"
+    ],
+    "expectedBytes": 24811248,
+    "expectedSha256": "046530a3242a9665dd33151e0c9db16c55d48fe7d9e2844bd241a8604fe08661",
+    "mode": "wasm-budget",
+    "inputId": "hd-main-cavlc-spatial-none",
+    "preexisting": false
+  },
+  {
+    "name": "h264-overwrite-faults-overwrite-late-nal",
+    "mode": "overwrite-late-nal",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "overwrite": true,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": true
+  },
+  {
+    "name": "h264-overwrite-faults-overwrite-cancel",
+    "mode": "overwrite-cancel",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "overwrite": true,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": true
+  },
+  {
+    "name": "h264-overwrite-faults-no-overwrite",
+    "mode": "no-overwrite",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "overwrite": false,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": true
+  },
+  {
+    "name": "h264-overwrite-faults-overwrite-success",
+    "limit": null,
+    "options": [
+      "-map",
+      "0:v:0"
+    ],
+    "expectedBytes": 110592,
+    "expectedSha256": "3ab0b2926bf523b6b724e96c075bd6869d9d0e832bbfc067739934e62312677e",
+    "mode": "overwrite-success",
+    "overwrite": true,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": true
+  },
+  {
+    "name": "h264-overwrite-faults-overwrite-hd-late-nal",
+    "mode": "overwrite-hd-late-nal",
+    "overwrite": true,
+    "limit": null,
+    "nalOffset": 3424107,
+    "inputId": "hd-high-cabac-temporal-normal",
+    "preexisting": true
+  },
+  {
+    "name": "h264-resource-cleanup",
+    "mode": "pending-cleanup",
+    "limit": null,
+    "avcOffset": 551,
+    "nalOffset": 17123,
+    "lengthOffset": 17119,
+    "inputId": "moving-main-cabac-temporal-normal",
+    "preexisting": false
+  }
+]

@@ -1,0 +1,4 @@
+import{it,expect}from'vitest';import{aacFrameSamples}from'../../packages/containers/src/mp4/aac.js';
+function entry(body:Uint8Array){const data=new Uint8Array(48+body.length),view=new DataView(data.buffer);view.setUint32(36,12+body.length);data.set([101,115,100,115],40);data.set(body,48);return data;}
+it('reads LC frame size and rejects malformed descriptor lengths',()=>{expect(aacFrameSamples(entry(Uint8Array.of(5,2,0x11,0x90)))).toBe(1024);expect(aacFrameSamples(entry(Uint8Array.of(5,2,0x11,0x94)))).toBe(960);for(const bytes of [[5],[5,128],[5,128,128,128,128],[5,3,17,144],[3,2,0,0],[4,1,0]])expect(()=>aacFrameSamples(entry(Uint8Array.from(bytes)))).toThrow();});
+it('bounds descriptor recursion',()=>{let bytes=Uint8Array.of(5,2,17,144);for(let i=0;i<19;i++){const next=new Uint8Array(bytes.length+5);next.set([3,bytes.length+3,0,0,0]);next.set(bytes,5);bytes=next;}expect(()=>aacFrameSamples(entry(bytes))).toThrow('nesting limit');});

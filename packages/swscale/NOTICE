@@ -1,0 +1,108 @@
+chroma-filter.ts adapts the default bicubic coefficient generation and fixed-point
+filter stages from FFmpeg libswscale/utils.c, swscale.c and output.c at commit
+946fcce07b6dcd0331c8cc609192aeff5e1924f8.
+
+Copyright (C) 2024 Niklas Haas
+Copyright (C) 2001-2003 Michael Niedermayer <michaelni@gmx.at>
+Copyright (C) 2001-2011 Michael Niedermayer <michaelni@gmx.at>
+Copyright (C) 2001-2012 Michael Niedermayer <michaelni@gmx.at>
+
+This component is licensed under GNU LGPL version 2.1 or, at your option, any
+later version. The complete license is in LICENSES/LGPL-2.1-or-later.txt.
+The adaptation specializes the default B=0, C=0.6 kernel, preserves quantization
+and border reduction, uses bigint coefficient initialization and typed buffers,
+and adds explicit resource accounting and cancellation. The upstream source is
+available in the pinned upstream/ffmpeg submodule. Other files retain their
+recorded provenance; this notice does not assign a license to the whole project.
+
+
+inverse.ts adapts the numeric lookup-table, generic matrix and AArch64 NEON
+rounding paths from libswscale/yuv2rgb.c, output.c,
+aarch64/swscale_unscaled.c and aarch64/yuv2rgb_neon.S at the same pinned commit.
+
+Copyright (C) 2009 Konstantin Shishkov
+Copyright (C) 2001-2012 Michael Niedermayer <michaelni@gmx.at>
+Copyright (c) 2016 Matthieu Bouron <matthieu.bouron stupeflix.com>
+Copyright (c) 2016 Clément Bœsch <clement stupeflix.com>
+Copyright (c) 2026 Ramiro Polla
+
+This component is also LGPL-2.1-or-later. Its adaptation emulates instruction
+rounding in portable TypeScript, retains fractional chroma through the matrix,
+and rejects a measured nondeterministic default semiplanar reference path.
+It does not execute FFmpeg or host SIMD instructions.
+
+The x86_64 inverse profile additionally adapts signed multiply-high arithmetic,
+packed-output dispatch, approximate chroma interpolation and the final-two-row
+C fallback from libswscale/x86/swscale_template.c, x86/swscale.c, swscale.c and
+vscale.c at the same pinned commit.
+
+Copyright (C) 2001-2011 Michael Niedermayer <michaelni@gmx.at>
+Copyright (C) 2015 Pedro Arthur <bygrandao@gmail.com>
+
+This adaptation is LGPL-2.1-or-later under the license included above. It models
+the fixed Linux reference built with external x86 assembly disabled and inline
+MMXEXT enabled; it does not execute MMX instructions or a native FFmpeg process.
+
+The shared coefficient generator also supports arbitrary resize ratios with
+on-demand bigint weights instead of support-sized temporary bigint arrays.
+resize.ts adapts Q14-to-Q7 horizontal scaling and signed32 vertical accumulation
+from libswscale/swscale.c and output.c at the same pinned commit. It uses one
+bounded accumulation row and preserves native rounding, wrapping and clipping.
+
+Copyright (C) 2001-2011 Michael Niedermayer <michaelni@gmx.at>
+Copyright (C) 2001-2012 Michael Niedermayer <michaelni@gmx.at>
+
+resize.ts is LGPL-2.1-or-later under the included license. Its ownership,
+resource checks and frame metadata handling are part of this adaptation.
+
+
+rgb-resize.ts adapts Q6 RGB/alpha ingestion, Q14 horizontal and Q12 vertical
+filter arithmetic and full-chroma RGB output from libswscale/input.c, swscale.c,
+output.c and vscale.c at the pinned commit above.
+Copyright (C) 2001-2012 Michael Niedermayer <michaelni@gmx.at>
+Copyright (C) 2015 Pedro Arthur <bygrandao@gmail.com>
+This component is LGPL-2.1-or-later under the license copy above. The adaptation
+uses bounded shared axes and output rows instead of the native slice pipeline.
+
+
+component-resize.ts adapts fused Q6 RGB input, Q14/Q7 horizontal filtering,
+full/limited range conversion before vertical filtering, Q12 output filtering
+and gray-to-RGB Q9 output rounding from libswscale/input.c, swscale.c and
+output.c at the pinned commit above.
+Copyright (C) 2001-2012 Michael Niedermayer <michaelni@gmx.at>
+This component is LGPL-2.1-or-later under the license copy above. Per-component
+source/target layouts share axis tables and one accumulation row. The original
+unchanged-size conversion implementation now resides in convert.ts.
+
+
+inverse-resize.ts adapts resized YUV-to-RGB full-chroma and lookup-table
+output, one/two/general vertical filter dispatch, inline MMXEXT arithmetic
+and final-two-row C fallback from libswscale/swscale.c, output.c, vscale.c
+and x86/swscale_template.c at the pinned commit above.
+Copyright (C) 2001-2012 Michael Niedermayer <michaelni@gmx.at>
+Copyright (C) 2015 Pedro Arthur <bygrandao@gmail.com>
+This component is LGPL-2.1-or-later under the license copy above. It reuses
+the recorded inverse.ts table/MMX helpers, bounded shared axes and owned
+output rows; no host SIMD or native process runs in the library.
+
+component-resize.ts additionally follows the paired RGB chroma decision in
+libswscale/utils.c at the pinned commit, using floor-shifted destination width
+before allocating ceil-sized chroma planes. It retains LGPL-2.1-or-later and
+the Michael Niedermayer attribution above.
+
+src/interpolation/ adds neighbor, bilinear and area resize axes and bounded shared
+execution. Axis modules retain the original libswscale/utils.c authors and pinned
+commit in their headers; see src/interpolation/NOTICE.activation and
+LICENSES/LGPL-2.1-or-later.txt. Public conversion and PixelResizeError identity are
+shared with the existing implementation. No full swscale conformance is certified.
+
+
+inverse-coefficients.ts additionally retains the limited-range YUV matrix
+coefficient tables and fixed-point initialization from libswscale/yuv2rgb.c
+at the same pinned commit. The adaptation shares coefficient profiles across
+lookup-table, filtered, SIMD-emulated and combined resize output paths.
+
+Copyright (C) 2009 Konstantin Shishkov
+Context/table implementation by Michael Niedermayer (michaelni@gmx.at).
+
+This adaptation is LGPL-2.1-or-later under LICENSES/LGPL-2.1-or-later.txt.

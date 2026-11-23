@@ -1,0 +1,8 @@
+{
+  "sha256": {
+    "compat/behavior-specs/video-signed-time/cases.json": "3a024feae71f86ac2ad79381e3579ce26a5957a04e4b37d41a3f0b7d7c8bedcf",
+    "compat/behavior-specs/video-signed-time/results.json": "7ff0f19a4af2906130c1435f20ae069a815f7264eb58d72e66295e51f798612a",
+    "compat/behavior-specs/video-signed-time/provenance.json": "e03727d2bbbb9cb62e0dbce7f4effbece6ea81a45b03589cc28838c07eb93eea",
+    "tools/differential-runner/video-signed-time/generate.mjs": "b9d43bb17af4275d468fdf24852af96e99d6db1cc70cddb532d2b25ad7aaf3fe"
+  }
+}

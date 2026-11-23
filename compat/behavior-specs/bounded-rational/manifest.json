@@ -1,0 +1,8 @@
+{
+  "sha256": {
+    "compat/behavior-specs/bounded-rational/cases.json": "8a0d4ac6956ab0c2ea556b861fa70b285031657d33d7d39178f196547a62ca10",
+    "compat/behavior-specs/bounded-rational/results.json": "06d886d1f21c8413e0460eb7f18c0687536c7ae1eae905ad33dfd88707e3a807",
+    "compat/behavior-specs/bounded-rational/host-provenance.json": "f0957d749a6fc9ff5b1914edb4da42c01680e3af067dec52ef2b7fac7ec788b6",
+    "tools/differential-runner/bounded-rational/oracle.c": "d09356f75add7a5665f9392f27c887fc8f51083c09633adfed0656d9b4f2bfaf"
+  }
+}

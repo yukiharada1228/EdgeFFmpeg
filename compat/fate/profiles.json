@@ -1,0 +1,7 @@
+[
+  "compat/fate/unknown-layout-pcm.json",
+  "compat/fate/asetrate.json",
+  "compat/fate/asetnsamples-pad.json",
+  "compat/fate/asetnsamples-nopad.json",
+  "compat/fate/apad.json"
+]

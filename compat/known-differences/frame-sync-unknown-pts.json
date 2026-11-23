@@ -1,0 +1,163 @@
+{
+  "id": "framesync.unknown-pts-stack-rescale",
+  "status": "resolved-for-sampled-stack-frame-events",
+  "fullConformance": false,
+  "referenceCommit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+  "observedCases": 242,
+  "differences": 48,
+  "examples": [
+    {
+      "a": [
+        "-9223372036854775808"
+      ],
+      "b": [
+        "-9223372036854775808"
+      ],
+      "shortest": false,
+      "native": {
+        "accepted": true,
+        "timeBase": {
+          "num": 1,
+          "den": 25
+        },
+        "events": [
+          {
+            "pts": "-9223372036854775807",
+            "values": [
+              10,
+              100
+            ]
+          }
+        ],
+        "eof": true
+      },
+      "events": [
+        {
+          "pts": "-9223372036854775808",
+          "values": [
+            10,
+            100
+          ]
+        }
+      ]
+    },
+    {
+      "a": [
+        "-9223372036854775808"
+      ],
+      "b": [
+        "-9223372036854775808"
+      ],
+      "shortest": true,
+      "native": {
+        "accepted": true,
+        "timeBase": {
+          "num": 1,
+          "den": 25
+        },
+        "events": [
+          {
+            "pts": "-9223372036854775807",
+            "values": [
+              10,
+              100
+            ]
+          }
+        ],
+        "eof": true
+      },
+      "events": [
+        {
+          "pts": "-9223372036854775808",
+          "values": [
+            10,
+            100
+          ]
+        }
+      ]
+    },
+    {
+      "a": [
+        "-9223372036854775808"
+      ],
+      "b": [
+        "-9223372036854775808",
+        "0",
+        "-9223372036854775808"
+      ],
+      "shortest": false,
+      "native": {
+        "accepted": true,
+        "timeBase": {
+          "num": 1,
+          "den": 25
+        },
+        "events": [
+          {
+            "pts": "-9223372036854775807",
+            "values": [
+              10,
+              100
+            ]
+          },
+          {
+            "pts": "0",
+            "values": [
+              10,
+              101
+            ]
+          },
+          {
+            "pts": "-9223372036854775807",
+            "values": [
+              10,
+              102
+            ]
+          }
+        ],
+        "eof": true
+      },
+      "events": [
+        {
+          "pts": "-9223372036854775808",
+          "values": [
+            10,
+            100
+          ]
+        },
+        {
+          "pts": "0",
+          "values": [
+            10,
+            101
+          ]
+        },
+        {
+          "pts": "-9223372036854775808",
+          "values": [
+            10,
+            102
+          ]
+        }
+      ]
+    }
+  ],
+  "investigation": "The experimental framesync state used AV_NOPTS sentinel internally. The Native stack graph emitted MIN+1 at unknown event times; production integration needs distinct internal-event and stack-output rescaling semantics, including EOF acknowledgement. This fixture is evidence of unfinished work, not passing compatibility.",
+  "productionFramesyncSupportsUnknownPts": true,
+  "resolution": {
+    "nodeNativeCases": 2178,
+    "localWorkerdCases": 2178,
+    "tests": [
+      "tests/differential/frame-sync-unknown.test.ts",
+      "tests/workers/frame-sync-irregular.test.ts"
+    ],
+    "semantics": "Unknown timestamps stay AV_NOPTS in synchronization state; stack output uses Native non-PASS_MINMAX same-clock rescaling (MIN to MIN+1). Source replay normalizes explicit AV_NOPTS to null.",
+    "remaining": [
+      "Explicit EOF/error timestamps through replay joins",
+      "CLI setpts graph integration",
+      "Full signed64 overflow/saturation domain"
+    ]
+  },
+  "historicalScope": "Development investigation of unknown PTS in a real buffer\u2192hstack\u2192buffersink graph. Production framesync still rejects missing/AV_NOPTS timestamps. Backward known PTS support is tested separately.",
+  "scope": "Sampled two-input synchronized stack frame events, including unknown/backward/repeated PTS, three time bases per input, empty streams and shortest/longest. Explicit terminal status timestamps and CLI setpts remain incomplete."
+}

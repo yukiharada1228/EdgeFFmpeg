@@ -1,0 +1,4 @@
+import{verifyMp4SelectionCorpus}from'../helpers/mp4-selection-corpus.js';
+verifyMp4SelectionCorpus(false);
+import{it,expect}from'vitest';import{readFileSync}from'node:fs';import{decodeMp4Language,encodeMp4Language}from'../../packages/containers/src/mp4/language.js';
+it('matches all65536 pinned Native mdhd language decode and MP4 re-encode values',()=>{const lines=readFileSync(new URL('../../compat/behavior-specs/mp4-selection/language-results.txt',import.meta.url),'utf8').trim().split('\n');expect(lines).toHaveLength(65536);for(const line of lines){const[code,found,a,b,c,encoded]=line.split(' ').map(Number),language=decodeMp4Language(code!);expect(language===undefined?0:1,line).toBe(found);if(language!==undefined)expect([...language].map(c=>c.charCodeAt(0)),line).toEqual([a,b,c]);expect(encodeMp4Language(language),line).toBe(encoded);}},30000);

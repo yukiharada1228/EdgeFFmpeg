@@ -1,0 +1,2 @@
+import two from '../helpers/timed-sync-two.js';import many from '../helpers/timed-sync-many.js';import diagnostics from '../helpers/timed-sync-diagnostic.js';import races from '../helpers/timed-sync-race.js';
+export default {fetch(request:Request){const kind=new URL(request.url).pathname;if(kind==='/diagnostics')return diagnostics.fetch();if(kind==='/races')return races.fetch();return (kind==='/two'||kind==='/boundary'?two:many).fetch(request);}};

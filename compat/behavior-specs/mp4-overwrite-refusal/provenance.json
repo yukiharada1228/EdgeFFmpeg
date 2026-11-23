@@ -1,0 +1,32 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "caseCount": 108,
+  "inputCount": 9,
+  "sources": {
+    "tools/differential-runner/mp4-overwrite-refusal/generate.mjs": "f625aa2c7d6ebc0539219eb50e7d3f33209dbff995b52cf64ba3a603aba151b6",
+    "compat/behavior-specs/mp4-selected-errors/manifest.json": "fcae2d44444f49d5dc241af7f41af823d052084be3fccb68accf958ecb2a8afa",
+    "compat/behavior-specs/mp4-selected-errors/inputs.json": "aa2bff7b592b23bb6c1bc72fa4eb1544c64e982ef60c88b563089bb2d663026a",
+    "compat/behavior-specs/mp4-selected-errors/results.json": "7831e53ce6fd41b6cad68b5c86b35cd8e7bf80ca798ca90e73b70a6441c0b8b4",
+    "compat/behavior-specs/mp4-selected-errors/jobs.json": "361075eb9e0e10139c4cc6b1396f8d508b3d2ca91949ecc9fd89e325542c9ee9",
+    "compat/behavior-specs/mp4-selected-errors/provenance.json": "a0ee92e8685629321f7c2dc16edcd6e2e075083ac8f9ce5a6eb4233af42ea47e"
+  },
+  "scope": "Native-only9 mixed two-audio sources,3mappings,default EOF/-n,existing/absent output.54refusals0,18copies0,36audio failures234.Native output effects recorded;Edge atomic abort intentionally does not reproduce empty failed OS outputs.Full stderr not certified."
+}

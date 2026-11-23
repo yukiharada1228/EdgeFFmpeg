@@ -1,0 +1,37 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "numericProfile": "darwin-arm64",
+  "jobs": 8038,
+  "sources": {
+    "upstream/ffmpeg/fftools/cmdutils.c": "d21c11d724bb9bcca498c3aeb589113577ed280441a91ba39a9ce0fde59e0b40",
+    "upstream/ffmpeg/fftools/ffmpeg_demux.c": "4289c42e1498322418eaec82f7e5012aba0f411fa8025aed0a64e72578f6a218",
+    "upstream/ffmpeg/fftools/ffmpeg_mux_init.c": "a74812b6e019e5cd2a0e6a28a63e989d55008b081a55acde8510774310e965c2",
+    "upstream/ffmpeg/fftools/ffmpeg_dec.c": "955c868895fa8ce4f8f65566c7d53bb5690e99bd4a1de7b4f346385984c5877d",
+    "upstream/ffmpeg/fftools/ffmpeg_filter.c": "85a5f5fec249430381d43ecbda28170ee6f4f2b86adfd5991c23cfeb1d57e273",
+    "upstream/ffmpeg/fftools/ffmpeg_mux.c": "a3081b45f817f44a27a079b7dac271e5b0ab4067eac9249203006d6f1cd9f14d",
+    "upstream/ffmpeg/libavformat/mux.c": "94067d0406cc53eb1624277e296642fc3cd94ce48e9bb5645923ade3cb00853c",
+    "upstream/ffmpeg/libavformat/seek.c": "68fa644ba14c782a779017e8faa7cd52bd3e3b4fac3995f8807f954d7ad26f43",
+    "upstream/ffmpeg/libavformat/rawvideodec.c": "7591f1ec801d3e1335e6cda0dd88be88fad90152b07f77efce18558fa19999c1",
+    "upstream/ffmpeg/libavformat/demux.c": "8bf6e79a1da4a5bf425211cdce36e018c5c8a782a254fa129a483e0d6c18b17b",
+    "upstream/ffmpeg/libavfilter/trim.c": "7cb3a92a79cb018c65ebc9c0193ea1752fefa4afcecb50f7126991ed8fe99fe6"
+  },
+  "scope": "8038 finite rawvideo signed seek/stop, empty-decoder clock fallback, input/output time/frame limits, physical/forced/output clocks, fourteen pixel formats, two-source hstack EOF, and raw/framecrc jobs. Full output bytes encoded as base64. Rejected cases compare success/failure projection only. Not full CLI, audio, codec, protocol or runtime conformance."
+}

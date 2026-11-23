@@ -1,0 +1,6242 @@
+[
+  {
+    "profileId": "wav-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "aiff-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "au-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-pcm",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "video-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-encode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-decode",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "mp4-copy",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "read",
+    "depth": 1,
+    "inputPath": "/block/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "read",
+    "depth": 2,
+    "inputPath": "/block/deeper/input.bin",
+    "outputPath": "/output/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "write",
+    "depth": 1,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "operation": "write",
+    "depth": 2,
+    "inputPath": "/input.bin",
+    "outputPath": "/block/deeper/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  }
+]

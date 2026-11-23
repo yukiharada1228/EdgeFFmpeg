@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "fate-filter-apad",
+  "comparison": "framecrc",
+  "definitionFile": "tests/fate/filter-audio.mak",
+  "command": "framecrc -i $(SRC) -af apad=pad_len=10",
+  "variables": {
+    "SRC": "$(TARGET_PATH)/tests/data/asynth-44100-2.wav"
+  },
+  "inputToken": "$(SRC)",
+  "generatorTarget": "tests/data/asynth-44100-2.wav",
+  "input": {
+    "bytes": 1058446,
+    "sha256": "a056bb276d48b09028d6c8d33c4864acd3a008865ce71d7d76d2ed9dc7e6702c"
+  },
+  "referenceFile": "tests/ref/fate/filter-apad",
+  "expectedOutput": {
+    "sha256": "9bc987422b7eaaffd72b7c1c8d328febdbf76639ff489f6617aae5a5e37444d8",
+    "bytes": 3940
+  },
+  "sources": {
+    "tests/audiogen.c": "369c6b055084c7dc570657ca304bf68c7aaf898673bb88c78e52d21454570a6e",
+    "tests/Makefile": "bdad72df5611255223f2c19cb5af7d71bd04af184232e808b86bc1f71afddf7f",
+    "tests/fate-run.sh": "d0b6825adced2aac7aa00e92850d5cdc7fffbbc2c457c229df291daf5aa41b2c",
+    "tests/md5.sh": "c041f16868df4c2b3824b15923a5d7bfac724a0c3d2534708380c7cac85ec606",
+    "tests/fate/filter-audio.mak": "3e84d48ecb55eb5e6aa5026dc23dc1583f5a48594ac42fa5d5e061cf6cbf5289",
+    "tests/ref/fate/filter-apad": "9bc987422b7eaaffd72b7c1c8d328febdbf76639ff489f6617aae5a5e37444d8"
+  },
+  "edgeArgv": [
+    "-y",
+    "-i",
+    "/input.sw",
+    "-af",
+    "apad=pad_len=10",
+    "-bitexact",
+    "-f",
+    "framecrc",
+    "/output.sw"
+  ],
+  "adaptations": [
+    "Resolve the reviewed SRC variable to the pinned generated WAV and project VFS input/output paths.",
+    "Expand native framecrc helper with -bitexact -f framecrc and compare all expected text bytes.",
+    "Native terminal/statistics, noauto_conversion_filters, CPUFLAGS=all, one-thread and hardware-none controls remain recorded harness adaptations; no media option or filter is removed."
+  ],
+  "scope": "Original finite apad FATE definition with generated 44100 Hz stereo PCM16 WAV and ten appended silence samples. Complete upstream expected framecrc, including final partial input packet and separate silence packet, is required. Infinite/duration padding and combined resampling are outside this profile."
+}

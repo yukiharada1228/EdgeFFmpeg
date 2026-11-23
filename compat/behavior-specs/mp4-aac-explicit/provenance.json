@@ -1,0 +1,102 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "caseCount": 384,
+  "sources": {
+    "compat/behavior-specs/mp4-demux/inputs.json": "765c8cb2811709e68fb401f0634afa29f1bd9762938bb4c5c386a7e29aeff3d0",
+    "compat/behavior-specs/mp4-audio-edits/inputs.json": "74109b37b5fe667c208afbefd4b3c03d70f8f3fd6668b10ae8261e4dab581211",
+    "compat/behavior-specs/mp4-audio-intervals/inputs.json": "abdfb1513d18e4120b8e86225d4e7b14fa2437f72aa39d4c8ff653011b72d53f",
+    "compat/behavior-specs/mp4-audio-boundaries/inputs.json": "f4d9cca8bf26078893e865d2678dbf458d7c9178b4001a10f58cab4fe1bd342a",
+    "compat/behavior-specs/mp4-audio-clocks/inputs.json": "a035608372ca2d72c5f44799fef4024e6050d9b19558a60c698bd5c9f0534530",
+    "compat/behavior-specs/mp4-aac-entries/inputs.json": "9372df1cfa4f92f5060bf2788d5a099714a3c585599328adffc8000fac5dd5f0",
+    "compat/behavior-specs/mp4-demux/results.json": "fbd828343968f0598ed22ce27cf3c4782d2e6125ae27327ead62b5c49d099bb0",
+    "compat/behavior-specs/mp4-demux/provenance.json": "27d038135ba5107123da8263026391eef6d9646c87cd71efdb2ab95611cec13b",
+    "compat/behavior-specs/mp4-demux/manifest.json": "acb93d304534dffdab21e4d00a15e7f71924d4d5bb00c64e60682cd6c29a1c96",
+    "compat/behavior-specs/mp4-audio-edits/results.json": "576f68b4713a77abd021c7fb1ba1fcadada60e3cec485816a95ca8897898c8cb",
+    "compat/behavior-specs/mp4-audio-edits/jobs.json": "ec42ccd0e11cfa5a4ffbaba1ef54b1a7d0821b7f14b3bfaf81774ffccdbfa35c",
+    "compat/behavior-specs/mp4-audio-edits/provenance.json": "e2cd99ab0a38d5acddcf0cfad04c55de2b8135cc286ecbe3b1a1c1a4ab7f9ec8",
+    "compat/behavior-specs/mp4-audio-edits/manifest.json": "1aec29c75700b1864991f396d00aec67fc184e750dabf50ad7785cf74eb76394",
+    "compat/behavior-specs/mp4-audio-intervals/results.json": "68386ae4466b4fe91c240ed4e37de5bf94868945ce555d452173ea58fb075f2e",
+    "compat/behavior-specs/mp4-audio-intervals/provenance.json": "a25b6c6065e40c41809ddf94cb8dc01c52d91d5c17fc764ea0042de29689f272",
+    "compat/behavior-specs/mp4-audio-intervals/manifest.json": "816d3b3a2fe06137995adb1f56ca14e30730334a580a08d6c7381d0377c80059",
+    "tools/differential-runner/mp4-aac-explicit/generate.mjs": "df814c8c45e75d014fd8799f28ccbc383a7de3332fa318091468b034eb286ead",
+    "tools/differential-runner/mp4-aac-explicit/probe.c": "c729db9684ecd9c729a6b23562b03b8807c872e7812228047c759e9a23d5d092",
+    "tools/differential-runner/mp4-aac-explicit/build-native.mjs": "d7a65c44c7dcccace31ac3bc5b1e69953f1249cdab17a02a896e526fe9efe77a",
+    "tools/differential-runner/mp4-aac-explicit/verify-native.mjs": "b9e4160c0f8918fcba7edaee56af1167a31627ba8a62e6587559429f68956dd9"
+  },
+  "nativeProbe": {
+    "inputs": {
+      "verifierSha256": "b9e4160c0f8918fcba7edaee56af1167a31627ba8a62e6587559429f68956dd9",
+      "baselineSourceSha256": "765c8cb2811709e68fb401f0634afa29f1bd9762938bb4c5c386a7e29aeff3d0",
+      "referenceCommit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "sourceSha256": "c729db9684ecd9c729a6b23562b03b8807c872e7812228047c759e9a23d5d092",
+      "builderSha256": "d7a65c44c7dcccace31ac3bc5b1e69953f1249cdab17a02a896e526fe9efe77a",
+      "librarySha256": {
+        "libavformat/libavformat.a": "d1760cb51a34c69c6c664fa616e455ee5f90d96c8f2a7d82d02bd5707837d1cc",
+        "libavcodec/libavcodec.a": "7570dfffaf568d1afeb7b4b002493f5d188470273819b7a4dd0521db75eb4ca9",
+        "libswresample/libswresample.a": "053aa00bcf154fc88877406ddd492ffc68952977cb1c61fe31b353c2d6547b1f",
+        "libavutil/libavutil.a": "b8864b177f1717ac38de58754a16ccee473e0fb7bf304398dcaffc1b6c89a598"
+      },
+      "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+      "platform": "darwin",
+      "arch": "arm64",
+      "command": [
+        "-I",
+        "upstream/ffmpeg",
+        "-I",
+        ".build/reference",
+        "tools/differential-runner/mp4-aac-explicit/probe.c",
+        ".build/reference/libavformat/libavformat.a",
+        ".build/reference/libavcodec/libavcodec.a",
+        ".build/reference/libswresample/libswresample.a",
+        ".build/reference/libavutil/libavutil.a",
+        "-lm",
+        "-pthread",
+        "-framework",
+        "CoreFoundation",
+        "-framework",
+        "CoreVideo",
+        "-framework",
+        "CoreMedia",
+        "-o",
+        ".build/aac-native-probe/probe"
+      ]
+    },
+    "binarySha256": "a2019f7c74086d70a0f4410bbdfed517394a86199fbfa6422efce47b1306736f",
+    "validation": {
+      "cases": 12,
+      "failures": 0
+    }
+  },
+  "validation": {
+    "cases": 1533,
+    "failures": [],
+    "corpusSha256": {
+      "compat/behavior-specs/mp4-demux/inputs.json": "765c8cb2811709e68fb401f0634afa29f1bd9762938bb4c5c386a7e29aeff3d0",
+      "compat/behavior-specs/mp4-audio-edits/inputs.json": "74109b37b5fe667c208afbefd4b3c03d70f8f3fd6668b10ae8261e4dab581211",
+      "compat/behavior-specs/mp4-audio-intervals/inputs.json": "abdfb1513d18e4120b8e86225d4e7b14fa2437f72aa39d4c8ff653011b72d53f",
+      "compat/behavior-specs/mp4-audio-boundaries/inputs.json": "f4d9cca8bf26078893e865d2678dbf458d7c9178b4001a10f58cab4fe1bd342a",
+      "compat/behavior-specs/mp4-audio-clocks/inputs.json": "a035608372ca2d72c5f44799fef4024e6050d9b19558a60c698bd5c9f0534530",
+      "compat/behavior-specs/mp4-aac-entries/inputs.json": "9372df1cfa4f92f5060bf2788d5a099714a3c585599328adffc8000fac5dd5f0"
+    },
+    "binarySha256": "a2019f7c74086d70a0f4410bbdfed517394a86199fbfa6422efce47b1306736f"
+  },
+  "scope": "AAC-LC explicit24-bit frequency equivalent to owned table frequency.12owned,60leading,288multiple interval and12faststart plus12odd-tick wide(>2^53) sources. Fixed libavformat API probe validates against1533standard ffprobe cases; Native ffprobe decoder open rejects explicit frequency while Native streamcopy succeeds. Container/copy only, not decoding."
+}

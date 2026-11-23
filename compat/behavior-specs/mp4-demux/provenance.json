@@ -1,0 +1,14 @@
+{
+  "reference": {
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "ffmpegSha256": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+    "ffprobeSha256": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n"
+  },
+  "sources": {
+    "upstream/ffmpeg/libavformat/mov.c": "533674687505d25db7176cf876036f600e6d8cb25079ffa6b28b4a8e8266eae1",
+    "upstream/ffmpeg/libavformat/isom.c": "6f78867fa7691b8e3a5ad5815309a626e67bd6128848ed65bb85f84f255013d7"
+  },
+  "caseCount": 85,
+  "certified": false
+}

@@ -1,0 +1,72 @@
+{
+  "status": "scoped-node-r2-exit-status-resolved-full-protocol-incomplete",
+  "fullConformance": false,
+  "features": [
+    "demuxer.mov",
+    "muxer.mp4"
+  ],
+  "reference": "fixed FFmpeg9.0.2",
+  "scope": "9two-audio sources,first/later/both selections;existing output,default EOF stdin or-n;54cases",
+  "native": {
+    "exitCode": 0,
+    "output": "prior sentinel preserved",
+    "basis": [
+      "fftools/ffmpeg_opt.c assert_file_overwrite returns AVERROR_EXIT",
+      "fftools/ffmpeg.c maps AVERROR_EXIT to0"
+    ]
+  },
+  "edge": {
+    "exitCode": 0,
+    "outputs": [],
+    "diagnosticCode": "output-exists",
+    "output": "prior sentinel preserved;no writer opened",
+    "scope": "MP4copy with built-in Node/R2 adapters or custom VFS implementing outputExists;default no-interactive/EOF policy or-n;shared preflight also covers13finite audio/rawvideo/BMP/H264 single-output profiles"
+  },
+  "requiredWork": [
+    "Complex/multi-output default and six timed CLI schedulers now have scoped preflight contracts;full log/OS side effects and general error precedence remain unverified.",
+    "Custom VFS adapters must implement outputExists to obtain this scoped behavior;legacy fallback remains partial.",
+    "Interactive stdin prompts/acceptance and full stderr formatting are not implemented.",
+    "Native may leave an empty OS file after other mux-header failures;Edge deliberately uses atomic abort per design and records this protocol difference."
+  ],
+  "evidence": {
+    "cases": 270,
+    "statusMismatchesBeforeConflictFix": 162,
+    "statusMismatchesAfterConflictFix": 54,
+    "conflictingFlagCasesResolved": 108,
+    "refusalCasesResolved": 54,
+    "auditedStatusMismatchesAfterRefusalFix": 0,
+    "nativeOnlyCanonicalCases": 108,
+    "canonicalBreakdown": {
+      "refusal": 54,
+      "copies": 18,
+      "invalidAudio": 36
+    },
+    "controls": [
+      "Node cancellation/path containment/missing parent/racing no-clobber commit",
+      "R2 preflight cancellation/failure/read-only mount/racing object creation"
+    ],
+    "additionalSingleOutputProfiles": {
+      "profiles": 13,
+      "cases": 130,
+      "Node": 130,
+      "workerd": 130
+    },
+    "multiOutputGraphs": {
+      "profiles": 7,
+      "nativeCases": 140,
+      "defaultNode": 140,
+      "timedNode": 840,
+      "defaultWorkerd": 140,
+      "timedWorkerd": 840
+    }
+  },
+  "limitations": "Interactive stdin acceptance,prompt/log formatting,general formats and Native OS failure effects remain unverified.",
+  "historicalEdge": {
+    "exitCodes": [
+      1,
+      234
+    ],
+    "output": "prior sentinel preserved",
+    "notes": "Unresolved selected audio fails234before overwrite refusal;valid later stream reaches atomic no-clobber commit and returns1. Neither matches Native graceful exit0."
+  }
+}

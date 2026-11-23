@@ -1,0 +1,11 @@
+BMP decoding/encoding is adapted from the pinned FFmpeg source:
+libavcodec/bmp.c: Copyright (c)2005 Mans Rullgard
+libavcodec/bmpenc.c: Copyright (c)2006,2007 Michel Bardiaux;
+Copyright (c)2009 Daniel Verkamp
+libavcodec/msrledec.c: Copyright (C)2008 Konstantin Shishkov
+Systematic palettes follow libavutil/imgutils.c.
+Commit946fcce07b6dcd0331c8cc609192aeff5e1924f8, LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and the original source/notices in upstream/ffmpeg.
+The TypeScript adaptation adds owned tight visible storage, finite byte budgets,
+cancellation and explicit RLE padding-capacity profiles. No FFmpeg library is
+linked into runtime code. The development-only Native oracle is separate.

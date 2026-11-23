@@ -1,0 +1,6 @@
+InputNotFoundError is an independent behavior mapping from the fixed Native
+FFmpeg reference at commit946fcce07b6dcd0331c8cc609192aeff5e1924f8:
+initial AVERROR(ENOENT)=-2 reaches the ffmpeg.c return path and is observed as
+POSIX process status254. Native-only fixtures establish ordering before output
+overwrite checks. No Native code is executed or linked in Core/Workers.
+Only initial VFS absence is mapped;post-open version changes remain distinct.

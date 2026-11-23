@@ -1,0 +1,332 @@
+[
+  {
+    "id": "multi-main-0.001-first",
+    "inputId": "multi-main-0.001",
+    "selection": "first",
+    "options": [
+      "-map",
+      "0:v:0"
+    ]
+  },
+  {
+    "id": "multi-main-0.001-later",
+    "inputId": "multi-main-0.001",
+    "selection": "later",
+    "options": [
+      "-map",
+      "0:v:1"
+    ]
+  },
+  {
+    "id": "multi-main-0.001-both",
+    "inputId": "multi-main-0.001",
+    "selection": "both",
+    "options": [
+      "-map",
+      "0:v"
+    ]
+  },
+  {
+    "id": "multi-main-0.001-reverse",
+    "inputId": "multi-main-0.001",
+    "selection": "reverse",
+    "options": [
+      "-map",
+      "0:v:1",
+      "-map",
+      "0:v:0"
+    ]
+  },
+  {
+    "id": "multi-main-0.001-duplicate",
+    "inputId": "multi-main-0.001",
+    "selection": "duplicate",
+    "options": [
+      "-map",
+      "0:v:1",
+      "-map",
+      "0:v:1"
+    ]
+  },
+  {
+    "id": "multi-main-0.001-auto",
+    "inputId": "multi-main-0.001",
+    "selection": "auto",
+    "options": []
+  },
+  {
+    "id": "multi-main-0.4-first",
+    "inputId": "multi-main-0.4",
+    "selection": "first",
+    "options": [
+      "-map",
+      "0:v:0"
+    ]
+  },
+  {
+    "id": "multi-main-0.4-later",
+    "inputId": "multi-main-0.4",
+    "selection": "later",
+    "options": [
+      "-map",
+      "0:v:1"
+    ]
+  },
+  {
+    "id": "multi-main-0.4-both",
+    "inputId": "multi-main-0.4",
+    "selection": "both",
+    "options": [
+      "-map",
+      "0:v"
+    ]
+  },
+  {
+    "id": "multi-main-0.4-reverse",
+    "inputId": "multi-main-0.4",
+    "selection": "reverse",
+    "options": [
+      "-map",
+      "0:v:1",
+      "-map",
+      "0:v:0"
+    ]
+  },
+  {
+    "id": "multi-main-0.4-duplicate",
+    "inputId": "multi-main-0.4",
+    "selection": "duplicate",
+    "options": [
+      "-map",
+      "0:v:1",
+      "-map",
+      "0:v:1"
+    ]
+  },
+  {
+    "id": "multi-main-0.4-auto",
+    "inputId": "multi-main-0.4",
+    "selection": "auto",
+    "options": []
+  },
+  {
+    "id": "multi-main-300000-first",
+    "inputId": "multi-main-300000",
+    "selection": "first",
+    "options": [
+      "-map",
+      "0:v:0"
+    ]
+  },
+  {
+    "id": "multi-main-300000-later",
+    "inputId": "multi-main-300000",
+    "selection": "later",
+    "options": [
+      "-map",
+      "0:v:1"
+    ]
+  },
+  {
+    "id": "multi-main-300000-both",
+    "inputId": "multi-main-300000",
+    "selection": "both",
+    "options": [
+      "-map",
+      "0:v"
+    ]
+  },
+  {
+    "id": "multi-main-300000-reverse",
+    "inputId": "multi-main-300000",
+    "selection": "reverse",
+    "options": [
+      "-map",
+      "0:v:1",
+      "-map",
+      "0:v:0"
+    ]
+  },
+  {
+    "id": "multi-main-300000-duplicate",
+    "inputId": "multi-main-300000",
+    "selection": "duplicate",
+    "options": [
+      "-map",
+      "0:v:1",
+      "-map",
+      "0:v:1"
+    ]
+  },
+  {
+    "id": "multi-main-300000-auto",
+    "inputId": "multi-main-300000",
+    "selection": "auto",
+    "options": []
+  },
+  {
+    "id": "multi-mixed-clock-0.001-first",
+    "inputId": "multi-mixed-clock-0.001",
+    "selection": "first",
+    "options": [
+      "-map",
+      "0:v:0"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-0.001-later",
+    "inputId": "multi-mixed-clock-0.001",
+    "selection": "later",
+    "options": [
+      "-map",
+      "0:v:1"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-0.001-both",
+    "inputId": "multi-mixed-clock-0.001",
+    "selection": "both",
+    "options": [
+      "-map",
+      "0:v"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-0.001-reverse",
+    "inputId": "multi-mixed-clock-0.001",
+    "selection": "reverse",
+    "options": [
+      "-map",
+      "0:v:1",
+      "-map",
+      "0:v:0"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-0.001-duplicate",
+    "inputId": "multi-mixed-clock-0.001",
+    "selection": "duplicate",
+    "options": [
+      "-map",
+      "0:v:1",
+      "-map",
+      "0:v:1"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-0.001-auto",
+    "inputId": "multi-mixed-clock-0.001",
+    "selection": "auto",
+    "options": []
+  },
+  {
+    "id": "multi-mixed-clock-0.4-first",
+    "inputId": "multi-mixed-clock-0.4",
+    "selection": "first",
+    "options": [
+      "-map",
+      "0:v:0"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-0.4-later",
+    "inputId": "multi-mixed-clock-0.4",
+    "selection": "later",
+    "options": [
+      "-map",
+      "0:v:1"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-0.4-both",
+    "inputId": "multi-mixed-clock-0.4",
+    "selection": "both",
+    "options": [
+      "-map",
+      "0:v"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-0.4-reverse",
+    "inputId": "multi-mixed-clock-0.4",
+    "selection": "reverse",
+    "options": [
+      "-map",
+      "0:v:1",
+      "-map",
+      "0:v:0"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-0.4-duplicate",
+    "inputId": "multi-mixed-clock-0.4",
+    "selection": "duplicate",
+    "options": [
+      "-map",
+      "0:v:1",
+      "-map",
+      "0:v:1"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-0.4-auto",
+    "inputId": "multi-mixed-clock-0.4",
+    "selection": "auto",
+    "options": []
+  },
+  {
+    "id": "multi-mixed-clock-300000-first",
+    "inputId": "multi-mixed-clock-300000",
+    "selection": "first",
+    "options": [
+      "-map",
+      "0:v:0"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-300000-later",
+    "inputId": "multi-mixed-clock-300000",
+    "selection": "later",
+    "options": [
+      "-map",
+      "0:v:1"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-300000-both",
+    "inputId": "multi-mixed-clock-300000",
+    "selection": "both",
+    "options": [
+      "-map",
+      "0:v"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-300000-reverse",
+    "inputId": "multi-mixed-clock-300000",
+    "selection": "reverse",
+    "options": [
+      "-map",
+      "0:v:1",
+      "-map",
+      "0:v:0"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-300000-duplicate",
+    "inputId": "multi-mixed-clock-300000",
+    "selection": "duplicate",
+    "options": [
+      "-map",
+      "0:v:1",
+      "-map",
+      "0:v:1"
+    ]
+  },
+  {
+    "id": "multi-mixed-clock-300000-auto",
+    "inputId": "multi-mixed-clock-300000",
+    "selection": "auto",
+    "options": []
+  }
+]

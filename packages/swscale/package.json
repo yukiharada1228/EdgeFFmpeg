@@ -1,0 +1,1 @@
+{"name":"@edge-ffmpeg/swscale","version":"0.0.0","private":true,"type":"module","exports":"./src/index.ts","dependencies":{"@edge-ffmpeg/avutil":"0.0.0"}}

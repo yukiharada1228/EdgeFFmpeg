@@ -1,0 +1,15 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {build} from 'esbuild';
+import {digest} from './profile.mjs';
+import {auditAudioCandidates} from './candidates.mjs';
+const root=resolve(import.meta.dirname,'../..'),read=path=>readFileSync(resolve(root,path)),inventory=JSON.parse(read('compat/reports/fate-inventory.json')),lock=JSON.parse(read('compat/upstream.lock.json'));
+if(inventory.commit!==lock.commit||execFileSync('git',['rev-parse','HEAD'],{cwd:resolve(root,'upstream/ffmpeg'),encoding:'utf8'}).trim()!==lock.commit)throw new Error('FATE audit upstream mismatch');
+for(const file of inventory.files)if(digest(read(`upstream/ffmpeg/${file.file}`))!==file.sha256)throw new Error(`Stale FATE inventory: ${file.file}`);
+const bundled=await build({stdin:{contents:"export {compileAudioFilterChain} from '@edge-ffmpeg/avfilter';",resolveDir:root},bundle:true,platform:'node',format:'esm',write:false,logLevel:'silent'}),code=bundled.outputFiles[0].text;
+const {compileAudioFilterChain}=await import(`data:text/javascript;base64,${Buffer.from(code).toString('base64')}`);
+const profiles=JSON.parse(read('compat/fate/profiles.json')).map(path=>({path,sha256:digest(read(path)),id:JSON.parse(read(path)).id}));
+const cases=auditAudioCandidates(inventory.cases,compileAudioFilterChain,profiles.map(profile=>profile.id)),counts={};for(const entry of cases)counts[entry.filterStatus]=(counts[entry.filterStatus]??0)+1;
+const result={schemaVersion:1,commit:lock.commit,inventorySha256:digest(read('compat/reports/fate-inventory.json')),compilerBundleSha256:digest(code),profiles,cases,counts,limitation:'Static explicit filter-audio.mak triage only. No commands, samples or expected results are executed or certified. A reviewed profile being present is not a fresh passing execution. Generated targets and complex/quoted filter syntax are not expanded.'};
+writeFileSync(resolve(root,'compat/reports/fate-audio-candidates.json'),JSON.stringify(result,null,2)+'\n');console.log(`Audited ${cases.length} explicit audio FATE candidates: ${JSON.stringify(counts)}; no new execution claimed`);

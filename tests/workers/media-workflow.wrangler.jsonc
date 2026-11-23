@@ -1,0 +1,59 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "edge-ffmpeg-media-workflow-local",
+  "main": "media-workflow-fixture.ts",
+  "compatibility_date": "2026-11-18",
+  "upload_source_maps": true,
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_BUCKET",
+      "bucket_name": "edge-ffmpeg-local-job-media"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "JOBS",
+        "class_name": "MediaJobCoordinator"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "MediaJobCoordinator"
+      ]
+    }
+  ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "MEDIA_JOB_QUEUE",
+        "queue": "edge-ffmpeg-local-media-jobs"
+      }
+    ],
+    "consumers": [
+      {
+        "queue": "edge-ffmpeg-local-media-jobs",
+        "max_batch_size": 1,
+        "max_batch_timeout": 0,
+        "max_retries": 3
+      }
+    ]
+  },
+  "vars": {
+    "AUTO_RUN": "yes"
+  },
+  "workflows": [
+    {
+      "name": "edge-ffmpeg-media-workflow-local",
+      "binding": "MEDIA_WORKFLOW",
+      "class_name": "MediaWorkflow"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "sha256": {
+    "compat/behavior-specs/video-copy-ts/cases.json": "a531934f5a111db1e6b4197ca66c555fa2094df64ec1d34e281f8789a47fc593",
+    "compat/behavior-specs/video-copy-ts/results.json": "c0f9550a66c7d8df7d43aed1acb91feece4051a603dff731d14edcfe6e31d5ff",
+    "compat/behavior-specs/video-copy-ts/provenance.json": "34d408cbde0e436ec0a53a62f412ce66589696283cadff8baac04e4babc78aee",
+    "tools/differential-runner/video-copy-ts/generate.mjs": "694b4a2fe54485ecb2f07e14c7fb920c63623fab790de259f3427ddcca51b158"
+  }
+}

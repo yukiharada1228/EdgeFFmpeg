@@ -1,0 +1,17 @@
+OpenH264 build inputs and independent EdgeFFmpeg Wasm adapter.
+
+source.patch adapts Cisco OpenH264 v2.7.0 commit
+1bca62311e447fd9c39fc93de2c4b96cd5ce971c. Original copyright notices and
+BSD-2-Clause terms are retained in each modified file and LICENSE.OpenH264.
+The wrapper contains no compiled FFmpeg implementation.
+Progressive POC type1/2 calculations and MMCO5 metadata access are independent
+SDK-side adaptations. The TypeScript display scheduler receives the reset
+boundary separately from the key-picture flag.
+
+Compiler runtime libraries carry separate notices. A build output is not a
+completed distribution package; source-specific runtime notices and source
+packaging require review. SDK sample-media rights are separate from the SDK
+source-code license.
+
+The separate TypeScript presentation/parameter-set adaptations are in
+packages/avcodec/src/h264, with their LGPL-2.1-or-later notices and source.

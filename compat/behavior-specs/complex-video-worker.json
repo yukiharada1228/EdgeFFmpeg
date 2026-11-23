@@ -1,0 +1,433 @@
+{
+  "reference": {
+    "aarch64": {
+      "artifacts": {
+        "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+        "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+      },
+      "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "platform": "darwin",
+      "arch": "arm64",
+      "flags": [
+        "--disable-autodetect",
+        "--disable-doc",
+        "--disable-debug",
+        "--disable-x86asm"
+      ],
+      "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+      "targetPlatformMatches": false,
+      "reproducibleToolchainPinned": false
+    },
+    "x86_64": {
+      "artifacts": {
+        "ffmpeg": "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91",
+        "ffprobe": "0895f870196845f40002238980f908e2dfed7dcf8197a1074b98e4312431671b"
+      },
+      "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "platform": "linux",
+      "arch": "x64",
+      "flags": [
+        "--disable-autodetect",
+        "--disable-doc",
+        "--disable-debug",
+        "--disable-x86asm"
+      ],
+      "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 12 (Debian 12.2.0-14+deb12u1)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+      "targetPlatformMatches": true,
+      "reproducibleToolchainPinned": false
+    }
+  },
+  "container": {
+    "image": "docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496",
+    "platform": "linux/amd64",
+    "outputDirectory": ".build/linux-x64",
+    "purpose": "Isolated Linux x86_64 reference build; reproducible binary identity and conformance remain unverified"
+  },
+  "cases": [
+    {
+      "id": "0",
+      "source": "nv21",
+      "targets": [
+        "bgra",
+        "rgba"
+      ],
+      "graph": "[0:v]split[a][b];[a]hflip[left];[b]vflip[right]",
+      "sizes": [
+        "3x2",
+        "13x7"
+      ],
+      "inputTime": [],
+      "formats": [
+        "framecrc",
+        "framecrc"
+      ],
+      "scalar": false,
+      "mapping": [
+        0,
+        1
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "a95ae6c7f33897faceacf7fd18ebcd135dc1bb9945ca809fc403e4e8a1c9b180",
+      "native": {
+        "aarch64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDN4Mgojc2FyIDA6IDAvMQowLCAgICAgICAgICAwLCAgICAgICAgICAwLCAgICAgICAgMSwgICAgICAgMjQsIDB4YjljYTBmYWQK",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMSwgICAgICAgICAgMSwgICAgICAgIDEsICAgICAgMzY0LCAweDFiODdlZTAyCg=="
+        ],
+        "x86_64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDN4Mgojc2FyIDA6IDAvMQowLCAgICAgICAgICAwLCAgICAgICAgICAwLCAgICAgICAgMSwgICAgICAgMjQsIDB4YjljYTBmYWQK",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMSwgICAgICAgICAgMSwgICAgICAgIDEsICAgICAgMzY0LCAweDFiODdlZTAyCg=="
+        ]
+      }
+    },
+    {
+      "id": "1",
+      "source": "rgba",
+      "targets": [
+        "nv12",
+        "gray"
+      ],
+      "graph": "[0:v]scale=13:7,split[left][right]",
+      "sizes": [
+        null,
+        null
+      ],
+      "inputTime": [
+        "-ss",
+        "0.02",
+        "-t",
+        "0.1"
+      ],
+      "formats": [
+        "rawvideo",
+        "framecrc"
+      ],
+      "scalar": false,
+      "mapping": [
+        1,
+        0
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "9db13462babe4c10957f55af4d6b4b211ce376898f5b0bd3a6605e32a63182f8",
+      "native": {
+        "aarch64": [
+          "RE9sh3pHLFeYqHxUR0RPbId6RyxXmKh8VEe9sZp8ZlxWbI6MZDwvvbGafGZcVmyOjGQ8L72xmnxmXFZsjoxkPC/BsYheZ5y/rYx0bmJewbGIXmecv62MdG5iXm3lhaCZZJZtlm2WbZZtHYFmbJWLcN6LjJlklm0dgWZslYtw3ouMmWSWbZZtn2x3ciV/emmOnm3l",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMSwgICAgICAgICAgMSwgICAgICAgIDEsICAgICAgIDkxLCAweGU0YTMyZjU0Cg=="
+        ],
+        "x86_64": [
+          "RE9sh3pHLFeYqHxUR0RPbId6RyxXmKh8VEe9sZp8ZlxWbI6MZDwvvbGafGZcVmyOjGQ8L72xmnxmXFZsjoxkPC/BsYheZ5y/rYx0bmJewbGIXmecv62MdG5iXm3lhaCZZJZtlm2WbZZtHYFmbJWLcN6LjJlklm0dgWZslYtw3ouMmWSWbZZtn2x3ciV/emmOnm3l",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMSwgICAgICAgICAgMSwgICAgICAgIDEsICAgICAgIDkxLCAweGU0YTMyZjU0Cg=="
+        ]
+      }
+    },
+    {
+      "id": "2",
+      "source": "yuv444p",
+      "targets": [
+        "gbrp",
+        "nv12"
+      ],
+      "graph": "[a]transpose=clock[left];[b]scale=13:7[right];[0:v]split[a][b]",
+      "sizes": [
+        "5x3",
+        "3x5"
+      ],
+      "inputTime": [],
+      "formats": [
+        "framecrc",
+        "rawvideo"
+      ],
+      "scalar": false,
+      "mapping": [
+        0,
+        1
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "a354e595685525a4bc1a39f59b029356f4787d7de004b8403fe1b44cd969c955",
+      "native": {
+        "aarch64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDV4Mwojc2FyIDA6IDAvMQowLCAgICAgICAgICAwLCAgICAgICAgICAwLCAgICAgICAgMSwgICAgICAgNDUsIDB4ZDhlYTE1NTQK",
+          "x74wlregdLf9VpTPKWiicD1Nb6WaTkF5mqp2x74wlregdLf9VpTPKWiicD1Nb6WaTkF5mqp2"
+        ],
+        "x86_64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDV4Mwojc2FyIDA6IDAvMQowLCAgICAgICAgICAwLCAgICAgICAgICAwLCAgICAgICAgMSwgICAgICAgNDUsIDB4ZDhlYTE1NTQK",
+          "x74wlregdLf9VpTPKWiicD1Nb6WaTkF5mqp2x74wlregdLf9VpTPKWiicD1Nb6WaTkF5mqp2"
+        ]
+      }
+    },
+    {
+      "id": "3",
+      "source": "gray",
+      "targets": [
+        "yuva420p",
+        "rgb24"
+      ],
+      "graph": "[0:v]split[a][b];[a]hflip[left];[b]vflip[right]",
+      "sizes": [
+        "13x7",
+        "3x2"
+      ],
+      "inputTime": [],
+      "formats": [
+        "framecrc",
+        "framecrc"
+      ],
+      "scalar": false,
+      "mapping": [
+        1,
+        0
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "9f76f8ef6f03b1dc554d6d0d5b850c1e7a1d07bb1d9a419e919b965ac529d1f0",
+      "native": {
+        "aarch64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMCwgICAgICAgICAgMCwgICAgICAgIDEsICAgICAgMjM4LCAweDMxYmQ5ZmJmCg==",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDN4Mgojc2FyIDA6IDAvMQowLCAgICAgICAgICAxLCAgICAgICAgICAxLCAgICAgICAgMSwgICAgICAgMTgsIDB4NWNhNjBhNGEK"
+        ],
+        "x86_64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMCwgICAgICAgICAgMCwgICAgICAgIDEsICAgICAgMjM4LCAweDMxYmQ5ZmJmCg==",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDN4Mgojc2FyIDA6IDAvMQowLCAgICAgICAgICAxLCAgICAgICAgICAxLCAgICAgICAgMSwgICAgICAgMTgsIDB4NWNhNjBhNGEK"
+        ]
+      }
+    },
+    {
+      "id": "4",
+      "source": "gbrp",
+      "targets": [
+        "gray",
+        "bgra"
+      ],
+      "graph": "[0:v]scale=13:7,split[left][right]",
+      "sizes": [
+        null,
+        "13x7"
+      ],
+      "inputTime": [
+        "-ss",
+        "0.02",
+        "-t",
+        "0.1"
+      ],
+      "formats": [
+        "framecrc",
+        "rawvideo"
+      ],
+      "scalar": false,
+      "mapping": [
+        0,
+        1
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "a354e595685525a4bc1a39f59b029356f4787d7de004b8403fe1b44cd969c955",
+      "native": {
+        "aarch64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMCwgICAgICAgICAgMCwgICAgICAgIDEsICAgICAgIDkxLCAweDhhNjcyZmRiCg==",
+          "S0tL/1FRUf9dXV3/bW1t/39/f/+IiIj/mpqa/6urq/+6urr/vLy8/6qqqv+ZmZn/lJSU/0tLS/9RUVH/XV1d/21tbf9/f3//iIiI/5qamv+rq6v/urq6/7y8vP+qqqr/mZmZ/5SUlP+tra3/mZmZ/21tbf86Ojr/LCws/0FBQf9TU1P/ZGRk/21tbf9/f3//i4uL/5ubm/+goKD/ra2t/5mZmf9tbW3/Ojo6/ywsLP9BQUH/U1NT/2RkZP9tbW3/f39//4uLi/+bm5v/oKCg/62trf+ZmZn/bW1t/zo6Ov8sLCz/QUFB/1NTU/9kZGT/bW1t/39/f/+Li4v/m5ub/6CgoP/Gxsb/wMDA/7CwsP+fn5//mZmZ/6ioqP+ioqL/dnZ2/0ZGRv8uLi7/RERE/1RUVP9ZWVn/xsbG/8DAwP+wsLD/n5+f/5mZmf+oqKj/oqKi/3Z2dv9GRkb/Li4u/0RERP9UVFT/WVlZ/0tLS/9RUVH/XV1d/21tbf9/f3//iIiI/5qamv+rq6v/urq6/7y8vP+qqqr/mZmZ/5SUlP9LS0v/UVFR/11dXf9tbW3/f39//4iIiP+ampr/q6ur/7q6uv+8vLz/qqqq/5mZmf+UlJT/ra2t/5mZmf9tbW3/Ojo6/ywsLP9BQUH/U1NT/2RkZP9tbW3/f39//4uLi/+bm5v/oKCg/62trf+ZmZn/bW1t/zo6Ov8sLCz/QUFB/1NTU/9kZGT/bW1t/39/f/+Li4v/m5ub/6CgoP+tra3/mZmZ/21tbf86Ojr/LCws/0FBQf9TU1P/ZGRk/21tbf9/f3//i4uL/5ubm/+goKD/xsbG/8DAwP+wsLD/n5+f/5mZmf+oqKj/oqKi/3Z2dv9GRkb/Li4u/0RERP9UVFT/WVlZ/8bGxv/AwMD/sLCw/5+fn/+ZmZn/qKio/6Kiov92dnb/RkZG/y4uLv9ERET/VFRU/1lZWf8="
+        ],
+        "x86_64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMCwgICAgICAgICAgMCwgICAgICAgIDEsICAgICAgIDkxLCAweDhhNjcyZmRiCg==",
+          "S0tL/1FRUf9dXV3/bW1t/39/f/+IiIj/mpqa/6urq/+6urr/vLy8/6qqqv+ZmZn/lJSU/0tLS/9RUVH/XV1d/21tbf9/f3//iIiI/5qamv+rq6v/urq6/7y8vP+qqqr/mZmZ/5SUlP+tra3/mZmZ/21tbf86Ojr/LCws/0FBQf9TU1P/ZGRk/21tbf9/f3//i4uL/5ubm/+goKD/ra2t/5mZmf9tbW3/Ojo6/ywsLP9BQUH/U1NT/2RkZP9tbW3/f39//4uLi/+bm5v/oKCg/62trf+ZmZn/bW1t/zo6Ov8sLCz/QUFB/1NTU/9kZGT/bW1t/39/f/+Li4v/m5ub/6CgoP/Gxsb/wMDA/7CwsP+fn5//mZmZ/6ioqP+ioqL/dnZ2/0ZGRv8uLi7/RERE/1RUVP9ZWVn/xsbG/8DAwP+wsLD/n5+f/5mZmf+oqKj/oqKi/3Z2dv9GRkb/Li4u/0RERP9UVFT/WVlZ/0tLS/9RUVH/XV1d/21tbf9/f3//iIiI/5qamv+rq6v/urq6/7y8vP+qqqr/mZmZ/5SUlP9LS0v/UVFR/11dXf9tbW3/f39//4iIiP+ampr/q6ur/7q6uv+8vLz/qqqq/5mZmf+UlJT/ra2t/5mZmf9tbW3/Ojo6/ywsLP9BQUH/U1NT/2RkZP9tbW3/f39//4uLi/+bm5v/oKCg/62trf+ZmZn/bW1t/zo6Ov8sLCz/QUFB/1NTU/9kZGT/bW1t/39/f/+Li4v/m5ub/6CgoP+tra3/mZmZ/21tbf86Ojr/LCws/0FBQf9TU1P/ZGRk/21tbf9/f3//i4uL/5ubm/+goKD/xsbG/8DAwP+wsLD/n5+f/5mZmf+oqKj/oqKi/3Z2dv9GRkb/Li4u/0RERP9UVFT/WVlZ/8bGxv/AwMD/sLCw/5+fn/+ZmZn/qKio/6Kiov92dnb/RkZG/y4uLv9ERET/VFRU/1lZWf8="
+        ]
+      }
+    },
+    {
+      "id": "5",
+      "source": "bgr24",
+      "targets": [
+        "rgba",
+        "yuv422p"
+      ],
+      "graph": "[a]transpose=clock[left];[b]scale=13:7[right];[0:v]split[a][b]",
+      "sizes": [
+        "3x2",
+        "13x7"
+      ],
+      "inputTime": [],
+      "formats": [
+        "rawvideo",
+        "framecrc"
+      ],
+      "scalar": false,
+      "mapping": [
+        1,
+        0
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "a354e595685525a4bc1a39f59b029356f4787d7de004b8403fe1b44cd969c955",
+      "native": {
+        "aarch64": [
+          "i2aq/2Ckf/+eeVT/ZqqF/6R/Wv95VIj/",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMSwgICAgICAgICAgMSwgICAgICAgIDEsICAgICAgMTg5LCAweDM2NWE1Y2JkCg=="
+        ],
+        "x86_64": [
+          "i2aq/2Ckf/+eeVT/ZqqF/6R/Wv95VIj/",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMSwgICAgICAgICAgMSwgICAgICAgIDEsICAgICAgMTg5LCAweDM2NWE1Y2JkCg=="
+        ]
+      }
+    },
+    {
+      "id": "6",
+      "source": "yuva420p",
+      "targets": [
+        "rgb24",
+        "gray"
+      ],
+      "graph": "[0:v]split[a][b];[a]hflip[left];[b]vflip[right]",
+      "sizes": [
+        null,
+        null
+      ],
+      "inputTime": [],
+      "formats": [
+        "framecrc",
+        "framecrc"
+      ],
+      "scalar": true,
+      "mapping": [
+        0,
+        1
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "0ab4f15d247c8b34a6c7b8c0c61005fd17d5172393adb52c6f50792a82559be1",
+      "native": {
+        "aarch64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDV4Mwojc2FyIDA6IDAvMQowLCAgICAgICAgICAwLCAgICAgICAgICAwLCAgICAgICAgMSwgICAgICAgNDUsIDB4MDJkYjE3YzEK",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDV4Mwojc2FyIDA6IDAvMQowLCAgICAgICAgICAxLCAgICAgICAgICAxLCAgICAgICAgMSwgICAgICAgMTUsIDB4NDIwMzA4MGUK"
+        ],
+        "x86_64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDV4Mwojc2FyIDA6IDAvMQowLCAgICAgICAgICAwLCAgICAgICAgICAwLCAgICAgICAgMSwgICAgICAgNDUsIDB4MDJkYjE3YzEK",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDV4Mwojc2FyIDA6IDAvMQowLCAgICAgICAgICAxLCAgICAgICAgICAxLCAgICAgICAgMSwgICAgICAgMTUsIDB4NDIwMzA4MGUK"
+        ]
+      }
+    },
+    {
+      "id": "7",
+      "source": "rgb24",
+      "targets": [
+        "yuv422p",
+        "gbrp"
+      ],
+      "graph": "[0:v]scale=13:7,split[left][right]",
+      "sizes": [
+        "13x7",
+        "3x2"
+      ],
+      "inputTime": [
+        "-ss",
+        "0.02",
+        "-t",
+        "0.1"
+      ],
+      "formats": [
+        "rawvideo",
+        "rawvideo"
+      ],
+      "scalar": false,
+      "mapping": [
+        1,
+        0
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "a354e595685525a4bc1a39f59b029356f4787d7de004b8403fe1b44cd969c955",
+      "native": {
+        "aarch64": [
+          "z7qHTk+DpJVzaXiFic+6h05Pg6SVc2l4hYlPTVRhe5ywjlpSfaazT01UYXucsI5aUn2ms09NVGF7nLCOWlJ9prMlNFuGiWhUW2Z8lbS9JTRbholoVFtmfJW0vZOWl5R4fZeTlpeUeH2XbI51LnOblWyOdS5zm5VsjnUuc5uVlZmKc5BqIpWZinOQaiJubWhyxrVqbm1ocsa1auGdbX5zbG3hnW1+c2xt4Z1tfnNsbW9kkNWOb4BvZJDVjm+A",
+          "kYhdiZKOiI6DjHh7bGKGm5JnkYhdiZKOiI6DjHh7bGKGm5Jn"
+        ],
+        "x86_64": [
+          "z7qHTk+DpJVzaXiFic+6h05Pg6SVc2l4hYlPTVRhe5ywjlpSfaazT01UYXucsI5aUn2ms09NVGF7nLCOWlJ9prMlNFuGiWhUW2Z8lbS9JTRbholoVFtmfJW0vZOWl5R4fZeTlpeUeH2XbI51LnOblWyOdS5zm5VsjnUuc5uVlZmKc5BqIpWZinOQaiJubWhyxrVqbm1ocsa1auGdbX5zbG3hnW1+c2xt4Z1tfnNsbW9kkNWOb4BvZJDVjm+A",
+          "kYhdiZKOiI6DjHh7bGKGm5JnkYhdiZKOiI6DjHh7bGKGm5Jn"
+        ]
+      }
+    }
+  ]
+}

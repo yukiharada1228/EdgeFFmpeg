@@ -1,0 +1,76 @@
+# Expression API
+
+`@edge-ffmpeg/avutil` exports `compileExpression` and `evaluateExpression`.
+The caller must select `numericProfile: 'linux-x64' | 'darwin-arm64'` explicitly.
+Profiles describe reference behavior; they do not detect the current host.
+
+```typescript
+import {compileExpression} from '@edge-ffmpeg/avutil';
+const evaluate = compileExpression('st(0,ld(0)+N);ld(0)', {
+  numericProfile: 'linux-x64', constants: ['N'],
+});
+evaluate([2]); // 2
+evaluate([3]); // 5: state persists in this compiled context
+```
+
+Compilation does not evaluate the expression. Each compiled context owns ten state
+slots and its random generators. `evaluateExpression` creates a fresh context on
+every call. Constant names are copied at compilation; values are supplied per call
+as an `ArrayLike<number>` and read only when the expression uses them. Evaluators
+reject reentrant calls and release the current value binding after success or error.
+State changes before an error are not rolled back.
+
+`if` and `ifnot` evaluate only their selected branch. `nowMicroseconds` injects the
+clock for `time`; the default clock has millisecond precision. `onPrint` receives
+`{value, level, text}` with six fractional digits, a trailing newline, and native-style rounding.
+Printing uses this callback rather than a global console; `logLevel` controls it.
+
+Current safety bounds are 256 input characters, 32 nesting levels, 128 parser
+operations, 64 constant names, and 10,000 evaluation steps per invocation.
+These bounds are not complete job-level CPU or heap accounting. A rejected or
+bounded expression is not evidence of full FFmpeg expression compatibility.
+
+The Linux profile targets the pinned GCC/glibc 2.36 x86-64 reference.
+It includes explicit integer conversions and adapted non-FMA hypot, log and exp2
+kernels. exp2 is an internal numeric kernel, not an added AVExpr builtin.
+The Darwin profile retains JavaScript math for those functions; the development
+comparison of 5,352 cases retained 12 ratio and 18 raw-value differences.
+Linux development probes matched 16,523 sampled rows on Node and local workerd;
+this is sampled evidence, not exhaustive libm or production Workers certification.
+C errno, floating-point exception flags and complete diagnostic compatibility
+are not implemented. Existing CLI expression handling remains a separate path.
+
+## Adapted sources
+
+The parser and SFC64 generator adapt FFmpeg sources. Numeric kernels and tables
+adapt glibc 2.36. These components are LGPL-2.1-or-later; see
+`packages/avutil/NOTICE` and `LICENSES/LGPL-2.1-or-later.txt`.
+This attribution does not complete the project-wide redistribution audit.
+
+- `hypot`: https://raw.githubusercontent.com/bminor/glibc/glibc-2.36/sysdeps/ieee754/dbl-64/e_hypot.c — SHA-256 `585880d4fd94f27dba8745fd8f4d55bab04a505028db9a551b7f00c9857149d2`
+- `e_log.c`: https://raw.githubusercontent.com/bminor/glibc/glibc-2.36/sysdeps/ieee754/dbl-64/e_log.c — SHA-256 `d9fae4150d9a19e218ea2d3550d563f07454f4ca285a7c3009f12dd5013ac33d`
+- `e_log_data.c`: https://raw.githubusercontent.com/bminor/glibc/glibc-2.36/sysdeps/ieee754/dbl-64/e_log_data.c — SHA-256 `a98e712fe4920b62b59fbb5fa6d605b750a88cdc51481a2e8d4c7e14e4b9444c`
+- `e_exp2.c`: https://raw.githubusercontent.com/bminor/glibc/glibc-2.36/sysdeps/ieee754/dbl-64/e_exp2.c — SHA-256 `9584a8b9ed756bb0b6e7800f7294bb20619bf23f6154ba2f3465f4e317cf642a`
+- `e_exp_data.c`: https://raw.githubusercontent.com/bminor/glibc/glibc-2.36/sysdeps/ieee754/dbl-64/e_exp_data.c — SHA-256 `b66a754f50e1bd6cd628561e8c7924e15ababba07ffe4a6a3e6c2459c8bd2c49`
+- `math_config.h`: https://raw.githubusercontent.com/bminor/glibc/glibc-2.36/sysdeps/ieee754/dbl-64/math_config.h — SHA-256 `d8976c33defa72d1c55101de6544e18e369ed568e22bbef888917df700266d81`
+- `libavutil/eval.c`: FFmpeg commit `946fcce07b6dcd0331c8cc609192aeff5e1924f8` — SHA-256 `40a55cebb95d323dc9afe8227fb5325ff7ad242aa55ecb92e0ce8cc67e75b0b8`
+- `libavutil/sfc64.h`: FFmpeg commit `946fcce07b6dcd0331c8cc609192aeff5e1924f8` — SHA-256 `b46a69f834bd68ef1f3b3240e7cb25291e308c7f806800f40a0adb4bbb9f1013`
+
+## Reproducing the numeric corpus
+
+`compat/behavior-specs/expression-linux/cases.json` contains 16,523 fixed probes
+and expected raw floating-point values. Run `npm run reference:expression-linux`
+with the pinned Linux reference already built to recompute expected results from
+that corpus. The generator runs the declared C oracle in the digest-pinned
+container with networking disabled and read-only reference/source mounts. It
+records the source, static library, binary and fixture hashes, compiler and libc;
+a CPUID probe records FMA and AVX2 availability. The current container exposes
+both features. The TypeScript kernels use the non-FMA algorithms; sampled
+agreement does not establish the libc dispatch path or all-input equivalence. This records binary identity,
+not a claim that the reference toolchain is fully reproducible.
+
+`tests/differential/expression-linux.test.ts` and the local workerd numeric test
+compare raw values. NaN payload bits are excluded from equality checks.
+`@exp2:` rows exercise the private kernel directly; all other rows use the public
+expression API. Syntax and persistent state are separately compared against the
+pinned host Native parser in the expression differential and workerd tests.

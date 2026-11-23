@@ -1,0 +1,7 @@
+PermissionDeniedError independently maps fixed POSIX Native FFmpeg behavior at
+commit946fcce07b6dcd0331c8cc609192aeff5e1924f8:AVERROR(EACCES)=-13 is observed as
+process status243. Native-only owner-mode fixtures establish input-open and
+output overwrite precedence. No Native code executes or links in Core.
+Only initial access denial is mapped;post-open generation/access changes and
+Node atomic replacement capability remain distinct. Other errno/OS behavior
+and full permission protocol conformance are not claimed.

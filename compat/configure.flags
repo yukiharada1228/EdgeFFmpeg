@@ -1,0 +1,4 @@
+--disable-autodetect
+--disable-doc
+--disable-debug
+--disable-x86asm

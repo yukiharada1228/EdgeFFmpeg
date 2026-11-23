@@ -1,0 +1,27 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "profileCount": 7,
+  "caseCount": 140,
+  "sources": {
+    "tools/differential-runner/multi-output-policy/generate.mjs": "26a2ccd707947f50a034bb082af08c09fc3ebc4fff9b8754b3d03d74119f40d6"
+  },
+  "scope": "Native-only7two-output split/replay/two-input/repeated-input graphs.5flag modes/4existence masks.56conflicts234,42refusals0,42copies0. Native side effects captured,including empty earlier output before later refusal;Edge uses atomic all-output preflight."
+}

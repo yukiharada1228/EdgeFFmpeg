@@ -1,0 +1,31 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "profileCount": 14,
+  "caseCount": 280,
+  "sources": {
+    "tools/differential-runner/input-open/generate.mjs": "b8cee1e176f974e52b7189f1bbc1a41050a0e52782060297b49e486b9c32ff9d",
+    "compat/behavior-specs/output-policy/manifest.json": "996dd78169dc971eed61e0ea8a802b6a59e76aae6404d716b4fbd8ce7e3b4016",
+    "compat/behavior-specs/output-policy/inputs.json": "727768da89c4fb11f96d7f3558dae5c1f41932726962d8b2e569bca57eb32324",
+    "compat/behavior-specs/output-policy/results.json": "864c9ceea2bcf7623ed09182078881ca8a3a9ac6c584340bcb3e56db33aa2fc3",
+    "compat/behavior-specs/output-policy/provenance.json": "23a91314948d8382a071d501dc5c7ff7946c6b5f518a8963b59d405e819b780a"
+  },
+  "scope": "Native-only14single-output profiles;missing file/missing parent,5overwrite flags,existing/absent output. AllENOENTprocess254beforeoverwriteconflict/refusal.No output effects.Full stderr/othererrnos/post-open-generation changes not certified."
+}

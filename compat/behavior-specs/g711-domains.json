@@ -1,0 +1,17 @@
+{
+  "upstreamCommit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+  "inputDomains": {
+    "decode": "bytes 0..255",
+    "encode": "signed16 little-endian samples -32768..32767"
+  },
+  "cases": {
+    "pcm_alaw": {
+      "decodedSha256": "e04788d110e58ff8c70c93b8480190d973e3b67876b6119abbaec766cc75c174",
+      "encodedSha256": "de19ff5b8d6a1950aa98385b61c7f7740a2ca88926fa86afd5986341f343a82c"
+    },
+    "pcm_mulaw": {
+      "decodedSha256": "3dab54339e520bb2c924826e3b72a917a2b612e9fd12fc867500f1d983a75827",
+      "encodedSha256": "e0be5288dc67592c7281f521cafb4d38cdee27e7d1aced826a99b07b0a557b78"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "sha256": {
+    "compat/behavior-specs/video-streamcopy/cases.json": "1585e998fc3deb076abe279ea7f1d098f9a3c549ad6a0f1630454222288aec44",
+    "compat/behavior-specs/video-streamcopy/results.json": "43bb6d7c49672706e72005bba313997eb2f148e6c0babeb72e78e9e51f88af11",
+    "compat/behavior-specs/video-streamcopy/provenance.json": "8a85bcba4d2270398d531514ef696c30243dde60e38b3b52b659b8a65ef19504",
+    "tools/differential-runner/video-streamcopy/generate.mjs": "eb32701b1cb93f006f33c6318b7c5ca295cf45a47eb6eb2316dedd0e21c02f28"
+  }
+}

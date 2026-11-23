@@ -1,0 +1,2394 @@
+{
+  "referenceCommit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+  "ffprobeSha256": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698",
+  "scope": "132 finite preserved Native metadata cases:54 pictures,18 plain comments,20 chapters,40 channel masks. Picture packet bytes only; no general AVIO/diagnostic/decoder/production claim.",
+  "sourceSha256": {
+    ".build/flac-header/native-pictures.json": "4362014f1b308a1c0031b9faa395e07f52432a369a1d4c7bd7770085708cee4d",
+    "compat/behavior-specs/flac-comments/native-comments.json": "792586af2ecf862e3239a3af7ea7e8af2f6f77cce8d7592503af1574d28a2301",
+    "compat/behavior-specs/flac-chapters/native-chapters.json": "4563bf9c34dbc0af60e373fa1fef50359849da2bd23d1259a43e44548b316d19",
+    "compat/behavior-specs/flac-channel-mask/native-channel-masks.json": "a502cc488d3f330678573949e278eeb6d8dc0e4da82c713b013b9e5890553ad3"
+  },
+  "rows": [
+    {
+      "id": "pictures-0",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAaAAAAAMAAAAJaW1hZ2UvYm1wAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADpCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "701a034234961c5a6f52177314ac6f0f8103320bd173c737b65fa0efc03ad016",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "bmp",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 58,
+            "sha256": "f8565d9f52860cfd3d49c7e5f9643d16778937658ca1fc4b9b7efb9bb270b9c4"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-1",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAaAAAAAMAAAAJaW1hZ2UvYm1wAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADpCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "701a034234961c5a6f52177314ac6f0f8103320bd173c737b65fa0efc03ad016",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "bmp",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 58,
+            "sha256": "f8565d9f52860cfd3d49c7e5f9643d16778937658ca1fc4b9b7efb9bb270b9c4"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-2",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArwAAAAABAAAAowAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOWliWEFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "1b663ad21eec2e54887d4f148a795f32d784bef2959b604c8ca0cd346ce9d356",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "bmp",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 58,
+            "sha256": "f8565d9f52860cfd3d49c7e5f9643d16778937658ca1fc4b9b7efb9bb270b9c4"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-3",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArwAAAAABAAAAowAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOWliWEFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "1b663ad21eec2e54887d4f148a795f32d784bef2959b604c8ca0cd346ce9d356",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "bmp",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 58,
+            "sha256": "f8565d9f52860cfd3d49c7e5f9643d16778937658ca1fc4b9b7efb9bb270b9c4"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-4",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAcwAAAAMAAAAJaW1hZ2UvcG5nAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAAEWJUE5HDQoaCgAAAA1JSERSAAAAAQAAAAEIAgAAAJB3U94AAAAMSURBVHicYxDUjgYAAOgAmPjlH64AAAAASUVORK5CYIL/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "79489cccaf8565591a69956a430c2964eea804bf19af1a916b9989eb3f205291",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "png",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 69,
+            "sha256": "d67ecbfd6f0358c57e8179488e02a0fe047439e44ac240cb6402e18df1c543fa"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-5",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAcwAAAAMAAAAJaW1hZ2UvcG5nAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAAEWJUE5HDQoaCgAAAA1JSERSAAAAAQAAAAEIAgAAAJB3U94AAAAMSURBVHicYxDUjgYAAOgAmPjlH64AAAAASUVORK5CYIL/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "79489cccaf8565591a69956a430c2964eea804bf19af1a916b9989eb3f205291",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "png",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 69,
+            "sha256": "d67ecbfd6f0358c57e8179488e02a0fe047439e44ac240cb6402e18df1c543fa"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-6",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAvwAAAAABAAAAswAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOXdibWNBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBUllsUVRrY05DaG9LQUFBQURVbElSRklBQUFBQkFBQUFBUWdDQUFBQWtIZFQzZ0FBQUF4SlJFRlVlSnhqRU5TT0JnQUE2QUNZK09VZnJnQUFBQUJKUlU1RXJrSmdnZz09//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "199b10e13fa4f04bbb34a3e6a4110fc7e6a3b2a3000d676aa3556516b0270ee2",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "png",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 69,
+            "sha256": "d67ecbfd6f0358c57e8179488e02a0fe047439e44ac240cb6402e18df1c543fa"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-7",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAvwAAAAABAAAAswAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOXdibWNBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBUllsUVRrY05DaG9LQUFBQURVbElSRklBQUFBQkFBQUFBUWdDQUFBQWtIZFQzZ0FBQUF4SlJFRlVlSnhqRU5TT0JnQUE2QUNZK09VZnJnQUFBQUJKUlU1RXJrSmdnZz09//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "199b10e13fa4f04bbb34a3e6a4110fc7e6a3b2a3000d676aa3556516b0270ee2",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "png",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 69,
+            "sha256": "d67ecbfd6f0358c57e8179488e02a0fe047439e44ac240cb6402e18df1c543fa"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-8",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAbAAAAAMAAAANaW1hZ2UvdW5rbm93bgAAAAVjb3ZlcgAAAAEAAAABAAAAGAAAAAAAAAA6Qk06AAAAAAAAADYAAAAoAAAAAQAAAAEAAAABABgAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAWysRAP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "74862b52b483d2dbbf0583ea2a8c8d63373e6d2ecc61cc139e56980e6b35c514",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-9",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAbAAAAAMAAAANaW1hZ2UvdW5rbm93bgAAAAVjb3ZlcgAAAAEAAAABAAAAGAAAAAAAAAA6Qk06AAAAAAAAADYAAAAoAAAAAQAAAAEAAAABABgAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAWysRAP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "74862b52b483d2dbbf0583ea2a8c8d63373e6d2ecc61cc139e56980e6b35c514",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-10",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAswAAAAABAAAApwAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQTFwYldGblpTOTFibXR1YjNkdUFBQUFCV052ZG1WeUFBQUFBUUFBQUFFQUFBQVlBQUFBQUFBQUFEcENUVG9BQUFBQUFBQUFOZ0FBQUNnQUFBQUJBQUFBQVFBQUFBRUFHQUFBQUFBQUJBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQmJLeEVB//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "bac6c428c7cfbee386eece1e863333187c1c2654ed980d8034e37b68d98e3c8d",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-11",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAswAAAAABAAAApwAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQTFwYldGblpTOTFibXR1YjNkdUFBQUFCV052ZG1WeUFBQUFBUUFBQUFFQUFBQVlBQUFBQUFBQUFEcENUVG9BQUFBQUFBQUFOZ0FBQUNnQUFBQUJBQUFBQVFBQUFBRUFHQUFBQUFBQUJBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQmJLeEVB//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "bac6c428c7cfbee386eece1e863333187c1c2654ed980d8034e37b68d98e3c8d",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-12",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAaAAAAAMAAAAJSU1BR0UvQk1QAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADpCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "aa0927b9e822883834080e5adcf59ef70534bd3807e787eb9a3cd244ddea112a",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-13",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAaAAAAAMAAAAJSU1BR0UvQk1QAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADpCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "aa0927b9e822883834080e5adcf59ef70534bd3807e787eb9a3cd244ddea112a",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-14",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArwAAAAABAAAAowAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxKVFVGSFJTOUNUVkFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "835d7560494ccb810afc16e95f3ce2970026a00d0f158c2fc88bf7db0f80ae3f",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-15",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArwAAAAABAAAAowAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxKVFVGSFJTOUNUVkFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "835d7560494ccb810afc16e95f3ce2970026a00d0f158c2fc88bf7db0f80ae3f",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-16",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAFAAAAAAAAAAAAAAAAAAAAAAAAAAA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "fef77f1b48b3e79545d5a09d3a3b32e67470935e85afaf1c857c32275696090a",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-17",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAFAAAAAAAAAAAAAAAAAAAAAAAAAAA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "fef77f1b48b3e79545d5a09d3a3b32e67470935e85afaf1c857c32275696090a",
+      "explode": true,
+      "status": 1,
+      "expected": {
+        "pictures": [],
+        "packets": []
+      }
+    },
+    {
+      "id": "pictures-18",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAPwAAAAABAAAAMwAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBPf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "e9664be9ceb5c3f4fa30b4d5464f23200517b1a26aa8c132a67ba33a97d99efc",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-19",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAPwAAAAABAAAAMwAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBPf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "e9664be9ceb5c3f4fa30b4d5464f23200517b1a26aa8c132a67ba33a97d99efc",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-20",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAaAAAABUAAAAJaW1hZ2UvYm1wAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADpCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "3ecb457c5dbe71c2105fa778f7d1500508486b42cff57afefd27002925097386",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "bmp",
+            "tags": {
+              "comment": "Other",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 58,
+            "sha256": "f8565d9f52860cfd3d49c7e5f9643d16778937658ca1fc4b9b7efb9bb270b9c4"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-21",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAaAAAABUAAAAJaW1hZ2UvYm1wAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADpCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "3ecb457c5dbe71c2105fa778f7d1500508486b42cff57afefd27002925097386",
+      "explode": true,
+      "status": 1,
+      "expected": {
+        "pictures": [],
+        "packets": []
+      }
+    },
+    {
+      "id": "pictures-22",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArwAAAAABAAAAowAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUZRQUFBQWxwYldGblpTOWliWEFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "28e8f5dba42b015173354de7235b8d04918453866770270639741c7aacd846a9",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "bmp",
+            "tags": {
+              "comment": "Other",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 58,
+            "sha256": "f8565d9f52860cfd3d49c7e5f9643d16778937658ca1fc4b9b7efb9bb270b9c4"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-23",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArwAAAAABAAAAowAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUZRQUFBQWxwYldGblpTOWliWEFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "28e8f5dba42b015173354de7235b8d04918453866770270639741c7aacd846a9",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-24",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAXwAAAAMAAAAAAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADpCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "90cb7b0c1b382275a757c706e818871fe8f652a1e466c36f9d12c168560717b9",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-25",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAXwAAAAMAAAAAAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADpCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "90cb7b0c1b382275a757c706e818871fe8f652a1e466c36f9d12c168560717b9",
+      "explode": true,
+      "status": 1,
+      "expected": {
+        "pictures": [],
+        "packets": []
+      }
+    },
+    {
+      "id": "pictures-26",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAowAAAAABAAAAlwAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQUFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "1930f88fa2fffdc2ac6dc503f4e0a56b6fe3db3886fa0e342ae9da8c71dd3afc",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-27",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAowAAAAABAAAAlwAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQUFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "1930f88fa2fffdc2ac6dc503f4e0a56b6fe3db3886fa0e342ae9da8c71dd3afc",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-28",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAnwAAAAMAAABAeHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eAAAAAVjb3ZlcgAAAAEAAAABAAAAGAAAAAAAAAA6Qk06AAAAAAAAADYAAAAoAAAAAQAAAAEAAAABABgAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAWysRAP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "6b900ad50157f2aa607f6d62dc810f15561f0b5447876cf328da0c423c205ab5",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-29",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAnwAAAAMAAABAeHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eAAAAAVjb3ZlcgAAAAEAAAABAAAAGAAAAAAAAAA6Qk06AAAAAAAAADYAAAAoAAAAAQAAAAEAAAABABgAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAWysRAP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "6b900ad50157f2aa607f6d62dc810f15561f0b5447876cf328da0c423c205ab5",
+      "explode": true,
+      "status": 1,
+      "expected": {
+        "pictures": [],
+        "packets": []
+      }
+    },
+    {
+      "id": "pictures-30",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAA9wAAAAABAAAA6wAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBRUI0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0QUFBQUJXTnZkbVZ5QUFBQUFRQUFBQUVBQUFBWUFBQUFBQUFBQURwQ1RUb0FBQUFBQUFBQU5nQUFBQ2dBQUFBQkFBQUFBUUFBQUFFQUdBQUFBQUFBQkFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFCYkt4RUH/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "239b4efddb7f35da74453baa01db97e0e090fff18fc3082348eb4409f7883da7",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-31",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAA9wAAAAABAAAA6wAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBRUI0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0ZUhoNGVIaDRlSGg0QUFBQUJXTnZkbVZ5QUFBQUFRQUFBQUVBQUFBWUFBQUFBQUFBQURwQ1RUb0FBQUFBQUFBQU5nQUFBQ2dBQUFBQkFBQUFBUUFBQUFFQUdBQUFBQUFBQkFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFCYkt4RUH/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "239b4efddb7f35da74453baa01db97e0e090fff18fc3082348eb4409f7883da7",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-32",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAaAAAAAMAAAAJaW1hZ2UvYm1w/////2NvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADpCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "e6defd6fa4aa23ac4d51c0d53bcef02b5c18ff78f9be3ce2e7b52535d251ebcd",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-33",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAaAAAAAMAAAAJaW1hZ2UvYm1w/////2NvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADpCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "e6defd6fa4aa23ac4d51c0d53bcef02b5c18ff78f9be3ce2e7b52535d251ebcd",
+      "explode": true,
+      "status": 1,
+      "expected": {
+        "pictures": [],
+        "packets": []
+      }
+    },
+    {
+      "id": "pictures-34",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArwAAAAABAAAAowAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOWliWEQvLy8vL1kyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "2cfc39890dbca4a128bce243587ba77306d5349bb8101b6f1bce525b1363c4ea",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-35",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArwAAAAABAAAAowAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOWliWEQvLy8vL1kyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "2cfc39890dbca4a128bce243587ba77306d5349bb8101b6f1bce525b1363c4ea",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-36",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAaAAAAAMAAAAJaW1hZ2UvYm1wAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAAABCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "3b0c7c830a73a7924a024de45ad960b2ac61ae026c87ca498a48156fedf4d29c",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-37",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAaAAAAAMAAAAJaW1hZ2UvYm1wAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAAABCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "3b0c7c830a73a7924a024de45ad960b2ac61ae026c87ca498a48156fedf4d29c",
+      "explode": true,
+      "status": 1,
+      "expected": {
+        "pictures": [],
+        "packets": []
+      }
+    },
+    {
+      "id": "pictures-38",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArwAAAAABAAAAowAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOWliWEFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBQUVKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "7657689d62ccea79805e312e16e4dcaa643eebd51a7434a9af43bad6e16c09d5",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-39",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArwAAAAABAAAAowAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOWliWEFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBQUVKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "7657689d62ccea79805e312e16e4dcaa643eebd51a7434a9af43bad6e16c09d5",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-40",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAaAAAAAMAAAAJaW1hZ2UvYm1wAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADtCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "21f888841847a57df7f61270d6217a633ce9c32ba4c906f4837211e31c961dd8",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-41",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAaAAAAAMAAAAJaW1hZ2UvYm1wAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADtCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "21f888841847a57df7f61270d6217a633ce9c32ba4c906f4837211e31c961dd8",
+      "explode": true,
+      "status": 1,
+      "expected": {
+        "pictures": [],
+        "packets": []
+      }
+    },
+    {
+      "id": "pictures-42",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArwAAAAABAAAAowAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOWliWEFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBTzBKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "591933d453abea71641023e4a54473d4a62b6a1218bb74966533adbf40a330a5",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-43",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArwAAAAABAAAAowAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOWliWEFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBTzBKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "591933d453abea71641023e4a54473d4a62b6a1218bb74966533adbf40a330a5",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-44",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAdAAAAAMAAAAKaW1hZ2UvanBlZwAAAAVjb3ZlcgAAAAEAAAABAAAAGAAAAAAAAABFiVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGMQ1I4GAADoAJj45R+uAAAAAElFTkSuQmCC//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "9f5487136b318a9486a0c98dd6d5c0beb845c0a599269e4e5cb5492310e73e99",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "png",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 69,
+            "sha256": "d67ecbfd6f0358c57e8179488e02a0fe047439e44ac240cb6402e18df1c543fa"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-45",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhgAAdAAAAAMAAAAKaW1hZ2UvanBlZwAAAAVjb3ZlcgAAAAEAAAABAAAAGAAAAAAAAABFiVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGMQ1I4GAADoAJj45R+uAAAAAElFTkSuQmCC//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "9f5487136b318a9486a0c98dd6d5c0beb845c0a599269e4e5cb5492310e73e99",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "png",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 69,
+            "sha256": "d67ecbfd6f0358c57e8179488e02a0fe047439e44ac240cb6402e18df1c543fa"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-46",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAvwAAAAABAAAAswAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQXBwYldGblpTOXFjR1ZuQUFBQUJXTnZkbVZ5QUFBQUFRQUFBQUVBQUFBWUFBQUFBQUFBQUVXSlVFNUhEUW9hQ2dBQUFBMUpTRVJTQUFBQUFRQUFBQUVJQWdBQUFKQjNVOTRBQUFBTVNVUkJWSGljWXhEVWpnWUFBT2dBbVBqbEg2NEFBQUFBU1VWT1JLNUNZSUk9//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "ec6c0a0453aadf287eade087a76b97402e6e6a51b92f2af51ed8d676d5123e44",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "png",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 69,
+            "sha256": "d67ecbfd6f0358c57e8179488e02a0fe047439e44ac240cb6402e18df1c543fa"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-47",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAvwAAAAABAAAAswAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQXBwYldGblpTOXFjR1ZuQUFBQUJXTnZkbVZ5QUFBQUFRQUFBQUVBQUFBWUFBQUFBQUFBQUVXSlVFNUhEUW9hQ2dBQUFBMUpTRVJTQUFBQUFRQUFBQUVJQWdBQUFKQjNVOTRBQUFBTVNVUkJWSGljWXhEVWpnWUFBT2dBbVBqbEg2NEFBQUFBU1VWT1JLNUNZSUk9//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "ec6c0a0453aadf287eade087a76b97402e6e6a51b92f2af51ed8d676d5123e44",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "png",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 69,
+            "sha256": "d67ecbfd6f0358c57e8179488e02a0fe047439e44ac240cb6402e18df1c543fa"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-48",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArgAAAAABAAAAogAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOWliWEFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "27b437cc49af03e5dd358dd40b60f439cbf2720fd95e6e711fe3e61ff9f220a6",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "bmp",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 58,
+            "sha256": "f8565d9f52860cfd3d49c7e5f9643d16778937658ca1fc4b9b7efb9bb270b9c4"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-49",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAArgAAAAABAAAAogAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOWliWEFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "27b437cc49af03e5dd358dd40b60f439cbf2720fd95e6e711fe3e61ff9f220a6",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "bmp",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 58,
+            "sha256": "f8565d9f52860cfd3d49c7e5f9643d16778937658ca1fc4b9b7efb9bb270b9c4"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-50",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAtwAAAAABAAAAqwAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOWliWEFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT0hZ2FyYmFnZf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "979bc120ea51b63e3b5fcf18e425c5fb63971d125126cf97721f9ce7c3035ffa",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "bmp",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 58,
+            "sha256": "f8565d9f52860cfd3d49c7e5f9643d16778937658ca1fc4b9b7efb9bb270b9c4"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-51",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAtwAAAAABAAAAqwAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOWliWEFBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBT2tKTk9nQUFBQUFBQUFBMkFBQUFLQUFBQUFFQUFBQUJBQUFBQVFBWUFBQUFBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUZzckVRQT0hZ2FyYmFnZf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "979bc120ea51b63e3b5fcf18e425c5fb63971d125126cf97721f9ce7c3035ffa",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [
+          {
+            "codec": "bmp",
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "kind": "picture",
+            "size": 58,
+            "sha256": "f8565d9f52860cfd3d49c7e5f9643d16778937658ca1fc4b9b7efb9bb270b9c4"
+          },
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-52",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAsAAAAAABAAAApAAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQSBscGJXRm5aUzlpYlhBQUFBQUZZMjkyWlhJQUFBQUJBQUFBQVFBQUFCZ0FBQUFBQUFBQU9rSk5PZ0FBQUFBQUFBQTJBQUFBS0FBQUFBRUFBQUFCQUFBQUFRQVlBQUFBQUFBRUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFGc3JFUUE9//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "dcd710c5c148fe6da3c63d6013ae3c78fa1ea263ae45dfe4aaf9611f8ef8db9b",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pictures-53",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAsAAAAAABAAAApAAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQSBscGJXRm5aUzlpYlhBQUFBQUZZMjkyWlhJQUFBQUJBQUFBQVFBQUFCZ0FBQUFBQUFBQU9rSk5PZ0FBQUFBQUFBQTJBQUFBS0FBQUFBRUFBQUFCQUFBQUFRQVlBQUFBQUFBRUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFGc3JFUUE9//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "dcd710c5c148fe6da3c63d6013ae3c78fa1ea263ae45dfe4aaf9611f8ef8db9b",
+      "explode": true,
+      "status": 0,
+      "expected": {
+        "pictures": [],
+        "packets": [
+          {
+            "kind": "audio",
+            "size": 14,
+            "sha256": "b4f2029595e442dcc9a9dbc7aacbf72ae8a8f93ba6c2126a4f8bf963384804d1"
+          },
+          {
+            "kind": "audio",
+            "size": 15,
+            "sha256": "9163caf72fb080483c6cba78e51adabb2e6cdc7985ab5aa90889743d881cae1d"
+          }
+        ]
+      }
+    },
+    {
+      "id": "comments-0",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAEwsAAAB0ZXN0LXZlbmRvcgAAAAD/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "232ffa00669a2bafbc2b2978cea64f7570619999aa2e0c9d11c1fd7e608559ab",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {}
+      }
+    },
+    {
+      "id": "comments-1",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAsAAAB0ZXN0LXZlbmRvcgIAAAALAAAAVElUTEU9aGVsbG8KAAAAQVJUSVNUPW9uZf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "c5c87e9a6ef2877e90633d5a13739b9e6e5d191fbad5aa48cac02c771171dc5b",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "TITLE": "hello",
+          "ARTIST": "one"
+        }
+      }
+    },
+    {
+      "id": "comments-2",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAagsAAAB0ZXN0LXZlbmRvcgUAAAANAAAAQUxCVU1BUlRJU1Q9YQ8AAABUUkFDS05VTUJFUj0yLzcMAAAARElTQ05VTUJFUj0xDgAAAERJU0NTVUJUSVRMRT1zDQAAAERFU0NSSVBUSU9OPWP/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "0b974457db14817e614bb606aead02d4739ef99f3c0cba3482ed24cccd86e3aa",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "album_artist": "a",
+          "track": "2/7",
+          "disc": "1",
+          "disc_subtitle": "s",
+          "comment": "c"
+        }
+      }
+    },
+    {
+      "id": "comments-3",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAPAsAAAB0ZXN0LXZlbmRvcgMAAAAJAAAAVElUTEU9b25lCQAAAHRpdGxlPXR3bwsAAABUaVRsRT10aHJlZf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "a548c5c64c9b61dbfcc69519b8d1410d84ed0a9157d31419403f4fa31361e4bd",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "TiTlE": "one;two;three"
+        }
+      }
+    },
+    {
+      "id": "comments-4",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIQsAAAB0ZXN0LXZlbmRvcgEAAAAKAAAATkFNRT1hPWI9Y//4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "541e3c6b6d4f4925e213d37dea128d914e84f0fd91e453ee7ef922662cf579da",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "NAME": "a=b=c"
+        }
+      }
+    },
+    {
+      "id": "comments-5",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMgsAAAB0ZXN0LXZlbmRvcgMAAAAGAAAAPXZhbHVlBAAAAEtFWT0JAAAATk9fRVFVQUxT//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "f9b4457295fee76f507e0edbbcb0aceb08ebf78132829413fdeaf965d6a4720a",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {}
+      }
+    },
+    {
+      "id": "comments-6",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAOgsAAAB0ZXN0LXZlbmRvcgIAAAATAAAAVElUTEU95pel5pys6Kqe8J+OtQwAAABBUlRJU1Q9Y2Fmw6n/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "e7013a77cf00ddbd00dc6a3de0d8a33129f24b73d9c759d6decb4ba59829eb37",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "TITLE": "\u65e5\u672c\u8a9e\ud83c\udfb5",
+          "ARTIST": "caf\u00e9"
+        }
+      }
+    },
+    {
+      "id": "comments-7",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAKQsAAAB0ZXN0LXZlbmRvcgEAAAASAAAAVElUTEU9YmVmb3JlAGFmdGVy//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "2bccccf4d7ffcba1afa3dcdf4cab808ba0f558760bfbd337186fb663e88c0223",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "TITLE": "before"
+        }
+      }
+    },
+    {
+      "id": "comments-8",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAKQsAAAB0ZXN0LXZlbmRvcgEAAAASAAAAVElUTEUAc3VmZml4PXZhbHVl//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "4fa0c99dabdd686a4108a690cd7b69f18a2969886ae3ea26522dd6e48913e083",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "TITLE": "value"
+        }
+      }
+    },
+    {
+      "id": "comments-9",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAAP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "3bbe6c497e9fe5d1b8c6ae51a97d251d1a42762ae8b1fdbb73e57d84ef9d6a71",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {}
+      }
+    },
+    {
+      "id": "comments-10",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAABwAAAAAAAAD/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "c1bc27b14151e1ab363ad7ea12e075167b1a18d1496993d6cb19d01ac885c27f",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {}
+      }
+    },
+    {
+      "id": "comments-11",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAACGQAAAAAAAAA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "ddcf2d72fee234f4aec7ccffe33956be4fa54d0ce1121de0aacda3e476276be4",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {}
+      }
+    },
+    {
+      "id": "comments-12",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAACAAAAIAAAAAA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "f0e5027c579130500294be948f96fb1031e1de0964c8b8e71938364eda7871e7",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {}
+      }
+    },
+    {
+      "id": "comments-13",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAADwAAAABkAAAAAwAAAEE9Yv/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "18b19330c0a51492cbb7afad630a75511e81f1b22e36119e4e84821f9bd03a0f",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "A": "b"
+        }
+      }
+    },
+    {
+      "id": "comments-14",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAACgAAAAABAAAAAQL/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "57b6d8f27c6b38f999f0995b85ca545da18fb3f96cf7f8cb65755cf757404e6b",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {}
+      }
+    },
+    {
+      "id": "comments-15",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAADwAAAAABAAAAZAAAAEE9Yv/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "e0b38f538fb2e92caa90b6b4a8195e3940924200463616ca4686e9f884ad9c5e",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {}
+      }
+    },
+    {
+      "id": "comments-16",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAADAAAAAABAAAAAAAAgP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "2d55ff7af51577f160a6dd8cbadb1b3f40911ed9e25afc39a048659c11cdd182",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {}
+      }
+    },
+    {
+      "id": "comments-17",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAHQsAAAB0ZXN0LXZlbmRvcgEAAAADAAAAQT1iAQID//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "91f9a4e83522b73a74ce6534d75006f0edc4d64cbb345a812fabdf2cdf1c105e",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "A": "b"
+        }
+      }
+    },
+    {
+      "id": "chapters-0",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAOgAAAAACAAAAFwAAAENIQVBURVIwMDE9MDA6MDA6MDAuMDEwEwAAAENIQVBURVIwMDFOQU1FPW5hbWX/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "6c7e84276f468d0f1228fc219263c3e84b2f007571ca7bf768377b499e96b727",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "start": "10",
+            "end": "32",
+            "tags": {
+              "title": "name"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-1",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAPAAAAAACAAAAFQAAAENIQVBURVIwMDFOQU1FPWJlZm9yZRcAAABDSEFQVEVSMDAxPTAwOjAwOjAwLjAxMP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "dce51717b7163358b7a20c9c54edddcfc1a54b4eb8ddfe3828f39e0216340ffc",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "CHAPTER001NAME": "before"
+        },
+        "chapters": [
+          {
+            "id": 1,
+            "start": "10",
+            "end": "32",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-2",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAVAAAAAADAAAAFwAAAENIQVBURVIwMDE9MDA6MDA6MDAuMDEwEgAAAENIQVBURVIwMDFOQU1FPW9sZBcAAABDSEFQVEVSMDAxPTAwOjAwOjAwLjAyMP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "d4f27df4cfc86e4d190dfd207648fafd3af1a4cd1b48c3182ca48f6a44d2f31f",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "start": "20",
+            "end": "32",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-3",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAPgAAAAACAAAAFwAAAENIQVBURVIwMDI9MDA6MDA6MDAuMDIwFwAAAENIQVBURVIwMDE9MDA6MDA6MDAuMDEw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "94f14827d7ae9b510e77bc6703b1cb15647753242ca2e1a85d28da191610eb5f",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": 2,
+            "start": "20",
+            "end": "32",
+            "tags": {}
+          },
+          {
+            "id": 1,
+            "start": "10",
+            "end": "20",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-4",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAWQAAAAADAAAAFwAAAENIQVBURVIwMDI9MDA6MDA6MDAuMDEwFwAAAENIQVBURVIwMDE9MDA6MDA6MDAuMDEwFwAAAENIQVBURVIwMDM9MDA6MDA6MDAuMDIw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "3cbffbac76464960b0ab5c0e96be03485b7aa4cbf066e1e70bf453ca94642419",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": 2,
+            "start": "10",
+            "end": "20",
+            "tags": {}
+          },
+          {
+            "id": 1,
+            "start": "10",
+            "end": "32",
+            "tags": {}
+          },
+          {
+            "id": 3,
+            "start": "20",
+            "end": "32",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-5",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIwAAAAABAAAAFwAAAENIQVBURVIwMDE9MDA6MDA6MDEuMDAw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "0a8c848b0389ec189800ddefa0499433754033b2751a197050cdab6af681ca07",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "start": "1000",
+            "end": "1000",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-6",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAHQAAAAABAAAAEQAAAENIQVBURVIwMT0wOjA6MC4x//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "17267bc707c1905aa0729b1d909cad3dd179ebf6c019c40d527f46ca38374960",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "start": "1",
+            "end": "32",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-7",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIwAAAAABAAAAFwAAAENIQVBURVJYWVo9MDA6MDA6MDAuMDEw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "4e29bb97a9675a6b1c6423edb4d826870cb5b20ae66396fadff3c980a4ed0c51",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "CHAPTERXYZ": "00:00:00.010"
+        },
+        "chapters": []
+      }
+    },
+    {
+      "id": "chapters-8",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIwAAAAABAAAAFwAAAENIQVBURVIxMlg9MDA6MDA6MDAuMDEw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "24ecd41380c6c11b8d93addc24caeb7701f31d9dfe95ee23b7529a9637000a8f",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": 12,
+            "start": "10",
+            "end": "32",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-9",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAJAAAAAABAAAAGAAAAENIQVBURVIxMDAwPTAwOjAwOjAwLjAxMP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "6960538f17bcfa7b998b80902a7512312449eb580c72ee10f584f23a84c8f64d",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "CHAPTER1000": "00:00:00.010"
+        },
+        "chapters": []
+      }
+    },
+    {
+      "id": "chapters-10",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIwAAAAABAAAAFwAAAENIQVBURVItMDE9MDA6MDA6MDAuMDEw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "8a1637d67cc7969027cfbc41bf7a04794967782f91c8d20a929738e3842a55ba",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": -1,
+            "start": "10",
+            "end": "32",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-11",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIgAAAAABAAAAFgAAAENIQVBURVIgMT0wMDowMDowMC4wMTD/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "10d00247d39b8686db78678c735b786f836a45b5c3d6fab7e79d763d33659d44",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "start": "10",
+            "end": "32",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-12",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIwAAAAABAAAAFwAAAENIQVBURVIwMDE9LTE6MDA6MDAuMDAx//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "262710b9d671b5b0db73999c75bdaaa0ff8e1e6150670c1af91a53284bb4d12c",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "start": "-3599999",
+            "end": "32",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-13",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIwAAAAABAAAAFwAAAENIQVBURVIwMDE9MDA6OTk6OTkuOTk5//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "969f09c47e0a7dc149948c7d5019ad8a6c141e93eb7aff7cd0862e52442b61f5",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "start": "6039999",
+            "end": "6039999",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-14",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAJwAAAAABAAAAGwAAAENIQVBURVIwMDE9MDA6MDA6MDAuMDEwdGFpbP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "8758f1be8a19615282bbf8d423552e40ee0459c1533d98c5f02f47b0198f1db1",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "start": "10",
+            "end": "32",
+            "tags": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "chapters-15",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAJAAAAAABAAAAGAAAAENIQVBURVIwMDE9MTAwOjAwOjAwLjAwMf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "e8e58f5f45fcc3828496eb6005b343421bf1b5dbb5ca853886275a6276cbf891",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "CHAPTER001": "100:00:00.001"
+        },
+        "chapters": []
+      }
+    },
+    {
+      "id": "chapters-16",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAHwAAAAABAAAAEwAAAENIQVBURVIwMDE9MDA6MDA6MDD/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "d29c10b5b53de466dbd08fec0f2502c0cb093a594969622349977528e19019dc",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "CHAPTER001": "00:00:00"
+        },
+        "chapters": []
+      }
+    },
+    {
+      "id": "chapters-17",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIQAAAAABAAAAFQAAAENIQVBURVIwMDJOQU1FPW9ycGhhbv/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "7671587d9f336efb81e67d965c5aa2fa653d3e247101930b73364e2fa676c7c0",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "CHAPTER002NAME": "orphan"
+        },
+        "chapters": []
+      }
+    },
+    {
+      "id": "chapters-18",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAJAAAAAABAAAAGAAAAENIQVBURVIxMsOpPTAwOjAwOjAwLjAxMP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "e7a8e564d5a423dd81ec17941b2a820f9cf91a18fcaea87648ede0c1464c0a7c",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "CHAPTER12\u00e9": "00:00:00.010"
+        },
+        "chapters": []
+      }
+    },
+    {
+      "id": "chapters-19",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAIwAAAAABAAAAFwAAAENIQVBURVIwMDE9MDA6MDA6MDAuMDEwhAAAIAAAAAABAAAAFAAAAGNoYXB0ZXIwMDFuYW1lPXNwbGl0//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "3c5a4505a8a071f4b082844bc589f8c808eddaf901004aa516e99d6ede674437",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "start": "10",
+            "end": "32",
+            "tags": {
+              "title": "split"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "mask-0",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDP/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "36685090be5f9b8a3da1e90b349c08d3c626ae59f448bc81f222a7cb239c9024",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-1",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAALwAAAAABAAAAIwAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0z//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "5c4012c20cab3c6f3e12a44b8abf184ac9b4ca0bbcbe787c053b1e2ab70f0415",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-2",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0wM//4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "93897ae0d04c3f0fc474a35f7c7767a6441d74ba50318f0043b26797985ba385",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-3",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0rM//4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "4a52873be4adfefd980cae28d79f17052b24fc27db377cd56e97e97315d81514",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-4",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0gM//4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "0b1f7bd0c16bf8a4c36b1f3317aebe35e44f5102b097a3149202c852b27ea2c9",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-5",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANgAAAAABAAAAKgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0zZ2FyYmFnZf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "17e354b55773029edbe22b766274ad1270565eead59269a214bd144f5b90feae",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-6",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAOAAAAAABAAAALAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDNnYXJiYWdl//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "ea7d5923e050082a1cd33e0e91a6b64d1af30b5535b3d907a6aa42e9dd2cb24c",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-7",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "55a65bc2efe788e0b720c1bb570d16f6ecc977f878e52012edf44ba3169a75d3",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "0x"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-8",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0wOP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "e276d1352dcff69b7780f873ab6ee4bb27a2050ec57ab92d7d6c9afd79fa7df0",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "08"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-9",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0wOf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "621c43912af6701db8ba8ee15d21ee0402f3e83e6cf25c4d515c50afbf92bff6",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "09"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-10",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0wMTH/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "e18b5ce20a0950efe9fc3bc287b0bc9ae4f7aa5d080828cbda496e1ac23f876f",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "2 channels (FL+LFE)"
+      }
+    },
+    {
+      "id": "mask-11",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMgAAAAABAAAAJgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0wYjEx//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "cba070eed575bad996ca0d3448eef1ea867af951b3853dcb517a8ddaaf0fec6a",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "0b11"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-12",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0tMP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "78fd5b1c87f0066de853f09c912b6021322c893953cbbc6f57175c2127c23aab",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "-0"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-13",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0tMf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "624768da561ce053786ad3c84391837dd5c27af839e02871b0e7fc35bd2663ab",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "-1"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-14",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMgAAAAABAAAAJgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0tMHgx//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "4e55139417af5b71f1af1e7973a7774a05fca068055b56bfeb6d940ec09bc1e2",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "-0x1"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-15",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0tMDP/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "6dffa01828a62edcf2e68f51a7345ddc68040e3c7c1ae938c8dc1596ad8d2727",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "-03"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-16",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANAAAAAABAAAAKAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0yNjIxNDP/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "69022677c5d254a3ef93014d329d0f48c120ea5380e7b3977db1bf89afb1cb4d",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-17",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANAAAAAABAAAAKAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0yNjIxNDT/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "18cdf7d8a14a5bf464d2c7e9bdd8d14f6fe4c6bea77f90f3c73f52a77ddc5eb1",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "262144"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-18",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANQAAAAABAAAAKQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDNmZmZm//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "5f44dab8b7a94348a3fc5a5fec6c24a8fb9593510905a87969ff8d8fc42e2ebe",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-19",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANQAAAAABAAAAKQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDQwMDAw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "8b94b4a83bc6f4165465a1d6be7a5304729711df8ee374601e78862b3150974e",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "0x40000"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-20",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQQAAAAABAAAANQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz05MjIzMzcyMDM2ODU0Nzc1ODA3//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "1796a928de42c50eed307a3fab2a1effaca02cfd9b434c15cbfa2b350fdce386",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "9223372036854775807"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-21",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQQAAAAABAAAANQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz05MjIzMzcyMDM2ODU0Nzc1ODA4//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "a10f6f9baa4ba695f1b74f32d227a32168de5cfb516eb7935524e475601bf4b9",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "9223372036854775808"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-22",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQgAAAAABAAAANgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0xODQ0Njc0NDA3MzcwOTU1MTYxNf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "9ec835d72fe38fb22bf34bc8e6aae630e0a25d847539f1e30bd6b54f78c029a5",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "18446744073709551615"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-23",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQgAAAAABAAAANgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0xODQ0Njc0NDA3MzcwOTU1MTYxNv/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "551b4ff192a9effd99d114e549d3944f3205764e737dbe1b595e70d1ea7039b8",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "18446744073709551616"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-24",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQgAAAAABAAAANgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0tOTIyMzM3MjAzNjg1NDc3NTgwOP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "d2a36f4f2343930d9aa6ecfb19a55cb2146da140ba50a7ae3dda560a66936860",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "-9223372036854775808"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-25",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQgAAAAABAAAANgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0tOTIyMzM3MjAzNjg1NDc3NTgwOf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "sha256": "3fffb3a130da6e22e761e0113f56f1c9fc14a5eaaf1c9921d00578b8cc8d1c8e",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "-9223372036854775809"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-26",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAALgAAAAABAAAAIgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "730edd58db100b3d61591a54dbf2a75735476b461df8cd8ccebe9f643ecd0379",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-27",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz1mb2//+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "4ab93eaf54750bfad0715393bd0ec9b091fd7511c512937e169213fd41feee96",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "foo"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-28",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAOAAAAAABAAAALAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0gICswWDAzenp6//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "105ac83fbb9286a1ae7fc9023ae0d655c212b97215baa2439134429e0900ff1b",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-29",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0JMwr/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "87f7df9bb6d264852eecea8369c5bb6bf5105084a9fd88b81348a88adf823faf",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-30",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMgAAAAABAAAAJgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz3ZoNmj//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "7c63f4900983b2605b53670a0308654d8f01bf3ec53e39cf3a2cdc59e55a00ec",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "\u0660\u0663"
+        },
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-31",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0wWDP/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "1927fa0ad27c0093073283db42355a66e0bd245d3cb5186b0ba97b4449029f9f",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-32",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAALwAAAAABAAAAIwAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz03//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "5e6638503ee43227179bdc73730e072b6f53b7c6fefe9c0c91fbea45d6a78eba",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-33",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAALwAAAAABAAAAIwAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0x//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "842da8c79989ab873a0bf2a50fbba8b238dcc4d68493adace50e3ef9284f484c",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-34",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAALwAAAAABAAAAIwAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz00//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "a3326fad5f4188f2d8b63bbc42d0f433331522796c9c5e2d529a820968fa9a96",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-35",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMgAAAAABAAAAJgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDMw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "834ffa6e336b7b3408ae5e31aa123660bf70a2a4818aa8e983df941334004079",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "2 channels (BL+BR)"
+      }
+    },
+    {
+      "id": "mask-36",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANQAAAAABAAAAKQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDEwMDAw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "d193adb224d3d5a6a9261ba63b4cd745249d4a93b79951560d6b29ad94494c67",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    },
+    {
+      "id": "mask-37",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANQAAAAABAAAAKQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDMwMDAw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "sha256": "f30cfd6828f84f8fa5327117836f9a85fdd469f421b09141e31a925a6c3730e4",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "2 channels (TBC+TBR)"
+      }
+    },
+    {
+      "id": "mask-38",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAMgAAAAABAAAAJgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDMwhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz1iYWT/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "1cd6d20bfe47e3207038f3d096a1c052145f8a70d2a202c46f20b6d088bd80ec",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "bad"
+        },
+        "layout": "2 channels (BL+BR)"
+      }
+    },
+    {
+      "id": "mask-39",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAMgAAAAABAAAAJgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDMwhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDP/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "sha256": "316d34cd7503055701f3d8db4e208e78d2361b9e9032e13f302091ffb2fa8486",
+      "explode": false,
+      "status": 0,
+      "expected": {
+        "tags": {},
+        "layout": "stereo"
+      }
+    }
+  ]
+}

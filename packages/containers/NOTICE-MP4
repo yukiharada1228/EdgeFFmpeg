@@ -1,0 +1,72 @@
+MP4 demux foundation
+
+Sample table and edit timing behavior adapts the pinned FFmpeg MOV demuxer:
+upstream/ffmpeg/libavformat/mov.c
+commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2001 Fabrice Bellard
+Copyright (c) 2009 Baptiste Coudurier
+First version by Francois Revol; seek function by Gael Chardon.
+License: LGPL-2.1-or-later. See COPYING.LGPLv2.1.
+
+TypeScript adaptations add bounded asynchronous ReadHandle reads, typed sample
+indexes, lazy owned packet payloads, cancellation and explicit resource budgets.
+Negative CTTS offset handling follows the pinned reference, including signed
+32-bit interpretation for versions 0 and 1 and DTS shift estimation excluding
+the last two table entries. Reference comparisons include packet timestamps and
+complete payload bytes. This notice does not constitute a project license audit.
+
+Current scope: local non-fragmented video/audio sample tables with one description
+and a single full-duration unit-rate edit. Versioned audio entries, fragmented media, general edit
+lists, decryption, compressed decoding, MP4 muxing and CLI integration remain
+unfinished. This implementation does not establish complete MOV/MP4 compatibility.
+
+Leading empty edit accumulation, default ELST entry-count recovery and stream
+start times follow mov_read_elst/mov_build_index/mov_fix_index at that commit.
+
+Default video edit rate handling follows mov_read_elst (unsigned16.16 read) and
+mov_fix_index (stored rate unused) at the pinned FFmpeg commit. This adaptation
+validates field bounds without rejecting non-unit rate words.
+
+Default negative video media-time handling follows mov_read_elst and
+get_edit_list_entry/mov_fix_index at the pinned commit: strict-only rejection is
+separate from default parsing; duration overflow uses unsigned64-bit addition.
+An input INT64_MIN search position is distinct from output timestamp sentinels.
+
+AAC leading delay, partial-frame preroll classification and final discard
+padding follow pinned mov.c mov_fix_index/mov_finalize_packet. AAC-LC nominal
+frequency is read from the AudioSpecificConfig frequency-index table; codec
+frame samples and packet timebase remain separate quantities.
+
+AAC multiple edit index reconstruction in src/mp4/audio-edit.ts adapts
+mov_fix_index/mov_finalize_packet from pinned libavformat/mov.c and skip-sample
+injection from libavformat/demux.c, under LGPL-2.1-or-later at the commit above.
+It preserves the first-media-entry-only skip rule, one-second key search,
+preroll timestamp backfill and original TTS cursor exhaustion. Expanded typed
+indexes and working buffers are bounded before allocation. This extends the
+older single-edit scope description above; general MOV compatibility is open.
+
+AAC edit search at signed64 boundaries follows the pinned mov_fix_index
+search_timestamp-minus-time_scale result before FFMAX with the original first
+DTS. Native boundary fixtures distinguish final-packet/no-skip behavior from
+unbounded bigint subtraction; reconstructed output timestamps remain checked.
+
+Independent AAC sample/track clocks use pinned mov_finalize_packet and demux.c
+sample-unit conversions, floored nominal packet timing and MOV's unconverted
+initial skip accumulation. Positive STTS sums limit MDHD duration as in
+mov_read_stts. This extends earlier matching-clock-only AAC scope.
+
+AAC-LC sample-rate/channel precedence over sample-entry words follows pinned
+libavformat/isom.c ff_mp4_read_dec_config_descr and mov.c audio entry parsing.
+Valid supported ASC supplies zero or differing header words; source header
+bytes and raw container channel count remain separately accessible.
+
+AAC-LC configuration parsing accepts the explicit24-bit frequency form in
+addition to indexed frequencies, with bounded bit reads and unchanged
+channel/frame-length semantics. The Native reference for container/copy tests
+uses pinned libavformat APIs because ffprobe's additional AAC decoder open
+rejects explicit-frequency ASC. This does not claim AAC decoding support.
+
+Zero AAC explicit frequency is retained as unset codec metadata; fallback to
+MDHD time_scale when greater than1 follows pinned mov_finalize_stsd_codec.
+Unresolved zero-rate streams remain demuxable. Nominal duration filling is
+suppressed when no sample rate is known,as in demux.c compute_frame_duration.

@@ -1,0 +1,8 @@
+{
+  "sha256": {
+    "compat/behavior-specs/number-rational/cases.json": "e9f87fc7e4d460e4aca94b0c365e226e533ac9091ecfc867ce24150ccc6045c8",
+    "compat/behavior-specs/number-rational/results.json": "f5a5692f47570f6f0208e0122ad729966b7329168b154e87da1cc5e56232cc55",
+    "compat/behavior-specs/number-rational/host-provenance.json": "5e77d70aa69a25aadd43c3b66a188e13d483b2ac7f2263839c31a556b50e71d9",
+    "tools/differential-runner/number-rational/oracle.c": "5e8ffb4d7df9cc38ae8f7fb1ba14433945c42824bf3d6da1c474bd680f1b4db6"
+  }
+}

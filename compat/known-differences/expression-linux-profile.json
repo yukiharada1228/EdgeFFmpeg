@@ -1,0 +1,247 @@
+{
+  "id": "expression.linux-numeric-profile",
+  "status": "known-difference",
+  "fullConformance": false,
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91",
+      "ffprobe": "0895f870196845f40002238980f908e2dfed7dcf8197a1074b98e4312431671b"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "linux",
+    "arch": "x64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 12 (Debian 12.2.0-14+deb12u1)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": true,
+    "reproducibleToolchainPinned": false
+  },
+  "container": {
+    "image": "docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496",
+    "platform": "linux/amd64",
+    "outputDirectory": ".build/linux-x64",
+    "purpose": "Isolated Linux x86_64 reference build; reproducible binary identity and conformance remain unverified"
+  },
+  "nativeProvenance": {
+    "prepared": {
+      "recordedAt": "2026-11-20T17:50:04.668Z",
+      "reference": {
+        "artifacts": {
+          "ffmpeg": "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91",
+          "ffprobe": "0895f870196845f40002238980f908e2dfed7dcf8197a1074b98e4312431671b"
+        },
+        "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+        "platform": "linux",
+        "arch": "x64",
+        "flags": [
+          "--disable-autodetect",
+          "--disable-doc",
+          "--disable-debug",
+          "--disable-x86asm"
+        ],
+        "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+        "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 12 (Debian 12.2.0-14+deb12u1)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+        "targetPlatformMatches": true,
+        "reproducibleToolchainPinned": false
+      },
+      "librarySha256": "b0f1b0085398cb212c387b983137812b6f7033f4228f7e50dad7292c4534b4c1",
+      "sourceSha256": "6454032263be6030e9e88281c91ac90389ba6b7ad4cc13051f7b764c9c654d29",
+      "casesSha256": "2f74b3b2ee421613b7edbd5ea5849d418ae0a1e30348b2c6c6f85b6a49e9b937",
+      "cases": 5352
+    },
+    "compilerVersion": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "libc": "glibc 2.36",
+    "binarySha256": "f583f868af8da9205ec2fb4f506f2491f6721d500025720e1cb423a7dc19112a",
+    "programSha256": "5000c3474bed45b13c119cac4fe1ee6376bb8285a5ade9397f6786ad67d2db2e"
+  },
+  "comparedPrototypeSourceBundleSha256": "8582360ede0514746a618682117680a038db68e5c51898993d08071da0c560f4",
+  "comparedPrototype": "clock-integers prototype; general functions are not production integrated",
+  "cases": 5352,
+  "ratioDifferenceCounts": {
+    "functions": 5,
+    "integers": 240
+  },
+  "valueDifferenceCounts": {
+    "functions": 18,
+    "integers": 484
+  },
+  "productionImpact": {
+    "expression": "-36.5dB",
+    "difference": "Supported encoder-clock expression produces a different rational under the pinned Linux glibc 2.36 reference and the current JavaScript math profile.",
+    "native": {
+      "index": 593,
+      "group": "functions",
+      "expression": "-36.5dB",
+      "native": {
+        "accepted": true,
+        "num": 25873543,
+        "den": 1729242509,
+        "valueAccepted": true,
+        "bits": "3f8ea49580cd82b6"
+      },
+      "actual": {
+        "accepted": true,
+        "num": "23024337",
+        "den": "1538817559"
+      }
+    }
+  },
+  "prototypeFunctionRatioDifferences": [
+    {
+      "index": 2386,
+      "group": "functions",
+      "expression": "log(3)",
+      "native": {
+        "accepted": true,
+        "num": 933118286,
+        "den": 849360867,
+        "valueAccepted": true,
+        "bits": "3ff193ea7aad030b"
+      },
+      "actual": {
+        "accepted": true,
+        "num": "1549195108",
+        "den": "1410138157"
+      }
+    },
+    {
+      "index": 2387,
+      "group": "functions",
+      "expression": "1/(log(3))",
+      "native": {
+        "accepted": true,
+        "num": 630122836,
+        "den": 692260691,
+        "valueAccepted": true,
+        "bits": "3fed20ae03bcc152"
+      },
+      "actual": {
+        "accepted": true,
+        "num": "1523487235",
+        "den": "1673721798"
+      }
+    },
+    {
+      "index": 3158,
+      "group": "functions",
+      "expression": "hypot(-3,0.5)",
+      "native": {
+        "accepted": true,
+        "num": 1192113347,
+        "den": 391964454,
+        "valueAccepted": true,
+        "bits": "400854bfb363dc39"
+      },
+      "actual": {
+        "accepted": true,
+        "num": "1068364297",
+        "den": "351276017"
+      }
+    },
+    {
+      "index": 3193,
+      "group": "functions",
+      "expression": "hypot(3,0.5)",
+      "native": {
+        "accepted": true,
+        "num": 1192113347,
+        "den": 391964454,
+        "valueAccepted": true,
+        "bits": "400854bfb363dc39"
+      },
+      "actual": {
+        "accepted": true,
+        "num": "1068364297",
+        "den": "351276017"
+      }
+    }
+  ],
+  "integerProfileExamples": [
+    {
+      "index": 3696,
+      "group": "integers",
+      "expression": "gcd(-inf,9223372036854775807)",
+      "native": {
+        "accepted": false,
+        "num": -1,
+        "den": 0,
+        "valueAccepted": true,
+        "bits": "c3e0000000000000"
+      },
+      "actual": {
+        "accepted": true,
+        "num": "1",
+        "den": "1"
+      }
+    },
+    {
+      "index": 3697,
+      "group": "integers",
+      "expression": "1/(gcd(-inf,9223372036854775807))",
+      "native": {
+        "accepted": true,
+        "num": 0,
+        "den": 1,
+        "valueAccepted": true,
+        "bits": "bc00000000000000"
+      },
+      "actual": {
+        "accepted": true,
+        "num": "1",
+        "den": "1"
+      }
+    },
+    {
+      "index": 3698,
+      "group": "integers",
+      "expression": "bitand(-inf,9223372036854775807)",
+      "native": {
+        "accepted": false,
+        "num": -1,
+        "den": 0,
+        "valueAccepted": true,
+        "bits": "c3e0000000000000"
+      },
+      "actual": {
+        "accepted": true,
+        "num": "0",
+        "den": "1"
+      }
+    },
+    {
+      "index": 3699,
+      "group": "integers",
+      "expression": "1/(bitand(-inf,9223372036854775807))",
+      "native": {
+        "accepted": true,
+        "num": 0,
+        "den": 1,
+        "valueAccepted": true,
+        "bits": "bc00000000000000"
+      },
+      "actual": {
+        "accepted": false
+      }
+    }
+  ],
+  "interpretation": "Observed cast differences are consistent with x86 invalid conversions versus AArch64 saturation. Signed-zero/libm differences need explicit compiler/runtime profile handling. This does not certify an exhaustive cause or domain.",
+  "remaining": [
+    "Exact exp2/libm implementation for the Linux reference",
+    "Cross-platform integer conversion profiles",
+    "Full expression numerical conformance"
+  ],
+  "publicExpressionApi": {
+    "status": "sampled-regression-covered",
+    "profile": "linux-x64",
+    "fixture": "compat/behavior-specs/expression-linux/cases.json",
+    "provenance": "compat/behavior-specs/expression-linux/provenance.json",
+    "cases": 16523,
+    "cliDifferenceRemains": true,
+    "note": "Public avutil expression API uses explicit numeric profiles. Existing CLI encoder expression path remains separate. CPUID is now measured; previous /proc/cpuinfo-based records did not establish x86 feature availability. Current container exposes FMA and AVX2. Sample agreement does not prove libc dispatch or exhaustive equivalence."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@edge-ffmpeg/storage-r2",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@edge-ffmpeg/core": "0.0.0"
+  },
+  "peerDependencies": {
+    "@cloudflare/workers-types": "^5.20261119.1"
+  }
+}

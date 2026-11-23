@@ -1,0 +1,41 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "sources": {
+    "tools/differential-runner/reference-metadata/generate.mjs": "98ecc6ff0ade1956f17687ee01af2b1694372a0256cc81648fe1e19bb6c8ecf0",
+    "upstream/ffmpeg/libavformat/version.h": "6e75a8cd7772f334958ffce859e3e23987963e3b406f12d9ec71650ca437fb92",
+    "upstream/ffmpeg/libavformat/version_major.h": "436db6c1b56db87e83682639fd0285e8b0138acc4fb572868c70a690eda7bb5e",
+    "upstream/ffmpeg/libavformat/mux.c": "94067d0406cc53eb1624277e296642fc3cd94ce48e9bb5645923ade3cb00853c",
+    "upstream/ffmpeg/libavformat/framehash.c": "42787901509e6c7d3dc9c9b95dfa3bd1c61e5db5db1d3c0da8f4d3c394ccd1a1",
+    "upstream/ffmpeg/libavformat/wavenc.c": "e4e026947aad2395982acb134743026e0c4fe30ea49dcccfe31ed456f1c226ca",
+    "upstream/ffmpeg/libavformat/riffenc.c": "c445eb042610fe77fd9deb585f32722d8f08578ced8333eba0e99cc218bbe25a",
+    "compat/behavior-specs/multi-output-policy/profiles.json": "7275cbc826f8aa5ff7b64e5aea5cf56a0f9af477fad1d34462351020c243c9b3",
+    "compat/behavior-specs/multi-output-policy/inputs.json": "c37c11e0badc1edbe7b267ddc99ce5baeef53fffadefe490490de64bfff1d434",
+    "compat/behavior-specs/output-open/profiles.json": "e575c400cfa4d97c026bd3dfc6a6efa86dbaa225d7b67e908977d3d889669dc6"
+  },
+  "caseCount": 336,
+  "groups": {
+    "audio": 288,
+    "video": 24,
+    "graph": 21,
+    "h264": 3
+  },
+  "scope": "Native-only default/output-bitexact/fflags-bitexact serialized metadata for finite PCM WAV/framecrc,raw video,seven graphs and scoped H264. No arbitrary metadata or full mux certification."
+}

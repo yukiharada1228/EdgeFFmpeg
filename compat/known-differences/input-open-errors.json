@@ -1,0 +1,9 @@
+{
+  "status": "scoped-initial-absence-resolved-other-open-errors-incomplete",
+  "fullConformance": false,
+  "scope": "Initial virtual input absence on built-in Node and R2 adapters, fixed POSIX FFmpeg reference",
+  "native": {"reason": "No such file or directory", "exitCode": 254, "basis": "AVERROR(ENOENT)=-2 returned by fixed ffmpeg process; observed POSIX status254"},
+  "edge": {"type": "InputNotFoundError", "code": "input-not-found", "exitCode": 254, "reason": "Input not found: <virtual path>"},
+  "evidence": {"profiles": 14, "nativeCases": 280, "Node": 280, "workerdR2": 280, "timedNode": 120, "timedWorkerdR2": 120, "timedSchedulers": 6},
+  "limits": ["Only initial ENOENT/head-null is mapped; permission, directory, I/O, malformed-data and other failure statuses remain incomplete.", "Full Native stderr and interactive/OS side effects are not certified.", "Node path security validation and R2 mount policies retain their own errors rather than being misclassified as absence.", "Post-open disappearance is a version/generation change and remains failure1. Native long-lived file-descriptor behavior is outside this guarantee.", "Custom VFS adapters must explicitly throw the typed absence error for this status; arbitrary similarly named properties are not trusted.", "Production Workers and other operating-system exit conventions remain unverified."]
+}

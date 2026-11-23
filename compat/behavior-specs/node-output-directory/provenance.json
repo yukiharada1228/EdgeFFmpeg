@@ -1,0 +1,31 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "profileCount": 26,
+  "caseCount": 650,
+  "sources": {
+    "tools/differential-runner/node-output-directory/generate.mjs": "51fabdc3de124256cd4ccb6a57896c2d09daca75839d2d7ca85c2cc8f93f4817",
+    "compat/behavior-specs/output-open/manifest.json": "abcf880e2b12d64ae4bff98e8a942af6eda5867f2ca132208ac189c9a8f603cb",
+    "compat/behavior-specs/output-open/profiles.json": "e575c400cfa4d97c026bd3dfc6a6efa86dbaa225d7b67e908977d3d889669dc6",
+    "compat/behavior-specs/output-open/results.json": "79c9caed194c322d396308dce1e5d77a2d1febe2d35c9d33fda9063324f709d1",
+    "compat/behavior-specs/output-open/provenance.json": "b719594a9698a3aaa3ddb1c39b276ff9def81c1180f0b5fe32655e8994f659e2"
+  },
+  "scope": "Native-only26profiles*5directory/trailing-slash scenarios*5flags:104refusals0,52EISDIR235,78ENOENT254,208ENOTDIR236,208conflicts234. Directory/file contents and absent targets unchanged. Input itself a directory,symlink/ACL/OS races/R2prefix emulation not certified."
+}

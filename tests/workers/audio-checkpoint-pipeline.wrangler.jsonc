@@ -1,0 +1,36 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "edge-ffmpeg-audio-checkpoint-pipeline-local",
+  "main": "audio-checkpoint-pipeline-fixture.ts",
+  "compatibility_date": "2026-11-18",
+  "upload_source_maps": true,
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_BUCKET",
+      "bucket_name": "edge-ffmpeg-audio-checkpoint-pipeline-local"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "CHECKPOINTS",
+        "class_name": "PipelineCheckpointCoordinator"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "PipelineCheckpointCoordinator"
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "name": "edge-ffmpeg-audio-checkpoint-pipeline-local",
+      "binding": "CHECKPOINT_WORKFLOW",
+      "class_name": "AudioPipelineCheckpointWorkflow"
+    }
+  ]
+}

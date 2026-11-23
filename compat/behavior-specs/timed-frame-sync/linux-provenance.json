@@ -1,0 +1,78 @@
+{
+  "prepared": {
+    "reference": {
+      "artifacts": {
+        "ffmpeg": "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91",
+        "ffprobe": "0895f870196845f40002238980f908e2dfed7dcf8197a1074b98e4312431671b"
+      },
+      "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "platform": "linux",
+      "arch": "x64",
+      "flags": [
+        "--disable-autodetect",
+        "--disable-doc",
+        "--disable-debug",
+        "--disable-x86asm"
+      ],
+      "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 12 (Debian 12.2.0-14+deb12u1)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+      "targetPlatformMatches": true,
+      "reproducibleToolchainPinned": false
+    },
+    "headers": {
+      "libavfilter/avfilter_internal.h": "f2a32f1fc64a797734cdf55e1b2dc0b553fa0126d9831f79e75dc8160b7cda81",
+      "libavfilter/filters.h": "f787754bd261b8ae9f9a19d63be0e37fb6541855a6b5ff86b63f6b222f31c70c",
+      "libavfilter/framequeue.h": "101b7b97199a753b73c7b0c6ecd43bae4de53663b5338b960b2f71b2e51c21dd",
+      "libavfilter/framepool.h": "728d61ddfb3c36ba8aec84d4462b3f754d03f88aac8c881d2b2e1fbba86826f1"
+    },
+    "librarySha256": {
+      "avfilter": "8f5821221423526d123767cb948c711f05e42b160917de4153dc9b860ba2417e",
+      "avformat": "0267653359746cc8e383c948447fb65f31edbecc98580d8b83ff0ec16b6d41cb",
+      "avcodec": "aa5c00c8bef4da62c5bab961a2010de6c81148b3d15179598148abb8701e31b2",
+      "swscale": "9f3a02b8a0923dece9609b31c29a1f1e9da8e53c8ccc784dab3566b7a560c098",
+      "swresample": "acf824905b972dd7f0c64afdb896ecef59e8433babfdab245b2736879c580f3c",
+      "avutil": "b0f1b0085398cb212c387b983137812b6f7033f4228f7e50dad7292c4534b4c1"
+    },
+    "sourceSha256": {
+      "two": "ab5542d8ce2ff048ef2a3122e9b84be41a85269f14cb4272e44deba8fe4590b1",
+      "three": "5673eaf9b2816d1aee041c435419c46b57448111fd7c1b0eafdcac2f7b77c061",
+      "many": "7775db2886dabb3ee3f694d405cd9cb7800487e1300fa8b7a5443f8194463dde",
+      "boundary": "ab5542d8ce2ff048ef2a3122e9b84be41a85269f14cb4272e44deba8fe4590b1"
+    },
+    "casesSha256": {
+      "two": "68b6893758908fcf60b95ac3f9bd7f89d0a686d12e1b1ccf085cc7e6a6903db8",
+      "three": "e6d154de0bdec2497c6fd3e93d51ee35bc53ee69aa9ce037fcd4efdd2004750a",
+      "many": "4ab4aecc2a844f382a1ec9acd95b01d49c85b067cb8ff4b8d412d2642662d7a0",
+      "boundary": "39ae9905b54e4b7675d975b7fa61b102494fccd247e51bc74b22f8c8997958aa"
+    }
+  },
+  "results": {
+    "two": {
+      "cases": 4536,
+      "binarySha256": "a7eaf7a0bac0969fe95c71c05aabadd3f56b16a11a56031ff849c8f2ec98d6d5",
+      "resultsSha256": "d318e8ebbea6025ec4193176afd4bc80b86f1278f307803facdb599b93be6a04"
+    },
+    "three": {
+      "cases": 4320,
+      "binarySha256": "0ae1191eac7333ff9ca00db1ddfcb4b2c3836ddf201acf4293a50f16417b5226",
+      "resultsSha256": "36dac3bd375fbd0963b470d2011a690556340b7324e1f262fb05f0f23745ff69"
+    },
+    "many": {
+      "cases": 2784,
+      "binarySha256": "a56d7231d953f3156ef27399d0e562c38bd2c5420309d0ebabf7c3fec00e31e4",
+      "resultsSha256": "3d4843cd10f924ec66c5b8c4e7638cd8031b57a1053df2699e1e87f52951f9c3"
+    },
+    "boundary": {
+      "cases": 1764,
+      "binarySha256": "c15100a24a32670b0d8222085c2cfea41830e2cbfd661a594ca850da1b3a2b1f",
+      "resultsSha256": "18b957e8000c4e57805f937a7215409d0dadaae4bf59476aefa01e514cb3c8be"
+    }
+  },
+  "cpuFeatures": {
+    "fma": true,
+    "avx2": true
+  },
+  "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "libc": "glibc 2.36",
+  "programSha256": "08adcfddc9e136a6615780e710f6315ebc2a9f4591259aa5306f92cd5dde76d6"
+}

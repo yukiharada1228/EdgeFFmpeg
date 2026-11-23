@@ -1,0 +1,4 @@
+import {beforeAll,it,expect} from 'vitest';import {execFileSync} from 'node:child_process';import {parseEncoderTimeBase} from '../../packages/avformat/src/video-output/encoder-ratio.js';import {hexClockCases} from '../helpers/video-clock-cases.js';
+it('matches Native signed hexadecimal floating literals and dB lookahead',()=>{const samples=hexClockCases();for(const value of samples){const native=JSON.parse(execFileSync('.build/oracles/encoder-ratio/native',[value],{encoding:'utf8',timeout:5000}));let accepted=true,actual:ReturnType<typeof parseEncoderTimeBase>;try{actual=parseEncoderTimeBase(value);}catch{accepted=false;}expect(accepted,value).toBe(native.accepted);if(accepted)expect(actual??{num:0n,den:1n},value).toEqual({num:BigInt(native.num),den:BigInt(native.den)});}expect(samples).toHaveLength(2150);},30000);
+
+beforeAll(()=>{execFileSync(process.execPath,['tools/differential-runner/build-oracle.mjs','encoder-ratio'],{timeout:30000});},30000);

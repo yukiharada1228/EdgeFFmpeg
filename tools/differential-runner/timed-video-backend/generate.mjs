@@ -1,0 +1,14 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
+import {build} from 'esbuild';
+import {cases,argv} from './cases.mjs';
+const root='compat/behavior-specs/timed-video-backend',hash=file=>createHash('sha256').update(readFileSync(file)).digest('hex'),reference=JSON.parse(readFileSync('.build/reference/build-metadata.json','utf8')),lock=JSON.parse(readFileSync('compat/upstream.lock.json','utf8'));
+if(reference.commit!==lock.commit||hash('.build/reference/ffmpeg')!==reference.artifacts.ffmpeg||JSON.stringify(reference.flags)!==JSON.stringify(readFileSync(lock.configureFile,'utf8').trim().split(/\s+/)))throw new Error('Invalid reference build');
+const profile=reference.platform==='darwin'&&reference.arch==='arm64'?'darwin-arm64':reference.platform==='linux'&&reference.arch==='x64'?'linux-x64':undefined;if(!profile)throw new Error('Unsupported reference profile');
+const bundle=await build({stdin:{contents:"export {pixelLayout} from '@edge-ffmpeg/avutil';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node'}),{pixelLayout}=await import('data:text/javascript;base64,'+Buffer.from(bundle.outputFiles[0].text).toString('base64'));
+const rows=cases(),results=[];for(const row of rows){const input=Uint8Array.from({length:pixelLayout(row.pixelFormat,3,2).bytes*4},(_,i)=>i%251),args=argv(row).map(value=>value==='/input/one'?'pipe:0':value==='/output/out'?'pipe:1':value),native=spawnSync('.build/reference/ffmpeg',['-v','error',...args],{input,encoding:'utf8'});if(native.status!==0)throw new Error(JSON.stringify({row,status:native.status,stderr:native.stderr}));results.push(native.stdout);}
+writeFileSync(root+'/cases.json',JSON.stringify(rows,null,2)+'\n');writeFileSync(root+'/results.json',JSON.stringify(results,null,2)+'\n');
+const sources=['upstream/ffmpeg/libavfilter/vf_crop.c','upstream/ffmpeg/libavfilter/vf_scale.c','upstream/ffmpeg/libavfilter/vf_aspect.c','upstream/ffmpeg/libswscale/utils.c'];
+writeFileSync(root+'/provenance.json',JSON.stringify({reference,numericProfile:profile,cases:rows.length,input:{width:3,height:2,frames:4,bytes:'index % 251'},output:'framecrc',sources:Object.fromEntries(sources.map(file=>[file,hash(file)])),scope:'Fourteen declared eight-bit formats; twenty-seven crop/aspect/scale/chain configurations, three frame limits. Finite rawvideo, producer scheduling, bitexact framecrc. Not full filter/codec/runtime conformance.'},null,2)+'\n');
+const files=[root+'/cases.json',root+'/results.json',root+'/provenance.json','tools/differential-runner/timed-video-backend/cases.mjs','tools/differential-runner/timed-video-backend/generate.mjs'];writeFileSync(root+'/manifest.json',JSON.stringify({sha256:Object.fromEntries(files.map(file=>[file,hash(file)]))},null,2)+'\n');console.log({cases:rows.length,numericProfile:profile});

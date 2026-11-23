@@ -1,0 +1,2836 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-20T04:44:29.369Z",
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91",
+      "ffprobe": "0895f870196845f40002238980f908e2dfed7dcf8197a1074b98e4312431671b"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "linux",
+    "arch": "x64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 12 (Debian 12.2.0-14+deb12u1)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": true,
+    "reproducibleToolchainPinned": false
+  },
+  "containerImage": "docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496",
+  "execution": "local Linux x86_64 under QEMU",
+  "inputGeneration": {
+    "seed": 53,
+    "multiplier": 1664525,
+    "increment": 1013904223,
+    "byte": "upper byte after each LCG step",
+    "frames": 1
+  },
+  "comparisonSummary": {
+    "cases": 140,
+    "explicitScalarMatches": 140,
+    "defaultMatchesScalar": 116,
+    "defaultMatchesAarch64": 56,
+    "aarch64Rejected": 28,
+    "repeatedDefaultCases": 4,
+    "observedUnstableCases": 0
+  },
+  "sourceBundleSha256": "8d5d93040343f6f4205032ab4731127e6326808024f144998b95664cecc5c60c",
+  "referenceStable": true,
+  "mmxextDisabledDiagnostic": {
+    "diagnosticOnly": true,
+    "referenceBinarySha256": "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91",
+    "options": [
+      "-cpuflags",
+      "-mmxext"
+    ],
+    "results": [
+      {
+        "id": "yuv420p-bgr24-16x7",
+        "sha256": "610c0f547c028d0ad2b2f72e8ba55c4b975f05bbc081620ec70067d8de3545f0",
+        "matchesScalar": true
+      },
+      {
+        "id": "yuv420p-rgba-16x7",
+        "sha256": "d4cee87c69993658f8c4b8ba9fde864d7c55867935133484b6a8c8e41daefca4",
+        "matchesScalar": true
+      },
+      {
+        "id": "yuv420p-bgra-16x7",
+        "sha256": "e93df73b455da0959e41654c3e4539c396d8ba87cb9bafb56d67a160b4df4abb",
+        "matchesScalar": true
+      },
+      {
+        "id": "yuva420p-bgr24-16x7",
+        "sha256": "610c0f547c028d0ad2b2f72e8ba55c4b975f05bbc081620ec70067d8de3545f0",
+        "matchesScalar": true
+      },
+      {
+        "id": "yuva420p-rgba-16x7",
+        "sha256": "4fbafe5591e763ce76c80c2d57c19297747c9840009baa30eb887d6504ad4f14",
+        "matchesScalar": true
+      },
+      {
+        "id": "yuva420p-bgra-16x7",
+        "sha256": "cc2d79c74c1408056febe1f09d2029c28481345d74fbd4da63b51c61e9068cbe",
+        "matchesScalar": true
+      },
+      {
+        "id": "yuv422p-bgr24-16x7",
+        "sha256": "129ecfca38203bba9a2b0d2b5d3429f70d0582dc18461ff18e1cb0393fabfbc6",
+        "matchesScalar": true
+      },
+      {
+        "id": "yuv422p-bgra-16x7",
+        "sha256": "4512651cffb6f8e578e45bea0813d8dc6b6778d945ab021939004d3f3badd40b",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv12-bgr24-16x6",
+        "sha256": "9aed8836f98093f988358fb495e0e5a2610bbb3f748c5771de02fe09a68b95a0",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv12-bgr24-32x8",
+        "sha256": "cbcfb9bd55a2bcb396454ccbe5d4965b694e93cec11ac11c5f8dc097c37de137",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv12-bgr24-16x7",
+        "sha256": "81219b7f61f9fd1d78fb4e3f7769c3129a30817b67181e0b3a29e02387f6b3a9",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv12-rgba-32x8",
+        "sha256": "5a47c2dd0628e622db636078f4289e17fe1a1617869f80a2ad9a91a26b6735e4",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv12-rgba-16x7",
+        "sha256": "97931b8bce369ce623e5ea7cb50a624df3efce62bef7ff387b51eb533645aaaf",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv12-bgra-16x6",
+        "sha256": "aa189caa18d9cacd8ba2a7d2c2560a8fa04984db8d965cc088e77d59700cc5b7",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv12-bgra-32x8",
+        "sha256": "ab7650b3384d042286dcd2c924a2d07aa734958bb6f0b92632478c7a8456887d",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv12-bgra-16x7",
+        "sha256": "606a5cdd5046c7d121ec5b1f737d252ed80c00694237307a60413ea1e03c7947",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv21-bgr24-16x6",
+        "sha256": "3159d66e54b70b0d8aab66a8389a146d52b58274030a208d45baac3afed7aeca",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv21-bgr24-32x8",
+        "sha256": "c8e788da94f251fdb5462374f7e1720141de2627cf07470389c134539e915e6e",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv21-bgr24-16x7",
+        "sha256": "16b77c1b7ee09d24cde18063dfccb7ed6d1d51305f9fb51d9d9d1981fd491118",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv21-rgba-32x8",
+        "sha256": "0846ba838115956d464b7f4c43c7f034e15837b5fe7865486f98353157553f36",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv21-rgba-16x7",
+        "sha256": "9913efb19837553b99d3c84a1cc284cf1b295dc4b229c59f5296bbb1f78fd9ac",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv21-bgra-16x6",
+        "sha256": "c4d4750f661ac75b6ad263f945a4aa81678ceee07a421b18937fcdac5f02ecd3",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv21-bgra-32x8",
+        "sha256": "369a3b7887bca0bddeb3653d5ff1f8923130c52cd823a2d07183f1736d714d53",
+        "matchesScalar": true
+      },
+      {
+        "id": "nv21-bgra-16x7",
+        "sha256": "2a415b616723e5d5e6a413cf1f71033cd85c6e4e07e0a5718d6d50ed5baa79b8",
+        "matchesScalar": true
+      }
+    ]
+  },
+  "compatibilityCertified": false,
+  "cases": [
+    {
+      "id": "yuv420p-rgb24-5x3",
+      "source": "yuv420p",
+      "destination": "rgb24",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "f1914781097b33c28d8119f016389121b5be4df4e185c2d63f1e4bc18a85e673",
+        "defaultObservations": {
+          "f1914781097b33c28d8119f016389121b5be4df4e185c2d63f1e4bc18a85e673": 1
+        },
+        "scalar": "f1914781097b33c28d8119f016389121b5be4df4e185c2d63f1e4bc18a85e673",
+        "scalarObservations": {
+          "f1914781097b33c28d8119f016389121b5be4df4e185c2d63f1e4bc18a85e673": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-rgb24-16x6",
+      "source": "yuv420p",
+      "destination": "rgb24",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "e2ea94319158d4941ba9167dc5908726c409797bde0deeb03d01a4b1a519f442",
+        "defaultObservations": {
+          "e2ea94319158d4941ba9167dc5908726c409797bde0deeb03d01a4b1a519f442": 1
+        },
+        "scalar": "e2ea94319158d4941ba9167dc5908726c409797bde0deeb03d01a4b1a519f442",
+        "scalarObservations": {
+          "e2ea94319158d4941ba9167dc5908726c409797bde0deeb03d01a4b1a519f442": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-rgb24-32x8",
+      "source": "yuv420p",
+      "destination": "rgb24",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "3f9d2a0c9db2e3578b00e88cbf3fa791f218e5415fcb4df3e349f1a2f98d3405",
+        "defaultObservations": {
+          "3f9d2a0c9db2e3578b00e88cbf3fa791f218e5415fcb4df3e349f1a2f98d3405": 1
+        },
+        "scalar": "3f9d2a0c9db2e3578b00e88cbf3fa791f218e5415fcb4df3e349f1a2f98d3405",
+        "scalarObservations": {
+          "3f9d2a0c9db2e3578b00e88cbf3fa791f218e5415fcb4df3e349f1a2f98d3405": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-rgb24-16x7",
+      "source": "yuv420p",
+      "destination": "rgb24",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "75167b807f8e16a3ed23799e3f1cb20e8927a3b0a5afaa7cd7f38759453f125f",
+        "defaultObservations": {
+          "75167b807f8e16a3ed23799e3f1cb20e8927a3b0a5afaa7cd7f38759453f125f": 1
+        },
+        "scalar": "75167b807f8e16a3ed23799e3f1cb20e8927a3b0a5afaa7cd7f38759453f125f",
+        "scalarObservations": {
+          "75167b807f8e16a3ed23799e3f1cb20e8927a3b0a5afaa7cd7f38759453f125f": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-bgr24-5x3",
+      "source": "yuv420p",
+      "destination": "bgr24",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "bc9751a14d59517a4149dcc4341602fb9cce7e8e18710be29d8bb96c5ee3131d",
+        "defaultObservations": {
+          "bc9751a14d59517a4149dcc4341602fb9cce7e8e18710be29d8bb96c5ee3131d": 1
+        },
+        "scalar": "bc9751a14d59517a4149dcc4341602fb9cce7e8e18710be29d8bb96c5ee3131d",
+        "scalarObservations": {
+          "bc9751a14d59517a4149dcc4341602fb9cce7e8e18710be29d8bb96c5ee3131d": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-bgr24-16x6",
+      "source": "yuv420p",
+      "destination": "bgr24",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "639ef05646051eade33615cd04a086efa1070f05e570145484eecdf276fc9f50",
+        "defaultObservations": {
+          "639ef05646051eade33615cd04a086efa1070f05e570145484eecdf276fc9f50": 1
+        },
+        "scalar": "639ef05646051eade33615cd04a086efa1070f05e570145484eecdf276fc9f50",
+        "scalarObservations": {
+          "639ef05646051eade33615cd04a086efa1070f05e570145484eecdf276fc9f50": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-bgr24-32x8",
+      "source": "yuv420p",
+      "destination": "bgr24",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "65142049edc0233a871cee936a17a833dce24c8b033d26c8f1e9df425cd52568",
+        "defaultObservations": {
+          "65142049edc0233a871cee936a17a833dce24c8b033d26c8f1e9df425cd52568": 1
+        },
+        "scalar": "65142049edc0233a871cee936a17a833dce24c8b033d26c8f1e9df425cd52568",
+        "scalarObservations": {
+          "65142049edc0233a871cee936a17a833dce24c8b033d26c8f1e9df425cd52568": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-bgr24-16x7",
+      "source": "yuv420p",
+      "destination": "bgr24",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "ac4e98d87fb07f1c09332ddab3bc9ff493af0bc0c0ed3c9427132fb9c5cd315a",
+        "defaultObservations": {
+          "ac4e98d87fb07f1c09332ddab3bc9ff493af0bc0c0ed3c9427132fb9c5cd315a": 1
+        },
+        "scalar": "610c0f547c028d0ad2b2f72e8ba55c4b975f05bbc081620ec70067d8de3545f0",
+        "scalarObservations": {
+          "610c0f547c028d0ad2b2f72e8ba55c4b975f05bbc081620ec70067d8de3545f0": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "yuv420p-rgba-5x3",
+      "source": "yuv420p",
+      "destination": "rgba",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "34c7ccd79ec6fd115734e3510d5ce9639218ef84628fef22fc7fa825f46613d8",
+        "defaultObservations": {
+          "34c7ccd79ec6fd115734e3510d5ce9639218ef84628fef22fc7fa825f46613d8": 1
+        },
+        "scalar": "34c7ccd79ec6fd115734e3510d5ce9639218ef84628fef22fc7fa825f46613d8",
+        "scalarObservations": {
+          "34c7ccd79ec6fd115734e3510d5ce9639218ef84628fef22fc7fa825f46613d8": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-rgba-16x6",
+      "source": "yuv420p",
+      "destination": "rgba",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "05f00f9ba3a041875690fcb05602d057f8ecd28472ac9303feed20bb2a171c61",
+        "defaultObservations": {
+          "05f00f9ba3a041875690fcb05602d057f8ecd28472ac9303feed20bb2a171c61": 1
+        },
+        "scalar": "05f00f9ba3a041875690fcb05602d057f8ecd28472ac9303feed20bb2a171c61",
+        "scalarObservations": {
+          "05f00f9ba3a041875690fcb05602d057f8ecd28472ac9303feed20bb2a171c61": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-rgba-32x8",
+      "source": "yuv420p",
+      "destination": "rgba",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "24e816332169a4fec3e86792603149ef1a09a6510a6f51d38a94664f7e4dce9a",
+        "defaultObservations": {
+          "24e816332169a4fec3e86792603149ef1a09a6510a6f51d38a94664f7e4dce9a": 1
+        },
+        "scalar": "24e816332169a4fec3e86792603149ef1a09a6510a6f51d38a94664f7e4dce9a",
+        "scalarObservations": {
+          "24e816332169a4fec3e86792603149ef1a09a6510a6f51d38a94664f7e4dce9a": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-rgba-16x7",
+      "source": "yuv420p",
+      "destination": "rgba",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "591fbe61b6a911c91f6694109ab4692b88f3faa6a56e417050628595edc9e0d3",
+        "defaultObservations": {
+          "591fbe61b6a911c91f6694109ab4692b88f3faa6a56e417050628595edc9e0d3": 1
+        },
+        "scalar": "d4cee87c69993658f8c4b8ba9fde864d7c55867935133484b6a8c8e41daefca4",
+        "scalarObservations": {
+          "d4cee87c69993658f8c4b8ba9fde864d7c55867935133484b6a8c8e41daefca4": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "yuv420p-bgra-5x3",
+      "source": "yuv420p",
+      "destination": "bgra",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "885c3c928c87ccfce52c8119d844e9eacfe830a9a4e18570d64de4013d207ea0",
+        "defaultObservations": {
+          "885c3c928c87ccfce52c8119d844e9eacfe830a9a4e18570d64de4013d207ea0": 1
+        },
+        "scalar": "885c3c928c87ccfce52c8119d844e9eacfe830a9a4e18570d64de4013d207ea0",
+        "scalarObservations": {
+          "885c3c928c87ccfce52c8119d844e9eacfe830a9a4e18570d64de4013d207ea0": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-bgra-16x6",
+      "source": "yuv420p",
+      "destination": "bgra",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "33a0dbcb0d52e851ca8265f0c6039c74fdb650b20299c9b2625ac79154d7a8e1",
+        "defaultObservations": {
+          "33a0dbcb0d52e851ca8265f0c6039c74fdb650b20299c9b2625ac79154d7a8e1": 1
+        },
+        "scalar": "33a0dbcb0d52e851ca8265f0c6039c74fdb650b20299c9b2625ac79154d7a8e1",
+        "scalarObservations": {
+          "33a0dbcb0d52e851ca8265f0c6039c74fdb650b20299c9b2625ac79154d7a8e1": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-bgra-32x8",
+      "source": "yuv420p",
+      "destination": "bgra",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "455b771e8e2fbb8db9e3550ccb5ca5dfeaea4b9be50131a9b7e4d15b2bd7f8ac",
+        "defaultObservations": {
+          "455b771e8e2fbb8db9e3550ccb5ca5dfeaea4b9be50131a9b7e4d15b2bd7f8ac": 1
+        },
+        "scalar": "455b771e8e2fbb8db9e3550ccb5ca5dfeaea4b9be50131a9b7e4d15b2bd7f8ac",
+        "scalarObservations": {
+          "455b771e8e2fbb8db9e3550ccb5ca5dfeaea4b9be50131a9b7e4d15b2bd7f8ac": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-bgra-16x7",
+      "source": "yuv420p",
+      "destination": "bgra",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "279be8e1307732f76958c42ebab48787a56b80278dca7972ac1229bcb0585b96",
+        "defaultObservations": {
+          "279be8e1307732f76958c42ebab48787a56b80278dca7972ac1229bcb0585b96": 1
+        },
+        "scalar": "e93df73b455da0959e41654c3e4539c396d8ba87cb9bafb56d67a160b4df4abb",
+        "scalarObservations": {
+          "e93df73b455da0959e41654c3e4539c396d8ba87cb9bafb56d67a160b4df4abb": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "yuv420p-argb-5x3",
+      "source": "yuv420p",
+      "destination": "argb",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "fcfc0b84e872c15708a1980d3e2c14780d861d4b6a5a438704f99776512fc2cc",
+        "defaultObservations": {
+          "fcfc0b84e872c15708a1980d3e2c14780d861d4b6a5a438704f99776512fc2cc": 1
+        },
+        "scalar": "fcfc0b84e872c15708a1980d3e2c14780d861d4b6a5a438704f99776512fc2cc",
+        "scalarObservations": {
+          "fcfc0b84e872c15708a1980d3e2c14780d861d4b6a5a438704f99776512fc2cc": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-argb-16x6",
+      "source": "yuv420p",
+      "destination": "argb",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "e38f3c8ac1ca4e377de240ca86067c03dac989bee303ef598ee680b853ec95b1",
+        "defaultObservations": {
+          "e38f3c8ac1ca4e377de240ca86067c03dac989bee303ef598ee680b853ec95b1": 1
+        },
+        "scalar": "e38f3c8ac1ca4e377de240ca86067c03dac989bee303ef598ee680b853ec95b1",
+        "scalarObservations": {
+          "e38f3c8ac1ca4e377de240ca86067c03dac989bee303ef598ee680b853ec95b1": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-argb-32x8",
+      "source": "yuv420p",
+      "destination": "argb",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "61de845ae5495891a7e71d16032f35b79e034930e73fef064fbdd9f0b683be1a",
+        "defaultObservations": {
+          "61de845ae5495891a7e71d16032f35b79e034930e73fef064fbdd9f0b683be1a": 1
+        },
+        "scalar": "61de845ae5495891a7e71d16032f35b79e034930e73fef064fbdd9f0b683be1a",
+        "scalarObservations": {
+          "61de845ae5495891a7e71d16032f35b79e034930e73fef064fbdd9f0b683be1a": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-argb-16x7",
+      "source": "yuv420p",
+      "destination": "argb",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "5b864cd65e558fab8fb8dabd70f36d5bf120a680b22609bc490060ff98781154",
+        "defaultObservations": {
+          "5b864cd65e558fab8fb8dabd70f36d5bf120a680b22609bc490060ff98781154": 1
+        },
+        "scalar": "5b864cd65e558fab8fb8dabd70f36d5bf120a680b22609bc490060ff98781154",
+        "scalarObservations": {
+          "5b864cd65e558fab8fb8dabd70f36d5bf120a680b22609bc490060ff98781154": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-abgr-5x3",
+      "source": "yuv420p",
+      "destination": "abgr",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "b4811aa16be867fc33651d7100f7a2235231c89eb8f10400bf1bbf59d7714c88",
+        "defaultObservations": {
+          "b4811aa16be867fc33651d7100f7a2235231c89eb8f10400bf1bbf59d7714c88": 1
+        },
+        "scalar": "b4811aa16be867fc33651d7100f7a2235231c89eb8f10400bf1bbf59d7714c88",
+        "scalarObservations": {
+          "b4811aa16be867fc33651d7100f7a2235231c89eb8f10400bf1bbf59d7714c88": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-abgr-16x6",
+      "source": "yuv420p",
+      "destination": "abgr",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "9d601edfc07636568bc052b371068f4a4216c4d17c71575ec5a98b1bcdf4c9c4",
+        "defaultObservations": {
+          "9d601edfc07636568bc052b371068f4a4216c4d17c71575ec5a98b1bcdf4c9c4": 1
+        },
+        "scalar": "9d601edfc07636568bc052b371068f4a4216c4d17c71575ec5a98b1bcdf4c9c4",
+        "scalarObservations": {
+          "9d601edfc07636568bc052b371068f4a4216c4d17c71575ec5a98b1bcdf4c9c4": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-abgr-32x8",
+      "source": "yuv420p",
+      "destination": "abgr",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "1b6b1f9c46c935ecb8229454e49c2502609f0909ed82e719dfa41899daae9522",
+        "defaultObservations": {
+          "1b6b1f9c46c935ecb8229454e49c2502609f0909ed82e719dfa41899daae9522": 1
+        },
+        "scalar": "1b6b1f9c46c935ecb8229454e49c2502609f0909ed82e719dfa41899daae9522",
+        "scalarObservations": {
+          "1b6b1f9c46c935ecb8229454e49c2502609f0909ed82e719dfa41899daae9522": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-abgr-16x7",
+      "source": "yuv420p",
+      "destination": "abgr",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "7b03fe93637d4193e5005f15ac9491bbed6bc3d09093acdaea1de49b7fb3fb59",
+        "defaultObservations": {
+          "7b03fe93637d4193e5005f15ac9491bbed6bc3d09093acdaea1de49b7fb3fb59": 1
+        },
+        "scalar": "7b03fe93637d4193e5005f15ac9491bbed6bc3d09093acdaea1de49b7fb3fb59",
+        "scalarObservations": {
+          "7b03fe93637d4193e5005f15ac9491bbed6bc3d09093acdaea1de49b7fb3fb59": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-gbrp-5x3",
+      "source": "yuv420p",
+      "destination": "gbrp",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "ae1cec02c6ae083dd587c8d88a2b5e9fe72cfcd2f4e930733bfc3a0b8b73b8c7",
+        "defaultObservations": {
+          "ae1cec02c6ae083dd587c8d88a2b5e9fe72cfcd2f4e930733bfc3a0b8b73b8c7": 1
+        },
+        "scalar": "ae1cec02c6ae083dd587c8d88a2b5e9fe72cfcd2f4e930733bfc3a0b8b73b8c7",
+        "scalarObservations": {
+          "ae1cec02c6ae083dd587c8d88a2b5e9fe72cfcd2f4e930733bfc3a0b8b73b8c7": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-gbrp-16x6",
+      "source": "yuv420p",
+      "destination": "gbrp",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "176c380a4d8925f16f206907dec0cd6df06da4b3ef607e322212eb7754a3bdfe",
+        "defaultObservations": {
+          "176c380a4d8925f16f206907dec0cd6df06da4b3ef607e322212eb7754a3bdfe": 1
+        },
+        "scalar": "176c380a4d8925f16f206907dec0cd6df06da4b3ef607e322212eb7754a3bdfe",
+        "scalarObservations": {
+          "176c380a4d8925f16f206907dec0cd6df06da4b3ef607e322212eb7754a3bdfe": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-gbrp-32x8",
+      "source": "yuv420p",
+      "destination": "gbrp",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "17e3fd082c35efd60bf8b7c2c70eebcdb68ff2a9308819186b64a2d76cfa710e",
+        "defaultObservations": {
+          "17e3fd082c35efd60bf8b7c2c70eebcdb68ff2a9308819186b64a2d76cfa710e": 1
+        },
+        "scalar": "17e3fd082c35efd60bf8b7c2c70eebcdb68ff2a9308819186b64a2d76cfa710e",
+        "scalarObservations": {
+          "17e3fd082c35efd60bf8b7c2c70eebcdb68ff2a9308819186b64a2d76cfa710e": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv420p-gbrp-16x7",
+      "source": "yuv420p",
+      "destination": "gbrp",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "d3d3f75d15f5ef6f6e6dfc103fa36880ee1437fa9003ba42a9137f6ada210ba5",
+        "defaultObservations": {
+          "d3d3f75d15f5ef6f6e6dfc103fa36880ee1437fa9003ba42a9137f6ada210ba5": 1
+        },
+        "scalar": "d3d3f75d15f5ef6f6e6dfc103fa36880ee1437fa9003ba42a9137f6ada210ba5",
+        "scalarObservations": {
+          "d3d3f75d15f5ef6f6e6dfc103fa36880ee1437fa9003ba42a9137f6ada210ba5": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-rgb24-5x3",
+      "source": "yuva420p",
+      "destination": "rgb24",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "1ace5b9d600fe810f31b26027fec627211557a809e756078ef1c90ad570bd7cf",
+      "native": {
+        "default": "f1914781097b33c28d8119f016389121b5be4df4e185c2d63f1e4bc18a85e673",
+        "defaultObservations": {
+          "f1914781097b33c28d8119f016389121b5be4df4e185c2d63f1e4bc18a85e673": 1
+        },
+        "scalar": "f1914781097b33c28d8119f016389121b5be4df4e185c2d63f1e4bc18a85e673",
+        "scalarObservations": {
+          "f1914781097b33c28d8119f016389121b5be4df4e185c2d63f1e4bc18a85e673": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-rgb24-16x6",
+      "source": "yuva420p",
+      "destination": "rgb24",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "ed31e0a7e2730c046dbb156e2385b9960e20b3b944fa90a8719161be602d9378",
+      "native": {
+        "default": "e2ea94319158d4941ba9167dc5908726c409797bde0deeb03d01a4b1a519f442",
+        "defaultObservations": {
+          "e2ea94319158d4941ba9167dc5908726c409797bde0deeb03d01a4b1a519f442": 1
+        },
+        "scalar": "e2ea94319158d4941ba9167dc5908726c409797bde0deeb03d01a4b1a519f442",
+        "scalarObservations": {
+          "e2ea94319158d4941ba9167dc5908726c409797bde0deeb03d01a4b1a519f442": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-rgb24-32x8",
+      "source": "yuva420p",
+      "destination": "rgb24",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "489b3bf8737c3f6231147496432349b2af4c1468a6401dab9cb3c6166c1df968",
+      "native": {
+        "default": "3f9d2a0c9db2e3578b00e88cbf3fa791f218e5415fcb4df3e349f1a2f98d3405",
+        "defaultObservations": {
+          "3f9d2a0c9db2e3578b00e88cbf3fa791f218e5415fcb4df3e349f1a2f98d3405": 1
+        },
+        "scalar": "3f9d2a0c9db2e3578b00e88cbf3fa791f218e5415fcb4df3e349f1a2f98d3405",
+        "scalarObservations": {
+          "3f9d2a0c9db2e3578b00e88cbf3fa791f218e5415fcb4df3e349f1a2f98d3405": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-rgb24-16x7",
+      "source": "yuva420p",
+      "destination": "rgb24",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "d88c1d75c7abff713581992362a75e71789dcfdaf69ddfe97dc09bc647dceddc",
+      "native": {
+        "default": "75167b807f8e16a3ed23799e3f1cb20e8927a3b0a5afaa7cd7f38759453f125f",
+        "defaultObservations": {
+          "75167b807f8e16a3ed23799e3f1cb20e8927a3b0a5afaa7cd7f38759453f125f": 1
+        },
+        "scalar": "75167b807f8e16a3ed23799e3f1cb20e8927a3b0a5afaa7cd7f38759453f125f",
+        "scalarObservations": {
+          "75167b807f8e16a3ed23799e3f1cb20e8927a3b0a5afaa7cd7f38759453f125f": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-bgr24-5x3",
+      "source": "yuva420p",
+      "destination": "bgr24",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "1ace5b9d600fe810f31b26027fec627211557a809e756078ef1c90ad570bd7cf",
+      "native": {
+        "default": "bc9751a14d59517a4149dcc4341602fb9cce7e8e18710be29d8bb96c5ee3131d",
+        "defaultObservations": {
+          "bc9751a14d59517a4149dcc4341602fb9cce7e8e18710be29d8bb96c5ee3131d": 1
+        },
+        "scalar": "bc9751a14d59517a4149dcc4341602fb9cce7e8e18710be29d8bb96c5ee3131d",
+        "scalarObservations": {
+          "bc9751a14d59517a4149dcc4341602fb9cce7e8e18710be29d8bb96c5ee3131d": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-bgr24-16x6",
+      "source": "yuva420p",
+      "destination": "bgr24",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "ed31e0a7e2730c046dbb156e2385b9960e20b3b944fa90a8719161be602d9378",
+      "native": {
+        "default": "639ef05646051eade33615cd04a086efa1070f05e570145484eecdf276fc9f50",
+        "defaultObservations": {
+          "639ef05646051eade33615cd04a086efa1070f05e570145484eecdf276fc9f50": 1
+        },
+        "scalar": "639ef05646051eade33615cd04a086efa1070f05e570145484eecdf276fc9f50",
+        "scalarObservations": {
+          "639ef05646051eade33615cd04a086efa1070f05e570145484eecdf276fc9f50": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-bgr24-32x8",
+      "source": "yuva420p",
+      "destination": "bgr24",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "489b3bf8737c3f6231147496432349b2af4c1468a6401dab9cb3c6166c1df968",
+      "native": {
+        "default": "65142049edc0233a871cee936a17a833dce24c8b033d26c8f1e9df425cd52568",
+        "defaultObservations": {
+          "65142049edc0233a871cee936a17a833dce24c8b033d26c8f1e9df425cd52568": 1
+        },
+        "scalar": "65142049edc0233a871cee936a17a833dce24c8b033d26c8f1e9df425cd52568",
+        "scalarObservations": {
+          "65142049edc0233a871cee936a17a833dce24c8b033d26c8f1e9df425cd52568": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-bgr24-16x7",
+      "source": "yuva420p",
+      "destination": "bgr24",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "d88c1d75c7abff713581992362a75e71789dcfdaf69ddfe97dc09bc647dceddc",
+      "native": {
+        "default": "ac4e98d87fb07f1c09332ddab3bc9ff493af0bc0c0ed3c9427132fb9c5cd315a",
+        "defaultObservations": {
+          "ac4e98d87fb07f1c09332ddab3bc9ff493af0bc0c0ed3c9427132fb9c5cd315a": 1
+        },
+        "scalar": "610c0f547c028d0ad2b2f72e8ba55c4b975f05bbc081620ec70067d8de3545f0",
+        "scalarObservations": {
+          "610c0f547c028d0ad2b2f72e8ba55c4b975f05bbc081620ec70067d8de3545f0": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "yuva420p-rgba-5x3",
+      "source": "yuva420p",
+      "destination": "rgba",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "1ace5b9d600fe810f31b26027fec627211557a809e756078ef1c90ad570bd7cf",
+      "native": {
+        "default": "c4f17a3e9613bdd2420895c80e0a44371fb11ef6a5d665250f78b3fdd71ac644",
+        "defaultObservations": {
+          "c4f17a3e9613bdd2420895c80e0a44371fb11ef6a5d665250f78b3fdd71ac644": 1
+        },
+        "scalar": "c4f17a3e9613bdd2420895c80e0a44371fb11ef6a5d665250f78b3fdd71ac644",
+        "scalarObservations": {
+          "c4f17a3e9613bdd2420895c80e0a44371fb11ef6a5d665250f78b3fdd71ac644": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-rgba-16x6",
+      "source": "yuva420p",
+      "destination": "rgba",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "ed31e0a7e2730c046dbb156e2385b9960e20b3b944fa90a8719161be602d9378",
+      "native": {
+        "default": "8e97029f11a510ae9b683f1e42aacda043ae050b2e20c44ad0047c4ec354d15a",
+        "defaultObservations": {
+          "8e97029f11a510ae9b683f1e42aacda043ae050b2e20c44ad0047c4ec354d15a": 1
+        },
+        "scalar": "8e97029f11a510ae9b683f1e42aacda043ae050b2e20c44ad0047c4ec354d15a",
+        "scalarObservations": {
+          "8e97029f11a510ae9b683f1e42aacda043ae050b2e20c44ad0047c4ec354d15a": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-rgba-32x8",
+      "source": "yuva420p",
+      "destination": "rgba",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "489b3bf8737c3f6231147496432349b2af4c1468a6401dab9cb3c6166c1df968",
+      "native": {
+        "default": "76d2064c8f453bbc300e5f83688cc46be0be4a0137816e27944639e40bac1ed3",
+        "defaultObservations": {
+          "76d2064c8f453bbc300e5f83688cc46be0be4a0137816e27944639e40bac1ed3": 1
+        },
+        "scalar": "76d2064c8f453bbc300e5f83688cc46be0be4a0137816e27944639e40bac1ed3",
+        "scalarObservations": {
+          "76d2064c8f453bbc300e5f83688cc46be0be4a0137816e27944639e40bac1ed3": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-rgba-16x7",
+      "source": "yuva420p",
+      "destination": "rgba",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "d88c1d75c7abff713581992362a75e71789dcfdaf69ddfe97dc09bc647dceddc",
+      "native": {
+        "default": "39ee7653aa097435b3a50501639af2e8d900ffdc8c60eaab9f5932a9373fe096",
+        "defaultObservations": {
+          "39ee7653aa097435b3a50501639af2e8d900ffdc8c60eaab9f5932a9373fe096": 1
+        },
+        "scalar": "4fbafe5591e763ce76c80c2d57c19297747c9840009baa30eb887d6504ad4f14",
+        "scalarObservations": {
+          "4fbafe5591e763ce76c80c2d57c19297747c9840009baa30eb887d6504ad4f14": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "yuva420p-bgra-5x3",
+      "source": "yuva420p",
+      "destination": "bgra",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "1ace5b9d600fe810f31b26027fec627211557a809e756078ef1c90ad570bd7cf",
+      "native": {
+        "default": "fef63d64c4d42e30b9ddcb90aae0a8e93937a1dfd8f42a68fdde60070fb30230",
+        "defaultObservations": {
+          "fef63d64c4d42e30b9ddcb90aae0a8e93937a1dfd8f42a68fdde60070fb30230": 1
+        },
+        "scalar": "fef63d64c4d42e30b9ddcb90aae0a8e93937a1dfd8f42a68fdde60070fb30230",
+        "scalarObservations": {
+          "fef63d64c4d42e30b9ddcb90aae0a8e93937a1dfd8f42a68fdde60070fb30230": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-bgra-16x6",
+      "source": "yuva420p",
+      "destination": "bgra",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "ed31e0a7e2730c046dbb156e2385b9960e20b3b944fa90a8719161be602d9378",
+      "native": {
+        "default": "dfad5a3333ab45ca583ec69c9b91d3c97bf65c642671b6efe2ed31bcef871799",
+        "defaultObservations": {
+          "dfad5a3333ab45ca583ec69c9b91d3c97bf65c642671b6efe2ed31bcef871799": 1
+        },
+        "scalar": "dfad5a3333ab45ca583ec69c9b91d3c97bf65c642671b6efe2ed31bcef871799",
+        "scalarObservations": {
+          "dfad5a3333ab45ca583ec69c9b91d3c97bf65c642671b6efe2ed31bcef871799": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-bgra-32x8",
+      "source": "yuva420p",
+      "destination": "bgra",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "489b3bf8737c3f6231147496432349b2af4c1468a6401dab9cb3c6166c1df968",
+      "native": {
+        "default": "4b69462f4614427f3b1cc484e2234fca149a1a69b12e2eb93d6902775a7cb0f5",
+        "defaultObservations": {
+          "4b69462f4614427f3b1cc484e2234fca149a1a69b12e2eb93d6902775a7cb0f5": 1
+        },
+        "scalar": "4b69462f4614427f3b1cc484e2234fca149a1a69b12e2eb93d6902775a7cb0f5",
+        "scalarObservations": {
+          "4b69462f4614427f3b1cc484e2234fca149a1a69b12e2eb93d6902775a7cb0f5": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-bgra-16x7",
+      "source": "yuva420p",
+      "destination": "bgra",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "d88c1d75c7abff713581992362a75e71789dcfdaf69ddfe97dc09bc647dceddc",
+      "native": {
+        "default": "71581d47ebbd850a9cbb256ce0f9cbbfafd2f6a429050e1868622362ff44703d",
+        "defaultObservations": {
+          "71581d47ebbd850a9cbb256ce0f9cbbfafd2f6a429050e1868622362ff44703d": 1
+        },
+        "scalar": "cc2d79c74c1408056febe1f09d2029c28481345d74fbd4da63b51c61e9068cbe",
+        "scalarObservations": {
+          "cc2d79c74c1408056febe1f09d2029c28481345d74fbd4da63b51c61e9068cbe": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "yuva420p-argb-5x3",
+      "source": "yuva420p",
+      "destination": "argb",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "1ace5b9d600fe810f31b26027fec627211557a809e756078ef1c90ad570bd7cf",
+      "native": {
+        "default": "bde4af086c47fb0a1d49b703d2dbd67b5990048d6df33dc4bb8922be385d103e",
+        "defaultObservations": {
+          "bde4af086c47fb0a1d49b703d2dbd67b5990048d6df33dc4bb8922be385d103e": 1
+        },
+        "scalar": "bde4af086c47fb0a1d49b703d2dbd67b5990048d6df33dc4bb8922be385d103e",
+        "scalarObservations": {
+          "bde4af086c47fb0a1d49b703d2dbd67b5990048d6df33dc4bb8922be385d103e": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-argb-16x6",
+      "source": "yuva420p",
+      "destination": "argb",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "ed31e0a7e2730c046dbb156e2385b9960e20b3b944fa90a8719161be602d9378",
+      "native": {
+        "default": "9afa7be2c17518a51148845655bbc62a0d5ed0053d35d05e93dca0d625ae5bd2",
+        "defaultObservations": {
+          "9afa7be2c17518a51148845655bbc62a0d5ed0053d35d05e93dca0d625ae5bd2": 1
+        },
+        "scalar": "9afa7be2c17518a51148845655bbc62a0d5ed0053d35d05e93dca0d625ae5bd2",
+        "scalarObservations": {
+          "9afa7be2c17518a51148845655bbc62a0d5ed0053d35d05e93dca0d625ae5bd2": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-argb-32x8",
+      "source": "yuva420p",
+      "destination": "argb",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "489b3bf8737c3f6231147496432349b2af4c1468a6401dab9cb3c6166c1df968",
+      "native": {
+        "default": "ef41a28767cc647414cad2815fd0fa788e96b438e5530f6297aabdbe395413ca",
+        "defaultObservations": {
+          "ef41a28767cc647414cad2815fd0fa788e96b438e5530f6297aabdbe395413ca": 1
+        },
+        "scalar": "ef41a28767cc647414cad2815fd0fa788e96b438e5530f6297aabdbe395413ca",
+        "scalarObservations": {
+          "ef41a28767cc647414cad2815fd0fa788e96b438e5530f6297aabdbe395413ca": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-argb-16x7",
+      "source": "yuva420p",
+      "destination": "argb",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "d88c1d75c7abff713581992362a75e71789dcfdaf69ddfe97dc09bc647dceddc",
+      "native": {
+        "default": "1cf263517ec77af5b405fd2dcf07cdff87a8d48a4dede52d3bd36c8804ea736f",
+        "defaultObservations": {
+          "1cf263517ec77af5b405fd2dcf07cdff87a8d48a4dede52d3bd36c8804ea736f": 1
+        },
+        "scalar": "1cf263517ec77af5b405fd2dcf07cdff87a8d48a4dede52d3bd36c8804ea736f",
+        "scalarObservations": {
+          "1cf263517ec77af5b405fd2dcf07cdff87a8d48a4dede52d3bd36c8804ea736f": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-abgr-5x3",
+      "source": "yuva420p",
+      "destination": "abgr",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "1ace5b9d600fe810f31b26027fec627211557a809e756078ef1c90ad570bd7cf",
+      "native": {
+        "default": "6762a25d88afd0a7fa817675c9b60834b4ff34ad7435965cb2636d4b50b229f1",
+        "defaultObservations": {
+          "6762a25d88afd0a7fa817675c9b60834b4ff34ad7435965cb2636d4b50b229f1": 1
+        },
+        "scalar": "6762a25d88afd0a7fa817675c9b60834b4ff34ad7435965cb2636d4b50b229f1",
+        "scalarObservations": {
+          "6762a25d88afd0a7fa817675c9b60834b4ff34ad7435965cb2636d4b50b229f1": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-abgr-16x6",
+      "source": "yuva420p",
+      "destination": "abgr",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "ed31e0a7e2730c046dbb156e2385b9960e20b3b944fa90a8719161be602d9378",
+      "native": {
+        "default": "f6c76154248478bd24d30462850cdb2db6ae1a30f43ae6a8c0ebe6ef18d96be0",
+        "defaultObservations": {
+          "f6c76154248478bd24d30462850cdb2db6ae1a30f43ae6a8c0ebe6ef18d96be0": 1
+        },
+        "scalar": "f6c76154248478bd24d30462850cdb2db6ae1a30f43ae6a8c0ebe6ef18d96be0",
+        "scalarObservations": {
+          "f6c76154248478bd24d30462850cdb2db6ae1a30f43ae6a8c0ebe6ef18d96be0": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-abgr-32x8",
+      "source": "yuva420p",
+      "destination": "abgr",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "489b3bf8737c3f6231147496432349b2af4c1468a6401dab9cb3c6166c1df968",
+      "native": {
+        "default": "b04165a187152539957df25afc0de77f7d28551054f75ce8c3a4cf44e9cecb92",
+        "defaultObservations": {
+          "b04165a187152539957df25afc0de77f7d28551054f75ce8c3a4cf44e9cecb92": 1
+        },
+        "scalar": "b04165a187152539957df25afc0de77f7d28551054f75ce8c3a4cf44e9cecb92",
+        "scalarObservations": {
+          "b04165a187152539957df25afc0de77f7d28551054f75ce8c3a4cf44e9cecb92": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-abgr-16x7",
+      "source": "yuva420p",
+      "destination": "abgr",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "d88c1d75c7abff713581992362a75e71789dcfdaf69ddfe97dc09bc647dceddc",
+      "native": {
+        "default": "bea3a956aabd3c47a76d8cda625b4666ae5144ce736c468a89b205e334137acc",
+        "defaultObservations": {
+          "bea3a956aabd3c47a76d8cda625b4666ae5144ce736c468a89b205e334137acc": 1
+        },
+        "scalar": "bea3a956aabd3c47a76d8cda625b4666ae5144ce736c468a89b205e334137acc",
+        "scalarObservations": {
+          "bea3a956aabd3c47a76d8cda625b4666ae5144ce736c468a89b205e334137acc": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-gbrp-5x3",
+      "source": "yuva420p",
+      "destination": "gbrp",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "1ace5b9d600fe810f31b26027fec627211557a809e756078ef1c90ad570bd7cf",
+      "native": {
+        "default": "ae1cec02c6ae083dd587c8d88a2b5e9fe72cfcd2f4e930733bfc3a0b8b73b8c7",
+        "defaultObservations": {
+          "ae1cec02c6ae083dd587c8d88a2b5e9fe72cfcd2f4e930733bfc3a0b8b73b8c7": 1
+        },
+        "scalar": "ae1cec02c6ae083dd587c8d88a2b5e9fe72cfcd2f4e930733bfc3a0b8b73b8c7",
+        "scalarObservations": {
+          "ae1cec02c6ae083dd587c8d88a2b5e9fe72cfcd2f4e930733bfc3a0b8b73b8c7": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-gbrp-16x6",
+      "source": "yuva420p",
+      "destination": "gbrp",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "ed31e0a7e2730c046dbb156e2385b9960e20b3b944fa90a8719161be602d9378",
+      "native": {
+        "default": "176c380a4d8925f16f206907dec0cd6df06da4b3ef607e322212eb7754a3bdfe",
+        "defaultObservations": {
+          "176c380a4d8925f16f206907dec0cd6df06da4b3ef607e322212eb7754a3bdfe": 1
+        },
+        "scalar": "176c380a4d8925f16f206907dec0cd6df06da4b3ef607e322212eb7754a3bdfe",
+        "scalarObservations": {
+          "176c380a4d8925f16f206907dec0cd6df06da4b3ef607e322212eb7754a3bdfe": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-gbrp-32x8",
+      "source": "yuva420p",
+      "destination": "gbrp",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "489b3bf8737c3f6231147496432349b2af4c1468a6401dab9cb3c6166c1df968",
+      "native": {
+        "default": "17e3fd082c35efd60bf8b7c2c70eebcdb68ff2a9308819186b64a2d76cfa710e",
+        "defaultObservations": {
+          "17e3fd082c35efd60bf8b7c2c70eebcdb68ff2a9308819186b64a2d76cfa710e": 1
+        },
+        "scalar": "17e3fd082c35efd60bf8b7c2c70eebcdb68ff2a9308819186b64a2d76cfa710e",
+        "scalarObservations": {
+          "17e3fd082c35efd60bf8b7c2c70eebcdb68ff2a9308819186b64a2d76cfa710e": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuva420p-gbrp-16x7",
+      "source": "yuva420p",
+      "destination": "gbrp",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "d88c1d75c7abff713581992362a75e71789dcfdaf69ddfe97dc09bc647dceddc",
+      "native": {
+        "default": "d3d3f75d15f5ef6f6e6dfc103fa36880ee1437fa9003ba42a9137f6ada210ba5",
+        "defaultObservations": {
+          "d3d3f75d15f5ef6f6e6dfc103fa36880ee1437fa9003ba42a9137f6ada210ba5": 1
+        },
+        "scalar": "d3d3f75d15f5ef6f6e6dfc103fa36880ee1437fa9003ba42a9137f6ada210ba5",
+        "scalarObservations": {
+          "d3d3f75d15f5ef6f6e6dfc103fa36880ee1437fa9003ba42a9137f6ada210ba5": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-rgb24-5x3",
+      "source": "yuv422p",
+      "destination": "rgb24",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "bcc6495e69c6949d401840dbd4e3acefe8efd2d3358aa326c636d6635dcb855e",
+      "native": {
+        "default": "1de2c348668dbc6a5b2149594cd1d2312b19027a36cca134d1f458088745131f",
+        "defaultObservations": {
+          "1de2c348668dbc6a5b2149594cd1d2312b19027a36cca134d1f458088745131f": 1
+        },
+        "scalar": "1de2c348668dbc6a5b2149594cd1d2312b19027a36cca134d1f458088745131f",
+        "scalarObservations": {
+          "1de2c348668dbc6a5b2149594cd1d2312b19027a36cca134d1f458088745131f": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-rgb24-16x6",
+      "source": "yuv422p",
+      "destination": "rgb24",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "8e479cff4efbb8eafcff68ed5faddd602749e25b0f1034d33e1a9cc81189d7e1",
+      "native": {
+        "default": "9297453d22ad95720a031dede4ee307efef828dfe0c81f249ce4dc2ff5221d34",
+        "defaultObservations": {
+          "9297453d22ad95720a031dede4ee307efef828dfe0c81f249ce4dc2ff5221d34": 1
+        },
+        "scalar": "9297453d22ad95720a031dede4ee307efef828dfe0c81f249ce4dc2ff5221d34",
+        "scalarObservations": {
+          "9297453d22ad95720a031dede4ee307efef828dfe0c81f249ce4dc2ff5221d34": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-rgb24-32x8",
+      "source": "yuv422p",
+      "destination": "rgb24",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4c5a18171eb28a74cbd96662681df0bfaadf2c2b7e9974e0b25f0b39ffa3adae",
+      "native": {
+        "default": "aed3449fc9040f621b4ef1e2ddd31f4d13f998e5e0f2fcf59da0aa1960e291c8",
+        "defaultObservations": {
+          "aed3449fc9040f621b4ef1e2ddd31f4d13f998e5e0f2fcf59da0aa1960e291c8": 1
+        },
+        "scalar": "aed3449fc9040f621b4ef1e2ddd31f4d13f998e5e0f2fcf59da0aa1960e291c8",
+        "scalarObservations": {
+          "aed3449fc9040f621b4ef1e2ddd31f4d13f998e5e0f2fcf59da0aa1960e291c8": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-rgb24-16x7",
+      "source": "yuv422p",
+      "destination": "rgb24",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "b4e2ccd0389a2dd8af237ebf0de0865988de83d28f564e9f25de6405929d06d4",
+      "native": {
+        "default": "3bf450e58f510557e1b197e01ea550ef33479d37ed97b39ab013c86420d75a54",
+        "defaultObservations": {
+          "3bf450e58f510557e1b197e01ea550ef33479d37ed97b39ab013c86420d75a54": 1
+        },
+        "scalar": "3bf450e58f510557e1b197e01ea550ef33479d37ed97b39ab013c86420d75a54",
+        "scalarObservations": {
+          "3bf450e58f510557e1b197e01ea550ef33479d37ed97b39ab013c86420d75a54": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-bgr24-5x3",
+      "source": "yuv422p",
+      "destination": "bgr24",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "bcc6495e69c6949d401840dbd4e3acefe8efd2d3358aa326c636d6635dcb855e",
+      "native": {
+        "default": "b2b807644c116de65d03fb5320e81f70d928f63d7a97f36495d9d0d514e5b862",
+        "defaultObservations": {
+          "b2b807644c116de65d03fb5320e81f70d928f63d7a97f36495d9d0d514e5b862": 1
+        },
+        "scalar": "b2b807644c116de65d03fb5320e81f70d928f63d7a97f36495d9d0d514e5b862",
+        "scalarObservations": {
+          "b2b807644c116de65d03fb5320e81f70d928f63d7a97f36495d9d0d514e5b862": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-bgr24-16x6",
+      "source": "yuv422p",
+      "destination": "bgr24",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "8e479cff4efbb8eafcff68ed5faddd602749e25b0f1034d33e1a9cc81189d7e1",
+      "native": {
+        "default": "8c3291ff6858954964c4dc091d648feeeb9d803c16ef45975aef23549014bf9d",
+        "defaultObservations": {
+          "8c3291ff6858954964c4dc091d648feeeb9d803c16ef45975aef23549014bf9d": 1
+        },
+        "scalar": "8c3291ff6858954964c4dc091d648feeeb9d803c16ef45975aef23549014bf9d",
+        "scalarObservations": {
+          "8c3291ff6858954964c4dc091d648feeeb9d803c16ef45975aef23549014bf9d": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-bgr24-32x8",
+      "source": "yuv422p",
+      "destination": "bgr24",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4c5a18171eb28a74cbd96662681df0bfaadf2c2b7e9974e0b25f0b39ffa3adae",
+      "native": {
+        "default": "1b0311598f26124572f9b6f42748abcca138745c3e436bfbd9882665a9f2460f",
+        "defaultObservations": {
+          "1b0311598f26124572f9b6f42748abcca138745c3e436bfbd9882665a9f2460f": 1
+        },
+        "scalar": "1b0311598f26124572f9b6f42748abcca138745c3e436bfbd9882665a9f2460f",
+        "scalarObservations": {
+          "1b0311598f26124572f9b6f42748abcca138745c3e436bfbd9882665a9f2460f": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-bgr24-16x7",
+      "source": "yuv422p",
+      "destination": "bgr24",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "b4e2ccd0389a2dd8af237ebf0de0865988de83d28f564e9f25de6405929d06d4",
+      "native": {
+        "default": "6d43c0e5466ebda849edf70d5bad4b6ace75e07eef14e16be97d8f6f56e457c6",
+        "defaultObservations": {
+          "6d43c0e5466ebda849edf70d5bad4b6ace75e07eef14e16be97d8f6f56e457c6": 1
+        },
+        "scalar": "129ecfca38203bba9a2b0d2b5d3429f70d0582dc18461ff18e1cb0393fabfbc6",
+        "scalarObservations": {
+          "129ecfca38203bba9a2b0d2b5d3429f70d0582dc18461ff18e1cb0393fabfbc6": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "yuv422p-rgba-5x3",
+      "source": "yuv422p",
+      "destination": "rgba",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "bcc6495e69c6949d401840dbd4e3acefe8efd2d3358aa326c636d6635dcb855e",
+      "native": {
+        "default": "052c99a6bbf1686eb0adc2844ee34ac7e0fc5bf4f199fb3d70694069837ce6b4",
+        "defaultObservations": {
+          "052c99a6bbf1686eb0adc2844ee34ac7e0fc5bf4f199fb3d70694069837ce6b4": 1
+        },
+        "scalar": "052c99a6bbf1686eb0adc2844ee34ac7e0fc5bf4f199fb3d70694069837ce6b4",
+        "scalarObservations": {
+          "052c99a6bbf1686eb0adc2844ee34ac7e0fc5bf4f199fb3d70694069837ce6b4": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-rgba-16x6",
+      "source": "yuv422p",
+      "destination": "rgba",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "8e479cff4efbb8eafcff68ed5faddd602749e25b0f1034d33e1a9cc81189d7e1",
+      "native": {
+        "default": "eb5c14a985ee4e61ddcd8a5b7a619dae4566430b74c279eaf853019a8804378a",
+        "defaultObservations": {
+          "eb5c14a985ee4e61ddcd8a5b7a619dae4566430b74c279eaf853019a8804378a": 1
+        },
+        "scalar": "eb5c14a985ee4e61ddcd8a5b7a619dae4566430b74c279eaf853019a8804378a",
+        "scalarObservations": {
+          "eb5c14a985ee4e61ddcd8a5b7a619dae4566430b74c279eaf853019a8804378a": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-rgba-32x8",
+      "source": "yuv422p",
+      "destination": "rgba",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4c5a18171eb28a74cbd96662681df0bfaadf2c2b7e9974e0b25f0b39ffa3adae",
+      "native": {
+        "default": "36e502046952d6581befce96a4e8c94fdb469672c454102dd7994bb788afb830",
+        "defaultObservations": {
+          "36e502046952d6581befce96a4e8c94fdb469672c454102dd7994bb788afb830": 1
+        },
+        "scalar": "36e502046952d6581befce96a4e8c94fdb469672c454102dd7994bb788afb830",
+        "scalarObservations": {
+          "36e502046952d6581befce96a4e8c94fdb469672c454102dd7994bb788afb830": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-rgba-16x7",
+      "source": "yuv422p",
+      "destination": "rgba",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "b4e2ccd0389a2dd8af237ebf0de0865988de83d28f564e9f25de6405929d06d4",
+      "native": {
+        "default": "889c9cb9107229efe78b7894b38e29a2953467397ec64e8d61ae52a13d7119bc",
+        "defaultObservations": {
+          "889c9cb9107229efe78b7894b38e29a2953467397ec64e8d61ae52a13d7119bc": 1
+        },
+        "scalar": "889c9cb9107229efe78b7894b38e29a2953467397ec64e8d61ae52a13d7119bc",
+        "scalarObservations": {
+          "889c9cb9107229efe78b7894b38e29a2953467397ec64e8d61ae52a13d7119bc": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-bgra-5x3",
+      "source": "yuv422p",
+      "destination": "bgra",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "bcc6495e69c6949d401840dbd4e3acefe8efd2d3358aa326c636d6635dcb855e",
+      "native": {
+        "default": "095a900c8d8f90e80ade3a5074e953463dbd525a9f8f02945031327de002e774",
+        "defaultObservations": {
+          "095a900c8d8f90e80ade3a5074e953463dbd525a9f8f02945031327de002e774": 1
+        },
+        "scalar": "095a900c8d8f90e80ade3a5074e953463dbd525a9f8f02945031327de002e774",
+        "scalarObservations": {
+          "095a900c8d8f90e80ade3a5074e953463dbd525a9f8f02945031327de002e774": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-bgra-16x6",
+      "source": "yuv422p",
+      "destination": "bgra",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "8e479cff4efbb8eafcff68ed5faddd602749e25b0f1034d33e1a9cc81189d7e1",
+      "native": {
+        "default": "48a264c8473363f342fd439891a99b072a959485151994950da4f811ec17ae26",
+        "defaultObservations": {
+          "48a264c8473363f342fd439891a99b072a959485151994950da4f811ec17ae26": 1
+        },
+        "scalar": "48a264c8473363f342fd439891a99b072a959485151994950da4f811ec17ae26",
+        "scalarObservations": {
+          "48a264c8473363f342fd439891a99b072a959485151994950da4f811ec17ae26": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-bgra-32x8",
+      "source": "yuv422p",
+      "destination": "bgra",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4c5a18171eb28a74cbd96662681df0bfaadf2c2b7e9974e0b25f0b39ffa3adae",
+      "native": {
+        "default": "5aefc7981889b17004dde7c8fe3bb257625fd86c33c43eaa8afa9a814fc98ab4",
+        "defaultObservations": {
+          "5aefc7981889b17004dde7c8fe3bb257625fd86c33c43eaa8afa9a814fc98ab4": 1
+        },
+        "scalar": "5aefc7981889b17004dde7c8fe3bb257625fd86c33c43eaa8afa9a814fc98ab4",
+        "scalarObservations": {
+          "5aefc7981889b17004dde7c8fe3bb257625fd86c33c43eaa8afa9a814fc98ab4": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-bgra-16x7",
+      "source": "yuv422p",
+      "destination": "bgra",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "b4e2ccd0389a2dd8af237ebf0de0865988de83d28f564e9f25de6405929d06d4",
+      "native": {
+        "default": "397740e2a58022e9c35be6c9a50cbf0859e57a22e0f63807270d499c2926d08a",
+        "defaultObservations": {
+          "397740e2a58022e9c35be6c9a50cbf0859e57a22e0f63807270d499c2926d08a": 1
+        },
+        "scalar": "4512651cffb6f8e578e45bea0813d8dc6b6778d945ab021939004d3f3badd40b",
+        "scalarObservations": {
+          "4512651cffb6f8e578e45bea0813d8dc6b6778d945ab021939004d3f3badd40b": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "yuv422p-argb-5x3",
+      "source": "yuv422p",
+      "destination": "argb",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "bcc6495e69c6949d401840dbd4e3acefe8efd2d3358aa326c636d6635dcb855e",
+      "native": {
+        "default": "828296391d4e55f0371c2fb068a11c206613e1c5fa6c6e1f25690ac6247a0f73",
+        "defaultObservations": {
+          "828296391d4e55f0371c2fb068a11c206613e1c5fa6c6e1f25690ac6247a0f73": 1
+        },
+        "scalar": "828296391d4e55f0371c2fb068a11c206613e1c5fa6c6e1f25690ac6247a0f73",
+        "scalarObservations": {
+          "828296391d4e55f0371c2fb068a11c206613e1c5fa6c6e1f25690ac6247a0f73": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-argb-16x6",
+      "source": "yuv422p",
+      "destination": "argb",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "8e479cff4efbb8eafcff68ed5faddd602749e25b0f1034d33e1a9cc81189d7e1",
+      "native": {
+        "default": "a2ede94dec378db3d23d0fadfc16c05dcab30638c1e8ed037030d9cced6c711f",
+        "defaultObservations": {
+          "a2ede94dec378db3d23d0fadfc16c05dcab30638c1e8ed037030d9cced6c711f": 1
+        },
+        "scalar": "a2ede94dec378db3d23d0fadfc16c05dcab30638c1e8ed037030d9cced6c711f",
+        "scalarObservations": {
+          "a2ede94dec378db3d23d0fadfc16c05dcab30638c1e8ed037030d9cced6c711f": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-argb-32x8",
+      "source": "yuv422p",
+      "destination": "argb",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4c5a18171eb28a74cbd96662681df0bfaadf2c2b7e9974e0b25f0b39ffa3adae",
+      "native": {
+        "default": "cc834fccbc0c908339aeb6d9c775011ac23c4575cc2ec2ac4825ab54635abc59",
+        "defaultObservations": {
+          "cc834fccbc0c908339aeb6d9c775011ac23c4575cc2ec2ac4825ab54635abc59": 1
+        },
+        "scalar": "cc834fccbc0c908339aeb6d9c775011ac23c4575cc2ec2ac4825ab54635abc59",
+        "scalarObservations": {
+          "cc834fccbc0c908339aeb6d9c775011ac23c4575cc2ec2ac4825ab54635abc59": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-argb-16x7",
+      "source": "yuv422p",
+      "destination": "argb",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "b4e2ccd0389a2dd8af237ebf0de0865988de83d28f564e9f25de6405929d06d4",
+      "native": {
+        "default": "027bf75f7f57939e405303ae826e8c9d72adacab69fd6b43434533df9ae4295b",
+        "defaultObservations": {
+          "027bf75f7f57939e405303ae826e8c9d72adacab69fd6b43434533df9ae4295b": 1
+        },
+        "scalar": "027bf75f7f57939e405303ae826e8c9d72adacab69fd6b43434533df9ae4295b",
+        "scalarObservations": {
+          "027bf75f7f57939e405303ae826e8c9d72adacab69fd6b43434533df9ae4295b": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-abgr-5x3",
+      "source": "yuv422p",
+      "destination": "abgr",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "bcc6495e69c6949d401840dbd4e3acefe8efd2d3358aa326c636d6635dcb855e",
+      "native": {
+        "default": "154f2b9ca0fd613547943427b868ded2db37fd45b373e06f59daf33a5a21f90d",
+        "defaultObservations": {
+          "154f2b9ca0fd613547943427b868ded2db37fd45b373e06f59daf33a5a21f90d": 1
+        },
+        "scalar": "154f2b9ca0fd613547943427b868ded2db37fd45b373e06f59daf33a5a21f90d",
+        "scalarObservations": {
+          "154f2b9ca0fd613547943427b868ded2db37fd45b373e06f59daf33a5a21f90d": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-abgr-16x6",
+      "source": "yuv422p",
+      "destination": "abgr",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "8e479cff4efbb8eafcff68ed5faddd602749e25b0f1034d33e1a9cc81189d7e1",
+      "native": {
+        "default": "adbfe56fd450ed7bfcd2b6cd72ac01f4e52d5cef4007bd1d11eb1295462ec2e6",
+        "defaultObservations": {
+          "adbfe56fd450ed7bfcd2b6cd72ac01f4e52d5cef4007bd1d11eb1295462ec2e6": 1
+        },
+        "scalar": "adbfe56fd450ed7bfcd2b6cd72ac01f4e52d5cef4007bd1d11eb1295462ec2e6",
+        "scalarObservations": {
+          "adbfe56fd450ed7bfcd2b6cd72ac01f4e52d5cef4007bd1d11eb1295462ec2e6": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-abgr-32x8",
+      "source": "yuv422p",
+      "destination": "abgr",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4c5a18171eb28a74cbd96662681df0bfaadf2c2b7e9974e0b25f0b39ffa3adae",
+      "native": {
+        "default": "b41e977364805bac55ea6a8fbfcbaf216f4419a233b9178db3be5b3a6f851967",
+        "defaultObservations": {
+          "b41e977364805bac55ea6a8fbfcbaf216f4419a233b9178db3be5b3a6f851967": 1
+        },
+        "scalar": "b41e977364805bac55ea6a8fbfcbaf216f4419a233b9178db3be5b3a6f851967",
+        "scalarObservations": {
+          "b41e977364805bac55ea6a8fbfcbaf216f4419a233b9178db3be5b3a6f851967": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-abgr-16x7",
+      "source": "yuv422p",
+      "destination": "abgr",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "b4e2ccd0389a2dd8af237ebf0de0865988de83d28f564e9f25de6405929d06d4",
+      "native": {
+        "default": "e96ba812d6db63e535fa1ff91e38ccebf9c1f24cacf1caedce56c39b9a2062ae",
+        "defaultObservations": {
+          "e96ba812d6db63e535fa1ff91e38ccebf9c1f24cacf1caedce56c39b9a2062ae": 1
+        },
+        "scalar": "e96ba812d6db63e535fa1ff91e38ccebf9c1f24cacf1caedce56c39b9a2062ae",
+        "scalarObservations": {
+          "e96ba812d6db63e535fa1ff91e38ccebf9c1f24cacf1caedce56c39b9a2062ae": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-gbrp-5x3",
+      "source": "yuv422p",
+      "destination": "gbrp",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "bcc6495e69c6949d401840dbd4e3acefe8efd2d3358aa326c636d6635dcb855e",
+      "native": {
+        "default": "ef24309aa4384a281e3b4b3a8bb84a7dc86887e3e80c53b8b6248b192aca01c8",
+        "defaultObservations": {
+          "ef24309aa4384a281e3b4b3a8bb84a7dc86887e3e80c53b8b6248b192aca01c8": 1
+        },
+        "scalar": "ef24309aa4384a281e3b4b3a8bb84a7dc86887e3e80c53b8b6248b192aca01c8",
+        "scalarObservations": {
+          "ef24309aa4384a281e3b4b3a8bb84a7dc86887e3e80c53b8b6248b192aca01c8": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-gbrp-16x6",
+      "source": "yuv422p",
+      "destination": "gbrp",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "8e479cff4efbb8eafcff68ed5faddd602749e25b0f1034d33e1a9cc81189d7e1",
+      "native": {
+        "default": "80d404396679af53f2fbec3ffde46ecd5d278f3ceec3bc3660308262d7ef7109",
+        "defaultObservations": {
+          "80d404396679af53f2fbec3ffde46ecd5d278f3ceec3bc3660308262d7ef7109": 1
+        },
+        "scalar": "80d404396679af53f2fbec3ffde46ecd5d278f3ceec3bc3660308262d7ef7109",
+        "scalarObservations": {
+          "80d404396679af53f2fbec3ffde46ecd5d278f3ceec3bc3660308262d7ef7109": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-gbrp-32x8",
+      "source": "yuv422p",
+      "destination": "gbrp",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4c5a18171eb28a74cbd96662681df0bfaadf2c2b7e9974e0b25f0b39ffa3adae",
+      "native": {
+        "default": "2fe96c2ff09cbb197081708faa8396bdb83b6d3087b8eafa52968ebe7fc1259c",
+        "defaultObservations": {
+          "2fe96c2ff09cbb197081708faa8396bdb83b6d3087b8eafa52968ebe7fc1259c": 1
+        },
+        "scalar": "2fe96c2ff09cbb197081708faa8396bdb83b6d3087b8eafa52968ebe7fc1259c",
+        "scalarObservations": {
+          "2fe96c2ff09cbb197081708faa8396bdb83b6d3087b8eafa52968ebe7fc1259c": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "yuv422p-gbrp-16x7",
+      "source": "yuv422p",
+      "destination": "gbrp",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "b4e2ccd0389a2dd8af237ebf0de0865988de83d28f564e9f25de6405929d06d4",
+      "native": {
+        "default": "af7656e9464f00f527d67ede694ae34488f6025c58608c0c21c612f8d172cae6",
+        "defaultObservations": {
+          "af7656e9464f00f527d67ede694ae34488f6025c58608c0c21c612f8d172cae6": 1
+        },
+        "scalar": "af7656e9464f00f527d67ede694ae34488f6025c58608c0c21c612f8d172cae6",
+        "scalarObservations": {
+          "af7656e9464f00f527d67ede694ae34488f6025c58608c0c21c612f8d172cae6": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-rgb24-5x3",
+      "source": "nv12",
+      "destination": "rgb24",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "711c11deeebb4f895047b16926b17dd11c37729d0ba78316919ed5ac0e921de2",
+        "defaultObservations": {
+          "711c11deeebb4f895047b16926b17dd11c37729d0ba78316919ed5ac0e921de2": 1
+        },
+        "scalar": "711c11deeebb4f895047b16926b17dd11c37729d0ba78316919ed5ac0e921de2",
+        "scalarObservations": {
+          "711c11deeebb4f895047b16926b17dd11c37729d0ba78316919ed5ac0e921de2": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-rgb24-16x6",
+      "source": "nv12",
+      "destination": "rgb24",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "f8bfddf250471461150b27cd80663d5fe2e95b3bdde8349e221f715567b91529",
+        "defaultObservations": {
+          "f8bfddf250471461150b27cd80663d5fe2e95b3bdde8349e221f715567b91529": 8
+        },
+        "scalar": "f8bfddf250471461150b27cd80663d5fe2e95b3bdde8349e221f715567b91529",
+        "scalarObservations": {
+          "f8bfddf250471461150b27cd80663d5fe2e95b3bdde8349e221f715567b91529": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-rgb24-32x8",
+      "source": "nv12",
+      "destination": "rgb24",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "ab82139d03fbebeb3ce79f4dbde2f928ab726ebf3ef0ce1d1ce2eab335ac67c9",
+        "defaultObservations": {
+          "ab82139d03fbebeb3ce79f4dbde2f928ab726ebf3ef0ce1d1ce2eab335ac67c9": 8
+        },
+        "scalar": "ab82139d03fbebeb3ce79f4dbde2f928ab726ebf3ef0ce1d1ce2eab335ac67c9",
+        "scalarObservations": {
+          "ab82139d03fbebeb3ce79f4dbde2f928ab726ebf3ef0ce1d1ce2eab335ac67c9": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-rgb24-16x7",
+      "source": "nv12",
+      "destination": "rgb24",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "f627342777bf876287afbfa9f271f9ea2ab8228422d801d8cec0c402561090bf",
+        "defaultObservations": {
+          "f627342777bf876287afbfa9f271f9ea2ab8228422d801d8cec0c402561090bf": 1
+        },
+        "scalar": "f627342777bf876287afbfa9f271f9ea2ab8228422d801d8cec0c402561090bf",
+        "scalarObservations": {
+          "f627342777bf876287afbfa9f271f9ea2ab8228422d801d8cec0c402561090bf": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-bgr24-5x3",
+      "source": "nv12",
+      "destination": "bgr24",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "c513509f8193528bb7f41eec876ad0cfa584b133da5032c830ee60868b8bd731",
+        "defaultObservations": {
+          "c513509f8193528bb7f41eec876ad0cfa584b133da5032c830ee60868b8bd731": 1
+        },
+        "scalar": "c513509f8193528bb7f41eec876ad0cfa584b133da5032c830ee60868b8bd731",
+        "scalarObservations": {
+          "c513509f8193528bb7f41eec876ad0cfa584b133da5032c830ee60868b8bd731": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-bgr24-16x6",
+      "source": "nv12",
+      "destination": "bgr24",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "d112c45a1b305739bcd8861d47453d9e9ec21ecafe3e34a598f83ebb32ef8516",
+        "defaultObservations": {
+          "d112c45a1b305739bcd8861d47453d9e9ec21ecafe3e34a598f83ebb32ef8516": 1
+        },
+        "scalar": "9aed8836f98093f988358fb495e0e5a2610bbb3f748c5771de02fe09a68b95a0",
+        "scalarObservations": {
+          "9aed8836f98093f988358fb495e0e5a2610bbb3f748c5771de02fe09a68b95a0": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv12-bgr24-32x8",
+      "source": "nv12",
+      "destination": "bgr24",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "71a8db5dca66a27c2064d21971a499829a861d8f9b795af0ced799ab63251f3c",
+        "defaultObservations": {
+          "71a8db5dca66a27c2064d21971a499829a861d8f9b795af0ced799ab63251f3c": 1
+        },
+        "scalar": "cbcfb9bd55a2bcb396454ccbe5d4965b694e93cec11ac11c5f8dc097c37de137",
+        "scalarObservations": {
+          "cbcfb9bd55a2bcb396454ccbe5d4965b694e93cec11ac11c5f8dc097c37de137": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv12-bgr24-16x7",
+      "source": "nv12",
+      "destination": "bgr24",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "ea19ea7a0bcd9680ffc26a44e2fbae9c9494a9ce254aa875a597ed273ef34ce8",
+        "defaultObservations": {
+          "ea19ea7a0bcd9680ffc26a44e2fbae9c9494a9ce254aa875a597ed273ef34ce8": 1
+        },
+        "scalar": "81219b7f61f9fd1d78fb4e3f7769c3129a30817b67181e0b3a29e02387f6b3a9",
+        "scalarObservations": {
+          "81219b7f61f9fd1d78fb4e3f7769c3129a30817b67181e0b3a29e02387f6b3a9": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv12-rgba-5x3",
+      "source": "nv12",
+      "destination": "rgba",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "5f702edc9bb5854f91a5d0cf39916a0f505efe62f5f18635439fd33367a5b8a3",
+        "defaultObservations": {
+          "5f702edc9bb5854f91a5d0cf39916a0f505efe62f5f18635439fd33367a5b8a3": 1
+        },
+        "scalar": "5f702edc9bb5854f91a5d0cf39916a0f505efe62f5f18635439fd33367a5b8a3",
+        "scalarObservations": {
+          "5f702edc9bb5854f91a5d0cf39916a0f505efe62f5f18635439fd33367a5b8a3": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-rgba-16x6",
+      "source": "nv12",
+      "destination": "rgba",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "b8037b31fe0b0e7d2d1c81b5b9a5da8a491e6f33c93baa84c37a73900726b30d",
+        "defaultObservations": {
+          "b8037b31fe0b0e7d2d1c81b5b9a5da8a491e6f33c93baa84c37a73900726b30d": 1
+        },
+        "scalar": "b8037b31fe0b0e7d2d1c81b5b9a5da8a491e6f33c93baa84c37a73900726b30d",
+        "scalarObservations": {
+          "b8037b31fe0b0e7d2d1c81b5b9a5da8a491e6f33c93baa84c37a73900726b30d": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-rgba-32x8",
+      "source": "nv12",
+      "destination": "rgba",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "a4997f9cb095cc4bdf6583a976f3c2cea1362f834b1bed6676ca31fc45576378",
+        "defaultObservations": {
+          "a4997f9cb095cc4bdf6583a976f3c2cea1362f834b1bed6676ca31fc45576378": 1
+        },
+        "scalar": "5a47c2dd0628e622db636078f4289e17fe1a1617869f80a2ad9a91a26b6735e4",
+        "scalarObservations": {
+          "5a47c2dd0628e622db636078f4289e17fe1a1617869f80a2ad9a91a26b6735e4": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv12-rgba-16x7",
+      "source": "nv12",
+      "destination": "rgba",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "e14b960a4bc065bcaf11ea844a563e0dd025ea2bc144c568a329513c9431916a",
+        "defaultObservations": {
+          "e14b960a4bc065bcaf11ea844a563e0dd025ea2bc144c568a329513c9431916a": 1
+        },
+        "scalar": "97931b8bce369ce623e5ea7cb50a624df3efce62bef7ff387b51eb533645aaaf",
+        "scalarObservations": {
+          "97931b8bce369ce623e5ea7cb50a624df3efce62bef7ff387b51eb533645aaaf": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv12-bgra-5x3",
+      "source": "nv12",
+      "destination": "bgra",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "e77b64b53a4a2a8a67a0fa51ec031b28a85b2e7164279e4eb4fe16b196a58b8d",
+        "defaultObservations": {
+          "e77b64b53a4a2a8a67a0fa51ec031b28a85b2e7164279e4eb4fe16b196a58b8d": 1
+        },
+        "scalar": "e77b64b53a4a2a8a67a0fa51ec031b28a85b2e7164279e4eb4fe16b196a58b8d",
+        "scalarObservations": {
+          "e77b64b53a4a2a8a67a0fa51ec031b28a85b2e7164279e4eb4fe16b196a58b8d": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-bgra-16x6",
+      "source": "nv12",
+      "destination": "bgra",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "e7b5381a744dc77f97b3314b9570af6f5203e0014ac5fc58a383c7c1737b3bac",
+        "defaultObservations": {
+          "e7b5381a744dc77f97b3314b9570af6f5203e0014ac5fc58a383c7c1737b3bac": 1
+        },
+        "scalar": "aa189caa18d9cacd8ba2a7d2c2560a8fa04984db8d965cc088e77d59700cc5b7",
+        "scalarObservations": {
+          "aa189caa18d9cacd8ba2a7d2c2560a8fa04984db8d965cc088e77d59700cc5b7": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv12-bgra-32x8",
+      "source": "nv12",
+      "destination": "bgra",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "983bbce5b0d8e4ed9a2c2f40e81f87da8f13da811cacbc4e6d44acb483064d3e",
+        "defaultObservations": {
+          "983bbce5b0d8e4ed9a2c2f40e81f87da8f13da811cacbc4e6d44acb483064d3e": 1
+        },
+        "scalar": "ab7650b3384d042286dcd2c924a2d07aa734958bb6f0b92632478c7a8456887d",
+        "scalarObservations": {
+          "ab7650b3384d042286dcd2c924a2d07aa734958bb6f0b92632478c7a8456887d": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv12-bgra-16x7",
+      "source": "nv12",
+      "destination": "bgra",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "517b1d3ee9b43e28d769e8181169bb5720cc6493724d092757e5614a2fc6a86b",
+        "defaultObservations": {
+          "517b1d3ee9b43e28d769e8181169bb5720cc6493724d092757e5614a2fc6a86b": 1
+        },
+        "scalar": "606a5cdd5046c7d121ec5b1f737d252ed80c00694237307a60413ea1e03c7947",
+        "scalarObservations": {
+          "606a5cdd5046c7d121ec5b1f737d252ed80c00694237307a60413ea1e03c7947": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv12-argb-5x3",
+      "source": "nv12",
+      "destination": "argb",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "5d5547e5d70cd8cc3d7109792f7ddc5003f8184fd193ec4ad7dbbe6810b4c1c2",
+        "defaultObservations": {
+          "5d5547e5d70cd8cc3d7109792f7ddc5003f8184fd193ec4ad7dbbe6810b4c1c2": 1
+        },
+        "scalar": "5d5547e5d70cd8cc3d7109792f7ddc5003f8184fd193ec4ad7dbbe6810b4c1c2",
+        "scalarObservations": {
+          "5d5547e5d70cd8cc3d7109792f7ddc5003f8184fd193ec4ad7dbbe6810b4c1c2": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-argb-16x6",
+      "source": "nv12",
+      "destination": "argb",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "9d4d2b9ff1273845ce66cf39e37bed034e5c2d1b2d7b639ed6deb0b1b7cd2acd",
+        "defaultObservations": {
+          "9d4d2b9ff1273845ce66cf39e37bed034e5c2d1b2d7b639ed6deb0b1b7cd2acd": 1
+        },
+        "scalar": "9d4d2b9ff1273845ce66cf39e37bed034e5c2d1b2d7b639ed6deb0b1b7cd2acd",
+        "scalarObservations": {
+          "9d4d2b9ff1273845ce66cf39e37bed034e5c2d1b2d7b639ed6deb0b1b7cd2acd": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-argb-32x8",
+      "source": "nv12",
+      "destination": "argb",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "6b6cbd50cca4269df0ab3a86a4910ed8429cb756b4df26bbe920afa8fd73665b",
+        "defaultObservations": {
+          "6b6cbd50cca4269df0ab3a86a4910ed8429cb756b4df26bbe920afa8fd73665b": 1
+        },
+        "scalar": "6b6cbd50cca4269df0ab3a86a4910ed8429cb756b4df26bbe920afa8fd73665b",
+        "scalarObservations": {
+          "6b6cbd50cca4269df0ab3a86a4910ed8429cb756b4df26bbe920afa8fd73665b": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-argb-16x7",
+      "source": "nv12",
+      "destination": "argb",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "282a294eff73b7b879890601913a1700cd8ccbb9a9bc188bf97cc205ff6d9a78",
+        "defaultObservations": {
+          "282a294eff73b7b879890601913a1700cd8ccbb9a9bc188bf97cc205ff6d9a78": 1
+        },
+        "scalar": "282a294eff73b7b879890601913a1700cd8ccbb9a9bc188bf97cc205ff6d9a78",
+        "scalarObservations": {
+          "282a294eff73b7b879890601913a1700cd8ccbb9a9bc188bf97cc205ff6d9a78": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-abgr-5x3",
+      "source": "nv12",
+      "destination": "abgr",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "5b53eb78945413c573677991106f15cfd9ce1b0d74f17df4e73557f3158f9812",
+        "defaultObservations": {
+          "5b53eb78945413c573677991106f15cfd9ce1b0d74f17df4e73557f3158f9812": 1
+        },
+        "scalar": "5b53eb78945413c573677991106f15cfd9ce1b0d74f17df4e73557f3158f9812",
+        "scalarObservations": {
+          "5b53eb78945413c573677991106f15cfd9ce1b0d74f17df4e73557f3158f9812": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-abgr-16x6",
+      "source": "nv12",
+      "destination": "abgr",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "62054bb06ee16b10e4b8a09d6e4ddcc296ffe7b015bc1d24e2fea59d9dcaf35e",
+        "defaultObservations": {
+          "62054bb06ee16b10e4b8a09d6e4ddcc296ffe7b015bc1d24e2fea59d9dcaf35e": 1
+        },
+        "scalar": "62054bb06ee16b10e4b8a09d6e4ddcc296ffe7b015bc1d24e2fea59d9dcaf35e",
+        "scalarObservations": {
+          "62054bb06ee16b10e4b8a09d6e4ddcc296ffe7b015bc1d24e2fea59d9dcaf35e": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-abgr-32x8",
+      "source": "nv12",
+      "destination": "abgr",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "a2cacba3350c642076b98704a5c0f440034a88028a63f93f7f6500ca3cfd36f5",
+        "defaultObservations": {
+          "a2cacba3350c642076b98704a5c0f440034a88028a63f93f7f6500ca3cfd36f5": 1
+        },
+        "scalar": "a2cacba3350c642076b98704a5c0f440034a88028a63f93f7f6500ca3cfd36f5",
+        "scalarObservations": {
+          "a2cacba3350c642076b98704a5c0f440034a88028a63f93f7f6500ca3cfd36f5": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-abgr-16x7",
+      "source": "nv12",
+      "destination": "abgr",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "16305616df2c1bb2f35369f383b94ddb100c8a6a93b1a7659af4505c2cb3fb8f",
+        "defaultObservations": {
+          "16305616df2c1bb2f35369f383b94ddb100c8a6a93b1a7659af4505c2cb3fb8f": 1
+        },
+        "scalar": "16305616df2c1bb2f35369f383b94ddb100c8a6a93b1a7659af4505c2cb3fb8f",
+        "scalarObservations": {
+          "16305616df2c1bb2f35369f383b94ddb100c8a6a93b1a7659af4505c2cb3fb8f": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-gbrp-5x3",
+      "source": "nv12",
+      "destination": "gbrp",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "d0db492619a889d6bd57503eae34a08bf6404d4851ca930b345e7ab4f141d48c",
+        "defaultObservations": {
+          "d0db492619a889d6bd57503eae34a08bf6404d4851ca930b345e7ab4f141d48c": 1
+        },
+        "scalar": "d0db492619a889d6bd57503eae34a08bf6404d4851ca930b345e7ab4f141d48c",
+        "scalarObservations": {
+          "d0db492619a889d6bd57503eae34a08bf6404d4851ca930b345e7ab4f141d48c": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-gbrp-16x6",
+      "source": "nv12",
+      "destination": "gbrp",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "9ecf11de642a125e36b09b62eddfaea5dd5c752f2cd603be70cb92517f616e39",
+        "defaultObservations": {
+          "9ecf11de642a125e36b09b62eddfaea5dd5c752f2cd603be70cb92517f616e39": 1
+        },
+        "scalar": "9ecf11de642a125e36b09b62eddfaea5dd5c752f2cd603be70cb92517f616e39",
+        "scalarObservations": {
+          "9ecf11de642a125e36b09b62eddfaea5dd5c752f2cd603be70cb92517f616e39": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-gbrp-32x8",
+      "source": "nv12",
+      "destination": "gbrp",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "ed09368e6f09fca4a8ee5b629025c0bf28afe0524bb2aeb4db3d85768f1ebcda",
+        "defaultObservations": {
+          "ed09368e6f09fca4a8ee5b629025c0bf28afe0524bb2aeb4db3d85768f1ebcda": 1
+        },
+        "scalar": "ed09368e6f09fca4a8ee5b629025c0bf28afe0524bb2aeb4db3d85768f1ebcda",
+        "scalarObservations": {
+          "ed09368e6f09fca4a8ee5b629025c0bf28afe0524bb2aeb4db3d85768f1ebcda": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv12-gbrp-16x7",
+      "source": "nv12",
+      "destination": "gbrp",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "c96141c0a0435dba8d35f4cf5c4fb5acda7f7fc88ba085d56cbca01ae394542e",
+        "defaultObservations": {
+          "c96141c0a0435dba8d35f4cf5c4fb5acda7f7fc88ba085d56cbca01ae394542e": 1
+        },
+        "scalar": "c96141c0a0435dba8d35f4cf5c4fb5acda7f7fc88ba085d56cbca01ae394542e",
+        "scalarObservations": {
+          "c96141c0a0435dba8d35f4cf5c4fb5acda7f7fc88ba085d56cbca01ae394542e": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-rgb24-5x3",
+      "source": "nv21",
+      "destination": "rgb24",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "f4373c3a0f91ecc0c6c996e8b7f6ced9d7c03636200d9398811cf2934f970957",
+        "defaultObservations": {
+          "f4373c3a0f91ecc0c6c996e8b7f6ced9d7c03636200d9398811cf2934f970957": 1
+        },
+        "scalar": "f4373c3a0f91ecc0c6c996e8b7f6ced9d7c03636200d9398811cf2934f970957",
+        "scalarObservations": {
+          "f4373c3a0f91ecc0c6c996e8b7f6ced9d7c03636200d9398811cf2934f970957": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-rgb24-16x6",
+      "source": "nv21",
+      "destination": "rgb24",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "fc46af636a4d888543f4881297837fafbc95023be266bb9a343fd4994cce809a",
+        "defaultObservations": {
+          "fc46af636a4d888543f4881297837fafbc95023be266bb9a343fd4994cce809a": 8
+        },
+        "scalar": "fc46af636a4d888543f4881297837fafbc95023be266bb9a343fd4994cce809a",
+        "scalarObservations": {
+          "fc46af636a4d888543f4881297837fafbc95023be266bb9a343fd4994cce809a": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-rgb24-32x8",
+      "source": "nv21",
+      "destination": "rgb24",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "3f471cc364b0860ec563fe50c786c4bb9b510d2a6b7cd9d4d9e56f80ecc40ff1",
+        "defaultObservations": {
+          "3f471cc364b0860ec563fe50c786c4bb9b510d2a6b7cd9d4d9e56f80ecc40ff1": 8
+        },
+        "scalar": "3f471cc364b0860ec563fe50c786c4bb9b510d2a6b7cd9d4d9e56f80ecc40ff1",
+        "scalarObservations": {
+          "3f471cc364b0860ec563fe50c786c4bb9b510d2a6b7cd9d4d9e56f80ecc40ff1": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-rgb24-16x7",
+      "source": "nv21",
+      "destination": "rgb24",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "4509b7c16ca4f36bdd1f2cbef4b72eb95f25dfde1592f54c1903f5d75d52d7fb",
+        "defaultObservations": {
+          "4509b7c16ca4f36bdd1f2cbef4b72eb95f25dfde1592f54c1903f5d75d52d7fb": 1
+        },
+        "scalar": "4509b7c16ca4f36bdd1f2cbef4b72eb95f25dfde1592f54c1903f5d75d52d7fb",
+        "scalarObservations": {
+          "4509b7c16ca4f36bdd1f2cbef4b72eb95f25dfde1592f54c1903f5d75d52d7fb": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-bgr24-5x3",
+      "source": "nv21",
+      "destination": "bgr24",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "277751254b8c6c3715b5716a06453d7afe765c4a67a71d8d73ba535f1adc4de9",
+        "defaultObservations": {
+          "277751254b8c6c3715b5716a06453d7afe765c4a67a71d8d73ba535f1adc4de9": 1
+        },
+        "scalar": "277751254b8c6c3715b5716a06453d7afe765c4a67a71d8d73ba535f1adc4de9",
+        "scalarObservations": {
+          "277751254b8c6c3715b5716a06453d7afe765c4a67a71d8d73ba535f1adc4de9": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-bgr24-16x6",
+      "source": "nv21",
+      "destination": "bgr24",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "1383d5e2a41eae8c9129017230bc650b6eb2efc1ec83eb4886b3a8c3d2ac21c5",
+        "defaultObservations": {
+          "1383d5e2a41eae8c9129017230bc650b6eb2efc1ec83eb4886b3a8c3d2ac21c5": 1
+        },
+        "scalar": "3159d66e54b70b0d8aab66a8389a146d52b58274030a208d45baac3afed7aeca",
+        "scalarObservations": {
+          "3159d66e54b70b0d8aab66a8389a146d52b58274030a208d45baac3afed7aeca": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv21-bgr24-32x8",
+      "source": "nv21",
+      "destination": "bgr24",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "92a6e2200e873bf83a6932080cfe42b59b72a7a0ccee4a3c52cb96d6ec2d2de4",
+        "defaultObservations": {
+          "92a6e2200e873bf83a6932080cfe42b59b72a7a0ccee4a3c52cb96d6ec2d2de4": 1
+        },
+        "scalar": "c8e788da94f251fdb5462374f7e1720141de2627cf07470389c134539e915e6e",
+        "scalarObservations": {
+          "c8e788da94f251fdb5462374f7e1720141de2627cf07470389c134539e915e6e": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv21-bgr24-16x7",
+      "source": "nv21",
+      "destination": "bgr24",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "e8affaf10e7b5a672c68020f896237d860c41bcbe54189433ed3d9f89e601f6d",
+        "defaultObservations": {
+          "e8affaf10e7b5a672c68020f896237d860c41bcbe54189433ed3d9f89e601f6d": 1
+        },
+        "scalar": "16b77c1b7ee09d24cde18063dfccb7ed6d1d51305f9fb51d9d9d1981fd491118",
+        "scalarObservations": {
+          "16b77c1b7ee09d24cde18063dfccb7ed6d1d51305f9fb51d9d9d1981fd491118": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv21-rgba-5x3",
+      "source": "nv21",
+      "destination": "rgba",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "ed7e9186206c4b70ef17f3b110c603d9a4192519c96dfd3df920a72df4574483",
+        "defaultObservations": {
+          "ed7e9186206c4b70ef17f3b110c603d9a4192519c96dfd3df920a72df4574483": 1
+        },
+        "scalar": "ed7e9186206c4b70ef17f3b110c603d9a4192519c96dfd3df920a72df4574483",
+        "scalarObservations": {
+          "ed7e9186206c4b70ef17f3b110c603d9a4192519c96dfd3df920a72df4574483": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-rgba-16x6",
+      "source": "nv21",
+      "destination": "rgba",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "52d2125b4d035e733e345e4ea0e946d47ef220435d9516c4b178ff582a2ef534",
+        "defaultObservations": {
+          "52d2125b4d035e733e345e4ea0e946d47ef220435d9516c4b178ff582a2ef534": 1
+        },
+        "scalar": "52d2125b4d035e733e345e4ea0e946d47ef220435d9516c4b178ff582a2ef534",
+        "scalarObservations": {
+          "52d2125b4d035e733e345e4ea0e946d47ef220435d9516c4b178ff582a2ef534": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-rgba-32x8",
+      "source": "nv21",
+      "destination": "rgba",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "44268b5df005d1ddad08357cd0db74484c7d643ef9eeebdb620ea37ca5b82e2c",
+        "defaultObservations": {
+          "44268b5df005d1ddad08357cd0db74484c7d643ef9eeebdb620ea37ca5b82e2c": 1
+        },
+        "scalar": "0846ba838115956d464b7f4c43c7f034e15837b5fe7865486f98353157553f36",
+        "scalarObservations": {
+          "0846ba838115956d464b7f4c43c7f034e15837b5fe7865486f98353157553f36": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv21-rgba-16x7",
+      "source": "nv21",
+      "destination": "rgba",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "4b32bc22ea550b8b8400f32b3def6ae1948be24ee19be89680852b77d12cebff",
+        "defaultObservations": {
+          "4b32bc22ea550b8b8400f32b3def6ae1948be24ee19be89680852b77d12cebff": 1
+        },
+        "scalar": "9913efb19837553b99d3c84a1cc284cf1b295dc4b229c59f5296bbb1f78fd9ac",
+        "scalarObservations": {
+          "9913efb19837553b99d3c84a1cc284cf1b295dc4b229c59f5296bbb1f78fd9ac": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv21-bgra-5x3",
+      "source": "nv21",
+      "destination": "bgra",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "9c7a43947ecdd042b034287469fe67d928b467a8540c78bf865626329f0bbde1",
+        "defaultObservations": {
+          "9c7a43947ecdd042b034287469fe67d928b467a8540c78bf865626329f0bbde1": 1
+        },
+        "scalar": "9c7a43947ecdd042b034287469fe67d928b467a8540c78bf865626329f0bbde1",
+        "scalarObservations": {
+          "9c7a43947ecdd042b034287469fe67d928b467a8540c78bf865626329f0bbde1": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-bgra-16x6",
+      "source": "nv21",
+      "destination": "bgra",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "3709a8f096265dd5715c808b58d306621c3ce4f7b6e4a1cfbe8a726709b07491",
+        "defaultObservations": {
+          "3709a8f096265dd5715c808b58d306621c3ce4f7b6e4a1cfbe8a726709b07491": 1
+        },
+        "scalar": "c4d4750f661ac75b6ad263f945a4aa81678ceee07a421b18937fcdac5f02ecd3",
+        "scalarObservations": {
+          "c4d4750f661ac75b6ad263f945a4aa81678ceee07a421b18937fcdac5f02ecd3": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv21-bgra-32x8",
+      "source": "nv21",
+      "destination": "bgra",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "86da31c385952a52011c84476eb3becb1006544a660cef9270a00d7bb7c8719e",
+        "defaultObservations": {
+          "86da31c385952a52011c84476eb3becb1006544a660cef9270a00d7bb7c8719e": 1
+        },
+        "scalar": "369a3b7887bca0bddeb3653d5ff1f8923130c52cd823a2d07183f1736d714d53",
+        "scalarObservations": {
+          "369a3b7887bca0bddeb3653d5ff1f8923130c52cd823a2d07183f1736d714d53": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv21-bgra-16x7",
+      "source": "nv21",
+      "destination": "bgra",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "8b38d5ebd4c448e06382785da037fb5f12fa6a4a931993bff6ac6003d38c05c0",
+        "defaultObservations": {
+          "8b38d5ebd4c448e06382785da037fb5f12fa6a4a931993bff6ac6003d38c05c0": 1
+        },
+        "scalar": "2a415b616723e5d5e6a413cf1f71033cd85c6e4e07e0a5718d6d50ed5baa79b8",
+        "scalarObservations": {
+          "2a415b616723e5d5e6a413cf1f71033cd85c6e4e07e0a5718d6d50ed5baa79b8": 1
+        }
+      },
+      "defaultMatchesPortableScalar": false
+    },
+    {
+      "id": "nv21-argb-5x3",
+      "source": "nv21",
+      "destination": "argb",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "af372e62d0ca52fe6828b2e4aaebb6d29de9aaf15db42b94d1e3367cdc205907",
+        "defaultObservations": {
+          "af372e62d0ca52fe6828b2e4aaebb6d29de9aaf15db42b94d1e3367cdc205907": 1
+        },
+        "scalar": "af372e62d0ca52fe6828b2e4aaebb6d29de9aaf15db42b94d1e3367cdc205907",
+        "scalarObservations": {
+          "af372e62d0ca52fe6828b2e4aaebb6d29de9aaf15db42b94d1e3367cdc205907": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-argb-16x6",
+      "source": "nv21",
+      "destination": "argb",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "74cce330c3e1f734b305ebb2bcac276b359129e462bff1502e9e8d9edf459656",
+        "defaultObservations": {
+          "74cce330c3e1f734b305ebb2bcac276b359129e462bff1502e9e8d9edf459656": 1
+        },
+        "scalar": "74cce330c3e1f734b305ebb2bcac276b359129e462bff1502e9e8d9edf459656",
+        "scalarObservations": {
+          "74cce330c3e1f734b305ebb2bcac276b359129e462bff1502e9e8d9edf459656": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-argb-32x8",
+      "source": "nv21",
+      "destination": "argb",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "b904ad56ca027c85c313099952afc7a68454599fc74abc6088db2d4554515d16",
+        "defaultObservations": {
+          "b904ad56ca027c85c313099952afc7a68454599fc74abc6088db2d4554515d16": 1
+        },
+        "scalar": "b904ad56ca027c85c313099952afc7a68454599fc74abc6088db2d4554515d16",
+        "scalarObservations": {
+          "b904ad56ca027c85c313099952afc7a68454599fc74abc6088db2d4554515d16": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-argb-16x7",
+      "source": "nv21",
+      "destination": "argb",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "01e3a89ad3b8b8818323967cf1c7e2e895383840ef23f4da6cf7713f2b6cd079",
+        "defaultObservations": {
+          "01e3a89ad3b8b8818323967cf1c7e2e895383840ef23f4da6cf7713f2b6cd079": 1
+        },
+        "scalar": "01e3a89ad3b8b8818323967cf1c7e2e895383840ef23f4da6cf7713f2b6cd079",
+        "scalarObservations": {
+          "01e3a89ad3b8b8818323967cf1c7e2e895383840ef23f4da6cf7713f2b6cd079": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-abgr-5x3",
+      "source": "nv21",
+      "destination": "abgr",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "7d1436273531d6062b8d607bd436c978f3bb5807fc2f4fc092f248ddfc9ceb00",
+        "defaultObservations": {
+          "7d1436273531d6062b8d607bd436c978f3bb5807fc2f4fc092f248ddfc9ceb00": 1
+        },
+        "scalar": "7d1436273531d6062b8d607bd436c978f3bb5807fc2f4fc092f248ddfc9ceb00",
+        "scalarObservations": {
+          "7d1436273531d6062b8d607bd436c978f3bb5807fc2f4fc092f248ddfc9ceb00": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-abgr-16x6",
+      "source": "nv21",
+      "destination": "abgr",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "68431e62928a3605310265669539e15e48f438528e916a2e74bf965f45bf8e43",
+        "defaultObservations": {
+          "68431e62928a3605310265669539e15e48f438528e916a2e74bf965f45bf8e43": 1
+        },
+        "scalar": "68431e62928a3605310265669539e15e48f438528e916a2e74bf965f45bf8e43",
+        "scalarObservations": {
+          "68431e62928a3605310265669539e15e48f438528e916a2e74bf965f45bf8e43": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-abgr-32x8",
+      "source": "nv21",
+      "destination": "abgr",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "1bcc53e655952ba03adace8c5b88e9498ab54e9087cde3d93958667514fdea75",
+        "defaultObservations": {
+          "1bcc53e655952ba03adace8c5b88e9498ab54e9087cde3d93958667514fdea75": 1
+        },
+        "scalar": "1bcc53e655952ba03adace8c5b88e9498ab54e9087cde3d93958667514fdea75",
+        "scalarObservations": {
+          "1bcc53e655952ba03adace8c5b88e9498ab54e9087cde3d93958667514fdea75": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-abgr-16x7",
+      "source": "nv21",
+      "destination": "abgr",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "6820766256f6caf571c806296719c5cc204c999f75cce7f648a3ace55d22f877",
+        "defaultObservations": {
+          "6820766256f6caf571c806296719c5cc204c999f75cce7f648a3ace55d22f877": 1
+        },
+        "scalar": "6820766256f6caf571c806296719c5cc204c999f75cce7f648a3ace55d22f877",
+        "scalarObservations": {
+          "6820766256f6caf571c806296719c5cc204c999f75cce7f648a3ace55d22f877": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-gbrp-5x3",
+      "source": "nv21",
+      "destination": "gbrp",
+      "width": 5,
+      "height": 3,
+      "inputSha256": "02af2ce347682cdb02b3ec717bf01514e350615d045f633003c4bddb7dc3b0a2",
+      "native": {
+        "default": "ab557cae5003dfaaca137f8e07d13f5fa9725182f0e2c50c85841e3c0ab1b862",
+        "defaultObservations": {
+          "ab557cae5003dfaaca137f8e07d13f5fa9725182f0e2c50c85841e3c0ab1b862": 1
+        },
+        "scalar": "ab557cae5003dfaaca137f8e07d13f5fa9725182f0e2c50c85841e3c0ab1b862",
+        "scalarObservations": {
+          "ab557cae5003dfaaca137f8e07d13f5fa9725182f0e2c50c85841e3c0ab1b862": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-gbrp-16x6",
+      "source": "nv21",
+      "destination": "gbrp",
+      "width": 16,
+      "height": 6,
+      "inputSha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3",
+      "native": {
+        "default": "d014d9d6fbf0ca2cfd61db754eaf60ead1c1a364975c0c239d50962673b162c3",
+        "defaultObservations": {
+          "d014d9d6fbf0ca2cfd61db754eaf60ead1c1a364975c0c239d50962673b162c3": 1
+        },
+        "scalar": "d014d9d6fbf0ca2cfd61db754eaf60ead1c1a364975c0c239d50962673b162c3",
+        "scalarObservations": {
+          "d014d9d6fbf0ca2cfd61db754eaf60ead1c1a364975c0c239d50962673b162c3": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-gbrp-32x8",
+      "source": "nv21",
+      "destination": "gbrp",
+      "width": 32,
+      "height": 8,
+      "inputSha256": "4694e770862e518bc1b671a8fe457ebaa3dec497cf9a9ecf0c49a2ee4984971e",
+      "native": {
+        "default": "edffb896bb2e1190ebdd585daf70e65b0234ecab4ff3cdea99493833a33a3ba6",
+        "defaultObservations": {
+          "edffb896bb2e1190ebdd585daf70e65b0234ecab4ff3cdea99493833a33a3ba6": 1
+        },
+        "scalar": "edffb896bb2e1190ebdd585daf70e65b0234ecab4ff3cdea99493833a33a3ba6",
+        "scalarObservations": {
+          "edffb896bb2e1190ebdd585daf70e65b0234ecab4ff3cdea99493833a33a3ba6": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    },
+    {
+      "id": "nv21-gbrp-16x7",
+      "source": "nv21",
+      "destination": "gbrp",
+      "width": 16,
+      "height": 7,
+      "inputSha256": "37fea3a499bdbac96d62e8c06eae0842e22b9f61b70a1f6d1808170ee167438c",
+      "native": {
+        "default": "44a508446baa6d64b36dc214dcbabf4f3495f29da3eae6c57e09c07f69475792",
+        "defaultObservations": {
+          "44a508446baa6d64b36dc214dcbabf4f3495f29da3eae6c57e09c07f69475792": 1
+        },
+        "scalar": "44a508446baa6d64b36dc214dcbabf4f3495f29da3eae6c57e09c07f69475792",
+        "scalarObservations": {
+          "44a508446baa6d64b36dc214dcbabf4f3495f29da3eae6c57e09c07f69475792": 1
+        }
+      },
+      "defaultMatchesPortableScalar": true
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@edge-ffmpeg/avformat",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@edge-ffmpeg/core": "0.0.0",
+    "@edge-ffmpeg/containers": "0.0.0",
+    "@edge-ffmpeg/avcodec": "0.0.0",
+    "@edge-ffmpeg/cli": "0.0.0",
+    "@edge-ffmpeg/avfilter": "0.0.0",
+    "@edge-ffmpeg/avutil": "0.0.0",
+    "@edge-ffmpeg/swresample": "0.0.0",
+    "@edge-ffmpeg/swscale": "0.0.0"
+  }
+}

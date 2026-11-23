@@ -1,0 +1,41 @@
+{
+  "status": "scoped-initial-intermediate-path-type-resolved-other-directory-semantics-incomplete",
+  "fullConformance": false,
+  "scope": "Built-in Node initial input/output traversal through a regular file component",
+  "native": {
+    "errno": "ENOTDIR",
+    "signedError": -20,
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  "edge": {
+    "type": "PathNotDirectoryError",
+    "code": "path-not-directory",
+    "operation": [
+      "read",
+      "write"
+    ],
+    "exitCode": 236,
+    "pathAndCause": true
+  },
+  "evidence": {
+    "profiles": 26,
+    "cases": 520,
+    "ENOTDIR": 416,
+    "outputConflicts": 104,
+    "statusMatches": 520,
+    "unexpectedFailures": 0
+  },
+  "ordering": [
+    "Input initial ENOTDIR precedes overwrite conflicts.",
+    "Output overwrite conflict precedes ENOTDIR;path failure precedes invalid mux-rate headers.",
+    "After an input version is accepted,component replacement remains NodeInputChangedError/failure1.",
+    "Initial staging-open ENOENT/ENOTDIR/EACCES are typed without hiding cleanup effects."
+  ],
+  "limits": [
+    "Input which is itself a directory/EISDIR and trailing slash semantics remain unverified.",
+    "Other errno,ACL,symlink,ownership,descriptor/log/OS races remain incomplete.",
+    "R2 object-prefix semantics are not local directory emulation.",
+    "Custom adapters and production Workers remain unverified."
+  ]
+}

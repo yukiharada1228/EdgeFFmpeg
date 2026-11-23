@@ -1,0 +1,12 @@
+{
+  "cases": 110,
+  "observations": 21575,
+  "scope": "Video frame sync_queue.c only; no audio sample splitting, full CLI task scheduling or whole-heap/CPU certification",
+  "sha256": {
+    "compat/behavior-specs/video-encoder-sync/cases.json": "47e21c3f89a9bf7ac401558fcaa796e3ec611502a5003ba0049897315db067cb",
+    "compat/behavior-specs/video-encoder-sync/results.jsonl.gz": "fe72d8c3e1a3cf2a39ed58d7a373a752de3f206c48f0c7581167ccc441c49537",
+    "compat/behavior-specs/video-encoder-sync/trace-sha256.json": "9193b98575698929999bebbef9b993a63f9d130eea02f23be2ebc53b6273b6c9",
+    "compat/behavior-specs/video-encoder-sync/host-provenance.json": "9c25a164b3cfbd3646e557ec2c4518403e4ff82c4bda8d0a8e4bdb65e249fac2",
+    "tools/differential-runner/video-encoder-sync/oracle.c": "85aa9f7e36c0a58566d2edbe74c2b26ead73d6d7b9a47d236ebaf2b0f792fee5"
+  }
+}

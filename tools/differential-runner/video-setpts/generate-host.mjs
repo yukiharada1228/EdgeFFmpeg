@@ -1,0 +1,11 @@
+import {execFileSync} from 'node:child_process';import {readFileSync,writeFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+if(process.platform!=='darwin'||process.arch!=='arm64')throw new Error('Expected Darwin arm64 reference host');
+const root='compat/behavior-specs/video-setpts',hash=bytes=>createHash('sha256').update(bytes).digest('hex');
+for(const name of ['video-setpts','video-setpts-eof'])execFileSync(process.execPath,['tools/differential-runner/build-oracle.mjs',name],{stdio:'inherit',timeout:30000});
+const frames=JSON.parse(readFileSync(`${root}/frame-cases.json`)),eof=JSON.parse(readFileSync(`${root}/eof-cases.json`));
+const run=(name,args)=>JSON.parse(execFileSync(`.build/oracles/${name}/native`,args,{encoding:'utf8',timeout:5000}));
+const frameResults=frames.map(c=>run('video-setpts',[c.expression,c.base,c.rate,c.points.map(p=>p??'N').join(','),c.strip?'1':'0',...(c.command===undefined?[]:[c.command,String(c.commandIndex)])]));
+const eofResults=eof.map(c=>run('video-setpts-eof',[c.expression,'1/25','25/1',c.points.map(p=>p??'N').join(','),c.strip?'1':'0',c.end??'N']));
+writeFileSync(`${root}/darwin-frame-results.json`,JSON.stringify(frameResults));writeFileSync(`${root}/darwin-eof-results.json`,JSON.stringify(eofResults));
+writeFileSync(`${root}/darwin-provenance.json`,JSON.stringify({reference:JSON.parse(readFileSync('.build/reference/build-metadata.json')),frameOracle:JSON.parse(readFileSync('.build/oracles/video-setpts/provenance.json')),eofOracle:JSON.parse(readFileSync('.build/oracles/video-setpts-eof/provenance.json')),frameResultsSha256:hash(JSON.stringify(frameResults)),eofResultsSha256:hash(JSON.stringify(eofResults))},null,2));
+const manifest=JSON.parse(readFileSync(`${root}/manifest.json`));for(const file of Object.keys(manifest.sha256))manifest.sha256[file]=hash(readFileSync(file));writeFileSync(`${root}/manifest.json`,JSON.stringify(manifest,null,2)+'\n');

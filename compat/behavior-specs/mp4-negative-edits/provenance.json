@@ -1,0 +1,28 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "caseCount": 66,
+  "sources": {
+    "tools/differential-runner/mp4-negative-edits/generate.mjs": "ba96e427d637a0c6d42545a0d741e6fbab8e8fcd196aa1df362f8add21920f2c",
+    "compat/behavior-specs/mp4-multiple-edits/inputs.json": "c34f005d3cba3501ed98d4079aad62b9a01e9e5ac1a688a90386fe6d977e4cd7",
+    "compat/behavior-specs/mp4-multiple-edits/manifest.json": "825ff02786e6b6dc983136634cf0148bea3f2728480f50836a7172a616c81e69"
+  },
+  "scope": "Default advanced MOV accepts media times below-1; v0/v1, nonaligned/32-bit/64-bit negative values. Native-only nofillin/default packets and streamcopy fields/payload hashes. Strict-option behavior not claimed."
+}

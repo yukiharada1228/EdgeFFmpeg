@@ -1,0 +1,4 @@
+import {it,expect} from 'vitest';import {FFmpeg,InputNotFoundError,ExecutionError} from '@edge-ffmpeg/core';
+it('retains initial missing-input classification status and cause while cancellation wins',async()=>{
+ const cause=Object.assign(new Error('missing'),{code:'ENOENT'}),error=new InputNotFoundError('/input',cause);expect(error).toBeInstanceOf(ExecutionError);expect(error.path).toBe('/input');expect(error.cause).toBe(cause);expect(error.exitCode).toBe(254);const filesystem={async openRead(){throw error;},async openWrite(){throw Error('Unexpected write');}},controller=new AbortController(),ffmpeg=new FFmpeg({filesystem,backend:{async execute(){controller.abort();throw error;}}}),result=await ffmpeg.exec(['-i','/input','/output'],{signal:controller.signal});expect(result.exitCode).toBe(1);expect(result.diagnostics[0]!.code).toBe('cancelled');
+});

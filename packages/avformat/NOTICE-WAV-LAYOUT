@@ -1,0 +1,11 @@
+Scoped default input channel layouts for WAV output
+
+The selected Native profile's layout fallback follows the behavior of
+fftools/ffmpeg_demux.c guess_input_channel_layout and default layouts defined
+in libavutil/channel_layout.c at fixed FFmpeg commit
+946fcce07b6dcd0331c8cc609192aeff5e1924f8.
+channel_layout.c Copyright (c)2006 Michael Niedermayer <michaelni@gmx.at>.
+Both upstream components are LGPL-2.1-or-later. See COPYING.LGPLv2.1 and
+LICENSES/LGPL-2.1-or-later.txt. Original sources/full notices remain in upstream.
+This adaptation preserves the configured guess_layout_max policy; arbitrary
+layouts,all CLI probing behavior and the whole-project license audit remain open.

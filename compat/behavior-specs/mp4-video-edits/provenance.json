@@ -1,0 +1,54 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "sourceSha256": "a19331c582539c302635ebf15fb498bb2f6d547bd7015dcdefa0e476811f8205",
+  "multiKeySha256": "161109c796ae1ef1220800c3d86fb0e6522e3ce2db8dcd295a37d76db85cfea3",
+  "caseCount": 71,
+  "sources": {
+    "tools/differential-runner/mp4-video-edits/generate.mjs": "f08ac19cc9d0e758291f10c45eb56515c2974e556d122ed3419cb3432a1f97ad",
+    "compat/behavior-specs/h264/mp4.json": "a380fe9ca13f85539e53bd408f09277c0585b406df536d59c111a7201772a119",
+    "compat/behavior-specs/h264/mp4-manifest.json": "6d8ab2132969059435160d32373f8e63894e0c86b6614050d08fd9f3319158e0"
+  },
+  "commands": [
+    [
+      "-i",
+      "<temporary>/source.mp4",
+      "-c:v",
+      "copy",
+      "-bsf:v",
+      "h264_mp4toannexb",
+      "-f",
+      "h264",
+      "<temporary>/one.h264"
+    ],
+    [
+      "-r",
+      "25",
+      "-f",
+      "h264",
+      "-i",
+      "<temporary>/four.h264",
+      "-c:v",
+      "copy",
+      "<temporary>/four.mp4"
+    ]
+  ],
+  "scope": "Single version0/version1 unit-rate video edit, two owned H264 MP4 sources; packet clocks/discard flags and decoded raw/best-effort timestamps. Not arbitrary edit lists."
+}

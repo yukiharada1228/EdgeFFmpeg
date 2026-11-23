@@ -1,0 +1,116 @@
+{
+  "imports": [
+    {
+      "module": "env",
+      "name": "edge_host_read",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "fd_write",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "fd_read",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "fd_close",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "fd_seek",
+      "kind": "function"
+    }
+  ],
+  "exports": [
+    {
+      "name": "memory",
+      "kind": "memory"
+    },
+    {
+      "name": "edge_flac_abi",
+      "kind": "function"
+    },
+    {
+      "name": "edge_flac_info_words",
+      "kind": "function"
+    },
+    {
+      "name": "edge_flac_async_data",
+      "kind": "function"
+    },
+    {
+      "name": "edge_flac_create",
+      "kind": "function"
+    },
+    {
+      "name": "free",
+      "kind": "function"
+    },
+    {
+      "name": "edge_flac_info",
+      "kind": "function"
+    },
+    {
+      "name": "edge_flac_step",
+      "kind": "function"
+    },
+    {
+      "name": "edge_flac_destroy",
+      "kind": "function"
+    },
+    {
+      "name": "__indirect_function_table",
+      "kind": "table"
+    },
+    {
+      "name": "malloc",
+      "kind": "function"
+    },
+    {
+      "name": "_initialize",
+      "kind": "function"
+    },
+    {
+      "name": "setThrew",
+      "kind": "function"
+    },
+    {
+      "name": "_emscripten_stack_restore",
+      "kind": "function"
+    },
+    {
+      "name": "emscripten_stack_get_current",
+      "kind": "function"
+    },
+    {
+      "name": "asyncify_start_unwind",
+      "kind": "function"
+    },
+    {
+      "name": "asyncify_stop_unwind",
+      "kind": "function"
+    },
+    {
+      "name": "asyncify_start_rewind",
+      "kind": "function"
+    },
+    {
+      "name": "asyncify_stop_rewind",
+      "kind": "function"
+    },
+    {
+      "name": "asyncify_get_state",
+      "kind": "function"
+    }
+  ],
+  "memory": {
+    "initialPages": 256,
+    "maximumPages": 256,
+    "bytes": 16777216
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "scope": "Cached host Native thread_queue.c FIFO/choke/finish steps; full sends are reported blocked instead of blocking the single-thread oracle. No pthread interleaving, CPU/heap, full scheduler or CLI certification.",
+  "cases": 120,
+  "observations": 15416,
+  "sha256": {
+    "compat/behavior-specs/thread-frame-queue/cases.json": "ba7512e30156e7a43050794afd13c5a2130ac538fa2a1731cd4ac2c49690c5cf",
+    "compat/behavior-specs/thread-frame-queue/results.json": "c02b4302257c11d36afa3684f313e6634ef0f716a265fe5dc7bc00e5bd7c64ed",
+    "compat/behavior-specs/thread-frame-queue/host-provenance.json": "2b95c481cce023156f1c1a0cc8510416e5f8680023d6812fc19975d44ac58c16",
+    "tools/differential-runner/thread-frame-queue/oracle.c": "95a9a8d402b355d1626eb72e53c02ee093576cd10830c3304cd038084fa86f3e"
+  }
+}

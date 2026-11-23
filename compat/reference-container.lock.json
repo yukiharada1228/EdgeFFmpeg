@@ -1,0 +1,6 @@
+{
+  "image": "docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496",
+  "platform": "linux/amd64",
+  "outputDirectory": ".build/linux-x64",
+  "purpose": "Isolated Linux x86_64 reference build; reproducible binary identity and conformance remain unverified"
+}

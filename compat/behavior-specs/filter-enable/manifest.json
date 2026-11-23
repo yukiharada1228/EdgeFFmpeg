@@ -1,0 +1,12 @@
+{
+  "cases": 48,
+  "operations": 384,
+  "scope": "Valid hflip/vflip enable commands and caller-supplied legacy scheduling stages; no CLI registration or production Workers certification.",
+  "sha256": {
+    "compat/behavior-specs/filter-enable/cases.json": "2e34f5aef7b84c69bd95eb4647682089ffd544045effa796672ec91449f4c29b",
+    "compat/behavior-specs/filter-enable/results.json": "d2b06ea2ca8e13cfca59f8c28f6b963f3b5539df8b8b99664d5ce43c075c640a",
+    "compat/behavior-specs/filter-enable/host-provenance.json": "2153887b7b9de8504eb24ff25d28ea6c464c65d67bbf31c812239b0057d7c6a1",
+    "compat/behavior-specs/filter-enable/native-invalid-replacement.json": "a985c4cd47c725955ad2be3537911287d48e75191b52a66ce9a3d932ebfe694e",
+    "tools/differential-runner/filter-enable/oracle.c": "4e8e2250026103dd444cd60eff0c7623985fe05e26d643e86c2e5f17e736117f"
+  }
+}

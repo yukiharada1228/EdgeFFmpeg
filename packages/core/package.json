@@ -1,0 +1,11 @@
+{
+  "name": "@edge-ffmpeg/core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@edge-ffmpeg/avutil": "0.0.0",
+    "@edge-ffmpeg/cli": "0.0.0"
+  }
+}

@@ -1,0 +1,7 @@
+BMP image2pipe framing follows pinned libavcodec/bmp_parser.c semantics,
+Copyright (c)2012 Paul B Mahol, LGPL-2.1-or-later.
+Commit946fcce07b6dcd0331c8cc609192aeff5e1924f8.
+See COPYING.LGPLv2.1 and the upstream source. The TypeScript adapter requires
+aligned finite declared BMP frames and adds bounded asynchronous ReadHandle
+reads, independent packet ownership, rational clocks and backpressure.
+It does not yet implement general parser resynchronization.

@@ -1,0 +1,150 @@
+Shared adaptation provenance for the actor backend. Historical development module
+names below identify their original responsibilities; production modules live in
+avfilter/src/activation, avformat/src/actor-video and swscale/src/interpolation.
+
+activation.ts adapts FFmpeg 9.0.2 commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8:
+libavfilter/avfiltergraph.c ff_filter_graph_run_once (Copyright 2007 Bobby Bingham; 2008 Vitor Sessak),
+libavfilter/avfilter.c ff_filter_set_ready and ff_filter_activate (Copyright 2007 Bobby Bingham).
+LGPL-2.1-or-later; license text: ../../LICENSES/LGPL-2.1-or-later.txt.
+Additional JS async cancellation, bounds and failure handling are EdgeFFmpeg changes.
+link.ts also adapts video link state transitions from the same pinned avfilter.c:
+ff_filter_frame, ff_inlink_consume_frame/consume_update, ff_inlink_request_frame,
+ff_avfilter_link_set_in_status, ff_inlink_acknowledge_status, ff_inlink_set_status
+and update_link_current_pts. It adds explicit JS lease ownership, queue byte/frame
+limits and complete cleanup-error collection. The Native oracle invokes actual
+functions against a configured buffer→buffersink link, not a duplicate model.
+actors.ts additionally adapts activation callbacks/macros from:
+- libavfilter/setpts.c activate: Copyright 2010 Stefano Sabatini; 2008 Victor Paesa.
+- libavfilter/split.c activate: Copyright 2007 Bobby Bingham.
+- libavfilter/buffersrc.c activate: Copyright 2008 Vitor Sessak.
+- libavfilter/buffersink.c activate: Copyright 2011 Stefano Sabatini.
+All at the pinned FFmpeg commit above, LGPL-2.1-or-later. Public timestamp
+transformation is delegated to avfilter's already-attributed setpts API.
+actors.ts read() also adapts buffersink.c get_frame_internal's frame consume,
+status acknowledgment, frame_wanted request, graph run-once and source-empty
+control loop (Copyright 2011 Stefano Sabatini). actor-driver.ts adds an explicit
+asynchronous application input-feeding/lifecycle layer around that loop.
+actor-multi-driver.ts input selection adapts choose_input in pinned
+fftools/ffmpeg_filter.c (LGPL-2.1-or-later): highest non-EOF source failed-request
+count, stable input-index tie order. actors.ts also models buffersrc.c's
+nb_failed_requests increment on source-empty activation and reset on frame feed
+(Copyright 2008 Vitor Sessak). Async provider ownership/cleanup are additions.
+The incremental synchronization implementation is now provided by public
+packages/avfilter/src/timed-sync/step.ts (Copyright 2013 Nicolas George,
+LGPL-2.1-or-later, adapting pinned framesync.c). sync-step.ts is only its
+prototype import alias. Join actor scheduling follows ff_framesync_activate,
+consume_from_fifos and vf_stack.c's output callback; integer scaling comes from
+the attributed avfilter timed-sync/int64.ts implementation.
+The scale actor's one-input synchronization/status handling also adapts pinned
+libavfilter/framesync.c (Copyright 2013 Nicolas George) and vf_scale.c's
+ff_framesync_activate/do_scale integration. Pixel resize/conversion delegates
+to the separately attributed packages/swscale implementation. Default-activation
+status timestamp forwarding adapts avfilter.c guess_status_pts/request_frame_to_filter.
+The implicit input trim=start=0 actor adapts pinned libavfilter/trim.c
+trim_filter_frame and activate (LGPL-2.1-or-later). This is the graph adapter
+inserted around already selected rawvideo input ranges, not a general trim API.
+sink-age-heap.ts and actors.ts requestOldest/peek adapt pinned avfiltergraph.c
+sink-link heap and avfilter_graph_request_oldest (Copyright 2007 Bobby Bingham,
+2008 Vitor Sessak), avfilter.c current_pts_us updates and buffersink.c PEEK
+(Copyright 2011 Stefano Sabatini), under LGPL-2.1-or-later.
+actor-multi-driver.ts readFrames and the optional reaped-output adapter follow
+pinned fftools/ffmpeg_filter.c read_frames/fg_output_step/choose_input ordering
+(LGPL-2.1-or-later). The development oracle models that configured control loop
+using actual Native buffersink/graph/source APIs; encoder queues are not modeled.
+finishOutput models fg_output_frame's eof_out/nb_outputs_done notification
+when sch_filter_send returns EOF. It deliberately does not perform an
+avfilter link-status close; the configured read_frames loop keeps reaping
+and discarding that output while other consumers remain active.
+encoder-sync-queue.ts adapts pinned fftools/sync_queue.c video-frame behavior,
+including finish_stream, queue_head_update, stream_update_ts, overflow_heartbeat,
+sq_send/sq_receive and sq_limit_frames, under LGPL-2.1-or-later. The associated
+Native development oracle compiles that upstream source directly and records
+its source digest. Audio sample splitting/alignment is not represented by this
+video-only prototype and remains future implementation work.
+thread-frame-queue.ts adapts pinned fftools/thread_queue.c's frame FIFO,
+FINISHED_SEND/FINISHED_RECV, choke and EOF acknowledgement behavior under
+LGPL-2.1-or-later. Promise wait/cancellation and byte/waiter budgets are additions
+for a single JavaScript isolate; they do not invoke native threads at runtime.
+queued-actor-delivery.ts models decoded-frame reference fanout and incoming
+stream-indexed delivery based on pinned fftools/ffmpeg_sched.c sch_dec_send /
+dec_send_to_dst / sch_filter_receive. TypeScript lease ownership, Promise
+cancellation and error-ledger handling are additions. The Native scheduler
+source is LGPL-2.1-or-later; this is a bounded adaptation, not the full FFmpeg scheduling implementation.
+queued-input-pump.ts connects lazy decoded physical inputs to the separately
+attributed thread FIFO and actor admission model; pad fanout follows the
+pinned scheduler's decoder destination order. spool-source.ts is a TypeScript
+cancellation/lifetime adapter for the experimental shared spool reader.
+actor-multi-driver.ts's inline sink acknowledgement models fg_output_frame's
+consumer result handling inside fg_output_step/read_frames in pinned
+fftools/ffmpeg_filter.c (LGPL-2.1-or-later). callback-frames-oracle.c combines
+actual Native sink/graph APIs with the included pinned sync_queue.c functions;
+it does not execute the full ffmpeg scheduler or encoder threads.
+scheduled-video-output.ts composes the attributed video-output clock, trim,
+synchronization, packet-duration and rawvideo encoder kernels with the pinned
+encoder sync queue semantics. publish-scheduled.ts connects that consumer to
+sink reaping, bounded packet FIFOs, muxing and the existing output group. Output
+control ordering follows pinned fftools/ffmpeg_filter.c and ffmpeg_sched.c;
+LGPL-2.1-or-later. This is not a port of complete decoder/encoder task scheduling.
+scheduler-receive.ts adapts sch_filter_receive from pinned fftools/ffmpeg_sched.c
+(LGPL-2.1-or-later). generate-scheduler-receive.mjs extracts that actual function
+into a developer-only scripted queue/waiter harness. The generated capture is
+not evidence of pthread interleavings, producer prefetch, or full CLI scheduling.
+queued-actor-delivery.ts deliverScheduled connects the attributed
+sch_filter_receive policy to the bounded thread FIFO and owned actor leases.
+Graph control-stream finish markers follow the same receive policy; filter
+command messages remain unimplemented by this delivery adapter.
+scheduled-input-pump.ts connects owned physical frame snapshots, bounded decoder
+fanout and scheduler receive policy. Its producer enable/park gates are an
+experimental approximation, not the full DTS-based schedule_update_locked or
+separate native demux packet/decoder tasks. actor-multi-driver.ts's optional
+PUSH admission adapts push_frame in pinned libavfilter/buffersrc.c, including
+continuing over FFERROR_BUFFERSRC_EMPTY and stopping on EAGAIN. push-frames-
+oracle.c links the pinned Native graph APIs with AV_BUFFERSRC_FLAG_PUSH and
+includes pinned fftools/sync_queue.c; LGPL-2.1-or-later.
+Actor source-closure queries model av_buffersrc_get_status and the CLI's
+post-read_frames close_input sweep in pinned buffersrc.c/ffmpeg_filter.c.
+source-close-oracle.c is a developer-only Native graph API probe for physical
+destination closure. It does not model logical CLI output-limit acknowledgement.
+The experimental physical producer adapter adds per-group AbortSignals and
+cached provider-return barriers for cooperative JavaScript I/O cancellation.
+These are runtime lifetime mechanisms, not a literal translation of Native
+pthread cancellation or a guarantee that an external transport can be aborted.
+The experimental frame-boundary setptsCommand adapter follows expr command
+replacement/error preservation in pinned libavfilter/setpts.c process_command.
+actor-command-oracle.c executes actual avfilter_process_command and graph APIs.
+It does not implement graph target-name routing or timestamp-queued commands.
+The immediate sendSetptsCommand target/ONE/FAST adapter follows the dispatch
+loop in pinned libavfilter/avfiltergraph.c avfilter_graph_send_command.
+The graph-command oracle invokes that actual Native graph API for expr commands.
+Other command names, timed queues and exact command diagnostics remain separate.
+The experimental timed-command-queue.ts and queueSetptsCommand adapter derive
+stable per-filter insertion/dispatch comparisons from pinned
+libavfilter/avfiltergraph.c avfilter_graph_queue_command and
+libavfilter/avfilter.c ff_inlink_process_commands (LGPL-2.1-or-later).
+The timed-command Native oracle calls the actual public graph queue API.
+The experimental sendPingCommand adapter follows avfilter_process_command's
+ping response and avfilter_graph_send_command target/ONE/FAST dispatch in pinned
+libavfilter/avfilter.c and avfiltergraph.c (LGPL-2.1-or-later).
+The experimental enable-timeline.ts and flip bypass integration adapt pinned
+libavfilter/avfilter.c set_enable_expr, evaluate_timeline_at_frame,
+consume_update, filter_frame_to_filter and filter_frame_framed (LGPL-2.1-or-later).
+The experimental nullsink actor follows pinned libavfilter/vsink_nullsink.c
+filter_frame and libavfilter/avfilter.c filter_activate_default, under
+LGPL-2.1-or-later. Native sink input status forwarding without outputs is left
+unacknowledged as in forward_status_change; no synthetic propagated EOF is added.
+scale-command-state.ts adapts pinned libavfilter/vf_scale.c scale_parse_expr,
+check_exprs, scale_eval_dimensions/config_props, and scale_eval.c
+ff_scale_adjust_dimensions, Copyright (c) 2007 Bobby Bingham, LGPL-2.1-or-later.
+The experimental kernel covers one input/init evaluation without reference-input
+or forced aspect/SAR reset modes; full dynamic graph/pixel reconfiguration remains.
+The dynamic scale input/link synchronization and configured-crop.ts hflip extent
+adapter follow pinned vf_scale.c scale_frame/config_props and vf_hflip.c
+config_props/filter_slice/filter_frame, Copyright (c) 2007 Bobby Bingham,
+LGPL-2.1-or-later. Reconfigured hflip output padding and undersized input extents
+are explicitly unverified rather than filled with invented pixels.
+Queued ping/filter log adapters follow pinned libavfilter/avfilter.c
+avfilter_process_command/ff_inlink_process_commands, and runtime context name
+bytes follow libavfilter/graphparser.c avfilter_graph_segment_create_filters'
+char name[64] snprintf boundary (LGPL-2.1-or-later).
+
+Additional staged operators: crop and aspect configuration adapt pinned vf_crop.c/vf_aspect.c, Copyright (c) 2007 Bobby Bingham, LGPL-2.1-or-later. Point/bilinear/area axes adapt libswscale/utils.c; original copyright headers are retained. JS ownership and bounds are EdgeFFmpeg additions; full audit remains unfinished.

@@ -1,0 +1,4 @@
+import {it,expect} from 'vitest';import {OutputIsDirectoryError,ExecutionError,FFmpeg} from '@edge-ffmpeg/core';
+it('retains output-directory path cause and status while cancellation overrides it',async()=>{
+ const cause=Object.assign(new Error('directory'),{code:'EISDIR'}),error=new OutputIsDirectoryError('/directory/',cause);expect(error).toBeInstanceOf(ExecutionError);expect(error.exitCode).toBe(235);expect(error.path).toBe('/directory/');expect(error.cause).toBe(cause);const controller=new AbortController(),frontend=new FFmpeg({filesystem:{async openRead(){throw Error('unused');},async openWrite(){throw Error('unused');}},backend:{async execute(){controller.abort();throw error;}}}),result=await frontend.exec(['-i','/input','/output'],{signal:controller.signal});expect(result.exitCode).toBe(1);expect(result.diagnostics[0]!.code).toBe('cancelled');
+});

@@ -1,0 +1,18 @@
+The output-policy.ts validation is adapted from assert_file_overwrite in
+fftools/ffmpeg_opt.c and the AVERROR_EXIT normalization in fftools/ffmpeg.c,
+at fixed FFmpeg commit946fcce07b6dcd0331c8cc609192aeff5e1924f8.
+The order relative to source/stream initialization follows ffmpeg_mux_init.c.
+These sources and original copyright notices remain in upstream/ffmpeg;
+the applicable LGPL-2.1-or-later license is COPYING.LGPLv2.1 there.
+
+The adapter-neutral helper preserves outputs via the VFS atomic publication
+contract. It does not implement Native interactive stdin,complete stderr logs,
+or empty native OS files after failed mux header initialization. Canonical
+Node/workerd fixtures cover13named single-output profiles and MP4 copy;other
+paths still require separate sequencing/protocol verification.
+
+Default complex/replay graphs and explicit timed command schedulers share this
+preflight before allocating output/spool state. All outputs are checked before
+opening any writer;this retains Edge atomic publication rather than Native
+sequential OS opening side effects. Explicit negative status propagation through
+ComplexVideoFailure only applies when its cleanup succeeds.

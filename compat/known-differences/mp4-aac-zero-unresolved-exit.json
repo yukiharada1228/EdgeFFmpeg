@@ -1,0 +1,108 @@
+{
+  "id": "mp4.aac-zero-unresolved-exit",
+  "status": "scoped-exit-status-resolved-diagnostic-protocol-incomplete",
+  "features": [
+    "demuxer.mov",
+    "muxer.mp4"
+  ],
+  "reference": {
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "scope": "12explicit-frequency0AAC-LC inputs with MDHDtime_scale1. Demux metadata correctly retains unresolved sample_rate0;streamcopy fails.",
+  "fullConformance": false,
+  "records": [
+    {
+      "id": "owned-audio-0-zero-one",
+      "nativeExit": 234,
+      "historicalCoreExit": 1,
+      "matchedCoreExit": 234
+    },
+    {
+      "id": "owned-audio-1-zero-one",
+      "nativeExit": 234,
+      "historicalCoreExit": 1,
+      "matchedCoreExit": 234
+    },
+    {
+      "id": "owned-audio-2-zero-one",
+      "nativeExit": 234,
+      "historicalCoreExit": 1,
+      "matchedCoreExit": 234
+    },
+    {
+      "id": "owned-audio-3-zero-one",
+      "nativeExit": 234,
+      "historicalCoreExit": 1,
+      "matchedCoreExit": 234
+    },
+    {
+      "id": "owned-audio-4-zero-one",
+      "nativeExit": 234,
+      "historicalCoreExit": 1,
+      "matchedCoreExit": 234
+    },
+    {
+      "id": "owned-audio-5-zero-one",
+      "nativeExit": 234,
+      "historicalCoreExit": 1,
+      "matchedCoreExit": 234
+    },
+    {
+      "id": "owned-audio-6-zero-one",
+      "nativeExit": 234,
+      "historicalCoreExit": 1,
+      "matchedCoreExit": 234
+    },
+    {
+      "id": "owned-audio-7-zero-one",
+      "nativeExit": 234,
+      "historicalCoreExit": 1,
+      "matchedCoreExit": 234
+    },
+    {
+      "id": "owned-audio-8-zero-one",
+      "nativeExit": 234,
+      "historicalCoreExit": 1,
+      "matchedCoreExit": 234
+    },
+    {
+      "id": "owned-audio-9-zero-one",
+      "nativeExit": 234,
+      "historicalCoreExit": 1,
+      "matchedCoreExit": 234
+    },
+    {
+      "id": "owned-audio-10-zero-one",
+      "nativeExit": 234,
+      "historicalCoreExit": 1,
+      "matchedCoreExit": 234
+    },
+    {
+      "id": "owned-audio-11-zero-one",
+      "nativeExit": 234,
+      "historicalCoreExit": 1,
+      "matchedCoreExit": 234
+    }
+  ],
+  "remediation": "Complete remaining error protocol separately;retain exact scoped exit validation and transactional output protection.",
+  "historicalObserved": "Pinned Native CLI exits234;Core returns generic failure1. Tests assert failure existence/transactional preservation and permit a future Native-matching code;they do not certify exact error protocol.",
+  "observed": "The12original unresolved-rate cases and27selected mixed-stream cases now return the Native exit234 in Node/Core and local workerd/R2. Canonical reason is sample rate not set;full Native log formatting and OS side effects are not certified.",
+  "exitStatusConformance": true,
+  "remaining": [
+    "Full Native stderr/log formatting",
+    "Native OS output side effects versus transactional VFS guarantees"
+  ],
+  "validation": {
+    "originalCases": 12,
+    "mixedSelectedFailures": 27,
+    "mixedSuccesses": 27,
+    "nodeAndWorkerd": true,
+    "fixture": "compat/behavior-specs/mp4-selected-errors/manifest.json"
+  }
+}

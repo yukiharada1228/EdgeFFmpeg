@@ -1,0 +1,2602 @@
+[
+  {
+    "profileId": "wav-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "wav-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "aiff-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "aiff-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "aiff-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "aiff-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "aiff-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "aiff-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "aiff-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "aiff-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "aiff-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "aiff-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "au-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "au-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "au-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "au-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "au-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "au-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "au-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "au-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "au-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "au-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-pcm",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-pcm",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-pcm",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-pcm",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-pcm",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-pcm",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-pcm",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-pcm",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-pcm",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-pcm",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "audio-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "audio-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "audio-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "audio-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "audio-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "audio-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "audio-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "audio-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "audio-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "audio-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-video-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-video-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-video-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-video-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-video-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-video-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-video-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-video-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-video-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "raw-video-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "video-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "video-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "video-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "video-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "video-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "video-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "video-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "video-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "video-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "video-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-encode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-encode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-decode",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-decode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-decode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-decode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-decode",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-decode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-decode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-decode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-decode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "bmp-decode",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-framecrc",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "h264-framecrc",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "mp4-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "mp4-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "mp4-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "mp4-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "mp4-copy",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "mp4-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "mp4-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "mp4-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "mp4-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "mp4-copy",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "outputPath": "/missing/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "outputPath": "/missing/nested/output.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "parentCreated": false
+  }
+]

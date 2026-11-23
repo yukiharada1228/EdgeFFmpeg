@@ -1,0 +1,28 @@
+{
+  "referenceCommit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+  "sources": {
+    "upstream/ffmpeg/fftools/cmdutils.c": "d21c11d724bb9bcca498c3aeb589113577ed280441a91ba39a9ce0fde59e0b40",
+    "upstream/ffmpeg/fftools/cmdutils.h": "1a51c479f16c2c37d0c24164a2690fe02e149879ee99a0d5b121f78eddce6c04",
+    "upstream/ffmpeg/fftools/ffmpeg_opt.c": "9b452dd88d471954e745fa9b74e4d501ae7438e4dde0228b0031bd9e4b08940b",
+    "upstream/ffmpeg/libavformat/mov.c": "533674687505d25db7176cf876036f600e6d8cb25079ffa6b28b4a8e8266eae1",
+    "upstream/ffmpeg/libavformat/isom.c": "6f78867fa7691b8e3a5ad5815309a626e67bd6128848ed65bb85f84f255013d7",
+    "upstream/ffmpeg/libavformat/movenc.c": "f4303c1c2313c590919ddcdcfac41ab1fc3d78c9a8a032462d6d83f6e767bea7",
+    "upstream/ffmpeg/libavutil/avstring.c": "a785f5cc16fd5b535186f79352540801af114255a1a426c80e4a73b6f3f78de5"
+  },
+  "oracle": {
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "source": "6f78867fa7691b8e3a5ad5815309a626e67bd6128848ed65bb85f84f255013d7",
+    "libraries": {
+      ".build/reference/libavfilter/libavfilter.a": "65827c43c8ac4463e661bead3dcdd90f3c0018c7119fa52ad737c9c80c93f1f7",
+      ".build/reference/libavformat/libavformat.a": "d1760cb51a34c69c6c664fa616e455ee5f90d96c8f2a7d82d02bd5707837d1cc",
+      ".build/reference/libavcodec/libavcodec.a": "7570dfffaf568d1afeb7b4b002493f5d188470273819b7a4dd0521db75eb4ca9",
+      ".build/reference/libswscale/libswscale.a": "fb03055c68d98b220dc46c7a58e60cedb233b37559d68cb24ccdc8bf5df5e050",
+      ".build/reference/libswresample/libswresample.a": "053aa00bcf154fc88877406ddd492ffc68952977cb1c61fe31b353c2d6547b1f",
+      ".build/reference/libavutil/libavutil.a": "b8864b177f1717ac38de58754a16ccee473e0fb7bf304398dcaffc1b6c89a598"
+    },
+    "oracle": "d26e5d4ba01611ea4fa291ba1aa87acaa1fd43fa49ccc2ed1bb99e3e57056e31",
+    "binary": "7119235e72ade7ab330744f0cc2a9dd4ebad6d2556ce6d3e67f54d6b8f59de93"
+  },
+  "scope": "Fixed local Native MPEG4/AAC MP4 media fixtures; mapping and language metadata only. No general codec/metadata/runtime compatibility claim.",
+  "certified": false
+}

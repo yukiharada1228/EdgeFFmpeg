@@ -1,0 +1,28 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "caseCount": 864,
+  "sources": {
+    "tools/differential-runner/mp4-audio-clocks/generate.mjs": "ff859743e3e2e5acab5d04236d464d0f8d9edc1f794228c22085185fba244f0d",
+    "compat/behavior-specs/mp4-audio-intervals/inputs.json": "abdfb1513d18e4120b8e86225d4e7b14fa2437f72aa39d4c8ff653011b72d53f",
+    "compat/behavior-specs/mp4-audio-intervals/manifest.json": "816d3b3a2fe06137995adb1f56ca14e30730334a580a08d6c7381d0377c80059"
+  },
+  "scope": "Native-only AAC-LC mono/stereo primed/unprimed8k/44.1k/48k short/long v0/v1 contiguous/repeat/long-trim, mdhd clock double/half/1000 with original or rescaled timing tables."
+}

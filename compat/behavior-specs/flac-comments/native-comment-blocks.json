@@ -1,0 +1,166 @@
+{
+  "status": "Native-multiple-comment-block-oracle",
+  "sourceSha256": "792586af2ecf862e3239a3af7ea7e8af2f6f77cce8d7592503af1574d28a2301",
+  "referenceSha256": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698",
+  "rows": [
+    {
+      "id": "two-duplicates",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAIQAAAAACAAAACQAAAFRJVExFPW9uZQgAAABBUlRJU1Q9YYQAABUAAAAAAQAAAAkAAAB0aXRsZT10d2//+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "ed0a15c4f06dfeea9792817d7622f131e47e4c515d6ad8e7a0fbb62721fe7e15",
+      "payloads": [
+        "AAAAAAIAAAAJAAAAVElUTEU9b25lCAAAAEFSVElTVD1h",
+        "AAAAAAEAAAAJAAAAdGl0bGU9dHdv"
+      ],
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"format\": {\n        \"tags\": {\n            \"ARTIST\": \"a\",\n            \"title\": \"one;two\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac':\n  Metadata:\n    ARTIST          : a\n    title           : one;two\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 33 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 7.979875,
+        "tags": {
+          "ARTIST": "a",
+          "title": "one;two"
+        },
+        "tagEntries": [
+          {
+            "key": "ARTIST",
+            "value": "a"
+          },
+          {
+            "key": "title",
+            "value": "one;two"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mapping-collision",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAKwAAAAACAAAADQAAAEFMQlVNQVJUSVNUPWEOAAAAYWxidW1fYXJ0aXN0PWKEAAAZAAAAAAEAAAANAAAAQUxCVU1BUlRJU1Q9Y//4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "167b68c5fe1341f51ce2d6ce545f296478466b3477202309a14ad4b0e135272f",
+      "payloads": [
+        "AAAAAAIAAAANAAAAQUxCVU1BUlRJU1Q9YQ4AAABhbGJ1bV9hcnRpc3Q9Yg==",
+        "AAAAAAEAAAANAAAAQUxCVU1BUlRJU1Q9Yw=="
+      ],
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"format\": {\n        \"tags\": {\n            \"album_artist\": \"a\",\n            \"album_artist\": \"b\",\n            \"album_artist\": \"c\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac':\n  Metadata:\n    album_artist    : a\n    album_artist    : b\n    album_artist    : c\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 36 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 5.5604159999999965,
+        "tags": {
+          "album_artist": "c"
+        },
+        "tagEntries": [
+          {
+            "key": "album_artist",
+            "value": "a"
+          },
+          {
+            "key": "album_artist",
+            "value": "b"
+          },
+          {
+            "key": "album_artist",
+            "value": "c"
+          }
+        ]
+      }
+    },
+    {
+      "id": "three-blocks",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAGgAAAAACAAAABwAAAEE9Zmlyc3QDAAAAQj1iBAAAFAAAAAABAAAACAAAAGE9c2Vjb25khAAAEwAAAAABAAAABwAAAEE9dGhpcmT/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "c875c40f71750fb725be0d2319501e5b06266bc17ad87fbd11009b0b76bdd333",
+      "payloads": [
+        "AAAAAAIAAAAHAAAAQT1maXJzdAMAAABCPWI=",
+        "AAAAAAEAAAAIAAAAYT1zZWNvbmQ=",
+        "AAAAAAEAAAAHAAAAQT10aGlyZA=="
+      ],
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"format\": {\n        \"tags\": {\n            \"B\": \"b\",\n            \"A\": \"first;second;third\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac':\n  Metadata:\n    B               : b\n    A               : first;second;third\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 36 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.648208000000004,
+        "tags": {
+          "B": "b",
+          "A": "first;second;third"
+        },
+        "tagEntries": [
+          {
+            "key": "B",
+            "value": "b"
+          },
+          {
+            "key": "A",
+            "value": "first;second;third"
+          }
+        ]
+      }
+    },
+    {
+      "id": "invalid-then-valid",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAAIQAABcAAAAAAQAAAAsAAABUSVRMRT12YWxpZP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "f82d40bbf9deee94248f9e293b523830a5701598f7dfbaf847a8cdb006643447",
+      "payloads": [
+        "",
+        "AAAAAAEAAAALAAAAVElUTEU9dmFsaWQ="
+      ],
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"format\": {\n        \"tags\": {\n            \"TITLE\": \"valid\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xc39034000] error parsing VorbisComment metadata\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac':\n  Metadata:\n    TITLE           : valid\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 25 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.437166000000005,
+        "tags": {
+          "TITLE": "valid"
+        },
+        "tagEntries": [
+          {
+            "key": "TITLE",
+            "value": "valid"
+          }
+        ]
+      }
+    }
+  ]
+}

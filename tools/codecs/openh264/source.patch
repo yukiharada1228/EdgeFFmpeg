@@ -1,0 +1,372 @@
+diff --git a/codec/decoder/core/inc/decoder_context.h b/codec/decoder/core/inc/decoder_context.h
+index 4d9adeb..48d5649 100644
+--- a/codec/decoder/core/inc/decoder_context.h
++++ b/codec/decoder/core/inc/decoder_context.h
+@@ -272,6 +272,8 @@ typedef struct tagSWelsLastDecPicInfo {
+   // Save the last nal header info
+   SNalUnitHeaderExt sLastNalHdrExt;
+   SSliceHeader      sLastSliceHeader;
++  int64_t           iEdgeFrameOffset;
++  int32_t           iEdgePreviousFrameNum;
+   int32_t           iPrevPicOrderCntMsb;
+   int32_t           iPrevPicOrderCntLsb;
+   PPicture          pPreviousDecodedPictureInDpb; //pointer to previously decoded picture in DPB for error concealment
+diff --git a/codec/decoder/core/inc/memmgr_nal_unit.h b/codec/decoder/core/inc/memmgr_nal_unit.h
+index 380e32c..755c92d 100644
+--- a/codec/decoder/core/inc/memmgr_nal_unit.h
++++ b/codec/decoder/core/inc/memmgr_nal_unit.h
+@@ -50,6 +50,8 @@ namespace WelsDec {
+ 
+ int32_t MemInitNalList (PAccessUnit* ppAu, const uint32_t kuiSize, CMemoryAlign* pMa);
+ 
++int32_t EdgeReserveNalList (PAccessUnit* ppAu, uint32_t incoming, CMemoryAlign* pMa);
++
+ int32_t MemFreeNalList (PAccessUnit* ppAu, CMemoryAlign* pMa);
+ 
+ /*
+diff --git a/codec/decoder/core/inc/pic_queue.h b/codec/decoder/core/inc/pic_queue.h
+index b41bb91..3b3b11e 100644
+--- a/codec/decoder/core/inc/pic_queue.h
++++ b/codec/decoder/core/inc/pic_queue.h
+@@ -47,6 +47,7 @@ namespace WelsDec {
+ 
+ 
+ typedef struct TagPicBuff {
++  struct TagWelsDecoderContext* pEdgeContext;
+   PPicture*      ppPic;
+   int32_t        iCapacity;  // capacity size of queue
+   int32_t        iCurrentIdx;
+diff --git a/codec/decoder/core/inc/picture.h b/codec/decoder/core/inc/picture.h
+index 745484f..b5953fd 100644
+--- a/codec/decoder/core/inc/picture.h
++++ b/codec/decoder/core/inc/picture.h
+@@ -49,6 +49,7 @@ namespace WelsDec {
+ */
+ 
+ struct SPicture {
++  bool bEdgeLazy;
+   /************************************payload data*********************************/
+   uint8_t*        pBuffer[4];             // pointer to the first allocated byte, basical offset of buffer, dimension:
+   uint8_t*        pData[4];               // pointer to picture planes respectively
+diff --git a/codec/decoder/core/src/deblocking.cpp b/codec/decoder/core/src/deblocking.cpp
+index 1837c76..a499b92 100644
+--- a/codec/decoder/core/src/deblocking.cpp
++++ b/codec/decoder/core/src/deblocking.cpp
+@@ -1180,8 +1180,8 @@ void WelsDeblockingMb (PDqLayer pCurDqLayer, PDeblockingFilter  pFilter, int32_t
+     } else {
+       * (uint32_t*)nBS[1][0] = 0;
+     }
+-    //SKIP MB_16x16 or others
+-    if (IS_SKIP (iCurMbType)) {
++    // P-skip has uniform motion; B-skip direct partitions can have internal motion edges.
++    if (IS_SKIP (iCurMbType) && !bBSlice) {
+       * (uint32_t*)nBS[0][1] = * (uint32_t*)nBS[0][2] = * (uint32_t*)nBS[0][3] =
+                                  * (uint32_t*)nBS[1][1] = * (uint32_t*)nBS[1][2] = * (uint32_t*)nBS[1][3] = 0;
+     } else {
+diff --git a/codec/decoder/core/src/decoder.cpp b/codec/decoder/core/src/decoder.cpp
+index 9d05a9b..b3e47b0 100644
+--- a/codec/decoder/core/src/decoder.cpp
++++ b/codec/decoder/core/src/decoder.cpp
+@@ -60,6 +60,8 @@ extern PPicture AllocPicture (PWelsDecoderContext pCtx, const int32_t kiPicWidth
+ 
+ extern void FreePicture (PPicture pPic, CMemoryAlign* pMa);
+ 
++extern PPicture EdgeAllocPictureShell (PWelsDecoderContext, int32_t, int32_t);
++
+ static int32_t CreatePicBuff (PWelsDecoderContext pCtx, PPicBuff* ppPicBuf, const int32_t kiSize,
+                               const int32_t kiPicWidth, const int32_t kiPicHeight) {
+ 
+@@ -77,6 +79,7 @@ static int32_t CreatePicBuff (PWelsDecoderContext pCtx, PPicBuff* ppPicBuf, cons
+     return ERR_INFO_OUT_OF_MEMORY;
+   }
+   pPicBuf->pMa = pMa;
++  pPicBuf->pEdgeContext = pCtx;
+ 
+   pPicBuf->ppPic = (PPicture*)pMa->WelsMallocz (kiSize * sizeof (PPicture), "PPicture*");
+ 
+@@ -87,7 +90,7 @@ static int32_t CreatePicBuff (PWelsDecoderContext pCtx, PPicBuff* ppPicBuf, cons
+   }
+ 
+   for (iPicIdx = 0; iPicIdx < kiSize; ++ iPicIdx) {
+-    PPicture pPic = AllocPicture (pCtx, kiPicWidth, kiPicHeight);
++    PPicture pPic = EdgeAllocPictureShell (pCtx, kiPicWidth, kiPicHeight);
+     if (NULL == pPic) {
+       // init capacity first for free memory
+       pPicBuf->iCapacity = iPicIdx;
+@@ -122,6 +125,7 @@ static int32_t IncreasePicBuff (PWelsDecoderContext pCtx, PPicBuff* ppPicBuf, co
+     return ERR_INFO_OUT_OF_MEMORY;
+   }
+   pPicNewBuf->pMa = pMa;
++  pPicNewBuf->pEdgeContext = pCtx;
+ 
+   pPicNewBuf->ppPic = (PPicture*)pMa->WelsMallocz (kiNewSize * sizeof (PPicture), "PPicture*");
+ 
+@@ -133,7 +137,7 @@ static int32_t IncreasePicBuff (PWelsDecoderContext pCtx, PPicBuff* ppPicBuf, co
+ 
+   // increase new PicBuf
+   for (iPicIdx = kiOldSize; iPicIdx < kiNewSize; ++ iPicIdx) {
+-    PPicture pPic = AllocPicture (pCtx, kiPicWidth, kiPicHeight);
++    PPicture pPic = EdgeAllocPictureShell (pCtx, kiPicWidth, kiPicHeight);
+     if (NULL == pPic) {
+       // Set maximum capacity as the new malloc memory at the tail
+       pPicNewBuf->iCapacity = iPicIdx;
+@@ -189,6 +193,7 @@ static int32_t DecreasePicBuff (PWelsDecoderContext pCtx, PPicBuff* ppPicBuf, co
+     return ERR_INFO_OUT_OF_MEMORY;
+   }
+   pPicNewBuf->pMa = pMa;
++  pPicNewBuf->pEdgeContext = pCtx;
+ 
+   pPicNewBuf->ppPic = (PPicture*)pMa->WelsMallocz (kiNewSize * sizeof (PPicture), "PPicture*");
+ 
+@@ -400,6 +405,8 @@ void WelsDecoderSpsPpsDefaults (SWelsDecoderSpsPpsCTX& sSpsPpsCtx) {
+ * fill last decoded picture info
+ */
+ void WelsDecoderLastDecPicInfoDefaults (SWelsLastDecPicInfo& sLastDecPicInfo) {
++  sLastDecPicInfo.iEdgeFrameOffset = 0;
++  sLastDecPicInfo.iEdgePreviousFrameNum = 0;
+   sLastDecPicInfo.iPrevPicOrderCntMsb = 0;
+   sLastDecPicInfo.iPrevPicOrderCntLsb = 0;
+   sLastDecPicInfo.pPreviousDecodedPictureInDpb = NULL;
+diff --git a/codec/decoder/core/src/decoder_core.cpp b/codec/decoder/core/src/decoder_core.cpp
+index 39e2810..10d6fd6 100644
+--- a/codec/decoder/core/src/decoder_core.cpp
++++ b/codec/decoder/core/src/decoder_core.cpp
+@@ -1130,6 +1130,43 @@ int32_t ParseSliceHeaderSyntaxs (PWelsDecoderContext pCtx, PBitStringAux pBs, co
+       pSliceHead->iDeltaPicOrderCnt[1] = iCode;
+     }
+   }
++  // Progressive picture-order calculation for POC types 1 and 2.
++  if (pSps->uiPocType != 0) {
++    PWelsLastDecPicInfo history = pCtx->pLastDecPicInfo;
++    const bool idr = kpCurNal->sNalHeaderExt.sNalUnitHeader.eNalUnitType == NAL_UNIT_CODED_SLICE_IDR;
++    if (idr || history->bLastHasMmco5) {
++      history->iEdgeFrameOffset = 0;
++      history->iEdgePreviousFrameNum = 0;
++    }
++    if (pSliceHead->iFrameNum < history->iEdgePreviousFrameNum)
++      history->iEdgeFrameOffset += int64_t(1) << pSps->uiLog2MaxFrameNum;
++    const int64_t absolute = history->iEdgeFrameOffset + pSliceHead->iFrameNum;
++    if (absolute > INT32_MAX)
++      return GENERATE_ERROR_NO (ERR_LEVEL_SLICE_HEADER, ERR_INFO_INVALID_FRAME_NUM);
++    const bool reference = kpCurNal->sNalHeaderExt.sNalUnitHeader.uiNalRefIdc != 0;
++    int64_t poc = 0;
++    if (pSps->uiPocType == 2) {
++      poc = idr ? 0 : 2 * absolute - (reference ? 0 : 1);
++    } else {
++      const int cycle = pSps->iNumRefFramesInPocCycle;
++      int64_t index = cycle ? absolute : 0;
++      if (!reference && index > 0) --index;
++      if (index > 0) {
++        int64_t delta = 0;
++        for (int i = 0; i < cycle; ++i) delta += pSps->iOffsetForRefFrame[i];
++        poc = ((index - 1) / cycle) * delta;
++        for (int i = 0; i <= (index - 1) % cycle; ++i) poc += pSps->iOffsetForRefFrame[i];
++      }
++      if (!reference) poc += pSps->iOffsetForNonRefPic;
++      poc += pSliceHead->iDeltaPicOrderCnt[0];
++      const int64_t bottom = poc + pSps->iOffsetForTopToBottomField + pSliceHead->iDeltaPicOrderCnt[1];
++      if (bottom < poc) poc = bottom;
++    }
++    if (poc < INT32_MIN || poc > INT32_MAX)
++      return GENERATE_ERROR_NO (ERR_LEVEL_SLICE_HEADER, ERR_INFO_INVALID_FRAME_NUM);
++    pSliceHead->iPicOrderCntLsb = int32_t(poc);
++    history->iEdgePreviousFrameNum = pSliceHead->iFrameNum;
++  }
+   pSliceHead->iRedundantPicCnt = 0;
+   if (pPps->bRedundantPicCntPresentFlag) {
+     WELS_READ_VERIFY (BsGetUe (pBs, &uiCode)); //redundant_pic_cnt
+diff --git a/codec/decoder/core/src/memmgr_nal_unit.cpp b/codec/decoder/core/src/memmgr_nal_unit.cpp
+index c274b71..84d8fc0 100644
+--- a/codec/decoder/core/src/memmgr_nal_unit.cpp
++++ b/codec/decoder/core/src/memmgr_nal_unit.cpp
+@@ -48,6 +48,11 @@ int32_t MemInitNalList (PAccessUnit* ppAu, const uint32_t kuiSize, CMemoryAlign*
+   uint32_t uiIdx = 0;
+   uint8_t* pBase = NULL, *pPtr = NULL;
+   const uint32_t kuiSizeAu = sizeof (SAccessUnit);
++  const uint64_t kuiTotalBytes = sizeof (SAccessUnit) +
++                                 uint64_t (kuiSize) * (sizeof (PNalUnit) + sizeof (SNalUnit));
++  // WelsMallocz and ExpandNalUnitList accept signed 32-bit sizes.
++  if (kuiSize == 0 || kuiTotalBytes > 0x7fffffffULL)
++    return ERR_INFO_INVALID_PARAM;
+   const uint32_t kuiSizeNalUnitPtr = kuiSize * sizeof (PNalUnit);
+   const uint32_t kuiSizeNalUnit = sizeof (SNalUnit);
+   const uint32_t kuiCountSize = (kuiSizeAu + kuiSizeNalUnitPtr + kuiSize * kuiSizeNalUnit) * sizeof (uint8_t);
+@@ -113,6 +118,7 @@ int32_t ExpandNalUnitList (PAccessUnit* ppAu, const int32_t kiOrgSize, const int
+     pTmp->uiCountUnitsNum       = kiExpSize;
+     pTmp->uiAvailUnitsNum       = (*ppAu)->uiAvailUnitsNum;
+     pTmp->uiActualUnitsNum      = (*ppAu)->uiActualUnitsNum;
++    pTmp->uiStartPos            = (*ppAu)->uiStartPos;
+     pTmp->uiEndPos              = (*ppAu)->uiEndPos;
+     pTmp->bCompletedAuFlag      = (*ppAu)->bCompletedAuFlag;
+ 
+@@ -122,6 +128,15 @@ int32_t ExpandNalUnitList (PAccessUnit* ppAu, const int32_t kiOrgSize, const int
+   }
+ }
+ 
++int32_t EdgeReserveNalList (PAccessUnit* ppAu, uint32_t incoming, CMemoryAlign* pMa) {
++  if (!ppAu || !*ppAu || incoming > 16384U) return ERR_INFO_INVALID_PARAM;
++  PAccessUnit au = *ppAu;
++  if (au->uiAvailUnitsNum > 16384U) return ERR_INFO_INVALID_PARAM;
++  const uint32_t needed = au->uiAvailUnitsNum + incoming;
++  if (needed <= au->uiCountUnitsNum) return ERR_NONE;
++  return ExpandNalUnitList (ppAu, au->uiCountUnitsNum, needed, pMa);
++}
++
+ /*
+  *  MemGetNextNal
+  *  Get next NAL Unit for using.
+@@ -132,7 +147,9 @@ PNalUnit MemGetNextNal (PAccessUnit* ppAu, CMemoryAlign* pMa) {
+   PNalUnit pNu = NULL;
+ 
+   if (pAu->uiAvailUnitsNum >= pAu->uiCountUnitsNum) { // need expand list
+-    const uint32_t kuiExpandingSize = pAu->uiCountUnitsNum + (MAX_NAL_UNIT_NUM_IN_AU >> 1);
++    if (pAu->uiCountUnitsNum > 0x3fffffffU)
++      return NULL;
++    const uint32_t kuiExpandingSize = pAu->uiCountUnitsNum * 2;
+     if (ExpandNalUnitList (ppAu, pAu->uiCountUnitsNum, kuiExpandingSize, pMa))
+       return NULL; // out of memory
+     pAu = *ppAu;
+diff --git a/codec/decoder/core/src/parse_mb_syn_cavlc.cpp b/codec/decoder/core/src/parse_mb_syn_cavlc.cpp
+index dc10d72..02265ad 100644
+--- a/codec/decoder/core/src/parse_mb_syn_cavlc.cpp
++++ b/codec/decoder/core/src/parse_mb_syn_cavlc.cpp
+@@ -1621,6 +1621,9 @@ int32_t ParseInterBInfo (PWelsDecoderContext pCtx, int16_t iMvArray[LIST_A][30][
+           }
+           Update8x8RefIdx (pCurDqLayer, iIdx8, LIST_0, iRef[LIST_0]);
+           Update8x8RefIdx (pCurDqLayer, iIdx8, LIST_1, iRef[LIST_1]);
++          // Preserve temporal-direct references for the later motion-prediction cache.
++          ref_idx_list[LIST_0][i] = iRef[LIST_0];
++          ref_idx_list[LIST_1][i] = iRef[LIST_1];
+           FillTemporalDirect8x8Mv (pCurDqLayer, iIdx8, pSubPartCount[i], pPartW[i], directSubMbType, iRef, mvColoc, iMvArray,
+                                    NULL);
+         }
+diff --git a/codec/decoder/core/src/pic_queue.cpp b/codec/decoder/core/src/pic_queue.cpp
+index ef44846..0fea3e5 100644
+--- a/codec/decoder/core/src/pic_queue.cpp
++++ b/codec/decoder/core/src/pic_queue.cpp
+@@ -136,6 +136,27 @@ PPicture AllocPicture (PWelsDecoderContext pCtx, const int32_t kiPicWidth, const
+   return pPic;
+ }
+ 
++PPicture EdgeAllocPictureShell (PWelsDecoderContext ctx, int32_t width, int32_t height) {
++  if (GetThreadCount (ctx) != 0 || ctx->pParam->bParseOnly) return AllocPicture (ctx, width, height);
++  PPicture pic = (PPicture)ctx->pMemAlign->WelsMallocz (sizeof (SPicture), "PPicture");
++  if (!pic) return NULL;
++  pic->bEdgeLazy = true;
++  pic->iWidthInPixel = width;
++  pic->iHeightInPixel = height;
++  pic->iFrameNum = -1;
++  return pic;
++}
++
++static PPicture EdgeMaterializePicture (PPicBuff pool, int32_t index) {
++  PPicture shell = pool->ppPic[index];
++  if (!shell || !shell->bEdgeLazy) return shell;
++  PPicture pic = AllocPicture (pool->pEdgeContext, shell->iWidthInPixel, shell->iHeightInPixel);
++  if (!pic) return NULL;
++  pool->ppPic[index] = pic;
++  FreePicture (shell, pool->pMa);
++  return pic;
++}
++
+ void FreePicture (PPicture pPic, CMemoryAlign* pMa) {
+   if (NULL != pPic) {
+     if (pPic->pBuffer[0]) {
+@@ -192,7 +213,7 @@ PPicture PrefetchPic (PPicBuff pPicBuf) {
+   for (iPicIdx = pPicBuf->iCurrentIdx + 1; iPicIdx < pPicBuf->iCapacity ; ++iPicIdx) {
+     if (pPicBuf->ppPic[iPicIdx] != NULL && !pPicBuf->ppPic[iPicIdx]->bUsedAsRef
+         && pPicBuf->ppPic[iPicIdx]->iRefCount <= 0) {
+-      pPic = pPicBuf->ppPic[iPicIdx];
++      pPic = EdgeMaterializePicture (pPicBuf, iPicIdx);
+       break;
+     }
+   }
+@@ -204,7 +225,7 @@ PPicture PrefetchPic (PPicBuff pPicBuf) {
+   for (iPicIdx = 0 ; iPicIdx <= pPicBuf->iCurrentIdx ; ++iPicIdx) {
+     if (pPicBuf->ppPic[iPicIdx] != NULL && !pPicBuf->ppPic[iPicIdx]->bUsedAsRef
+         && pPicBuf->ppPic[iPicIdx]->iRefCount <= 0) {
+-      pPic = pPicBuf->ppPic[iPicIdx];
++      pPic = EdgeMaterializePicture (pPicBuf, iPicIdx);
+       break;
+     }
+   }
+diff --git a/codec/decoder/plus/inc/welsDecoderExt.h b/codec/decoder/plus/inc/welsDecoderExt.h
+index f5abac3..c00f054 100644
+--- a/codec/decoder/plus/inc/welsDecoderExt.h
++++ b/codec/decoder/plus/inc/welsDecoderExt.h
+@@ -109,12 +109,41 @@ class CWelsDecoder : public ISVCDecoder {
+   virtual long EXTAPI SetOption (DECODER_OPTION eOptID, void* pOption);
+   virtual long EXTAPI GetOption (DECODER_OPTION eOptID, void* pOption);
+ 
++  // EdgeFFmpeg experiment: expose picture order and opt into decode-order output.
++  // Separate candidate only; upstream public decoder ABI remains unchanged.
++  int32_t EdgeReserveInputNals (uint32_t count);
++  void EdgeDecodeOrder (bool enabled) { m_bEdgeDecodeOrder = enabled; }
++  int32_t EdgeCurrentPOC () const {
++    PWelsDecoderContext ctx = m_pDecThrCtx ? m_pDecThrCtx[0].pCtx : NULL;
++    return ctx && ctx->pSliceHeader ? ctx->pSliceHeader->iPicOrderCntLsb : INT32_MIN;
++  }
++  int32_t EdgeCurrentSliceType () const {
++    PWelsDecoderContext ctx = m_pDecThrCtx ? m_pDecThrCtx[0].pCtx : NULL;
++    return ctx && ctx->pSliceHeader ? ctx->pSliceHeader->eSliceType : -1;
++  }
++  bool EdgeCurrentMMCO5 () const {
++    PWelsDecoderContext ctx = m_pDecThrCtx ? m_pDecThrCtx[0].pCtx : NULL;
++    return ctx && ctx->pLastDecPicInfo && ctx->pLastDecPicInfo->bLastHasMmco5;
++  }
++  int32_t EdgeCurrentSequence () const {
++    PWelsDecoderContext ctx = m_pDecThrCtx ? m_pDecThrCtx[0].pCtx : NULL;
++    return ctx ? ctx->iSeqNum : -1;
++  }
++  int32_t EdgeOutputPOC () const {
++    return (m_bIsBaseline || m_bEdgeDecodeOrder) ? EdgeCurrentPOC () : m_sReoderingStatus.iLastWrittenPOC;
++  }
++  int32_t EdgeOutputSequence () const {
++    return (m_bIsBaseline || m_bEdgeDecodeOrder) ? EdgeCurrentSequence () : m_sReoderingStatus.iLastWrittenSeqNum;
++  }
++
++
+  public:
+   DECODING_STATE DecodeFrame2WithCtx (PWelsDecoderContext pCtx, const unsigned char* kpSrc, const int kiSrcLen,
+                                       unsigned char** ppDst, SBufferInfo* pDstInfo);
+   DECODING_STATE ParseAccessUnit (SWelsDecoderThreadCTX& sThreadCtx);
+ 
+  private:
++  bool                   m_bEdgeDecodeOrder = false;
+   welsCodecTrace*         m_pWelsTrace;
+   uint32_t                m_uiDecodeTimeStamp;
+   bool                    m_bIsBaseline;
+diff --git a/codec/decoder/plus/src/welsDecoderExt.cpp b/codec/decoder/plus/src/welsDecoderExt.cpp
+index 8f760eb..427237b 100644
+--- a/codec/decoder/plus/src/welsDecoderExt.cpp
++++ b/codec/decoder/plus/src/welsDecoderExt.cpp
+@@ -45,6 +45,7 @@
+ #include "codec_def.h"
+ #include "typedefs.h"
+ #include "memory_align.h"
++#include "memmgr_nal_unit.h"
+ #include "utils.h"
+ #include "version.h"
+ 
+@@ -701,6 +702,12 @@ long CWelsDecoder::GetOption (DECODER_OPTION eOptID, void* pOption) {
+   return cmInitParaError;
+ }
+ 
++int32_t CWelsDecoder::EdgeReserveInputNals (uint32_t count) {
++  if (m_iThreadCount != 0 || !m_pDecThrCtx || !m_pDecThrCtx[0].pCtx) return -1;
++  PWelsDecoderContext ctx = m_pDecThrCtx[0].pCtx;
++  return EdgeReserveNalList (&ctx->pAccessUnitList, count, ctx->pMemAlign);
++}
++
+ DECODING_STATE CWelsDecoder::DecodeFrameNoDelay (const unsigned char* kpSrc,
+     const int kiSrcLen,
+     unsigned char** ppDst,
+@@ -1190,6 +1197,8 @@ void CWelsDecoder::ReleaseBufferedReadyPictureNoReorder(PWelsDecoderContext pCtx
+ DECODING_STATE CWelsDecoder::ReorderPicturesInDisplay(PWelsDecoderContext pDecContext, unsigned char** ppDst,
+   SBufferInfo* pDstInfo) {
+   DECODING_STATE iRet = dsErrorFree;
++  // EdgeFFmpeg experiment: let the caller own bounded presentation scheduling.
++  if (m_bEdgeDecodeOrder) return iRet;
+   if (pDecContext->pSps != NULL) {
+     m_bIsBaseline = pDecContext->pSps->uiProfileIdc == 66 || pDecContext->pSps->uiProfileIdc == 83;
+     if (!m_bIsBaseline) {

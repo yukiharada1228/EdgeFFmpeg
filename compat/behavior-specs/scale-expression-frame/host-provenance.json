@@ -1,0 +1,42 @@
+{
+  "oracle": {
+    "name": "scale-expression-frame",
+    "source": "/Users/yukiharada/orca/EdgeFFmpeg/tools/differential-runner/scale-expression/frame-oracle.c",
+    "sourceSha256": "4cbabd43aae6c429276ed81c9f97c517a33c9dd1a9d82e1a8929838a4381dbf4",
+    "includedSource": "libavfilter/vf_scale.c",
+    "sourceDependencySha256": "3efdf8a46613c3545f50887f6dbb5a9c95ce8d38d7312f9ee544ae4453be3079",
+    "reference": {
+      "artifacts": {
+        "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+        "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+      },
+      "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "platform": "darwin",
+      "arch": "arm64",
+      "flags": [
+        "--disable-autodetect",
+        "--disable-doc",
+        "--disable-debug",
+        "--disable-x86asm"
+      ],
+      "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+      "targetPlatformMatches": false,
+      "reproducibleToolchainPinned": false
+    },
+    "librarySha256": {
+      "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libavfilter/libavfilter.a": "65827c43c8ac4463e661bead3dcdd90f3c0018c7119fa52ad737c9c80c93f1f7",
+      "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libavformat/libavformat.a": "d1760cb51a34c69c6c664fa616e455ee5f90d96c8f2a7d82d02bd5707837d1cc",
+      "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libavcodec/libavcodec.a": "7570dfffaf568d1afeb7b4b002493f5d188470273819b7a4dd0521db75eb4ca9",
+      "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libswscale/libswscale.a": "fb03055c68d98b220dc46c7a58e60cedb233b37559d68cb24ccdc8bf5df5e050",
+      "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libswresample/libswresample.a": "053aa00bcf154fc88877406ddd492ffc68952977cb1c61fe31b353c2d6547b1f",
+      "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libavutil/libavutil.a": "b8864b177f1717ac38de58754a16ccee473e0fb7bf304398dcaffc1b6c89a598"
+    },
+    "compiler": "cc",
+    "compilerVersion": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "binarySha256": "5c0953b5de0d14b3a1ddd08d19030b23934a94681fc07158aa90dc69bc2a6d27"
+  },
+  "cases": 224,
+  "operations": 1792,
+  "scope": "Native single-input frame-mode scale geometry and command replies projected from actual frame processing; no pixel/scheduler/CLI certification."
+}

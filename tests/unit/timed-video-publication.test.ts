@@ -1,0 +1,9 @@
+import {it,expect} from 'vitest';
+import {evaluatePublication} from '../helpers/timed-video-publication.js';
+it.each(['ok','read-error','cancel-read','open-output-error','write-error','commit-error','ack-lost','uncertain-ack','cancel-after-left','store-close-error','abort-error'])('retains publication effects and disposes input stores: %s',async scenario=>{
+ const result=await evaluatePublication(scenario);expect(result.pending).toBe(0);expect(result.stores).toEqual({created:1,closed:1,entries:0});expect(result.exitCode).toBe(scenario==='ok'?0:1);if(scenario!=='ok')expect(result.primaryPreserved).toBe(true);if(scenario==='abort-error')expect(result.secondaryPreserved).toBe(true);
+ const published=['ok','ack-lost','uncertain-ack'].includes(scenario)?['/left','/right']:['commit-error','cancel-after-left'].includes(scenario)?['/left']:[];expect(Object.keys(result.rows).sort()).toEqual(published);
+ const confirmed=['ok','ack-lost'].includes(scenario)?['/left','/right']:['commit-error','uncertain-ack','cancel-after-left'].includes(scenario)?['/left']:[];expect(result.outputs).toEqual(confirmed);
+ const effects=scenario==='ok'?[]:scenario==='open-output-error'?[{path:'/left',status:'aborted'}]:['commit-error','uncertain-ack'].includes(scenario)?[{path:'/left',status:'published'},{path:'/right',status:'uncertain'}]:scenario==='ack-lost'?[{path:'/left',status:'published'},{path:'/right',status:'published'}]:scenario==='cancel-after-left'?[{path:'/left',status:'published'},{path:'/right',status:'aborted'}]:['/left','/right'].map(path=>({path,status:scenario==='abort-error'?'cleanup-failed':'aborted'}));expect(result.effects).toEqual(effects);
+ if(scenario==='cancel-read'||scenario==='cancel-after-left')expect(result.diagnostic).toBe('cancelled');if(scenario==='read-error'||scenario==='cancel-read')expect(result.effectDepth).toBe(1);
+});

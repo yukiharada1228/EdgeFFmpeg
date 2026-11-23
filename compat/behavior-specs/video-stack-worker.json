@@ -1,0 +1,433 @@
+{
+  "reference": {
+    "aarch64": {
+      "artifacts": {
+        "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+        "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+      },
+      "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "platform": "darwin",
+      "arch": "arm64",
+      "flags": [
+        "--disable-autodetect",
+        "--disable-doc",
+        "--disable-debug",
+        "--disable-x86asm"
+      ],
+      "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+      "targetPlatformMatches": false,
+      "reproducibleToolchainPinned": false
+    },
+    "x86_64": {
+      "artifacts": {
+        "ffmpeg": "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91",
+        "ffprobe": "0895f870196845f40002238980f908e2dfed7dcf8197a1074b98e4312431671b"
+      },
+      "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "platform": "linux",
+      "arch": "x64",
+      "flags": [
+        "--disable-autodetect",
+        "--disable-doc",
+        "--disable-debug",
+        "--disable-x86asm"
+      ],
+      "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 12 (Debian 12.2.0-14+deb12u1)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+      "targetPlatformMatches": true,
+      "reproducibleToolchainPinned": false
+    }
+  },
+  "container": {
+    "image": "docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496",
+    "platform": "linux/amd64",
+    "outputDirectory": ".build/linux-x64",
+    "purpose": "Isolated Linux x86_64 reference build; reproducible binary identity and conformance remain unverified"
+  },
+  "cases": [
+    {
+      "id": "0",
+      "source": "nv21",
+      "targets": [
+        "bgra",
+        "rgba"
+      ],
+      "graph": "[0:v]split[a][b];[a]hflip[x];[x][b]hstack,split[left][right]",
+      "sizes": [
+        "3x2",
+        "13x7"
+      ],
+      "inputTime": [],
+      "formats": [
+        "framecrc",
+        "framecrc"
+      ],
+      "scalar": false,
+      "mapping": [
+        0,
+        1
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "a95ae6c7f33897faceacf7fd18ebcd135dc1bb9945ca809fc403e4e8a1c9b180",
+      "native": {
+        "aarch64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDN4Mgojc2FyIDA6IDAvMQowLCAgICAgICAgICAwLCAgICAgICAgICAwLCAgICAgICAgMSwgICAgICAgMjQsIDB4YmY5NjBmYzAK",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMSwgICAgICAgICAgMSwgICAgICAgIDEsICAgICAgMzY0LCAweDM4OTdlMTkyCg=="
+        ],
+        "x86_64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDN4Mgojc2FyIDA6IDAvMQowLCAgICAgICAgICAwLCAgICAgICAgICAwLCAgICAgICAgMSwgICAgICAgMjQsIDB4YmY5NjBmYzAK",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMSwgICAgICAgICAgMSwgICAgICAgIDEsICAgICAgMzY0LCAweDM4OTdlMTkyCg=="
+        ]
+      }
+    },
+    {
+      "id": "1",
+      "source": "rgba",
+      "targets": [
+        "nv12",
+        "gray"
+      ],
+      "graph": "[0:v]scale=13:7,split[a][b];[a][b]vstack,split[left][right]",
+      "sizes": [
+        null,
+        null
+      ],
+      "inputTime": [
+        "-ss",
+        "0.02",
+        "-t",
+        "0.1"
+      ],
+      "formats": [
+        "rawvideo",
+        "framecrc"
+      ],
+      "scalar": false,
+      "mapping": [
+        1,
+        0
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "9db13462babe4c10957f55af4d6b4b211ce376898f5b0bd3a6605e32a63182f8",
+      "native": {
+        "aarch64": [
+          "RE9sh3pHLFeYqHxUR0RPbId6RyxXmKh8VEe9sZp8ZlxWbI6MZDwvvbGafGZcVmyOjGQ8L72xmnxmXFZsjoxkPC/BsYheZ5y/rYx0bmJewbGIXmecv62MdG5iXkRPbId6RyxXmKh8VEdET2yHekcsV5iofFRHvbGafGZcVmyOjGQ8L72xmnxmXFZsjoxkPC+9sZp8ZlxWbI6MZDwvwbGIXmecv62MdG5iXsGxiF5nnL+tjHRuYl5t5YWgmWSWbZZtlm2WbR2BZmyVi3Dei4yZZJZtHYFmbJWLcN6LjJlklm2WbZ9sd3Ilf3ppjp5t5W3lhaCZZJZtlm2WbZZtHYFmbJWLcN6LjJlklm0dgWZslYtw3ouMmWSWbQ==",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDE0CiNzYXIgMDogMC8xCjAsICAgICAgICAgIDEsICAgICAgICAgIDEsICAgICAgICAxLCAgICAgIDE4MiwgMHg5ZDMwNWVhOAo="
+        ],
+        "x86_64": [
+          "RE9sh3pHLFeYqHxUR0RPbId6RyxXmKh8VEe9sZp8ZlxWbI6MZDwvvbGafGZcVmyOjGQ8L72xmnxmXFZsjoxkPC/BsYheZ5y/rYx0bmJewbGIXmecv62MdG5iXkRPbId6RyxXmKh8VEdET2yHekcsV5iofFRHvbGafGZcVmyOjGQ8L72xmnxmXFZsjoxkPC+9sZp8ZlxWbI6MZDwvwbGIXmecv62MdG5iXsGxiF5nnL+tjHRuYl5t5YWgmWSWbZZtlm2WbR2BZmyVi3Dei4yZZJZtHYFmbJWLcN6LjJlklm2WbZ9sd3Ilf3ppjp5t5W3lhaCZZJZtlm2WbZZtHYFmbJWLcN6LjJlklm0dgWZslYtw3ouMmWSWbQ==",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDE0CiNzYXIgMDogMC8xCjAsICAgICAgICAgIDEsICAgICAgICAgIDEsICAgICAgICAxLCAgICAgIDE4MiwgMHg5ZDMwNWVhOAo="
+        ]
+      }
+    },
+    {
+      "id": "2",
+      "source": "yuv444p",
+      "targets": [
+        "gbrp",
+        "nv12"
+      ],
+      "graph": "[a][b]hstack,split[left][right];[x]transpose=clock[a];[y]transpose=cclock[b];[0:v]split[x][y]",
+      "sizes": [
+        "5x3",
+        "3x5"
+      ],
+      "inputTime": [],
+      "formats": [
+        "framecrc",
+        "rawvideo"
+      ],
+      "scalar": false,
+      "mapping": [
+        0,
+        1
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "a354e595685525a4bc1a39f59b029356f4787d7de004b8403fe1b44cd969c955",
+      "native": {
+        "aarch64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDV4Mwojc2FyIDA6IDAvMQowLCAgICAgICAgICAwLCAgICAgICAgICAwLCAgICAgICAgMSwgICAgICAgNDUsIDB4ZGE0ZDE1NTUK",
+          "U4bFe4agmOuXoIZyyIZNfoJzZm9rfHhrWn+AU4bFe4agmOuXoIZyyIZNfoJzZm9rfHhrWn+A"
+        ],
+        "x86_64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDV4Mwojc2FyIDA6IDAvMQowLCAgICAgICAgICAwLCAgICAgICAgICAwLCAgICAgICAgMSwgICAgICAgNDUsIDB4ZGE0ZDE1NTUK",
+          "U4bFe4agmOuXoIZyyIZNfoJzZm9rfHhrWn+AU4bFe4agmOuXoIZyyIZNfoJzZm9rfHhrWn+A"
+        ]
+      }
+    },
+    {
+      "id": "3",
+      "source": "gray",
+      "targets": [
+        "yuva420p",
+        "rgb24"
+      ],
+      "graph": "[0:v]split[a][b];[a]hflip[x];[x][b]hstack,split[left][right]",
+      "sizes": [
+        "13x7",
+        "3x2"
+      ],
+      "inputTime": [],
+      "formats": [
+        "framecrc",
+        "framecrc"
+      ],
+      "scalar": false,
+      "mapping": [
+        1,
+        0
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "9f76f8ef6f03b1dc554d6d0d5b850c1e7a1d07bb1d9a419e919b965ac529d1f0",
+      "native": {
+        "aarch64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMCwgICAgICAgICAgMCwgICAgICAgIDEsICAgICAgMjM4LCAweDI1MDg5ZmEyCg==",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDN4Mgojc2FyIDA6IDAvMQowLCAgICAgICAgICAxLCAgICAgICAgICAxLCAgICAgICAgMSwgICAgICAgMTgsIDB4NjcxYTBhMmMK"
+        ],
+        "x86_64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMCwgICAgICAgICAgMCwgICAgICAgIDEsICAgICAgMjM4LCAweDI1MDg5ZmEyCg==",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDN4Mgojc2FyIDA6IDAvMQowLCAgICAgICAgICAxLCAgICAgICAgICAxLCAgICAgICAgMSwgICAgICAgMTgsIDB4NjcxYTBhMmMK"
+        ]
+      }
+    },
+    {
+      "id": "4",
+      "source": "gbrp",
+      "targets": [
+        "gray",
+        "bgra"
+      ],
+      "graph": "[0:v]scale=13:7,split[a][b];[a][b]vstack,split[left][right]",
+      "sizes": [
+        null,
+        "13x7"
+      ],
+      "inputTime": [
+        "-ss",
+        "0.02",
+        "-t",
+        "0.1"
+      ],
+      "formats": [
+        "framecrc",
+        "rawvideo"
+      ],
+      "scalar": false,
+      "mapping": [
+        0,
+        1
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "a354e595685525a4bc1a39f59b029356f4787d7de004b8403fe1b44cd969c955",
+      "native": {
+        "aarch64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDE0CiNzYXIgMDogMC8xCjAsICAgICAgICAgIDAsICAgICAgICAgIDAsICAgICAgICAxLCAgICAgIDE4MiwgMHgxOGI1NWZiNgo=",
+          "UVFR/1ZWVv9eXl7/ampq/3p6ev+Dg4P/lZWV/6ampv+1tbX/uLi4/6ioqP+ZmZn/lZWV/6Wlpf+SkpL/aGho/zg4OP8rKyv/QEBA/1NTU/9oaGj/dHR0/4eHh/+RkZH/n5+f/6Ojo//CwsL/tLS0/5OTk/9vb2//Y2Nj/3V1df96enr/aWlp/1JSUv9OTk7/YWFh/3R0dP95eXn/hISE/4eHh/+JiYn/j4+P/5eXl/+ioqL/pqam/5WVlf+CgoL/dHR0/3V1df9ycnL/cnJy/3V1df9ubm7/X19f/09PT/9SUlL/YWFh/3V1df+Kior/m5ub/6enp/+hoaH/n5+f/56env+0tLT/oKCg/3Jycv8+Pj7/Li4u/0RERP9UVFT/YWFh/2ZmZv92dnb/hYWF/5eXl/+cnJz/xMTE/76+vv+srKz/mZmZ/5KSkv+hoaH/nZ2d/3V1df9ISEj/MzMz/0lJSf9ZWVn/Xl5e/1FRUf9WVlb/Xl5e/2pqav96enr/g4OD/5WVlf+mpqb/tbW1/7i4uP+oqKj/mZmZ/5WVlf+lpaX/kpKS/2hoaP84ODj/Kysr/0BAQP9TU1P/aGho/3R0dP+Hh4f/kZGR/5+fn/+jo6P/wsLC/7S0tP+Tk5P/b29v/2NjY/91dXX/enp6/2lpaf9SUlL/Tk5O/2FhYf90dHT/eXl5/4SEhP+Hh4f/iYmJ/4+Pj/+Xl5f/oqKi/6ampv+VlZX/goKC/3R0dP91dXX/cnJy/3Jycv91dXX/bm5u/19fX/9PT0//UlJS/2FhYf91dXX/ioqK/5ubm/+np6f/oaGh/5+fn/+enp7/tLS0/6CgoP9ycnL/Pj4+/y4uLv9ERET/VFRU/2FhYf9mZmb/dnZ2/4WFhf+Xl5f/nJyc/8TExP++vr7/rKys/5mZmf+SkpL/oaGh/52dnf91dXX/SEhI/zMzM/9JSUn/WVlZ/15eXv8="
+        ],
+        "x86_64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDE0CiNzYXIgMDogMC8xCjAsICAgICAgICAgIDAsICAgICAgICAgIDAsICAgICAgICAxLCAgICAgIDE4MiwgMHgxOGI1NWZiNgo=",
+          "UVFR/1ZWVv9eXl7/ampq/3p6ev+Dg4P/lZWV/6ampv+1tbX/uLi4/6ioqP+ZmZn/lZWV/6Wlpf+SkpL/aGho/zg4OP8rKyv/QEBA/1NTU/9oaGj/dHR0/4eHh/+RkZH/n5+f/6Ojo//CwsL/tLS0/5OTk/9vb2//Y2Nj/3V1df96enr/aWlp/1JSUv9OTk7/YWFh/3R0dP95eXn/hISE/4eHh/+JiYn/j4+P/5eXl/+ioqL/pqam/5WVlf+CgoL/dHR0/3V1df9ycnL/cnJy/3V1df9ubm7/X19f/09PT/9SUlL/YWFh/3V1df+Kior/m5ub/6enp/+hoaH/n5+f/56env+0tLT/oKCg/3Jycv8+Pj7/Li4u/0RERP9UVFT/YWFh/2ZmZv92dnb/hYWF/5eXl/+cnJz/xMTE/76+vv+srKz/mZmZ/5KSkv+hoaH/nZ2d/3V1df9ISEj/MzMz/0lJSf9ZWVn/Xl5e/1FRUf9WVlb/Xl5e/2pqav96enr/g4OD/5WVlf+mpqb/tbW1/7i4uP+oqKj/mZmZ/5WVlf+lpaX/kpKS/2hoaP84ODj/Kysr/0BAQP9TU1P/aGho/3R0dP+Hh4f/kZGR/5+fn/+jo6P/wsLC/7S0tP+Tk5P/b29v/2NjY/91dXX/enp6/2lpaf9SUlL/Tk5O/2FhYf90dHT/eXl5/4SEhP+Hh4f/iYmJ/4+Pj/+Xl5f/oqKi/6ampv+VlZX/goKC/3R0dP91dXX/cnJy/3Jycv91dXX/bm5u/19fX/9PT0//UlJS/2FhYf91dXX/ioqK/5ubm/+np6f/oaGh/5+fn/+enp7/tLS0/6CgoP9ycnL/Pj4+/y4uLv9ERET/VFRU/2FhYf9mZmb/dnZ2/4WFhf+Xl5f/nJyc/8TExP++vr7/rKys/5mZmf+SkpL/oaGh/52dnf91dXX/SEhI/zMzM/9JSUn/WVlZ/15eXv8="
+        ]
+      }
+    },
+    {
+      "id": "5",
+      "source": "bgr24",
+      "targets": [
+        "rgba",
+        "yuv422p"
+      ],
+      "graph": "[a][b]hstack,split[left][right];[x]transpose=clock[a];[y]transpose=cclock[b];[0:v]split[x][y]",
+      "sizes": [
+        "3x2",
+        "13x7"
+      ],
+      "inputTime": [],
+      "formats": [
+        "rawvideo",
+        "framecrc"
+      ],
+      "scalar": false,
+      "mapping": [
+        1,
+        0
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "a354e595685525a4bc1a39f59b029356f4787d7de004b8403fe1b44cd969c955",
+      "native": {
+        "aarch64": [
+          "d4aW/5Brc/+BkWz/gJBr/5Brc/90hJT/",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMSwgICAgICAgICAgMSwgICAgICAgIDEsICAgICAgMTg5LCAweDA0ZDc1ZDMwCg=="
+        ],
+        "x86_64": [
+          "d4aW/5Brc/+BkWz/gJBr/5Brc/90hJT/",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEzeDcKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMSwgICAgICAgICAgMSwgICAgICAgIDEsICAgICAgMTg5LCAweDA0ZDc1ZDMwCg=="
+        ]
+      }
+    },
+    {
+      "id": "6",
+      "source": "yuva420p",
+      "targets": [
+        "rgb24",
+        "gray"
+      ],
+      "graph": "[0:v]split[a][b];[a]hflip[x];[x][b]hstack,split[left][right]",
+      "sizes": [
+        null,
+        null
+      ],
+      "inputTime": [],
+      "formats": [
+        "framecrc",
+        "framecrc"
+      ],
+      "scalar": true,
+      "mapping": [
+        0,
+        1
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "0ab4f15d247c8b34a6c7b8c0c61005fd17d5172393adb52c6f50792a82559be1",
+      "native": {
+        "aarch64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEweDMKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMCwgICAgICAgICAgMCwgICAgICAgIDEsICAgICAgIDkwLCAweGY5MWMzMTRmCg==",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEweDMKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMSwgICAgICAgICAgMSwgICAgICAgIDEsICAgICAgIDMwLCAweGY1ZjIxMDFjCg=="
+        ],
+        "x86_64": [
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEweDMKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMCwgICAgICAgICAgMCwgICAgICAgIDEsICAgICAgIDkwLCAweGY5MWMzMTRmCg==",
+          "I3RiIDA6IDEvMjUKI21lZGlhX3R5cGUgMDogdmlkZW8KI2NvZGVjX2lkIDA6IHJhd3ZpZGVvCiNkaW1lbnNpb25zIDA6IDEweDMKI3NhciAwOiAwLzEKMCwgICAgICAgICAgMSwgICAgICAgICAgMSwgICAgICAgIDEsICAgICAgIDMwLCAweGY1ZjIxMDFjCg=="
+        ]
+      }
+    },
+    {
+      "id": "7",
+      "source": "rgb24",
+      "targets": [
+        "yuv422p",
+        "gbrp"
+      ],
+      "graph": "[0:v]scale=13:7,split[a][b];[a][b]vstack,split[left][right]",
+      "sizes": [
+        "13x7",
+        "3x2"
+      ],
+      "inputTime": [
+        "-ss",
+        "0.02",
+        "-t",
+        "0.1"
+      ],
+      "formats": [
+        "rawvideo",
+        "rawvideo"
+      ],
+      "scalar": false,
+      "mapping": [
+        1,
+        0
+      ],
+      "outputTime": [
+        [
+          "-frames:v",
+          "1"
+        ],
+        [
+          "-ss",
+          "0.02",
+          "-t",
+          "0.05"
+        ]
+      ],
+      "inputSha256": "a354e595685525a4bc1a39f59b029356f4787d7de004b8403fe1b44cd969c955",
+      "native": {
+        "aarch64": [
+          "x7ODT1KFpZRyaHmHjFpVV153nbSSW1F8pLAvN1R3hoF9cV9oi7C8f3x0a2pxdnVudoiboZmLcFRhkrCVZ1x5k5tFRVJlfpqqi1lTf6m2KDZbhIhsWV5leZSzvJCVlY53f5dsjnYxcpycgJR+TYOCVZiYlI2Gb1Z+kodidI6ebI91LXWajpOYiW+ObSl1cWlzwbBq4J1qeHZxbKqBgK98aXhhY36nsJZ2qYdocZ+UauCcb4RwaG92aI3PjW9/",
+          "jIlriY19jIh+jYB7eW+Di4J2jIlriY19jIh+jYB7eW+Di4J2"
+        ],
+        "x86_64": [
+          "x7ODT1KFpZRyaHmHjFpVV153nbSSW1F8pLAvN1R3hoF9cV9oi7C8f3x0a2pxdnVudoiboZmLcFRhkrCVZ1x5k5tFRVJlfpqqi1lTf6m2KDZbhIhsWV5leZSzvJCVlY53f5dsjnYxcpycgJR+TYOCVZiYlI2Gb1Z+kodidI6ebI91LXWajpOYiW+ObSl1cWlzwbBq4J1qeHZxbKqBgK98aXhhY36nsJZ2qYdocZ+UauCcb4RwaG92aI3PjW9/",
+          "jIlriY19jIh+jYB7eW+Di4J2jIlriY19jIh+jYB7eW+Di4J2"
+        ]
+      }
+    }
+  ]
+}

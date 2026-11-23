@@ -1,0 +1,262 @@
+[
+  {
+    "id": "wav-copy",
+    "input": "gMFlxUrJL80U0fnU3tjD3KjgjeRy6FfsPPAh9Ab46/vQ/7UDmgd/C2QPSRMuFxMb+B7dIsImpyqMLnEyVjY7Og==",
+    "sha256": "87bf8ed53a2887b2199a1c237b619713b5c5c53c0e566a1f14c764fa8e23f7f6",
+    "inputOptions": [
+      "-f",
+      "s16le",
+      "-ar",
+      "8000",
+      "-ac",
+      "1"
+    ],
+    "outputOptions": [
+      "-c:a",
+      "copy",
+      "-f",
+      "wav"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "wav-encode",
+    "input": "gMFlxUrJL80U0fnU3tjD3KjgjeRy6FfsPPAh9Ab46/vQ/7UDmgd/C2QPSRMuFxMb+B7dIsImpyqMLnEyVjY7Og==",
+    "sha256": "87bf8ed53a2887b2199a1c237b619713b5c5c53c0e566a1f14c764fa8e23f7f6",
+    "inputOptions": [
+      "-f",
+      "s16le",
+      "-ar",
+      "8000",
+      "-ac",
+      "1"
+    ],
+    "outputOptions": [
+      "-c:a",
+      "pcm_s16le",
+      "-f",
+      "wav"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "aiff-encode",
+    "input": "gMFlxUrJL80U0fnU3tjD3KjgjeRy6FfsPPAh9Ab46/vQ/7UDmgd/C2QPSRMuFxMb+B7dIsImpyqMLnEyVjY7Og==",
+    "sha256": "87bf8ed53a2887b2199a1c237b619713b5c5c53c0e566a1f14c764fa8e23f7f6",
+    "inputOptions": [
+      "-f",
+      "s16le",
+      "-ar",
+      "8000",
+      "-ac",
+      "1"
+    ],
+    "outputOptions": [
+      "-c:a",
+      "pcm_s16be",
+      "-f",
+      "aiff"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "au-encode",
+    "input": "gMFlxUrJL80U0fnU3tjD3KjgjeRy6FfsPPAh9Ab46/vQ/7UDmgd/C2QPSRMuFxMb+B7dIsImpyqMLnEyVjY7Og==",
+    "sha256": "87bf8ed53a2887b2199a1c237b619713b5c5c53c0e566a1f14c764fa8e23f7f6",
+    "inputOptions": [
+      "-f",
+      "s16le",
+      "-ar",
+      "8000",
+      "-ac",
+      "1"
+    ],
+    "outputOptions": [
+      "-c:a",
+      "pcm_s16be",
+      "-f",
+      "au"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "raw-pcm",
+    "input": "gMFlxUrJL80U0fnU3tjD3KjgjeRy6FfsPPAh9Ab46/vQ/7UDmgd/C2QPSRMuFxMb+B7dIsImpyqMLnEyVjY7Og==",
+    "sha256": "87bf8ed53a2887b2199a1c237b619713b5c5c53c0e566a1f14c764fa8e23f7f6",
+    "inputOptions": [
+      "-f",
+      "s16le",
+      "-ar",
+      "8000",
+      "-ac",
+      "1"
+    ],
+    "outputOptions": [
+      "-c:a",
+      "pcm_s16le",
+      "-f",
+      "s16le"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "audio-framecrc",
+    "input": "gMFlxUrJL80U0fnU3tjD3KjgjeRy6FfsPPAh9Ab46/vQ/7UDmgd/C2QPSRMuFxMb+B7dIsImpyqMLnEyVjY7Og==",
+    "sha256": "87bf8ed53a2887b2199a1c237b619713b5c5c53c0e566a1f14c764fa8e23f7f6",
+    "inputOptions": [
+      "-f",
+      "s16le",
+      "-ar",
+      "8000",
+      "-ac",
+      "1"
+    ],
+    "outputOptions": [
+      "-c:a",
+      "pcm_s16le",
+      "-f",
+      "framecrc"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "raw-video-copy",
+    "input": "AAsWISw3Qk1YY255hI+apbC7xtHc5/L9",
+    "sha256": "24d479a4696b06357463c3c6c1e4955949576f385c8b4a55bbc5b6ee6846e7c7",
+    "inputOptions": [
+      "-f",
+      "rawvideo",
+      "-pixel_format",
+      "rgb24",
+      "-video_size",
+      "2x2",
+      "-framerate",
+      "25"
+    ],
+    "outputOptions": [
+      "-c:v",
+      "copy",
+      "-f",
+      "rawvideo"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "video-framecrc",
+    "input": "AAsWISw3Qk1YY255hI+apbC7xtHc5/L9",
+    "sha256": "24d479a4696b06357463c3c6c1e4955949576f385c8b4a55bbc5b6ee6846e7c7",
+    "inputOptions": [
+      "-f",
+      "rawvideo",
+      "-pixel_format",
+      "rgb24",
+      "-video_size",
+      "2x2",
+      "-framerate",
+      "25"
+    ],
+    "outputOptions": [
+      "-c:v",
+      "rawvideo",
+      "-f",
+      "framecrc"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "bmp-copy",
+    "input": "Qk1GAAAAAAAAADYAAAAoAAAAAgAAAAIAAAABABgAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAeoGIj5adpKuyucDHztXc4w==",
+    "sha256": "a6432bc06769fe177f99959bfa1d0eb01f23ff3319198fb816de867f03b12d35",
+    "inputOptions": [
+      "-f",
+      "image2pipe",
+      "-c:v",
+      "bmp"
+    ],
+    "outputOptions": [
+      "-c:v",
+      "copy",
+      "-f",
+      "image2pipe"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "bmp-encode",
+    "input": "Qk1GAAAAAAAAADYAAAAoAAAAAgAAAAIAAAABABgAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAeoGIj5adpKuyucDHztXc4w==",
+    "sha256": "a6432bc06769fe177f99959bfa1d0eb01f23ff3319198fb816de867f03b12d35",
+    "inputOptions": [
+      "-f",
+      "image2pipe",
+      "-c:v",
+      "bmp"
+    ],
+    "outputOptions": [
+      "-c:v",
+      "bmp",
+      "-f",
+      "image2pipe"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "bmp-decode",
+    "input": "Qk1GAAAAAAAAADYAAAAoAAAAAgAAAAIAAAABABgAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAeoGIj5adpKuyucDHztXc4w==",
+    "sha256": "a6432bc06769fe177f99959bfa1d0eb01f23ff3319198fb816de867f03b12d35",
+    "inputOptions": [
+      "-f",
+      "image2pipe",
+      "-c:v",
+      "bmp"
+    ],
+    "outputOptions": [
+      "-c:v",
+      "rawvideo",
+      "-f",
+      "rawvideo"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "h264-rawvideo",
+    "input": "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",
+    "sha256": "99602bca24223abb7403eb905529a0cba08063881ed5a8eff63793e30b06a99b",
+    "inputOptions": [
+      "-f",
+      "mp4"
+    ],
+    "outputOptions": [
+      "-an",
+      "-c:v",
+      "rawvideo",
+      "-pix_fmt",
+      "yuv420p",
+      "-fps_mode",
+      "passthrough",
+      "-f",
+      "rawvideo"
+    ],
+    "h264Module": true
+  },
+  {
+    "id": "h264-framecrc",
+    "input": "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",
+    "sha256": "99602bca24223abb7403eb905529a0cba08063881ed5a8eff63793e30b06a99b",
+    "inputOptions": [
+      "-f",
+      "mp4"
+    ],
+    "outputOptions": [
+      "-an",
+      "-c:v",
+      "rawvideo",
+      "-pix_fmt",
+      "yuv420p",
+      "-fps_mode",
+      "passthrough",
+      "-f",
+      "framecrc"
+    ],
+    "h264Module": true
+  }
+]

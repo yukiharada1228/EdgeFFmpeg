@@ -1,0 +1,1715 @@
+{
+  "provenance": {
+    "native-comments.json": {
+      "sourceSha256": "27b76ec8598c0a985a24eb3f2495646d539d509e3daf655fe3b51a1254fcb590",
+      "referenceSha256": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698",
+      "generatorSha256": "cca602e3059e140a4cdae1a1066c3f43591aeada2c75132c670c093c8c310224"
+    },
+    "native-comment-blocks.json": {
+      "sourceSha256": "792586af2ecf862e3239a3af7ea7e8af2f6f77cce8d7592503af1574d28a2301",
+      "referenceSha256": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "native-picture-order.json": {
+      "sourceSha256": "4362014f1b308a1c0031b9faa395e07f52432a369a1d4c7bd7770085708cee4d",
+      "referenceSha256": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "native-chapters.json": {
+      "sourceSha256": "792586af2ecf862e3239a3af7ea7e8af2f6f77cce8d7592503af1574d28a2301",
+      "referenceSha256": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    }
+  },
+  "rows": [
+    {
+      "id": "empty",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAEwsAAAB0ZXN0LXZlbmRvcgAAAAD/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "232ffa00669a2bafbc2b2978cea64f7570619999aa2e0c9d11c1fd7e608559ab",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 23 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 7.671791000000006,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "basic",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAsAAAB0ZXN0LXZlbmRvcgIAAAALAAAAVElUTEU9aGVsbG8KAAAAQVJUSVNUPW9uZf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "c5c87e9a6ef2877e90633d5a13739b9e6e5d191fbad5aa48cac02c771171dc5b",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"TITLE\": \"hello\",\n            \"ARTIST\": \"one\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Metadata:\n    TITLE           : hello\n    ARTIST          : one\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 8.978082999999998,
+        "tags": {
+          "TITLE": "hello",
+          "ARTIST": "one"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "mapping",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAagsAAAB0ZXN0LXZlbmRvcgUAAAANAAAAQUxCVU1BUlRJU1Q9YQ8AAABUUkFDS05VTUJFUj0yLzcMAAAARElTQ05VTUJFUj0xDgAAAERJU0NTVUJUSVRMRT1zDQAAAERFU0NSSVBUSU9OPWP/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "0b974457db14817e614bb606aead02d4739ef99f3c0cba3482ed24cccd86e3aa",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"album_artist\": \"a\",\n            \"track\": \"2/7\",\n            \"disc\": \"1\",\n            \"disc_subtitle\": \"s\",\n            \"comment\": \"c\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Metadata:\n    album_artist    : a\n    track           : 2/7\n    disc            : 1\n    disc_subtitle   : s\n    comment         : c\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 45 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 5.911749999999998,
+        "tags": {
+          "album_artist": "a",
+          "track": "2/7",
+          "disc": "1",
+          "disc_subtitle": "s",
+          "comment": "c"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "duplicates",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAPAsAAAB0ZXN0LXZlbmRvcgMAAAAJAAAAVElUTEU9b25lCQAAAHRpdGxlPXR3bwsAAABUaVRsRT10aHJlZf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "a548c5c64c9b61dbfcc69519b8d1410d84ed0a9157d31419403f4fa31361e4bd",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"TiTlE\": \"one;two;three\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Metadata:\n    TiTlE           : one;two;three\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 33 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 6.253999999999991,
+        "tags": {
+          "TiTlE": "one;two;three"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "equals",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIQsAAAB0ZXN0LXZlbmRvcgEAAAAKAAAATkFNRT1hPWI9Y//4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "541e3c6b6d4f4925e213d37dea128d914e84f0fd91e453ee7ef922662cf579da",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"NAME\": \"a=b=c\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Metadata:\n    NAME            : a=b=c\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 26 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 5.667249999999996,
+        "tags": {
+          "NAME": "a=b=c"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "empty-fields",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMgsAAAB0ZXN0LXZlbmRvcgMAAAAGAAAAPXZhbHVlBAAAAEtFWT0JAAAATk9fRVFVQUxT//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "f9b4457295fee76f507e0edbbcb0aceb08ebf78132829413fdeaf965d6a4720a",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 31 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 8.151416000000012,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "unicode",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAOgsAAAB0ZXN0LXZlbmRvcgIAAAATAAAAVElUTEU95pel5pys6Kqe8J+OtQwAAABBUlRJU1Q9Y2Fmw6n/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "e7013a77cf00ddbd00dc6a3de0d8a33129f24b73d9c759d6decb4ba59829eb37",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"TITLE\": \"\u65e5\u672c\u8a9e\ud83c\udfb5\",\n            \"ARTIST\": \"caf\u00e9\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Metadata:\n    TITLE           : \u65e5\u672c\u8a9e\ud83c\udfb5\n    ARTIST          : caf\u00e9\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 33 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 15.595584000000002,
+        "tags": {
+          "TITLE": "\u65e5\u672c\u8a9e\ud83c\udfb5",
+          "ARTIST": "caf\u00e9"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "nul-value",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAKQsAAAB0ZXN0LXZlbmRvcgEAAAASAAAAVElUTEU9YmVmb3JlAGFmdGVy//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "2bccccf4d7ffcba1afa3dcdf4cab808ba0f558760bfbd337186fb663e88c0223",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"TITLE\": \"before\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Metadata:\n    TITLE           : before\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 28 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.812207999999998,
+        "tags": {
+          "TITLE": "before"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "nul-key",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAKQsAAAB0ZXN0LXZlbmRvcgEAAAASAAAAVElUTEUAc3VmZml4PXZhbHVl//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "4fa0c99dabdd686a4108a690cd7b69f18a2969886ae3ea26522dd6e48913e083",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"TITLE\": \"value\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Metadata:\n    TITLE           : value\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 28 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.463957999999991,
+        "tags": {
+          "TITLE": "value"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "short-zero",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAAP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "3bbe6c497e9fe5d1b8c6ae51a97d251d1a42762ae8b1fdbb73e57d84ef9d6a71",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xa32c10000] error parsing VorbisComment metadata\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 18 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 8.224375000000009,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "short-seven",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAABwAAAAAAAAD/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "c1bc27b14151e1ab363ad7ea12e075167b1a18d1496993d6cb19d01ac885c27f",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x7b5034000] error parsing VorbisComment metadata\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 20 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.91062500000001,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "vendor-overrun",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAACGQAAAAAAAAA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "ddcf2d72fee234f4aec7ccffe33956be4fa54d0ce1121de0aacda3e476276be4",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x7e8c18000] error parsing VorbisComment metadata\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 20 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 3.9614999999999725,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "vendor-signed",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAACAAAAIAAAAAA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "f0e5027c579130500294be948f96fb1031e1de0964c8b8e71938364eda7871e7",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x970c14000] error parsing VorbisComment metadata\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 20 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 5.319541000000015,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "count-overrun",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAADwAAAABkAAAAAwAAAEE9Yv/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "18b19330c0a51492cbb7afad630a75511e81f1b22e36119e4e84821f9bd03a0f",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"A\": \"b\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x8b6c10000] truncated comment header, 99 comments not found\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Metadata:\n    A               : b\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 22 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.656292000000008,
+        "tags": {
+          "A": "b"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "entry-length-truncated",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAACgAAAAABAAAAAQL/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "57b6d8f27c6b38f999f0995b85ca545da18fb3f96cf7f8cb65755cf757404e6b",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x94f034000] 2 bytes of comment header remain\n[flac @ 0x94f034000] truncated comment header, 1 comments not found\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 21 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.662415999999979,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "entry-value-truncated",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAADwAAAAABAAAAZAAAAEE9Yv/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "e0b38f538fb2e92caa90b6b4a8195e3940924200463616ca4686e9f884ad9c5e",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xc70c14000] 3 bytes of comment header remain\n[flac @ 0xc70c14000] truncated comment header, 1 comments not found\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 22 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 12.820125000000019,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "entry-signed",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAADAAAAAABAAAAAAAAgP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "2d55ff7af51577f160a6dd8cbadb1b3f40911ed9e25afc39a048659c11cdd182",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x794c18000] truncated comment header, 1 comments not found\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 21 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.608291999999977,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "trailing-bytes",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAHQsAAAB0ZXN0LXZlbmRvcgEAAAADAAAAQT1iAQID//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "91f9a4e83522b73a74ce6534d75006f0edc4d64cbb345a812fabdf2cdf1c105e",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"A\": \"b\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x7b3034000] 3 bytes of comment header remain\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Metadata:\n    A               : b\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 25 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 7.761708999999996,
+        "tags": {
+          "A": "b"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "chapter",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAASAsAAAB0ZXN0LXZlbmRvcgIAAAAXAAAAQ0hBUFRFUjAwMT0wMDowMDowMC4wMTAWAAAAQ0hBUFRFUjAwMU5BTUU9Y2hhcHRlcv/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "e42f25c5a7602cdc57ada69e3db700657313fcb1350907b587e0a31a376be292",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": 10,\n            \"start_time\": \"0.010000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\",\n            \"tags\": {\n                \"title\": \"chapter\"\n            }\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 36 kb/s\n  Chapters:\n    Chapter #0:0: start 0.010000, end 0.032000\n      Metadata:\n        title           : chapter\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 7.549499999999995,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": [
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 10,
+            "start_time": "0.010000",
+            "end": 32,
+            "end_time": "0.032000",
+            "tags": {
+              "title": "chapter"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "channel-mask-valid",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAPAsAAAB0ZXN0LXZlbmRvcgEAAAAlAAAAV0FWRUZPUk1BVEVYVEVOU0lCTEVfQ0hBTk5FTF9NQVNLPTB4M//4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "0bdd12de2cbf61589a8e16c69c3c6f3d19457d2be9b0ccf26f6906776103c797",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 33 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 14.459500000000048,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "channel-mask-invalid",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQAsAAAB0ZXN0LXZlbmRvcgEAAAApAAAAV0FWRUZPUk1BVEVYVEVOU0lCTEVfQ0hBTk5FTF9NQVNLPTB4NDAwMDD/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "08f3d3deb7b5b5f18f4238f3ef902366f2fd1e98326d0bbdd0e61df105792451",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"0x40000\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x79cc10000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-KaPWyB/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: 0x40000\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 34 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 10.031042000000014,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "0x40000"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ],
+        "chapters": []
+      }
+    },
+    {
+      "id": "two-duplicates",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAIQAAAAACAAAACQAAAFRJVExFPW9uZQgAAABBUlRJU1Q9YYQAABUAAAAAAQAAAAkAAAB0aXRsZT10d2//+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "ed0a15c4f06dfeea9792817d7622f131e47e4c515d6ad8e7a0fbb62721fe7e15",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"format\": {\n        \"tags\": {\n            \"ARTIST\": \"a\",\n            \"title\": \"one;two\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac':\n  Metadata:\n    ARTIST          : a\n    title           : one;two\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 33 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 7.979875,
+        "tags": {
+          "ARTIST": "a",
+          "title": "one;two"
+        },
+        "tagEntries": [
+          {
+            "key": "ARTIST",
+            "value": "a"
+          },
+          {
+            "key": "title",
+            "value": "one;two"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mapping-collision",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAKwAAAAACAAAADQAAAEFMQlVNQVJUSVNUPWEOAAAAYWxidW1fYXJ0aXN0PWKEAAAZAAAAAAEAAAANAAAAQUxCVU1BUlRJU1Q9Y//4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "167b68c5fe1341f51ce2d6ce545f296478466b3477202309a14ad4b0e135272f",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"format\": {\n        \"tags\": {\n            \"album_artist\": \"a\",\n            \"album_artist\": \"b\",\n            \"album_artist\": \"c\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac':\n  Metadata:\n    album_artist    : a\n    album_artist    : b\n    album_artist    : c\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 36 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 5.5604159999999965,
+        "tags": {
+          "album_artist": "c"
+        },
+        "tagEntries": [
+          {
+            "key": "album_artist",
+            "value": "a"
+          },
+          {
+            "key": "album_artist",
+            "value": "b"
+          },
+          {
+            "key": "album_artist",
+            "value": "c"
+          }
+        ]
+      }
+    },
+    {
+      "id": "three-blocks",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAGgAAAAACAAAABwAAAEE9Zmlyc3QDAAAAQj1iBAAAFAAAAAABAAAACAAAAGE9c2Vjb25khAAAEwAAAAABAAAABwAAAEE9dGhpcmT/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "c875c40f71750fb725be0d2319501e5b06266bc17ad87fbd11009b0b76bdd333",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"format\": {\n        \"tags\": {\n            \"B\": \"b\",\n            \"A\": \"first;second;third\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac':\n  Metadata:\n    B               : b\n    A               : first;second;third\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 36 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.648208000000004,
+        "tags": {
+          "B": "b",
+          "A": "first;second;third"
+        },
+        "tagEntries": [
+          {
+            "key": "B",
+            "value": "b"
+          },
+          {
+            "key": "A",
+            "value": "first;second;third"
+          }
+        ]
+      }
+    },
+    {
+      "id": "invalid-then-valid",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAAIQAABcAAAAAAQAAAAsAAABUSVRMRT12YWxpZP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "f82d40bbf9deee94248f9e293b523830a5701598f7dfbaf847a8cdb006643447",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"format\": {\n        \"tags\": {\n            \"TITLE\": \"valid\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xc39034000] error parsing VorbisComment metadata\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-comment-blocks-11tMT8/input.flac':\n  Metadata:\n    TITLE           : valid\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 25 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.437166000000005,
+        "tags": {
+          "TITLE": "valid"
+        },
+        "tagEntries": [
+          {
+            "key": "TITLE",
+            "value": "valid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "0-1",
+      "transport": "mixed",
+      "policy": "default",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBgAAaAAAAAMAAAAJaW1hZ2UvYm1wAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADpCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEAhAAAvwAAAAABAAAAswAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOXdibWNBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBUllsUVRrY05DaG9LQUFBQURVbElSRklBQUFBQkFBQUFBUWdDQUFBQWtIZFQzZ0FBQUF4SlJFRlVlSnhqRU5TT0JnQUE2QUNZK09VZnJnQUFBQUJKUlU1RXJrSmdnZz09//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "3e8c7df88ce0e7a54de23c017d89eb3cebc020617ed19eed3ec8f785ff4ea1fa",
+      "native": {
+        "argv": [
+          "-v",
+          "warning",
+          "-f",
+          "flac",
+          "-show_streams",
+          "-show_packets",
+          "-show_data",
+          "-show_entries",
+          "format_tags:stream=index,codec_name,codec_type,width,height:stream_disposition:stream_tags:packet=stream_index,size,data",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-picture-order-iNEeJM/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"packets\": [\n        {\n            \"stream_index\": 1,\n            \"size\": \"58\",\n            \"data\": \"\\n00000000: 424d 3a00 0000 0000 0000 3600 0000 2800  BM:.......6...(.\\n00000010: 0000 0100 0000 0100 0000 0100 1800 0000  ................\\n00000020: 0000 0400 0000 0000 0000 0000 0000 0000  ................\\n00000030: 0000 0000 0000 5b2b 1100                 ......[+..\\n\"\n        },\n        {\n            \"stream_index\": 2,\n            \"size\": \"69\",\n            \"data\": \"\\n00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR\\n00000010: 0000 0001 0000 0001 0802 0000 0090 7753  ..............wS\\n00000020: de00 0000 0c49 4441 5478 9c63 10d4 8e06  .....IDATx.c....\\n00000030: 0000 e800 98f8 e51f ae00 0000 0049 454e  .............IEN\\n00000040: 44ae 4260 82                             D.B`.\\n\"\n        },\n        {\n            \"stream_index\": 0,\n            \"size\": \"14\",\n            \"data\": \"\\n00000000: fff8 1418 007c 0000 0000 0000 6341       .....|......cA\\n\"\n        },\n        {\n            \"stream_index\": 0,\n            \"size\": \"15\",\n            \"data\": \"\\n00000000: fff8 6418 0140 9300 0000 0000 00b0 8c    ..d..@.........\\n\"\n        }\n    ],\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"index\": 0,\n            \"codec_name\": \"flac\",\n            \"codec_type\": \"audio\",\n            \"disposition\": {\n                \"default\": 0,\n                \"dub\": 0,\n                \"original\": 0,\n                \"comment\": 0,\n                \"lyrics\": 0,\n                \"karaoke\": 0,\n                \"forced\": 0,\n                \"hearing_impaired\": 0,\n                \"visual_impaired\": 0,\n                \"clean_effects\": 0,\n                \"attached_pic\": 0,\n                \"timed_thumbnails\": 0,\n                \"non_diegetic\": 0,\n                \"captions\": 0,\n                \"descriptions\": 0,\n                \"metadata\": 0,\n                \"dependent\": 0,\n                \"still_image\": 0,\n                \"multilayer\": 0\n            }\n        },\n        {\n            \"index\": 1,\n            \"codec_name\": \"bmp\",\n            \"codec_type\": \"video\",\n            \"width\": 1,\n            \"height\": 1,\n            \"disposition\": {\n                \"default\": 0,\n                \"dub\": 0,\n                \"original\": 0,\n                \"comment\": 0,\n                \"lyrics\": 0,\n                \"karaoke\": 0,\n                \"forced\": 0,\n                \"hearing_impaired\": 0,\n                \"visual_impaired\": 0,\n                \"clean_effects\": 0,\n                \"attached_pic\": 1,\n                \"timed_thumbnails\": 0,\n                \"non_diegetic\": 0,\n                \"captions\": 0,\n                \"descriptions\": 0,\n                \"metadata\": 0,\n                \"dependent\": 0,\n                \"still_image\": 0,\n                \"multilayer\": 0\n            },\n            \"tags\": {\n                \"comment\": \"Cover (front)\",\n                \"title\": \"cover\"\n            }\n        },\n        {\n            \"index\": 2,\n            \"codec_name\": \"png\",\n            \"codec_type\": \"video\",\n            \"width\": 1,\n            \"height\": 1,\n            \"disposition\": {\n                \"default\": 0,\n                \"dub\": 0,\n                \"original\": 0,\n                \"comment\": 0,\n                \"lyrics\": 0,\n                \"karaoke\": 0,\n                \"forced\": 0,\n                \"hearing_impaired\": 0,\n                \"visual_impaired\": 0,\n                \"clean_effects\": 0,\n                \"attached_pic\": 1,\n                \"timed_thumbnails\": 0,\n                \"non_diegetic\": 0,\n                \"captions\": 0,\n                \"descriptions\": 0,\n                \"metadata\": 0,\n                \"dependent\": 0,\n                \"still_image\": 0,\n                \"multilayer\": 0\n            },\n            \"tags\": {\n                \"comment\": \"Cover (front)\",\n                \"title\": \"cover\"\n            }\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "Unsupported codec with id 61 for input stream 2\n",
+        "wallMs": 183.9655,
+        "pictures": [
+          {
+            "index": 1,
+            "codec_name": "bmp",
+            "codec_type": "video",
+            "width": 1,
+            "height": 1,
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 1,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          },
+          {
+            "index": 2,
+            "codec_name": "png",
+            "codec_type": "video",
+            "width": 1,
+            "height": 1,
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 1,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "stream_index": 1,
+            "size": "58",
+            "data": "\n00000000: 424d 3a00 0000 0000 0000 3600 0000 2800  BM:.......6...(.\n00000010: 0000 0100 0000 0100 0000 0100 1800 0000  ................\n00000020: 0000 0400 0000 0000 0000 0000 0000 0000  ................\n00000030: 0000 0000 0000 5b2b 1100                 ......[+..\n"
+          },
+          {
+            "stream_index": 2,
+            "size": "69",
+            "data": "\n00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR\n00000010: 0000 0001 0000 0001 0802 0000 0090 7753  ..............wS\n00000020: de00 0000 0c49 4441 5478 9c63 10d4 8e06  .....IDATx.c....\n00000030: 0000 e800 98f8 e51f ae00 0000 0049 454e  .............IEN\n00000040: 44ae 4260 82                             D.B`.\n"
+          },
+          {
+            "stream_index": 0,
+            "size": "14",
+            "data": "\n00000000: fff8 1418 007c 0000 0000 0000 6341       .....|......cA\n"
+          },
+          {
+            "stream_index": 0,
+            "size": "15",
+            "data": "\n00000000: fff8 6418 0140 9300 0000 0000 00b0 8c    ..d..@.........\n"
+          }
+        ],
+        "tags": {}
+      }
+    },
+    {
+      "id": "1-0",
+      "transport": "mixed",
+      "policy": "default",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAvwAAAAABAAAAswAAAE1FVEFEQVRBX0JMT0NLX1BJQ1RVUkU9QUFBQUF3QUFBQWxwYldGblpTOXdibWNBQUFBRlkyOTJaWElBQUFBQkFBQUFBUUFBQUJnQUFBQUFBQUFBUllsUVRrY05DaG9LQUFBQURVbElSRklBQUFBQkFBQUFBUWdDQUFBQWtIZFQzZ0FBQUF4SlJFRlVlSnhqRU5TT0JnQUE2QUNZK09VZnJnQUFBQUJKUlU1RXJrSmdnZz09hgAAaAAAAAMAAAAJaW1hZ2UvYm1wAAAABWNvdmVyAAAAAQAAAAEAAAAYAAAAAAAAADpCTToAAAAAAAAANgAAACgAAAABAAAAAQAAAAEAGAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABbKxEA//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "785542081a80f808987f871637803404da5bc0d5f2937024bb284c006e995561",
+      "native": {
+        "argv": [
+          "-v",
+          "warning",
+          "-f",
+          "flac",
+          "-show_streams",
+          "-show_packets",
+          "-show_data",
+          "-show_entries",
+          "format_tags:stream=index,codec_name,codec_type,width,height:stream_disposition:stream_tags:packet=stream_index,size,data",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-picture-order-iNEeJM/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"packets\": [\n        {\n            \"stream_index\": 1,\n            \"size\": \"69\",\n            \"data\": \"\\n00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR\\n00000010: 0000 0001 0000 0001 0802 0000 0090 7753  ..............wS\\n00000020: de00 0000 0c49 4441 5478 9c63 10d4 8e06  .....IDATx.c....\\n00000030: 0000 e800 98f8 e51f ae00 0000 0049 454e  .............IEN\\n00000040: 44ae 4260 82                             D.B`.\\n\"\n        },\n        {\n            \"stream_index\": 2,\n            \"size\": \"58\",\n            \"data\": \"\\n00000000: 424d 3a00 0000 0000 0000 3600 0000 2800  BM:.......6...(.\\n00000010: 0000 0100 0000 0100 0000 0100 1800 0000  ................\\n00000020: 0000 0400 0000 0000 0000 0000 0000 0000  ................\\n00000030: 0000 0000 0000 5b2b 1100                 ......[+..\\n\"\n        },\n        {\n            \"stream_index\": 0,\n            \"size\": \"14\",\n            \"data\": \"\\n00000000: fff8 1418 007c 0000 0000 0000 6341       .....|......cA\\n\"\n        },\n        {\n            \"stream_index\": 0,\n            \"size\": \"15\",\n            \"data\": \"\\n00000000: fff8 6418 0140 9300 0000 0000 00b0 8c    ..d..@.........\\n\"\n        }\n    ],\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"index\": 0,\n            \"codec_name\": \"flac\",\n            \"codec_type\": \"audio\",\n            \"disposition\": {\n                \"default\": 0,\n                \"dub\": 0,\n                \"original\": 0,\n                \"comment\": 0,\n                \"lyrics\": 0,\n                \"karaoke\": 0,\n                \"forced\": 0,\n                \"hearing_impaired\": 0,\n                \"visual_impaired\": 0,\n                \"clean_effects\": 0,\n                \"attached_pic\": 0,\n                \"timed_thumbnails\": 0,\n                \"non_diegetic\": 0,\n                \"captions\": 0,\n                \"descriptions\": 0,\n                \"metadata\": 0,\n                \"dependent\": 0,\n                \"still_image\": 0,\n                \"multilayer\": 0\n            }\n        },\n        {\n            \"index\": 1,\n            \"codec_name\": \"png\",\n            \"codec_type\": \"video\",\n            \"width\": 1,\n            \"height\": 1,\n            \"disposition\": {\n                \"default\": 0,\n                \"dub\": 0,\n                \"original\": 0,\n                \"comment\": 0,\n                \"lyrics\": 0,\n                \"karaoke\": 0,\n                \"forced\": 0,\n                \"hearing_impaired\": 0,\n                \"visual_impaired\": 0,\n                \"clean_effects\": 0,\n                \"attached_pic\": 1,\n                \"timed_thumbnails\": 0,\n                \"non_diegetic\": 0,\n                \"captions\": 0,\n                \"descriptions\": 0,\n                \"metadata\": 0,\n                \"dependent\": 0,\n                \"still_image\": 0,\n                \"multilayer\": 0\n            },\n            \"tags\": {\n                \"comment\": \"Cover (front)\",\n                \"title\": \"cover\"\n            }\n        },\n        {\n            \"index\": 2,\n            \"codec_name\": \"bmp\",\n            \"codec_type\": \"video\",\n            \"width\": 1,\n            \"height\": 1,\n            \"disposition\": {\n                \"default\": 0,\n                \"dub\": 0,\n                \"original\": 0,\n                \"comment\": 0,\n                \"lyrics\": 0,\n                \"karaoke\": 0,\n                \"forced\": 0,\n                \"hearing_impaired\": 0,\n                \"visual_impaired\": 0,\n                \"clean_effects\": 0,\n                \"attached_pic\": 1,\n                \"timed_thumbnails\": 0,\n                \"non_diegetic\": 0,\n                \"captions\": 0,\n                \"descriptions\": 0,\n                \"metadata\": 0,\n                \"dependent\": 0,\n                \"still_image\": 0,\n                \"multilayer\": 0\n            },\n            \"tags\": {\n                \"comment\": \"Cover (front)\",\n                \"title\": \"cover\"\n            }\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "Unsupported codec with id 61 for input stream 1\n",
+        "wallMs": 4.7910420000000045,
+        "pictures": [
+          {
+            "index": 1,
+            "codec_name": "png",
+            "codec_type": "video",
+            "width": 1,
+            "height": 1,
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 1,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          },
+          {
+            "index": 2,
+            "codec_name": "bmp",
+            "codec_type": "video",
+            "width": 1,
+            "height": 1,
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 1,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "comment": "Cover (front)",
+              "title": "cover"
+            }
+          }
+        ],
+        "packets": [
+          {
+            "stream_index": 1,
+            "size": "69",
+            "data": "\n00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR\n00000010: 0000 0001 0000 0001 0802 0000 0090 7753  ..............wS\n00000020: de00 0000 0c49 4441 5478 9c63 10d4 8e06  .....IDATx.c....\n00000030: 0000 e800 98f8 e51f ae00 0000 0049 454e  .............IEN\n00000040: 44ae 4260 82                             D.B`.\n"
+          },
+          {
+            "stream_index": 2,
+            "size": "58",
+            "data": "\n00000000: 424d 3a00 0000 0000 0000 3600 0000 2800  BM:.......6...(.\n00000010: 0000 0100 0000 0100 0000 0100 1800 0000  ................\n00000020: 0000 0400 0000 0000 0000 0000 0000 0000  ................\n00000030: 0000 0000 0000 5b2b 1100                 ......[+..\n"
+          },
+          {
+            "stream_index": 0,
+            "size": "14",
+            "data": "\n00000000: fff8 1418 007c 0000 0000 0000 6341       .....|......cA\n"
+          },
+          {
+            "stream_index": 0,
+            "size": "15",
+            "data": "\n00000000: fff8 6418 0140 9300 0000 0000 00b0 8c    ..d..@.........\n"
+          }
+        ],
+        "tags": {}
+      }
+    },
+    {
+      "id": "basic",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAOgAAAAACAAAAFwAAAENIQVBURVIwMDE9MDA6MDA6MDAuMDEwEwAAAENIQVBURVIwMDFOQU1FPW5hbWX/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "6c7e84276f468d0f1228fc219263c3e84b2f007571ca7bf768377b499e96b727",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": 10,\n            \"start_time\": \"0.010000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\",\n            \"tags\": {\n                \"title\": \"name\"\n            }\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 33 kb/s\n  Chapters:\n    Chapter #0:0: start 0.010000, end 0.032000\n      Metadata:\n        title           : name\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 7.7003330000000005,
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 10,
+            "start_time": "0.010000",
+            "end": 32,
+            "end_time": "0.032000",
+            "tags": {
+              "title": "name"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "name-before-time",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAPAAAAAACAAAAFQAAAENIQVBURVIwMDFOQU1FPWJlZm9yZRcAAABDSEFQVEVSMDAxPTAwOjAwOjAwLjAxMP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "dce51717b7163358b7a20c9c54edddcfc1a54b4eb8ddfe3828f39e0216340ffc",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": 10,\n            \"start_time\": \"0.010000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"CHAPTER001NAME\": \"before\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Metadata:\n    CHAPTER001NAME  : before\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 33 kb/s\n  Chapters:\n    Chapter #0:0: start 0.010000, end 0.032000\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 9.779833999999994,
+        "tags": {
+          "CHAPTER001NAME": "before"
+        },
+        "chapters": [
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 10,
+            "start_time": "0.010000",
+            "end": 32,
+            "end_time": "0.032000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "duplicate-clears-name",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAVAAAAAADAAAAFwAAAENIQVBURVIwMDE9MDA6MDA6MDAuMDEwEgAAAENIQVBURVIwMDFOQU1FPW9sZBcAAABDSEFQVEVSMDAxPTAwOjAwOjAwLjAyMP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "d4f27df4cfc86e4d190dfd207648fafd3af1a4cd1b48c3182ca48f6a44d2f31f",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": 20,\n            \"start_time\": \"0.020000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 39 kb/s\n  Chapters:\n    Chapter #0:0: start 0.020000, end 0.032000\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.582125000000005,
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 20,
+            "start_time": "0.020000",
+            "end": 32,
+            "end_time": "0.032000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "unordered",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAPgAAAAACAAAAFwAAAENIQVBURVIwMDI9MDA6MDA6MDAuMDIwFwAAAENIQVBURVIwMDE9MDA6MDA6MDAuMDEw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "94f14827d7ae9b510e77bc6703b1cb15647753242ca2e1a85d28da191610eb5f",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 2,\n            \"time_base\": \"1/1000\",\n            \"start\": 20,\n            \"start_time\": \"0.020000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\"\n        },\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": 10,\n            \"start_time\": \"0.010000\",\n            \"end\": 20,\n            \"end_time\": \"0.020000\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 34 kb/s\n  Chapters:\n    Chapter #0:0: start 0.020000, end 0.032000\n    Chapter #0:1: start 0.010000, end 0.020000\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 7.312291999999999,
+        "tags": {},
+        "chapters": [
+          {
+            "id": 2,
+            "time_base": "1/1000",
+            "start": 20,
+            "start_time": "0.020000",
+            "end": 32,
+            "end_time": "0.032000"
+          },
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 10,
+            "start_time": "0.010000",
+            "end": 20,
+            "end_time": "0.020000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "equal-starts",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAWQAAAAADAAAAFwAAAENIQVBURVIwMDI9MDA6MDA6MDAuMDEwFwAAAENIQVBURVIwMDE9MDA6MDA6MDAuMDEwFwAAAENIQVBURVIwMDM9MDA6MDA6MDAuMDIw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "3cbffbac76464960b0ab5c0e96be03485b7aa4cbf066e1e70bf453ca94642419",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 2,\n            \"time_base\": \"1/1000\",\n            \"start\": 10,\n            \"start_time\": \"0.010000\",\n            \"end\": 20,\n            \"end_time\": \"0.020000\"\n        },\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": 10,\n            \"start_time\": \"0.010000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\"\n        },\n        {\n            \"id\": 3,\n            \"time_base\": \"1/1000\",\n            \"start\": 20,\n            \"start_time\": \"0.020000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 40 kb/s\n  Chapters:\n    Chapter #0:0: start 0.010000, end 0.020000\n    Chapter #0:1: start 0.010000, end 0.032000\n    Chapter #0:2: start 0.020000, end 0.032000\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 8.472999999999999,
+        "tags": {},
+        "chapters": [
+          {
+            "id": 2,
+            "time_base": "1/1000",
+            "start": 10,
+            "start_time": "0.010000",
+            "end": 20,
+            "end_time": "0.020000"
+          },
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 10,
+            "start_time": "0.010000",
+            "end": 32,
+            "end_time": "0.032000"
+          },
+          {
+            "id": 3,
+            "time_base": "1/1000",
+            "start": 20,
+            "start_time": "0.020000",
+            "end": 32,
+            "end_time": "0.032000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "past-duration",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIwAAAAABAAAAFwAAAENIQVBURVIwMDE9MDA6MDA6MDEuMDAw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "0a8c848b0389ec189800ddefa0499433754033b2751a197050cdab6af681ca07",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": 1000,\n            \"start_time\": \"1.000000\",\n            \"end\": 1000,\n            \"end_time\": \"1.000000\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 27 kb/s\n  Chapters:\n    Chapter #0:0: start 1.000000, end 1.000000\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 8.753,
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 1000,
+            "start_time": "1.000000",
+            "end": 1000,
+            "end_time": "1.000000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "short-fields",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAHQAAAAABAAAAEQAAAENIQVBURVIwMT0wOjA6MC4x//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "17267bc707c1905aa0729b1d909cad3dd179ebf6c019c40d527f46ca38374960",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": 1,\n            \"start_time\": \"0.001000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 25 kb/s\n  Chapters:\n    Chapter #0:0: start 0.001000, end 0.032000\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.659999999999997,
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 1,
+            "start_time": "0.001000",
+            "end": 32,
+            "end_time": "0.032000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "non-numeric-key",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIwAAAAABAAAAFwAAAENIQVBURVJYWVo9MDA6MDA6MDAuMDEw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "4e29bb97a9675a6b1c6423edb4d826870cb5b20ae66396fadff3c980a4ed0c51",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"CHAPTERXYZ\": \"00:00:00.010\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Metadata:\n    CHAPTERXYZ      : 00:00:00.010\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 27 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.612250000000003,
+        "tags": {
+          "CHAPTERXYZ": "00:00:00.010"
+        },
+        "chapters": []
+      }
+    },
+    {
+      "id": "trailing-key",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIwAAAAABAAAAFwAAAENIQVBURVIxMlg9MDA6MDA6MDAuMDEw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "24ecd41380c6c11b8d93addc24caeb7701f31d9dfe95ee23b7529a9637000a8f",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 12,\n            \"time_base\": \"1/1000\",\n            \"start\": 10,\n            \"start_time\": \"0.010000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 27 kb/s\n  Chapters:\n    Chapter #0:0: start 0.010000, end 0.032000\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.706791999999993,
+        "tags": {},
+        "chapters": [
+          {
+            "id": 12,
+            "time_base": "1/1000",
+            "start": 10,
+            "start_time": "0.010000",
+            "end": 32,
+            "end_time": "0.032000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "four-digit-key",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAJAAAAAABAAAAGAAAAENIQVBURVIxMDAwPTAwOjAwOjAwLjAxMP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "6960538f17bcfa7b998b80902a7512312449eb580c72ee10f584f23a84c8f64d",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"CHAPTER1000\": \"00:00:00.010\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Metadata:\n    CHAPTER1000     : 00:00:00.010\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 27 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 3.989083999999991,
+        "tags": {
+          "CHAPTER1000": "00:00:00.010"
+        },
+        "chapters": []
+      }
+    },
+    {
+      "id": "signed-key",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIwAAAAABAAAAFwAAAENIQVBURVItMDE9MDA6MDA6MDAuMDEw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "8a1637d67cc7969027cfbc41bf7a04794967782f91c8d20a929738e3842a55ba",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": -1,\n            \"time_base\": \"1/1000\",\n            \"start\": 10,\n            \"start_time\": \"0.010000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 27 kb/s\n  Chapters:\n    Chapter #0:0: start 0.010000, end 0.032000\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.085333000000006,
+        "tags": {},
+        "chapters": [
+          {
+            "id": -1,
+            "time_base": "1/1000",
+            "start": 10,
+            "start_time": "0.010000",
+            "end": 32,
+            "end_time": "0.032000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "space-key",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIgAAAAABAAAAFgAAAENIQVBURVIgMT0wMDowMDowMC4wMTD/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "10d00247d39b8686db78678c735b786f836a45b5c3d6fab7e79d763d33659d44",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": 10,\n            \"start_time\": \"0.010000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 27 kb/s\n  Chapters:\n    Chapter #0:0: start 0.010000, end 0.032000\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 3.7885000000000133,
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 10,
+            "start_time": "0.010000",
+            "end": 32,
+            "end_time": "0.032000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "negative-time",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIwAAAAABAAAAFwAAAENIQVBURVIwMDE9LTE6MDA6MDAuMDAx//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "262710b9d671b5b0db73999c75bdaaa0ff8e1e6150670c1af91a53284bb4d12c",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": -3599999,\n            \"start_time\": \"-3599.999000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 27 kb/s\n  Chapters:\n    Chapter #0:0: start -3599.999000, end 0.032000\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.442165999999986,
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": -3599999,
+            "start_time": "-3599.999000",
+            "end": 32,
+            "end_time": "0.032000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "range-unchecked",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIwAAAAABAAAAFwAAAENIQVBURVIwMDE9MDA6OTk6OTkuOTk5//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "969f09c47e0a7dc149948c7d5019ad8a6c141e93eb7aff7cd0862e52442b61f5",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": 6039999,\n            \"start_time\": \"6039.999000\",\n            \"end\": 6039999,\n            \"end_time\": \"6039.999000\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 27 kb/s\n  Chapters:\n    Chapter #0:0: start 6039.999000, end 6039.999000\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 4.6430839999999876,
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 6039999,
+            "start_time": "6039.999000",
+            "end": 6039999,
+            "end_time": "6039.999000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "time-trailing",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAJwAAAAABAAAAGwAAAENIQVBURVIwMDE9MDA6MDA6MDAuMDEwdGFpbP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "8758f1be8a19615282bbf8d423552e40ee0459c1533d98c5f02f47b0198f1db1",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": 10,\n            \"start_time\": \"0.010000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 28 kb/s\n  Chapters:\n    Chapter #0:0: start 0.010000, end 0.032000\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 6.239167000000009,
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 10,
+            "start_time": "0.010000",
+            "end": 32,
+            "end_time": "0.032000"
+          }
+        ]
+      }
+    },
+    {
+      "id": "width-overrun",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAJAAAAAABAAAAGAAAAENIQVBURVIwMDE9MTAwOjAwOjAwLjAwMf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "e8e58f5f45fcc3828496eb6005b343421bf1b5dbb5ca853886275a6276cbf891",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"CHAPTER001\": \"100:00:00.001\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Metadata:\n    CHAPTER001      : 100:00:00.001\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 27 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 7.579833000000008,
+        "tags": {
+          "CHAPTER001": "100:00:00.001"
+        },
+        "chapters": []
+      }
+    },
+    {
+      "id": "missing-fraction",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAHwAAAAABAAAAEwAAAENIQVBURVIwMDE9MDA6MDA6MDD/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "d29c10b5b53de466dbd08fec0f2502c0cb093a594969622349977528e19019dc",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"CHAPTER001\": \"00:00:00\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Metadata:\n    CHAPTER001      : 00:00:00\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 26 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 5.97199999999998,
+        "tags": {
+          "CHAPTER001": "00:00:00"
+        },
+        "chapters": []
+      }
+    },
+    {
+      "id": "unknown-name",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAIQAAAAABAAAAFQAAAENIQVBURVIwMDJOQU1FPW9ycGhhbv/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "7671587d9f336efb81e67d965c5aa2fa653d3e247101930b73364e2fa676c7c0",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"CHAPTER002NAME\": \"orphan\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Metadata:\n    CHAPTER002NAME  : orphan\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 26 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 10.841541000000007,
+        "tags": {
+          "CHAPTER002NAME": "orphan"
+        },
+        "chapters": []
+      }
+    },
+    {
+      "id": "unicode-key",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAJAAAAAABAAAAGAAAAENIQVBURVIxMsOpPTAwOjAwOjAwLjAxMP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "e7a8e564d5a423dd81ec17941b2a820f9cf91a18fcaea87648ede0c1464c0a7c",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n\n    ],\n    \"format\": {\n        \"tags\": {\n            \"CHAPTER12\u00e9\": \"00:00:00.010\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Metadata:\n    CHAPTER12\u00e9     : 00:00:00.010\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 27 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 9.165042,
+        "tags": {
+          "CHAPTER12\u00e9": "00:00:00.010"
+        },
+        "chapters": []
+      }
+    },
+    {
+      "id": "split-blocks",
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAIwAAAAABAAAAFwAAAENIQVBURVIwMDE9MDA6MDA6MDAuMDEwhAAAIAAAAAABAAAAFAAAAGNoYXB0ZXIwMDFuYW1lPXNwbGl0//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "3c5a4505a8a071f4b082844bc589f8c808eddaf901004aa516e99d6ede674437",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:chapter",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"chapters\": [\n        {\n            \"id\": 1,\n            \"time_base\": \"1/1000\",\n            \"start\": 10,\n            \"start_time\": \"0.010000\",\n            \"end\": 32,\n            \"end_time\": \"0.032000\",\n            \"tags\": {\n                \"title\": \"split\"\n            }\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-chapters-q9XjaP/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 36 kb/s\n  Chapters:\n    Chapter #0:0: start 0.010000, end 0.032000\n      Metadata:\n        title           : split\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 10.610916000000003,
+        "tags": {},
+        "chapters": [
+          {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 10,
+            "start_time": "0.010000",
+            "end": 32,
+            "end_time": "0.032000",
+            "tags": {
+              "title": "split"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

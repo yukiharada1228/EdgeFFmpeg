@@ -1,0 +1,42 @@
+{
+  "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+  "sources": {
+    "upstream/ffmpeg/libavcodec/bmp.c": "20b6c63b449c74f942a82e95d4265c915e142dfb86f1dd9e9d66ab378e85e7fb",
+    "upstream/ffmpeg/libavcodec/bmpenc.c": "f917daab5fd0798c70312d9c7a7bac453331a10a5c004c1662bfee56bc706fdc",
+    "upstream/ffmpeg/libavcodec/msrledec.c": "b9a39d5bce759952ec0551424daf9084ab119f4ec688b00a9ce9fb96d1262556",
+    "upstream/ffmpeg/libavcodec/bmp_parser.c": "0ae1f89314e6a19419ed28d75563d8d57c57bc9a0f6aa9eaa0f23a8934003356",
+    "upstream/ffmpeg/libavutil/imgutils.c": "00db6789b8daf24cc1ba44b53a41876c95183e208cb2cf44f4c596949f30ee84",
+    "upstream/ffmpeg/libavcodec/internal.h": "4e18e61cb32ada13d3cc79f12eb36db6efed1c8a64accf5c9f0d09c68d5ca57b",
+    "upstream/ffmpeg/libavcodec/get_buffer.c": "83d8594171732675c131248b212b41d3efebc59f5f9bc388b5f792e8edce6782",
+    "upstream/ffmpeg/libavcodec/utils.c": "8679acf63c09d658b385c5b52987b75fb4441b106f3352eaac1bd5f72031ea2a",
+    "tools/differential-runner/bmp-rle/oracle.c": "f242041721e9cb213f9f304526e5bbd9d87174229a5c830f27e4d48bd682be89",
+    "tools/differential-runner/bmp-rle/generate.mjs": "3c23463f2052646373e221ff52d8d6c4f8e1979f8930dcc27e5d7bb3dab10d3c",
+    "upstream/ffmpeg/libavfilter/vf_hflip.c": "798a49e9fc32372d9bac8ce50e8b6c7de39cabc6a5dbdfa2eab98c84d38f18f0",
+    "upstream/ffmpeg/libavfilter/vf_vflip.c": "189b045af43059b654eef2c8fd5c849ea07a3e72a78334dd654f7abfed0a2b69",
+    "upstream/ffmpeg/libavfilter/vf_transpose.c": "c1d4c8213419c75063626e8474f45e1987408b5cb5b7db3a43c70427a65f622e",
+    "upstream/ffmpeg/libavfilter/vf_crop.c": "d8eaeadd526ba9228ffbd63ddd69e6f6767ba0f27aa98825baad1e2d588598e9"
+  },
+  "recipes": {
+    "tests/helpers/bmp-fixture.ts": "962a8af4094c174fae91513d6050ab79ecdc13082a026948755bbfad3e561f7d",
+    "tests/differential/bmp-codec.test.ts": "aa6aab995baebd0cf5a2691b52d354677d5ad41ada4a2098247b5eca380acef4",
+    "tests/differential/bmp-rle.test.ts": "d050739b19890e2bb667e5ae74633b645f4d2ab6b3b90df591c6bb4b10a5f528",
+    "tests/differential/bmp-rle-malformed.test.ts": "9eb09b9eb8f191d123348e91b0b449ac5e97a3b946277b3b416be7971d94c516",
+    "tests/differential/bmp-stream.test.ts": "1333cbc62a9cf262e8852cfaea7240f39ace4f695b6d9c68b9858b5ad8d4d4ef",
+    "tests/differential/bmp-cli.test.ts": "9df4e048a7aaae4e74c36a3143728f9141bf499e4e7792f947b2d14010e01fa7",
+    "tests/differential/bmp-copy-errors.test.ts": "778df80c7213355429b1b65b22684b5f94aabf7c399c331e4ec6ad851ab7f5cc",
+    "tests/differential/bmp-packed32-cli.test.ts": "3d0728eb43fe1b553bd6f41d3cfad086114cad8158447625bc8d4748ee91a243",
+    "tests/differential/bmp-pixel-layout.test.ts": "1bd0e109e644ee07e9aeed834b1b53c73134f487a27a72c71bbb0dc3c704b226",
+    "tests/differential/bmp-raw-bridge.test.ts": "264fabb8c6ce8302d18509a15c3c3e6cff67d9f322b24a44ed4a84c4534dbf08",
+    "tests/workers/bmp-codec.test.ts": "1b2426574714a34d58895ead12f819f1670af0ab066c05027d1cf621d13d464f",
+    "tests/workers/bmp-cli.test.ts": "8113c029823e23db91489aec98b5667cb76d3bd23b8791f427ebc33f53f073f9",
+    "tests/workers/bmp-codec-fixture.ts": "bbe70dfc6a579518e83fec0895f26d079807bee3e9bbb71c1b6f340ca14e7f1a",
+    "tests/workers/bmp-cli-fixture.ts": "a365a85b2a8399eb2d80ab535bdf98cf198b326ecad98fc4d617993d4431e763",
+    "tests/differential/bmp-rle-profiles.test.ts": "d05ab318eb148cfa4822d6f5371cee6c3485945e43d610491fbdbe5e7d1f8e6e",
+    "tests/differential/bmp-spatial.test.ts": "73864eff1b2517cbc26ee0633526911d1c6d7d8f7dd5cf959dc5de866c51c0c6"
+  },
+  "reference": {
+    "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+    "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+  },
+  "scope": "Partial BMP codec and declared aligned BMP image2pipe, explicit RLE row profiles; local Native/workerd evidence, no full compatibility/resource certification."
+}

@@ -1,0 +1,5 @@
+import {it,expect} from 'vitest';import {PermissionDeniedError,ExecutionError,FFmpeg} from '@edge-ffmpeg/core';
+it('retains initial permission operation path cause and status while cancellation overrides it',async()=>{
+ const cause=Object.assign(new Error('denied'),{code:'EACCES'});for(const operation of ['read','write'] as const){const error=new PermissionDeniedError(operation,'/path',cause);expect(error).toBeInstanceOf(ExecutionError);expect(error.exitCode).toBe(243);expect(error.operation).toBe(operation);expect(error.path).toBe('/path');expect(error.cause).toBe(cause);}
+ const controller=new AbortController(),frontend=new FFmpeg({filesystem:{async openRead(){throw Error('unused');},async openWrite(){throw Error('unused');}},backend:{async execute(){controller.abort();throw new PermissionDeniedError('write','/path',cause);}}}),result=await frontend.exec(['-i','/input','/output'],{signal:controller.signal});expect(result.exitCode).toBe(1);expect(result.diagnostics[0]!.code).toBe('cancelled');
+});

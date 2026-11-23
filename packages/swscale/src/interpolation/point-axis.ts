@@ -1,0 +1,5 @@
+// SPDX-License-Identifier: LGPL-2.1-or-later
+// Adapted pinned FFmpeg libswscale/utils.c initFilter SWS_POINT.
+import type {ChromaAxis} from "../chroma-filter.js";
+export function pointAxisBound(src:number,dst:number,one:number){if(!Number.isInteger(src)||!Number.isInteger(dst)||src<1||dst<1||src>2147483647||dst>2147483647||![4096,16384].includes(one))throw new RangeError('Invalid point filter axis');return {bytes:src===dst?0:6*dst,taps:1};}
+export function pointAxis(src:number,dst:number,one:number,maxBytes:number,signal?:AbortSignal):ChromaAxis|null{const bound=pointAxisBound(src,dst,one);if(!Number.isSafeInteger(maxBytes)||maxBytes<0||bound.bytes>maxBytes)throw new Error('Point filter state exceeds allocation limit');signal?.throwIfAborted();if(src===dst)return null;const inc=(BigInt(src)*65536n+BigInt(dst>>1))/BigInt(dst),positions=new Int32Array(dst),coefficients=new Int16Array(dst);for(let i=0;i<dst;i++){if((i&4095)===0)signal?.throwIfAborted();positions[i]=Math.max(0,Math.min(src-1,Number(inc>65526n&&inc<65546n?BigInt(i):(inc/2n+BigInt(i)*inc)>>16n)));coefficients[i]=one;}return {size:dst,taps:1,positions,coefficients};}

@@ -1,0 +1,69 @@
+MP4 mux candidate: source layout adapted from pinned FFmpeg movenc.c
+upstream/ffmpeg/libavformat/movenc.c
+commit946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2003 Thomas Raivio
+Copyright (c)2004 Gildas Bazin
+Copyright (c)2009 Baptiste Coudurier
+LGPL-2.1-or-later. See packages/containers/COPYING.LGPLv2.1.
+TypeScript adaptation adds finite planned sample metadata, asynchronous bounded
+WriteHandle writes, input packet validation, cancellation and output abort.
+
+CLI stream selection adapts pinned fftools/ffmpeg_mux_init.c (map_auto_video,
+map_auto_audio and disposition propagation), LGPL-2.1-or-later, plus MOV enabled
+track handling from movenc.c. These files are part of FFmpeg; their upstream
+notices and source remain in the pinned submodule. AAC configuration parsing
+supplies codec channel counts for selection; no decoder runs in the library.
+
+Input stream-ID parsing/matching additionally follows pinned fftools/cmdutils.c
+and ordered negative mapping follows fftools/ffmpeg_opt.c.
+cmdutils.c: Copyright (c)2000-2003 Fabrice Bellard, LGPL-2.1-or-later.
+The TypeScript CLI keeps unsigned container IDs in metadata and applies the
+pinned AVStream signed32-bit identity only when matching input ID selectors.
+
+Language metadata tokenization follows pinned libavutil/avstring.c av_get_token:
+Copyright (c)2000,2001,2002 Fabrice Bellard; (c)2007 Mans Rullgard.
+LGPL-2.1-or-later. Language selector matching follows cmdutils.c.
+
+H264 initial video-delay estimation adapts mov_estimate_video_delay from
+pinned libavformat/mov.c, LGPL-2.1-or-later. Original source and notices remain
+in upstream/ffmpeg/libavformat/mov.c; license text is COPYING.LGPLv2.1.
+The TypeScript implementation uses bigint PTS and a bounded17entry ring.
+
+
+h264-rate-probe.ts adapts ff_rfps_add_frame/ff_rfps_calculate from demux.c and
+av_guess_frame_rate from avformat.c at the pinned commit, LGPL-2.1-or-later.
+Copyright (c)2000,2001,2002 Fabrice Bellard. Original source/notices remain
+in upstream/ffmpeg/libavformat; license text is COPYING.LGPLv2.1. The TypeScript
+adaptation bounds standard-rate state to399entries and index probing to the
+configured budget; general multi-stream probe termination remains unverified.
+
+Original-file start-time adjustment before stream mapping follows
+fftools/ffmpeg_demux.c and ffmpeg_opt.c (MOV does not use the TS_DISCONT
+selected-stream correction) at the pinned commit above.
+
+H264 packet DTS order checking, PTS-window selection, error scores and aging
+are adapted from libavformat/demux.c compute_pkt_fields/select_from_pts_buffer
+at the pinned FFmpeg commit. LGPL-2.1-or-later; source and notices remain in the
+upstream submodule. The independent codec parameter inspector supplies active
+SPS restrictions; packet clock probing does not load a Wasm decoder.
+
+Copy clock probing is restricted to selected AVC video tracks. AAC backward
+edit clocks retain their per-stream sequence until strict mux timestamp
+normalization; they do not enter the H264 SPS probe path.
+
+Selected audio sample-rate preflight follows pinned libavformat/mux.c
+sample_rate<=0 -> AVERROR(EINVAL),with ffmpeg.c process status234. Canonical
+reason is sample rate not set;the check applies to selected output tracks.
+Full diagnostic formatting/Native OS side-effect compatibility is not claimed.
+
+Conflicting -y/-n validation follows assert_file_overwrite in pinned
+fftools/ffmpeg_opt.c:AVERROR(EINVAL),observed as234. The check follows source
+and selected codec validation and precedes mux audio header validation.
+LGPL-2.1-or-later;upstream copyright/license notices remain in the submodule.
+Existing-output refusal AVERROR_EXIT/0 has a separate scoped Node/R2 contract;
+full Native protocol remains unverified.
+
+Overwrite refusal sequencing follows pinned fftools/ffmpeg_mux_init.c and
+assert_file_overwrite in ffmpeg_opt.c. Native AVERROR_EXIT maps to0 in
+ffmpeg.c finish;the Core ExecutionExit models this graceful non-publication.
+Native OS empty-file failure effects are not reproduced by atomic VFS output.

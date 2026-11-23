@@ -1,0 +1,146 @@
+video-format-negotiation.ts adapts format-set merging, conversion insertion,
+singleton propagation and eight-bit pixel-format loss scoring from FFmpeg
+libavfilter/formats.c, libavfilter/avfiltergraph.c and libavutil/pixdesc.c at
+commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8.
+
+Copyright (c) 2007 Bobby Bingham
+Copyright (c) 2008 Vitor Sessak
+Copyright (c) 2009 Michael Niedermayer <michaelni@gmx.at>
+
+This component is licensed under GNU LGPL version 2.1 or, at your option, any
+later version. The complete license is in LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation restricts negotiation to bounded linear graphs and
+fourteen eight-bit layouts, uses shared candidate groups, adds explicit node
+limits, and emits immutable conversion stages. The upstream source is available
+in the pinned upstream/ffmpeg submodule. This notice does not assign a license to
+the whole project or certify completion of the project-wide license audit.
+
+format-pixel-format.ts adapts declared-format parsing and alias resolution from
+FFmpeg libavfilter/vf_format.c and libavutil/pixdesc.c, with fixed numeric IDs from
+libavutil/pixfmt.h at the same pinned commit. Copyright (c) 2007 Bobby Bingham;
+Copyright (c) 2009 Michael Niedermayer <michaelni@gmx.at>.
+
+This component is LGPL-2.1-or-later under LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation bounds saturated LP64/base-zero parsing, models signed32
+enum storage, normalizes the fourteen declared layouts and fixed LE/gray aliases,
+and retains duplicate validation and graph preflight. The surrounding linear
+option parser follows the ASCII whitespace rules observed in graphparser.c,
+libavutil/opt.c and avstring.c. General graph quoting and options are incomplete.
+
+video-syntax.ts and video-parse.ts adapt token/option parsing and scoped scale
+initialization from FFmpeg libavutil/avstring.c, libavutil/opt.c,
+libavfilter/avfilter.c, graphparser.c and vf_scale.c at the same pinned commit.
+
+Copyright (c) 2000, 2001, 2002 Fabrice Bellard
+Copyright (c) 2007 Mans Rullgard
+Copyright (c) 2005 Michael Niedermayer <michaelni@gmx.at>
+Copyright (c) 2007 Bobby Bingham
+Copyright (c) 2008 Vitor Sessak
+
+These components are LGPL-2.1-or-later under LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation bounds single-path graphs, applies independent
+quoting layers and protected whitespace, resolves final string options before
+validation, and retains positive constant dimensions/default bicubic scope.
+General graphs, expressions and additional options remain incomplete.
+
+video-graph.ts adapts single-input/output pad linking from FFmpeg
+libavfilter/graphparser.c at the pinned commit above.
+Copyright (c) 2007 Bobby Bingham
+Copyright (c) 2008 Vitor Sessak
+Licensed LGPL-2.1-or-later under LICENSES/LGPL-2.1-or-later.txt.
+The adaptation bounds graphs to 32 single-pad nodes and one connected path,
+preserves declaration order for format queries, and exposes immutable metadata.
+Branching, multiple inputs/outputs and general graph commands remain incomplete.
+
+video-transpose.ts adapts plane transposition and direction/passthrough semantics
+from FFmpeg libavfilter/vf_transpose.c at commit
+946fcce07b6dcd0331c8cc609192aeff5e1924f8.
+Copyright (c) 2010 Stefano Sabatini
+Copyright (c) 2008 Vitor Sessak
+LGPL-2.1-or-later; license text: LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation materializes tight positive strides, validates budgets
+and source storage, and restricts direct operations to thirteen eight-bit layouts
+with symmetric chroma. Negative-stride inputs and full frame-property semantics
+remain incomplete. Graph format restrictions and legacy passthrough semantics
+also follow vf_transpose.c. Internal input-trim registration placement follows
+fftools/ffmpeg_filter.c at the same pinned commit (LGPL-2.1-or-later).
+
+filter-topology.ts adapts libavfilter/graphparser.c pad linking at the same pinned
+commit. Copyright (c) 2007 Bobby Bingham; Copyright (c) 2008 Vitor Sessak.
+It adds bounded registry descriptors, immutable topology snapshots and a separate
+DAG execution ordering check while preserving structural cyclic links.
+video-graph-formats.ts extends the format-set negotiation adaptation described
+above to bounded split branches, sink constraints and per-output sizes.
+Both adaptations use LGPL-2.1-or-later and the accompanying license text.
+
+video-stack.ts adapts plane placement and frame construction from
+libavfilter/vf_stack.c at the same pinned commit.
+Copyright (c) 2015 Paul B. Mahol.
+The LGPL-2.1-or-later adaptation uses tight owned output storage, validates
+synchronized timestamps, clips the final visible chroma boundary and rejects
+overlapping Native parallel chroma writes before allocation.
+
+frame-sync.ts adapts all-input state transitions and clock selection from
+libavfilter/framesync.c and libavutil/rational.c at the pinned commit.
+Copyright (c) 2013 Nicolas George.
+Copyright (c) 2003 Michael Niedermayer <michaelni@gmx.at>.
+It retains LGPL-2.1-or-later and the accompanying license text. The adaptation
+uses bounded retention leases, exact bigint rescaling, explicit cancellation and
+Native unreduced rational representations. Main/secondary and nearest modes are
+not implemented. video-filter-graph.ts uses this clock selection for local joins.
+video-stream.ts is independently authored replay/scheduling glue using these
+components; this notice does not assign a license to the whole project or
+complete the project-wide license audit.
+
+setpts/state.ts adapts FFmpeg libavfilter/setpts.c at commit
+946fcce07b6dcd0331c8cc609192aeff5e1924f8. Copyright (c) 2010 Stefano Sabatini;
+Copyright (c) 2008 Victor Paesa. Licensed under LGPL-2.1-or-later.
+See LICENSES/LGPL-2.1-or-later.txt and the pinned upstream source.
+This notice does not assign a license to the whole project.
+
+timed-sync/stream.ts adapts the explicit frame/status transitions in pinned
+libavfilter/framesync.c, Copyright (c) 2013 Nicolas George.
+timed-sync/int64.ts adapts sentinel and overflow semantics in pinned
+libavutil/mathematics.c, Copyright (c) 2005-2012 Michael Niedermayer.
+Both components are LGPL-2.1-or-later; see LICENSES/LGPL-2.1-or-later.txt.
+timed-sync/lifecycle.ts is the independent asynchronous lifecycle adapter.
+
+timed-sync/step.ts provides the incremental consume/advance form of the same
+pinned framesync.c transitions, Copyright (c) 2013 Nicolas George, under
+LGPL-2.1-or-later. It adds bounded synchronous polling, missing-input requests,
+owned lease disposal and an explicit success barrier. This is not a full
+FFmpeg scheduler or CLI compatibility claim.
+
+src/enable-timeline.ts adapts set_enable_expr/evaluate_timeline_at_frame in
+pinned libavfilter/avfilter.c, Copyright (c) 2007 Bobby Bingham, under
+LGPL-2.1-or-later. It adds explicit lifetime/input guards and an invalid-state
+error for a recorded Native invalid-expression replacement crash. See
+LICENSES/LGPL-2.1-or-later.txt and docs/contributing/filter-enable.md.
+
+src/command-queue.ts adapts avfilter_graph_queue_command in pinned
+libavfilter/avfiltergraph.c, Copyright (c) 2008 Vitor Sessak and
+Copyright (c) 2007 Bobby Bingham, and ff_inlink_process_commands in
+libavfilter/avfilter.c, Copyright (c) 2007 Bobby Bingham, under LGPL-2.1-or-later.
+It adds bounded resolved destinations, scalar snapshots, callback/lifetime guards
+and declared storage charges. See docs/contributing/filter-command-queue.md.
+
+src/scale-expression.ts adapts single-input expression evaluation, command state
+and dimension adjustment from FFmpeg libavfilter/vf_scale.c and scale_eval.c at
+946fcce07b6dcd0331c8cc609192aeff5e1924f8, Copyright (c) 2007 Bobby Bingham,
+LGPL-2.1-or-later. It adds explicit host input/lifetime guards and expression bounds.
+Developer-only scale-expression oracle links the pinned native libraries; the
+runtime API has no FFmpeg execution dependency. Full license audit remains open.
+
+src/activation/ adds bounded graph activation, link ownership, input selection,
+stateful crop/aspect/scale configuration and filter command/timeline adapters.
+FFmpeg source functions, authors and scoped adaptations are recorded in
+src/activation/NOTICE.activation. LGPL-2.1-or-later; license text above applies.
+Cross-package orchestration is in avformat/src/actor-video; interpolation kernels
+are in swscale/src/interpolation. This is not a whole-project license certification.
+
+Singleton aformat sample_rates/r and channel_layouts/cl constraints follow
+libavfilter/af_aformat.c at commit946fcce07b6dcd0331c8cc609192aeff5e1924f8.
+Copyright (c) 2011 Mina Nagy Zaki. Applicable adaptations retain
+LGPL-2.1-or-later; the license text and pinned source location above apply.
+The bounded implementation accepts identity mono/stereo layout and rate
+constraints and rejects implicit conversion; general negotiation is incomplete.

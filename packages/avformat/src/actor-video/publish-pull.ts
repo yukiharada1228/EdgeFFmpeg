@@ -1,0 +1,39 @@
+import {createEncoderSyncQueue} from "./encoder-sync-queue.js";
+import type {PullGraphExecution} from "./pull-execution.js";
+import type {VirtualFileSystem} from '@edge-ffmpeg/core';import type {MediaPacket,VideoFrameData,Rational} from '@edge-ffmpeg/avutil';import {encodeRawVideo} from '@edge-ffmpeg/avcodec';
+import {openOutputGroup,OutputGroupError} from "../output-group.js";import {ComplexVideoFailure} from "../complex-video-failure.js";import {initializeVideoOutput} from "../video-output/output-initialization.js";import {synchronizeVideoOutput} from "../video-output/output-stream.js";import {videoPacketDuration} from "../video-output/packet-duration.js";import {muxTimedRawVideo} from "../multi-video-mux.js";
+import type {SyncFrame,VideoSyncMode} from "../video-output/sync.js";import {executeTimedGraph,createTimedGraphExecution} from "./execute.js";
+type Execution=Parameters<typeof executeTimedGraph>;
+export interface TimedOutput {path:string;framecrc:boolean;emptyFilterTimeBase?:()=>Rational;mode:VideoSyncMode;outputFrameRate?:Rational;outputMaxFrameRate?:Rational;demuxTimeBase?:Rational;bitexact?:boolean;encoderTimeBase?:Rational|'filter'|'demux';maxFrames?:bigint;startUs?:bigint;durationUs?:bigint|null}
+/** Pull graph sinks directly into bounded output staging; all cleanup precedes commit. */
+export async function publishTimedGraphPull(plan:Execution[0],sources:Execution[1],graphStores:Execution[2],filesystem:VirtualFileSystem,outputs:readonly TimedOutput[],options:Omit<Execution[3],'frame'|'terminal'>&{maxWriteBytes:number;overwrite:boolean;lookahead?:0|1;encoderSyncQueue?:boolean;inputGroups?:readonly number[];beforePublish?():Promise<void>;executionFactory?(plan:Execution[0],sources:Execution[1],options:Omit<Execution[3],'frame'>):Promise<PullGraphExecution>}){
+ const settings={...options};outputs=outputs.map(o=>({...o, ...(o.outputFrameRate?{outputFrameRate:{...o.outputFrameRate}}:{}),...(typeof o.encoderTimeBase==='object'?{encoderTimeBase:{...o.encoderTimeBase}}:{})}));
+ if(outputs.length!==plan.sinks.length||!outputs.length||new Set(outputs.map(o=>o.path)).size!==outputs.length)throw new Error('Invalid timed publication output bindings');
+ const controller=new AbortController(),abort=()=>controller.abort(settings.signal!.reason);if(settings.signal?.aborted)abort();else settings.signal?.addEventListener('abort',abort,{once:true});let execution:PullGraphExecution|undefined,group:Awaited<ReturnType<typeof openOutputGroup>>|undefined;const cleanupErrors:unknown[]=[];const tasks:Promise<unknown>[]=[];
+ try{
+  execution=settings.executionFactory?await settings.executionFactory(plan,sources,{...settings,signal:controller.signal}):await createTimedGraphExecution(plan,sources,graphStores,{...settings,signal:controller.signal,async frame(){}});
+  group=await openOutputGroup(filesystem,outputs.map(o=>o.path),settings.overwrite,controller.signal);
+  for(const [index,output]of outputs.entries()){
+   const link=plan.sinks[index]!;
+   async function* frames():AsyncGenerator<SyncFrame<VideoFrameData>>{const iterator=execution!.outputs[index]![Symbol.asyncIterator]();try{let next=await iterator.next();while(!next.done){const event=next.value;if(event.kind==='end'){if(event.status!=='eof')throw event.error;return;}if(!event.frame.pts)throw new Error('Unknown final frame timestamp');if(settings.lookahead===1)next=await iterator.next();yield {payload:event.frame,pts:event.frame.pts,duration:event.duration};if(settings.lookahead!==1)next=await iterator.next();}}finally{await iterator.return?.();}}
+   tasks.push((async()=>{
+   const initialized=await initializeVideoOutput(frames(),{mode:output.mode,sinkFrameRate:link.frameRate,filterTimeBase:link.timeBase,...(output.emptyFilterTimeBase?{emptyFilterTimeBase:output.emptyFilterTimeBase}:{}),...(output.outputFrameRate?{outputFrameRate:output.outputFrameRate}:{}),...(output.encoderTimeBase?{encoderTimeBase:output.encoderTimeBase}:{}),...(output.outputMaxFrameRate?{outputMaxFrameRate:output.outputMaxFrameRate}:{}),...(output.demuxTimeBase?{demuxTimeBase:output.demuxTimeBase}:{}),startUs:output.startUs??0n,durationUs:output.durationUs??null,signal:controller.signal});
+   let muxFailed=false;try{const clock=initialized.clock,rate={num:clock.timeBase.den,den:clock.timeBase.num};
+    async function* packets():AsyncGenerator<MediaPacket>{
+     const queue=settings.encoderSyncQueue&&output.maxFrames!==undefined&&output.maxFrames<(1n<<63n)-1n?createEncoderSyncQueue<VideoFrameData>([true],{bufferUs:10000000n,maxFrames:settings.maxEvents,maxBytes:settings.maxFrameBytes}):undefined;if(queue)queue.limit(0,output.maxFrames!);
+     const encode=(payload:VideoFrameData,pts:bigint,duration:bigint):MediaPacket=>{const packet=encodeRawVideo({...payload,pts:{value:pts,timeBase:clock.timeBase}},rate,{maxFrameBytes:settings.maxFrameBytes,signal:controller.signal});return {...packet,pts,dts:pts,timeBase:clock.timeBase,duration};};
+     try{outer:for await(const run of synchronizeVideoOutput(initialized.frames,{mode:clock.mode,filterTimeBase:link.timeBase,encoderTimeBase:clock.timeBase,sinkFrameRate:link.frameRate,startUs:output.startUs??0n,durationUs:output.durationUs??null,maxFrames:queue?null:output.maxFrames??null,signal:controller.signal}))for(let copy=0n;copy<run.count;copy++){
+      const pts=run.firstPts+copy,duration=videoPacketDuration(run.duration,clock.frameRate,clock.timeBase);if(!queue){yield encode(run.payload,pts,duration);continue;}
+      const sent=queue.send(0,{payload:run.payload,pts,duration,timeBase:clock.timeBase,bytes:run.payload.planes.reduce((sum,plane)=>sum+plane.byteLength,0),release(){}});if(sent===-541478725)break outer;
+      for(;;){const result=queue.receive();if(result.code===-541478725)break outer;if(result.code==='again')break;if(!result.frame)throw new Error('Encoder queue frame missing');try{if(result.frame.pts===null)throw new Error('Unknown encoder queue timestamp');yield encode(result.frame.payload,result.frame.pts,result.frame.duration);}finally{result.frame.release();}}
+     }if(queue){queue.send(0,null);for(;;){const result=queue.receive();if(result.code===-541478725||result.code==='again')break;if(!result.frame)throw new Error('Encoder drain frame missing');try{if(result.frame.pts===null)throw new Error('Unknown encoder drain timestamp');yield encode(result.frame.payload,result.frame.pts,result.frame.duration);}finally{result.frame.release();}}}}finally{queue?.dispose();}
+    }
+
+    await muxTimedRawVideo(group!.writers[index]!,packets(),{width:link.width,height:link.height,pixelFormat:link.format,timeBase:clock.timeBase,framecrc:output.framecrc,bitexact:output.bitexact??true,maxWriteBytes:settings.maxWriteBytes,signal:controller.signal});
+   }catch(error){muxFailed=true;execution!.fail(error);throw error;}finally{try{await initialized.close();}catch(error){cleanupErrors.push(error);if(!muxFailed)throw error;}}
+   })().catch(error=>{execution!.fail(error);throw error;}));
+  }
+  tasks.push(execution.drain());await Promise.all(tasks);await execution.finish();await settings.beforePublish?.();controller.signal.throwIfAborted();await group.commit();return outputs.map(o=>o.path);
+ }catch(error){if(execution)execution.fail(error);if(!controller.signal.aborted)controller.abort(error);await Promise.allSettled(tasks);if(execution)try{await execution.finish();}catch(cleanup){if(cleanup!==error)cleanupErrors.push(cleanup);}if(execution?.cleanupErrors)cleanupErrors.push(...execution.cleanupErrors);if(group)try{await group.abort(error);}catch(cleanup){cleanupErrors.push(cleanup);}if(error instanceof OutputGroupError&&!cleanupErrors.length)throw error;throw new ComplexVideoFailure(error,group?.effects()??(error instanceof OutputGroupError?error.effects:[]),Object.freeze([...new Set(cleanupErrors)]));}
+ finally{settings.signal?.removeEventListener('abort',abort);}
+}

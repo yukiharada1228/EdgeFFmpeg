@@ -1,0 +1,19 @@
+{
+  "scope": "Sampled real Native buffer→setpts→buffersink graph results. Linux generation records CPUID; cached historical provenance without CPUID does not establish x86 feature availability.",
+  "sha256": {
+    "compat/behavior-specs/video-setpts/frame-cases.json": "a33c206a2495835d3463ee3fe0785cde9d1c22311d51631d3c6c47882ab13108",
+    "compat/behavior-specs/video-setpts/eof-cases.json": "a26b56cf8435dc51e62146e72b6c7589425d84150e4bd54066075eb4e022801f",
+    "compat/behavior-specs/video-setpts/darwin-provenance.json": "e0240f8e3d12014f93ef6dada3d45966ff089600b572c0a445a48bb60783343d",
+    "compat/behavior-specs/video-setpts/darwin-frame-results.json": "803360ff769b99fd6693da5c2bb149f96b7d8ec0607ed5729898cb2fe2a4bb59",
+    "compat/behavior-specs/video-setpts/darwin-eof-results.json": "5462100a87d0585c74a27e7dbb4a5c3d8a8f736d50fd85f8cebc976fe5b98f5f",
+    "compat/behavior-specs/video-setpts/native-frame-results.json": "bdb04fd7db3db396de5369717053b3019beae422aa0962044bb9fe1366e95fb1",
+    "compat/behavior-specs/video-setpts/native-provenance.json": "b414f6acb21c2ea2612650a8be11f172d7884bed0684f64d624628e3c460df99",
+    "compat/behavior-specs/video-setpts/native-eof-results.json": "5462100a87d0585c74a27e7dbb4a5c3d8a8f736d50fd85f8cebc976fe5b98f5f",
+    "tests/helpers/video-setpts-cases.ts": "ec1bc3f01a61a1283c89b85ba5941078a6857758343a9af4f8ab845774ec1556",
+    "tests/helpers/video-setpts-eof-cases.ts": "b73cc123ceae400200a393b6de4d2eac3968f0b6fd8f352747b1eaea2b7052d2",
+    "compat/behavior-specs/video-setpts/native-error-provenance.json": "b414f6acb21c2ea2612650a8be11f172d7884bed0684f64d624628e3c460df99",
+    "compat/behavior-specs/video-setpts/darwin-error-results.json": "c846728fc9fce6b2c64e0059e9f625267e2290efc53ddcd437bcb4a5a3256ed1",
+    "compat/behavior-specs/video-setpts/native-error-results.json": "c846728fc9fce6b2c64e0059e9f625267e2290efc53ddcd437bcb4a5a3256ed1",
+    "compat/behavior-specs/video-setpts/darwin-error-provenance.json": "73c650bb2bbe5682f2f17ae46948e56327612f9a5ad272dcc4681c79c9ae528c"
+  }
+}

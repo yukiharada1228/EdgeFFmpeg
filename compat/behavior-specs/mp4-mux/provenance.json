@@ -1,0 +1,15 @@
+{
+  "reference": {
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "ffmpegSha256": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+    "ffprobeSha256": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+  },
+  "sources": {
+    "upstream/ffmpeg/libavformat/movenc.c": "f4303c1c2313c590919ddcdcfac41ab1fc3d78c9a8a032462d6d83f6e767bea7",
+    "upstream/ffmpeg/libavformat/mov.c": "533674687505d25db7176cf876036f600e6d8cb25079ffa6b28b4a8e8266eae1",
+    "upstream/ffmpeg/fftools/ffmpeg_mux_init.c": "a74812b6e019e5cd2a0e6a28a63e989d55008b081a55acde8510774310e965c2"
+  },
+  "fixtureOrigin": "85 pinned Native base fixtures plus seven small timing rewrites and eight tkhd-enabled-bit variants, each verified with pinned Native; packet/header and CLI copies are semantic, not container-byte-exact.",
+  "certified": false,
+  "baseCorpusManifestSha256": "acb93d304534dffdab21e4d00a15e7f71924d4d5bb00c64e60682cd6c29a1c96"
+}

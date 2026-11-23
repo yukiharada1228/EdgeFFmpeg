@@ -1,0 +1,79 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "nativeProbe": {
+    "inputs": {
+      "verifierSha256": "b9e4160c0f8918fcba7edaee56af1167a31627ba8a62e6587559429f68956dd9",
+      "baselineSourceSha256": "765c8cb2811709e68fb401f0634afa29f1bd9762938bb4c5c386a7e29aeff3d0",
+      "referenceCommit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "sourceSha256": "c729db9684ecd9c729a6b23562b03b8807c872e7812228047c759e9a23d5d092",
+      "builderSha256": "d7a65c44c7dcccace31ac3bc5b1e69953f1249cdab17a02a896e526fe9efe77a",
+      "librarySha256": {
+        "libavformat/libavformat.a": "d1760cb51a34c69c6c664fa616e455ee5f90d96c8f2a7d82d02bd5707837d1cc",
+        "libavcodec/libavcodec.a": "7570dfffaf568d1afeb7b4b002493f5d188470273819b7a4dd0521db75eb4ca9",
+        "libswresample/libswresample.a": "053aa00bcf154fc88877406ddd492ffc68952977cb1c61fe31b353c2d6547b1f",
+        "libavutil/libavutil.a": "b8864b177f1717ac38de58754a16ccee473e0fb7bf304398dcaffc1b6c89a598"
+      },
+      "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+      "platform": "darwin",
+      "arch": "arm64",
+      "command": [
+        "-I",
+        "upstream/ffmpeg",
+        "-I",
+        ".build/reference",
+        "tools/differential-runner/mp4-aac-explicit/probe.c",
+        ".build/reference/libavformat/libavformat.a",
+        ".build/reference/libavcodec/libavcodec.a",
+        ".build/reference/libswresample/libswresample.a",
+        ".build/reference/libavutil/libavutil.a",
+        "-lm",
+        "-pthread",
+        "-framework",
+        "CoreFoundation",
+        "-framework",
+        "CoreVideo",
+        "-framework",
+        "CoreMedia",
+        "-o",
+        ".build/aac-native-probe/probe"
+      ]
+    },
+    "binarySha256": "a2019f7c74086d70a0f4410bbdfed517394a86199fbfa6422efce47b1306736f",
+    "validation": {
+      "cases": 12,
+      "failures": 0
+    }
+  },
+  "caseCount": 60,
+  "positiveCopies": 48,
+  "negativeCopies": 12,
+  "sources": {
+    "tools/differential-runner/mp4-aac-zero/generate.mjs": "5ae0c33e0332fd9a0aa8f0b9244240a3dcc1b249ff3de5d6a5ae0bc2b87ae3b1",
+    "tools/differential-runner/mp4-aac-explicit/probe.c": "c729db9684ecd9c729a6b23562b03b8807c872e7812228047c759e9a23d5d092",
+    "tools/differential-runner/mp4-aac-explicit/build-native.mjs": "d7a65c44c7dcccace31ac3bc5b1e69953f1249cdab17a02a896e526fe9efe77a",
+    "tools/differential-runner/mp4-aac-explicit/verify-native.mjs": "b9e4160c0f8918fcba7edaee56af1167a31627ba8a62e6587559429f68956dd9",
+    "compat/behavior-specs/mp4-aac-explicit/manifest.json": "5c9fa3d06305db58e0a5a5034382adf5da3cc53afc42b03c9e9548c7a5abb8df",
+    "compat/behavior-specs/mp4-aac-explicit/inputs.json": "965474b8ffabc943ca33cc23ea6e1fe69b9404fb7037e976777315b9767330c1",
+    "compat/behavior-specs/mp4-aac-explicit/results.json": "f00e75788018e0e6b4fc463a2d26930746d16f3990933df1ca35e8f7f6c56162",
+    "compat/behavior-specs/mp4-aac-explicit/provenance.json": "7177a3f35536f59e282ca8fc04d3cc59fb56d7e04e8a030aa2916ed83c6ec9ee"
+  },
+  "scope": "AAC-LC explicitfrequency0; Native mov_finalize_stsd_codec fallback toMDHD ifscale>1.48resolved-copy cases and12scale1 unresolved-rate failures,all60demux metadata/index probes. Failure existence only; exact CLI errorcode/sideeffect certification remains open."
+}

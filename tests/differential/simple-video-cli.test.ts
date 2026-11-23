@@ -1,0 +1,13 @@
+import {it,expect} from 'vitest';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {evaluateSimpleVideoCase} from '../helpers/simple-video-cli.js';
+import type {SimpleVideoCase} from '../helpers/simple-video-cli.js';
+import type {ExpressionNumericProfile} from '@edge-ffmpeg/avutil';
+it('matches 1369 pinned Native simple video CLI cases and 42 filter selector boundaries',async()=>{
+ const root='compat/behavior-specs/simple-video-cli',hash=(path:string)=>createHash('sha256').update(readFileSync(path)).digest('hex'),manifest=JSON.parse(readFileSync(root+'/manifest.json','utf8')) as {sha256:Record<string,string>};for(const [file,digest]of Object.entries(manifest.sha256))expect(hash(file),file).toBe(digest);
+ const provenance=JSON.parse(readFileSync(root+'/provenance.json','utf8')) as {reference:{commit:string};numericProfile:ExpressionNumericProfile;sources:Record<string,string>};expect(provenance.reference.commit).toBe(JSON.parse(readFileSync('compat/upstream.lock.json','utf8')).commit);for(const [file,digest]of Object.entries(provenance.sources))expect(hash(file),file).toBe(digest);
+ const cases=JSON.parse(readFileSync(root+'/cases.json','utf8')) as SimpleVideoCase[],results=JSON.parse(readFileSync(root+'/results.json','utf8')) as Record<string,string>[];expect(cases).toHaveLength(1369);expect(results).toHaveLength(cases.length);
+ for(const [index,row]of cases.entries()){const actual=await evaluateSimpleVideoCase(row,provenance.numericProfile);expect(actual.exitCode,row.id+' '+JSON.stringify(actual.diagnostics)).toBe(0);expect(actual.outputs,row.id).toEqual(Object.keys(results[index]!));expect(actual.rows,row.id).toEqual(results[index]);expect(actual.pending,row.id).toBe(0);expect(actual.storesClosed,row.id).toBe(true);expect(Object.values(actual.reads).every(count=>count===1),row.id).toBe(true);}
+ const selectorCases=JSON.parse(readFileSync(root+'/selector-cases.json','utf8')) as SimpleVideoCase[],selectorResults=JSON.parse(readFileSync(root+'/selector-results.json','utf8')) as {exitCode:number;rows:Record<string,string>}[];expect(selectorCases).toHaveLength(42);expect(selectorResults).toHaveLength(42);for(const [index,row]of selectorCases.entries()){const actual=await evaluateSimpleVideoCase(row,provenance.numericProfile);expect(actual.exitCode,row.id).toBe(selectorResults[index]!.exitCode);expect(actual.rows,row.id).toEqual(selectorResults[index]!.rows);expect(actual.pending).toBe(0);expect(actual.storesClosed).toBe(true);if(actual.exitCode!==0){expect(actual.outputs).toEqual([]);expect(actual.reads).toEqual({});}}
+},30000);

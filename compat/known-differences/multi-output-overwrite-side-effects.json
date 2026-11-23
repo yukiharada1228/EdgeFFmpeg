@@ -1,0 +1,175 @@
+{
+  "status": "known-difference-atomic-publication-design",
+  "fullConformance": false,
+  "scope": "two-output graphs when later output exists and defaultEOF/-n refuses it",
+  "native": {
+    "exitCode": 0,
+    "earlierOutput": "opened before later refusal;may remain empty OS file",
+    "cases": [
+      {
+        "profile": "split-raw",
+        "flags": [],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "split-raw",
+        "flags": [
+          "-n"
+        ],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "split-crc",
+        "flags": [],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "split-crc",
+        "flags": [
+          "-n"
+        ],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "split-mixed",
+        "flags": [],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "split-mixed",
+        "flags": [
+          "-n"
+        ],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "forced-replay",
+        "flags": [],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "forced-replay",
+        "flags": [
+          "-n"
+        ],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "two-input-raw",
+        "flags": [],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "two-input-raw",
+        "flags": [
+          "-n"
+        ],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "two-input-crc",
+        "flags": [],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "two-input-crc",
+        "flags": [
+          "-n"
+        ],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "repeated-input",
+        "flags": [],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      },
+      {
+        "profile": "repeated-input",
+        "flags": [
+          "-n"
+        ],
+        "existing": [
+          false,
+          true
+        ],
+        "earlierBytes": 0
+      }
+    ]
+  },
+  "edge": {
+    "exitCode": 0,
+    "outputs": [],
+    "earlierOutput": "absent;all-output non-mutating preflight occurs before any writer",
+    "preCommitRaceProtection": "All no-clobber destinations are checked again before the first publication;observed collisions abort every stage.",
+    "remainingRaceBoundary": "Races or failures after final preflight can still leave ordered partial publication. Per-output conditional commit stays mandatory and publishedOutputs/effects report the actual state;cross-object atomic commit is not claimed."
+  },
+  "rationale": "EFF-DESIGN-001 requires output publication only after success and recovery of pre-commit failures. Preserve this invariant and expose the Native side-effect difference.",
+  "otherLimitations": [
+    "Interactive stdin/full stderr remain unverified",
+    "Generic source/mux error status mappings remain incomplete",
+    "Custom VFS without outputExists has legacy partial behavior",
+    "Production Workers not certified"
+  ],
+  "evidence": {
+    "secondProbeFaultControls": 63,
+    "schedulers": "default plus6timed",
+    "faults": [
+      "cancellation",
+      "head failure",
+      "racing second object creation"
+    ],
+    "unit": "output-group recheck prevents observed collision from publishing earlier stage"
+  }
+}

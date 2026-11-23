@@ -1,0 +1,6 @@
+PathNotDirectoryError independently maps fixed POSIX Native FFmpeg behavior at
+commit946fcce07b6dcd0331c8cc609192aeff5e1924f8:AVERROR(ENOTDIR)=-20 is observed as
+process status236. Native-only intermediate-file fixtures establish input and
+output overwrite precedence. Core does not execute or link Native FFmpeg.
+Only initial path-component traversal is mapped;post-open version changes,
+EISDIR,directory/trailing-slash and general OS protocol remain distinct.

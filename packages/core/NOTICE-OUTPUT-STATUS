@@ -1,0 +1,6 @@
+OutputParentNotFoundError independently maps fixed POSIX Native FFmpeg behavior
+at commit946fcce07b6dcd0331c8cc609192aeff5e1924f8:avio_open2 returning
+AVERROR(ENOENT)=-2 is observed as process status254. Conflicting overwrite flags
+fail first with234,and output opening precedes mux audio rate validation.
+Native-only fixtures establish this scoped ordering;Core never executes Native.
+Only an absent local writable parent is mapped,not a normally absent output.

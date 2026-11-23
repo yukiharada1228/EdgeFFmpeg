@@ -1,0 +1,112 @@
+{
+  "status": "scoped-access-denials-resolved-atomic-capability-differences-remain",
+  "fullConformance": false,
+  "reference": "fixed POSIX Native FFmpeg with unprivileged owner-mode enforcement",
+  "scope": "26owned finite PCM/video/BMP/H264/MP4/AAC profiles,4permission modes,5flag modes",
+  "results": {
+    "cases": 520,
+    "statusMatches": 506,
+    "knownStatusDifferences": 14,
+    "unexpectedFailures": 0
+  },
+  "mapping": {
+    "initialEACCES": 243,
+    "postOpenAccessChange": "NodeInputChangedError/failure1",
+    "refusal": "existing output defaultEOF/-n remains0 before write permission checks"
+  },
+  "known": [
+    {
+      "profile": "wav-copy",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "wav-encode",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "aiff-encode",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "au-encode",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "raw-pcm",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "audio-framecrc",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "raw-video-copy",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "video-framecrc",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "bmp-copy",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "bmp-encode",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "bmp-decode",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "h264-rawvideo",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "h264-framecrc",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    },
+    {
+      "profile": "mp4-copy",
+      "nativeStatus": 0,
+      "edgeStatus": 1,
+      "reason": "Atomic replacement requires a writable output parent: /output/result.bin"
+    }
+  ],
+  "atomicBoundary": "Native can write an existing writable file inside a non-writable parent. Node atomic replacement needs parent write permission;the adapter returns runtime-blocked1,preserves prior output and does not chmod caller files. Staging capability is checked after mux header validation,so12unresolved AAC cases retain Native234.",
+  "otherEffectDifference": "Those12Native mux-header failures can truncate an existing OS file;Edge preserves old output per atomic publication policy.",
+  "limitations": [
+    "No unconditional Native permission/OS/log conformance",
+    "Root/privileged users cannot execute the owner-mode fixture faithfully;tests fail explicitly rather than skip",
+    "Other errno,ACL,symlink,ownership,descriptor and post-open races remain unverified",
+    "R2 mount policy is an application policy and is not remapped to POSIX EACCES",
+    "Custom VFS wrappers must forward optional WriteOptions in outputExists;production unverified"
+  ]
+}

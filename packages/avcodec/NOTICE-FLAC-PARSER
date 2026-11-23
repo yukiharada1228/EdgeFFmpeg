@@ -1,0 +1,21 @@
+FLAC header and descriptor parser
+
+packages/avcodec/src/flac is adapted from the pinned FFmpeg 9.0.2 source,
+commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8:
+- libavcodec/flac.c: Copyright (c) 2009 Justin Ruggles
+- libavcodec/flacdata.c: Copyright (c) 2003 Alex Beregszaszi
+- libavcodec/flac_parser.c: Copyright (c) 2010 Michael Chinen
+- libavcodec/parser.c: Copyright (c) 2003 Fabrice Bellard;
+  Copyright (c) 2003 Michael Niedermayer
+- libavutil/common.h: Copyright (c) 2006 Michael Niedermayer
+
+These source files license their code under LGPL version 2.1 or, at your option,
+any later version. COPYING.LGPLv2.1 contains that license. This is an adapted
+implementation; no independent-implementation claim is made.
+
+The TypeScript parser retains bounded header/CRC descriptors, rather than media
+payload buffers. The caller supplies input discovery and packet payload I/O.
+FFmpeg is a development reference, not a runtime dependency. Full AVIO scheduling,
+container timestamps, malformed diagnostics, decoding and CLI compatibility
+remain separate requirements. Package-level redistribution and project-wide
+license review remain open.

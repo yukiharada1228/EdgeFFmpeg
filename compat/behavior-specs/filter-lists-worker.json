@@ -1,0 +1,142 @@
+{
+  "reference": {
+    "aarch64": {
+      "artifacts": {
+        "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+        "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+      },
+      "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "platform": "darwin",
+      "arch": "arm64",
+      "flags": [
+        "--disable-autodetect",
+        "--disable-doc",
+        "--disable-debug",
+        "--disable-x86asm"
+      ],
+      "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+      "targetPlatformMatches": false,
+      "reproducibleToolchainPinned": false
+    },
+    "x86_64": {
+      "artifacts": {
+        "ffmpeg": "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91",
+        "ffprobe": "0895f870196845f40002238980f908e2dfed7dcf8197a1074b98e4312431671b"
+      },
+      "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "platform": "linux",
+      "arch": "x64",
+      "flags": [
+        "--disable-autodetect",
+        "--disable-doc",
+        "--disable-debug",
+        "--disable-x86asm"
+      ],
+      "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 12 (Debian 12.2.0-14+deb12u1)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+      "targetPlatformMatches": true,
+      "reproducibleToolchainPinned": false
+    }
+  },
+  "containerImage": "docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496",
+  "payload": "three tight 5x3 frames; byte[i]=(i*37+13)&255",
+  "cases": [
+    {
+      "id": "0",
+      "source": "rgba",
+      "destination": "",
+      "description": "format=gray|rgba,format=gray|nv12",
+      "size": "4x3",
+      "inputSha256": "3e21f3febc548d8023dec6ff59cd01abfaf4ce5656252d7f68db2e7d9f45dcec",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       20, 0x64fd0984\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       20, 0x64fd0984\n"
+      }
+    },
+    {
+      "id": "1",
+      "source": "rgba",
+      "destination": "",
+      "description": "format=rgba|nv12,format=yuva420p|nv12",
+      "size": "4x3",
+      "inputSha256": "3e21f3febc548d8023dec6ff59cd01abfaf4ce5656252d7f68db2e7d9f45dcec",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       32, 0xfcd10f43\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       32, 0xfcd10f43\n"
+      }
+    },
+    {
+      "id": "2",
+      "source": "nv21",
+      "destination": "bgra",
+      "description": "scale=13:7,format=gray|gbrp,scale",
+      "size": "4x3",
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xcb1c1f2b\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xcb1c1f2b\n"
+      }
+    },
+    {
+      "id": "3",
+      "source": "gray",
+      "destination": "rgba",
+      "description": "format=rgba|gray,scale=13:7,format=nv12|gray",
+      "size": "13x7",
+      "inputSha256": "9e79a9bf4e7243e70edfa252cd433482adac96993a86d50b647c87782d80db69",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0x0bdadfda\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0x0bdadfda\n"
+      }
+    },
+    {
+      "id": "4",
+      "source": "yuv444p",
+      "destination": "gbrp",
+      "description": "format=nv12|rgba,scale=13:7",
+      "size": "4x3",
+      "inputSha256": "045d226a89ed3c0f39f18948d5e5e34bc1f5abc2c6083a455f703d8291511b41",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x49141142\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x49141142\n"
+      }
+    },
+    {
+      "id": "5",
+      "source": "bgr24",
+      "destination": "",
+      "description": "format=gray|rgba,format=gbrp|yuv422p,scale=13:7",
+      "size": "4x3",
+      "inputSha256": "045d226a89ed3c0f39f18948d5e5e34bc1f5abc2c6083a455f703d8291511b41",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x434d1176\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x434d1176\n"
+      }
+    },
+    {
+      "id": "6",
+      "source": "gbrp",
+      "destination": "gray",
+      "description": "scale=13:7,format=rgba|bgra,scale",
+      "size": "13x7",
+      "inputSha256": "045d226a89ed3c0f39f18948d5e5e34bc1f5abc2c6083a455f703d8291511b41",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,       91, 0x986f2dd2\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,       91, 0x986f2dd2\n"
+      }
+    },
+    {
+      "id": "7",
+      "source": "yuva420p",
+      "destination": "rgba",
+      "description": "format=gray|rgba,scale=1:1,format=nv12|yuva420p,scale=13:7",
+      "size": "4x3",
+      "inputSha256": "3095a940d3411acb402acf62dde816733c2ea55ba8d77b6b10179f9faa0b4bc4",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0x61ae18a8\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0x639218b4\n"
+      }
+    }
+  ]
+}

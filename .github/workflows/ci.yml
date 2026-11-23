@@ -1,0 +1,102 @@
+name: CI
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  foundation:
+    needs: reference
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: worker-reference-and-codec
+          path: .build
+      - run: chmod +x .build/reference/ffmpeg .build/reference/ffprobe
+      - run: npm run check
+  reference:
+    runs-on: ubuntu-latest
+    # Keep in sync with compat/reference-container.lock.json.
+    container:
+      image: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
+    steps:
+      - name: Install codec build prerequisites
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends cmake python3 xz-utils
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - run: npm ci
+      - run: npm run reference:build
+      - uses: actions/checkout@v4
+        with:
+          repository: cisco/openh264
+          ref: 1bca62311e447fd9c39fc93de2c4b96cd5ce971c
+          path: .build/vendor/openh264
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: emscripten-core/emsdk
+          ref: 708dcbcc9ee23bc7d2dad44fc90db377e38b771c
+          path: .build/toolchains/emsdk
+          persist-credentials: false
+      - run: .build/toolchains/emsdk/emsdk install 7.0.0
+      - run: .build/toolchains/emsdk/emsdk activate 7.0.0
+      - run: npm run codec:h264:build -- --source .build/vendor/openh264 --emsdk .build/toolchains/emsdk
+      - name: Fetch verified libFLAC release inputs
+        run: |
+          mkdir -p .build/vendor
+          curl --fail --location --retry 3 https://downloads.xiph.org/releases/flac/flac-1.5.0.tar.xz --output .build/vendor/flac-1.5.0.tar.xz
+          echo 'f2c1c76592a82ffff8413ba3c4a1299b6c7ab06c734dee03fd88630485c2b920  .build/vendor/flac-1.5.0.tar.xz' | sha256sum --check
+          tar -xJf .build/vendor/flac-1.5.0.tar.xz -C .build/vendor
+      - run: npm run codec:flac:build -- --source .build/vendor/flac-1.5.0 --archive .build/vendor/flac-1.5.0.tar.xz --emsdk .build/toolchains/emsdk --out .build/codecs/flac
+      - uses: actions/upload-artifact@v4
+        with:
+          name: worker-reference-and-codec
+          include-hidden-files: true
+          if-no-files-found: error
+          path: |
+            .build/reference/
+            .build/codecs/openh264/openh264.wasm
+            .build/codecs/flac/edge-flac.wasm
+      # Includes integration tests that invoke .build/reference/ffmpeg.
+      - run: npm run compat:report
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reference-evidence
+          include-hidden-files: true
+          path: |
+            compat/capabilities.json
+            compat/reports/
+            .build/reference/build-metadata.json
+            .build/evidence/
+            .build/fate-execution/
+  workers:
+    needs: reference
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: worker-reference-and-codec
+          path: .build
+      - run: chmod +x .build/reference/ffmpeg .build/reference/ffprobe
+      - run: npm run workers:types -- --check
+      - run: npm run test:workers
+      - run: npm run workers:bundle

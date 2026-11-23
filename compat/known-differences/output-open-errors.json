@@ -1,0 +1,32 @@
+{
+  "status": "scoped-node-parent-absence-resolved-other-open-errors-incomplete",
+  "fullConformance": false,
+  "reference": "fixed POSIX FFmpeg",
+  "scope": "initial missing writable parent in built-in Node VFS",
+  "native": {
+    "parentMissingExit": 254,
+    "conflictingFlagsExit": 234,
+    "basis": "assert_file_overwrite conflict precedes avio_open2 ENOENT;output opening precedes mux audio header sample-rate validation"
+  },
+  "edge": {
+    "type": "OutputParentNotFoundError",
+    "code": "output-parent-not-found",
+    "exitCode": 254,
+    "preflight": "writable path validation also runs with-y"
+  },
+  "groupPropagation": "Typed status is retained only with successful cleanup and no opened stages or only confirmed aborted stages;otherwise1 with explicit effects.",
+  "evidence": {
+    "profiles": 26,
+    "cases": 260,
+    "ENOENT": 156,
+    "conflicts": 104,
+    "invalidRateProfiles": 12
+  },
+  "limits": [
+    "R2 object key prefixes are not local directories;missing filesystem parent semantics are not claimed for R2.",
+    "Permission/not-directory/I/O/space/quota and other open-error statuses remain incomplete.",
+    "Full Native stderr,failed empty OS files and later publication races remain outside this scope.",
+    "Path-security and mount-policy failures retain their own error behavior.",
+    "Custom VFS adapters must expose writable path validation and typed failures;production remains unverified."
+  ]
+}

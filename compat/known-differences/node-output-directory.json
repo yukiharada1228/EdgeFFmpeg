@@ -1,0 +1,30 @@
+{
+  "status": "scoped-output-directory-and-trailing-slash-resolved-other-directory-semantics-incomplete",
+  "fullConformance": false,
+  "scope": "Built-in Node,existing output directory with/without slash,missing trailing-slash directory,regular file with input/output trailing slash",
+  "mapping": {
+    "existingDirectoryRefusal": 0,
+    "overwriteDirectory": 235,
+    "missingTrailingSlashDirectory": 254,
+    "fileWithTrailingSlash": 236,
+    "outputFlagConflict": 234
+  },
+  "evidence": {
+    "profiles": 26,
+    "cases": 650,
+    "counts": {
+      "refused": 104,
+      "EISDIR": 52,
+      "ENOENT": 78,
+      "ENOTDIR": 208,
+      "conflict": 208
+    }
+  },
+  "preservation": "No directory children or existing file are modified;no target/staging file is created. Canonical containment is checked before metadata inspection through a trailing-slash alias.",
+  "limits": [
+    "Initial input-directory behavior has scoped evidence in node-input-directory.json;general directory read/discovery and output effects remain incomplete.",
+    "Full symlink/ACL/ownership/descriptor/OS-race/other-error semantics remain incomplete.",
+    "R2 prefixes are not local directories;no emulation or production claim.",
+    "Existing14atomic-permission status differences remain open."
+  ]
+}

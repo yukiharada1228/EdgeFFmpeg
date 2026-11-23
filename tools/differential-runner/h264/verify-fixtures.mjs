@@ -1,0 +1,4 @@
+import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+const rows=JSON.parse(readFileSync('compat/behavior-specs/h264/cases.json')),hash=x=>createHash('sha256').update(x).digest('hex');
+for(const row of rows){const id=row.id;let path;if(id==='legacy-manual')path='.build/h264-fixtures/owned-manual/owned.264';else if(['legacy-skip-direct','legacy-mixed-direct'].includes(id))path='.build/h264-fixtures/owned-direct/'+id.slice(7)+'.264';else if(id.startsWith('legacy-'))path='.build/h264-fixtures/encoder/'+id.slice(7)+'.264';else if(id.startsWith('moving-'))path='.build/h264-fixtures/x264-moving/'+id.slice(7)+'.264';else if(id.startsWith('hd-'))path='.build/h264-fixtures/x264-hd/'+id.slice(3)+'.264';else path='.build/h264-fixtures/'+id+'.264';if(hash(readFileSync(path))!==row.inputSha256)throw Error('Generated H264 input differs: '+id);}
+console.log(JSON.stringify({inputs:rows.length,passed:true}));

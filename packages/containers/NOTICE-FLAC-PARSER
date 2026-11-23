@@ -1,0 +1,46 @@
+FLAC header, descriptor parser and metadata foundation
+
+packages/containers/src/flac uses bounded VFS scheduling around logic adapted from the pinned FFmpeg 9.0.2 source,
+commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8:
+- libavformat/flacdec.c: Copyright (c) 2001 Fabrice Bellard
+- libavcodec/flac.c: Copyright (c) 2009 Justin Ruggles
+- libavcodec/flacdata.c: Copyright (c) 2003 Alex Beregszaszi
+- libavcodec/flac_parser.c: Copyright (c) 2010 Michael Chinen
+- libavcodec/parser.c: Copyright (c) 2003 Fabrice Bellard;
+  Copyright (c) 2003 Michael Niedermayer
+- libavutil/common.h: Copyright (c) 2006 Michael Niedermayer
+
+These source files license their code under LGPL version 2.1 or, at your option,
+any later version. COPYING.LGPLv2.1 contains that license. This is an adapted
+implementation; no independent-implementation claim is made.
+
+The TypeScript scanner and scheduler use bounded input buffers and header/CRC
+descriptors. The caller supplies packet payload I/O. The metadata reader handles STREAMINFO
+and block descriptors; trusted handlers supply remaining payload validation.
+FFmpeg is a development reference, not a runtime dependency. Full AVIO scheduling,
+container timestamps, malformed diagnostics, decoding and CLI compatibility
+remain separate requirements. Package-level redistribution and project-wide
+license review remain open.
+
+Comment, chapter and picture handlers also adapt the same pinned FFmpeg source:
+- libavformat/oggparsevorbis.c: Copyright (C) 2005 Michael Ahlberg, Måns Rullgård;
+  its MIT permission notice is retained in COPYING.MIT.oggparsevorbis
+- libavformat/vorbiscomment.c: Copyright (c) 2009 James Darnley
+- libavformat/metadata.c and libavutil/dict.c: Copyright (c) 2009 Michael Niedermayer
+- libavformat/flac_picture.c: Copyright (c) 2001 Fabrice Bellard
+- libavformat/id3v2.c: Copyright (c) 2003 Fabrice Bellard
+- libavutil/base64.c: Copyright (c) 2006 Ryan Martell
+The applicable LGPL-2.1-or-later notices remain in those adapted modules.
+No project-wide distribution-license verification follows from these notices.
+
+Scoped timestamp fill-in also adapts libavformat/demux.c
+(Copyright (c) 2001 Fabrice Bellard), under LGPL-2.1-or-later.
+Channel-layout constants refer to libavutil/channel_layout.h
+(Copyright (c) 2006 Michael Niedermayer; Copyright (c) 2008 Peter Ross).
+
+The bounded packet-copy mux in src/flac/mux.ts adapts pinned
+libavformat/flacenc.c (Copyright (c) 2006-2009 Justin Ruggles),
+flacenc_header.c (Copyright (C) 2009 Justin Ruggles), vorbiscomment.c
+(Copyright (c) 2009 James Darnley) and mux.c. LGPL-2.1-or-later and the
+accompanying license apply. Original sources/notices remain in upstream/ffmpeg.
+This does not establish whole-project redistribution/license conformance.

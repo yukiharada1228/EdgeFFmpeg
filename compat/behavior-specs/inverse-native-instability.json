@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-20T03:37:22.685413+00:00",
+  "upstreamCommit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+  "referenceBinarySha256": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+  "platform": "Darwin",
+  "arch": "arm64",
+  "input": {
+    "width": 16,
+    "height": 6,
+    "bytes": 144,
+    "seed": 53,
+    "lcgMultiplier": 1664525,
+    "lcgIncrement": 1013904223,
+    "sha256": "e12cb4e987a04f1cd33a30349f69dfe82fc72bf3ddf8a42150f2f9857972e8f3"
+  },
+  "observations": [
+    {
+      "source": "nv12",
+      "destination": "rgb24",
+      "options": [],
+      "repeats": 48,
+      "outputHashes": {
+        "23e46c2c2d99e1e10aa780a999f5674b976249d32423ab3789feb12f7079699f": 46,
+        "60791060022fe35ffc6d4a600a707aeef44846cb9ac9a4f236212b4f2a79d8a9": 2
+      }
+    },
+    {
+      "source": "nv12",
+      "destination": "rgb24",
+      "options": [
+        "-filter_threads",
+        "1"
+      ],
+      "repeats": 12,
+      "outputHashes": {
+        "23e46c2c2d99e1e10aa780a999f5674b976249d32423ab3789feb12f7079699f": 12
+      }
+    },
+    {
+      "source": "nv21",
+      "destination": "rgb24",
+      "options": [],
+      "repeats": 48,
+      "outputHashes": {
+        "30ee02c2597736442b53aee8ff6bf2a956e73ff169cfe5d9e50ca410801a704c": 7,
+        "93838775e42f1352f408d29a267dd67f833d4c5eb23632635a3591c4fb0e3a09": 4,
+        "ca3734c2a2511cc5c7d52345a898238d4e578cb60d1aaa60cc8df6848f8503f3": 37
+      }
+    },
+    {
+      "source": "nv21",
+      "destination": "rgb24",
+      "options": [
+        "-filter_threads",
+        "1"
+      ],
+      "repeats": 12,
+      "outputHashes": {
+        "ca3734c2a2511cc5c7d52345a898238d4e578cb60d1aaa60cc8df6848f8503f3": 12
+      }
+    }
+  ],
+  "policy": "Reject aarch64-default aligned NV12/NV21-to-RGB before I/O; explicit scalar remains separately supported. Single-thread control is diagnostic only, not a replacement oracle profile."
+}

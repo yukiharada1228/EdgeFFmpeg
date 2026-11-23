@@ -1,0 +1,3 @@
+import {createScaleExpressionState} from '@edge-ffmpeg/avfilter';import type {ScaleExpressionOptions} from '@edge-ffmpeg/avfilter';
+export interface ScaleExpressionCase {initial:[string,string];ops:[string,string][];options?:Pick<ScaleExpressionOptions,'sar'|'forceOriginalAspectRatio'|'forceDivisibleBy'|'resetSar'>}
+export function evaluateScaleExpression(row:ScaleExpressionCase){const state=createScaleExpressionState({inputWidth:3,inputHeight:2,width:row.initial[0],height:row.initial[1],numericProfile:'darwin-arm64',...row.options});try{return row.ops.map(([command,expression])=>({code:state.command(command,expression).code,state:state.snapshot}));}finally{state.dispose();}}

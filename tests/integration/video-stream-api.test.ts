@@ -1,0 +1,17 @@
+import {it,expect} from 'vitest';
+import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,readdirSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';import {join} from 'node:path';
+import {createNodeFileSystem} from '@edge-ffmpeg/runtime-node';
+import {compileMultiInputVideoFilterGraph,createReplayVideoExecution} from '@edge-ffmpeg/avfilter';
+import type {ReplayVideoSource} from '@edge-ffmpeg/avfilter';import type {ReadHandle} from '@edge-ffmpeg/core';
+import {openOutputGroup} from '../../packages/avformat/src/output-group.js';
+import {cases} from '../workers/video-stream-cases.js';
+it('matches native stream graph anchors through version-bound Node readers and staged files',async()=>{
+ const root=mkdtempSync(join(tmpdir(),'edge-stream-api-')),fixture=JSON.parse(readFileSync('compat/behavior-specs/video-stream-worker.json','utf8')) as {cases:{id:string;native:{timeBase:{num:number;den:number};events:{pts:string;values:number[]}[]}}[]};
+ try{for(const c of cases){const directory=join(root,c.id);mkdirSync(join(directory,'input'),{recursive:true});mkdirSync(join(directory,'output'));const inputs=[c.a,c.b];for(const [index,input]of inputs.entries())writeFileSync(join(directory,'input',`${index}.raw`),Uint8Array.from({length:input.pts.length},(_,i)=>(index?100:10)+i));const fs=await createNodeFileSystem({root:directory,maxReadBytes:1,maxWriteBytes:64}),readers:(Promise<ReadHandle>|undefined)[]=[],readerOpens=[0,0];
+  const source=(index:number):ReplayVideoSource=>{const input=inputs[index]!,timeBase={num:BigInt(input.timeBase[0]),den:BigInt(input.timeBase[1])};return {geometry:{format:'gray',width:1,height:1},timeBase,readBufferBytes:1,open(signal){return {async *[Symbol.asyncIterator](){if(!readers[index]){readerOpens[index]=(readerOpens[index]??0)+1;readers[index]=fs.openRead(`/input/${index}.raw`);}const reader=await readers[index]!;for(const [position,pts]of input.pts.entries()){const bytes=await reader.readAt(BigInt(position),1,signal);yield {width:1,height:1,pixelFormat:'gray',planes:[bytes],linesizes:[1],pts:{value:BigInt(pts),timeBase},metadata:{}};}}};}};};
+  const byLabel={a:source(0),b:source(1)},sources=compileMultiInputVideoFilterGraph(c.graph).graph.inputs.map(pad=>byLabel[pad.label as 'a'|'b']),controller=new AbortController(),execution=createReplayVideoExecution(c.graph,sources,['gray'],{maxFrameBytes:1024,maxStateBytes:8192,maxResidentBytes:65536,maxSourceTraversals:16,signal:controller.signal}),group=await openOutputGroup(fs,['/output/frames.raw'],false,controller.signal),events=[];
+  try{for await(const frame of execution.outputs[0]!.frames){const values=frame.planes.flatMap(plane=>[...plane]);events.push({pts:String(frame.pts!.value),values});await group.writers[0]!.write(Uint8Array.from(values));}await group.writers[0]!.commit();await execution.close();await group.commit();}catch(error){try{await group.abort(error);}catch{}throw error;}finally{await execution.close();}
+  const expected=fixture.cases.find(value=>value.id===c.id)!.native;expect(events,c.id).toEqual(expected.events);expect({num:Number(execution.outputs[0]!.timeBase.num),den:Number(execution.outputs[0]!.timeBase.den)},c.id).toEqual(expected.timeBase);expect(readFileSync(join(directory,'output/frames.raw')),c.id).toEqual(Buffer.from(expected.events.flatMap(event=>event.values)));expect(readerOpens).toEqual([1,1]);expect(readdirSync(join(directory,'output'))).toEqual(['frames.raw']);
+ }}finally{rmSync(root,{recursive:true,force:true});}
+});

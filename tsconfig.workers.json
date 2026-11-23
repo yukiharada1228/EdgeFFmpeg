@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": [
+      "ES2022"
+    ],
+    "types": [
+      "@cloudflare/workers-types"
+    ]
+  },
+  "include": [
+    "tests/workers/fixture.ts",
+    "tests/workers/*-fixture.ts",
+    "tests/workers/env.d.ts",
+    "packages/**/*.ts",
+    "tests/workers/durable-media-job-env.d.ts",
+    "tests/workers/media-workflow-env.d.ts",
+    "tests/workers/media-checkpoint-env.d.ts"
+  ],
+  "exclude": [
+    "packages/runtime-node/**"
+  ]
+}

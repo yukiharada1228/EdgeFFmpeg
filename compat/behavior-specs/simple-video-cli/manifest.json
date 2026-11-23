@@ -1,0 +1,10 @@
+{
+  "sha256": {
+    "compat/behavior-specs/simple-video-cli/cases.json": "00a706207ec6e5c9ea68479f5ceb8fec783ce4272e40dbd3bad47d8c42df3db2",
+    "compat/behavior-specs/simple-video-cli/results.json": "5fd242b87444c0afd4c42a642dc420f413260f2d66b70330e67ba01e32c24916",
+    "compat/behavior-specs/simple-video-cli/selector-cases.json": "74e7eca15dbf92fda4f99a7d1301529ab0d1fd00220a054779e17286de7d42eb",
+    "compat/behavior-specs/simple-video-cli/selector-results.json": "14b6dab9dd242b7e631d2c03c48ada8eabca12252a6b923e036f9735f2f060f1",
+    "compat/behavior-specs/simple-video-cli/provenance.json": "eb056c2cca3e51a1a1eb9a5276bf1bcb029e60a960eeada6bf1b62aac1000723",
+    "tools/differential-runner/simple-video-cli/generate.mjs": "75a1c7cfcd427f617a82466e5246235bd90f4b5ed0dc8cf6fde55af82712c9fd"
+  }
+}

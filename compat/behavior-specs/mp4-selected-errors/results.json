@@ -1,0 +1,1142 @@
+[
+  {
+    "id": "multi-0-7-0.001",
+    "input": {
+      "packets": [
+        {
+          "stream_index": 1,
+          "pts": "-980",
+          "dts": "-980",
+          "duration": "1024",
+          "pos": "44",
+          "flags": 1,
+          "size": 331,
+          "sha256": "ff536916aa44e2a48131a9e8d6635d61b5637c03436401da1e9948f19ebfdb35",
+          "skipSamples": {
+            "skipSamples": 980,
+            "discardPadding": 0
+          }
+        },
+        {
+          "stream_index": 0,
+          "pts": "0",
+          "dts": "0",
+          "duration": "1024",
+          "pos": "375",
+          "flags": 5,
+          "size": 583,
+          "sha256": "4936eb1760723e53b8f58afb1d694a43f5c5d861d7872bf60a23392f654c55d1",
+          "skipSamples": {
+            "skipSamples": 1024,
+            "discardPadding": 0
+          }
+        },
+        {
+          "stream_index": 1,
+          "pts": "44",
+          "dts": "44",
+          "duration": "1024",
+          "pos": "958",
+          "flags": 1,
+          "size": 561,
+          "sha256": "2c6cdcea720b599db91c30d6ca97fcf5993470d167d11d88e1d87cf7f1c1b908",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "1068",
+          "dts": "1068",
+          "duration": "1024",
+          "pos": "1519",
+          "flags": 1,
+          "size": 317,
+          "sha256": "5781f0da50cf571c2f5a0cbfe7add92b7a92166ab2d4721e3713b6c4ec5d69da",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "2092",
+          "dts": "2092",
+          "duration": "1024",
+          "pos": "1836",
+          "flags": 1,
+          "size": 408,
+          "sha256": "2b601884c54621399b0e414a70d73c5e1d729bf14e51e9703e597268d0c37ed4",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "3116",
+          "dts": "3116",
+          "duration": "1024",
+          "pos": "2244",
+          "flags": 1,
+          "size": 365,
+          "sha256": "d5096b60f125b8177ea5d96f8a1609c86ec3b0e0059fef406739f0283e08538f",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "4140",
+          "dts": "4140",
+          "duration": "1024",
+          "pos": "2609",
+          "flags": 1,
+          "size": 403,
+          "sha256": "b5a9c7f79aa7f5c9d37316d2ae6d736af416b137858f93e8af38ec6ba3adc0a1",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "5164",
+          "dts": "5164",
+          "duration": "1024",
+          "pos": "3012",
+          "flags": 1,
+          "size": 322,
+          "sha256": "281a569c48cd44bd88eb2790db988eb0c34a72b740f3afe8a3fc690b1520ea74",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "6188",
+          "dts": "6188",
+          "duration": "1024",
+          "pos": "3864",
+          "flags": 1,
+          "size": 497,
+          "sha256": "369cf0a2c8c328dce748503ee8a08e43feeaaf4f84244ee5cb7a121f1a9ea975",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "7212",
+          "dts": "7212",
+          "duration": "359",
+          "pos": "4361",
+          "flags": 1,
+          "size": 7,
+          "sha256": "8a3734dbcb6f4f91174047b0e347cbbd65a57aca20511f53b8488f8da10ff600",
+          "skipSamples": {
+            "skipSamples": 0,
+            "discardPadding": 665
+          }
+        }
+      ],
+      "streams": [
+        {
+          "codec": "aac",
+          "id": 1,
+          "default": 1,
+          "timeBase": "1/1",
+          "sampleRate": 0,
+          "channels": 1,
+          "start": "0",
+          "duration": "0",
+          "count": "3",
+          "extradata": "178000000856e500"
+        },
+        {
+          "codec": "aac",
+          "id": 2,
+          "default": 1,
+          "timeBase": "1/44100",
+          "sampleRate": 44100,
+          "channels": 2,
+          "start": "0",
+          "duration": "7571",
+          "count": "9",
+          "extradata": "121056e500"
+        }
+      ],
+      "formatStartUs": "0"
+    }
+  },
+  {
+    "id": "multi-0-7-0.4",
+    "input": {
+      "packets": [
+        {
+          "stream_index": 0,
+          "pts": "0",
+          "dts": "0",
+          "duration": "1024",
+          "pos": "44",
+          "flags": 5,
+          "size": 583,
+          "sha256": "4936eb1760723e53b8f58afb1d694a43f5c5d861d7872bf60a23392f654c55d1",
+          "skipSamples": {
+            "skipSamples": 1024,
+            "discardPadding": 0
+          }
+        },
+        {
+          "stream_index": 1,
+          "pts": "16616",
+          "dts": "16616",
+          "duration": "1024",
+          "pos": "1162",
+          "flags": 1,
+          "size": 331,
+          "sha256": "ff536916aa44e2a48131a9e8d6635d61b5637c03436401da1e9948f19ebfdb35",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "17640",
+          "dts": "17640",
+          "duration": "1024",
+          "pos": "1493",
+          "flags": 1,
+          "size": 561,
+          "sha256": "2c6cdcea720b599db91c30d6ca97fcf5993470d167d11d88e1d87cf7f1c1b908",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "18664",
+          "dts": "18664",
+          "duration": "1024",
+          "pos": "2054",
+          "flags": 1,
+          "size": 317,
+          "sha256": "5781f0da50cf571c2f5a0cbfe7add92b7a92166ab2d4721e3713b6c4ec5d69da",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "19688",
+          "dts": "19688",
+          "duration": "1024",
+          "pos": "2371",
+          "flags": 1,
+          "size": 408,
+          "sha256": "2b601884c54621399b0e414a70d73c5e1d729bf14e51e9703e597268d0c37ed4",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "20712",
+          "dts": "20712",
+          "duration": "1024",
+          "pos": "2779",
+          "flags": 1,
+          "size": 365,
+          "sha256": "d5096b60f125b8177ea5d96f8a1609c86ec3b0e0059fef406739f0283e08538f",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "21736",
+          "dts": "21736",
+          "duration": "1024",
+          "pos": "3144",
+          "flags": 1,
+          "size": 403,
+          "sha256": "b5a9c7f79aa7f5c9d37316d2ae6d736af416b137858f93e8af38ec6ba3adc0a1",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "22760",
+          "dts": "22760",
+          "duration": "1024",
+          "pos": "3547",
+          "flags": 1,
+          "size": 322,
+          "sha256": "281a569c48cd44bd88eb2790db988eb0c34a72b740f3afe8a3fc690b1520ea74",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "23784",
+          "dts": "23784",
+          "duration": "1024",
+          "pos": "3869",
+          "flags": 1,
+          "size": 497,
+          "sha256": "369cf0a2c8c328dce748503ee8a08e43feeaaf4f84244ee5cb7a121f1a9ea975",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "24808",
+          "dts": "24808",
+          "duration": "359",
+          "pos": "4366",
+          "flags": 1,
+          "size": 7,
+          "sha256": "8a3734dbcb6f4f91174047b0e347cbbd65a57aca20511f53b8488f8da10ff600",
+          "skipSamples": null
+        }
+      ],
+      "streams": [
+        {
+          "codec": "aac",
+          "id": 1,
+          "default": 1,
+          "timeBase": "1/1",
+          "sampleRate": 0,
+          "channels": 1,
+          "start": "0",
+          "duration": "0",
+          "count": "3",
+          "extradata": "178000000856e500"
+        },
+        {
+          "codec": "aac",
+          "id": 2,
+          "default": 1,
+          "timeBase": "1/44100",
+          "sampleRate": 44100,
+          "channels": 2,
+          "start": "16616",
+          "duration": "8551",
+          "count": "9",
+          "extradata": "121056e500"
+        }
+      ],
+      "formatStartUs": "0"
+    }
+  },
+  {
+    "id": "multi-0-7-3000000",
+    "input": {
+      "packets": [
+        {
+          "stream_index": 0,
+          "pts": "0",
+          "dts": "0",
+          "duration": "1024",
+          "pos": "44",
+          "flags": 5,
+          "size": 583,
+          "sha256": "4936eb1760723e53b8f58afb1d694a43f5c5d861d7872bf60a23392f654c55d1",
+          "skipSamples": {
+            "skipSamples": 1024,
+            "discardPadding": 0
+          }
+        },
+        {
+          "stream_index": 1,
+          "pts": "132299998976",
+          "dts": "132299998976",
+          "duration": "1024",
+          "pos": "1162",
+          "flags": 1,
+          "size": 331,
+          "sha256": "ff536916aa44e2a48131a9e8d6635d61b5637c03436401da1e9948f19ebfdb35",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "132300000000",
+          "dts": "132300000000",
+          "duration": "1024",
+          "pos": "1493",
+          "flags": 1,
+          "size": 561,
+          "sha256": "2c6cdcea720b599db91c30d6ca97fcf5993470d167d11d88e1d87cf7f1c1b908",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "132300001024",
+          "dts": "132300001024",
+          "duration": "1024",
+          "pos": "2054",
+          "flags": 1,
+          "size": 317,
+          "sha256": "5781f0da50cf571c2f5a0cbfe7add92b7a92166ab2d4721e3713b6c4ec5d69da",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "132300002048",
+          "dts": "132300002048",
+          "duration": "1024",
+          "pos": "2371",
+          "flags": 1,
+          "size": 408,
+          "sha256": "2b601884c54621399b0e414a70d73c5e1d729bf14e51e9703e597268d0c37ed4",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "132300003072",
+          "dts": "132300003072",
+          "duration": "1024",
+          "pos": "2779",
+          "flags": 1,
+          "size": 365,
+          "sha256": "d5096b60f125b8177ea5d96f8a1609c86ec3b0e0059fef406739f0283e08538f",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "132300004096",
+          "dts": "132300004096",
+          "duration": "1024",
+          "pos": "3144",
+          "flags": 1,
+          "size": 403,
+          "sha256": "b5a9c7f79aa7f5c9d37316d2ae6d736af416b137858f93e8af38ec6ba3adc0a1",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "132300005120",
+          "dts": "132300005120",
+          "duration": "1024",
+          "pos": "3547",
+          "flags": 1,
+          "size": 322,
+          "sha256": "281a569c48cd44bd88eb2790db988eb0c34a72b740f3afe8a3fc690b1520ea74",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "132300006144",
+          "dts": "132300006144",
+          "duration": "1024",
+          "pos": "3869",
+          "flags": 1,
+          "size": 497,
+          "sha256": "369cf0a2c8c328dce748503ee8a08e43feeaaf4f84244ee5cb7a121f1a9ea975",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "132300007168",
+          "dts": "132300007168",
+          "duration": "359",
+          "pos": "4366",
+          "flags": 1,
+          "size": 7,
+          "sha256": "8a3734dbcb6f4f91174047b0e347cbbd65a57aca20511f53b8488f8da10ff600",
+          "skipSamples": null
+        }
+      ],
+      "streams": [
+        {
+          "codec": "aac",
+          "id": 1,
+          "default": 1,
+          "timeBase": "1/1",
+          "sampleRate": 0,
+          "channels": 1,
+          "start": "0",
+          "duration": "0",
+          "count": "3",
+          "extradata": "178000000856e500"
+        },
+        {
+          "codec": "aac",
+          "id": 2,
+          "default": 1,
+          "timeBase": "1/44100",
+          "sampleRate": 44100,
+          "channels": 2,
+          "start": "132299998976",
+          "duration": "8551",
+          "count": "9",
+          "extradata": "121056e500"
+        }
+      ],
+      "formatStartUs": "0"
+    }
+  },
+  {
+    "id": "multi-5-10-0.001",
+    "input": {
+      "packets": [
+        {
+          "stream_index": 0,
+          "pts": "0",
+          "dts": "0",
+          "duration": "1024",
+          "pos": "44",
+          "flags": 5,
+          "size": 296,
+          "sha256": "693d3c35c5491097646f3d957d06013adbba3a82fba8e8d8cfd014860fa3b70f",
+          "skipSamples": {
+            "skipSamples": 1024,
+            "discardPadding": 0
+          }
+        },
+        {
+          "stream_index": 1,
+          "pts": "48",
+          "dts": "48",
+          "duration": "1024",
+          "pos": "592",
+          "flags": 1,
+          "size": 288,
+          "sha256": "aecf3fc00890ba67f16e3c1720864c1600f2fcf3fc82dfa0bdc9efe4fa2739ff",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "1072",
+          "dts": "1072",
+          "duration": "1024",
+          "pos": "880",
+          "flags": 1,
+          "size": 335,
+          "sha256": "e07c9848bf81e4bd8d20c7bcd6a4406122c023dc66102739472a641d4731055c",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "2096",
+          "dts": "2096",
+          "duration": "1024",
+          "pos": "1356",
+          "flags": 1,
+          "size": 235,
+          "sha256": "716805bdfcb76a63527d6d2caf8bf421b51a2a53a13c140e7329aa36896147b9",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "3120",
+          "dts": "3120",
+          "duration": "1024",
+          "pos": "1780",
+          "flags": 1,
+          "size": 263,
+          "sha256": "13619abbd80bc961feb688ae1d616bfbf32b6e41aef61e4ff88de3fadd5e61cc",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "4144",
+          "dts": "4144",
+          "duration": "1024",
+          "pos": "2235",
+          "flags": 1,
+          "size": 270,
+          "sha256": "a51b9a69c6457f05842500a660c2c6be28121dbdd59e13c417445ce4f21fe842",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "5168",
+          "dts": "5168",
+          "duration": "1024",
+          "pos": "2710",
+          "flags": 1,
+          "size": 273,
+          "sha256": "5f1eea81af00e1342b7593e6bd512ecd961f9e80efd8f47fa2762362386ba44f",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "6192",
+          "dts": "6192",
+          "duration": "1024",
+          "pos": "3173",
+          "flags": 1,
+          "size": 306,
+          "sha256": "18547682f9f86f695290317e269348386b03e38236d52673e5b0713a37125eba",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "7216",
+          "dts": "7216",
+          "duration": "1024",
+          "pos": "3767",
+          "flags": 1,
+          "size": 287,
+          "sha256": "ca930c801595ac6837dcbdb2b8ad571221f5a921c9c56dc494286d418aa64471",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "8240",
+          "dts": "8240",
+          "duration": "1024",
+          "pos": "4059",
+          "flags": 1,
+          "size": 359,
+          "sha256": "16a04f5bcc40405b8e0766741d8929660e9c5aba42ceb2aeda7bf38cdc37af39",
+          "skipSamples": {
+            "skipSamples": 0,
+            "discardPadding": 48
+          }
+        }
+      ],
+      "streams": [
+        {
+          "codec": "aac",
+          "id": 1,
+          "default": 1,
+          "timeBase": "1/1",
+          "sampleRate": 0,
+          "channels": 1,
+          "start": "0",
+          "duration": "0",
+          "count": "9",
+          "extradata": "178000000856e500"
+        },
+        {
+          "codec": "aac",
+          "id": 2,
+          "default": 1,
+          "timeBase": "1/48000",
+          "sampleRate": 48000,
+          "channels": 2,
+          "start": "48",
+          "duration": "9216",
+          "count": "9",
+          "extradata": "119056e500"
+        }
+      ],
+      "formatStartUs": "0"
+    }
+  },
+  {
+    "id": "multi-5-10-0.4",
+    "input": {
+      "packets": [
+        {
+          "stream_index": 0,
+          "pts": "0",
+          "dts": "0",
+          "duration": "1024",
+          "pos": "44",
+          "flags": 5,
+          "size": 296,
+          "sha256": "693d3c35c5491097646f3d957d06013adbba3a82fba8e8d8cfd014860fa3b70f",
+          "skipSamples": {
+            "skipSamples": 1024,
+            "discardPadding": 0
+          }
+        },
+        {
+          "stream_index": 1,
+          "pts": "19200",
+          "dts": "19200",
+          "duration": "1024",
+          "pos": "1802",
+          "flags": 1,
+          "size": 288,
+          "sha256": "aecf3fc00890ba67f16e3c1720864c1600f2fcf3fc82dfa0bdc9efe4fa2739ff",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "20224",
+          "dts": "20224",
+          "duration": "1024",
+          "pos": "2090",
+          "flags": 1,
+          "size": 335,
+          "sha256": "e07c9848bf81e4bd8d20c7bcd6a4406122c023dc66102739472a641d4731055c",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "21248",
+          "dts": "21248",
+          "duration": "1024",
+          "pos": "2425",
+          "flags": 1,
+          "size": 235,
+          "sha256": "716805bdfcb76a63527d6d2caf8bf421b51a2a53a13c140e7329aa36896147b9",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "22272",
+          "dts": "22272",
+          "duration": "1024",
+          "pos": "2660",
+          "flags": 1,
+          "size": 263,
+          "sha256": "13619abbd80bc961feb688ae1d616bfbf32b6e41aef61e4ff88de3fadd5e61cc",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "23296",
+          "dts": "23296",
+          "duration": "1024",
+          "pos": "2923",
+          "flags": 1,
+          "size": 270,
+          "sha256": "a51b9a69c6457f05842500a660c2c6be28121dbdd59e13c417445ce4f21fe842",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "24320",
+          "dts": "24320",
+          "duration": "1024",
+          "pos": "3193",
+          "flags": 1,
+          "size": 273,
+          "sha256": "5f1eea81af00e1342b7593e6bd512ecd961f9e80efd8f47fa2762362386ba44f",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "25344",
+          "dts": "25344",
+          "duration": "1024",
+          "pos": "3466",
+          "flags": 1,
+          "size": 306,
+          "sha256": "18547682f9f86f695290317e269348386b03e38236d52673e5b0713a37125eba",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "26368",
+          "dts": "26368",
+          "duration": "1024",
+          "pos": "3772",
+          "flags": 1,
+          "size": 287,
+          "sha256": "ca930c801595ac6837dcbdb2b8ad571221f5a921c9c56dc494286d418aa64471",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "27392",
+          "dts": "27392",
+          "duration": "1024",
+          "pos": "4059",
+          "flags": 1,
+          "size": 359,
+          "sha256": "16a04f5bcc40405b8e0766741d8929660e9c5aba42ceb2aeda7bf38cdc37af39",
+          "skipSamples": null
+        }
+      ],
+      "streams": [
+        {
+          "codec": "aac",
+          "id": 1,
+          "default": 1,
+          "timeBase": "1/1",
+          "sampleRate": 0,
+          "channels": 1,
+          "start": "0",
+          "duration": "0",
+          "count": "9",
+          "extradata": "178000000856e500"
+        },
+        {
+          "codec": "aac",
+          "id": 2,
+          "default": 1,
+          "timeBase": "1/48000",
+          "sampleRate": 48000,
+          "channels": 2,
+          "start": "19200",
+          "duration": "9216",
+          "count": "9",
+          "extradata": "119056e500"
+        }
+      ],
+      "formatStartUs": "0"
+    }
+  },
+  {
+    "id": "multi-5-10-3000000",
+    "input": {
+      "packets": [
+        {
+          "stream_index": 0,
+          "pts": "0",
+          "dts": "0",
+          "duration": "1024",
+          "pos": "44",
+          "flags": 5,
+          "size": 296,
+          "sha256": "693d3c35c5491097646f3d957d06013adbba3a82fba8e8d8cfd014860fa3b70f",
+          "skipSamples": {
+            "skipSamples": 1024,
+            "discardPadding": 0
+          }
+        },
+        {
+          "stream_index": 1,
+          "pts": "144000000000",
+          "dts": "144000000000",
+          "duration": "1024",
+          "pos": "1802",
+          "flags": 1,
+          "size": 288,
+          "sha256": "aecf3fc00890ba67f16e3c1720864c1600f2fcf3fc82dfa0bdc9efe4fa2739ff",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "144000001024",
+          "dts": "144000001024",
+          "duration": "1024",
+          "pos": "2090",
+          "flags": 1,
+          "size": 335,
+          "sha256": "e07c9848bf81e4bd8d20c7bcd6a4406122c023dc66102739472a641d4731055c",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "144000002048",
+          "dts": "144000002048",
+          "duration": "1024",
+          "pos": "2425",
+          "flags": 1,
+          "size": 235,
+          "sha256": "716805bdfcb76a63527d6d2caf8bf421b51a2a53a13c140e7329aa36896147b9",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "144000003072",
+          "dts": "144000003072",
+          "duration": "1024",
+          "pos": "2660",
+          "flags": 1,
+          "size": 263,
+          "sha256": "13619abbd80bc961feb688ae1d616bfbf32b6e41aef61e4ff88de3fadd5e61cc",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "144000004096",
+          "dts": "144000004096",
+          "duration": "1024",
+          "pos": "2923",
+          "flags": 1,
+          "size": 270,
+          "sha256": "a51b9a69c6457f05842500a660c2c6be28121dbdd59e13c417445ce4f21fe842",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "144000005120",
+          "dts": "144000005120",
+          "duration": "1024",
+          "pos": "3193",
+          "flags": 1,
+          "size": 273,
+          "sha256": "5f1eea81af00e1342b7593e6bd512ecd961f9e80efd8f47fa2762362386ba44f",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "144000006144",
+          "dts": "144000006144",
+          "duration": "1024",
+          "pos": "3466",
+          "flags": 1,
+          "size": 306,
+          "sha256": "18547682f9f86f695290317e269348386b03e38236d52673e5b0713a37125eba",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "144000007168",
+          "dts": "144000007168",
+          "duration": "1024",
+          "pos": "3772",
+          "flags": 1,
+          "size": 287,
+          "sha256": "ca930c801595ac6837dcbdb2b8ad571221f5a921c9c56dc494286d418aa64471",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "144000008192",
+          "dts": "144000008192",
+          "duration": "1024",
+          "pos": "4059",
+          "flags": 1,
+          "size": 359,
+          "sha256": "16a04f5bcc40405b8e0766741d8929660e9c5aba42ceb2aeda7bf38cdc37af39",
+          "skipSamples": null
+        }
+      ],
+      "streams": [
+        {
+          "codec": "aac",
+          "id": 1,
+          "default": 1,
+          "timeBase": "1/1",
+          "sampleRate": 0,
+          "channels": 1,
+          "start": "0",
+          "duration": "0",
+          "count": "9",
+          "extradata": "178000000856e500"
+        },
+        {
+          "codec": "aac",
+          "id": 2,
+          "default": 1,
+          "timeBase": "1/48000",
+          "sampleRate": 48000,
+          "channels": 2,
+          "start": "144000000000",
+          "duration": "9216",
+          "count": "9",
+          "extradata": "119056e500"
+        }
+      ],
+      "formatStartUs": "0"
+    }
+  },
+  {
+    "id": "multi-8-3-0.001",
+    "input": {
+      "packets": [
+        {
+          "stream_index": 1,
+          "pts": "-1016",
+          "dts": "-1016",
+          "duration": "1024",
+          "pos": "44",
+          "flags": 1,
+          "size": 1083,
+          "sha256": "38ab1c58c5a5d781b5997396d3c36051eee5c344dd5487a583e5324f8b26d2af",
+          "skipSamples": {
+            "skipSamples": 1016,
+            "discardPadding": 0
+          }
+        },
+        {
+          "stream_index": 0,
+          "pts": "0",
+          "dts": "0",
+          "duration": "1024",
+          "pos": "1127",
+          "flags": 5,
+          "size": 230,
+          "sha256": "74b3fd3d7c0226be3febf16e355c206d8e8701a192c1ba117727ca3e90453ef0",
+          "skipSamples": {
+            "skipSamples": 1024,
+            "discardPadding": 0
+          }
+        },
+        {
+          "stream_index": 1,
+          "pts": "8",
+          "dts": "8",
+          "duration": "1024",
+          "pos": "1357",
+          "flags": 1,
+          "size": 1097,
+          "sha256": "d02896d7dcdea57cd87d34f8af8b9da96edad66c4e602dcb69dd932b7d1e522e",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "1032",
+          "dts": "1032",
+          "duration": "342",
+          "pos": "3550",
+          "flags": 1,
+          "size": 7,
+          "sha256": "8a3734dbcb6f4f91174047b0e347cbbd65a57aca20511f53b8488f8da10ff600",
+          "skipSamples": {
+            "skipSamples": 0,
+            "discardPadding": 682
+          }
+        }
+      ],
+      "streams": [
+        {
+          "codec": "aac",
+          "id": 1,
+          "default": 1,
+          "timeBase": "1/1",
+          "sampleRate": 0,
+          "channels": 1,
+          "start": "0",
+          "duration": "0",
+          "count": "9",
+          "extradata": "178000000856e500"
+        },
+        {
+          "codec": "aac",
+          "id": 2,
+          "default": 1,
+          "timeBase": "1/8000",
+          "sampleRate": 8000,
+          "channels": 2,
+          "start": "0",
+          "duration": "1374",
+          "count": "3",
+          "extradata": "159056e500"
+        }
+      ],
+      "formatStartUs": "0"
+    }
+  },
+  {
+    "id": "multi-8-3-0.4",
+    "input": {
+      "packets": [
+        {
+          "stream_index": 0,
+          "pts": "0",
+          "dts": "0",
+          "duration": "1024",
+          "pos": "44",
+          "flags": 5,
+          "size": 230,
+          "sha256": "74b3fd3d7c0226be3febf16e355c206d8e8701a192c1ba117727ca3e90453ef0",
+          "skipSamples": {
+            "skipSamples": 1024,
+            "discardPadding": 0
+          }
+        },
+        {
+          "stream_index": 1,
+          "pts": "2176",
+          "dts": "2176",
+          "duration": "1024",
+          "pos": "1764",
+          "flags": 1,
+          "size": 1083,
+          "sha256": "38ab1c58c5a5d781b5997396d3c36051eee5c344dd5487a583e5324f8b26d2af",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "3200",
+          "dts": "3200",
+          "duration": "1024",
+          "pos": "2847",
+          "flags": 1,
+          "size": 1097,
+          "sha256": "d02896d7dcdea57cd87d34f8af8b9da96edad66c4e602dcb69dd932b7d1e522e",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "4224",
+          "dts": "4224",
+          "duration": "342",
+          "pos": "3944",
+          "flags": 1,
+          "size": 7,
+          "sha256": "8a3734dbcb6f4f91174047b0e347cbbd65a57aca20511f53b8488f8da10ff600",
+          "skipSamples": null
+        }
+      ],
+      "streams": [
+        {
+          "codec": "aac",
+          "id": 1,
+          "default": 1,
+          "timeBase": "1/1",
+          "sampleRate": 0,
+          "channels": 1,
+          "start": "0",
+          "duration": "0",
+          "count": "9",
+          "extradata": "178000000856e500"
+        },
+        {
+          "codec": "aac",
+          "id": 2,
+          "default": 1,
+          "timeBase": "1/8000",
+          "sampleRate": 8000,
+          "channels": 2,
+          "start": "2176",
+          "duration": "2390",
+          "count": "3",
+          "extradata": "159056e500"
+        }
+      ],
+      "formatStartUs": "0"
+    }
+  },
+  {
+    "id": "multi-8-3-3000000",
+    "input": {
+      "packets": [
+        {
+          "stream_index": 0,
+          "pts": "0",
+          "dts": "0",
+          "duration": "1024",
+          "pos": "44",
+          "flags": 5,
+          "size": 230,
+          "sha256": "74b3fd3d7c0226be3febf16e355c206d8e8701a192c1ba117727ca3e90453ef0",
+          "skipSamples": {
+            "skipSamples": 1024,
+            "discardPadding": 0
+          }
+        },
+        {
+          "stream_index": 1,
+          "pts": "23999998976",
+          "dts": "23999998976",
+          "duration": "1024",
+          "pos": "1764",
+          "flags": 1,
+          "size": 1083,
+          "sha256": "38ab1c58c5a5d781b5997396d3c36051eee5c344dd5487a583e5324f8b26d2af",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "24000000000",
+          "dts": "24000000000",
+          "duration": "1024",
+          "pos": "2847",
+          "flags": 1,
+          "size": 1097,
+          "sha256": "d02896d7dcdea57cd87d34f8af8b9da96edad66c4e602dcb69dd932b7d1e522e",
+          "skipSamples": null
+        },
+        {
+          "stream_index": 1,
+          "pts": "24000001024",
+          "dts": "24000001024",
+          "duration": "342",
+          "pos": "3944",
+          "flags": 1,
+          "size": 7,
+          "sha256": "8a3734dbcb6f4f91174047b0e347cbbd65a57aca20511f53b8488f8da10ff600",
+          "skipSamples": null
+        }
+      ],
+      "streams": [
+        {
+          "codec": "aac",
+          "id": 1,
+          "default": 1,
+          "timeBase": "1/1",
+          "sampleRate": 0,
+          "channels": 1,
+          "start": "0",
+          "duration": "0",
+          "count": "9",
+          "extradata": "178000000856e500"
+        },
+        {
+          "codec": "aac",
+          "id": 2,
+          "default": 1,
+          "timeBase": "1/8000",
+          "sampleRate": 8000,
+          "channels": 2,
+          "start": "23999998976",
+          "duration": "2390",
+          "count": "3",
+          "extradata": "159056e500"
+        }
+      ],
+      "formatStartUs": "0"
+    }
+  }
+]

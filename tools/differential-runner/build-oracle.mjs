@@ -1,0 +1,29 @@
+import {execFileSync} from 'node:child_process';
+import {readFileSync,writeFileSync,mkdirSync,renameSync,rmSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {createHash,randomUUID} from 'node:crypto';
+const names={'h264-frames':'h264/oracle.c','bmp-rle':'bmp-rle/oracle.c','mp4-language':'mp4-language/oracle.c','scale-expression-frame':'scale-expression/frame-oracle.c','scale-expression':'scale-expression/oracle.c','number-rational':'number-rational/oracle.c','bounded-rational':'bounded-rational/oracle.c','filter-command-queue':'filter-command-queue/oracle.c','filter-enable':'filter-enable/oracle.c','video-encoder-sync':'video-encoder-sync/oracle.c','thread-frame-queue':'thread-frame-queue/oracle.c','timed-frame-sync-two':'timed-frame-sync/two.c','timed-frame-sync-three':'timed-frame-sync/three.c','timed-frame-sync-many':'timed-frame-sync/many.c','video-setpts':'video-setpts/oracle.c','video-setpts-eof':'video-setpts/eof-oracle.c','expression-parse':'expression/parse-oracle.c','expression-repeat':'expression/repeat-oracle.c','clock-expression-value':'video-output/value-oracle.c','encoder-ratio':'video-output/ratio-oracle.c','frame-sync':'frame-sync/oracle.c','multi-input-formats':'video-multi-input/formats-oracle.c','video-stream':'video-stream/oracle.c'},name=process.argv[2];
+if(!Object.hasOwn(names,name))throw new Error('Expected a declared development oracle name');
+const root=process.cwd(),reference=resolve(root,'.build/reference'),metadata=JSON.parse(readFileSync(resolve(reference,'build-metadata.json'))),lock=JSON.parse(readFileSync('compat/upstream.lock.json')),flags=readFileSync(lock.configureFile,'utf8').trim().split(/\s+/),hash=bytes=>createHash('sha256').update(bytes).digest('hex'),source=resolve(import.meta.dirname,names[name]),sourceSha256=hash(readFileSync(source));
+function verify(){
+ if(['scale-expression-frame','scale-expression','number-rational','bounded-rational','thread-frame-queue','video-encoder-sync','filter-enable','filter-command-queue'].includes(name) && execFileSync('git',['-C','upstream/ffmpeg','status','--porcelain','--untracked-files=no'],{encoding:'utf8'}).trim())throw new Error('Pinned upstream source has local changes');
+ if(metadata.commit!==lock.commit||JSON.stringify(metadata.flags)!==JSON.stringify(flags)||metadata.platform!==process.platform||metadata.arch!==process.arch)throw new Error('Reference provenance or execution host mismatch');
+ for(const artifact of ['ffmpeg','ffprobe'])if(hash(readFileSync(resolve(reference,artifact)))!==metadata.artifacts[artifact])throw new Error('Reference binary changed');
+ if(execFileSync('git',['-C','upstream/ffmpeg','rev-parse','HEAD'],{encoding:'utf8'}).trim()!==lock.commit)throw new Error('Upstream commit mismatch');
+}
+verify();
+if(name==='filter-command-queue'||name==='video-setpts-eof'||name.startsWith('timed-frame-sync-'))for(const file of ['avfilter_internal.h','filters.h','framequeue.h','framepool.h']){const path=`libavfilter/${file}`,expected=execFileSync('git',['-C','upstream/ffmpeg','show',`${lock.commit}:${path}`]);if(hash(readFileSync(resolve('upstream/ffmpeg',path)))!==hash(expected))throw new Error('Pinned internal header changed: '+path);}
+const includedSource = ['scale-expression','scale-expression-frame'].includes(name) ? 'libavfilter/vf_scale.c' : ['bounded-rational','number-rational'].includes(name) ? 'libavutil/rational.c' : name === 'thread-frame-queue' ? 'fftools/thread_queue.c' : name === 'video-encoder-sync' ? 'fftools/sync_queue.c' : undefined;
+const sourceDependencySha256 = includedSource ? hash(readFileSync(resolve('upstream/ffmpeg', includedSource))) : undefined;
+if (includedSource && sourceDependencySha256 !== hash(execFileSync('git', ['-C', 'upstream/ffmpeg', 'show', `${lock.commit}:${includedSource}`]))) throw new Error('Pinned included source changed');
+const components=['avfilter','avformat','avcodec','swscale','swresample','avutil'],libraries=components.map(part=>resolve(reference,`lib${part}/lib${part}.a`)),librarySha256=Object.fromEntries(libraries.map(file=>[file,hash(readFileSync(file))])),config=readFileSync(resolve(reference,'ffbuild/config.mak'),'utf8');
+// Link the same literal component extras as the pinned build. Preserve order,
+// duplicate flags and paired framework arguments instead of deduplicating tokens.
+const extra=components.flatMap(part=>{const line=config.split('\n').find(line=>line.startsWith(`EXTRALIBS-${part}=`));if(!line)throw new Error(`Missing linker metadata: ${part}`);const value=line.slice(line.indexOf('=')+1).trim();if(/[$`"'\\]/.test(value))throw new Error('Nonliteral linker metadata');return value?value.split(/\s+/):[];});
+const directory=resolve(root,'.build/oracles',name);mkdirSync(directory,{recursive:true});const binary=resolve(directory,'native'),temporary=resolve(directory,`native-${randomUUID()}`),compiler=process.env.CC||'cc';
+try{
+ const compilerVersion=execFileSync(compiler,['--version'],{encoding:'utf8'});
+ execFileSync(compiler,[`-I${reference}`,`-I${resolve(root,'upstream/ffmpeg')}`,source,...libraries,...extra,'-o',temporary]);
+ verify();if(includedSource && hash(readFileSync(resolve('upstream/ffmpeg', includedSource))) !== sourceDependencySha256)throw new Error('Included source changed during build');if(hash(readFileSync(source))!==sourceSha256)throw new Error('Oracle source changed');for(const [file,digest]of Object.entries(librarySha256))if(hash(readFileSync(file))!==digest)throw new Error('Reference library changed');
+ const binarySha256=hash(readFileSync(temporary));renameSync(temporary,binary);writeFileSync(resolve(directory,'provenance.json'),JSON.stringify({name,source,sourceSha256,...(includedSource?{includedSource,sourceDependencySha256}:{}),reference:metadata,librarySha256,compiler,compilerVersion,binarySha256},null,2)+'\n');
+}finally{rmSync(temporary,{force:true});}

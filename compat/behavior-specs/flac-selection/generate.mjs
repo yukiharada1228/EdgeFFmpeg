@@ -1,0 +1,12 @@
+// Sequential, fresh pinned Native invocations; production helpers are not imported.
+import {readFileSync,writeFileSync,mkdtempSync,rmSync} from 'node:fs';
+import {spawnSync} from 'node:child_process';
+import {tmpdir} from 'node:os';import {join,resolve} from 'node:path';import {createHash} from 'node:crypto';
+const binary=resolve('.build/reference/ffmpeg'),sha=b=>createHash('sha256').update(b).digest('hex');
+const expected='1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92';if(sha(readFileSync(binary))!==expected)throw Error('Wrong reference');
+const base=Buffer.from(JSON.parse(readFileSync('compat/behavior-specs/flac-cli/cases.json')).input,'base64');
+const picture=Buffer.from(JSON.parse(readFileSync('compat/behavior-specs/flac-pictures/native-pictures.json')).rows.find(r=>r.id==='bmp'&&r.transport==='block').payload,'base64');
+const plain=Buffer.from(base);let at=4,last;while(true){last=at;const end=at+4+base.readUIntBE(at+1,3);if(base[at]&128){at=end;break;}at=end;}
+const prefix=Buffer.from(base.subarray(0,at));prefix[last]&=127;const header=Buffer.alloc(4);header[0]=134;header.writeUIntBE(picture.length,1,3);const pictured=Buffer.concat([prefix,header,picture,base.subarray(at)]);
+const patterns=[[],['0'],['0:a'],['0:0'],['0:v'],['0:v:0'],['0:1'],['0:2?'],['0:v:1?'],['-0:a?'],['-0:a'],['0','-0:a'],['0','-0:v'],['0:a','0:a'],['0:a','-0:a','0:a'],['0:a','-0:v'],['0:a','-0:v?'],['0:v?','0:a'],['0:v?','-0:a?'],['0:a','0:2?'],['0:a','-0:a?'],['0','-0:1','0:1'],['0','-0:1','-0:1'],['0','-0:1','-0:1?']];
+const root=mkdtempSync(join(tmpdir(),'flac-selection-')),rows=[];try{for(const [kind,input] of [['audio',plain],['pictured',pictured]]){writeFileSync(join(root,'in.flac'),input);for(const maps of patterns)for(const disabled of [[],['-an'],['-vn']]){const args=[...maps.flatMap(s=>['-map',s]),...disabled];const r=spawnSync(binary,['-hide_banner','-i',join(root,'in.flac'),...args,'-c','copy','-f','framecrc','-'],{encoding:'utf8',timeout:10000});if(r.error)throw r.error;const ids=[...r.stderr.matchAll(/Stream #0:(\d+) -> #0:\d+/g)].map(m=>Number(m[1]));rows.push({kind,maps,audio:!disabled.includes('-an'),video:!disabled.includes('-vn'),exitCode:r.status,selected:ids,stderr:r.stderr.replaceAll(root,'<fixture>'),stdout:r.stdout});}}writeFileSync('compat/behavior-specs/flac-selection/cases.json',JSON.stringify({commit:'946fcce07b6dcd0331c8cc609192aeff5e1924f8',binarySha256:expected,inputs:{audio:sha(plain),pictured:sha(pictured)},rows},null,2)+'\n');}finally{rmSync(root,{recursive:true,force:true});}

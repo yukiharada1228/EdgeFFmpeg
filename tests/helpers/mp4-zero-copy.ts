@@ -1,0 +1,8 @@
+import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+export interface ZeroCopyInput {id:string;input:string;sha256:string;options:string[]}
+export interface ZeroCopyResult {id:string;exitCode:number;streams:Record<string,unknown>[];packets:Record<string,unknown>[]}
+export function loadMp4ZeroCopy(){
+ const root='compat/behavior-specs/mp4-zero-copy/',read=(p:string)=>readFileSync(p),hash=(data:Uint8Array)=>createHash('sha256').update(data).digest('hex'),manifest=JSON.parse(read(root+'manifest.json').toString()) as {sha256:Record<string,string>};for(const [name,digest]of Object.entries(manifest.sha256))if(hash(read(root+name))!==digest)throw Error('Changed zero-copy fixture '+name);
+ const provenance=JSON.parse(read(root+'provenance.json').toString()) as {reference:{commit:string};sources:Record<string,string>;caseCount:number};if(provenance.reference.commit!==JSON.parse(read('compat/upstream.lock.json').toString()).commit)throw Error('Changed zero-copy reference');for(const [file,digest]of Object.entries(provenance.sources))if(hash(read(file))!==digest)throw Error('Changed zero-copy generator source '+file);
+ const inputs=JSON.parse(read(root+'inputs.json').toString()) as ZeroCopyInput[],results=JSON.parse(read(root+'results.json').toString()) as ZeroCopyResult[];if(inputs.length!==126||results.length!==126||provenance.caseCount!==126||new Set(inputs.map(r=>r.id)).size!==126||new Set(results.map(r=>r.id)).size!==126)throw Error('Incomplete zero-copy corpus');for(const row of inputs)if(hash(Buffer.from(row.input,'base64'))!==row.sha256||!results.some(r=>r.id===row.id))throw Error('Changed zero-copy input '+row.id);return {inputs,results};
+}

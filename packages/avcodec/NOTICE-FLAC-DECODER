@@ -1,0 +1,12 @@
+The optional FLAC decoder Wasm uses libFLAC 1.5.0, Xiph.Org Foundation.
+Official source: https://downloads.xiph.org/releases/flac/flac-1.5.0.tar.xz
+Archive SHA256: f2c1c76592a82ffff8413ba3c4a1299b6c7ab06c734dee03fd88630485c2b920
+Upstream release commit (provenance, not source-tree git identity):
+1507800de4b70e21be71f38caa0d9079d0bc6e45
+Selected libFLAC library: BSD-3-Clause; see COPYING.BSD.libFLAC.
+The build disables programs, C++ libraries, examples, tests, Ogg and threading.
+No GPL command-line tools are linked. The original EdgeFFmpeg wrapper and
+build tooling are separate from upstream libFLAC. Emscripten 7.0.0 runtime
+support is linked by the compiler; its MIT/University of Illinois notices
+are preserved in tools/codecs/flac/COPYING.emscripten.
+This scoped attribution is not a release-wide license audit.

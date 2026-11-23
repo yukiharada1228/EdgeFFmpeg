@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "fate-unknown_layout-pcm",
+  "definitionFile": "tests/fate/ffmpeg.mak",
+  "command": "md5 -guess_layout_max 0 -f s16le -ac 1 -ar 44100 -i $(TARGET_PATH)/$(AREF) -f s16le",
+  "variables": {
+    "AREF": "tests/data/asynth1.sw"
+  },
+  "generatorTarget": "tests/data/asynth1.sw",
+  "input": {
+    "bytes": 1058400,
+    "sha256": "e56392d6eb63f3de1e7d5353264ee312be8d0a94543a3a8b14e87c9831ff7345"
+  },
+  "referenceFile": "tests/ref/fate/unknown_layout-pcm",
+  "md5": "4dada0795adf50f7a0e60861658f86ea",
+  "sources": {
+    "tests/audiogen.c": "369c6b055084c7dc570657ca304bf68c7aaf898673bb88c78e52d21454570a6e",
+    "tests/Makefile": "bdad72df5611255223f2c19cb5af7d71bd04af184232e808b86bc1f71afddf7f",
+    "tests/fate-run.sh": "d0b6825adced2aac7aa00e92850d5cdc7fffbbc2c457c229df291daf5aa41b2c",
+    "tests/md5.sh": "c041f16868df4c2b3824b15923a5d7bfac724a0c3d2534708380c7cac85ec606",
+    "tests/fate/ffmpeg.mak": "845e05e6452ed7c78424701f7741ed6f670866bd7f1ffae6c16f61a2876d57e6",
+    "tests/ref/fate/unknown_layout-pcm": "6b141afff51252862423ae422af15ca94df0b70dc06d60d294e09230bae86455"
+  },
+  "edgeArgv": [
+    "-y",
+    "-guess_layout_max",
+    "0",
+    "-f",
+    "s16le",
+    "-ac",
+    "1",
+    "-ar",
+    "44100",
+    "-i",
+    "/input.sw",
+    "-f",
+    "s16le",
+    "/output.sw"
+  ],
+  "adaptations": [
+    "md5 helper: hash committed output on the host; replace only input/output paths with VFS paths.",
+    "Native FATE runs its original helper: nostdin, nostats, noauto_conversion_filters, cpuflags all, hwaccel none, threads 1 and thread_type frame+slice. Edge has no terminal/stats/hardware/thread controls; this PCM16-to-PCM16 case performs no format conversion. Those harness controls are not CLI compatibility claims."
+  ],
+  "scope": "Generated raw mono PCM16 input and output with layout guessing disabled. This single case does not validate general FATE helpers, Make conditions, datasets or codec compatibility."
+}

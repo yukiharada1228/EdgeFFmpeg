@@ -1,0 +1,5 @@
+import {it,expect} from 'vitest';import {PathNotDirectoryError,ExecutionError,FFmpeg} from '@edge-ffmpeg/core';
+it('retains initial path-component operation cause and status while cancellation wins',async()=>{
+ const cause=Object.assign(new Error('not dir'),{code:'ENOTDIR'});for(const operation of ['read','write'] as const){const error=new PathNotDirectoryError(operation,'/file/child',cause);expect(error).toBeInstanceOf(ExecutionError);expect(error.exitCode).toBe(236);expect(error.operation).toBe(operation);expect(error.path).toBe('/file/child');expect(error.cause).toBe(cause);}
+ const controller=new AbortController(),ffmpeg=new FFmpeg({filesystem:{async openRead(){throw Error('unused');},async openWrite(){throw Error('unused');}},backend:{async execute(){controller.abort();throw new PathNotDirectoryError('read','/file/child',cause);}}}),result=await ffmpeg.exec(['-i','/input','/output'],{signal:controller.signal});expect(result.exitCode).toBe(1);expect(result.diagnostics[0]!.code).toBe('cancelled');
+});

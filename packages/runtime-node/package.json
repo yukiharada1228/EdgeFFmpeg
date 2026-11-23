@@ -1,0 +1,9 @@
+{
+  "name": "@edge-ffmpeg/runtime-node",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": { "@edge-ffmpeg/core": "0.0.0" },
+  "peerDependencies": { "@types/node": ">=24" }
+}

@@ -1,0 +1,6 @@
+{
+ "extends":"../../../tsconfig.json",
+ "compilerOptions":{"types":["node"],"noEmit":true},
+ "include":["../../../tests/unit/flac-parser-flags.test.ts","../../../tests/differential/flac-parser-flags.test.ts"],
+ "exclude":[]
+}

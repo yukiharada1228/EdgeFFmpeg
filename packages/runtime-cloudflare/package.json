@@ -1,0 +1,22 @@
+{
+  "name": "@edge-ffmpeg/runtime-cloudflare",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./jobs": "./src/jobs/index.ts",
+    "./jobs/durable-object": "./src/jobs/durable-object.ts",
+    "./jobs/workflow": "./src/jobs/workflow.ts",
+    "./checkpoints": "./src/checkpoints/index.ts",
+    "./checkpoints/durable-object": "./src/checkpoints/durable-object.ts",
+    "./checkpoints/workflow": "./src/checkpoints/workflow.ts"
+  },
+  "dependencies": {
+    "@edge-ffmpeg/core": "0.0.0",
+    "@edge-ffmpeg/storage-r2": "0.0.0"
+  },
+  "peerDependencies": {
+    "@cloudflare/workers-types": "^5.20261119.1"
+  }
+}

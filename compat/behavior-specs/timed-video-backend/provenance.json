@@ -1,0 +1,37 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "numericProfile": "darwin-arm64",
+  "cases": 1134,
+  "input": {
+    "width": 3,
+    "height": 2,
+    "frames": 4,
+    "bytes": "index % 251"
+  },
+  "output": "framecrc",
+  "sources": {
+    "upstream/ffmpeg/libavfilter/vf_crop.c": "d8eaeadd526ba9228ffbd63ddd69e6f6767ba0f27aa98825baad1e2d588598e9",
+    "upstream/ffmpeg/libavfilter/vf_scale.c": "3efdf8a46613c3545f50887f6dbb5a9c95ce8d38d7312f9ee544ae4453be3079",
+    "upstream/ffmpeg/libavfilter/vf_aspect.c": "e2c76db56ecd136daf4f95820fbffefa52abf5b4f990d0a3b27b2c8e1b9ac07c",
+    "upstream/ffmpeg/libswscale/utils.c": "41f863d372aa3683de5e4877d02b59cd8e749b1bb8619539b967cb553eebf91d"
+  },
+  "scope": "Fourteen declared eight-bit formats; twenty-seven crop/aspect/scale/chain configurations, three frame limits. Finite rawvideo, producer scheduling, bitexact framecrc. Not full filter/codec/runtime conformance."
+}

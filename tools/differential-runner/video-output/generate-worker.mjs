@@ -1,0 +1,19 @@
+import {spawnSync} from 'node:child_process';import {readFileSync,writeFileSync,mkdtempSync,rmSync} from 'node:fs';import {tmpdir} from 'node:os';import {join} from 'node:path';import {createHash} from 'node:crypto';
+const metadata=JSON.parse(readFileSync('.build/reference/build-metadata.json')),lock=JSON.parse(readFileSync('compat/upstream.lock.json')),hash=bytes=>createHash('sha256').update(bytes).digest('hex');function verify(){if(metadata.commit!==lock.commit||hash(readFileSync('.build/reference/ffmpeg'))!==metadata.artifacts.ffmpeg||JSON.stringify(metadata.flags)!==JSON.stringify(readFileSync(lock.configureFile,'utf8').trim().split(/\s+/)))throw new Error('Reference mismatch');}verify();
+const stack='[0:v][1:v]hstack[o]',recipes=[
+ {graph:stack,format:'framecrc',options:['-r','20','-fps_mode','cfr']},
+ {graph:stack,format:'framecrc',options:['-fps_mode','vfr','-enc_time_base','filter']},
+ {graph:stack,format:'rawvideo',options:['-r','30000/1001','-enc_time_base','filter']},
+ {graph:stack,format:'framecrc',options:['-fps_mode','passthrough','-enc_time_base','1/(25*2)']},
+ {graph:stack,format:'framecrc',empty:true,options:['-r','20','-ss','0.02','-t','0.08']},
+ {graph:'[0:v]hflip[o]',single:true,format:'rawvideo',options:['-r','20','-ss','0.02','-t','0.08']},
+ {graph:'[0:v]split[a][b];[a][b]hstack[o]',single:true,format:'framecrc',options:['-enc_time_base','demux']},
+ {graph:'[0:v]hflip[o]',single:true,format:'framecrc',options:['-enc_time_base','demux']},
+ {graph:stack,format:'framecrc',options:['-r','20','-frames:v','0']},
+ {graph:'[0:v]hflip[o]',single:true,format:'framecrc',options:['-enc_time_base','4e-2']},
+ {graph:'[0:v]hflip[o]',single:true,format:'framecrc',options:['-fps_mode','vfr','-enc_time_base','1/PI']},
+ {graph:stack,format:'framecrc',empty:true,options:['-fps_mode','cfr','-frames:v','0']},
+ {graph:stack,format:'framecrc',options:['-fps_mode','cfr','-frames:v','0']}
+];
+const input=(path,rate)=>['-f','rawvideo','-pixel_format','gray','-s','2x2','-framerate',rate,'-i',path],cases=recipes.map((r,index)=>({id:String(index),a:Array.from({length:r.empty?0:20},(_,i)=>10+Math.floor(i/4)),b:Array.from({length:12},(_,i)=>100+Math.floor(i/4)),argv:[...input('/input/a.raw','25'),...(r.single?[]:input('/input/b.raw','30')),'-filter_complex',r.graph,'-map','[o]',...r.options,'-c:v','rawvideo','-bitexact','-f',r.format,'/output/out.raw']})),directory=mkdtempSync(join(tmpdir(),'edge-options-workers-'));
+try{const anchors=cases.map(c=>{writeFileSync(join(directory,'a'),Uint8Array.from(c.a));writeFileSync(join(directory,'b'),Uint8Array.from(c.b));const nativePath=join(directory,'out'),replace={'/input/a.raw':join(directory,'a'),'/input/b.raw':join(directory,'b'),'/output/out.raw':nativePath},args=c.argv.flatMap(value=>value==='/output/out.raw'?['-threads:v','1',nativePath]:[replace[value]??value]),native=spawnSync('.build/reference/ffmpeg',['-v','error','-nostdin','-y','-filter_complex_threads','1',...args],{encoding:'utf8',timeout:10000});if(native.error)throw native.error;if(native.status!==0&&!native.stderr.includes('Demuxing timebase not available'))throw new Error(native.stderr);return {id:c.id,exitCode:native.status===0?0:1,bytes:native.status===0?[...readFileSync(nativePath)]:null,stderr:native.stderr};});verify();writeFileSync('tests/workers/video-output-cases.ts','export const cases='+JSON.stringify(cases)+' as const;\n');writeFileSync('compat/behavior-specs/video-output-worker.json',JSON.stringify({reference:metadata,cases:anchors},null,2)+'\n');console.log(JSON.stringify({cases:cases.length}));}finally{rmSync(directory,{recursive:true,force:true});}

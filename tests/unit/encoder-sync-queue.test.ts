@@ -1,0 +1,18 @@
+import {it,expect} from 'vitest';import {createVideoEncoderSyncQueue as createEncoderSyncQueue} from '@edge-ffmpeg/avformat';
+const tb={num:1n,den:25n};
+it('transfers accepted leases, snapshots clock headers and retains caller ownership on rejection',()=>{
+ const queue=createEncoderSyncQueue<number>([false,false],{bufferUs:10000n,maxFrames:1,maxBytes:1}),released:number[]=[],lease=(payload:number)=>({payload,pts:0n,duration:1n,timeBase:{...tb},bytes:1,release(){released.push(this.payload);}}),first=lease(1),second=lease(2);expect(queue.send(0,first)).toBe(0);first.timeBase.den=50n;const before=queue.snapshot();expect(()=>queue.send(1,second)).toThrow('budget');expect(queue.snapshot()).toEqual(before);expect(released).toEqual([]);const result=queue.receive();expect(result.frame?.timeBase).toEqual(tb);result.frame?.release();expect(released).toEqual([1]);queue.limit(1,0n);expect(queue.send(1,second)).toBe(-541478725);queue.dispose();expect(released).toEqual([1]);second.release();expect(released).toEqual([1,2]);
+});
+it('releases every retained frame despite cleanup failures and clears owned payload references',()=>{
+ const queue=createEncoderSyncQueue<number>([true,true],{bufferUs:1000000n,maxFrames:4,maxBytes:4}),failure=new Error('release'),released:number[]=[];for(let i=0;i<2;i++)queue.send(0,{payload:i,pts:BigInt(i),duration:1n,timeBase:tb,bytes:1,release(){released.push(i);if(i===0)throw failure;}});expect(queue.receive().code).toBe('again');let caught:AggregateError|undefined;try{queue.dispose();}catch(error){expect(error).toBeInstanceOf(AggregateError);caught=error as AggregateError;}expect(caught!.errors).toEqual([failure]);expect(released).toEqual([0,1]);expect(queue.snapshot()).toMatchObject({residentBytes:0,queued:0});expect(()=>queue.dispose()).toThrow(caught);expect(queue.cleanupErrors).toEqual([failure]);expect(released).toEqual([0,1]);expect(()=>queue.receive()).toThrow('disposed');
+});
+it('snapshots accepted release callbacks and freezes diagnostic headers',()=>{
+ const queue=createEncoderSyncQueue<number>([false],{bufferUs:0n,maxFrames:2,maxBytes:2});let releases=0;
+ const frame={payload:7,pts:0n,duration:1n,timeBase:{...tb},bytes:1,release(){releases++;}};queue.send(0,frame);frame.release=()=>{throw new Error('Replaced release');};frame.bytes=99;
+ const state=queue.snapshot();expect(state.residentBytes).toBe(1);expect(Object.isFrozen(state.streams)).toBe(true);expect(Object.isFrozen(state.streams[0]!.timeBase)).toBe(true);const next=queue.receive();expect(next.frame?.bytes).toBe(1);next.frame?.release();expect(releases).toBe(1);queue.dispose();
+});
+it('captures frame headers once and leaves state unchanged when payload acquisition fails',()=>{
+ const queue=createEncoderSyncQueue<number>([false],{bufferUs:0n,maxFrames:2,maxBytes:2}),original=new Error('payload getter');let reads=0,released=0;
+ const failing={get payload():number{throw original;},pts:0n,duration:1n,timeBase:{...tb},bytes:1,release(){released++;}},before=queue.snapshot();expect(()=>queue.send(0,failing)).toThrow(original);expect(queue.snapshot()).toEqual(before);expect(released).toBe(0);
+ queue.send(0,{payload:7,pts:0n,duration:1n,timeBase:{...tb},get bytes(){reads++;return 1;},release(){released++;}});expect(reads).toBe(1);let payloadReads=0;const pending=queue.snapshot();expect(()=>queue.send(0,{get payload(){payloadReads++;return 8;},pts:1n,duration:1n,timeBase:{num:1n,den:50n},bytes:1,release(){released++;}})).toThrow('timebase changed');expect(payloadReads).toBe(0);expect(queue.snapshot()).toEqual(pending);const result=queue.receive();expect(result.frame?.bytes).toBe(1);result.frame?.release();queue.dispose();expect(released).toBe(1);
+});

@@ -1,0 +1,250 @@
+[
+  {
+    "id": "wav-copy",
+    "inputOptions": [
+      "-f",
+      "s16le",
+      "-ar",
+      "8000",
+      "-ac",
+      "1"
+    ],
+    "outputOptions": [
+      "-c:a",
+      "copy",
+      "-f",
+      "wav"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "wav-encode",
+    "inputOptions": [
+      "-f",
+      "s16le",
+      "-ar",
+      "8000",
+      "-ac",
+      "1"
+    ],
+    "outputOptions": [
+      "-c:a",
+      "pcm_s16le",
+      "-f",
+      "wav"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "aiff-encode",
+    "inputOptions": [
+      "-f",
+      "s16le",
+      "-ar",
+      "8000",
+      "-ac",
+      "1"
+    ],
+    "outputOptions": [
+      "-c:a",
+      "pcm_s16be",
+      "-f",
+      "aiff"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "au-encode",
+    "inputOptions": [
+      "-f",
+      "s16le",
+      "-ar",
+      "8000",
+      "-ac",
+      "1"
+    ],
+    "outputOptions": [
+      "-c:a",
+      "pcm_s16be",
+      "-f",
+      "au"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "raw-pcm",
+    "inputOptions": [
+      "-f",
+      "s16le",
+      "-ar",
+      "8000",
+      "-ac",
+      "1"
+    ],
+    "outputOptions": [
+      "-c:a",
+      "pcm_s16le",
+      "-f",
+      "s16le"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "audio-framecrc",
+    "inputOptions": [
+      "-f",
+      "s16le",
+      "-ar",
+      "8000",
+      "-ac",
+      "1"
+    ],
+    "outputOptions": [
+      "-c:a",
+      "pcm_s16le",
+      "-f",
+      "framecrc"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "raw-video-copy",
+    "inputOptions": [
+      "-f",
+      "rawvideo",
+      "-pixel_format",
+      "rgb24",
+      "-video_size",
+      "2x2",
+      "-framerate",
+      "25"
+    ],
+    "outputOptions": [
+      "-c:v",
+      "copy",
+      "-f",
+      "rawvideo"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "video-framecrc",
+    "inputOptions": [
+      "-f",
+      "rawvideo",
+      "-pixel_format",
+      "rgb24",
+      "-video_size",
+      "2x2",
+      "-framerate",
+      "25"
+    ],
+    "outputOptions": [
+      "-c:v",
+      "rawvideo",
+      "-f",
+      "framecrc"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "bmp-copy",
+    "inputOptions": [
+      "-f",
+      "image2pipe",
+      "-c:v",
+      "bmp"
+    ],
+    "outputOptions": [
+      "-c:v",
+      "copy",
+      "-f",
+      "image2pipe"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "bmp-encode",
+    "inputOptions": [
+      "-f",
+      "image2pipe",
+      "-c:v",
+      "bmp"
+    ],
+    "outputOptions": [
+      "-c:v",
+      "bmp",
+      "-f",
+      "image2pipe"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "bmp-decode",
+    "inputOptions": [
+      "-f",
+      "image2pipe",
+      "-c:v",
+      "bmp"
+    ],
+    "outputOptions": [
+      "-c:v",
+      "rawvideo",
+      "-f",
+      "rawvideo"
+    ],
+    "h264Module": false
+  },
+  {
+    "id": "h264-rawvideo",
+    "inputOptions": [
+      "-f",
+      "mp4"
+    ],
+    "outputOptions": [
+      "-an",
+      "-c:v",
+      "rawvideo",
+      "-pix_fmt",
+      "yuv420p",
+      "-fps_mode",
+      "passthrough",
+      "-f",
+      "rawvideo"
+    ],
+    "h264Module": true
+  },
+  {
+    "id": "h264-framecrc",
+    "inputOptions": [
+      "-f",
+      "mp4"
+    ],
+    "outputOptions": [
+      "-an",
+      "-c:v",
+      "rawvideo",
+      "-pix_fmt",
+      "yuv420p",
+      "-fps_mode",
+      "passthrough",
+      "-f",
+      "framecrc"
+    ],
+    "h264Module": true
+  },
+  {
+    "id": "mp4-copy",
+    "inputOptions": [
+      "-f",
+      "mp4"
+    ],
+    "outputOptions": [
+      "-c",
+      "copy",
+      "-f",
+      "mp4"
+    ],
+    "h264Module": false
+  }
+]

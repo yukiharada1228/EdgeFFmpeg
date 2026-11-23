@@ -1,0 +1,3782 @@
+[
+  {
+    "profileId": "split-raw",
+    "flags": [],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "696fabdcdbd16b7ccdcd43a558e5d78b1bb2df4efc482fa9cff4f25d4f2cb97b",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "696fabdcdbd16b7ccdcd43a558e5d78b1bb2df4efc482fa9cff4f25d4f2cb97b",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "696fabdcdbd16b7ccdcd43a558e5d78b1bb2df4efc482fa9cff4f25d4f2cb97b",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "696fabdcdbd16b7ccdcd43a558e5d78b1bb2df4efc482fa9cff4f25d4f2cb97b",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "696fabdcdbd16b7ccdcd43a558e5d78b1bb2df4efc482fa9cff4f25d4f2cb97b",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "696fabdcdbd16b7ccdcd43a558e5d78b1bb2df4efc482fa9cff4f25d4f2cb97b",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-raw",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "ade75c3cd35543ac7a8393c0f3504876b08e3d338de03d188b8cea65d1ada81d",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "ade75c3cd35543ac7a8393c0f3504876b08e3d338de03d188b8cea65d1ada81d",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "ade75c3cd35543ac7a8393c0f3504876b08e3d338de03d188b8cea65d1ada81d",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "ade75c3cd35543ac7a8393c0f3504876b08e3d338de03d188b8cea65d1ada81d",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "ade75c3cd35543ac7a8393c0f3504876b08e3d338de03d188b8cea65d1ada81d",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "ade75c3cd35543ac7a8393c0f3504876b08e3d338de03d188b8cea65d1ada81d",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-crc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "split-mixed",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 8,
+        "sha256": "d75b415a5b37b1bbdae64fbb43dc1be717da99d41c07db3e4c295f18d7a4b624",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "47b5c871fbbd010801ea7b0f2256cc47804298d9432cdba40124afef53287498",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "forced-replay",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "aa4c044d25729689e9fc22f7423614a0c076bafcf5cf72a8a215a9711b1a8693",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "aa4c044d25729689e9fc22f7423614a0c076bafcf5cf72a8a215a9711b1a8693",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "aa4c044d25729689e9fc22f7423614a0c076bafcf5cf72a8a215a9711b1a8693",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "aa4c044d25729689e9fc22f7423614a0c076bafcf5cf72a8a215a9711b1a8693",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "aa4c044d25729689e9fc22f7423614a0c076bafcf5cf72a8a215a9711b1a8693",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "aa4c044d25729689e9fc22f7423614a0c076bafcf5cf72a8a215a9711b1a8693",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "aa4c044d25729689e9fc22f7423614a0c076bafcf5cf72a8a215a9711b1a8693",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "aa4c044d25729689e9fc22f7423614a0c076bafcf5cf72a8a215a9711b1a8693",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "aa4c044d25729689e9fc22f7423614a0c076bafcf5cf72a8a215a9711b1a8693",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "aa4c044d25729689e9fc22f7423614a0c076bafcf5cf72a8a215a9711b1a8693",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "aa4c044d25729689e9fc22f7423614a0c076bafcf5cf72a8a215a9711b1a8693",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "aa4c044d25729689e9fc22f7423614a0c076bafcf5cf72a8a215a9711b1a8693",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-raw",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "e33548ee599dc177accb82216cc7e83b240bd7445f00da5bd72b09bf330de62a",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "e33548ee599dc177accb82216cc7e83b240bd7445f00da5bd72b09bf330de62a",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "e33548ee599dc177accb82216cc7e83b240bd7445f00da5bd72b09bf330de62a",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "e33548ee599dc177accb82216cc7e83b240bd7445f00da5bd72b09bf330de62a",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "e33548ee599dc177accb82216cc7e83b240bd7445f00da5bd72b09bf330de62a",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "e33548ee599dc177accb82216cc7e83b240bd7445f00da5bd72b09bf330de62a",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "e33548ee599dc177accb82216cc7e83b240bd7445f00da5bd72b09bf330de62a",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "e33548ee599dc177accb82216cc7e83b240bd7445f00da5bd72b09bf330de62a",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "e33548ee599dc177accb82216cc7e83b240bd7445f00da5bd72b09bf330de62a",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "e33548ee599dc177accb82216cc7e83b240bd7445f00da5bd72b09bf330de62a",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "e33548ee599dc177accb82216cc7e83b240bd7445f00da5bd72b09bf330de62a",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "e33548ee599dc177accb82216cc7e83b240bd7445f00da5bd72b09bf330de62a",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "two-input-crc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "c960882ab4316277618f24fc99859f48d2558963158485d83691176c813ac53c",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "7fe60012bca8d53894cfcc1546af9d7e881e931e36e2a37dd4d015de71648bd7",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "c960882ab4316277618f24fc99859f48d2558963158485d83691176c813ac53c",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "7fe60012bca8d53894cfcc1546af9d7e881e931e36e2a37dd4d015de71648bd7",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 1,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "refused",
+    "refusalIndex": 0,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "c960882ab4316277618f24fc99859f48d2558963158485d83691176c813ac53c",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "7fe60012bca8d53894cfcc1546af9d7e881e931e36e2a37dd4d015de71648bd7",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "c960882ab4316277618f24fc99859f48d2558963158485d83691176c813ac53c",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "7fe60012bca8d53894cfcc1546af9d7e881e931e36e2a37dd4d015de71648bd7",
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "c960882ab4316277618f24fc99859f48d2558963158485d83691176c813ac53c",
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "7fe60012bca8d53894cfcc1546af9d7e881e931e36e2a37dd4d015de71648bd7",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 0,
+    "action": "copy",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 16,
+        "sha256": "c960882ab4316277618f24fc99859f48d2558963158485d83691176c813ac53c",
+        "preserved": false
+      },
+      {
+        "exists": true,
+        "bytes": 202,
+        "sha256": "7fe60012bca8d53894cfcc1546af9d7e881e931e36e2a37dd4d015de71648bd7",
+        "preserved": false
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      false
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      false,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": false,
+        "bytes": null,
+        "sha256": null,
+        "preserved": null
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  },
+  {
+    "profileId": "repeated-input",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": [
+      true,
+      true
+    ],
+    "exitCode": 234,
+    "action": "conflict",
+    "refusalIndex": null,
+    "outputs": [
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      },
+      {
+        "exists": true,
+        "bytes": 3,
+        "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+        "preserved": true
+      }
+    ]
+  }
+]

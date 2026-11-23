@@ -1,0 +1,40 @@
+{
+  "cases": 2784,
+  "oracle": {
+    "name": "timed-frame-sync-many",
+    "source": "/Users/yukiharada/orca/EdgeFFmpeg/tools/differential-runner/timed-frame-sync/many.c",
+    "sourceSha256": "af1734f6385f63033112269f862af7e912140ea46966fc9cf98978993ef2a073",
+    "reference": {
+      "artifacts": {
+        "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+        "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+      },
+      "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "platform": "darwin",
+      "arch": "arm64",
+      "flags": [
+        "--disable-autodetect",
+        "--disable-doc",
+        "--disable-debug",
+        "--disable-x86asm"
+      ],
+      "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+      "targetPlatformMatches": false,
+      "reproducibleToolchainPinned": false
+    },
+    "librarySha256": {
+      "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libavfilter/libavfilter.a": "65827c43c8ac4463e661bead3dcdd90f3c0018c7119fa52ad737c9c80c93f1f7",
+      "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libavformat/libavformat.a": "d1760cb51a34c69c6c664fa616e455ee5f90d96c8f2a7d82d02bd5707837d1cc",
+      "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libavcodec/libavcodec.a": "7570dfffaf568d1afeb7b4b002493f5d188470273819b7a4dd0521db75eb4ca9",
+      "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libswscale/libswscale.a": "fb03055c68d98b220dc46c7a58e60cedb233b37559d68cb24ccdc8bf5df5e050",
+      "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libswresample/libswresample.a": "053aa00bcf154fc88877406ddd492ffc68952977cb1c61fe31b353c2d6547b1f",
+      "/Users/yukiharada/orca/EdgeFFmpeg/.build/reference/libavutil/libavutil.a": "b8864b177f1717ac38de58754a16ccee473e0fb7bf304398dcaffc1b6c89a598"
+    },
+    "compiler": "cc",
+    "compilerVersion": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "binarySha256": "7db868fbfa893e3b1cfd774e80672296bb767ac62476e6c8f319f1c9f3e1e789"
+  },
+  "casesSha256": "4ab4aecc2a844f382a1ec9acd95b01d49c85b067cb8ff4b8d412d2642662d7a0",
+  "resultsSha256": "3d4843cd10f924ec66c5b8c4e7638cd8031b57a1053df2699e1e87f52951f9c3"
+}

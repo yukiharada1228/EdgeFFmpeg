@@ -1,0 +1,150 @@
+complex-video-time.ts adapts the scoped fixed-rate CFR startup and encoder
+deadline behavior of video_sync_process and adjust_frame_pts_to_encoder_tb in
+FFmpeg fftools/ffmpeg_filter.c at commit
+946fcce07b6dcd0331c8cc609192aeff5e1924f8.
+
+This adaptation is licensed under GNU LGPL version 2.1 or, at your option, any
+later version. The complete license is in LICENSES/LGPL-2.1-or-later.txt.
+The pinned upstream source is available in upstream/ffmpeg. The adaptation
+handles a single fixed-rate finite rawvideo source and does not implement the
+general FFmpeg synchronization engine. This notice does not assign a license
+to the whole project or complete its project-wide license audit.
+
+video-output/sync.ts and output-clock.ts adapt fftools/ffmpeg_filter.c encoder
+synchronization and clock selection at the pinned commit above.
+output-clock.ts also adapts libavfilter/vf_stack.c frame-rate comparison
+(Copyright (c) 2015 Paul B. Mahol). video-trim.ts adapts libavfilter/trim.c.
+packet-duration.ts adapts libavformat/mux.c guess_pkt_duration
+(Copyright (c) 2000, 2001, 2002 Fabrice Bellard).
+These adaptations retain LGPL-2.1-or-later and the accompanying license text.
+They implement a bounded known-PTS video subset; codec-specific rate constraints,
+unknown-PTS synchronization, keyframe flags and full diagnostic parity remain
+unimplemented. Scheduling and replay integration do not complete the project-wide
+license audit.
+
+video-output/encoder-ratio.ts adapts av_reduce/av_d2q in libavutil/rational.c
+(Copyright (c) 2003 Michael Niedermayer). clock-expression.ts adapts arithmetic
+grammar in libavutil/eval.c (Copyright (c) 2002-2006 Michael Niedermayer;
+Copyright (c) 2006 Oded Shimon). These adaptations retain LGPL-2.1-or-later.
+General expression functions/state and exhaustive platform-libm
+numeric equivalence remain incomplete.
+
+video-output/encoder-sync-queue.ts adapts the video-frame synchronization queue
+state machine in FFmpeg fftools/sync_queue.c at commit
+946fcce07b6dcd0331c8cc609192aeff5e1924f8, licensed LGPL-2.1-or-later. The public
+TypeScript API adds bounded ownership and cleanup diagnostics for the runtime.
+The developer-only oracle in tools/differential-runner/video-encoder-sync includes
+that pinned source. Audio sample splitting/alignment and complete native
+scheduler integration are not implemented by this video queue.
+
+src/actor-video/ adds bounded actor input/output scheduling and explicit timed
+rawvideo CLI execution. Detailed FFmpeg source functions and copyright provenance
+are in src/actor-video/NOTICE.activation, under LGPL-2.1-or-later. The shared spool,
+event serialization, asynchronous cancellation and failure aggregation are
+EdgeFFmpeg additions. These ephemeral stores do not implement distributed restart
+recovery. This does not complete the project-wide license/distribution audit.
+
+actor-video/simple-command.ts additionally adapts finite rawvideo auto-selection
+score/tie behavior from fftools/ffmpeg_mux_init.c map_auto_video at the same pinned
+commit. Raw token boundary scanning follows libavutil/avstring.c av_get_token
+(Copyright 2000, 2001, 2002 Fabrice Bellard; 2007 Mans Rullgard) and graphparser.c
+(Copyright 2007 Bobby Bingham; 2008 Vitor Sessak), LGPL-2.1-or-later. It preserves
+raw option text while rebinding existing topology edges without added filter nodes.
+Packet-presence inference from finite rawvideo handle size, candidate preflight,
+handle reuse and asynchronous cancellation are EdgeFFmpeg adaptations. This finite rawvideo behavior is covered by the scoped simple-video CLI
+reference comparisons; it does not establish complete CLI conformance.
+
+The simple filter selector adapter follows fftools/cmdutils.c
+stream_specifier_parse/stream_specifier_match at the pinned commit, including
+base-zero LP64 strtol saturation, signed32 narrowing and negative-index sentinel
+matching for one declared rawvideo stream. General stream lists/metadata/program
+selectors remain unimplemented. video-output/output-limit.ts now applies the actual
+frame-time deadline from fftools/ffmpeg_enc.c check_recording_time instead of
+predicting the next passthrough PTS; equal timestamps may still be within the limit.
+LGPL-2.1-or-later; complete license text is in LICENSES/LGPL-2.1-or-later.txt.
+
+video-output/option-order.ts and stream-option.ts adapt typed option ingestion,
+last-matching per-stream string selection, and rawvideo format dictionary
+overrides from fftools/cmdutils.c, ffmpeg_demux.c and ffmpeg_mux_init.c at
+commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8.
+video-output/input-rate-range.ts and its rawvideo execution callers adapt the
+forced decoder cadence in fftools/ffmpeg_dec.c video_frame_process, keeping
+the physical demux clock independent of the matching decoder rate and
+streamcopy output clock. LGPL-2.1-or-later; the license text and pinned source
+locations are listed above. This covers finite rawvideo with known timestamps;
+general codec timebases and exact native diagnostic/exit-code parity remain
+unimplemented. It does not complete the project-wide license audit.
+
+raw-video.ts streamcopy output-option handling and output clock selection adapt
+fftools/ffmpeg_mux_init.c new_stream_video and streamcopy_init at the same pinned
+commit. Packet timestamps and durations are rescaled without frame duplication,
+and encoder-only pixel/synchronization/timebase settings are ignored when copying.
+The rate and maximum-rate options retain Native validation. LGPL-2.1-or-later.
+This finite rawvideo path does not provide compressed-codec streamcopy or full
+error/diagnostic parity, and does not complete the project-wide license audit.
+
+The signed video time candidate adapts seek failure and buffered-packet flushing
+from libavformat/seek.c seek_frame_generic and ff_read_frame_flush, and time
+offset/trim setup from fftools/ffmpeg_demux.c at the pinned commit above.
+Frame-count/probe-size arithmetic models the finite rawvideo default probe only.
+Negative video start/stop values do not enable negative durations, audio timing,
+custom probe settings or general protocol seek semantics. LGPL-2.1-or-later.
+
+Seeking/index source attribution: libavformat/seek.c, Copyright (c) 2000, 2001,
+2002 Fabrice Bellard; rawvideo demux source, Copyright (c) 2001 Fabrice Bellard.
+Tentative EOF filter clocks additionally follow fftools/ffmpeg_filter.c fallback
+parameter configuration at the pinned commit. Per-source decoded-state flags
+and asynchronous fallback selection are EdgeFFmpeg runtime adaptations.
+
+The copyts candidate adapts input timestamp offset/trim setup from
+fftools/ffmpeg_demux.c and forced-rate processing from fftools/ffmpeg_dec.c
+at commit946fcce07b6dcd0331c8cc609192aeff5e1924f8, LGPL-2.1-or-later.
+Forced-rate initialization retains a physically seekable last packet even when
+accurate input trim discards it; the bounded adapter decodes one packet solely
+to initialize codec parameters and verify input identity. This does not implement
+compressed-codec copyts, nonzero container start offsets or audio timestamp modes.
+
+Automatic CFR/VSCFR selection follows fftools/ffmpeg_mux_init.c new_stream_video
+at the same pinned commit. Global boolean suffix matching follows cmdutils.c
+find_option/write_option. The private direct-output marker preserves that Native
+frontend distinction through graph normalization. LGPL-2.1-or-later; the license
+text and source location above apply. This does not complete distribution audit.
+
+
+flac-selection.ts adapts the bounded one-input ordered/optional/negative map
+semantics of opt_map in fftools/ffmpeg_opt.c and automatic/manual output stream
+selection in fftools/ffmpeg_mux_init.c at FFmpeg commit
+946fcce07b6dcd0331c8cc609192aeff5e1924f8. Original source and copyright notices
+remain in upstream/ffmpeg; this adaptation retains LGPL-2.1-or-later with the
+accompanying license text. It models one FLAC audio stream and attached-picture
+identities. Bounded uppercase V, metadata, attached_pic disposition and explicit
+usable-stream facts additionally follow stream_specifier_parse/match in
+fftools/cmdutils.c (Copyright (c) 2000-2003 Fabrice Bellard), including metadata
+token parsing before opt_map's optional remainder. General media selection
+remains unimplemented. This notice does not complete the project-wide license audit.
+
+flac-wave-time.ts and flac-transform.ts implement scoped timestamp/recording-time
+policy with reference to fftools/ffmpeg_demux.c, ffmpeg_mux_init.c,
+ffmpeg_filter.c and libavfilter/trim.c at the same pinned commit. The bounded
+packet-copy route in flac-wave-remux.ts follows libavformat/flacenc.c and mux.c;
+the original copyright/license notices remain in upstream/ffmpeg. Applicable
+adaptations retain LGPL-2.1-or-later. Core ownership and atomic VFS publication
+are EdgeFFmpeg-specific boundaries, not Native OS side-effect compatibility.
+
+flac-copy-duration.ts additionally adapts the scoped stream-copy recording-time
+checks in fftools/ffmpeg_demux.c (input_packet_process/ts_fixup) and
+fftools/ffmpeg_mux.c (of_streamcopy) at the same pinned commit. The Native
+microsecond DTS estimate uses av_rescale_q rounding. Original source notices
+remain in upstream/ffmpeg; this adaptation retains LGPL-2.1-or-later.
+
+flac-filter-rate.ts and the aformat/rate path in flac-transform.ts model scoped
+automatic converter placement using fftools/ffmpeg_filter.c and
+libavfilter/avfiltergraph.c at commit946fcce07b6dcd0331c8cc609192aeff5e1924f8.
+Original copyright notices remain in upstream/ffmpeg; applicable adaptations
+retain LGPL-2.1-or-later. The existing license text and source location apply.
+
+flac-timed-buffered.ts composes finite filter execution with input/output trim
+placement from fftools/ffmpeg_filter.c and libavfilter/trim.c at the same pinned
+commit. Original source notices remain in upstream/ffmpeg; applicable adaptations
+retain LGPL-2.1-or-later under the accompanying license text. Core allocation
+ownership and atomic publication remain EdgeFFmpeg-specific boundaries.

@@ -1,0 +1,8 @@
+import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+export interface EditRateInput {id:string;input:string;sha256:string;rate:number}
+export interface EditRateResult {id:string;copy:{streams:Record<string,unknown>[];packets:Record<string,unknown>[]}}
+export function loadMp4EditRates(){
+ const root='compat/behavior-specs/mp4-edit-rates/',read=(p:string)=>readFileSync(p),hash=(data:Uint8Array)=>createHash('sha256').update(data).digest('hex'),manifest=JSON.parse(read(root+'manifest.json').toString()) as {sha256:Record<string,string>};for(const [name,digest]of Object.entries(manifest.sha256))if(hash(read(root+name))!==digest)throw Error('Changed edit-rate fixture '+name);
+ const provenance=JSON.parse(read(root+'provenance.json').toString()) as {reference:{commit:string};sources:Record<string,string>;caseCount:number};if(provenance.reference.commit!==JSON.parse(read('compat/upstream.lock.json').toString()).commit)throw Error('Changed edit-rate reference');for(const [file,digest]of Object.entries(provenance.sources))if(hash(read(file))!==digest)throw Error('Changed edit-rate generator source '+file);
+ const inputs=JSON.parse(read(root+'inputs.json').toString()) as EditRateInput[],results=JSON.parse(read(root+'results.json').toString()) as EditRateResult[];if(inputs.length!==96||results.length!==96||provenance.caseCount!==96||new Set(inputs.map(r=>r.id)).size!==96||new Set(results.map(r=>r.id)).size!==96)throw Error('Incomplete edit-rate corpus');for(const row of inputs)if(hash(Buffer.from(row.input,'base64'))!==row.sha256||!results.some(r=>r.id===row.id))throw Error('Changed edit-rate input '+row.id);return {inputs,results};
+}

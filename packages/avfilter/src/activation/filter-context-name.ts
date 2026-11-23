@@ -1,0 +1,4 @@
+/** graphparser.c uses char name[64]; externally allocated source/sink names do not. */
+export function filterContextNameBytes(instance:string,parsed:boolean){const bytes=new TextEncoder().encode(instance);return parsed?bytes.slice(0,63):bytes;}
+export function filterCommandTarget(target:string,name:string,instance:string,parsed:boolean){if(target==='all'||target===name)return true;const actual=filterContextNameBytes(instance,parsed),wanted=new TextEncoder().encode(target);return actual.length===wanted.length&&actual.every((byte,index)=>byte===wanted[index]);}
+export function pingResponseBytes(name:string,instance:string,parsed:boolean){const prefix=new TextEncoder().encode(`pong from:${name} `),context=filterContextNameBytes(instance,parsed),result=new Uint8Array(prefix.length+context.length+1);result.set(prefix);result.set(context,prefix.length);result[result.length-1]=10;return result;}

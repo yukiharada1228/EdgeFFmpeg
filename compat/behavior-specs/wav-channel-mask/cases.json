@@ -1,0 +1,191 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "rows": [
+    {
+      "mask": 4,
+      "channels": 1,
+      "samples": 0,
+      "exitCode": 0,
+      "fmtTag": 1,
+      "outputMask": null,
+      "input": "UklGRjwAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAQAAAABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "output": "UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA=",
+      "sha256": "4f8734c5e13ac599e168cf247a51c1dd0758537ce00bf16d7fed1a3d14d07041",
+      "stderr": ""
+    },
+    {
+      "mask": 4,
+      "channels": 1,
+      "samples": 4,
+      "exitCode": 0,
+      "fmtTag": 1,
+      "outputMask": null,
+      "input": "UklGRkQAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAQAAAABAAAAAAAQAIAAAKoAOJtxZGF0YQgAAAARLktohaK/3A==",
+      "output": "UklGRiwAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAARLktohaK/3A==",
+      "sha256": "9a0775ee4d553b3902f5ff0e1b089fcdc1ef7126297b76dba9744cb6f3173b20",
+      "stderr": ""
+    },
+    {
+      "mask": 131072,
+      "channels": 1,
+      "samples": 0,
+      "exitCode": 0,
+      "fmtTag": 65534,
+      "outputMask": 131072,
+      "input": "UklGRjwAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAAAAgABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "output": "UklGRjwAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAAAAgABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "sha256": "fcf1b564bff8ab398704e8c1c6ebde48bb7b68e0970255278556c1bea4268425",
+      "stderr": ""
+    },
+    {
+      "mask": 131072,
+      "channels": 1,
+      "samples": 4,
+      "exitCode": 0,
+      "fmtTag": 65534,
+      "outputMask": 131072,
+      "input": "UklGRkQAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAAAAgABAAAAAAAQAIAAAKoAOJtxZGF0YQgAAAARLktohaK/3A==",
+      "output": "UklGRkQAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAAAAgABAAAAAAAQAIAAAKoAOJtxZGF0YQgAAAARLktohaK/3A==",
+      "sha256": "c558b00a6d15ef4e91a94440b63ee6dad7341aa1d8bc5740fdd486458843a46c",
+      "stderr": ""
+    },
+    {
+      "mask": 262143,
+      "channels": 18,
+      "samples": 0,
+      "exitCode": 0,
+      "fmtTag": 65534,
+      "outputMask": 262143,
+      "input": "UklGRjwAAABXQVZFZm10ICgAAAD+/xIAQB8AAABlBAAkABAAFgAQAP//AwABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "output": "UklGRjwAAABXQVZFZm10ICgAAAD+/xIAQB8AAABlBAAkABAAFgAQAP//AwABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "sha256": "2e7ca7fb50443c723ef2051940ea18b60105f74df8d962095fdffea98089447a",
+      "stderr": ""
+    },
+    {
+      "mask": 262143,
+      "channels": 18,
+      "samples": 4,
+      "exitCode": 0,
+      "fmtTag": 65534,
+      "outputMask": 262143,
+      "input": "UklGRswAAABXQVZFZm10ICgAAAD+/xIAQB8AAABlBAAkABAAFgAQAP//AwABAAAAAAAQAIAAAKoAOJtxZGF0YZAAAAARLktohaK/3PkWM1BtiqfE4f4bOFVyj6zJ5gMgPVp3lLHO6wglQl98mbbT8A0qR2SBnrvY9RIvTGmGo8Dd+hc0UW6LqMXi/xw5VnOQrcrnBCE+W3iVss/sCSZDYH2at9TxDitIZYKfvNn2EzBNaoekwd77GDVSb4ypxuMAHTpXdJGuy+gFIj9ceZaz0O0KJ0Q=",
+      "output": "UklGRswAAABXQVZFZm10ICgAAAD+/xIAQB8AAABlBAAkABAAFgAQAP//AwABAAAAAAAQAIAAAKoAOJtxZGF0YZAAAAARLktohaK/3PkWM1BtiqfE4f4bOFVyj6zJ5gMgPVp3lLHO6wglQl98mbbT8A0qR2SBnrvY9RIvTGmGo8Dd+hc0UW6LqMXi/xw5VnOQrcrnBCE+W3iVss/sCSZDYH2at9TxDitIZYKfvNn2EzBNaoekwd77GDVSb4ypxuMAHTpXdJGuy+gFIj9ceZaz0O0KJ0Q=",
+      "sha256": "012e6fab031445dd93abd4908b624e4b46c69ece09f2804fb1f43b34ecb15b85",
+      "stderr": ""
+    },
+    {
+      "mask": 262144,
+      "channels": 1,
+      "samples": 0,
+      "exitCode": 0,
+      "fmtTag": 65534,
+      "outputMask": 0,
+      "input": "UklGRjwAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAAABAABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "output": "UklGRjwAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAAAAAABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "sha256": "6f2e937d5609a19da1547e0048302e5ac9b1db855237e22bd7d5f147c5e842ef",
+      "stderr": ""
+    },
+    {
+      "mask": 262144,
+      "channels": 1,
+      "samples": 4,
+      "exitCode": 0,
+      "fmtTag": 65534,
+      "outputMask": 0,
+      "input": "UklGRkQAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAAABAABAAAAAAAQAIAAAKoAOJtxZGF0YQgAAAARLktohaK/3A==",
+      "output": "UklGRkQAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAAAAAABAAAAAAAQAIAAAKoAOJtxZGF0YQgAAAARLktohaK/3A==",
+      "sha256": "8e2e79f10b12af64dcd03233f4498b9fd71bd097a6592313edba100b1ce51bbc",
+      "stderr": ""
+    },
+    {
+      "mask": 262145,
+      "channels": 2,
+      "samples": 0,
+      "exitCode": 0,
+      "fmtTag": 65534,
+      "outputMask": 0,
+      "input": "UklGRjwAAABXQVZFZm10ICgAAAD+/wIAQB8AAAB9AAAEABAAFgAQAAEABAABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "output": "UklGRjwAAABXQVZFZm10ICgAAAD+/wIAQB8AAAB9AAAEABAAFgAQAAAAAAABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "sha256": "91e48852bb5c66cb9c02dde8871fad13e5044d07204b39bf591ca6431b398e9b",
+      "stderr": ""
+    },
+    {
+      "mask": 262145,
+      "channels": 2,
+      "samples": 4,
+      "exitCode": 0,
+      "fmtTag": 65534,
+      "outputMask": 0,
+      "input": "UklGRkwAAABXQVZFZm10ICgAAAD+/wIAQB8AAAB9AAAEABAAFgAQAAEABAABAAAAAAAQAIAAAKoAOJtxZGF0YRAAAAARLktohaK/3PkWM1BtiqfE",
+      "output": "UklGRkwAAABXQVZFZm10ICgAAAD+/wIAQB8AAAB9AAAEABAAFgAQAAAAAAABAAAAAAAQAIAAAKoAOJtxZGF0YRAAAAARLktohaK/3PkWM1BtiqfE",
+      "sha256": "1c4c822d8e5e3ecbc98a98487d6f48eacb5f620a2fe63dc39838a3942576d26d",
+      "stderr": ""
+    },
+    {
+      "mask": 393216,
+      "channels": 2,
+      "samples": 0,
+      "exitCode": 0,
+      "fmtTag": 65534,
+      "outputMask": 0,
+      "input": "UklGRjwAAABXQVZFZm10ICgAAAD+/wIAQB8AAAB9AAAEABAAFgAQAAAABgABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "output": "UklGRjwAAABXQVZFZm10ICgAAAD+/wIAQB8AAAB9AAAEABAAFgAQAAAAAAABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "sha256": "91e48852bb5c66cb9c02dde8871fad13e5044d07204b39bf591ca6431b398e9b",
+      "stderr": ""
+    },
+    {
+      "mask": 393216,
+      "channels": 2,
+      "samples": 4,
+      "exitCode": 0,
+      "fmtTag": 65534,
+      "outputMask": 0,
+      "input": "UklGRkwAAABXQVZFZm10ICgAAAD+/wIAQB8AAAB9AAAEABAAFgAQAAAABgABAAAAAAAQAIAAAKoAOJtxZGF0YRAAAAARLktohaK/3PkWM1BtiqfE",
+      "output": "UklGRkwAAABXQVZFZm10ICgAAAD+/wIAQB8AAAB9AAAEABAAFgAQAAAAAAABAAAAAAAQAIAAAKoAOJtxZGF0YRAAAAARLktohaK/3PkWM1BtiqfE",
+      "sha256": "1c4c822d8e5e3ecbc98a98487d6f48eacb5f620a2fe63dc39838a3942576d26d",
+      "stderr": ""
+    },
+    {
+      "mask": 2147483648,
+      "channels": 1,
+      "samples": 0,
+      "exitCode": 0,
+      "fmtTag": 65534,
+      "outputMask": 0,
+      "input": "UklGRjwAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAAAAIABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "output": "UklGRjwAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAAAAAABAAAAAAAQAIAAAKoAOJtxZGF0YQAAAAA=",
+      "sha256": "6f2e937d5609a19da1547e0048302e5ac9b1db855237e22bd7d5f147c5e842ef",
+      "stderr": ""
+    },
+    {
+      "mask": 2147483648,
+      "channels": 1,
+      "samples": 4,
+      "exitCode": 0,
+      "fmtTag": 65534,
+      "outputMask": 0,
+      "input": "UklGRkQAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAAAAIABAAAAAAAQAIAAAKoAOJtxZGF0YQgAAAARLktohaK/3A==",
+      "output": "UklGRkQAAABXQVZFZm10ICgAAAD+/wEAQB8AAIA+AAACABAAFgAQAAAAAAABAAAAAAAQAIAAAKoAOJtxZGF0YQgAAAARLktohaK/3A==",
+      "sha256": "8e2e79f10b12af64dcd03233f4498b9fd71bd097a6592313edba100b1ce51bbc",
+      "stderr": ""
+    }
+  ]
+}

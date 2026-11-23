@@ -1,0 +1,551 @@
+{
+  "reference": {
+    "aarch64": {
+      "artifacts": {
+        "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+        "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+      },
+      "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "platform": "darwin",
+      "arch": "arm64",
+      "flags": [
+        "--disable-autodetect",
+        "--disable-doc",
+        "--disable-debug",
+        "--disable-x86asm"
+      ],
+      "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+      "targetPlatformMatches": false,
+      "reproducibleToolchainPinned": false
+    },
+    "x86_64": {
+      "artifacts": {
+        "ffmpeg": "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91",
+        "ffprobe": "0895f870196845f40002238980f908e2dfed7dcf8197a1074b98e4312431671b"
+      },
+      "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+      "platform": "linux",
+      "arch": "x64",
+      "flags": [
+        "--disable-autodetect",
+        "--disable-doc",
+        "--disable-debug",
+        "--disable-x86asm"
+      ],
+      "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 12 (Debian 12.2.0-14+deb12u1)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+      "targetPlatformMatches": true,
+      "reproducibleToolchainPinned": false
+    }
+  },
+  "containerImage": "docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496",
+  "payload": "three tight 5x3 frames; byte[i]=(i*37+13)&255",
+  "scope": "Fresh native whole framecrc default outputs; local workerd profiles are explicit and independent of execution-host ISA",
+  "cases": [
+    {
+      "id": "yuv420p-rgb24",
+      "format": "yuv420p",
+      "destination": "rgb24",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0xb4e89934\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0xb4e89934\n"
+      }
+    },
+    {
+      "id": "yuv420p-bgr24",
+      "format": "yuv420p",
+      "destination": "bgr24",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x55391517\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x555d1518\n"
+      }
+    },
+    {
+      "id": "yuv420p-rgba",
+      "format": "yuv420p",
+      "destination": "rgba",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xe11c210b\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xe11c210b\n"
+      }
+    },
+    {
+      "id": "yuv420p-bgra",
+      "format": "yuv420p",
+      "destination": "bgra",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xe0fa210b\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xe12a210c\n"
+      }
+    },
+    {
+      "id": "yuv420p-argb",
+      "format": "yuv420p",
+      "destination": "argb",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xb5a8f3d9\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xb5a8f3d9\n"
+      }
+    },
+    {
+      "id": "yuv420p-abgr",
+      "format": "yuv420p",
+      "destination": "abgr",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xb6bef3d9\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xb6bef3d9\n"
+      }
+    },
+    {
+      "id": "yuv420p-gbrp",
+      "format": "yuv420p",
+      "destination": "gbrp",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x7c7d9934\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x7c7d9934\n"
+      }
+    },
+    {
+      "id": "yuv422p-rgb24",
+      "format": "yuv422p",
+      "destination": "rgb24",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "dcc4f08b86e1b3684795ff9158b81304a76057af2396d6818b907a6b7e4dcb0b",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x0dc7922a\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x0dc7922a\n"
+      }
+    },
+    {
+      "id": "yuv422p-bgr24",
+      "format": "yuv422p",
+      "destination": "bgr24",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "dcc4f08b86e1b3684795ff9158b81304a76057af2396d6818b907a6b7e4dcb0b",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x70d813af\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x70d013af\n"
+      }
+    },
+    {
+      "id": "yuv422p-rgba",
+      "format": "yuv422p",
+      "destination": "rgba",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "dcc4f08b86e1b3684795ff9158b81304a76057af2396d6818b907a6b7e4dcb0b",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0x015f1fa3\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0x015f1fa3\n"
+      }
+    },
+    {
+      "id": "yuv422p-bgra",
+      "format": "yuv422p",
+      "destination": "bgra",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "dcc4f08b86e1b3684795ff9158b81304a76057af2396d6818b907a6b7e4dcb0b",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0x04cd1fa3\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0x04c31fa3\n"
+      }
+    },
+    {
+      "id": "yuv422p-argb",
+      "format": "yuv422p",
+      "destination": "argb",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "dcc4f08b86e1b3684795ff9158b81304a76057af2396d6818b907a6b7e4dcb0b",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0x2f14eccf\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0x2f14eccf\n"
+      }
+    },
+    {
+      "id": "yuv422p-abgr",
+      "format": "yuv422p",
+      "destination": "abgr",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "dcc4f08b86e1b3684795ff9158b81304a76057af2396d6818b907a6b7e4dcb0b",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0x25b0eccf\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0x25b0eccf\n"
+      }
+    },
+    {
+      "id": "yuv422p-gbrp",
+      "format": "yuv422p",
+      "destination": "gbrp",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "dcc4f08b86e1b3684795ff9158b81304a76057af2396d6818b907a6b7e4dcb0b",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x8272922a\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x8272922a\n"
+      }
+    },
+    {
+      "id": "yuv444p-rgb24",
+      "format": "yuv444p",
+      "destination": "rgb24",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "045d226a89ed3c0f39f18948d5e5e34bc1f5abc2c6083a455f703d8291511b41",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x15ea8315\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x15ea8315\n"
+      }
+    },
+    {
+      "id": "yuv444p-bgr24",
+      "format": "yuv444p",
+      "destination": "bgr24",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "045d226a89ed3c0f39f18948d5e5e34bc1f5abc2c6083a455f703d8291511b41",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x5ad71167\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x5ad71167\n"
+      }
+    },
+    {
+      "id": "yuv444p-rgba",
+      "format": "yuv444p",
+      "destination": "rgba",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "045d226a89ed3c0f39f18948d5e5e34bc1f5abc2c6083a455f703d8291511b41",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xe82c1d5b\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xe82c1d5b\n"
+      }
+    },
+    {
+      "id": "yuv444p-bgra",
+      "format": "yuv444p",
+      "destination": "bgra",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "045d226a89ed3c0f39f18948d5e5e34bc1f5abc2c6083a455f703d8291511b41",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xe75a1d5b\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xe75a1d5b\n"
+      }
+    },
+    {
+      "id": "yuv444p-argb",
+      "format": "yuv444p",
+      "destination": "argb",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "045d226a89ed3c0f39f18948d5e5e34bc1f5abc2c6083a455f703d8291511b41",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xef61ddba\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xef61ddba\n"
+      }
+    },
+    {
+      "id": "yuv444p-abgr",
+      "format": "yuv444p",
+      "destination": "abgr",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "045d226a89ed3c0f39f18948d5e5e34bc1f5abc2c6083a455f703d8291511b41",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xea9bddba\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xea9bddba\n"
+      }
+    },
+    {
+      "id": "yuv444p-gbrp",
+      "format": "yuv444p",
+      "destination": "gbrp",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "045d226a89ed3c0f39f18948d5e5e34bc1f5abc2c6083a455f703d8291511b41",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x0fe78315\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x0fe78315\n"
+      }
+    },
+    {
+      "id": "yuva420p-rgb24",
+      "format": "yuva420p",
+      "destination": "rgb24",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "3095a940d3411acb402acf62dde816733c2ea55ba8d77b6b10179f9faa0b4bc4",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x421e8e2c\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x421e8e2c\n"
+      }
+    },
+    {
+      "id": "yuva420p-bgr24",
+      "format": "yuva420p",
+      "destination": "bgr24",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "3095a940d3411acb402acf62dde816733c2ea55ba8d77b6b10179f9faa0b4bc4",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x4b4212ab\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x4ada12a8\n"
+      }
+    },
+    {
+      "id": "yuva420p-rgba",
+      "format": "yuva420p",
+      "destination": "rgba",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "3095a940d3411acb402acf62dde816733c2ea55ba8d77b6b10179f9faa0b4bc4",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0x2f5b17eb\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0x2f5b17eb\n"
+      }
+    },
+    {
+      "id": "yuva420p-bgra",
+      "format": "yuva420p",
+      "destination": "bgra",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "3095a940d3411acb402acf62dde816733c2ea55ba8d77b6b10179f9faa0b4bc4",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0x2a9b17eb\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0x29e217e7\n"
+      }
+    },
+    {
+      "id": "yuva420p-argb",
+      "format": "yuva420p",
+      "destination": "argb",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "3095a940d3411acb402acf62dde816733c2ea55ba8d77b6b10179f9faa0b4bc4",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xcb71b5c5\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xcb71b5c5\n"
+      }
+    },
+    {
+      "id": "yuva420p-abgr",
+      "format": "yuva420p",
+      "destination": "abgr",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "3095a940d3411acb402acf62dde816733c2ea55ba8d77b6b10179f9faa0b4bc4",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xc7bbb5c5\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xc7bbb5c5\n"
+      }
+    },
+    {
+      "id": "yuva420p-gbrp",
+      "format": "yuva420p",
+      "destination": "gbrp",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "3095a940d3411acb402acf62dde816733c2ea55ba8d77b6b10179f9faa0b4bc4",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x593f8e2c\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x593f8e2c\n"
+      }
+    },
+    {
+      "id": "nv12-rgb24",
+      "format": "nv12",
+      "destination": "rgb24",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x8c7293f2\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x8c7293f2\n"
+      }
+    },
+    {
+      "id": "nv12-bgr24",
+      "format": "nv12",
+      "destination": "bgr24",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x5ce51509\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x5cb81507\n"
+      }
+    },
+    {
+      "id": "nv12-rgba",
+      "format": "nv12",
+      "destination": "rgba",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xe5a920fd\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xe5a920fd\n"
+      }
+    },
+    {
+      "id": "nv12-bgra",
+      "format": "nv12",
+      "destination": "bgra",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xea6120fd\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xea2520fb\n"
+      }
+    },
+    {
+      "id": "nv12-argb",
+      "format": "nv12",
+      "destination": "argb",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0x2d51ee97\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0x2d51ee97\n"
+      }
+    },
+    {
+      "id": "nv12-abgr",
+      "format": "nv12",
+      "destination": "abgr",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0x2ae7ee97\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0x2ae7ee97\n"
+      }
+    },
+    {
+      "id": "nv12-gbrp",
+      "format": "nv12",
+      "destination": "gbrp",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x3b9d93f2\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x3b9d93f2\n"
+      }
+    },
+    {
+      "id": "nv21-rgb24",
+      "format": "nv21",
+      "destination": "rgb24",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x5d1791fa\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x5d1791fa\n"
+      }
+    },
+    {
+      "id": "nv21-bgr24",
+      "format": "nv21",
+      "destination": "bgr24",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x458813cb\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       36, 0x453d13c8\n"
+      }
+    },
+    {
+      "id": "nv21-rgba",
+      "format": "nv21",
+      "destination": "rgba",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xd1221fbf\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xd1221fbf\n"
+      }
+    },
+    {
+      "id": "nv21-bgra",
+      "format": "nv21",
+      "destination": "bgra",
+      "width": 4,
+      "height": 3,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xcc641fbf\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 4x3\n#sar 0: 0/1\n0,          1,          1,        1,       48, 0xcbff1fbc\n"
+      }
+    },
+    {
+      "id": "nv21-argb",
+      "format": "nv21",
+      "destination": "argb",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xef2eec9f\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xef2eec9f\n"
+      }
+    },
+    {
+      "id": "nv21-abgr",
+      "format": "nv21",
+      "destination": "abgr",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xeb44ec9f\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      364, 0xeb44ec9f\n"
+      }
+    },
+    {
+      "id": "nv21-gbrp",
+      "format": "nv21",
+      "destination": "gbrp",
+      "width": 13,
+      "height": 7,
+      "inputSha256": "29c68478a6697d82c32b4ba4f3490986a53cd6caba928f5ed2c3a0fd34010482",
+      "native": {
+        "aarch64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x27bb91fa\n",
+        "x86_64": "#tb 0: 1/25\n#media_type 0: video\n#codec_id 0: rawvideo\n#dimensions 0: 13x7\n#sar 0: 0/1\n0,          1,          1,        1,      273, 0x27bb91fa\n"
+      }
+    }
+  ]
+}

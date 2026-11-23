@@ -1,0 +1,2 @@
+import {evaluateTimedSyncStep,normalizeTimedStepCase} from '../helpers/timed-sync-step.js';import type {TimedStepCase,TimedStepTwoCase} from '../helpers/timed-sync-step.js';
+export default {async fetch(request:Request){const cases=await request.json() as (TimedStepCase|TimedStepTwoCase)[];if(!Array.isArray(cases)||cases.length>128)return new Response('Invalid incremental fixture batch',{status:400});return Response.json(cases.map(row=>evaluateTimedSyncStep(normalizeTimedStepCase(row))));}};

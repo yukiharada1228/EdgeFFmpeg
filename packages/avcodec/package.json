@@ -1,0 +1,11 @@
+{
+  "name": "@edge-ffmpeg/avcodec",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@edge-ffmpeg/avutil": "0.0.0",
+    "@edge-ffmpeg/swresample": "0.0.0"
+  }
+}

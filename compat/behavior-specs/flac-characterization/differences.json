@@ -1,0 +1,41 @@
+{
+  "scope": "finite characterization, not capability certification",
+  "differences": [
+    {
+      "id": "bounded-header-truncation",
+      "status": "intentional-public-policy",
+      "observation": "Native GetBitContext reads zero-padded backing memory and may inspect beyond the declared bit count. truncated-15 accepts the complete 15-byte header without a supplied subframe. Public header candidate API requires the next subframe byte and returns incomplete. Raw native status/bitsRead/available are preserved for every truncation.",
+      "publicParityClaim": false
+    },
+    {
+      "id": "complete-frames",
+      "status": "public-option-unexpressible",
+      "observation": "PARSER_FLAG_COMPLETE_FRAMES (1) emits each explicit input call as a packet, including seven-byte fragments. One-shot input emits one 7059-byte packet rather than nine frame packets. Combined flags 4097 are retained too. These calls characterize caller-declared packet completeness, not validity.",
+      "publicParityClaim": false
+    },
+    {
+      "id": "codec-timestamps",
+      "status": "public-option-unexpressible",
+      "observation": "USE_CODEC_TS (4096) derives fixed frame PTS 0,192,...,1344 while a best child exists. The final fixed-block packet retains caller/wrapper timestamp behavior (123 for seven-byte calls; AV_NOPTS_VALUE for one-shot). Public descriptor API cannot supply parser flags or caller PTS/DTS; its codecPts is not asserted equivalent for this mode.",
+      "publicParityClaim": false
+    },
+    {
+      "id": "avio-probe-scheduling",
+      "status": "public-scheduler-unexpressible",
+      "observation": "Custom nonseekable AVIO buffer4096 with callback caps7/4096 auto-probes the same raw7059-byte seed successfully at score13. It makes1015/8 read callbacks respectively, including EOF reads. Both emit nine identical packet sizes and physical positions. Explicit parser cap7 makes1019 parser calls; cap7059 makes11. Native callback requests, returns, positions, probe scores and packet outcomes are retained. Physical I/O callbacks are not equivalent to parser calls.",
+      "publicParityClaim": false
+    },
+    {
+      "id": "retained-best-child",
+      "status": "finite-native-and-public-parity",
+      "observation": "Synthetic-overlap stage2 versus stage3 has equal penalties and scores but different offset0 best child: retained36 versus fresh-1 after lastHeader changes. score_sequences clears scores but retains best_child; both public graph paths match their respective native states. Do not collapse retained and fresh cache behavior or rewrite scoring on an assumed equivalence.",
+      "publicParityClaim": true
+    },
+    {
+      "id": "remaining-malformed-intake",
+      "status": "unverified",
+      "observation": "Only two malformed one-shot public parser schedules and seven finite scoring graphs are compared here. Arbitrary overlapping chains, all truncation/CRC recovery schedules, native diagnostics, metadata probe fallback, seekable AVIO and complete-frame malformed input remain outside this evidence. Existing policy gaps are not resolved by finite clean/default parity.",
+      "publicParityClaim": false
+    }
+  ]
+}

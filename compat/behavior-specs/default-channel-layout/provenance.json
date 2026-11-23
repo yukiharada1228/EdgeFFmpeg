@@ -1,0 +1,34 @@
+{
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92",
+      "ffprobe": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "darwin",
+    "arch": "arm64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 21.0.0 (clang-2100.0.123.102)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": false,
+    "reproducibleToolchainPinned": false
+  },
+  "sources": {
+    "tools/differential-runner/default-channel-layout/generate.mjs": "24ab23d573fa62a1ac48a4af3309308a8d5057c02c4236730e4f6234fb24e35e",
+    "tools/differential-runner/default-channel-layout/oracle.c": "742e89d1fcea061a6ef61784b365f2278d5e516fb9979db4915f4f9513d46b72",
+    "upstream/ffmpeg/libavutil/channel_layout.c": "0ecfece846cf4ad42af9f121f09b18a3d1833d9d6a26f1f54c941a4f21ec526f",
+    "upstream/ffmpeg/libavutil/channel_layout.h": "fbd3246297cd72be45268eacd9229d23247dfe394fb15b6a40ce8773422661c6",
+    "upstream/ffmpeg/libavformat/riffenc.c": "c445eb042610fe77fd9deb585f32722d8f08578ced8333eba0e99cc218bbe25a",
+    "upstream/ffmpeg/fftools/ffmpeg_demux.c": "4289c42e1498322418eaec82f7e5012aba0f411fa8025aed0a64e72578f6a218"
+  },
+  "librarySha256": "b8864b177f1717ac38de58754a16ccee473e0fb7bf304398dcaffc1b6c89a598",
+  "oracleBinarySha256": "c3563a351d6bfe4652e4872816ff52de444dc010869e8606a1300d684ae25c1a",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "caseCount": 512,
+  "scope": "All13defaultlayouts returned by fixed Native API across1..65535counts;finite PCM16 raw/WAV streamcopy counts1..32,empty/foursamples,default/disabledguess,WAV/framecrc. No arbitrary-layout or fullcodec certification."
+}

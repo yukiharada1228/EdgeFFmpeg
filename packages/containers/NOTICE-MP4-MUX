@@ -1,0 +1,52 @@
+MP4 mux candidate: source layout adapted from pinned FFmpeg movenc.c
+upstream/ffmpeg/libavformat/movenc.c
+commit946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2003 Thomas Raivio
+Copyright (c)2004 Gildas Bazin
+Copyright (c)2009 Baptiste Coudurier
+LGPL-2.1-or-later. See packages/containers/COPYING.LGPLv2.1.
+TypeScript adaptation adds finite planned sample metadata, asynchronous bounded
+WriteHandle writes, input packet validation, cancellation and output abort.
+
+CLI stream selection adapts pinned fftools/ffmpeg_mux_init.c (map_auto_video,
+map_auto_audio and disposition propagation), LGPL-2.1-or-later, plus MOV enabled
+track handling from movenc.c. These files are part of FFmpeg; their upstream
+notices and source remain in the pinned submodule. AAC configuration parsing
+supplies codec channel counts for selection; no decoder runs in the library.
+
+Language conversion/table adapts pinned libavformat/isom.c:
+Copyright (c)2001 Fabrice Bellard; (c)2002 Francois Revol;
+(c)2006 Baptiste Coudurier. LGPL-2.1-or-later.
+Mux invalid-language normalization follows movenc.c (32767 sentinel).
+
+Edited video copy duration tracking follows movenc.c end_pts/elst_end_pts.
+Strict mux DTS correction follows fftools/ffmpeg_mux.c at the same commit.
+The adaptation keeps original packet timestamps for input-plan validation and
+records destination sample deltas separately for STTS serialization.
+
+Zero-packet nonfragmented output omits empty trak boxes, following
+mov_write_moov_tag, and computes next_track_ID from nonempty track IDs as in
+mov_write_mvhd_tag. Planned stream indices remain intact for packet validation.
+
+AAC presentation/end-edit tracking follows movenc.c handling of
+AV_PKT_DATA_SKIP_SAMPLES: effective presentation duration is the larger of
+nominal codec-frame duration and packet duration, less discard padding. STTS
+keeps its planned packet durations. Source skip-sample stamps are deep-copied
+and validated during payload consumption; changes abort without commit.
+
+AAC output-clock conversion and stateful coarse timestamp correction in
+src/mp4/aac-copy-clock.ts/copy-plan.ts adapt av_rescale_delta from pinned
+libavutil/mathematics.c and mux_fixup_ts from fftools/ffmpeg_mux.c, under
+LGPL-2.1-or-later. Original copyright notices and license text remain in the
+pinned upstream submodule. mov_init movie-timescale selection uses original
+input clocks before audio track clocks become sample-rate clocks. The source
+clock/duration plan markers are separately checked against payload iteration.
+
+AAC copy sample-entry rate/channel regeneration follows pinned
+libavformat/movenc.c mov_write_audio_tag: codec channel count and sample rate,
+with rate shifted until representable in the16-bit word for MP4 entries.
+Encoded payload and AudioSpecificConfig bytes are retained.
+
+AAC copy rate resolution uses effective demux codec parameters after MOV's
+zero-rate fallback;unresolved sample rates fail before output publication.
+Native/Core exact exit-code mapping remains a documented known difference.

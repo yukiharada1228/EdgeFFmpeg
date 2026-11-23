@@ -1,0 +1,1406 @@
+[
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "Error, both -y and -n supplied. Exiting.",
+    "outputExists": true,
+    "outputUnchanged": true
+  }
+]

@@ -1,0 +1,73 @@
+{
+  "range": [
+    1,
+    65535
+  ],
+  "layouts": [
+    {
+      "channels": 1,
+      "name": "mono",
+      "mask": "4"
+    },
+    {
+      "channels": 2,
+      "name": "stereo",
+      "mask": "3"
+    },
+    {
+      "channels": 3,
+      "name": "2.1",
+      "mask": "11"
+    },
+    {
+      "channels": 4,
+      "name": "4.0",
+      "mask": "263"
+    },
+    {
+      "channels": 5,
+      "name": "5.0",
+      "mask": "55"
+    },
+    {
+      "channels": 6,
+      "name": "5.1",
+      "mask": "63"
+    },
+    {
+      "channels": 7,
+      "name": "6.1",
+      "mask": "1807"
+    },
+    {
+      "channels": 8,
+      "name": "7.1",
+      "mask": "1599"
+    },
+    {
+      "channels": 10,
+      "name": "5.1.4",
+      "mask": "185871"
+    },
+    {
+      "channels": 12,
+      "name": "7.1.4",
+      "mask": "185919"
+    },
+    {
+      "channels": 14,
+      "name": "9.1.4",
+      "mask": "186111"
+    },
+    {
+      "channels": 16,
+      "name": "9.1.6",
+      "mask": "206158616319"
+    },
+    {
+      "channels": 24,
+      "name": "22.2",
+      "mask": "2164663779327"
+    }
+  ]
+}

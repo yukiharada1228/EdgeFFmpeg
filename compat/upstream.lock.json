@@ -1,0 +1,11 @@
+{
+  "project": "FFmpeg",
+  "version": "9.0.2",
+  "tag": "n9.0.2",
+  "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+  "source": "https://git.ffmpeg.org/ffmpeg.git",
+  "fetchMirror": "https://github.com/FFmpeg/FFmpeg.git",
+  "referenceBuild": "ffmpeg-9.0.2-linux-x86_64",
+  "configureFile": "compat/configure.flags",
+  "capabilityManifest": "compat/capabilities.json"
+}

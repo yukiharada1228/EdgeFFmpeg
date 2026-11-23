@@ -1,0 +1,26 @@
+H264 TypeScript API and presentation adapter.
+
+This directory contains the bounded TypeScript adapter and LGPL adaptations.
+The caller supplies an explicitly trusted precompiled independent codec module.
+No OpenH264 binary or sample media are included in this directory.
+
+The JavaScript display-policy.mjs scheduler adapts FFmpeg's
+libavcodec/h264_slice.c (h264_select_output_frame) and libavcodec/h264dec.c
+(send_next_delayed_frame/idr) from the repository's pinned upstream submodule.
+Copyright (c) 2003 Michael Niedermayer <michaelni@gmx.at>.
+Those files' original authors/notices apply; the scheduling adaptation is
+LGPL-2.1-or-later. The original source remains in upstream/ffmpeg and the
+license text in COPYING.LGPLv2.1 beside this notice.
+No FFmpeg implementation is compiled into the OpenH264 Wasm artifact.
+
+Codec binaries, their corresponding sources/build materials and sample media
+require their own distribution inventory. This API does not imply CLI support
+or complete H264 compatibility.
+
+The independent SPS/PPS parser's VUI field ordering and retained Native
+pixel-format lifecycle also follow pinned libavcodec/h264_ps.c,
+h2645_vui.c, h2645data.c and h264_slice.c under LGPL-2.1-or-later.
+Original notices include Copyright (c) 2003 Michael Niedermayer;
+Copyright (C) 2012-2013 Guillaume Martres, Mickael Raulet and Gildas Cocherel;
+and Copyright (C) 2013 Vittorio Giovara. The copied license text applies.
+These routines execute in TypeScript/JavaScript; they are not compiled into Wasm.

@@ -1,0 +1,3362 @@
+[
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "wav-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "aiff-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "au-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-pcm",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "audio-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "raw-video-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "video-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-encode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "bmp-decode",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "h264-framecrc",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": false,
+    "outputUnchanged": null
+  },
+  {
+    "profileId": "mp4-copy",
+    "inputPath": "/missing/input.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 254,
+    "reason": "No such file or directory",
+    "outputExists": true,
+    "outputUnchanged": true
+  }
+]

@@ -1,0 +1,1327 @@
+{
+  "status": "Native-channel-mask-comment-characterization",
+  "sourceSha256": "792586af2ecf862e3239a3af7ea7e8af2f6f77cce8d7592503af1574d28a2301",
+  "referenceSha256": "9cb672fd23da44c9a1fa5cb6f9255eab4ca3ddbba6d8c94a676b719cf0c87698",
+  "rows": [
+    {
+      "id": "value-0",
+      "values": [
+        "0x3"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDP/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "36685090be5f9b8a3da1e90b349c08d3c626ae59f448bc81f222a7cb239c9024",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 14.208708000000001,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-1",
+      "values": [
+        "3"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAALwAAAAABAAAAIwAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0z//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "5c4012c20cab3c6f3e12a44b8abf184ac9b4ca0bbcbe787c053b1e2ab70f0415",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 6.386832999999996,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-2",
+      "values": [
+        "03"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0wM//4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "93897ae0d04c3f0fc474a35f7c7767a6441d74ba50318f0043b26797985ba385",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 6.4766249999999985,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-3",
+      "values": [
+        "+3"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0rM//4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "4a52873be4adfefd980cae28d79f17052b24fc27db377cd56e97e97315d81514",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 9.271124999999998,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-4",
+      "values": [
+        " 3"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0gM//4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "0b1f7bd0c16bf8a4c36b1f3317aebe35e44f5102b097a3149202c852b27ea2c9",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 7.854124999999996,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-5",
+      "values": [
+        "3garbage"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANgAAAAABAAAAKgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0zZ2FyYmFnZf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "17e354b55773029edbe22b766274ad1270565eead59269a214bd144f5b90feae",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 32 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 13.71183400000001,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-6",
+      "values": [
+        "0x3garbage"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAOAAAAAABAAAALAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDNnYXJiYWdl//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "ea7d5923e050082a1cd33e0e91a6b64d1af30b5535b3d907a6aa42e9dd2cb24c",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 32 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 11.321457999999978,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-7",
+      "values": [
+        "0x"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "55a65bc2efe788e0b720c1bb570d16f6ecc977f878e52012edf44ba3169a75d3",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"0x\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xc4ac10000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: 0x\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 15.047875000000005,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "0x"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-8",
+      "values": [
+        "08"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0wOP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "e276d1352dcff69b7780f873ab6ee4bb27a2050ec57ab92d7d6c9afd79fa7df0",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"08\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xc8680c000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: 08\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 22.77516700000001,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "08"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-9",
+      "values": [
+        "09"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0wOf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "621c43912af6701db8ba8ee15d21ee0402f3e83e6cf25c4d515c50afbf92bff6",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"09\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xaeac10000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: 09\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 11.875875000000008,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "09"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-10",
+      "values": [
+        "011"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0wMTH/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "e18b5ce20a0950efe9fc3bc287b0bc9ae4f7aa5d080828cbda496e1ac23f876f",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"2 channels (FL+LFE)\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, 2 channels (FL+LFE), s16\n",
+        "wallMs": 10.452624999999983,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "2 channels (FL+LFE)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-11",
+      "values": [
+        "0b11"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMgAAAAABAAAAJgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0wYjEx//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "cba070eed575bad996ca0d3448eef1ea867af951b3853dcb517a8ddaaf0fec6a",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"0b11\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xab0c0c000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: 0b11\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 31 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 13.677084000000008,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "0b11"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-12",
+      "values": [
+        "-0"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0tMP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "78fd5b1c87f0066de853f09c912b6021322c893953cbbc6f57175c2127c23aab",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"-0\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xc8080c000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: -0\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 20.15787499999999,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "-0"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-13",
+      "values": [
+        "-1"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMAAAAAABAAAAJAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0tMf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "624768da561ce053786ad3c84391837dd5c27af839e02871b0e7fc35bd2663ab",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"-1\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x894c14000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: -1\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 12.212582999999967,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "-1"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-14",
+      "values": [
+        "-0x1"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMgAAAAABAAAAJgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0tMHgx//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "4e55139417af5b71f1af1e7973a7774a05fca068055b56bfeb6d940ec09bc1e2",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"-0x1\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x9c0c10000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: -0x1\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 31 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 11.399125000000026,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "-0x1"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-15",
+      "values": [
+        "-03"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0tMDP/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "6dffa01828a62edcf2e68f51a7345ddc68040e3c7c1ae938c8dc1596ad8d2727",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"-03\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x75ac18000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: -03\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 14.551041999999995,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "-03"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-16",
+      "values": [
+        "262143"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANAAAAAABAAAAKAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0yNjIxNDP/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "69022677c5d254a3ef93014d329d0f48c120ea5380e7b3977db1bf89afb1cb4d",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 31 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 21.848374999999976,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-17",
+      "values": [
+        "262144"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANAAAAAABAAAAKAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0yNjIxNDT/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "18cdf7d8a14a5bf464d2c7e9bdd8d14f6fe4c6bea77f90f3c73f52a77ddc5eb1",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"262144\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xbfe800000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: 262144\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 31 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 20.28370799999999,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "262144"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-18",
+      "values": [
+        "0x3ffff"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANQAAAAABAAAAKQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDNmZmZm//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "5f44dab8b7a94348a3fc5a5fec6c24a8fb9593510905a87969ff8d8fc42e2ebe",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 31 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 11.946791000000019,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-19",
+      "values": [
+        "0x40000"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANQAAAAABAAAAKQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDQwMDAw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "8b94b4a83bc6f4165465a1d6be7a5304729711df8ee374601e78862b3150974e",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"0x40000\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x8d2810000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: 0x40000\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 31 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 10.956292000000019,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "0x40000"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-20",
+      "values": [
+        "9223372036854775807"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQQAAAAABAAAANQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz05MjIzMzcyMDM2ODU0Nzc1ODA3//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "1796a928de42c50eed307a3fab2a1effaca02cfd9b434c15cbfa2b350fdce386",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"9223372036854775807\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xb1cc10000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: 9223372036854775807\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 34 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 9.575625000000002,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "9223372036854775807"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-21",
+      "values": [
+        "9223372036854775808"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQQAAAAABAAAANQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz05MjIzMzcyMDM2ODU0Nzc1ODA4//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "a10f6f9baa4ba695f1b74f32d227a32168de5cfb516eb7935524e475601bf4b9",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"9223372036854775808\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x774800000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: 9223372036854775808\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 34 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 14.163999999999987,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "9223372036854775808"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-22",
+      "values": [
+        "18446744073709551615"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQgAAAAABAAAANgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0xODQ0Njc0NDA3MzcwOTU1MTYxNf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "9ec835d72fe38fb22bf34bc8e6aae630e0a25d847539f1e30bd6b54f78c029a5",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"18446744073709551615\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x728c10000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: 18446744073709551615\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 35 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 8.99912500000005,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "18446744073709551615"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-23",
+      "values": [
+        "18446744073709551616"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQgAAAAABAAAANgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0xODQ0Njc0NDA3MzcwOTU1MTYxNv/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "551b4ff192a9effd99d114e549d3944f3205764e737dbe1b595e70d1ea7039b8",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"18446744073709551616\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xa14c10000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: 18446744073709551616\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 35 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 8.57366599999989,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "18446744073709551616"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-24",
+      "values": [
+        "-9223372036854775808"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQgAAAAABAAAANgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0tOTIyMzM3MjAzNjg1NDc3NTgwOP/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "d2a36f4f2343930d9aa6ecfb19a55cb2146da140ba50a7ae3dda560a66936860",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"-9223372036854775808\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xbeec10000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: -9223372036854775808\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 35 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 8.884290999999962,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "-9223372036854775808"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-25",
+      "values": [
+        "-9223372036854775809"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAQgAAAAABAAAANgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0tOTIyMzM3MjAzNjg1NDc3NTgwOf/4FBgAfAAAAAAAAGNB//hkGAFAkwAAAAAAALCM",
+      "inputSha256": "3fffb3a130da6e22e761e0113f56f1c9fc14a5eaaf1c9921d00578b8cc8d1c8e",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"-9223372036854775809\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0xc86c14000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: -9223372036854775809\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 35 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 7.998207999999977,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "-9223372036854775809"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-26",
+      "values": [
+        ""
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAALgAAAAABAAAAIgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz3/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "730edd58db100b3d61591a54dbf2a75735476b461df8cd8ccebe9f643ecd0379",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 23.119583999999918,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-27",
+      "values": [
+        "foo"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz1mb2//+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "4ab93eaf54750bfad0715393bd0ec9b091fd7511c512937e169213fd41feee96",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"foo\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x9d1034000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: foo\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 8.42304200000001,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "foo"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-28",
+      "values": [
+        "  +0X03zzz"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAOAAAAAABAAAALAAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0gICswWDAzenp6//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "105ac83fbb9286a1ae7fc9023ae0d655c212b97215baa2439134429e0900ff1b",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 32 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 5.1170000000000755,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-29",
+      "values": [
+        "\t3\n"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0JMwr/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "87f7df9bb6d264852eecea8369c5bb6bf5105084a9fd88b81348a88adf823faf",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 5.367875000000026,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-30",
+      "values": [
+        "٠٣"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMgAAAAABAAAAJgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz3ZoNmj//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "7c63f4900983b2605b53670a0308654d8f01bf3ec53e39cf3a2cdc59e55a00ec",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"٠٣\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x83b034000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: ٠٣\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 31 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 5.132749999999987,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "٠٣"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-31",
+      "values": [
+        "0X3"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0wWDP/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "1927fa0ad27c0093073283db42355a66e0bd245d3cb5186b0ba97b4449029f9f",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 7.114125000000058,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-32",
+      "values": [
+        "7"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAALwAAAAABAAAAIwAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz03//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "5e6638503ee43227179bdc73730e072b6f53b7c6fefe9c0c91fbea45d6a78eba",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 11.181500000000028,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-33",
+      "values": [
+        "1"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAALwAAAAABAAAAIwAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0x//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "842da8c79989ab873a0bf2a50fbba8b238dcc4d68493adace50e3ef9284f484c",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 11.88333399999999,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-34",
+      "values": [
+        "4"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAALwAAAAABAAAAIwAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz00//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "a3326fad5f4188f2d8b63bbc42d0f433331522796c9c5e2d529a820968fa9a96",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 30 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 11.58416699999998,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-35",
+      "values": [
+        "0x30"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAAMgAAAAABAAAAJgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDMw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "834ffa6e336b7b3408ae5e31aa123660bf70a2a4818aa8e983df941334004079",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"2 channels (BL+BR)\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 31 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, 2 channels (BL+BR), s16\n",
+        "wallMs": 12.307458999999994,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "2 channels (BL+BR)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-36",
+      "values": [
+        "0x10000"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANQAAAAABAAAAKQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDEwMDAw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "d193adb224d3d5a6a9261ba63b4cd745249d4a93b79951560d6b29ad94494c67",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 31 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 18.624874999999975,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "value-37",
+      "values": [
+        "0x30000"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OhAAANQAAAAABAAAAKQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDMwMDAw//gUGAB8AAAAAAAAY0H/+GQYAUCTAAAAAAAAsIw=",
+      "inputSha256": "f30cfd6828f84f8fa5327117836f9a85fdd469f421b09141e31a925a6c3730e4",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"2 channels (TBC+TBR)\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 31 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, 2 channels (TBC+TBR), s16\n",
+        "wallMs": 15.515375000000063,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "2 channels (TBC+TBR)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "valid-then-invalid",
+      "values": [
+        "0x30",
+        "bad"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAMgAAAAABAAAAJgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDMwhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz1iYWT/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "1cd6d20bfe47e3207038f3d096a1c052145f8a70d2a202c46f20b6d088bd80ec",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"2 channels (BL+BR)\"\n        }\n    ],\n    \"format\": {\n        \"tags\": {\n            \"WAVEFORMATEXTENSIBLE_CHANNEL_MASK\": \"bad\"\n        }\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\n[flac @ 0x844c14000] Invalid value of WAVEFORMATEXTENSIBLE_CHANNEL_MASK\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Metadata:\n    WAVEFORMATEXTENSIBLE_CHANNEL_MASK: bad\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 44 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, 2 channels (BL+BR), s16\n",
+        "wallMs": 8.899999999999977,
+        "tags": {
+          "WAVEFORMATEXTENSIBLE_CHANNEL_MASK": "bad"
+        },
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "2 channels (BL+BR)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "valid-then-valid",
+      "values": [
+        "0x30",
+        "0x3"
+      ],
+      "input": "ZkxhQwAAACIAwADAAAAOAAAPAfQC8AAAAQEstngiTnx6keX1q6uvpu2OBAAAMgAAAAABAAAAJgAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDMwhAAAMQAAAAABAAAAJQAAAFdBVkVGT1JNQVRFWFRFTlNJQkxFX0NIQU5ORUxfTUFTSz0weDP/+BQYAHwAAAAAAABjQf/4ZBgBQJMAAAAAAACwjA==",
+      "inputSha256": "316d34cd7503055701f3d8db4e208e78d2361b9e9032e13f302091ffb2fa8486",
+      "native": {
+        "argv": [
+          "-v",
+          "info",
+          "-f",
+          "flac",
+          "-show_entries",
+          "format_tags:stream=channels,channel_layout",
+          "-of",
+          "json",
+          "/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac"
+        ],
+        "status": 0,
+        "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"channels\": 2,\n            \"channel_layout\": \"stereo\"\n        }\n    ],\n    \"format\": {\n\n    }\n}\n",
+        "stderr": "ffprobe version n9.0.2 Copyright (c) 2007-2026 the FFmpeg developers\n  built with Apple clang version 21.0.0 (clang-2100.0.123.102)\n  configuration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\n  libavutil      61.  1.102 / 61.  1.102\n  libavcodec     63.  1.102 / 63.  1.102\n  libavformat    63.  1.102 / 63.  1.102\n  libavdevice    63.  1.102 / 63.  1.102\n  libavfilter    12.  1.102 / 12.  1.102\n  libswscale     10.  1.102 / 10.  1.102\n  libswresample   7.  1.102 /  7.  1.102\nInput #0, flac, from '/var/folders/z3/yjrxg9l50tqbjjswt552m17c0000gn/T/flac-mask-eBildH/input.flac':\n  Duration: 00:00:00.03, start: 0.000000, bitrate: 44 kb/s\n  Stream #0:0: Audio: flac, 8000 Hz, stereo, s16\n",
+        "wallMs": 9.876499999999965,
+        "tags": {},
+        "streams": [
+          {
+            "channels": 2,
+            "channel_layout": "stereo"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+Scoped reference metadata and WAV RIFF fields
+
+The reference-profile branch in src/wav-mux.ts follows the fixed FFmpeg
+libavformat/riffenc.c ff_put_wav_header layout predicate and channel-mask fields,
+and libavformat/wavenc.c fact-sample trailer semantics. The empty non-PCM fact
+value preserves the fixed reference's timestamp-sentinel result. This scope is
+not a port of the complete WAV/RF64/peak-envelope muxer.
+
+Fixed source commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+RIFF Copyright (c)2000 Fabrice Bellard
+WAV Copyright (c)2001,2002 Fabrice Bellard
+WAV source also retains notices for Paul B Mahol(2012),Daniel Verkamp(2013),
+and Georg Lippitsch(2014) for their upstream components.
+LGPL-2.1-or-later; see COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and notices remain in the pinned upstream submodule.
+
+The serialized software identity follows libavformat/mux.c and framehash.c:
+Copyright (c)2000,2001,2002 Fabrice Bellard for upstream mux.c;
+these files are distributed under LGPL-2.1-or-later with their upstream notices.
+The target identifier is derived from libavformat/version.h/version_major.h.
+It identifies the selected serialization compatibility profile,not an executing
+FFmpeg library. Runtime processing remains TypeScript/independent Wasm.
+
+The TypeScript adaptation uses finite packet/sample plans,bounded asynchronous
+writes,cancellation,transaction aborts and explicitly selected low-level API
+profiles. Low-level defaults retain their pre-profile behavior. General metadata,
+all RIFF layouts and project-wide redistribution/attribution auditing remain open.
+
+The reference-profile channel mask also follows the default-normal-compliance
+write_channel_mask threshold in riffenc.c:mask>=0x40000 is serialized as0,
+without altering the declared in-memory input layout. Other strictness modes
+remain outside this scope.

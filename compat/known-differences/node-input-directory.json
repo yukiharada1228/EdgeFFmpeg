@@ -1,0 +1,1713 @@
+{
+  "status": "scoped-initial-directory-statuses-resolved-output-differences-remain",
+  "fullConformance": false,
+  "scope": "Fixed POSIX Native reference, initial directory reads/discovery, declared raw PCM/video, BMP image2pipe, scoped MP4/H264, raw graph and selection cases",
+  "fixture": "compat/behavior-specs/node-input-directory/manifest.json",
+  "results": {
+    "nativeCases": 1932,
+    "statusMatches": 1932,
+    "exactOutputCases": 1632,
+    "knownOutputDifferenceCases": 300,
+    "knownOutputDifferences": 354,
+    "unexpectedFailures": 0,
+    "resolvedDefaultMetadataCases": 32
+  },
+  "known": [
+    {
+      "kind": "atomic-error-publication",
+      "cases": 264,
+      "outputs": 318,
+      "reason": "Native creates or truncates output before fatal read error; Edge preserves prior output or leaves it absent."
+    },
+    {
+      "kind": "atomic-late-refusal",
+      "cases": 36,
+      "outputs": 36,
+      "reason": "Native may create an earlier output before refusing a later existing output; Edge checks all destinations before staging."
+    }
+  ],
+  "semantics": {
+    "rawDefault": "diagnostic plus empty mux output, status0",
+    "rawXerror": "235, with atomic-publication difference retained",
+    "bmpNoStream": "234 before output overwrite policy",
+    "mp4InitialDiscovery": "183 before output overwrite policy",
+    "unselectedRawDirectory": "not reported as a fatal or nonfatal demux error",
+    "inputGenerationChange": "failure1, never converted into an empty successful stream"
+  },
+  "limits": [
+    "General midstream read errors and valid headered xerror/noxerror policy remain incomplete; valid BMP/MP4/H264 commands with these flags explicitly report unsupported policy.",
+    "Automatic raw multi-input/output normalization uses the existing bounded replay engine; arbitrary codecs, maps, stream copy and graph forms remain incomplete.",
+    "The optional input read probe is non-consuming; regular Node files do not acquire an eager payload read.",
+    "Diagnostics are immutable and bounded; retention truncation is explicit and late notifications are ignored.",
+    "No full Native log, all-platform, symlink/ACL/OS-race, R2-directory-emulation or production certification. Existing permission capability differences remain open."
+  ],
+  "knownCases": [
+    {
+      "id": "single-1",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-3",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-5",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-15",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-21",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-23",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-25",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-35",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-41",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-43",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-45",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-55",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-61",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-63",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-65",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-75",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-81",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-83",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-85",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-95",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-101",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-103",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-105",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-115",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-121",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-123",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-125",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-135",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-141",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-143",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-145",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-155",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-161",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-163",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-165",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-175",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-181",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-183",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-185",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-195",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-201",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-203",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-205",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-215",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-221",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-223",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-225",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-235",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-241",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-243",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-245",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-255",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-261",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-263",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-265",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-275",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-281",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-283",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-285",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-295",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-301",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-303",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-305",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-315",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-321",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-323",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-325",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-335",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-341",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-343",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-345",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-355",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-361",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-363",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-365",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-375",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-381",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-383",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-385",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-395",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-401",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-403",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-405",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-415",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-421",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-423",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-425",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-435",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-441",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-443",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-445",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-455",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-461",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-463",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-465",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-475",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-481",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-483",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-485",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-495",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-501",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-503",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-505",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-515",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-521",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-523",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-525",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-535",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-541",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-543",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-545",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-555",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-561",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-563",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-565",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-575",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-581",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-583",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-585",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-595",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-601",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-603",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-605",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-615",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-621",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-623",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-625",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "single-635",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1362",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1364",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1366",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1370",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1372",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1374",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1380",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1381",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1382",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1383",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1402",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1404",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1406",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1410",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1412",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1414",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1420",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1421",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1422",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1423",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1442",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1444",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1446",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1450",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1452",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1454",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1460",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1461",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1462",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1463",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1482",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1484",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1486",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1490",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1492",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1494",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1500",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1501",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1502",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1503",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1522",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1524",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1526",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1530",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1532",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1534",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1540",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1541",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1542",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1543",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1562",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1564",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1566",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1570",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1572",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1574",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1580",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1581",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1582",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1583",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1602",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1604",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1606",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1610",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1612",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1614",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1620",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1621",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1622",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1623",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1642",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1644",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1646",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1650",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1652",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1654",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1660",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1661",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1662",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1663",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1682",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1684",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1686",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1690",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1692",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1694",
+      "kind": "atomic-late-refusal",
+      "outputs": 1
+    },
+    {
+      "id": "graph-1700",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1701",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1702",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "graph-1703",
+      "kind": "atomic-error-publication",
+      "outputs": 2
+    },
+    {
+      "id": "termination-1725",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1726",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1727",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1728",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1729",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1740",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1741",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1742",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1743",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1744",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1750",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1751",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1752",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1753",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1754",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1765",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1766",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1767",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1768",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1769",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1775",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1776",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1777",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1778",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1779",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1790",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1791",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1792",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1793",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1794",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1800",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1801",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1802",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1803",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1804",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1815",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1816",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1817",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1818",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1819",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1825",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1826",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1827",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1828",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1829",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1840",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1841",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1842",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1843",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1844",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1850",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1851",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1852",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1853",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1854",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1865",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1866",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1867",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1868",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1869",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1875",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1876",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1877",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1878",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1879",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1890",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1891",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1892",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1893",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1894",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1900",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1901",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1902",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1903",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1904",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1915",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1916",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1917",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1918",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "termination-1919",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "automatic-1925",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    },
+    {
+      "id": "automatic-1931",
+      "kind": "atomic-error-publication",
+      "outputs": 1
+    }
+  ],
+  "resolvedCases": [
+    {
+      "id": "single-0",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-2",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-4",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-14",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-20",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-22",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-24",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-34",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-80",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-82",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-84",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-94",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-100",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-102",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-104",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-114",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-400",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-402",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-404",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-414",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-420",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-422",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-424",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-434",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-560",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-562",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-564",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-574",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-580",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-582",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-584",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    },
+    {
+      "id": "single-594",
+      "kind": "default-encoder-metadata",
+      "outputs": 1
+    }
+  ],
+  "resolved": {
+    "kind": "default-encoder-metadata",
+    "cases": 32,
+    "evidence": "The original1932-case fixedNativecorpus is unchanged;these32caseIDs now match complete output bytes with the fixed reference metadata profile."
+  }
+}

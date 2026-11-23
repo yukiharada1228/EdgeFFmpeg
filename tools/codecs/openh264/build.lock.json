@@ -1,0 +1,10 @@
+{
+  "sourceRepository": "https://github.com/cisco/openh264.git",
+  "sourceCommit": "1bca62311e447fd9c39fc93de2c4b96cd5ce971c",
+  "emsdkCommit": "708dcbcc9ee23bc7d2dad44fc90db377e38b771c",
+  "emscriptenVersion": "7.0.0",
+  "patchSha256": "75ec3d618f99be0957f20830fae9ed92bce23980e82e2c8613f556ae167743d5",
+  "wrapperSha256": "96979e955815989f2bc5fb5dea1d528d31fb1fd79fb3c775c2e57a0cc09b4033",
+  "expectedWasmSha256": "1b14bb76bdf5629975dccb6096e12b28875ce53f588f05456560c8bdd13af36a",
+  "sourceSnapshotSha256": "0df7aa557fe9640061aae75b4cefb36c1ec3f306051368b6ba228efab85f8ce1"
+}

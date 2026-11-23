@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "tests/**/*.ts",
+    "packages/**/*.ts"
+  ],
+  "exclude": [
+    "tests/workers/fixture.ts",
+    "tests/workers/*-fixture.ts",
+    "tests/workers/env.d.ts"
+  ]
+}

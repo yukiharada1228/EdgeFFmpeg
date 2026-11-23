@@ -1,0 +1,3 @@
+export interface TraceRow {readonly used:number;readonly size:number;readonly currentOffset:number;readonly nextFrameOffset:number;readonly frameOffset:number|null;readonly duration:number|null;readonly eof:boolean}
+export function traceLine(row:TraceRow):string;
+export function parseOracle(text:string):{readonly traces:readonly (TraceRow&{readonly trace:true;readonly call:number})[];readonly packets:readonly {readonly sha256:string;readonly size:number;readonly frameOffset:number;readonly call:number;readonly duration:number}[];readonly summary:{readonly summary:true;readonly calls:number;readonly packets:number;readonly consumed:number}};

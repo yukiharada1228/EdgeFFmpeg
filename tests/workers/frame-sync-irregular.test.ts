@@ -1,0 +1,9 @@
+import {it,expect} from 'vitest';import {execFileSync} from 'node:child_process';import {readFileSync} from 'node:fs';import {build} from 'esbuild';import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+it('matches 2178 Native unknown, backward and repeated timestamp joins in local workerd',async()=>{
+ execFileSync(process.execPath,['tools/differential-runner/build-oracle.mjs','frame-sync'],{timeout:30000});
+ const points=[[],['-9223372036854775808'],['-9223372036854775808','0','-9223372036854775808'],['0','-9223372036854775808','2'],['0'],['3','2','1'],['0','2','1','3'],['2','-1','4'],['0','0','-1'],['4','1','4','1'],['0','1','2']],rows=[];
+ for(const ab of ['1/25','1/30','1001/30000'])for(const bb of ['1/25','1/30','1001/30000'])for(const a of points)for(const b of points)for(const shortest of [false,true])rows.push({ab,bb,a,b,shortest});
+ const native=rows.map(row=>{const result=JSON.parse(execFileSync('.build/oracles/frame-sync/native',[row.shortest?'1':'0',row.ab,row.bb,row.a.join(','),row.b.join(',')],{encoding:'utf8',timeout:3000}));expect(result.accepted).toBe(true);expect(result.eof).toBe(true);return result.events;});
+ const bundle=await build({entryPoints:['tests/workers/frame-sync-irregular-fixture.ts'],bundle:true,write:false,format:'esm',platform:'browser',target:'es2022'}),config=JSON.parse(readFileSync('wrangler.jsonc','utf8')),mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundle.outputFiles[0]!.text,compatibilityDate:config.compatibility_date}));
+ try{await mf.ready;expect(rows).toHaveLength(2178);for(let offset=0;offset<rows.length;offset+=128){const response=await mf.dispatchFetch('https://test/irregular',{method:'POST',body:JSON.stringify(rows.slice(offset,offset+128))});expect(response.status).toBe(200);expect(await response.json()).toEqual(native.slice(offset,offset+128));}}finally{await mf.dispose();}
+},30000);

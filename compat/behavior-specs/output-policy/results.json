@@ -1,0 +1,1562 @@
+[
+  {
+    "inputId": "wav-copy",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 142,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "wav-copy",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "wav-copy",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 142,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "wav-copy",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "wav-copy",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 142,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "wav-copy",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 142,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "wav-copy",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "wav-copy",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "wav-copy",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "wav-copy",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "wav-encode",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 142,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "wav-encode",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "wav-encode",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 142,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "wav-encode",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "wav-encode",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 142,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "wav-encode",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 142,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "wav-encode",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "wav-encode",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "wav-encode",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "wav-encode",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "aiff-encode",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 118,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "aiff-encode",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "aiff-encode",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 118,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "aiff-encode",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "aiff-encode",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 118,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "aiff-encode",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 118,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "aiff-encode",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "aiff-encode",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "aiff-encode",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "aiff-encode",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "au-encode",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 96,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "au-encode",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "au-encode",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 96,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "au-encode",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "au-encode",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 96,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "au-encode",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 96,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "au-encode",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "au-encode",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "au-encode",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "au-encode",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "raw-pcm",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 64,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "raw-pcm",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "raw-pcm",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 64,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "raw-pcm",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "raw-pcm",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 64,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "raw-pcm",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 64,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "raw-pcm",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "raw-pcm",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "raw-pcm",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "raw-pcm",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "audio-framecrc",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 190,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "audio-framecrc",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "audio-framecrc",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 190,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "audio-framecrc",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "audio-framecrc",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 190,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "audio-framecrc",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 190,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "audio-framecrc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "audio-framecrc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "audio-framecrc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "audio-framecrc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "raw-video-copy",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 24,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "raw-video-copy",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "raw-video-copy",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 24,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "raw-video-copy",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "raw-video-copy",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 24,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "raw-video-copy",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 24,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "raw-video-copy",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "raw-video-copy",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "raw-video-copy",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "raw-video-copy",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "video-framecrc",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 226,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "video-framecrc",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "video-framecrc",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 226,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "video-framecrc",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "video-framecrc",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 226,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "video-framecrc",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 226,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "video-framecrc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "video-framecrc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "video-framecrc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "video-framecrc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "bmp-copy",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 70,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-copy",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "bmp-copy",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 70,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-copy",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "bmp-copy",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 70,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-copy",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 70,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "bmp-copy",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-copy",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "bmp-copy",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-copy",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "bmp-encode",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 70,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-encode",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "bmp-encode",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 70,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-encode",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "bmp-encode",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 70,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-encode",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 70,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "bmp-encode",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-encode",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "bmp-encode",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-encode",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "bmp-decode",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 12,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-decode",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "bmp-decode",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 12,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-decode",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "bmp-decode",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 12,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-decode",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 12,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "bmp-decode",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-decode",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "bmp-decode",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "bmp-decode",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "h264-rawvideo",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 2304,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "h264-rawvideo",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "h264-rawvideo",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 2304,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "h264-rawvideo",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "h264-rawvideo",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 2304,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "h264-rawvideo",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 2304,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "h264-rawvideo",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "h264-rawvideo",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "h264-rawvideo",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "h264-rawvideo",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "h264-framecrc",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 460,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "h264-framecrc",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "h264-framecrc",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 460,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "h264-framecrc",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "refused",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "h264-framecrc",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 460,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "h264-framecrc",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "action": "copy",
+    "outputExists": true,
+    "outputBytes": 460,
+    "outputUnchanged": false
+  },
+  {
+    "inputId": "h264-framecrc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "h264-framecrc",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "h264-framecrc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": false,
+    "outputBytes": null,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "h264-framecrc",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "action": "conflict",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  }
+]

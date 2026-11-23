@@ -1,0 +1,40 @@
+import {mkdtempSync,rmSync,readFileSync,writeFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join,resolve} from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {expect,it} from 'vitest';
+import {build} from 'esbuild';
+import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+import type {MediaCheckpointLease,MediaCheckpointDescriptor,MediaCheckpointClaim,MediaCheckpointStatus} from '@edge-ffmpeg/runtime-cloudflare/checkpoints';
+it('atomically journals reframe state and output chunks across fresh Workers with fenced leases and exact Native recovery',async()=>{
+ const directory=mkdtempSync(join(tmpdir(),'edge-media-checkpoint-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ const bundle=await build({entryPoints:[root+'/media-checkpoint-fixture.ts'],bundle:true,write:false,format:'esm',platform:'browser',target:'es2022',external:['cloudflare:workers'],metafile:true});for(const path of Object.keys(bundle.metafile!.inputs))expect(path.startsWith('node:')).toBe(false);
+ const start=()=>new Miniflare(convertV4MiniflareOptions({name:'media-checkpoint-test',modules:[{type:'ESModule',path:root+'/media-checkpoint-bundle.mjs',contents:bundle.outputFiles[0]!.text}],modulesRoot:root,compatibilityDate:'2026-11-18',compatibilityFlags:[],resourcePersistencePath:join(directory,'persist'),durableObjects:{CHECKPOINTS:{className:'MediaCheckpointCoordinator',useSQLite:true}},r2Buckets:['MEDIA_BUCKET']}));let mf=start();
+ const request=async(path:string,pad:number,id='main',body?:object)=>mf.dispatchFetch('https://checkpoint.test/'+path.split('&')[0]+'?pad='+pad+'&id='+id+(path.includes('&')?'&'+path.split('&').slice(1).join('&'):''),{method:body?'POST':'GET',...(body?{body:JSON.stringify(body)}:{})});
+ const call=async<T>(path:string,pad:number,id='main',body?:object)=>{const response=await request(path,pad,id,body),value=await response.json();expect(response.status,JSON.stringify(value)).toBe(200);return value as T;};
+ type Prepared={lease:MediaCheckpointLease;descriptor:MediaCheckpointDescriptor;metadata:{samples:number;pts:string}[]};const prefixes=new Map<number,Prepared>();
+ try{
+  await mf.ready;let bucket=await mf.getR2Bucket('MEDIA_BUCKET');
+  for(const pad of [0,1]){
+   const prepared=await call<Prepared>('prepare',pad);prefixes.set(pad,prepared);const before=await call<MediaCheckpointStatus>('status',pad);expect(before.revision).toBe(0);expect(before.commits).toEqual([]);expect(prepared.descriptor.output!.size).toBe(12);
+   // Both immutable R2 objects exist, but neither is part of the committed journal.
+   expect(await bucket.head(prepared.descriptor.state.key)).not.toBeNull();expect(await bucket.head(prepared.descriptor.output!.key)).not.toBeNull();
+   const lost=await request('commit&lostAck=1',pad,'main',prepared);expect(lost.status).toBe(503);const accepted=await call<MediaCheckpointStatus>('commit',pad,'main',prepared);expect(accepted.revision).toBe(1);expect(accepted.commits).toHaveLength(1);expect(accepted.inputPosition).toBe('4');expect(accepted.outputPosition).toBe('12');const incomplete=await call<{ok:boolean;opens:number;stages:number}>('finalize',pad);expect(incomplete).toMatchObject({ok:false,opens:0,stages:0});expect(await bucket.get('final/main-'+pad+'.raw')).toBeNull();
+  }
+  await mf.dispose();mf=start();await mf.ready;bucket=await mf.getR2Bucket('MEDIA_BUCKET');
+  const expiry=Math.max(...[...prefixes.values()].map(item=>item.lease.expiresAt));while(Date.now()<=expiry+5)await new Promise(resolve=>setTimeout(resolve,10));
+  for(const pad of [0,1]){
+   const recovered=await call<MediaCheckpointStatus>('status',pad);expect(recovered.revision).toBe(1);expect(recovered.commits).toHaveLength(1);
+   const resumed=await call<{status:MediaCheckpointStatus;metadata:{samples:number;pts:string}[]}>('resume',pad),finished=resumed.status;expect(finished.phase).toBe('finished');expect(finished.commits).toHaveLength(2);expect(finished.inputPosition).toBe('8');expect(finished.outputPosition).toBe(pad?'36':'32');
+   const replay=await call<MediaCheckpointStatus>('commit',pad,'main',prefixes.get(pad)!);expect(replay).toEqual(finished);expect(await call('claim',pad)).toBeNull();
+   const loaded=await request('load',pad);expect(loaded.status).toBe(200);const actual=Buffer.from(await loaded.arrayBuffer());
+   const left=[1,-2,300,-400,32767,-32768,7,-8],right=[-9,10,-1100,1200,-1300,1400,-1500,1600],input=Buffer.alloc(32);for(let i=0;i<8;i++){input.writeInt16LE(left[i]!,i*4);input.writeInt16LE(right[i]!,i*4+2);}writeFileSync(join(directory,'input.raw'),input);const output=join(directory,'native-'+pad+'.raw'),crc=join(directory,'native-'+pad+'.crc');
+   execFileSync(binary,['-cpuflags','0','-f','s16le','-ar','8000','-ac','2','-i',join(directory,'input.raw'),'-filter_complex',`[0:a]aformat=sample_fmts=s16p,asetnsamples=n=3:p=${pad},asetpts=PTS+123,asplit=2[a][b]`,'-map','[a]','-c:a','pcm_s16le','-f','s16le',output,'-map','[b]','-c:a','pcm_s16le','-f','framecrc',crc],{timeout:10000,maxBuffer:1048576,stdio:'pipe'});expect(actual).toEqual(readFileSync(output));const publication=await call<{ok:boolean;opens:number;stages:number}>('finalize',pad);expect(publication).toMatchObject({ok:true,opens:1,stages:0});const published=await bucket.get('final/main-'+pad+'.raw');expect(Buffer.from(await published!.arrayBuffer())).toEqual(readFileSync(output));const version=published!.version;await call('commit',pad,'main',prefixes.get(pad)!);expect((await bucket.head('final/main-'+pad+'.raw'))!.version).toBe(version);expect(await call('finalize',pad)).toMatchObject({ok:true,opens:0,stages:0});expect((await bucket.head('final/main-'+pad+'.raw'))!.version).toBe(version);const frames=readFileSync(crc,'utf8').split('\n').filter(line=>line&&!line.startsWith('#')).map(line=>{const fields=line.split(',').map(value=>value.trim());return {samples:Number(fields[3]),pts:fields[2]!};});expect([...prefixes.get(pad)!.metadata,...resumed.metadata]).toEqual(frames);
+  }
+  const publishedVersion=(await bucket.head('final/main-0.raw'))!.version;await bucket.put(prefixes.get(0)!.descriptor.output!.key,Uint8Array.of(255));const tamperedFinal=await call<{ok:boolean;stages:number}>('finalize&suffix=-tampered',0);expect(tamperedFinal).toMatchObject({ok:false,opens:1,stages:0});expect(await call('finalize&overwrite=1',0)).toMatchObject({ok:false,opens:1,stages:0});expect(await bucket.get('final/main-0-tampered.raw')).toBeNull();expect((await bucket.head('final/main-0.raw'))!.version).toBe(publishedVersion);
+  const previous=(await bucket.get('final/main-1.raw'))!,previousBytes=Buffer.from(await previous.arrayBuffer());expect(await call('finalize&overwrite=1',1)).toMatchObject({ok:true,opens:1,stages:0});const replaced=(await bucket.get('final/main-1.raw'))!;expect(replaced.version).not.toBe(previous.version);expect(Buffer.from(await replaced.arrayBuffer())).toEqual(previousBytes);
+  const stale=await call<Prepared>('prepare&leaseMs=200',0,'stale');while(Date.now()<=stale.lease.expiresAt+5)await new Promise(resolve=>setTimeout(resolve,10));const owner=await call<MediaCheckpointClaim>('claim',0,'stale');expect(owner.lease.generation).toBeGreaterThan(stale.lease.generation);expect((await request('commit',0,'stale',stale)).status).toBe(422);expect((await call<MediaCheckpointStatus>('status',0,'stale')).revision).toBe(0);
+  for(const kind of ['state','output'] as const){const id='tamper-'+kind,prepared=await call<Prepared>('prepare',0,id);await call('commit',0,id,prepared);const object=prepared.descriptor[kind]!;await bucket.put(object.key,Uint8Array.of(255));expect((await request('load',0,id)).status).toBe(422);const status=await call<MediaCheckpointStatus>('status',0,id);expect(status.revision).toBe(1);expect(status.commits).toEqual([prepared.descriptor]);}
+ }finally{await mf.dispose();rmSync(directory,{recursive:true,force:true});}
+},120000);

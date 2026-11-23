@@ -1,0 +1,6 @@
+OutputIsDirectoryError independently maps fixed POSIX Native FFmpeg behavior at
+commit946fcce07b6dcd0331c8cc609192aeff5e1924f8:AVERROR(EISDIR)=-21 is observed as
+process status235 when writing a directory. Native-only fixtures establish
+refusal/overwrite ordering and significant input/output trailing slashes.
+Core does not execute or link Native FFmpeg. Input itself a directory has
+format-dependent behavior and is not classified by this output-only error.

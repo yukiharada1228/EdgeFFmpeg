@@ -1,0 +1,12 @@
+import {createR2FileSystem} from '@edge-ffmpeg/storage-r2';
+import type {R2Bucket,R2MultipartUpload} from '@cloudflare/workers-types';
+export default {async fetch(request:Request,env:{BUCKET:R2Bucket}):Promise<Response>{
+ const kind=new URL(request.url).pathname.slice(1),sizes={budget:513,small:257,growth:8193,multipart:5*1024*1024+17};if(!['budget','small','growth','multipart'].includes(kind))return new Response('Invalid case',{status:400});
+ const size=sizes[kind as keyof typeof sizes],id=crypto.randomUUID(),prefix='result/'+id,staging='stage/'+id,parts:{number:number;bytes:number;backingBytes:number}[]=[];
+ const bucket=new Proxy(env.BUCKET,{get(target,property){if(property==='createMultipartUpload')return async(...args:Parameters<R2Bucket['createMultipartUpload']>)=>{const upload=await target.createMultipartUpload(...args);return {key:upload.key,uploadId:upload.uploadId,async uploadPart(...values:Parameters<R2MultipartUpload['uploadPart']>){const value=values[1];if(!ArrayBuffer.isView(value))throw Error('Expected bounded part view');parts.push({number:values[0],bytes:value.byteLength,backingBytes:value.buffer.byteLength});return upload.uploadPart(...values);},complete:upload.complete.bind(upload),abort:upload.abort.bind(upload)};};const value:unknown=Reflect.get(target,property,target);return typeof value==='function'?value.bind(target):value;}});
+ const files=createR2FileSystem({bucket,mounts:{'/output':prefix},maxReadBytes:4096,output:{writableMounts:['/output'],stagingPrefix:staging,partBytes:5*1024*1024,maxWriteBytes:4096,maxOutputBytes:kind==='budget'?1024:6*1024*1024}}),output=await files.openWrite('/output/out');
+ try{let offset=0;while(offset<size){const length=Math.min(kind==='growth'?3000:4096,size-offset),chunk=Uint8Array.from({length},(_,i)=>((offset+i)*17+3)&255);await output.write(chunk);offset+=length;}
+  const publishedBeforeCommit=await env.BUCKET.head(prefix+'/out')!==null;await output.commit();const object=await env.BUCKET.get(prefix+'/out');if(!object)throw Error('Missing output');const bytes=await object.arrayBuffer(),digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),n=>n.toString(16).padStart(2,'0')).join(''),temporary=(await env.BUCKET.list({prefix:staging+'/'})).objects.length;
+  return Response.json({kind,bytes:bytes.byteLength,digest,parts,publishedBeforeCommit,temporary});
+ }finally{await output.abort();await env.BUCKET.delete(prefix+'/out');}
+}} satisfies ExportedHandler<{BUCKET:R2Bucket}>;

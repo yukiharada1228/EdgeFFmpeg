@@ -1,0 +1,1298 @@
+[
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 4073,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 4073,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.001",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 4085,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 4085,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-0.4",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 4125,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 4125,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-0-7-3000000",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 3482,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 3482,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.001",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 3482,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 3482,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-0.4",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 3522,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 3522,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-5-10-3000000",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 3025,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 3025,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.001",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 3037,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 3037,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-0.4",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:0",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:0",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 3077,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:1",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 0,
+    "reason": null,
+    "outputExists": true,
+    "outputBytes": 3077,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a:1",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a",
+    "flags": [],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "outputExists": true,
+    "outputBytes": 0,
+    "outputUnchanged": null
+  },
+  {
+    "inputId": "multi-8-3-3000000",
+    "map": "0:a",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "output-exists",
+    "outputExists": true,
+    "outputBytes": 3,
+    "outputUnchanged": true
+  }
+]
