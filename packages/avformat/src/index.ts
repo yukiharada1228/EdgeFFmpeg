@@ -5,6 +5,7 @@ import {executeFlacRemux} from './flac-wave-remux.js';
 import {defaultChannelLayout} from '@edge-ffmpeg/avutil';
 import {executeSimpleMultiVideo} from './simple-multi-video.js';
 import {probeRawRead} from './raw-read-probe.js';
+import {openW64,muxW64,validateW64Output} from '@edge-ffmpeg/containers';
 import {assertOutputPolicy} from './output-policy.js';
 import {createMp4H264Backend,wantsMp4H264Decode} from './mp4-h264.js';
 import type {H264BackendConfiguration} from './mp4-h264.js';
@@ -107,7 +108,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
         else unsupported(`Unsupported input option: ${option.name}`);
       }
       const rawInputCodec = inputFormat === null || inputFormat === 'wav' || inputFormat === 'aiff' || inputFormat === 'au' ? null : rawPcmCodec(inputFormat);
-      if (inputFormat !== null && inputFormat !== 'wav' && inputFormat !== 'aiff' && inputFormat !== 'au' && !rawInputCodec) unsupported(`Unsupported input format: ${inputFormat}`);
+      if (inputFormat !== null && inputFormat !== 'wav' && inputFormat !== 'aiff' && inputFormat !== 'au' && inputFormat !== 'w64' && !rawInputCodec) unsupported(`Unsupported input format: ${inputFormat}`);
       if (!rawInputCodec && (inputRate !== null || inputChannels !== null)) unsupported('Input rate/channel declarations currently require a raw PCM format');
       let maxFrames: bigint | null = null;
       let codec: string | null = null, outputFormat: string | null = null, maps = 0, filterSpec: string | null = null, outputRate: number | null = null, outputChannels: number | null = null;
@@ -128,9 +129,9 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
           if (++maps > 1 || !['0', '0:0', '0:a', '0:a:0'].includes(option.value ?? '')) unsupported('Only one mapping of the PCM audio stream is supported');
         } else if (!['-vn', '-sn', '-dn'].includes(option.name)) unsupported(`Unsupported output option: ${option.name}`);
       }
-      if(outputFormat===null){const path=output.url.toLowerCase();if(path.endsWith('.au')||path.endsWith('.snd'))outputFormat='au';else if(path.endsWith('.wav'))outputFormat='wav';else if(['.aif','.aiff','.aifc'].some(extension=>path.endsWith(extension)))outputFormat='aiff';}
+      if(outputFormat===null){const path=output.url.toLowerCase();if(path.endsWith('.au')||path.endsWith('.snd'))outputFormat='au';else if(path.endsWith('.wav'))outputFormat='wav';else if(path.endsWith('.w64'))outputFormat='w64';else if(['.aif','.aiff','.aifc'].some(extension=>path.endsWith(extension)))outputFormat='aiff';}
       const rawOutputCodec = outputFormat === null || outputFormat === 'wav' || outputFormat === 'au' ? null : rawPcmCodec(outputFormat);
-      if (outputFormat !== 'wav' && outputFormat !== 'aiff' && outputFormat !== 'au' && outputFormat !== 'framecrc' && !rawOutputCodec) unsupported('Output requires WAV, AIFF, AU, framecrc or an explicit raw PCM format');
+      if (outputFormat !== 'wav' && outputFormat !== 'aiff' && outputFormat !== 'au' && outputFormat !== 'w64' && outputFormat !== 'framecrc' && !rawOutputCodec) unsupported('Output requires WAV, AIFF, AU, W64, framecrc or an explicit raw PCM format');
       if (codec === null) codec = rawOutputCodec ?? (['aiff','au'].includes(outputFormat??'')?'pcm_s16be':'pcm_s16le');
       let filters: AudioFilterChain | undefined;
       if (filterSpec !== null) {
@@ -147,7 +148,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
       const inputContainer=rawInputCodec?'raw':inputFormat??await detectAudioContainer(source,context.budget.maxBufferBytes,context.signal);
       const audio = rawInputCodec
         ? await openRawPcm(source,{codec:rawInputCodec,channels:inputChannels??1,sampleRate:inputRate??44100,...((inputChannels??1)>guessLayoutMax?{channelMask:null}:{}),maxReadBytes:context.budget.maxBufferBytes,signal:context.signal})
-        : inputContainer==='au'?await openAu(source,{maxReadBytes:context.budget.maxBufferBytes,signal:context.signal}):inputContainer==='aiff'?await openAiff(source,{maxReadBytes:context.budget.maxBufferBytes,signal:context.signal}):await openWav(source, { maxReadBytes: context.budget.maxBufferBytes, signal: context.signal });
+        : inputContainer==='w64'?await openW64(source,{maxReadBytes:context.budget.maxBufferBytes,signal:context.signal}):inputContainer==='au'?await openAu(source,{maxReadBytes:context.budget.maxBufferBytes,signal:context.signal}):inputContainer==='aiff'?await openAiff(source,{maxReadBytes:context.budget.maxBufferBytes,signal:context.signal}):await openWav(source, { maxReadBytes: context.budget.maxBufferBytes, signal: context.signal });
       const filteredRate = filters?.outputSampleRate(audio.info.sampleRate) ?? audio.info.sampleRate;
       const resultRate=outputRate??filteredRate,resampling=resultRate!==filteredRate;
       const channels=outputChannels??audio.info.channels,remixing=channels!==audio.info.channels;
@@ -167,6 +168,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
       if(outputFormat==='aiff'&&aiffCodec===null)unsupported(`AIFF muxer does not support ${outputCodec}`);
       const wavCodec=supportsWavCodec(outputCodec)?outputCodec:null;
       if(outputFormat==='wav'&&wavCodec===null)unsupported(`WAV muxer does not support ${outputCodec}`);
+      if(outputFormat==='w64'&&wavCodec===null)unsupported(`W64 muxer does not support ${outputCodec}`);
       if (rawOutputCodec && rawOutputCodec !== outputCodec) unsupported('Raw PCM mux format must match the selected codec');
       await assertOutputPolicy(context,output.url,overwrite,noOverwrite);
       if(rawProbe.failure){if(exitOnError)throw rawProbe.failure;context.reportDiagnostic?.({code:rawProbe.failure.code,message:rawProbe.failure.message});}
@@ -217,7 +219,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
         if(resamplePlan.stateBytes+context.budget.maxBufferBytes>context.budget.maxResidentBytes)throw new ExecutionError('resource-budget','Resampler state and one payload buffer exceed the resident-byte budget');
       }
       const payloadBudget=resamplePlan?{...context.budget,maxResidentBytes:context.budget.maxResidentBytes-resamplePlan.stateBytes}:context.budget;
-      const memoryPlan=planPcmMemory({budget:payloadBudget,resample:resampling,channels:Math.max(audio.info.channels,channels),remix:remixing,inputBytesPerSample:getPcmFormat(pcmCodec).bytesPerSample,widestBytesPerSample:sampleBytes,copy:codec==='copy',volumeNodes:filters?.steps.filter(step=>step.name==='volume'||step.name==='apad'||step.name==='aformat'&&step.sampleFormat!==null).length??0,reframeSamples:filterBuffers,sourceSamples:range.samples===0n?0n:readRange.samples,generatedOutput:padding&&range.samples>0n&&readRange.samples===0n,inputHeaderBytes:rawInputCodec?0:128,outputScratchBytes:outputFormat==='framecrc'?512:['wav','aiff','au'].includes(outputFormat??'')?128:0});
+      const memoryPlan=planPcmMemory({budget:payloadBudget,resample:resampling,channels:Math.max(audio.info.channels,channels),remix:remixing,inputBytesPerSample:getPcmFormat(pcmCodec).bytesPerSample,widestBytesPerSample:sampleBytes,copy:codec==='copy',volumeNodes:filters?.steps.filter(step=>step.name==='volume'||step.name==='apad'||step.name==='aformat'&&step.sampleFormat!==null).length??0,reframeSamples:filterBuffers,sourceSamples:range.samples===0n?0n:readRange.samples,generatedOutput:padding&&range.samples>0n&&readRange.samples===0n,inputHeaderBytes:rawInputCodec?0:128,outputScratchBytes:outputFormat==='framecrc'?512:outputFormat==='w64'?168:['wav','aiff','au'].includes(outputFormat??'')?128:0});
       const guessLayout = audio.info.channels <= guessLayoutMax;
       async function* selectedPackets(): AsyncIterable<MediaPacket> {
         if (readRange.samples === 0n) return;
@@ -272,6 +274,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
         if (!channelLayout) unsupported('Unknown channel mask for framecrc output');
       }
       if(outputFormat==='au')validateAuOutput({codec:auCodec!,channels,sampleRate:resultRate},range.samples);
+      if(outputFormat==='w64')validateW64Output({codec:wavCodec!,channels,sampleRate:resultRate,channelMask:(remixing?null:audio.info.channelMask)??((remixing||guessLayout)?defaultChannelLayout(channels)?.mask??null:null)},range.samples);
       if(outputFormat==='aiff')validateAiffOutput({codec:aiffCodec!,channels,sampleRate:resultRate,channelMask:remixing?null:audio.info.channelMask},range.samples);
       context.signal.throwIfAborted();
       const destination = await context.filesystem.openWrite(output.url, { overwrite });
@@ -286,6 +289,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
       }
       else if(outputFormat==='au')await muxAu(destination,{...format,codec:auCodec!},packets,options);
       else if(outputFormat==='aiff')await muxAiff(destination,{...format,codec:aiffCodec!},packets,options);
+      else if(outputFormat==='w64')await muxW64(destination,{...format,codec:wavCodec!,channelMask:format.channelMask??((remixing||guessLayout)?defaultChannelLayout(channels)?.mask??null:null)},packets,options);
       else if (rawOutputCodec) await muxRawPcm(destination,format,packets,options);
       else await muxWav(destination,{...format,codec:wavCodec!,channelMask:format.channelMask??((remixing||guessLayout)?defaultChannelLayout(channels)?.mask??null:null)},packets,{...options,metadataProfile:'ffmpeg-9.0.2',bitexact});
       return [output.url];
