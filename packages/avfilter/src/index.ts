@@ -364,6 +364,8 @@ export type {VideoFilterPlan,VideoFilterStep,VideoFilterNegotiation,VideoFilterS
 
 export {flipVideoFrame,VideoFlipError} from './video-flip.js';
 export type {VideoFlipOptions} from './video-flip.js';
+export {negateVideoFrame,parseNegateOptions,negatePixelFormats,VideoNegateError} from './video-negate.js';
+export type {VideoNegateOptions,VideoNegateSettings} from './video-negate.js';
 
 export type {VideoGraphNode} from './video-graph.js';
 

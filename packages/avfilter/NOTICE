@@ -144,3 +144,12 @@ Copyright (c) 2011 Mina Nagy Zaki. Applicable adaptations retain
 LGPL-2.1-or-later; the license text and pinned source location above apply.
 The bounded implementation accepts identity mono/stereo layout and rate
 constraints and rejects implicit conversion; general negotiation is incomplete.
+
+video-negate.ts adapts component availability, plane/packed-byte selection and
+eight-bit negation from FFmpeg libavfilter/vf_negate.c, ff_fill_rgba_map from
+libavfilter/drawutils.c, and AV_OPT_TYPE_FLAGS/BOOL folding from libavutil/opt.c
+at commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8. LGPL-2.1-or-later; the
+license text and pinned source location above apply. The adaptation restricts
+negation to twelve declared eight-bit layouts, materializes owned tight planes,
+accepts declared flag names and bounded integer terms only, and rejects timeline,
+generic context and av_expr flag expressions. Runtime commands remain incomplete.

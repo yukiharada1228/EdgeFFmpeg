@@ -3,8 +3,9 @@
 import {parseVideoSize} from '@edge-ffmpeg/avutil';
 import {parseFilterPixelFormat} from './format-pixel-format.js';
 import {filterOptions} from './video-syntax.js';
+import {parseNegateOptions} from './video-negate.js';
 import type {LinearFilterToken} from './video-syntax.js';
-export type ParsedVideoStep={readonly name:'transpose';readonly direction:number;readonly passthrough:number}|{readonly name:'null'|'hflip'|'vflip'}|{readonly name:'format';readonly pixelFormat:string|null;readonly pixelFormats:readonly string[]|null}|{readonly name:'scale';readonly width:number|null;readonly height:number|null};
+export type ParsedVideoStep={readonly name:'transpose';readonly direction:number;readonly passthrough:number}|{readonly name:'null'|'hflip'|'vflip'}|{readonly name:'format';readonly pixelFormat:string|null;readonly pixelFormats:readonly string[]|null}|{readonly name:'scale';readonly width:number|null;readonly height:number|null}|{readonly name:'negate';readonly components:number;readonly negateAlpha:boolean};
 export class VideoFilterParseError extends Error {}
 const dimension=(value:string):number=>{
  const text=value.replace(/^[ \t\r\n\v\f]+|[ \t\r\n\v\f]+$/g,'');
@@ -14,6 +15,7 @@ export function parseVideoFilterToken(filter:LinearFilterToken):ParsedVideoStep 
   if(filter.name==='null'||filter.name==='hflip'||filter.name==='vflip'){
    if(filterOptions(filter.options,[]).length)throw new VideoFilterParseError('Timeline and reflection options are not implemented');return Object.freeze({name:filter.name});
   }
+  if(filter.name==='negate')return Object.freeze({name:'negate',...parseNegateOptions(filter.options)});
   if(filter.name==='transpose'){
    let direction=0,passthrough=0;
    const directions:Record<string,number>={cclock_flip:0,clock:1,cclock:2,clock_flip:3},modes:Record<string,number>={none:0,landscape:1,portrait:2};
