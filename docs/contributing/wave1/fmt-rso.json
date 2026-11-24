@@ -1,0 +1,198 @@
+{
+  "capabilityId": "demuxer.rso",
+  "slug": "fmt-rso",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/rso.ts",
+    "packages/containers/NOTICE-RSO",
+    "docs/contributing/rso-support.md",
+    "tests/unit/rso.test.ts",
+    "tests/differential/rso.test.ts",
+    "docs/contributing/wave1/fmt-rso.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/containers/src/registry.ts",
+      "change": "+1 line: export {rso} from './rso.js'; (extension demux .rso, mux, .rso output extension)"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/differential/rso.test.ts",
+      "name": "matches native RSO mux bytes from raw u8 and WAV s16le inputs for three rates and six lengths",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/rso.test.ts",
+      "name": "refuses RSO rates of 65536 and above stereo and pcm_s16le with native exit 183 before output creation",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/rso.test.ts",
+      "name": "matches native RSO demux of native-written and short or long header-size files through copy framecrc WAV decode and seeks",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/rso.test.ts",
+      "name": "detects undeclared RSO only by extension and refuses ADPCM and unknown tags with native exit 176",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/rso.test.ts",
+      "name": "parses the RSO header with bounded reads and reads pcm_u8 mono to EOF whatever the header size",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/rso.test.ts",
+      "name": "refuses truncated headers ADPCM unknown tags rate 0 and invalid budgets with native statuses where native has one",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/rso.test.ts",
+      "name": "refuses RSO outputs in native write_header order with exit 183 and writes min(samples,0xffff) up front",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/rso.test.ts",
+      "name": "aborts RSO output exactly once on failed packets invalid budgets and cancellation",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/rso.test.ts",
+      "name": "registers RSO as an extension-only demuxer and a pcm_u8 .rso muxer",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry.test.ts",
+      "name": "(whole file, unchanged)",
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry-extension.test.ts",
+      "name": "(whole file, unchanged)",
+      "passed": 7,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 161,
+    "details": [
+      "36 byte-exact RSO mux outputs: rates 8000/11025/65535 x lengths 0/1/4097/65535/65536/70000 bytes x raw u8 and WAV s16le inputs, native writing to a seekable file",
+      "5 refusals with native exit 183 and no Edge output: rate 65536, rate 70000, stereo, -c:a pcm_s16le to .rso and with -f rso",
+      "114 byte-exact demux outputs: 3 native-written and 5 synthetic header-size (0, 100, 0xffff, 3000 over 3000 bytes, 5000 over 4097 bytes) files x copy framecrc / WAV file / pcm_s16le framecrc x no seek, input -ss, input -ss + -t, output -ss/-t, -frames:a 2, undeclared and -f rso",
+      "2 extension-detection decodes (undeclared .rso and -f rso on .dat) plus undeclared .dat failing on both sides",
+      "3 tag refusals (0x0101, 0x0200, 0) with native exit 176"
+    ]
+  },
+  "unsupported": [
+    "adpcm_ima_wav (tag 0x0101) and unknown tags: refused with exit 176",
+    "headers shorter than 8 bytes and sample rate 0: refused explicitly; native's own failure path and exit status are not mirrored",
+    "input -ss at or beyond EOF (no seekBeyondEnd)",
+    "non-seekable/pipe output",
+    "FLAC input to the RSO muxer (FLAC output dispatcher does not iterate the registry)",
+    "native st->duration from the header size is not exported; Edge uses the physical length"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "files": 6,
+    "tests": 13,
+    "list": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts (file: missing .build/codecs/flac/edge-flac.wasm)",
+      "tests/unit/flac-decoder.test.ts (file: missing FLAC artifact)",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts (file: missing FLAC artifact)",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ]
+  },
+  "finalUnitFailures": {
+    "files": 6,
+    "tests": 13,
+    "list": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts (file: missing .build/codecs/flac/edge-flac.wasm)",
+      "tests/unit/flac-decoder.test.ts (file: missing FLAC artifact)",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts (file: missing FLAC artifact)",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ],
+    "sameAsBaseline": true
+  },
+  "proposedContracts": [
+    {
+      "id": "rso.mux-bytes",
+      "file": "tests/differential/rso.test.ts",
+      "name": "matches native RSO mux bytes from raw u8 and WAV s16le inputs for three rates and six lengths",
+      "modes": [
+        "bit-exact"
+      ],
+      "scope": "pcm_u8 mono RSO mux from raw u8 and WAV s16le, rates 8000/11025/65535, lengths 0-70000 bytes, size field min(data,0xffff); seekable native output."
+    },
+    {
+      "id": "rso.mux-refusals",
+      "file": "tests/differential/rso.test.ts",
+      "name": "refuses RSO rates of 65536 and above stereo and pcm_s16le with native exit 183 before output creation",
+      "modes": [
+        "semantic"
+      ],
+      "scope": "Native exit 183 for rate >= 65536, stereo and non-pcm_u8 codecs, before Edge output creation."
+    },
+    {
+      "id": "rso.demux",
+      "file": "tests/differential/rso.test.ts",
+      "name": "matches native RSO demux of native-written and short or long header-size files through copy framecrc WAV decode and seeks",
+      "modes": [
+        "bit-exact",
+        "bit-exact-pcm"
+      ],
+      "scope": "pcm_u8 RSO demux read to EOF regardless of header size, through copy framecrc, WAV and pcm_s16le framecrc, with -ss/-t/-frames."
+    },
+    {
+      "id": "rso.detect-refusals",
+      "file": "tests/differential/rso.test.ts",
+      "name": "detects undeclared RSO only by extension and refuses ADPCM and unknown tags with native exit 176",
+      "modes": [
+        "semantic",
+        "bit-exact-pcm"
+      ],
+      "scope": "Undeclared detection only by .rso extension; -f rso; tag 0x0101/unknown refused with native exit 176."
+    }
+  ],
+  "notes": [
+    "Native has no read_probe; the registry demux.extensions hook is used, so undeclared detection needs a .rso path.",
+    "Native creates (empty) output files on its write_header refusals; Edge refuses before output creation as the registry contract requires.",
+    "Setup durations: submodule init 44s, npm ci 10s, reference:build 180s, baseline static checks 59s, baseline unit suite 84s.",
+    "No shared edits beyond the registry line were needed."
+  ]
+}
