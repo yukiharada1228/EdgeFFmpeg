@@ -6,5 +6,6 @@ export {aiff} from './formats/aiff.js';
 export {au} from './formats/au.js';
 export {framecrc} from './formats/framecrc.js';
 export * from './formats/raw-pcm.js';
+export {sds} from './sds.js';
 export {w64} from './formats/w64.js';
 export {wav} from './formats/wav.js';
