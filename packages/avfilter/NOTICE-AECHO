@@ -1,0 +1,20 @@
+aecho multi-tap echo (src/audio/aecho.ts)
+
+src/audio/aecho.ts adapts FFmpeg libavfilter/af_aecho.c: the in_gain/out_gain/
+delays/decays options, init()'s list counting (count_items, fill_items with
+av_strtok skipping empty fields) and its count and range checks,
+config_output()'s tap sample counts ((int)(float(delay * sample_rate) / 1000.0))
+and max_samples check, the echo_samples_<fmt>p loops (shared delay_index, MOD
+ring indexing, float tap products, av_clipd and C conversion), the
+FILTER_SAMPLEFMTS list (s16p, s32p, fltp, dblp) and request_frame()'s
+max_samples tail in frames of at most 2048 samples continuing next_pts.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2013 Paul B Mahol
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation accepts only plain decimal option values, refuses
+expressions, exponents, signs, hexadecimal, inf/nan, trailing text, escaping
+and float32 rounding midpoints instead of approximating them, always writes a
+new owned output frame, declares the per-channel ring in reserve(), enforces
+explicit allocation limits and AbortSignal, and adds no FFmpeg runtime code.
+The original source and full notices remain in the pinned upstream submodule.
