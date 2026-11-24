@@ -1,0 +1,241 @@
+{
+ "capabilityId": "filter.aderivative",
+ "slug": "af-aderivative",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/audio/aderivative.ts",
+  "packages/avfilter/NOTICE-ADERIVATIVE",
+  "tests/unit/aderivative.test.ts",
+  "tests/differential/aderivative.test.ts",
+  "docs/contributing/aderivative.md",
+  "docs/contributing/wave1/af-aderivative.json",
+  "packages/avfilter/src/audio/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/audio/registry.ts",
+   "change": "+1 line: export {aderivative} from './aderivative.js';"
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/aderivative.test.ts",
+   "title": "accepts only the bare token and refuses every option, timeline enable and empty argument with exact messages",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/aderivative.test.ts",
+   "title": "declares a stream step that allocates frames, keeps counts and packets, and refuses rate conversion and FLAC input",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/aderivative.test.ts",
+   "title": "reserves one output frame plus the per-channel previous sample at the working width on both planners",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/aderivative.test.ts",
+   "title": "negotiates native picks: u8 and s16 to s16p, s32 to s32p, flt to fltp and dbl to dblp, with a single rounding only from float input",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/aderivative.test.ts",
+   "title": "matches a C transcription with two's-complement wrap and float32 rounding, independent of frame splits",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/aderivative.test.ts",
+   "title": "converts packed and u8 input to the negotiated planar format before differencing",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/aderivative.test.ts",
+   "title": "refuses non-finite floating input, enforces the frame allocation limit and observes cancellation",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/aderivative.test.ts",
+   "title": "matches native framecrc across source formats, channel counts, frame splits and padding in the native format and s16",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/aderivative.test.ts",
+   "title": "writes native-identical WAV and raw PCM from WAV and raw inputs",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/aderivative.test.ts",
+   "title": "filters the whole input before output -ss, -t, -to and -frames:a, as native does",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/aderivative.test.ts",
+   "title": "matches native where neighbouring format lists merge with its own, across source formats",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/aderivative.test.ts",
+   "title": "fails explicitly before output for options, timeline enable and neighbour merges native would run in another format",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/audio-filter-registry.test.ts + audio-filter-registry-extension.test.ts + audio-filter-registry-contract.test.ts",
+   "title": "(whole files, unchanged)",
+   "pass": 26,
+   "fail": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 542,
+  "byteComparisons": 534,
+  "exitStatusChecks": 8,
+  "compares": [
+   "108 framecrc: u8/s16/s32/f32/f64 x 1-3 channels x native codec and s16 x aderivative, asetnsamples=7,aderivative, aderivative,apad=pad_len=5, aderivative,aderivative (20000 samples at 8000 Hz, full-scale extremes)",
+   "72 WAV/raw file bytes from WAV and raw stereo input, native codec and s16",
+   "192 framecrc with output -ss/-t/-ss -t/-ss -to/-frames:a/sub-sample -t over three chains",
+   "162 framecrc for neighbour merges (aformat=s16p/s16/fltp/dbl/s32 and volume float/fixed before and after)",
+   "8 native exit statuses: 2 shared refusals, 6 native-accepted runs refused before output"
+  ],
+  "floatToIntegerGate": "linux x64 with -cpuflags 0"
+ },
+ "unsupported": [
+  "any option, including the empty argument 'aderivative='",
+  "timeline enable (native's reset-to-silence path)",
+  "runtime commands",
+  "automatic sample-rate conversion",
+  "FLAC input (refused before decoding)",
+  "non-finite floating input",
+  "neighbour merges the negotiation model cannot reproduce (fixed volume before it on float/u8/dbl input)",
+  "aintegral"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": {
+  "files": 6,
+  "tests": 13,
+  "list": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+   "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ]
+ },
+ "finalUnitFailures": {
+  "files": 6,
+  "tests": 13,
+  "list": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+   "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ],
+  "identicalToBaseline": true
+ },
+ "proposedContracts": [
+  {
+   "id": "filter.aderivative.cli-framecrc",
+   "file": "tests/differential/aderivative.test.ts",
+   "name": "matches native framecrc across source formats, channel counts, frame splits and padding in the native format and s16",
+   "modes": [
+    "cli"
+   ],
+   "scope": "framecrc bytes for all PCM source formats, 1-3 channels, frame splits and apad tail"
+  },
+  {
+   "id": "filter.aderivative.cli-files",
+   "file": "tests/differential/aderivative.test.ts",
+   "name": "writes native-identical WAV and raw PCM from WAV and raw inputs",
+   "modes": [
+    "cli"
+   ],
+   "scope": "WAV and raw output bytes"
+  },
+  {
+   "id": "filter.aderivative.cli-time-selection",
+   "file": "tests/differential/aderivative.test.ts",
+   "name": "filters the whole input before output -ss, -t, -to and -frames:a, as native does",
+   "modes": [
+    "cli"
+   ],
+   "scope": "output -ss/-t/-to/-frames:a filter the whole input"
+  },
+  {
+   "id": "filter.aderivative.cli-negotiation",
+   "file": "tests/differential/aderivative.test.ts",
+   "name": "matches native where neighbouring format lists merge with its own, across source formats",
+   "modes": [
+    "cli"
+   ],
+   "scope": "native format-list merges with aformat and volume neighbours"
+  },
+  {
+   "id": "filter.aderivative.cli-refusals",
+   "file": "tests/differential/aderivative.test.ts",
+   "name": "fails explicitly before output for options, timeline enable and neighbour merges native would run in another format",
+   "modes": [
+    "cli"
+   ],
+   "scope": "explicit failure before output with native exit status"
+  },
+  {
+   "id": "filter.aderivative.stream-arithmetic",
+   "file": "tests/unit/aderivative.test.ts",
+   "name": "matches a C transcription with two's-complement wrap and float32 rounding, independent of frame splits",
+   "modes": [
+    "unit"
+   ],
+   "scope": "C transcription, wrap, float32 rounding, frame-split invariance"
+  },
+  {
+   "id": "filter.aderivative.negotiation",
+   "file": "tests/unit/aderivative.test.ts",
+   "name": "negotiates native picks: u8 and s16 to s16p, s32 to s32p, flt to fltp and dbl to dblp, with a single rounding only from float input",
+   "modes": [
+    "unit"
+   ],
+   "scope": "negotiatedSampleFormats for every input format"
+  }
+ ],
+ "notes": [
+  "Setup durations: submodule 45 s, npm ci 9 s, reference:build 171 s, baseline unit run 81 s.",
+  "No additional shared edit was needed.",
+  "Native accepts 'aderivative=' and enable; both are refused explicitly per scope.",
+  "Float-to-integer and float-source neighbour cases are gated to linux x64; on other platforms those comparisons are skipped.",
+  "FLAC tests that need edge-flac.wasm and resample-checkpoint golden digests (macOS arm64) fail in the baseline and after the change, identically."
+ ]
+}
