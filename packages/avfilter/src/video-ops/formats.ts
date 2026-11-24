@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 // Adapted format negotiation and loss scoring; see ../../NOTICE, ../../NOTICE-VIDEO-OPS and ../../NOTICE-VIDEO-NEGOTIATION for provenance.
+import {videoStoragePixelFormat} from '@edge-ffmpeg/avutil';
 /** The one negotiation table shared by the linear, frame-graph and timed negotiators: every non-hwaccel
  * pixel format of the pinned build in AVPixelFormat order, as name, nb_components,
  * log2_chroma_w, log2_chroma_h, flags, av_get_padded_bits_per_pixel, vf_scale list membership
@@ -95,9 +96,21 @@ export function chooseFormat(source:string,values:readonly string[]):string {
  }
  return selected.name;
 }
-/** Plan-time refusal of a negotiated format without storage or conversion here; consumer names the pad. */
-export function requireExecutableFormat(format:string,consumer:string):void {
- if(!executable.has(format))throw new Error(`${consumer} negotiates ${format}, which is not implemented`);
+const siblings:Readonly<Record<string,string>>={yuv420p:'yuvj420p',yuv422p:'yuvj422p',yuv444p:'yuvj444p'};
+/** An operator's candidates as native query_formats declares them: with jpegSiblings, the yuvj sibling of each
+ * listed yuv420p, yuv422p and yuv444p follows the list. Without formats(), every negotiable format. */
+export function declaredFormats(formats:readonly string[]|undefined,jpegSiblings:boolean|undefined,fallback:readonly string[]=negotiableFormats):readonly string[] {
+ if(!formats)return fallback;if(!jpegSiblings)return formats;
+ const result=[...formats];for(const format of formats){const sibling=siblings[format];if(sibling&&!result.includes(sibling))result.push(sibling);}return result;
+}
+/** Legacy yuvj420p, yuvj422p and yuvj444p links hold ordinary planar storage with forced full range. */
+export const storageFormat=(format:string)=>videoStoragePixelFormat(format);
+/** Plan-time refusal of a negotiated format without storage or conversion here; consumer names the pad.
+ * A legacy JPEG-range format is executable only when its producer's input is one too: pass-through and
+ * yuvj-to-yuvj conversion keep the forced full range, any other conversion into it is not implemented. */
+export function requireExecutableFormat(format:string,consumer:string,input?:string):void {
+ if(executable.has(format)||input!==undefined&&storageFormat(format)!==format&&storageFormat(input)!==input)return;
+ throw new Error(`${consumer} negotiates ${format}, which is not implemented`);
 }
 export interface FormatGroup {values:string[];parent:FormatGroup}
 export function formatGroup(values:readonly string[]):FormatGroup {const result={values:[...values]} as FormatGroup;result.parent=result;return result;}

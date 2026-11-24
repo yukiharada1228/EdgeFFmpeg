@@ -5,7 +5,7 @@ import {parseFilterTopology,filterTopologyOrder} from './filter-topology.js';
 import {resolveVideoFilter} from './video-graph-resolver.js';
 import type {GraphVideoStep} from './video-graph-resolver.js';
 import {requireVideoPath,videoOperator} from './video-ops/registry.js';
-import {negotiableFormats as order,scaleInputFormats,scaleOutputFormats,requireExecutableFormat,chooseFormat as choose,formatGroup as group,formatRoot as root,mergeFormats as merge} from './video-ops/formats.js';
+import {negotiableFormats as order,scaleInputFormats,scaleOutputFormats,requireExecutableFormat,declaredFormats,chooseFormat as choose,formatGroup as group,formatRoot as root,mergeFormats as merge} from './video-ops/formats.js';
 import type {FormatGroup as Group} from './video-ops/formats.js';
 export interface Geometry{readonly format:string;readonly width:number;readonly height:number}
 type Step=GraphVideoStep|{readonly name:'source';readonly geometry:Geometry}|{readonly name:'sink'|'trim'};
@@ -19,7 +19,7 @@ export function negotiateVideoTopology(description:string,source:Geometry|readon
  const inputOrder=options.inputRegistrationOrder??sources.map((_,index)=>index);if(inputOrder.length!==sources.length||new Set(inputOrder).size!==sources.length||inputOrder.some(index=>!Number.isInteger(index)||index<0||index>=sources.length))throw new Error('Invalid input registration order');
  const trims=Array.isArray(options.inputTrim)?options.inputTrim:sources.map(()=>options.inputTrim===true);if(trims.length!==sources.length||trims.some(value=>typeof value!=='boolean'))throw new Error('Invalid input trim bindings');
  // Pseudo nodes (source, trim, sink) are never registered operators and accept every format.
- const make=(step:Step,inputs:number,outputs:number):Node=>{const op=videoOperator(step.name),resize=op?.role==='resize',common=group(op?.formats?.(step)??(resize?scaleInputFormats:order));return {step,inputs:[],outputs:[],inputGroups:Array.from({length:inputs},()=>common),outputGroups:Array.from({length:outputs},()=>resize?group(scaleOutputFormats):common)};};
+ const make=(step:Step,inputs:number,outputs:number):Node=>{const op=videoOperator(step.name),resize=op?.role==='resize',common=group(declaredFormats(op?.formats?.(step),op?.jpegSiblings,resize?scaleInputFormats:order));return {step,inputs:[],outputs:[],inputGroups:Array.from({length:inputs},()=>common),outputGroups:Array.from({length:outputs},()=>resize?group(scaleOutputFormats):common)};};
  const nodes=topology.nodes.map(node=>make(node.configuration,node.inputs,node.outputs)),registration=[...nodes];
  const connect=(from:Node,fromPad:number,to:Node,toPad:number):Link=>{const link:Link={from,fromPad,to,toPad,selected:null,geometry:null};from.outputs[fromPad]=link;to.inputs[toPad]=link;return link;};
  for(const edge of topology.edges)connect(nodes[edge.from.node]!,edge.from.pad,nodes[edge.to.node]!,edge.to.pad);

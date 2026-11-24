@@ -48,6 +48,9 @@ export interface VideoOperatorDescriptor<S extends VideoStep=VideoStep,T extends
   * entries without duplicates, as native query_formats declares them. A negotiated format outside
   * negotiationOrder is refused before output. Absent means every negotiable format. */
  formats?(step:S|T):readonly string[];
+ /** formats() leaves out the yuvj420p, yuvj422p and yuvj444p siblings that native lists beside the yuv420p,
+  * yuv422p and yuv444p it names; every negotiator adds them back. Absent means formats() is the native list. */
+ readonly jpegSiblings?:boolean;
  /** Output size from the negotiated input shapes, on every path. Size-dependent refusals throw here and are repeated in frame. */
  geometry?(step:S|T,inputs:readonly VideoShape[]):VideoSize;
  /** Timed output size and aspect; absent uses geometry and keeps the input aspect. */

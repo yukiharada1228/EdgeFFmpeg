@@ -2,7 +2,7 @@
 // Adapted format negotiation and loss scoring; see ../NOTICE for provenance.
 import {requireVideoPath} from './video-ops/registry.js';
 import type {StaticVideoStep} from './video-ops/registry.js';
-import {negotiableFormats as order,scaleInputFormats,scaleOutputFormats,negotiableFormat,executableFormat,requireExecutableFormat,chooseFormat as choose,formatGroup as group,formatRoot as root,mergeFormats as merge} from './video-ops/formats.js';
+import {negotiableFormats as order,scaleInputFormats,scaleOutputFormats,negotiableFormat,executableFormat,requireExecutableFormat,declaredFormats,storageFormat,chooseFormat as choose,formatGroup as group,formatRoot as root,mergeFormats as merge} from './video-ops/formats.js';
 import type {FormatGroup as Group} from './video-ops/formats.js';
 /** Bounded linear negotiation over every native format; picks without storage here are refused. */
 export type NegotiationStep=StaticVideoStep;
@@ -12,11 +12,12 @@ interface Node {step:NegotiationStep|null;input:Group|null;output:Group|null;pre
 export function negotiateVideoFormats(source:string,steps:readonly NegotiationStep[],target?:string,registrationOrder?:readonly number[]):readonly NegotiatedVideoStage[] {
  if(steps.length>34)throw new Error('Video graph exceeds negotiation node limit');
  const supported=negotiableFormat;
- if(!executableFormat(source)||target!==undefined&&!executableFormat(target))throw new Error('Unsupported video negotiation format');
+ // A legacy yuvj source negotiates under its own name, as native does; its links store the planar layout.
+ if(!executableFormat(storageFormat(source))||target!==undefined&&!executableFormat(target))throw new Error('Unsupported video negotiation format');
  const nodes:Node[]=steps.map(step=>{
   const op=requireVideoPath(step.name,'linear'),formats=op.formats?.(step);
   if(formats&&(!formats.length||formats.some(format=>!supported(format))||new Set(formats).size!==formats.length))throw new Error('Invalid video format candidates');
-  const resize=op.role==='resize',input=group(formats??(resize?scaleInputFormats:order));
+  const resize=op.role==='resize',input=group(declaredFormats(formats,op.jpegSiblings,resize?scaleInputFormats:order));
   return {step,input,output:resize?group(scaleOutputFormats):input,previous:null,next:null};
  });
  const start:Node={step:null,input:null,output:group([source]),previous:null,next:null},end:Node={step:null,input:group(target?[target]:order),output:null,previous:null,next:null},path=[start,...nodes,end];
@@ -41,10 +42,10 @@ export function negotiateVideoFormats(source:string,steps:readonly NegotiationSt
  }}
  const result:NegotiatedVideoStage[]=[];let current=source;
  for(let node=start.next!;node!==end;node=node.next!){
-  const output=root(node.output!),selected=choose(current,output.values);output.values=[selected];current=selected;
-  requireExecutableFormat(selected,node.next===end?'Video output':`Video filter ${node.next!.step!.name} input`);
+  const output=root(node.output!),selected=choose(current,output.values);output.values=[selected];
+  requireExecutableFormat(selected,node.next===end?'Video output':`Video filter ${node.next!.step!.name} input`,current);current=selected;
   const step=node.step!,role=requireVideoPath(step.name,'linear').role;
-  if(role==='resize'||role==='frame')result.push(Object.freeze({...(role==='frame'?{operation:step.name}:{}),step,pixelFormat:selected}));
+  if(role==='resize'||role==='frame')result.push(Object.freeze({...(role==='frame'?{operation:step.name}:{}),step,pixelFormat:storageFormat(selected)}));
  }
  return Object.freeze(result);
 }

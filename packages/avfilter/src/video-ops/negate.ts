@@ -7,6 +7,6 @@ const formats=Object.freeze(negotiationOrder.filter(format=>negatePixelFormats.i
 /** Timed actor and DAG execution remain unimplemented; their planners reject negate explicitly. */
 export const negateOperator=defineVideoOperator<NegateStep>({name:'negate',role:'frame',paths:['linear','graph','stream'],examples:['negate','negate=components=y'],
  parse:token=>singlePad(Object.freeze({name:'negate',...parseNegateOptions(token.options)})),
- formats:()=>formats,validate:(pixelFormat,step)=>{negateMasks(pixelFormat,step);},
+ formats:()=>formats,jpegSiblings:true,validate:(pixelFormat,step)=>{negateMasks(pixelFormat,step);},
  frame:(frame,step,options)=>negateVideoFrame(frame,step,options),
  stageFields:step=>({negate:Object.freeze({components:step.components,negateAlpha:step.negateAlpha})})});

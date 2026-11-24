@@ -24,7 +24,7 @@ export function compileVideoFilterChain(description:string):{readonly steps:read
  try{({steps,registrationOrder}=parseVideoGraph(description));}catch(error){throw new VideoFilterError(error instanceof Error?error.message:'Invalid video filter syntax');}
  for(const step of steps)requireVideoPath(step.name,'linear',name=>new VideoFilterError(`Video filter ${name} is not implemented for linear chains`));
  return Object.freeze({steps:Object.freeze(steps),plan(pixelFormat:string,width:number,height:number,negotiation:VideoFilterNegotiation={}):VideoFilterPlan{
-  const sourceWidth=width,sourceHeight=height,legacyRange=videoStoragePixelFormat(pixelFormat)!==pixelFormat,source=pixelLayout(videoStoragePixelFormat(pixelFormat),width,height),arithmetic=negotiation.arithmetic??'aarch64';
+  const sourceWidth=width,sourceHeight=height,legacyRange=videoStoragePixelFormat(pixelFormat)!==pixelFormat,requestedFormat=pixelFormat,source=pixelLayout(videoStoragePixelFormat(pixelFormat),width,height),arithmetic=negotiation.arithmetic??'aarch64';
   if(!['aarch64','scalar','x86_64'].includes(arithmetic))throw new VideoFilterError('Invalid graph arithmetic profile');
   pixelFormat=source.pixelFormat;const stages:VideoFilterStage[]=[],runners:((frame:VideoFrameData,options:PixelResizeOptions)=>VideoFrameData)[]=[];let state=0n,intermediate=0n,maxFrameBytes=source.bytes;
   // A frame operator stage keeps its step; a stage without one is a resize.
@@ -42,7 +42,7 @@ export function compileVideoFilterChain(description:string):{readonly steps:read
   if(negotiation.outputSize)negotiatedSteps.push({name:'scale',width:negotiation.outputSize.width,height:negotiation.outputSize.height});
   const target=negotiation.outputPixelFormat===undefined?undefined:pixelLayout(negotiation.outputPixelFormat,1,1).pixelFormat;
   let operations:ReturnType<typeof negotiateVideoFormats>;
-  try{operations=negotiateVideoFormats(source.pixelFormat,negotiatedSteps,target,[...registrationOrder.map(index=>index+offset),...(negotiation.inputTrim?[0]:[]),...(negotiation.outputSize?[steps.length+offset]:[])]);}catch(error){throw new VideoFilterError(error instanceof Error?error.message:'Video format negotiation failed');}
+  try{operations=negotiateVideoFormats(legacyRange?requestedFormat:source.pixelFormat,negotiatedSteps,target,[...registrationOrder.map(index=>index+offset),...(negotiation.inputTrim?[0]:[]),...(negotiation.outputSize?[steps.length+offset]:[])]);}catch(error){throw new VideoFilterError(error instanceof Error?error.message:'Video format negotiation failed');}
   for(const next of operations){
    const op=videoOperator(next.step.name)!;if(op.bypass?.(next.step,width,height))continue;
    let size={width,height};if(op.geometry)try{size=op.geometry(next.step,[{format:pixelFormat,width,height}]);}catch(error){throw new VideoFilterError(error instanceof Error?error.message:`Invalid ${next.step.name} geometry`);}

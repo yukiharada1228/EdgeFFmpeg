@@ -22,7 +22,7 @@ export const transposeOperator=defineVideoOperator<TransposeStep>({name:'transpo
   if(direction&4){direction&=3;passthrough=1;}
   return singlePad(Object.freeze({name:'transpose',direction,passthrough}));
  },
- formats:()=>formats,bypass:passthrough,
+ formats:()=>formats,jpegSiblings:true,bypass:passthrough,
  geometry:(step,[input])=>passthrough(step,input!.width,input!.height)?{width:input!.width,height:input!.height}:{width:input!.height,height:input!.width},
  timedGeometry(step,{input}){let width=input.width,height=input.height,aspect=input.sampleAspectRatio;if(!passthrough(step,width,height)){[width,height]=[height,width];if(aspect?.num)aspect=Object.freeze({num:aspect.den,den:aspect.num});}return {width,height,sampleAspectRatio:aspect};},
  frame:(frame,step,options)=>transposeVideoFrame(frame,step.direction as 0|1|2|3,options),
