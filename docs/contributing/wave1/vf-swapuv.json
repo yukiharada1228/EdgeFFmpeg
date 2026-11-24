@@ -1,0 +1,204 @@
+{
+ "capabilityId": "filter.swapuv",
+ "slug": "vf-swapuv",
+ "status": "partial",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/swapuv.ts",
+  "packages/avfilter/NOTICE-SWAPUV",
+  "tests/unit/video-swapuv.test.ts",
+  "tests/differential/video-swapuv.test.ts",
+  "docs/contributing/swapuv.md",
+  "docs/contributing/wave1/vf-swapuv.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {swapuvOperator} from './swapuv.js';",
+    " swapuvOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-swapuv.test.ts",
+   "title": "parses bare swapuv and refuses every option, enable= and runtime commands before planning",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-swapuv.test.ts",
+   "title": "swaps chroma into owned tight planes from padded input without mutating it",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-swapuv.test.ts",
+   "title": "plans swapuv with native auto-conversion and runs it on the linear chain",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-swapuv.test.ts",
+   "title": "rejects unsupported layouts, budgets, malformed storage and cancellation explicitly",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-swapuv.test.ts",
+   "title": "matches native -vf swapuv rawvideo and framecrc across formats sizes and time scopes",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-swapuv.test.ts",
+   "title": "matches native -filter_complex swapuv split branches through the media and timed backends",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-swapuv.test.ts",
+   "title": "matches native swapuv frame by frame through replay streams and activation actors",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-swapuv.test.ts",
+   "title": "refuses swapuv options and timeline before opening outputs on every backend",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-swapuv.test.ts",
+   "title": "records the native gray and packed-alpha conversions that fall outside the negotiation table",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "all 8 tests",
+   "pass": 8,
+   "fail": 0
+  }
+ ],
+ "nativeComparisons": [
+  {
+   "count": 252,
+   "compares": "-vf swapuv / swapuv,hflip / format=yuv422p,swapuv through the media backend, rawvideo and framecrc bytes, 7 sources x 3 sizes, with and without -ss/-t, 3 frames"
+  },
+  {
+   "count": 504,
+   "compares": "252 native -filter_complex split graphs, both outputs byte-compared (rawvideo and framecrc) through the media backend and the timed backend"
+  },
+  {
+   "count": 126,
+   "compares": "63 native rawvideo outputs each compared frame by frame against createReplayVideoExecution and createFrameActors"
+  },
+  {
+   "count": 10,
+   "compares": "native auto_scale target format for swapuv vs the EdgeFFmpeg plan (documents the gray/alpha-RGB gap)"
+  }
+ ],
+ "unsupported": [
+  "enable= timeline expressions and every option",
+  "runtime commands",
+  "native-equivalent auto-conversion of gray (native yuvj444p) and rgba/bgra/argb/abgr (native yuva444p): these are accepted but convert to a different table format and diverge from native",
+  "planar YUV formats outside the negotiation table (yuv410p, yuv411p, high bit depth, yuvj*, yuva422p/444p)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": [
+  "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+  "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+  "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+ ],
+ "finalUnitFailures": [
+  "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+  "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+  "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+ ],
+ "proposedContracts": [
+  {
+   "id": "filter.swapuv.cli",
+   "file": "tests/differential/video-swapuv.test.ts",
+   "name": "matches native -vf swapuv rawvideo and framecrc across formats sizes and time scopes",
+   "modes": [
+    "linear"
+   ],
+   "scope": "yuv420p/yuv422p/yuv444p/yuva420p plus nv12/rgb24/gbrp under -cpuflags 0; 5x3,7x5,8x6; rawvideo/framecrc; -ss/-t"
+  },
+  {
+   "id": "filter.swapuv.graph",
+   "file": "tests/differential/video-swapuv.test.ts",
+   "name": "matches native -filter_complex swapuv split branches through the media and timed backends",
+   "modes": [
+    "graph",
+    "timed"
+   ],
+   "scope": "split branches with hflip/vflip/format=yuv422p, media and timed backends"
+  },
+  {
+   "id": "filter.swapuv.stream",
+   "file": "tests/differential/video-swapuv.test.ts",
+   "name": "matches native swapuv frame by frame through replay streams and activation actors",
+   "modes": [
+    "stream",
+    "actor"
+   ],
+   "scope": "replay streams and activation actors, 3 frames"
+  },
+  {
+   "id": "filter.swapuv.refusals",
+   "file": "tests/differential/video-swapuv.test.ts",
+   "name": "refuses swapuv options and timeline before opening outputs on every backend",
+   "modes": [
+    "linear",
+    "graph",
+    "timed"
+   ],
+   "scope": "enable= and options refused before outputs open"
+  },
+  {
+   "id": "filter.swapuv.negotiation-gap",
+   "file": "tests/differential/video-swapuv.test.ts",
+   "name": "records the native gray and packed-alpha conversions that fall outside the negotiation table",
+   "modes": [
+    "linear"
+   ],
+   "scope": "native gray->yuvj444p and alpha RGB->yuva444p are outside the table"
+  }
+ ],
+ "notes": [
+  "All five paths are flagged; actor and timed are proven through createFrameActors and the timed CLI backend.",
+  "Status is partial: native auto-converts gray to yuvj444p and packed alpha RGB to yuva444p. Matching that needs a shared edit, which was not made: add yuvj444p and yuva444p to negotiationOrder/descriptors in packages/avfilter/src/video-ops/formats.ts and pixelLayout, or add a descriptor hook that sees the pre-conversion source format so swapuv can refuse those sources. Until then, swapuv on those inputs runs but diverges from native. The registry examples therefore start with an explicit format=.",
+  "The spec asked for gray/rgba sources. They were replaced by rgb24/gbrp in the byte comparisons because of the gap, and the gap itself is pinned by a native test.",
+  "Setup durations: submodule 51s, npm ci 9s, reference:build 198s.",
+  "Baseline: typecheck, lint and boundaries clean; 13 unit failures (FLAC artifacts, resample-checkpoint macOS digests), unchanged after the change."
+ ]
+}
