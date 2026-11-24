@@ -23,7 +23,8 @@ constants `default`, `max`, `min`, `none` and `all`. Terms may be declared names
 decimal/`0x` integers up to 4294967295. `negate_alpha` uses the LP64 `strtol` and
 signed32 narrowing of `AV_OPT_TYPE_BOOL`, including empty and named values.
 
-Native configuration semantics are retained and checked before file I/O:
+Native configuration semantics are retained and checked before any output is
+opened:
 
 - Exactly `0x77` (the default, `default`, `119` or `y+u+v+r+g+b`) skips the
   availability check; YUV/gray planes 0-2 are negated and `negate_alpha` adds plane 3.
@@ -38,8 +39,11 @@ Native configuration semantics are retained and checked before file I/O:
 
 Unsupported forms fail explicitly: `enable` timeline expressions, generic filter
 context options such as `threads`, av_expr flag terms (`y*2`, `1e1`, `++y`, `(y)`),
-flag values longer than 255 characters, runtime commands, 9-16 bit and other
-undeclared formats, and negative-stride input.
+flag values longer than 255 characters, undeclared formats and strides shorter
+than a row, including negative strides. Runtime commands fail because `sendcmd` is
+not implemented. 9-16 bit rawvideo input is refused as an unsupported pixel format
+before negate is reached. Neither case has a committed test; the unit tests cover
+undeclared formats only for nv12, nv21, pal8, monob and rgb0.
 
 ## Evidence
 

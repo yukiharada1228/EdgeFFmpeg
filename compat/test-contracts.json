@@ -8432,5 +8432,403 @@
       "runtime"
     ],
     "scope": "Local workerd Workflows + SQLite coordinator + R2: s16 FIR stereo 44100->48000 asetnsamples=n=64:p=1, 600 samples in 15 units across a stale owner, dropped ack and full restart, then orphan collection and finalize; 5 fault-free cases including equal-rate f32/s16/f32; WAV byte-identical to pinned native for these 6 cases only; tagged and 300-unit inputs refused at validation with no objects written. Not production Workflows."
+  },
+  {
+    "id": "filter.adelay-parse",
+    "file": "tests/unit/adelay.test.ts",
+    "name": "parses positional and named options, skips empty fields and defers unsupported tokens to the channel that reads them",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "TypeScript parser contract: positional and named delays/all, skipped empty fields, fractional s/S suffixes read as milliseconds; unsupported tokens (ms suffix, exponent, sign, nan/inf, hex, leading whitespace, beyond signed64) are kept per channel and fail only when that channel reads them; malformed option forms throw AudioDelayError. Native acceptance is compared in the differential contracts."
+  },
+  {
+    "id": "filter.adelay-resolution",
+    "file": "tests/unit/adelay.test.ts",
+    "name": "resolves per-channel delays with float32 arithmetic truncated toward zero and native defaults for missing channels",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "float32 delay*rate/divisor truncated toward zero (110.839 ms at 11025 Hz -> 1222, 1523 s at 11025 Hz -> 16791076), missing channels undelayed, all=1 repetition, padding/flush plan, signed64 bound and invalid rate/channel/missing channel count rejection. No native comparison in this test."
+  },
+  {
+    "id": "filter.adelay-planning",
+    "file": "tests/unit/adelay.test.ts",
+    "name": "plans counts, packet sections and buffers in the filter rate, and rejects stateless or resampled use",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Output counts, buffers and packet sections ({padding,2048} and {flush,2048} around upstream sections) in the filter rate after asetrate; planning without a channel count, stateless apply() and sample-rate conversion are rejected; an equal-rate boundary is null. No native comparison in this test."
+  },
+  {
+    "id": "filter.adelay-negotiation",
+    "file": "tests/unit/adelay.test.ts",
+    "name": "negotiates the planar input precision and reproduces native fixed-volume precision when adelay blocks the encoder format",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Planar input precision (s16p, fltp), native s32p/s32 selection for fixed volume on floating input that shares a format-merge component with adelay, explicit rejection with a following integer aformat, and required scalar rounding. Native output is compared in filter.adelay-framecrc."
+  },
+  {
+    "id": "filter.adelay-rings",
+    "file": "tests/unit/adelay.test.ts",
+    "name": "streams per-channel delays through rings identically to a naive shift for packed/planar inputs and arbitrary frame sizes",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "u8/s16/dbl packed and s32p/fltp planar, three channels, four delay lists including ring wraps and delays above 2048, seven frame sizes: output equals a naive per-channel shift with 0x80/zero silence, contiguous PTS from the input origin, owned storage, untouched input and leading silence in chunks of at most 2048 samples. Reference is a naive shift, not native."
+  },
+  {
+    "id": "filter.adelay-limits",
+    "file": "tests/unit/adelay.test.ts",
+    "name": "emits configured silence for empty input and enforces allocation, format, timestamp and cancellation limits",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Configured empty input emits u8p leading silence and flush; a missing empty-input descriptor, ring and frame allocation limits, a rate change, unaligned timestamps, s24 input, malformed planes, a zero allocation limit and cancellation (source closed) fail explicitly; parsed settings are frozen."
+  },
+  {
+    "id": "filter.adelay-framecrc",
+    "file": "tests/differential/adelay.test.ts",
+    "name": "matches native framecrc bytes and timestamps across formats, channel counts, delay lists and composed chains",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "referenceOptions": [
+      "-cpuflags",
+      "0"
+    ],
+    "scope": "540 CLI cases: u8/s16/s32/f32/f64 raw sources at 8000 Hz, 1/2/3 channels, native and pcm_s16le targets, 20 chains (per-channel lists, all, named options, 2100-sample delays, asetnsamples, apad before/after, fixed/double volume, asetrate, planar aformat, nested and zero adelay). Entire -bitexact framecrc matches pinned native. No s24/companded sources or rate conversion."
+  },
+  {
+    "id": "filter.adelay-time",
+    "file": "tests/differential/adelay.test.ts",
+    "name": "matches native input/output time selection and frame limits over leading silence, delayed input and flush sections",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "referenceOptions": [
+      "-cpuflags",
+      "0"
+    ],
+    "scope": "192 CLI cases: s16/f64, mono/stereo, four chains and twelve input/output -ss/-t/-to/-frames:a profiles across leading silence, delayed input and flush sections; entire framecrc matches pinned native."
+  },
+  {
+    "id": "filter.adelay-empty",
+    "file": "tests/differential/adelay.test.ts",
+    "name": "matches native output for empty input, where only leading silence and flush remain",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "referenceOptions": [
+      "-cpuflags",
+      "0"
+    ],
+    "scope": "48 empty raw-input cases: u8/f32 stereo, six chains (including apad and asetnsamples after adelay) and four output profiles; entire framecrc matches pinned native. Only framecrc is compared; native's NOPTS-derived internal timestamps are not."
+  },
+  {
+    "id": "filter.adelay-files",
+    "file": "tests/differential/adelay.test.ts",
+    "name": "writes native-identical WAV, AIFF and raw PCM files from WAV and raw inputs",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "referenceOptions": [
+      "-cpuflags",
+      "0"
+    ],
+    "scope": "60 whole-file cases: five PCM formats, two chains, raw and native-written WAV inputs, -bitexact WAV/AIFF (pcm_s16be)/raw outputs; complete file bytes match pinned native. No AU output comparison."
+  },
+  {
+    "id": "filter.adelay-rounding",
+    "file": "tests/differential/adelay.test.ts",
+    "name": "matches native float32 millisecond/second rounding, suffix fallbacks, empty fields and unread tokens",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "98 cases with default CPU flags: 19 millisecond/second/suffix/empty-field forms with all=1 at 8000/11025/22050/44100/48000 Hz stereo s16, 1523 s at 11025 Hz (16791076 delay samples, also counted in the native framecrc) and two mono chains with unread invalid tokens; entire framecrc matches pinned native."
+  },
+  {
+    "id": "filter.adelay-refusals",
+    "file": "tests/differential/adelay.test.ts",
+    "name": "fails explicitly before output for native errors, unimplemented delay forms and unsupported combinations",
+    "modes": [
+      "semantic"
+    ],
+    "referenceOptions": [
+      "-cpuflags",
+      "0"
+    ],
+    "scope": "18 refusals before output with native status asserted for each: 7 forms native also rejects (negative values, unparsable text, all=2, an extra positional value, a positional value after a named one, an unknown option) and 11 native-valid forms or combinations (ms suffix, exponent, sign, -0, nan, hex, all=yes, escaping, -ar rate conversion, fixed volume with an integer aformat on float input in two placements). No output file is created; the negative, unparsable and all=2 cases assert only failure, the other 14 also an adelay diagnostic."
+  },
+  {
+    "id": "filter.adelay-budgets",
+    "file": "tests/differential/adelay.test.ts",
+    "name": "keeps native output under small physical I/O budgets and rejects delay rings above the buffer budget",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "referenceOptions": [
+      "-cpuflags",
+      "0"
+    ],
+    "scope": "36 CLI cases at 128/512-byte read, write and buffer budgets: u8/s16/f64, mono/stereo, three chains; entire framecrc matches pinned native. A 4000-sample stereo ring fails with resource-budget and no output at both budgets."
+  },
+  {
+    "id": "filter.adelay-remix",
+    "file": "tests/differential/adelay.test.ts",
+    "name": "matches native stereo/mono channel conversion after adelay under the pinned rematrix arithmetic profile",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "referenceOptions": [
+      "-cpuflags",
+      "0"
+    ],
+    "scope": "48 CLI cases: u8/s16/f32 sources, stereo-to-mono and mono-to-stereo -ac after four adelay chains, pcm_s16le/pcm_f32le output; entire framecrc matches pinned native under the pinned rematrix arithmetic profile (tests/helpers/remix-profile.ts)."
+  },
+  {
+    "id": "filter.adelay-flac-timed-refusal",
+    "file": "tests/integration/flac-timed-filters.test.ts",
+    "name": "rejects timed FLAC scheduling before publication: adelay=1 ",
+    "modes": [
+      "semantic"
+    ],
+    "referenceOptions": [
+      "-cpuflags",
+      "0"
+    ],
+    "scope": "One timed FLAC command (-t 0.001) with adelay=1 fails with unsupported-command and the timed FLAC scheduling diagnostic after one input open and before any output open. Refusal only; untimed FLAC input with adelay has no committed comparison."
+  },
+  {
+    "id": "w64.chunk-walk",
+    "file": "tests/unit/w64.test.ts",
+    "name": "walks W64 GUID chunks with bounded reads skips unknown chunks without payload reads and seeks",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Synthetic file with a 4093-byte unknown chunk, fmt, fact, data and a trailing chunk: 2-byte reads, only GUID headers, fmt payload and fact count read on open, packet reads confined to the data range, seek beyond EOF refused, detection and probe. No native claim."
+  },
+  {
+    "id": "w64.detection",
+    "file": "tests/unit/w64.test.ts",
+    "name": "detects W64 only from the native riff and wave GUIDs over more than forty bytes",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "A 40-byte prefix and wrong riff/wave GUIDs fail probing and detection; a zero budget is rejected; RIFF/WAVE input keeps the four-byte WAV probe. Synthetic inputs."
+  },
+  {
+    "id": "w64.fmt-mapping",
+    "file": "tests/unit/w64.test.ts",
+    "name": "maps W64 fmt payloads like WAV and keeps the alignment padding inside the data size as native does",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "8/16/24/32-bit integer PCM, WAVE_FORMAT_EXTENSIBLE float with canonical and non-canonical masks, A-law with a fact count and 8-byte padded data counted as samples, and a walk that ends at a chunk size of 24 or less after data. Synthetic inputs."
+  },
+  {
+    "id": "w64.refusals",
+    "file": "tests/unit/w64.test.ts",
+    "name": "rejects malformed limited metadata-bearing and partial-frame W64 explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Explicit refusals: truncated header, wrong GUIDs, riff size below 72, small and overflowing chunk sizes, multiple fmt/data, data before fmt, truncated data, short fact, summary-list metadata, partial final sample frame, read budget, unsupported encoding, invalid alignment, truncated fmt, missing chunks, chunk-count limit, zero read limit and cancellation."
+  },
+  {
+    "id": "w64.mux-bounds",
+    "file": "tests/unit/w64.test.ts",
+    "name": "writes W64 headers in bounded chunks pads data to eight bytes and aborts failed output exactly once",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Header sizes and 8-byte data padding with writes of at most 5 bytes; empty mu-law output with a 32-byte fact chunk counting 0 and data size 24; duration, timestamp and length failures abort exactly once without commit; cancellation, write limit, 64-bit size limit and the eight supported codecs."
+  },
+  {
+    "id": "w64.mux-demux-files",
+    "file": "tests/differential/w64.test.ts",
+    "name": "matches native W64 mux bytes and native-written W64 demux for eight codecs rates channel counts and odd lengths",
+    "modes": [
+      "semantic",
+      "bit-exact",
+      "bit-exact-pcm"
+    ],
+    "scope": "192 -bitexact -f w64 outputs (eight PCM/G.711 codecs, 1/2/3 channels, 8000/96000 Hz, 1/3/8/67 samples) byte-identical to pinned native. For the 146 native-written files whose padded data is whole frames, info, packet bytes (native -c:a copy raw), copy framecrc, -cpuflags 0 s16le decode and W64 copy match; the other 46 are refused with 'partial sample frame' (native emits a short final packet). 128-byte I/O."
+  },
+  {
+    "id": "w64.packet-timing",
+    "file": "tests/differential/w64.test.ts",
+    "name": "matches W64 native packet timing for copy seek duration frame limits filters and WAV conversion",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "referenceOptions": [
+      "-cpuflags",
+      "0"
+    ],
+    "scope": "192 cases from native-written stereo 8000 Hz W64 in eight codecs: four input/output seek, duration and -frames:a profiles, copy or fixed volume/asetnsamples/asetrate, framecrc/W64/WAV outputs byte-identical to pinned native; 16 seeks at or beyond EOF refused with unsupported-seek. 128-byte I/O."
+  },
+  {
+    "id": "w64.routing",
+    "file": "tests/differential/w64.test.ts",
+    "name": "selects W64 by extension and declaration converts from WAV and refuses unsupported W64 requests explicitly",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "Five native byte comparisons: .w64 extension from WAV without -bitexact, -f w64 pcm_f32le with -fflags +bitexact, W64 to WAV pcm_s24le, empty A-law and -frames:a 0 mu-law. Three requests native also rejects (native-written empty W64, -f w64 on WAV input, pcm_s16be W64 output) fail with explicit codes and no outputs. 64-byte I/O."
+  },
+  {
+    "id": "w64.workers",
+    "file": "tests/workers/w64.test.ts",
+    "name": "matches Native W64 mux, auto-detected demux and W64-to-WAV bytes inside workerd with bounded I/O",
+    "modes": [
+      "bit-exact",
+      "semantic",
+      "runtime"
+    ],
+    "scope": "48 local workerd (Miniflare) cases: eight codecs at 8000/96000 Hz stereo, mux from raw s16le, auto-detected copy framecrc and -cpuflags 0 W64 to WAV pcm_s16le; bytes match pinned native, output committed, reads and writes at most 64 bytes; pcm_s16be W64 output refused uncommitted. In-memory filesystem, not R2; not production Workers."
+  },
+  {
+    "id": "video.negate-options-api",
+    "file": "tests/unit/video-negate.test.ts",
+    "name": "parses declared defaults, shorthand, flag folding and boolean narrowing into frozen settings",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "TypeScript parser: default 0x77, shorthand components/negate_alpha, repeated keys and +/- flag folding, all/none constants, 0x and 4294967295 wraparound, signed32 negate_alpha narrowing; malformed, timeline, generic context, av_expr and over-long values rejected. Native acceptance is compared in video.negate-options."
+  },
+  {
+    "id": "video.negate-frame-api",
+    "file": "tests/unit/video-negate.test.ts",
+    "name": "materializes owned tight negated planes from padded input without changing timestamps or metadata",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Padded gray input yields owned tight negated planes with copied PTS and metadata and untouched input; components=none copies; packed argb r+a and yuva420p negate_alpha=1 select the expected bytes/planes. No native comparison in this test."
+  },
+  {
+    "id": "video.negate-limits",
+    "file": "tests/unit/video-negate.test.ts",
+    "name": "rejects unsupported layouts, unavailable components, budgets, malformed storage and cancellation explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Undeclared layouts (nv12, nv21, pal8, monob, rgb0), unavailable components, allocation and storage limits, malformed strides, invalid time base and settings, and cancellation fail explicitly; the declared format list is frozen."
+  },
+  {
+    "id": "video.negate-planners",
+    "file": "tests/unit/video-negate.test.ts",
+    "name": "preflights negate through linear and branch planners and rejects the timed actor executors",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Linear plan with zero state and 45 intermediate bytes and its budget check, branch negotiation of NV12 to yuv420p before negate, unavailable-component rejection, timed actor executor rejection ('Actor operators not implemented') with no output written."
+  },
+  {
+    "id": "video.negate-launcher",
+    "file": "tests/integration/video-negate.test.ts",
+    "name": "runs linear video negation and format conversion through the staged Node launcher",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "16 complete native raw/framecrc outputs through the actual Node launcher and staged filesystem: four source/target pairs, two chains (negate; format=nv12,negate=negate_alpha=1,scale=13:7,hflip), -ss 0.02 -t 0.05, reference pixel arithmetic profile."
+  },
+  {
+    "id": "video.negate-layouts",
+    "file": "tests/differential/video-negate-helper.test.ts",
+    "name": "matches native negate components and alpha policy across every supported plane layout",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "1,440 native runs: twelve declared layouts, six geometries and twenty option sets; 726 raw byte matches with exact bigint PTS and 714 matching 'Requested components not available' rejections."
+  },
+  {
+    "id": "video.negate-options",
+    "file": "tests/differential/video-negate-options.test.ts",
+    "name": "matches native negate option parsing, component availability and malformed option rejection",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "248 option/format cases (62 option strings over gray, rgba, yuva420p and gbrp) with identical native acceptance; the 116 accepted outputs match native raw bytes."
+  },
+  {
+    "id": "video.negate-unimplemented",
+    "file": "tests/differential/video-negate-options.test.ts",
+    "name": "rejects native-valid negate forms that remain unimplemented instead of dropping them",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "28 explicit rejections of timeline enable, threads and av_expr component terms (seven forms over four formats), 20 of which native accepts. Refusal only."
+  },
+  {
+    "id": "video.negate-graphs",
+    "file": "tests/differential/video-negate-graph.test.ts",
+    "name": "matches native linear negate with negotiated conversion across every declared format pair",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "10,080 linear cases: 14 sources including nv12/nv21, two geometries, implicit and 14 explicit targets, six chains with flips, scale and format lists, two output sizes and default/scalar arithmetic; 8,936 raw byte matches with exact PTS and 1,144 matching component-availability rejections."
+  },
+  {
+    "id": "video.negate-plan",
+    "file": "tests/differential/video-negate-graph.test.ts",
+    "name": "plans negate as a format-preserving stage with semiplanar conversion and explicit component failures",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "NV12 input plans a yuv420p conversion before negate, negate stages hold no state and frozen settings, RGBA to NV12 converts after negate, and six unavailable-component chains are rejected. No native comparison in this test."
+  },
+  {
+    "id": "video.negate-cli",
+    "file": "tests/differential/video-negate-cli.test.ts",
+    "name": "matches native negate CLI outputs across negotiated formats timing and size scopes",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "384 complete raw/framecrc CLI outputs: eight source/target pairs, four chains, two sizes and three input/output time profiles; 11-byte reads and committed output."
+  },
+  {
+    "id": "video.negate-complex",
+    "file": "tests/differential/video-negate-cli.test.ts",
+    "name": "matches native complex negate branches across mapping and output scopes",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "48 -filter_complex commands with two mapped outputs each (96 outputs): four sources, three split/negate/hflip/transpose graphs, raw/framecrc and two time profiles; every output committed and byte-identical to native."
+  },
+  {
+    "id": "video.negate-cli-rejection",
+    "file": "tests/differential/video-negate-cli.test.ts",
+    "name": "fails like native for unavailable negate components before opening CLI outputs",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Seven linear and complex commands that native rejects with 'Requested components not available', including chroma components after a semiplanar conversion boundary with an RGB sink, fail with no output opened."
+  },
+  {
+    "id": "video.negate-replay",
+    "file": "tests/differential/video-negate-stream.test.ts",
+    "name": "matches native replayed negate branches and joins frame by frame",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "16 replay executions: four source/target pairs and four graphs including split, hstack join and nullsink branches; concatenated raw frames match native and PTS are 0, 1, 2."
   }
 ]

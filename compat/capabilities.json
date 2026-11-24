@@ -22844,9 +22844,13 @@
       "id": "demuxer.w64",
       "kind": "demuxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/w64.test.ts",
+        "tests/differential/w64.test.ts",
+        "tests/workers/w64.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -22855,7 +22859,8 @@
         "name": "w64",
         "kind": "demuxer",
         "flags": "DE"
-      }
+      },
+      "notes": "Finite Sony Wave64 input for the eight WAV PCM/G.711 codecs: bounded GUID chunk walk to EOF, native alignment padding counted as samples, detection from the riff/wave GUIDs and -f w64; seeks, packet budgets and timestamps follow the WAV PCM path, including its seek-at/beyond-EOF refusal. Native evidence on the macOS arm64 reference: 146 native-written files demux to identical info, packets, copy framecrc, s16le decode and W64 copy; 192 timing/filter outputs from native-written W64; W64 to WAV routing; 32 local workerd copy framecrc and W64-to-WAV cases with an in-memory filesystem. Files whose padded data is not a whole number of frames (46 of the 192 native-written test files; native emits a short final packet), summary-list metadata, multiple fmt/data chunks, data before fmt, data past EOF, short fact chunks and unsupported encodings fail explicitly; native-written empty files fail as natively. R2-backed I/O, Linux reference and production Workers are unverified."
     },
     {
       "id": "demuxer.wady",
@@ -26526,9 +26531,13 @@
       "id": "filter.adelay",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/adelay.test.ts",
+        "tests/differential/adelay.test.ts",
+        "tests/integration/flac-timed-filters.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -26536,7 +26545,8 @@
       "reference": {
         "name": "adelay",
         "flags": "T."
-      }
+      },
+      "notes": "Finite per-channel delays in the bounded linear audio chain for WAV/AIFF/raw PCM/framecrc CLI paths and delayAudio: <n>S samples, <n>s seconds and decimal milliseconds with native float32 truncation, skipped empty fields, unread tokens and all=1. Leading silence and the final flush are emitted in chunks of at most 2048 samples and drive packet sections, output seek/duration and -frames:a; adelay negotiates the planar input precision. Native evidence on the macOS arm64 reference: 1022 byte-exact framecrc/file comparisons (540 chain, 192 time/frame-limit, 48 empty-input, 60 WAV/AIFF/raw file, 98 rounding/suffix, 36 small-budget and 48 channel-conversion cases) plus 18 explicit refusals with native status asserted. Signs, exponents, hex, nan/inf, trailing text, escaping, extra or misplaced positional values, stateless apply(), sample-rate conversion with adelay and fixed volume with a following integer aformat on float input fail explicitly; timed FLAC input is refused before output. Untimed FLAC input is accepted without native comparison; s24/companded sources and AU output are not compared. Local workerd covers only the timed FLAC refusal; no workerd output, Linux reference or production evidence."
     },
     {
       "id": "filter.adenorm",
@@ -31117,9 +31127,17 @@
       "id": "filter.negate",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/video-negate.test.ts",
+        "tests/differential/video-negate-helper.test.ts",
+        "tests/differential/video-negate-options.test.ts",
+        "tests/differential/video-negate-graph.test.ts",
+        "tests/differential/video-negate-cli.test.ts",
+        "tests/differential/video-negate-stream.test.ts",
+        "tests/integration/video-negate.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -31127,7 +31145,8 @@
       "reference": {
         "name": "negate",
         "flags": "TS"
-      }
+      },
+      "notes": "Pinned vf_negate semantics for the twelve declared 8-bit layouts (gray, yuv420p/422p/444p, yuva420p, six packed RGB, gbrp) in the linear chain, branch graph and replay executors, with automatic NV12/NV21 conversion. components and negate_alpha follow native flag folding, the 0x77 default exception, packed rgba-map byte selection and component availability errors. Native evidence on the macOS arm64 reference: 1440 helper runs (726 byte matches, 714 matching rejections), 248 option cases with identical acceptance (116 byte matches) and 28 explicit refusals, 10080 negotiated linear cases (8936 byte matches, 1144 matching rejections), 384 CLI outputs, 96 outputs of 48 complex commands, 7 CLI rejections before output, 16 replay and 16 Node launcher outputs. Timeline enable, the generic threads option, av_expr flag terms, undeclared formats (including nv12/nv21 frames without conversion) and malformed storage fail explicitly; timed actor executors reject negate. MP4/H264 processing has no negate comparison. No workerd, Linux reference or production evidence."
     },
     {
       "id": "filter.nlmeans",
@@ -36955,9 +36974,13 @@
       "id": "muxer.w64",
       "kind": "muxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/w64.test.ts",
+        "tests/differential/w64.test.ts",
+        "tests/workers/w64.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -36966,7 +36989,8 @@
         "name": "w64",
         "kind": "muxer",
         "flags": "DE"
-      }
+      },
+      "notes": "Finite W64 output for the eight WAV PCM/G.711 codecs with a known sample count, sequential writes, native seekable-trailer sizes and fact count (0 for empty output), the shared native-profile WAV fmt layout, packet validation and transactional commit/abort; .w64 extension and -f w64 select it, and other codecs are refused before output. Native evidence on the macOS arm64 reference: 192 byte-exact -bitexact files (eight codecs, 1-3 channels, 8000/96000 Hz, four lengths), 64 W64 outputs among 192 timing/filter cases, four routing outputs and 16 local workerd mux cases with an in-memory filesystem. Pipe or non-seekable output (native placeholder sizes, no fact), unknown-length or checkpointed W64, FLAC decode to W64, the audio checkpoint pipeline, R2-backed output, Linux reference and production Workers are unverified."
     },
     {
       "id": "muxer.wav",

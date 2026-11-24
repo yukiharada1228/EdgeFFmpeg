@@ -23,7 +23,7 @@ it('runs timed FLAC sample-local filters through actual R2/workerd without Node 
   }
   const sentinel=Buffer.from('previous committed media');
   for(const [filter,...extra] of [['asetrate=16000'],['adelay=1'],['atrim=start_sample=1'],['asetrate=8000'],['apad=pad_len=7','-ar','16000']]){
-   await bucket.put('output/result.raw',sentinel);const result=await invoke(['-y','-cpuflags','0','-i','/input/input.flac','-t','0.001','-af',filter!,...extra,'-f','s16le','/output/result.raw']);expect(result.exitCode).not.toBe(0);expect(result.diagnostics[0]?.code,JSON.stringify(result.diagnostics)).toBe(filter!.startsWith('adelay')||filter!.startsWith('atrim')?'execution-failed':'unsupported-command');expect(result.diagnostics[0]?.message).toMatch(/filter|scheduling/i);expect(result.opens).toBe(0);expect(result.sha256).toBe(hash(sentinel));expect(result.outputs).toEqual([]);expect(result.stages).toBe(0);expect(result.multipartLive).toBe(0);
+   await bucket.put('output/result.raw',sentinel);const result=await invoke(['-y','-cpuflags','0','-i','/input/input.flac','-t','0.001','-af',filter!,...extra,'-f','s16le','/output/result.raw']);expect(result.exitCode).not.toBe(0);expect(result.diagnostics[0]?.code,JSON.stringify(result.diagnostics)).toBe(filter!.startsWith('atrim')?'execution-failed':'unsupported-command');expect(result.diagnostics[0]?.message).toMatch(/filter|scheduling/i);expect(result.opens).toBe(0);expect(result.sha256).toBe(hash(sentinel));expect(result.outputs).toEqual([]);expect(result.stages).toBe(0);expect(result.multipartLive).toBe(0);
   }
   const row=corpus.rows.find(row=>row.args.includes('wav')&&!row.id.includes('past-eof'))!;
   await bucket.put('source/input.flac',Buffer.from(row.input,'base64'));

@@ -3178,5 +3178,50 @@
       "tests/workers/h264-framecrc.test.ts"
     ],
     "notes": "72 self-owned progressive H264 streams (859 frames), CAVLC/CABAC, POC0/1/2, MMCO5, weighted/direct/reference-B prediction, 8x8 transforms and 1918x1078 crop. Raw API checks owned I420, int64 clocks/key/type/reset and resource profiles. MP4 CLI/R2 checks146 Native frame-limit/map cases plus16 resource/decode/input-change/old-output controls, including aborting uploaded multipart parts. No general H264/encoder, damaged-stream concealment, field/recovery, CFR/general-color-conversion, arbitrary fragmentation or production runtime certification. Explicit trusted independent ABI2 module; Native FFmpeg is a development oracle only. Typed codec resource failures retain their resource category and cause; cleanup errors are not relabeled as budget exhaustion. Bounded H264 decode to existing spatial filter/scale/format pipeline. 128 actual Node CLI comparisons under default/scalar arithmetic,18 large planar/semiplanar direct resize comparisons,20 workerd/R2 output comparisons and three processing budget/cancellation controls. Explicit passthrough timing; no general H264, full-range/color-metadata conversion, CFR, arbitrary graphs or production runtime certification. Per-picture VUI matrix now selects limited-range YUV-to-RGB coefficients, with72freshNative workerd/R2 matrix comparisons. Full-range RGB, general transfer/primaries conversion and production conformance remain incomplete. Actual NodeCLI automatic matrix negotiation matches32positive cases and tracks4Native BT2020-CL failures without substituting NCL coefficients. Explicit-passthrough H264 MP4 framecrc now has324base+15changed-clock+20aspect Native/NodeCLI comparisons and53Native workerd/R2 comparisons plus2rollback controls.27source-track clocks match FFprobe. Active SPS parameters include immutable SAR/nominal rate;container pasp takes precedence. Native-style399-rate estimation fixes the variable default clock counterexample. General CFR/auto synchronization,all probe termination/parameter-change cases,complete aspect/metadata/error semantics and production runtime remain unverified."
+  },
+  "filter.adelay": {
+    "implementation": "partial",
+    "runtime": "node",
+    "testCases": [
+      "tests/unit/adelay.test.ts",
+      "tests/differential/adelay.test.ts",
+      "tests/integration/flac-timed-filters.test.ts",
+      "tests/workers/flac-timed-filters.test.ts"
+    ],
+    "notes": "Finite per-channel delays in the bounded linear audio chain for WAV/AIFF/raw PCM/framecrc CLI paths and delayAudio: <n>S samples, <n>s seconds and decimal milliseconds with native float32 truncation, skipped empty fields, unread tokens and all=1. Leading silence and the final flush are emitted in chunks of at most 2048 samples and drive packet sections, output seek/duration and -frames:a; adelay negotiates the planar input precision. Native evidence on the macOS arm64 reference: 1022 byte-exact framecrc/file comparisons (540 chain, 192 time/frame-limit, 48 empty-input, 60 WAV/AIFF/raw file, 98 rounding/suffix, 36 small-budget and 48 channel-conversion cases) plus 18 explicit refusals with native status asserted. Signs, exponents, hex, nan/inf, trailing text, escaping, extra or misplaced positional values, stateless apply(), sample-rate conversion with adelay and fixed volume with a following integer aformat on float input fail explicitly; timed FLAC input is refused before output. Untimed FLAC input is accepted without native comparison; s24/companded sources and AU output are not compared. Local workerd covers only the timed FLAC refusal; no workerd output, Linux reference or production evidence."
+  },
+  "demuxer.w64": {
+    "implementation": "partial",
+    "runtime": "cloudflare",
+    "testCases": [
+      "tests/unit/w64.test.ts",
+      "tests/differential/w64.test.ts",
+      "tests/workers/w64.test.ts"
+    ],
+    "notes": "Finite Sony Wave64 input for the eight WAV PCM/G.711 codecs: bounded GUID chunk walk to EOF, native alignment padding counted as samples, detection from the riff/wave GUIDs and -f w64; seeks, packet budgets and timestamps follow the WAV PCM path, including its seek-at/beyond-EOF refusal. Native evidence on the macOS arm64 reference: 146 native-written files demux to identical info, packets, copy framecrc, s16le decode and W64 copy; 192 timing/filter outputs from native-written W64; W64 to WAV routing; 32 local workerd copy framecrc and W64-to-WAV cases with an in-memory filesystem. Files whose padded data is not a whole number of frames (46 of the 192 native-written test files; native emits a short final packet), summary-list metadata, multiple fmt/data chunks, data before fmt, data past EOF, short fact chunks and unsupported encodings fail explicitly; native-written empty files fail as natively. R2-backed I/O, Linux reference and production Workers are unverified."
+  },
+  "muxer.w64": {
+    "implementation": "partial",
+    "runtime": "cloudflare",
+    "testCases": [
+      "tests/unit/w64.test.ts",
+      "tests/differential/w64.test.ts",
+      "tests/workers/w64.test.ts"
+    ],
+    "notes": "Finite W64 output for the eight WAV PCM/G.711 codecs with a known sample count, sequential writes, native seekable-trailer sizes and fact count (0 for empty output), the shared native-profile WAV fmt layout, packet validation and transactional commit/abort; .w64 extension and -f w64 select it, and other codecs are refused before output. Native evidence on the macOS arm64 reference: 192 byte-exact -bitexact files (eight codecs, 1-3 channels, 8000/96000 Hz, four lengths), 64 W64 outputs among 192 timing/filter cases, four routing outputs and 16 local workerd mux cases with an in-memory filesystem. Pipe or non-seekable output (native placeholder sizes, no fact), unknown-length or checkpointed W64, FLAC decode to W64, the audio checkpoint pipeline, R2-backed output, Linux reference and production Workers are unverified."
+  },
+  "filter.negate": {
+    "implementation": "partial",
+    "runtime": "node",
+    "testCases": [
+      "tests/unit/video-negate.test.ts",
+      "tests/differential/video-negate-helper.test.ts",
+      "tests/differential/video-negate-options.test.ts",
+      "tests/differential/video-negate-graph.test.ts",
+      "tests/differential/video-negate-cli.test.ts",
+      "tests/differential/video-negate-stream.test.ts",
+      "tests/integration/video-negate.test.ts"
+    ],
+    "notes": "Pinned vf_negate semantics for the twelve declared 8-bit layouts (gray, yuv420p/422p/444p, yuva420p, six packed RGB, gbrp) in the linear chain, branch graph and replay executors, with automatic NV12/NV21 conversion. components and negate_alpha follow native flag folding, the 0x77 default exception, packed rgba-map byte selection and component availability errors. Native evidence on the macOS arm64 reference: 1440 helper runs (726 byte matches, 714 matching rejections), 248 option cases with identical acceptance (116 byte matches) and 28 explicit refusals, 10080 negotiated linear cases (8936 byte matches, 1144 matching rejections), 384 CLI outputs, 96 outputs of 48 complex commands, 7 CLI rejections before output, 16 replay and 16 Node launcher outputs. Timeline enable, the generic threads option, av_expr flag terms, undeclared formats (including nv12/nv21 frames without conversion) and malformed storage fail explicitly; timed actor executors reject negate. MP4/H264 processing has no negate comparison. No workerd, Linux reference or production evidence."
   }
 }

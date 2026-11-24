@@ -2609,3 +2609,171 @@ codecs, multiple outputs or parallel WorkUnits. The 9,216-case resampler and
 13,824-output WAV comparisons, the short-stream probe and the mutation harnesses
 remain scratch evidence. No Modal run, production Cloudflare execution,
 compatibility certification or capability promotion was performed.
+
+### Pilot integration: adelay, Wave64 and negate (2026-11-24)
+
+Three pilot branches were merged onto the validated base `47001fc`: `pilot/adelay`
+(`a851050`), `pilot/w64` (`cc12ee1`) and `pilot/negate` (`54fd558`), as merge
+commits `c98a95d`, `2c87423` and `4b48ec7`. The only conflict was one line in
+`packages/avformat/src/index.ts`: the `planPcmMemory` call. There, adelay counts
+itself among the buffer-allocating filter nodes (two payload slots, like volume
+and apad), and w64 adds 168 bytes of output scratch. Both edits were kept.
+
+`adelay` runs in the bounded linear audio chain for the WAV, AIFF, raw PCM and
+framecrc CLI paths and through `delayAudio`. Delay lists follow native
+`config_input`: `<n>S` samples, `<n>s` seconds, otherwise milliseconds, with
+fractional `s`/`S` suffixes falling back to milliseconds, float32 arithmetic
+truncated toward zero, unread tokens beyond the channel count and `all` repeating
+the last value. The common minimum delay is emitted as leading silence and the
+remaining maximum as a flush, both in chunks of at most 2048 samples, and these
+drive packet sections, output seek/duration and `-frames:a`. Against the pinned
+build, `tests/differential/adelay.test.ts` compares 1,022 framecrc or file outputs
+byte for byte: 540 chain, 192 time/frame-limit, 48 empty-input, 60 WAV/AIFF/raw
+file, 98 rounding/suffix, 36 small-budget and 48 channel-conversion cases. It also
+checks 18 refusals before output. Unimplemented delay syntaxes and the combination
+with sample-rate conversion fail explicitly. See [adelay](adelay.md).
+
+Wave64 demux and mux cover the eight WAV PCM/G.711 codecs, with `-f w64`, the
+`.w64` extension and detection from the native riff/wave GUIDs. The demuxer walks
+GUID chunks to EOF in bounded reads and, as native does, counts the muxer's
+alignment padding as samples. The muxer writes the sizes and fact count of
+native's seekable trailer. `tests/differential/w64.test.ts` compares 192 muxed
+files byte for byte (eight codecs, one to three channels, 8000/96000 Hz, four
+lengths). Of the 192 native-written files, 146 open with the expected header info
+(checked against computed values, not native output). Their packets, copy
+framecrc, s16le decode and W64 copy are byte-identical to native. The other 46
+have a partial final sample frame after padding, and EdgeFFmpeg refuses them
+explicitly ("partial sample frame"). For these files, native emits a final packet
+that ends in a partial frame. Only scratch probes show this; the test asserts the
+refusal alone. A further
+192 timing cases cover four seek/duration/frame-limit profiles, copy or a
+fixed-volume/asetnsamples/asetrate chain, and framecrc, W64 and WAV output.
+`tests/workers/w64.test.ts` runs 48 cases inside local workerd (mux, auto-detected
+copy framecrc and W64 to WAV for eight codecs at two rates) with at most 64-byte
+reads and writes over an in-memory filesystem, not R2. See
+[Wave64 support](w64-support.md).
+
+`negate` follows the standalone pinned `vf_negate.c` for its twelve declared
+8-bit layouts in the linear chain, branch graph and replay executors. NV12/NV21
+input receives an automatic conversion, and `components`/`negate_alpha` follow
+native flag folding, the `0x77` default exception, packed rgba-map selection and
+component availability errors. The native comparisons are: 1,440 helper runs
+(726 byte matches, 714 matching rejections); 248 option cases with identical
+acceptance (116 byte matches); 28 explicit refusals of unimplemented forms, 20 of
+which native accepts; 10,080 negotiated linear cases
+(8,936 byte matches, 1,144 matching rejections); 384 CLI outputs; 96 outputs from
+48 `-filter_complex` commands; 7 CLI rejections before output; 16 replay outputs
+and 16 Node launcher outputs. In total that is 12,267 native invocations. The timed
+actor executors reject `negate`. See [negate](negate.md).
+
+The first full run below was preceded by a scoped run of the two existing test
+files that name `adelay`. Both failed on the merged tree:
+`tests/integration/flac-timed-filters.test.ts` (1 of 43) and
+`tests/workers/flac-timed-filters.test.ts` (1 of 1). These tests used `adelay=1`
+as a filter the parser rejects (`execution-failed`) on a timed FLAC command. The
+parser now accepts adelay, so the timed FLAC check refuses it before any output
+opens with `unsupported-command` and the existing scheduling diagnostic, as it
+does `asetrate`. Only the expected code for adelay changed. The read, open,
+sentinel and staging assertions are unchanged, and `atrim` still covers the
+parser rejection. Probing beyond the committed tests showed that untimed FLAC input
+with adelay is accepted, not refused as `adelay.md` claimed. Scratch probes matched
+pinned native for 24 outputs, but the path has no committed comparison, and
+`adelay.md` now says so. FLAC rate conversion with adelay fails before output with
+adelay's own rate-conversion error. The adelay refusal test's comment also
+claimed that native accepts `5S:1:1`, `delays=5S:5S` and `5S:foo=1`, which the
+pinned build rejects. The test now asserts the native exit status of every
+refused form, and the doc's two lists were corrected.
+
+The full validation then ran once, sequentially, on one source snapshot (stable
+before and after) with Node v26.12.0 on macOS arm64:
+
+- `npm run check`: four TypeScript configurations, declarations, ESLint and
+  package boundaries passed; unit **2,602/2,602 tests across 204 files**.
+- `npm run test:workers`: **277/277 tests across 110 files**.
+- `npm run test:integration`: **2,081/2,081 tests across 83 files**.
+- `npm run test:differential`: **536/536 tests across 205 files**.
+- `npm run workers:bundle`: the dry-run bundle passed; nothing was deployed.
+  Wrangler's update check still contacted the npm registry. It reported 4.165.0
+  with 4.167.0 available. The log shows the dry run exiting before any upload,
+  with metrics disabled through `WRANGLER_SEND_METRICS=false`.
+
+That is **5,496/5,496 tests across 602 files, zero failures and zero skips**.
+Against the base's 5,459 tests across 590 files, the 37 added tests are the
+pilots' 15 unit, 1 Workers, 1 integration and 20 differential tests in 12 new
+files. The earlier report of 2,593 unit tests on the merged tree does not equal
+2,587 plus the 15 pilot unit tests and was not reproduced. It equals 2,587 plus
+only adelay's 6 unit tests. No log was retained to show which tree produced it.
+38 new scoped
+contracts cover the pilots' tests and the timed FLAC adelay refusal. All 830
+contracts (792 existing and 38 new) resolve to exactly one passed assertion under
+the compatibility report's matcher. They were checked against the clean run's own
+JSON reports, including the unit report written by the same `npm run check`
+invocation. Raw logs, JSON reports, the scoped prechecks, the scratch probes and
+the contract check are retained in the local, git-ignored
+`.build/pilot-integration/` directory. Its `receipt.json` records the
+source/reference hashes and the hash of each retained file.
+`compat/implementation-progress.json` gains `partial` entries for `filter.adelay`
+and `filter.negate` with runtime `node`, because neither has workerd output
+evidence, and for `demuxer.w64` and `muxer.w64` with runtime `cloudflare`, because
+of the local workerd cases. `compat/capabilities.json` was regenerated with
+`npm run reference:extract`; only those four entries changed. Nothing was promoted
+to `conformant` or `bitexact`.
+
+Open after this validation:
+
+- The pilots were launched with cloud ("remote") isolation but actually ran
+  locally in git worktrees on macOS arm64. No Linux or cloud evidence exists for
+  any of the three capabilities, and every native comparison above is against
+  the macOS arm64 reference only.
+- GitHub Actions CI did not start on this repository because of an account
+  billing/spending-limit block, so no CI run covers the merge.
+- A fresh checkout fails `npm run check` without the git-ignored
+  `.build/codecs/flac/edge-flac.wasm` (read by five unit files),
+  `.build/flac-investigation/native-cases.json` (two unit files) and the
+  `upstream/ffmpeg` submodule (`tests/unit/fate.test.js`).
+- Parallel pilot agents that shared one scratch directory overwrote each other's
+  files. This validation ran alone.
+- `npm run test:workers -- <file>` still runs the whole Workers suite, because the
+  script's own `tests/workers` filter matches every file. Scoped reruns need
+  `npx vitest run <file> --maxWorkers=1`.
+- The video executors pass a parsed step they have no branch for through
+  unchanged instead of refusing it. The negate pilot had to add explicit
+  branches to the linear, branch-graph and replay executors.
+- Untimed FLAC input with adelay, s24/companded adelay sources, AU output, MP4/H264
+  negate, R2-backed and pipe/non-seekable W64 I/O, checkpointed W64 and production
+  Workers have no committed comparison.
+- On that untimed FLAC path, the `processFlacAudioFilters` resident reservation
+  counts nothing for adelay's rings or output frames. Only `delayAudio`'s
+  `maxFrameBytes` checks bound them, at the buffer limit. The PCM CLI path counts
+  them through `planPcmMemory`.
+- `reference:extract` does not copy the progress `runtime` field, so
+  `compat/capabilities.json` still lists `cloudflare` for adelay and negate, as it
+  does for every capability.
+- No Modal run, production Cloudflare execution, compatibility certification or
+  capability promotion was performed.
+
+A later audit compared these records with the code, the tests and the retained
+logs. The per-test comparison counts were re-derived from the test sources. The
+suite totals came from the clean run's JSON reports, and the contract totals from
+the retained `contract-check.json`. All matched. Each pilot's differential tests
+compare against output from the pinned `.build/reference/ffmpeg`. Wording was
+corrected where it went beyond the tests:
+
+- `adelay.md`: the exact value for 110.839 ms at 11025 Hz is 1221.999975, not
+  1221.4. Native also rejects `inf`, which the doc had listed as native-valid.
+  Whitespace, timeline `enable` and runtime-command refusals were described too
+  broadly. The buffer accounting reports the longest ring, not each ring. The doc
+  did not say that the float32-midpoint refusal has no test, and did not mention
+  the FLAC reservation gap above.
+- `w64-support.md` and this section: the 146 files' info is checked against
+  computed header values, not against native. Native's behaviour on partial-frame
+  files comes from scratch probes only.
+- `negate.md`: runtime commands and 9-16 bit input fail outside negate and have
+  no committed test. The checks run before any output is opened; the tests do not
+  show they run before all file I/O.
+
+The audit's scratch probes ran the pinned macOS arm64 native and the EdgeFFmpeg
+Node CLI. They are not committed tests and are not retained in
+`.build/pilot-integration/`. The doc edits came after `receipt.json` was written, so
+its doc hashes and `changedAfterValidation` do not cover them. No test, contract
+or progress entry was changed by the audit.

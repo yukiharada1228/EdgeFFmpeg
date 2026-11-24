@@ -17,14 +17,16 @@ npm run ffmpeg -- --root ./media -- -i /input.wav -af 'adelay=10|1500S:all=1' /d
 | `<decimal>` | milliseconds |
 | `<decimal>s`, `<decimal>S` with a fraction (for example `1.5s`, `.5s`, `7.S`) | milliseconds. Native reads an integer followed by `.`, so these are not seconds or samples |
 
-Seconds and milliseconds follow `config_input`: the value is parsed as float32, `delay * sample_rate / div` is evaluated in float32, and the result is truncated toward zero. For example, 110.839 ms at 11025 Hz gives 1222 samples (the exact value is 1221.4), and 1523 s at 11025 Hz gives 16791076 samples. The sample rate is the rate at adelay's position in the chain, so a preceding `asetrate` applies. Decimals that land exactly on a float32 rounding midpoint in double precision are rejected rather than approximated.
+Seconds and milliseconds follow `config_input`: the value is parsed as float32, `delay * sample_rate / div` is evaluated in float32, and the result is truncated toward zero. For example, 110.839 ms at 11025 Hz gives 1222 samples (the exact value is 1221.999975, which would truncate to 1221), and 1523 s at 11025 Hz gives 16791076 samples. The sample rate is the rate at adelay's position in the chain, so a preceding `asetrate` applies. Decimals that land exactly on a float32 rounding midpoint in double precision are rejected rather than approximated. No committed test covers that rejection; a scratch probe saw it for `1.000000059604644775390625`, which native accepts.
 
 Channels without a value are not delayed. `all=1` copies the last value that was read to the remaining channels. As in native, values beyond the channel count are never parsed, so `adelay=5S|abc` is valid for mono input.
 
 Explicit failures:
 
-- Native rejects these too: negative values, unparsable text, and boolean values other than `0`, `1`, `false` and `true`.
-- Native accepts these, but they are unimplemented and fail with an `adelay` diagnostic before output is created: signs (`+5S`, `-0`), exponents, hexadecimal, `nan`/`inf`, trailing text such as `5ms`, whitespace, escaping, positional options after named ones, other boolean spellings, and runtime commands.
+- Native rejects these too: negative values, unparsable text, booleans its parser rejects (such as `2`), an extra positional value (`5S:1:1`), a positional value after a named one (`delays=5S:5S`) and unknown options. Native also fails to configure `inf` (exit 244 in a scratch probe), which EdgeFFmpeg refuses as an unsupported token.
+- Native accepts these, but they are unimplemented and fail with an `adelay` diagnostic before output is created: signs (`+5S`, `-0`), exponents, hexadecimal, `nan`, trailing text such as `5ms`, leading or inner whitespace (` 5S`, `5S| 6S`), escaping and other boolean spellings such as `yes`.
+
+The differential refusal test asserts native status for the forms it lists. `inf` and whitespace are covered only by the unit parser test and scratch probes. Whitespace at the very end of the filter arguments is removed by the filter-chain parser and accepted, as in native. Scratch probes matched native output for this case, but no committed test covers it.
 
 ## Execution
 
@@ -34,13 +36,15 @@ The minimum delay across channels is emitted first as leading silence in chunks 
 
 Like native, adelay negotiates the planar form of the current precision (`u8p`/`s16p`/`s32p`/`fltp`/`dblp`), so `resolvedSampleFormat` reports a planar format. Packed input is repacked losslessly, and every output frame owns new storage. A fixed-precision `volume` on floating input that shares a format-merge component with adelay negotiates s32 (native picks `s32p`) instead of the encoder format. The same case with an integer `aformat` constraint after it fails explicitly.
 
-Planning needs the channel count (`AudioCountOptions.channels`, the fifth `packetSections` argument), because the number of values read depends on it. Planning without it fails explicitly. Each ring is reported as a buffer requirement, and the CLI rejects rings above `maxBufferBytes` with `resource-budget`. `delayAudio` also enforces `maxFrameBytes` for the total ring bytes and for each output frame.
+Planning needs the channel count (`AudioCountOptions.channels`, the fifth `packetSections` argument), because the number of values read depends on it. Planning without it fails explicitly. `planSamples().buffers` reports the first leading-silence chunk and the longest ring (the flush length), not each ring. The CLI multiplies the largest buffer by the channel count and widest sample size and rejects it above `maxBufferBytes` with `resource-budget`. This bounds the rings' total. `delayAudio` also enforces `maxFrameBytes` for the total ring bytes and for each output frame.
 
 For empty input, a configured format yields leading silence and then the flush. Native emits NOPTS/near-INT64_MIN timestamps here that the native CLI encoder happens to make contiguous. Edge emits contiguous timestamps directly and matches the resulting native framecrc.
 
 ## Unsupported
 
-These fail explicitly: automatic sample-rate conversion combined with adelay (`-ar` different from the filter rate), the fixed-volume/integer-aformat case above, FLAC CLI paths (their planner does not pass a channel count), stateless `apply()`, commands and timeline `enable`.
+These fail explicitly: automatic sample-rate conversion combined with adelay (`-ar` different from the filter rate), the fixed-volume/integer-aformat case above and stateless `apply()`. Timeline `enable` is refused as an unsupported adelay option. Runtime commands fail because the command filters (such as `asendcmd`) are not implemented. Native accepts both, and only scratch probes cover them, with no committed test. FLAC input with `-ss`/`-t`/`-to` is refused before output by the timed FLAC filter check (`unsupported-command`, "Combined FLAC time selection and filters/rate conversion require additional Native packet scheduling"). FLAC rate conversion fails before output with the same adelay sample-rate-conversion error as the PCM paths. `compileFlacAudioFilters(...).plan()` fails because it passes no channel count.
+
+Untimed FLAC CLI input without rate conversion, including `-ac` channel conversion, is not refused: the FLAC two-pass transform runs adelay through `processFlacAudioFilters` without calling that planner. No committed test compares this path with native. That helper's resident reservation counts nothing for adelay's rings or output frames. Only `delayAudio`'s `maxFrameBytes` checks bound them there, at the buffer limit.
 
 `maxBufferedSamples` does not include adelay, because its rings depend on rate and channels; use `planSamples().buffers`.
 
@@ -55,8 +59,8 @@ These fail explicitly: automatic sample-rate conversion combined with adelay (`-
 - 98 rounding and suffix cases at five rates, including the 1523 s case and unread tokens.
 - 36 cases at 128/512-byte I/O budgets.
 - 48 mono/stereo conversion cases under the pinned rematrix arithmetic profile.
-- 18 explicit-failure checks.
+- 18 explicit-failure checks before output: 7 forms or combinations native rejects too and 11 native-valid forms or combinations, with native status asserted for each.
 
 `tests/unit/adelay.test.ts` covers parsing, float32 resolution, planning, negotiation, ring output against a naive shift for packed/planar formats across ring wraps, ownership, limits and cancellation.
 
-Not verified: s24/companded sources, AU output, canonical Linux x86_64 reference, local workerd and production Workers.
+Not verified: s24/companded sources, AU output, untimed FLAC input, canonical Linux x86_64 reference, local workerd and production Workers. The timed FLAC refusal is covered by `tests/integration/flac-timed-filters.test.ts` and `tests/workers/flac-timed-filters.test.ts`.
