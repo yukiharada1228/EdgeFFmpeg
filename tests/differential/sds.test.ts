@@ -57,6 +57,30 @@ it('matches native SDS packet timing for -t, -frames:a, declared -f sds and filt
     expect(compared).toBe(90);
   }finally{rmSync(root,{recursive:true,force:true});}
 },120000);
+it('matches native when a declared -f sds ignores byte 2, which sds_read_header skips unchecked, and refuses it undetected',async()=>{
+  checkReference();const root=mkdtempSync(join(tmpdir(),'edgeffmpeg-sds-byte2-'));
+  try{
+    const filesystem=await createNodeFileSystem({root,maxReadBytes:128,maxWriteBytes:128}),ffmpeg=new FFmpeg({filesystem,backend:createMediaBackend(),budget});
+    let compared=0;
+    for(const value of [0x05,0x7f,0xff])for(const depth of [8,16,24]){
+      const bytes=dump(depth,22675,3,depth+value);bytes[2]=value;const name=`b${value}-${depth}`;writeFileSync(join(root,`${name}.sds`),bytes);
+      for(const [after,format] of [[['-c:a','copy','-bitexact'],'framecrc'],[['-c:a','pcm_s16le','-bitexact'],'wav']] as const){
+        const out=`/${name}.${format}`,expected=nativeFile(['-f','sds','-i',join(root,`${name}.sds`),...after,'-f',format],join(root,'native'+out.slice(1))),result=await ffmpeg.exec(['-f','sds','-i',`/${name}.sds`,...after,'-f',format,out]);
+        expect(result.exitCode,`${out} ${JSON.stringify(result.diagnostics)}`).toBe(0);expect(readFileSync(join(root,out.slice(1))).equals(expected),out).toBe(true);compared++;
+      }
+    }
+    expect(compared).toBe(18);
+    // Undeclared: without the .sds extension native's probe rejects byte 2 (183). With it, native falls back to the
+    // extension at score 1 when no other probe claims the file (0); detection here is by content only, so both are refused.
+    const zero=dump(16,0,3,1,0);zero[2]=0x05;
+    for(const [name,status] of [['byte2.bin',183],['byte2.sds',0]] as const){
+      writeFileSync(join(root,name),zero);
+      expect(spawnSync(native,['-v','error','-y','-i',join(root,name),'-c:a','copy','-f','framecrc',join(root,`${name}.native.crc`)],{timeout:15000}).status,name).toBe(status);
+      const result=await ffmpeg.exec(['-i',`/${name}`,'-c:a','copy','-f','framecrc',`/${name}.crc`]);
+      expect(result.exitCode,name).not.toBe(0);expect(result.diagnostics.at(-1)?.message,name).toBe('Unsupported audio container signature');expect(existsSync(join(root,`${name}.crc`)),name).toBe(false);
+    }
+  }finally{rmSync(root,{recursive:true,force:true});}
+},120000);
 it('refuses malformed SDS before any output and records native exit statuses',async()=>{
   checkReference();const root=mkdtempSync(join(tmpdir(),'edgeffmpeg-sds-errors-'));
   try{
@@ -70,6 +94,9 @@ it('refuses malformed SDS before any output and records native exit statuses',as
       ['missing-f7',change(21+127*2-1,0x00),[],0,/^Missing SDS data packet end at 148$/],
       ['truncated',valid.subarray(0,valid.length-10),[],0,/^Truncated SDS data packet$/],
       ['trailing',Uint8Array.from([...valid,0xf0,0x7e]),[],0,/^Truncated SDS data packet$/],
+      // sds_probe tests AV_RB32(buf) == 0xF07E0001, so a nonzero byte 2 is not SDS by content; with these payloads another probe takes the .sds file (187).
+      ['byte2',change(2,0x05),[],187,/^Unsupported audio container signature$/],
+      ['byte2-ff',change(2,0xff),[],187,/^Unsupported audio container signature$/],
       ['depth7',change(6,7),[],187,/^Unsupported audio container signature$/],
       ['depth29',change(6,29),[],187,/^Unsupported audio container signature$/],
       ['depth7-declared',change(6,7),['-f','sds'],183,/^Invalid SDS bit depth: 7$/],
@@ -91,6 +118,6 @@ it('refuses malformed SDS before any output and records native exit statuses',as
     // sds is demux-only in native and here.
     expect(spawnSync(native,['-v','error','-y','-f','s16le','-i',join(root,'truncated.sds'),'-f','sds',join(root,'out.sds')],{timeout:15000}).status).not.toBe(0);
     const mux=await ffmpeg.exec(['-f','s16le','-i','/truncated.sds','-f','sds','/out.sds']);expect(mux.exitCode).not.toBe(0);expect(mux.diagnostics.at(-1)?.message).toMatch(/^Output requires /);expect(existsSync(join(root,'out.sds'))).toBe(false);
-    expect(Object.keys(statuses)).toHaveLength(10);
+    expect(Object.keys(statuses)).toHaveLength(12);
   }finally{rmSync(root,{recursive:true,force:true});}
 },60000);

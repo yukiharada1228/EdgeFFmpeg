@@ -35,7 +35,7 @@ export async function probeSds(input:ReadHandle,maxReadBytes:number,signal?:Abor
   if(!Number.isSafeInteger(maxReadBytes)||maxReadBytes<1)throw new SdsError('resource-limit','Invalid SDS read budget');
   if(input.size<BigInt(headerBytes))return false;
   const head=await readExact(input,0n,headerBytes,maxReadBytes,signal);
-  return head[0]===0xf0&&head[1]===0x7e&&head[3]===0x01&&head[20]===0xf7&&head[6]!>=8&&head[6]!<=28;
+  return head[0]===0xf0&&head[1]===0x7e&&head[2]===0x00&&head[3]===0x01&&head[20]===0xf7&&head[6]!>=8&&head[6]!<=28;
 }
 /** Finite range-backed SDS. Every packet's F0 7E and F7 framing and the whole-packet size are checked with bounded reads before any sample is returned. */
 export async function openSds(input:ReadHandle,options:{readonly maxReadBytes:number;readonly signal?:AbortSignal}):Promise<SdsInput>{
@@ -47,7 +47,7 @@ export async function openSds(input:ReadHandle,options:{readonly maxReadBytes:nu
   const samplePeriod=sdsSamplePeriod(header.subarray(7,10)),sampleRate=sdsSampleRate(samplePeriod),packetSamples=payloadBytes/width;
   const dataBytes=input.size-BigInt(headerBytes),blocks=dataBytes/BigInt(blockBytes);
   if(dataBytes%BigInt(blockBytes))throw new SdsError('invalid-data','Truncated SDS data packet');
-  // Native sds_read_packet fails mid-stream on these; refuse them up front instead. Windows cover only the checked bytes.
+  // Native sds_read_packet fails mid-stream on these; refuse them up front instead. Each window reads up to maxReadBytes from a checked byte, so with maxReadBytes >= 127 this pass reads the whole file once.
   let windowStart=0n,window:Uint8Array=new Uint8Array(0);
   const at=async(position:bigint)=>{
     if(position<windowStart||position>=windowStart+BigInt(window.length)){const remaining=input.size-position;window=await readExact(input,position,Number(remaining<BigInt(maxReadBytes)?remaining:BigInt(maxReadBytes)),maxReadBytes,signal);windowStart=position;}
@@ -79,8 +79,8 @@ export async function openSds(input:ReadHandle,options:{readonly maxReadBytes:nu
 /** Registered by `export {sds} from './sds.js';` in registry.ts. Demux only; native packets hold one SDS data packet (60, 40 or 30 samples). */
 export const sds=defineContainer({
   name:'sds',
-  // Exact head F0 7E xx 01; the confirm reads the 21 bytes sds_probe inspects.
-  demux:{probe:{precedence:100,head:bytes=>bytes[0]===0xf0&&bytes[1]===0x7e&&bytes[3]===0x01,confirm:probeSds},headerBytes:128,
+  // Exact head F0 7E 00 01 (sds_probe's AV_RB32(buf) == 0xF07E0001); the confirm reads the 21 bytes sds_probe inspects.
+  demux:{probe:{precedence:100,head:bytes=>bytes[0]===0xf0&&bytes[1]===0x7e&&bytes[2]===0x00&&bytes[3]===0x01,confirm:probeSds},headerBytes:128,
     // Native input -ss goes through the generic index and ends in a demux error with shifted timestamps; it is not mirrored.
     async open(source,{maxReadBytes,signal,seek}){if(seek>0n)throw containerRefusal('SDS input seeking is not implemented');return openSds(source,{maxReadBytes,signal});},packetSpan:(info:SdsInfo)=>BigInt(info.packetSamples)}
 });

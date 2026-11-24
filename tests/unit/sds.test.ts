@@ -55,6 +55,11 @@ const words=(data:Uint8Array)=>Array.from({length:data.length/4},(_,i)=>new Data
   const odd=dump(12,100,[payload(5)],bytes=>{bytes[0]=0;bytes[3]=9;bytes[20]=0;});
   expect((await openSds(memoryInput(odd),{maxReadBytes:64})).info).toMatchObject({sampleRate:10000000,packetSamples:60});
   expect(await probeSds(memoryInput(odd),64)).toBe(false);
+  // sds_probe compares AV_RB32(buf) with 0xF07E0001: byte 2 must be zero to detect, and read_header skips it when declared.
+  const byte2=dump(12,100,[payload(5)],bytes=>{bytes[2]=5;});
+  expect(await probeSds(memoryInput(byte2),64)).toBe(false);expect(sds.demux.probe.head(byte2)).toBe(false);
+  expect(await probeSds(memoryInput(dump(12,100,[payload(5)])),64)).toBe(true);expect(sds.demux.probe.head(dump(12,100,[payload(5)]))).toBe(true);
+  expect((await openSds(memoryInput(byte2),{maxReadBytes:64})).info).toMatchObject({sampleRate:10000000,packetSamples:60});
  });
  it('refuses bad depths, framing and truncation up front',async()=>{
   const open=(bytes:Uint8Array,maxReadBytes=64)=>openSds(memoryInput(bytes),{maxReadBytes});

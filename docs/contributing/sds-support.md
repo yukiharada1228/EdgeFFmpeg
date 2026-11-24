@@ -4,8 +4,8 @@
 
 ## Detection and header
 
-- **Probe** (precedence 100, exact magic): `head` tests `F0 7E xx 01`. `confirm` (`probeSds`) reads exactly the 21 bytes `sds_probe` inspects, in bounded reads. It requires `F7` at byte 20 and a bit depth of 8 to 28 at byte 6. Native scores this as `AVPROBE_SCORE_EXTENSION`. No other registered head overlaps it.
-- **Header** (`openSds`): 21 bytes. As in `sds_read_header`, only the bit depth is checked. A declared `-f sds` input with a different magic or no closing `F7` still opens. Depth 8..13 unpacks 2 bytes per sample (60 samples per packet), 14..20 unpacks 3 (40) and 21..28 unpacks 4 (30). Any other depth is refused (`Invalid SDS bit depth: <n>`).
+- **Probe** (precedence 100, exact magic): `head` tests `F0 7E 00 01`, as `sds_probe` compares `AV_RB32(buf)` with `0xF07E0001`. `confirm` (`probeSds`) reads exactly the 21 bytes `sds_probe` inspects, in bounded reads. It requires `00` at byte 2, `F7` at byte 20 and a bit depth of 8 to 28 at byte 6. Native scores this as `AVPROBE_SCORE_EXTENSION`; EdgeFFmpeg's precedence 100 gives the same choice only for the tested payloads. No other registered head overlaps it. Native also accepts a `.sds` file whose probe fails by falling back to its extension at score 1 when no other demuxer claims it; detection here is by content only, so such a file (for example one with a nonzero byte 2) is refused as `Unsupported audio container signature` unless `-f sds` is given.
+- **Header** (`openSds`): 21 bytes. As in `sds_read_header`, only the bit depth is checked. A declared `-f sds` input with a different magic (including a nonzero byte 2) or no closing `F7` still opens. Depth 8..13 unpacks 2 bytes per sample (60 samples per packet), 14..20 unpacks 3 (40) and 21..28 unpacks 4 (30). Any other depth is refused (`Invalid SDS bit depth: <n>`).
 - **Rate**: bytes 7..9 hold a 21-bit sample period in nanoseconds, made of three 7-bit groups (`SDS_3BYTE_TO_INT_DECODE`, so bit 7 of each byte is ignored). The rate is the integer `1000000000 / period`, or 16000 when the period is 0. Periods 1 (1 GHz) and `0x1FFFFF` (476 Hz) are tested.
 - **Stream**: `pcm_u32le`, mono with no channel mask (native reports `mono`), and `durationSamples = packets * samplesPerPacket` (native `((size-21)/127)*size/4`).
 
@@ -17,11 +17,11 @@ Each 127-byte data packet is `F0 7E ch 02 nn`, 120 data bytes, a checksum and `F
 
 - A file shorter than 21 bytes (`Truncated SDS header`). Native opens a declared 20-byte file as an empty stream and exits 0.
 - Data that is not a whole number of 127-byte packets, either a truncated last packet or trailing bytes (`Truncated SDS data packet`). Native drops the partial packet and exits 0.
-- A packet without `F0 7E` at its start (`Invalid SDS data packet header at <offset>`) or without `F7` at its end (`Missing SDS data packet end at <offset>`). Native returns `AVERROR_INVALIDDATA` mid-stream, prints `Error during demuxing`, may skip or resume packets, and exits 0. Those mid-stream semantics are not mirrored. `openSds` scans every packet's three framing bytes with bounded windowed reads at open, and never reads the payload while it does so.
+- A packet without `F0 7E` at its start (`Invalid SDS data packet header at <offset>`) or without `F7` at its end (`Missing SDS data packet end at <offset>`). Native returns `AVERROR_INVALIDDATA` mid-stream, prints `Error during demuxing`, may skip or resume packets, and exits 0. Those mid-stream semantics are not mirrored. `openSds` checks every packet's three framing bytes at open with bounded windowed reads. Each window reads up to `maxReadBytes` from a checked byte, so with `maxReadBytes` of 127 or more the check reads the whole file once before decoding.
 - Input `-ss` (`SDS input seeking is not implemented`). Native seeks through the generic index, emits shifted timestamps (a first packet at pts -4 for `-ss 0.001` at 44101 Hz) and ends with a demux error.
 - `-f sds` output. Native has no sds muxer, and the module registers no `mux`.
 
-Native exit statuses recorded by the differential test: mid-stream framing errors, a truncated last packet and trailing bytes exit 0. Undetected depth 7 or 29 (the probe fails and another probe claims the file) exits 187. A declared depth of 7 or 29 exits 183. Edge exits nonzero in every case and opens no output.
+Native exit statuses recorded by the differential test: mid-stream framing errors, a truncated last packet and trailing bytes exit 0. Undetected depth 7 or 29, and a nonzero byte 2 (the probe fails and another probe claims the file) exit 187. A nonzero byte 2 with zero payloads exits 183 without the `.sds` extension and 0 with it (extension fallback). A declared depth of 7 or 29 exits 183. Edge exits nonzero in every case and opens no output.
 
 ## Evidence
 
@@ -30,7 +30,8 @@ On the Linux x86_64 oracle built in this sandbox (`.build/reference/ffmpeg`, sha
 - `tests/differential/sds.test.ts`:
   - 300 byte-exact comparisons over 75 synthesized dumps: bit depths {8,13,14,20,21,28} × periods {0, 22675, 1, 0x1FFFFF} × {0, 1, 7} packets with 7-bit random payloads, plus three 8-bit-payload dumps. Each dump is compared as copy framecrc (`-bitexact`), `-cpuflags 0` s16le decode, `-bitexact` WAV decode and copy to raw `u32le`.
   - 90 timing comparisons for depths 8, 16 and 24 at periods 0 and 22675: `-t 0.004`, `-frames:a 2`, `-t 0.0001`, declared `-f sds` with `-frames:a 0` and `-t 1`, each as copy framecrc and as a fixed-volume/asetnsamples decode to framecrc and WAV.
-  - A 10-case error matrix (bad `F07E`, missing `F7`, truncated packet, trailing bytes, depth 7/29 detected and declared, truncated declared header) with native exit statuses asserted, the input-seek refusal against native's shifted output, and the demux-only refusal.
+  - 18 comparisons of declared `-f sds` input with byte 2 set to 0x05, 0x7F or 0xFF (depths 8, 16 and 24, copy framecrc and WAV), which `sds_read_header` skips, plus undeclared byte-2 files with and without the `.sds` extension refused here with native's status asserted (integration fix).
+  - A 12-case error matrix (bad `F07E`, missing `F7`, truncated packet, trailing bytes, nonzero byte 2, depth 7/29 detected and declared, truncated declared header) with native exit statuses asserted, the input-seek refusal against native's shifted output, and the demux-only refusal.
 - `tests/unit/sds.test.ts` (8 tests): the three unpackers against independent formulas (including 8-bit bytes), the width and rate formulas, header parsing with 2-byte reads that never touch the payload on open, re-chunked packets with seeks and budgets, declared-input leniency, refusals, abort around reads and packets, the 21-byte probe, the frozen demux-only descriptor, and backend routing with no output opened on refusal.
 
 ## Unsupported

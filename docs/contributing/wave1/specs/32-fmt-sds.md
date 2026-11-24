@@ -3,7 +3,7 @@ You are one of 40 cloud agents implementing EdgeFFmpeg capabilities in parallel.
 ## Capability specification
 - Upstream source: upstream/ffmpeg/libavformat/sdsdec.c
 - Scope: Demux only.
-- Header F0 7E xx 01 with bit_depth 8..28; probe as native, including buf[20]==F7.
+- Header F0 7E 00 01 with bit_depth 8..28; probe as native, including buf[20]==F7. (Integration correction: this line said F0 7E xx 01, but sds_probe compares AV_RB32(buf) with 0xF07E0001, so byte 2 must be 00.)
 - The sample period is three 7-bit bytes; rate = period ? 1e9/period (integer) : 16000. Duration is ((size-21)/127)*size/4.
 - Each 127-byte data packet (F0 7E ch 02 nn, 120 data bytes, checksum, F7) is unpacked by byte2/3/4_read into left-justified pcm_u32le: 60, 40 or 30 samples per packet. The checksum is ignored and F7 is checked.
 - Packets are uniform within a stream, so the registry's per-format input packet span hook carries 60/40/30.
