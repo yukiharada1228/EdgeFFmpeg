@@ -42,8 +42,10 @@ export const asoftclip=defineAudioFilter<AudioSoftClipStep>({
   parse(text){
     if(text!=='asoftclip'&&!text.startsWith('asoftclip='))throw new AudioFilterError(`Unsupported audio filter: ${text}`);
     const values=new Map<string,string>();let named=false;
-    if(text!=='asoftclip')for(const [index,option]of text.slice(10).split(':').entries()){
-      if(option==='')continue;
+    const tokens=text==='asoftclip'?[]:text.slice(10).split(':');
+    for(const [index,option]of tokens.entries()){
+      // process_args stops after one trailing ':'; any other empty token is an empty option value natively.
+      if(option===''){if(index===tokens.length-1)continue;throw new AudioFilterError('Empty asoftclip option value');}
       const separator=option.indexOf('=');
       if(separator<0){
         if(named||index>=positional.length)throw new AudioFilterError(`Unsupported asoftclip option: ${option}`);

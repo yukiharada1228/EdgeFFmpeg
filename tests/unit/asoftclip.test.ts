@@ -36,6 +36,7 @@ it('parses hard and alg with named and positional options and refuses every libm
   expect(step('asoftclip=alg:0.001:16:3:1')).toEqual({name:'asoftclip',type:'alg',threshold:0.001,output:16,param:3});
   expect(step('asoftclip=hard:.5:output=2.')).toEqual({name:'asoftclip',type:'hard',threshold:0.5,output:2,param:1});
   expect(step('asoftclip=threshold=0.000001:type=hard:threshold=0.25')).toMatchObject({threshold:0.25});
+  expect(step('asoftclip=hard:0.5:')).toEqual({name:'asoftclip',type:'hard',threshold:0.5,output:1,param:1});
   const refused:[string,string][]=[
     ['asoftclip','asoftclip type tanh requires unimplemented libm arithmetic'],
     ...['tanh','atan','cubic','exp','quintic','sin','erf'].map(type=>[`asoftclip=type=${type}`,`asoftclip type ${type} requires unimplemented libm arithmetic`] as [string,string]),
@@ -46,6 +47,7 @@ it('parses hard and alg with named and positional options and refuses every libm
     ['asoftclip=hard:threshold=0','asoftclip threshold 0 is outside 0.000001..1'],['asoftclip=hard:threshold=1.01','asoftclip threshold 1.01 is outside 0.000001..1'],
     ['asoftclip=hard:output=16.5','asoftclip output 16.5 is outside 0.000001..16'],['asoftclip=alg:param=0.001','asoftclip param 0.001 is outside 0.01..3'],['asoftclip=alg:param=-1','asoftclip param -1 is outside 0.01..3'],
     ['asoftclip=hard:enable=1','asoftclip timeline enable is not implemented'],['asoftclip=hard:foo=1','Unsupported asoftclip option: foo=1'],
+    ['asoftclip=hard::0.5','Empty asoftclip option value'],['asoftclip=hard:0.5::2','Empty asoftclip option value'],['asoftclip=:hard','Empty asoftclip option value'],['asoftclip=hard::','Empty asoftclip option value'],
     ['asoftclip=type=hard:0.5','Unsupported asoftclip option: 0.5'],['asoftclip=hard:1:1:1:1:1','Unsupported asoftclip option: 1'],['asoftclipx','Unsupported audio filter: asoftclipx']
   ];
   for(const [text,message]of refused){expect(()=>step(text),text).toThrow(AudioFilterError);expect(()=>step(text),text).toThrow(new RegExp(`^${message.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}$`));}

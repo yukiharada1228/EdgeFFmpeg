@@ -85,7 +85,8 @@ it('refuses every libm type, oversampling and unscoped options before writing ou
     const cases:[string,number][]=[
       ...['tanh','atan','cubic','exp','quintic','sin','erf'].map(type=>[`asoftclip=type=${type}`,0] as [string,number]),
       ['asoftclip',0],['asoftclip=hard:oversample=2',0],['asoftclip=alg:oversample=2',0],['asoftclip=hard:enable=gt(t\\,0.01)',0],['asoftclip=hard:threshold=1e-3',0],
-      ['asoftclip=hard:threshold=2',1],['asoftclip=hard:param=0',1],['asoftclip=hard:oversample=65',1]
+      ['asoftclip=hard:threshold=2',1],['asoftclip=hard:param=0',1],['asoftclip=hard:oversample=65',1],
+      ['asoftclip=hard::0.5',1],['asoftclip=hard:0.5::2',1],['asoftclip=:hard',1],['asoftclip=hard::',1]
     ];
     for(const [index,[filter,status]]of cases.entries()){
       const args=['-cpuflags','0','-f','s16le','-ar','8000','-ac','2'];
