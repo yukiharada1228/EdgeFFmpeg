@@ -1,0 +1,12 @@
+Scoped SoX native intermediate format layout
+
+The header fields, probe, header validation, PCM packet semantics and sample-count
+trailer in src/sox.ts follow libavformat/soxdec.c (sox_probe, sox_read_header),
+soxenc.c (sox_write_header, sox_write_trailer), sox.h (SOX_FIXED_HDR, SOX_TAG)
+and pcm.c (ff_pcm_read_packet, ff_pcm_read_seek).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2009 Daniel Verkamp;(c)2008 robs@users.sourceforge.net;(c)2003 Fabrice Bellard.
+LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete sox demuxer or muxer.
