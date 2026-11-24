@@ -62,7 +62,8 @@ describe('hash muxers',()=>{
       for(const codec of ['pcm_u8','pcm_s16le','pcm_f64be','pcm_alaw','pcm_u32le'] as const)expect(mux.supports(codec)).toBe(true);
       expect(Object.isFrozen(descriptor)&&Object.isFrozen(mux)).toBe(true);
     }
-    expect(containerOutputListing).toBe('WAV, AIFF, AU, W64, framecrc, crc, hash, md5, streamhash');
+    // Other registered muxers also appear in the listing; assert this module's entries and their relative order.
+    const listed=containerOutputListing.split(', ');expect(listed.filter(name=>['framecrc','crc','hash','md5','streamhash'].includes(name))).toEqual(['framecrc','crc','hash','md5','streamhash']);
   });
   it('writes the native trailer lines of the concatenated payloads independent of packet boundaries',async()=>{
     const data=pseudo(4000),split=[data.subarray(0,2),data.subarray(2,1026),data.subarray(1026)];
