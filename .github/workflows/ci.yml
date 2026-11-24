@@ -34,6 +34,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
+      # The container runs as root over a runner-owned checkout; the report snapshots sources with git.
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - run: npm ci
       - run: npm run reference:build
       - uses: actions/checkout@v4
