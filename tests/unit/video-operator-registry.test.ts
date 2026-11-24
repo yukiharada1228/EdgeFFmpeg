@@ -4,7 +4,7 @@ import type {VideoOperatorDescriptor,VideoExecutionPath,TimedVideoOutputEvent} f
 import {pixelLayout} from '@edge-ffmpeg/avutil';
 import type {VideoFrameData} from '@edge-ffmpeg/avutil';
 import {validateVideoOperator} from '../../packages/avfilter/src/video-ops/registry.js';
-import {negotiationOrder} from '../../packages/avfilter/src/video-ops/formats.js';
+import {negotiableFormat,executableFormat} from '../../packages/avfilter/src/video-ops/formats.js';
 import {resolveVideoFilter as resolveScoped} from '../../packages/avfilter/src/video-graph-resolver.js';
 import {createFrameActors} from '../../packages/avfilter/src/activation/actors.js';
 import {negotiateVideoTopology as negotiateTimedTopology} from '../../packages/avfilter/src/activation/formats.js';
@@ -115,9 +115,10 @@ it('runs every registered example on each flagged path with identical frames',as
    const frames=(await run[path](example)).map(tight);runs++;expect(frames.length,`${op.name} ${example} ${path}`).toBeGreaterThan(0);
    if(reference)expect(frames,`${op.name} ${example}: ${path} differs from ${first}`).toEqual(reference);else{reference=frames;first=path;}
   }
-  // Candidate lists honour the descriptor contract shared by the three negotiators.
+  // Candidate lists honour the descriptor contract shared by the three negotiators: native's list over every negotiable
+  // format, of which at least one member has frame storage here (the others are refused when negotiated).
   const steps=[...op.parse?parseFilterTopology(graphDescription(example),resolveScoped).nodes:[],...parseFilterTopology(graphDescription(example),resolveTimed).nodes].map(node=>node.configuration);
-  for(const step of steps){const formats=videoOperator(step.name)!.formats?.(step as never);if(formats)expect(formats.length>0&&new Set(formats).size===formats.length&&formats.every(format=>(negotiationOrder as readonly string[]).includes(format)),`${op.name} ${example} formats`).toBe(true);}
+  for(const step of steps){const formats=videoOperator(step.name)!.formats?.(step as never);if(formats)expect(formats.length>0&&new Set(formats).size===formats.length&&formats.every(negotiableFormat)&&formats.some(executableFormat),`${op.name} ${example} formats`).toBe(true);}
  }
  expect(runs).toBeGreaterThanOrEqual(operators.reduce((sum,op)=>sum+op.paths.length,0));
 });
