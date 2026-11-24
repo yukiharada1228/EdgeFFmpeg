@@ -1,0 +1,12 @@
+Scoped Psion 3 audio (wve) demuxer
+
+The magic probe, the 32-byte header layout (duration rb32 at offset 18,
+data from offset 32 to EOF) and the A-law 8000 Hz mono stream parameters in
+src/wve.ts follow libavformat/wvedec.c (wve_probe, wve_read_header); packets
+and their span follow libavformat/pcm.c (ff_pcm_default_packet_size,
+ff_pcm_read_packet).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2015 Paul B Mahol;(c)2001,2002 Fabrice Bellard. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete wve demuxer.

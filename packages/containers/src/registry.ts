@@ -8,3 +8,4 @@ export {framecrc} from './formats/framecrc.js';
 export * from './formats/raw-pcm.js';
 export {w64} from './formats/w64.js';
 export {wav} from './formats/wav.js';
+export {wve} from './wve.js';
