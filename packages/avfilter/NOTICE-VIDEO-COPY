@@ -1,0 +1,12 @@
+Scoped copy video filter
+
+The copy descriptor in src/video-ops/copy.ts follows libavfilter/vf_copy.c
+(query_formats, filter_frame and the ff_vf_copy registration): every
+non-hwaccel format is accepted and frames reach the output unchanged.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+vf_copy.c carries no individual copyright line; it is part of FFmpeg,
+copyright (c) the FFmpeg developers. LGPL-2.1-or-later.
+See ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete copy filter: it refuses
+every option, including enable= and the generic threads option, and runtime commands.

@@ -1,0 +1,260 @@
+{
+ "capabilityId": "filter.copy",
+ "slug": "vf-copy",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/copy.ts",
+  "packages/avfilter/NOTICE-VIDEO-COPY",
+  "tests/unit/video-copy-filter.test.ts",
+  "tests/differential/video-copy-filter.test.ts",
+  "docs/contributing/video-copy-filter.md",
+  "docs/contributing/wave1/vf-copy.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {copyOperator} from './copy.js';",
+    " copyOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-copy-filter.test.ts",
+   "title": "parses copy as an option-free identity operator over the whole negotiation table on every path",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-copy-filter.test.ts",
+   "title": "refuses every copy option and enable= with VideoFilterParseError before planning on every path",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-copy-filter.test.ts",
+   "title": "forwards the frame unchanged on the linear, graph and replay paths within budgets and signals",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-copy-filter.test.ts",
+   "title": "forwards the frame unchanged through activation actors and the timed executor and refuses runtime commands",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-copy-filter.test.ts",
+   "title": "matches native -vf copy chains across all 14 formats, sizes and timing scopes as rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-copy-filter.test.ts",
+   "title": "matches native -filter_complex split and copy branches across all 14 formats as rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-copy-filter.test.ts",
+   "title": "matches native replayed copy graphs frame by frame across all 14 formats and sizes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-copy-filter.test.ts",
+   "title": "matches native copy through activation actors and the timed backend as rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-copy-filter.test.ts",
+   "title": "refuses copy options before opening any output, as native does except for the generic threads option",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(whole file, unedited)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 2246,
+  "details": [
+   {
+    "test": "matches native -vf copy chains across all 14 formats, sizes and timing scopes as rawvideo and framecrc",
+    "count": 1008,
+    "compares": "exact rawvideo and framecrc bytes of the media backend CLI vs native; plus 42 checks that native -vf copy rawvideo equals the input"
+   },
+   {
+    "test": "matches native -filter_complex split and copy branches across all 14 formats as rawvideo and framecrc",
+    "count": 224,
+    "compares": "exact rawvideo and framecrc bytes of both -filter_complex outputs (448 files)"
+   },
+   {
+    "test": "matches native replayed copy graphs frame by frame across all 14 formats and sizes",
+    "count": 168,
+    "compares": "replay output planes (tight) vs native rawvideo, plus pts 0,1,2"
+   },
+   {
+    "test": "matches native copy through activation actors and the timed backend as rawvideo and framecrc",
+    "count": 840,
+    "compares": "168 actor output planes vs native rawvideo; 672 timed-backend rawvideo/framecrc bytes vs native"
+   },
+   {
+    "test": "refuses copy options before opening any output, as native does except for the generic threads option",
+    "count": 6,
+    "compares": "native exit status for refused options (5 refused natively; threads=1 accepted natively but refused here)"
+   }
+  ]
+ },
+ "unsupported": [
+  "every option, including enable= (native also refuses) and the generic threads option (native accepts; refused here instead of being ignored)",
+  "runtime commands (enable answers AVERROR_PATCHWELCOME, all others ENOSYS, as native)",
+  "hwaccel formats and formats outside the shared 14-entry negotiation table"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": [
+  "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+  "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+  "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+ ],
+ "finalUnitFailures": [
+  "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+  "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+  "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+ ],
+ "proposedContracts": [
+  {
+   "id": "filter.copy.unit.parse",
+   "file": "tests/unit/video-copy-filter.test.ts",
+   "name": "parses copy as an option-free identity operator over the whole negotiation table on every path",
+   "modes": [
+    "linear",
+    "graph"
+   ],
+   "scope": "option-free identity descriptor, no conversion stage for any of the 14 table formats"
+  },
+  {
+   "id": "filter.copy.unit.refusal",
+   "file": "tests/unit/video-copy-filter.test.ts",
+   "name": "refuses every copy option and enable= with VideoFilterParseError before planning on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "VideoFilterParseError for options and enable= before planning"
+  },
+  {
+   "id": "filter.copy.unit.scoped-forward",
+   "file": "tests/unit/video-copy-filter.test.ts",
+   "name": "forwards the frame unchanged on the linear, graph and replay paths within budgets and signals",
+   "modes": [
+    "linear",
+    "graph",
+    "stream"
+   ],
+   "scope": "unchanged forwarding, budgets, AbortSignal, frame-shape mismatch, padded strides, unmutated input"
+  },
+  {
+   "id": "filter.copy.unit.timed-forward",
+   "file": "tests/unit/video-copy-filter.test.ts",
+   "name": "forwards the frame unchanged through activation actors and the timed executor and refuses runtime commands",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "unchanged forwarding and native runtime command codes"
+  },
+  {
+   "id": "filter.copy.differential.linear",
+   "file": "tests/differential/video-copy-filter.test.ts",
+   "name": "matches native -vf copy chains across all 14 formats, sizes and timing scopes as rawvideo and framecrc",
+   "modes": [
+    "linear"
+   ],
+   "scope": "-vf copy, copy,negate, format=nv12,copy,vflip and copy,hflip over all 14 rawvideo input formats, 5x3/7x5/8x6, 3 frames, three -ss/-t scopes, rawvideo and framecrc"
+  },
+  {
+   "id": "filter.copy.differential.graph",
+   "file": "tests/differential/video-copy-filter.test.ts",
+   "name": "matches native -filter_complex split and copy branches across all 14 formats as rawvideo and framecrc",
+   "modes": [
+    "graph"
+   ],
+   "scope": "four split/copy -filter_complex graphs, two outputs each, all 14 formats at 7x5, rawvideo and framecrc, with and without -ss/-frames:v"
+  },
+  {
+   "id": "filter.copy.differential.stream",
+   "file": "tests/differential/video-copy-filter.test.ts",
+   "name": "matches native replayed copy graphs frame by frame across all 14 formats and sizes",
+   "modes": [
+    "stream"
+   ],
+   "scope": "createReplayVideoExecution over four copy graphs, all 14 formats and three sizes, rawvideo bytes and pts"
+  },
+  {
+   "id": "filter.copy.differential.timed",
+   "file": "tests/differential/video-copy-filter.test.ts",
+   "name": "matches native copy through activation actors and the timed backend as rawvideo and framecrc",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "createFrameActors rawvideo and createTimedVideoBackend rawvideo/framecrc for copy, copy,hflip, format=nv12,copy,vflip and copy,copy over all 14 formats and three sizes"
+  },
+  {
+   "id": "filter.copy.differential.refusal",
+   "file": "tests/differential/video-copy-filter.test.ts",
+   "name": "refuses copy options before opening any output, as native does except for the generic threads option",
+   "modes": [
+    "linear",
+    "graph",
+    "timed"
+   ],
+   "scope": "option and enable= refusal before any output is opened on the media and timed backends"
+  }
+ ],
+ "notes": [
+  "Identity role with no frame function, like null; formats omitted so the whole 14-entry table is accepted, matching native query_formats (rejects only hwaccel).",
+  "Registry examples: copy, copy,hflip, format=nv12,copy,vflip; run on all five paths by the unedited registry test.",
+  "Native accepts copy=threads=1 (generic AVFilterContext option); bareStep refuses it, which is the explicit refusal the spec requires.",
+  "Identity forwards the same frame object, so stride or storage defects are detected by the next materializing operator, not by copy itself; documented and unit-tested via copy,hflip.",
+  "No shared edits beyond the two registry lines were needed.",
+  "Setup durations: submodule 41s, npm ci 9s, reference:build 198s, baseline typecheck+lint+boundaries 68s, baseline unit suite 88s, differential suite 80s.",
+  "Baseline and final unit failures are identical: FLAC artifacts (downloads.xiph.org blocked) and resample-checkpoint macOS digests."
+ ]
+}
