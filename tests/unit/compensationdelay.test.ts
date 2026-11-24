@@ -1,7 +1,7 @@
 import {expect,it} from 'vitest';
 import {AudioFilterError,compileAudioFilterChain} from '@edge-ffmpeg/avfilter';
 import type {AudioFrameData} from '@edge-ffmpeg/avutil';
-import {compensationDelayFront,compensationDelaySamples,compensationdelay} from '../../packages/avfilter/src/audio/compensationdelay.js';
+import {compensationDelayBufferSize,compensationDelayEffectiveSamples,compensationDelayFront,compensationDelaySamples,compensationdelay} from '../../packages/avfilter/src/audio/compensationdelay.js';
 import {pcmFilterMemory} from '../../packages/avformat/src/pcm-filter-memory.js';
 async function* input(...frames:AudioFrameData[]){yield*frames;}
 async function collect(frames:AsyncIterable<AudioFrameData>){const result:AudioFrameData[]=[];for await(const value of frames)result.push(value);return result;}
@@ -79,6 +79,22 @@ it('matches the C transcription across ring wraps, delay 0 and arbitrary frame s
       // Split invariance against one native frame, and against native fed the same split.
       for(let c=0;c<channels;c++){const joined=Float64Array.from(output.flatMap(f=>Array.from(doubles(f)[c]!)));expect(Object.is(joined[0],reference[c]![0])&&joined.every((v,i)=>Object.is(v,reference[c]![i])),`${text}/${channels}/${sizes.length} channel ${c}`).toBe(true);}
       const split=native(text,rate,channels,frames.map(doubles));expect(output.map(doubles)).toEqual(split);
+    }
+  }
+});
+it('reduces the delay modulo native\'s power-of-two ring where colder temperatures exceed it, as the masked read does',async()=>{
+  const wrap='compensationdelay=m=100:cm=100:mm=10:temp=-50:dry=0:wet=1',cold='compensationdelay=m=100:cm=100:mm=10:temp=-40:dry=0.5:wet=0.5';
+  const sizes=(text:string,rate:number)=>[compensationDelaySamples(step(text),rate),compensationDelayBufferSize(rate),compensationDelayEffectiveSamples(step(text),rate)];
+  expect([sizes(wrap,50000),sizes(wrap,25000),sizes(cold,50000),sizes(cold,25000),sizes(wrap,48000),sizes(wrap,44100),sizes(wrap,8000)]).toEqual([[16855,16384,471],[8427,8192,235],[16490,16384,106],[8245,8192,53],[16181,16384,16181],[14866,16384,14866],[2696,4096,2696]]);
+  expect([...compileAudioFilterChain(wrap).reservations({sampleRate:50000,channels:2,sampleFormat:'dbl'})]).toEqual([{frames:1,buffers:[],stateBytes:472n*2n*8n}]);
+  for(const rate of [25000,50000,48000])for(const text of [wrap,cold,'compensationdelay=m=100:temp=-50'])for(const channels of [1,2]){
+    const total=20000,source=Array.from({length:channels},(_,c)=>Float64Array.from({length:total},(_,i)=>Math.sin(i*0.21+c)*((i%13)/12)));
+    const reference=native(text,rate,channels,[source]).flatMap(planes=>planes);
+    for(const split of [[total],Array(20).fill(1000),[7,4093,1,15899]]){
+      const frames:AudioFrameData[]=[];let offset=0;
+      for(const samples of split){frames.push(frame(source.map(plane=>plane.slice(offset,offset+samples)),BigInt(offset),rate));offset+=samples;}
+      const output=await collect(compileAudioFilterChain(text).process(input(...frames),{maxFrameBytes:1<<20}));
+      for(let c=0;c<channels;c++){const joined=Float64Array.from(output.flatMap(f=>Array.from(doubles(f)[c]!)));expect(joined.length===total&&joined.every((v,i)=>Object.is(v,reference[c]![i])),`${text}/${rate}/${channels}/${split.length} channel ${c}`).toBe(true);}
     }
   }
 });

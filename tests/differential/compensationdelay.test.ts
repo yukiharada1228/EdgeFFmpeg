@@ -50,6 +50,28 @@ it.runIf(linux)('writes native-identical f64le, s16le and WAV files with the lon
     }
   }finally{rmSync(root,{recursive:true,force:true});}
 },300000);
+it('matches native delays that wrap the power-of-two ring at 25000 and 50000 Hz, with exact dry/wet copies on every platform',async()=>{
+  // Native reads (w + buf_size - delay) & mask: at these rates the colder delays exceed buf_size and wrap. dry=0:wet=1, and
+  // dry=1:wet=1 over non-overlapping impulses, are exact copies, so no fused arithmetic can reach the output.
+  const {root,frontend}=await harness('edgeffmpeg-compensationdelay-wrap-',1<<21);
+  try{
+    let index=0;
+    const impulses=(count:number)=>{const data=new Uint8Array(count*8),view=new DataView(data.buffer);for(let i=0;i<count;i+=1777)view.setFloat64(i*8,(i%3)-1.25,true);return data;};
+    for(const rate of [25000,50000,8000])for(const channels of [1,2]){
+      for(const [raw,data,target,chains]of [
+        ['s16le',pcm(2,false,40000*channels),'pcm_s16le',['compensationdelay=m=100:cm=100:mm=10:temp=-50:dry=0:wet=1','compensationdelay=m=100:cm=100:mm=10:temp=-40:dry=0:wet=1','asetnsamples=997:p=0,compensationdelay=10:100:100:0:1:-45']],
+        ['f64le',impulses(40000*channels),'pcm_f64le',['compensationdelay=m=100:cm=100:mm=10:temp=-50:dry=1:wet=1','compensationdelay=m=100:cm=100:mm=10:temp=-40:dry=0:wet=1']]
+      ] as const){
+        writeFileSync(join(root,'input.raw'),data);
+        for(const chain of chains){
+          const before=['-cpuflags','0','-f',raw,'-ar',String(rate),'-ac',String(channels)],after=['-af',chain,'-c:a',target,'-bitexact','-f','framecrc'],expected=execFileSync(native,['-v','error',...before,'-i',join(root,'input.raw'),...after,'-']),out=`/${index++}.crc`,result=await frontend.exec([...before,'-i','/input.raw',...after,out]);
+          expect(result.exitCode,JSON.stringify({raw,rate,channels,chain,diagnostics:result.diagnostics})).toBe(0);
+          expect(readFileSync(join(root,out.slice(1))).toString(),`${raw}/${rate}/${channels}/${chain}`).toBe(expected.toString());
+        }
+      }
+    }
+  }finally{rmSync(root,{recursive:true,force:true});}
+},300000);
 it('matches native output for empty input',async()=>{
   const {root,frontend}=await harness('edgeffmpeg-compensationdelay-empty-');
   try{

@@ -6,7 +6,7 @@ You are one of 40 cloud agents implementing EdgeFFmpeg capabilities in parallel.
 - delay = (unsigned)((m*100. + cm*1. + mm*.1) * COMP_DELAY_SOUND_FRONT_DELAY(temp) * sr), evaluated in the macro's exact order: 1.85325*(643.95*sqrt((temp+273.15)/273.15)), then *(1000.0*100.0)/(60.0*60.0), then 1.0/that.
 - dst = dry*x + wet*buf[r]; the sample is written before it is read, so delay 0 reads the current sample.
 - The output length is unchanged: there is no tail.
-- The ring may be sized delay+1 per channel (output identical) instead of native's pow2(sr*MAX_DELAY); declare it in reserve().stateBytes.
+- The ring may be sized delay+1 per channel instead of native's pow2(sr*MAX_DELAY); declare it in reserve().stateBytes. (Integration correction: the output is identical only when delay < buf_size. Native's masked read delays by delay mod buf_size, which differs at, for example, 25000 and 50000 Hz with temp=-50, so the delay must first be reduced modulo native's buf_size.)
 - Files you own: packages/avfilter/src/audio/compensationdelay.ts, packages/avfilter/NOTICE-COMPENSATIONDELAY, tests/unit/compensationdelay.test.ts, tests/differential/compensationdelay.test.ts, docs/contributing/compensationdelay.md, docs/contributing/wave1/af-compensationdelay.json
 - Shared one-line edits you may make: packages/avfilter/src/audio/registry.ts: +1 line `export {compensationdelay} from './compensationdelay.js';`
 - Test strategy: Differential against Linux native (linux/x64 gate).

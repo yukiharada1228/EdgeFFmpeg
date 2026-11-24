@@ -37,8 +37,21 @@ export function compensationDelaySamples(step:AudioCompensationDelayStep,sampleR
   if(!Number.isSafeInteger(sampleRate)||sampleRate<1||sampleRate>2147483647)invalid('compensationdelay requires a valid sample rate');
   return Math.trunc((step.m*100.+step.cm*1.+step.mm*.1)*compensationDelayFront(step.temp)*sampleRate);
 }
-/** Ring bytes: delay+1 doubles per channel reproduce native's power-of-two ring (write before read, so delay 0 reads the current sample). */
-const ringBytes=(step:AudioCompensationDelayStep,sampleRate:number,channels:number)=>BigInt(compensationDelaySamples(step,sampleRate)+1)*BigInt(channels)*8n;
+/** config_input's buf_size: the smallest power of two >= (unsigned)(sample_rate * COMP_DELAY_MAX_DELAY), where
+ * COMP_DELAY_MAX_DELAY uses the 50 degree (shortest) front delay. */
+export function compensationDelayBufferSize(sampleRate:number):number {
+  const minimum=Math.trunc(sampleRate*((100.0*100.0+100.0*1.0+1.0)*compensationDelayFront(50)));
+  let size=1;while(size<minimum)size*=2;
+  return size;
+}
+/** filter_frame reads (w_ptr + buf_size - delay) & (buf_size - 1) in unsigned arithmetic, so the delay that reaches the
+ * output is delay mod buf_size: colder temperatures at rates where sample_rate * COMP_DELAY_MAX_DELAY lies just below a
+ * power of two (25000 and 50000 Hz, for example) wrap. */
+export function compensationDelayEffectiveSamples(step:AudioCompensationDelayStep,sampleRate:number):number {
+  return compensationDelaySamples(step,sampleRate)%compensationDelayBufferSize(sampleRate);
+}
+/** Ring bytes: effective delay + 1 doubles per channel reproduce native's power-of-two ring (write before read, so delay 0 reads the current sample). */
+const ringBytes=(step:AudioCompensationDelayStep,sampleRate:number,channels:number)=>BigInt(compensationDelayEffectiveSamples(step,sampleRate)+1)*BigInt(channels)*8n;
 async function* compensate(step:AudioCompensationDelayStep,frames:AsyncIterable<AudioFrameData>,options:AudioConversionOptions,negotiated:(input:AudioSampleFormat)=>AudioSampleFormat):AsyncIterable<AudioFrameData> {
   const {maxFrameBytes,signal}=options;signal?.throwIfAborted();
   if(!Number.isSafeInteger(maxFrameBytes)||maxFrameBytes<1)invalid('Invalid compensationdelay allocation limit');
@@ -49,7 +62,7 @@ async function* compensate(step:AudioCompensationDelayStep,frames:AsyncIterable<
     if(!Number.isSafeInteger(frame.samples)||frame.samples<0||!Number.isSafeInteger(frame.channels)||frame.channels<1)invalid('Invalid compensationdelay input frame');
     if(!format){
       if(ringBytes(step,frame.sampleRate,frame.channels)>BigInt(maxFrameBytes))invalid('compensationdelay delay buffer exceeds allocation limit');
-      size=compensationDelaySamples(step,frame.sampleRate)+1;rings=Array.from({length:frame.channels},()=>new Float64Array(size));
+      size=compensationDelayEffectiveSamples(step,frame.sampleRate)+1;rings=Array.from({length:frame.channels},()=>new Float64Array(size));
       format={sampleRate:frame.sampleRate,channels:frame.channels,channelLayout:frame.channelLayout};
     }else if(frame.sampleRate!==format.sampleRate||frame.channels!==format.channels||frame.channelLayout!==format.channelLayout)invalid('compensationdelay requires a stable input format');
     const target=negotiated(frame.sampleFormat as AudioSampleFormat);if(target!=='dblp')invalid(`compensationdelay cannot work in ${target}`);
@@ -59,7 +72,7 @@ async function* compensate(step:AudioCompensationDelayStep,frames:AsyncIterable<
     for(let channel=0;channel<frame.channels;channel++){
       signal?.throwIfAborted();
       const plane=input.planes[channel]!,source=new Float64Array(plane.buffer.slice(plane.byteOffset,plane.byteOffset+bytes)),out=data.subarray(channel*bytes,(channel+1)*bytes),dst=new Float64Array(out.buffer,out.byteOffset,frame.samples),buffer=rings[channel]!;
-      // native: buffer[w] = x; dst = dry*x + wet*buffer[r]; r = (w + size - delay) mod size, which is w+1 for a delay+1 ring.
+      // native: buffer[w] = x; dst = dry*x + wet*buffer[r]; r = (w + buf_size - delay) & mask, which is w+1 for an effective delay+1 ring.
       let w=write,r=w+1===size?0:w+1;
       for(let n=0;n<frame.samples;n++){const sample=source[n]!;buffer[w]=sample;dst[n]=dry*sample+wet*buffer[r]!;w=w+1===size?0:w+1;r=r+1===size?0:r+1;}
       next=w;planes.push(out);
@@ -76,6 +89,6 @@ export const compensationdelay=defineAudioFilter<AudioCompensationDelayStep>({
   capabilities:()=>({generatesOutput:false,reframes:true,allocatesFrames:true,formatConstraint:false,rateConversion:false,timeSelection:false}),
   formats:()=>['dblp'],
   stream:(step,frames,options,_configured,negotiated)=>compensate(step,frames,options,negotiated),
-  // One output frame plus the per-channel ring of delay+1 doubles.
+  // One output frame plus the per-channel ring of effective delay+1 doubles.
   reserve:(step,{sampleRate,channels})=>({frames:1,buffers:[],stateBytes:ringBytes(step,sampleRate,channels)})
 });
