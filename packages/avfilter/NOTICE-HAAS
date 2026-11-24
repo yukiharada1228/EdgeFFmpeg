@@ -1,0 +1,19 @@
+Haas stereo enhancer (src/audio/haas.ts)
+
+src/audio/haas.ts adapts FFmpeg libavfilter/af_haas.c: the AVOption table
+(names, defaults and ranges of level_in, level_out, side_gain, middle_source,
+middle_phase, left/right delay, balance, gain and phase), query_formats (a
+single packed dbl format and the stereo layout), config_input (delay
+truncation to uint32 samples, phase signs and balance coefficients) and the
+per-sample loop of filter_frame.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2001-2010 Vladimir Sadovnikov
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation sizes its delay ring to the largest delay plus one
+sample instead of native's power-of-two buffer, reducing each delay modulo the
+native buffer size so the output is identical. It accepts only constant
+decimal values, the middle_source names or integers and the boolean names or
+0/1, refuses inputs native would remix to stereo implicitly, and has no
+runtime commands. The original source and full notices remain in the pinned
+upstream submodule.

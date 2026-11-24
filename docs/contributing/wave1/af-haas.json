@@ -1,0 +1,238 @@
+{
+ "capabilityId": "filter.haas",
+ "slug": "af-haas",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/audio/haas.ts",
+  "packages/avfilter/NOTICE-HAAS",
+  "tests/unit/haas.test.ts",
+  "tests/differential/haas.test.ts",
+  "docs/contributing/haas.md",
+  "docs/contributing/wave1/af-haas.json",
+  "packages/avfilter/src/audio/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/audio/registry.ts",
+   "change": "+1 line: export {haas} from './haas.js';"
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/haas.test.ts",
+   "title": "parses named and positional options with native defaults, names and ranges, and refuses everything else with exact messages",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/haas.test.ts",
+   "title": "truncates delays as config_input does, reduces them modulo native's power-of-two ring and derives balance coefficients",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/haas.test.ts",
+   "title": "pins dbl for every input format, refuses non-stereo layouts and plans an unchanged count with an exact ring reservation",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/haas.test.ts",
+   "title": "matches a transcription of the C loop for every option family, independent of frame splits, without touching its input",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/haas.test.ts",
+   "title": "refuses non-stereo frames, rate changes, oversized rings and frames, emits nothing for empty input and observes cancellation",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/haas.test.ts",
+   "title": "matches native PCM bytes for every option sweep at 8000/44100/48000 Hz, stereo from every source format into f64/f32/s16",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/haas.test.ts",
+   "title": "matches native framecrc across frame splits, WAV input, output selection and frame limits, and at rates where native wraps its power-of-two ring",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/haas.test.ts",
+   "title": "refuses mono, three-channel, out-of-range and unimplemented forms before output, beside native status",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/audio-filter-registry.test.ts + audio-filter-registry-extension.test.ts + audio-filter-registry-contract.test.ts",
+   "title": "(unchanged registry suites)",
+   "passed": 26,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 642,
+  "details": [
+   {
+    "count": 489,
+    "compares": "raw PCM bytes (f64le, plus f32le/s16le for defaults and the positional form, and for all sweeps on f64 input), -cpuflags 0: 21 option sweeps x 8000/44100/48000 Hz x stereo u8/s16/s32/f32/f64 raw input",
+    "gate": "linux/x64"
+   },
+   {
+    "count": 120,
+    "compares": "framecrc (pcm_f64le, -bitexact): raw and WAV s16/f64 input, 5 chains (asetnsamples splits before/after, haas in series, volume/aformat neighbours) x 6 input/output -ss/-t/-frames:a profiles",
+    "gate": "linux/x64"
+   },
+   {
+    "count": 12,
+    "compares": "raw f64 PCM bytes at 1/100/6400/12800/25600/192000 Hz with 40 ms and near-40 ms delays (native ring wrap)",
+    "gate": "linux/x64"
+   },
+   {
+    "count": 21,
+    "compares": "native exit status per refusal (0, 8, 222, 234) beside ours: non-zero exit, nothing written, exact message",
+    "gate": "none"
+   }
+  ]
+ },
+ "unsupported": [
+  "FLAC input (refused before decoding: FLAC input to haas requires additional Native evidence)",
+  "expressions, SI suffixes and other non-literal numeric values (native accepts)",
+  "fractional middle_source values (native rounds)",
+  "quoted or escaped option values",
+  "enable / timeline",
+  "runtime commands (haas has no process_command; the chain has none)",
+  "mono, 3+ channel and non-default-mask stereo input (native remixes implicitly)",
+  "automatic sample-rate conversion next to haas",
+  "float output on platforms other than linux/x64"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": {
+  "tests": 13,
+  "files": 6,
+  "list": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts (file failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+   "tests/unit/flac-decoder.test.ts (file failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-max-frames.test.ts (file failed to load: missing FLAC build artifacts)",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ]
+ },
+ "finalUnitFailures": {
+  "tests": 13,
+  "files": 6,
+  "list": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts (file failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+   "tests/unit/flac-decoder.test.ts (file failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-max-frames.test.ts (file failed to load: missing FLAC build artifacts)",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ],
+  "sameAsBaseline": true
+ },
+ "proposedContracts": [
+  {
+   "id": "filter.haas.parse",
+   "file": "tests/unit/haas.test.ts",
+   "name": "parses named and positional options with native defaults, names and ranges, and refuses everything else with exact messages",
+   "modes": [
+    "unit"
+   ],
+   "scope": "option syntax, native defaults/ranges and exact refusal messages"
+  },
+  {
+   "id": "filter.haas.config",
+   "file": "tests/unit/haas.test.ts",
+   "name": "truncates delays as config_input does, reduces them modulo native's power-of-two ring and derives balance coefficients",
+   "modes": [
+    "unit"
+   ],
+   "scope": "delay truncation, ring modulo reduction and balance coefficients"
+  },
+  {
+   "id": "filter.haas.planning",
+   "file": "tests/unit/haas.test.ts",
+   "name": "pins dbl for every input format, refuses non-stereo layouts and plans an unchanged count with an exact ring reservation",
+   "modes": [
+    "unit"
+   ],
+   "scope": "dbl negotiation, stereo constraint, counts, packet sections and reservations"
+  },
+  {
+   "id": "filter.haas.transcription",
+   "file": "tests/unit/haas.test.ts",
+   "name": "matches a transcription of the C loop for every option family, independent of frame splits, without touching its input",
+   "modes": [
+    "unit"
+   ],
+   "scope": "output against a C-loop transcription under frame splits, ownership"
+  },
+  {
+   "id": "filter.haas.limits",
+   "file": "tests/unit/haas.test.ts",
+   "name": "refuses non-stereo frames, rate changes, oversized rings and frames, emits nothing for empty input and observes cancellation",
+   "modes": [
+    "unit"
+   ],
+   "scope": "stream refusals, allocation limits, empty input and cancellation"
+  },
+  {
+   "id": "filter.haas.native-pcm",
+   "file": "tests/differential/haas.test.ts",
+   "name": "matches native PCM bytes for every option sweep at 8000/44100/48000 Hz, stereo from every source format into f64/f32/s16",
+   "modes": [
+    "differential"
+   ],
+   "scope": "raw PCM bytes vs native across option sweeps, rates, sources and outputs (linux/x64)"
+  },
+  {
+   "id": "filter.haas.native-framecrc",
+   "file": "tests/differential/haas.test.ts",
+   "name": "matches native framecrc across frame splits, WAV input, output selection and frame limits, and at rates where native wraps its power-of-two ring",
+   "modes": [
+    "differential"
+   ],
+   "scope": "framecrc vs native across frame splits, WAV, time selection, frame limits and ring-wrap rates (linux/x64)"
+  },
+  {
+   "id": "filter.haas.native-refusals",
+   "file": "tests/differential/haas.test.ts",
+   "name": "refuses mono, three-channel, out-of-range and unimplemented forms before output, beside native status",
+   "modes": [
+    "differential"
+   ],
+   "scope": "explicit refusals before output beside native exit status"
+  }
+ ],
+ "notes": [
+  "Native's power-of-two ring is replaced by a max(delay)+1 ring with each delay reduced modulo native's ring size; this reproduces native at rates where sample_rate*40ms is a power of two (verified at 6400/12800/25600 Hz).",
+  "Positional option values follow libavfilter shorthand in AVOption order; verified for one 13-value form against native.",
+  "No shared edit beyond the registry line was needed.",
+  "Setup durations: submodule 35s, npm ci 7s, reference:build 138s, baseline typecheck+lint+boundaries 52s, baseline unit 67s."
+ ]
+}

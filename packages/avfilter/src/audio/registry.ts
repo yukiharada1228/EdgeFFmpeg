@@ -19,3 +19,4 @@ export {asoftclip} from './asoftclip.js';
 export {adynamicsmooth} from './adynamicsmooth.js';
 export {crystalizer} from './crystalizer.js';
 export {compensationdelay} from './compensationdelay.js';
+export {haas} from './haas.js';
