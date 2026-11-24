@@ -1,0 +1,17 @@
+aintegral audio filter (src/audio/aintegral.ts)
+
+src/audio/aintegral.ts adapts the aintegral filter of FFmpeg
+libavfilter/af_aderivative.c (ff_af_aintegral, the INTEGRAL(flt, float) and
+INTEGRAL(dbl, double) loops, config_input and filter_frame): a per-channel
+running sum that starts at zero and carries across frames, computed in float
+for fltp and in double for dblp, over the native FILTER_SAMPLEFMTS list
+(fltp, dblp).
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+libavfilter/af_aderivative.c carries no individual copyright line; its header
+states only "This file is part of FFmpeg."
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation is a separate module: it shares no code with
+aderivative, accepts no options, and refuses timeline enable and commands
+instead of implementing ctx->is_disabled. It adds no FFmpeg runtime code.
+The original source and full notices remain in the pinned upstream submodule.
