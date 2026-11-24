@@ -1,0 +1,18 @@
+adynamicsmooth audio filter (src/audio/adynamicsmooth.ts)
+
+src/audio/adynamicsmooth.ts adapts FFmpeg libavfilter/af_adynamicsmooth.c:
+the sensitivity and basefreq options and their ranges, the per-channel
+low1/low2/inz state zero-initialised at configuration (config_input), and the
+filter_frame smoothing loop with its coefficient polynomial, evaluated in the
+same double operation order. The pinned dblp format follows its
+FILTER_SINGLE_SAMPLEFMT(AV_SAMPLE_FMT_DBLP).
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Upstream file:libavfilter/af_adynamicsmooth.c
+The upstream file carries no individual copyright line; it states "This file is
+part of FFmpeg" under the FFmpeg project's copyright.
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation accepts only plain decimal option values, refuses
+timeline enable, runtime commands and non-finite input explicitly, never
+smooths a frame in place, and adds no FFmpeg runtime code. The original source
+and full notices remain in the pinned upstream submodule.
