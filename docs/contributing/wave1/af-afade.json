@@ -1,0 +1,276 @@
+{
+  "capabilityId": "filter.afade",
+  "slug": "af-afade",
+  "status": "partial",
+  "filesChanged": [
+    "packages/avfilter/src/audio/afade.ts",
+    "packages/avfilter/NOTICE-AFADE",
+    "tests/unit/afade.test.ts",
+    "tests/differential/afade.test.ts",
+    "docs/contributing/afade.md",
+    "docs/contributing/wave1/af-afade.json",
+    "packages/avfilter/src/audio/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/audio/registry.ts",
+      "change": "+1 line: export {afade} from './afade.js';"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/afade.test.ts",
+      "name": "accepts names, aliases, positional options and the last value of each field",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/afade.test.ts",
+      "name": "refuses libm curves and unimplemented syntax with exact messages",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/afade.test.ts",
+      "name": "computes fade_gain per curve with clipping and the unfused silence/unity combination",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/afade.test.ts",
+      "name": "maps durations at the link rate and selects filter_frame branches with strict comparisons",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/afade.test.ts",
+      "name": "reads cur_sample from pts in any time base with near-infinity rounding",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/afade.test.ts",
+      "name": "negotiates the native list per output codec and plans counts and one owned frame",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/afade.test.ts",
+      "name": "refuses zero-sample durations and nofade silence outside the window before output",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/afade.test.ts",
+      "name": "refuses floating fades with zero silence outside the window and runs integer and from-zero fades",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/afade.test.ts",
+      "name": "matches a direct C transcription for every curve, format and branch, and is invariant under frame splits where native is",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/afade.test.ts",
+      "name": "processes streams frame by frame from pts, as filter_frame does",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/afade.test.ts",
+      "name": "never mutates its input, returns owned planes and keeps timing",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/afade.test.ts",
+      "name": "honours allocation limits, cancellation and non-finite input refusals",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/afade.test.ts",
+      "name": "matches native fade-in and fade-out bytes for every implemented curve and the ss/ns, st/d and positional spellings",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 300,
+      "nativeStatusRefusals": 8
+    },
+    {
+      "file": "tests/differential/afade.test.ts",
+      "name": "matches native WAV and framecrc output from every source format into u8, s16 and f32 outputs",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 168,
+      "nativeStatusRefusals": 42
+    },
+    {
+      "file": "tests/differential/afade.test.ts",
+      "name": "matches native fades crossing frame boundaries, outside the input, and under input and output time selection",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 252,
+      "nativeStatusRefusals": 0
+    },
+    {
+      "file": "tests/differential/afade.test.ts",
+      "name": "matches native non-default silence and unity gains on linux x64",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 360,
+      "nativeStatusRefusals": 72,
+      "gate": "linux x64"
+    },
+    {
+      "file": "tests/differential/afade.test.ts",
+      "name": "refuses libm curves, unimplemented syntax and frame-boundary-dependent fades before output, recording native status",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 0,
+      "nativeStatusRefusals": 34
+    },
+    {
+      "file": "tests/unit/audio-filter-registry.test.ts",
+      "name": "(existing registry suite, unchanged)",
+      "passed": 11,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/audio-filter-registry-extension.test.ts",
+      "name": "(existing registry suite, unchanged)",
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/audio-filter-registry-contract.test.ts",
+      "name": "(existing registry suite, unchanged)",
+      "passed": 3,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 1080,
+    "refusalStatusChecks": 156,
+    "compares": "CLI output bytes (raw PCM, WAV and framecrc) of .build/reference/ffmpeg -cpuflags 0 -bitexact against Edge for generated stereo 8000 Hz u8/s16le/s32le/f32le/f64le input: 8 polynomial/sqrt curves plus nofade, in/out, ss/ns, st/d and positional spellings, u8/s16/s32/f32/f64 outputs, asetnsamples before and after, fades outside the input, stacked fades, volume and asetrate neighbours, input -ss/-t and output -ss/-t/-frames:a, and non-default silence/unity (linux x64). Refusal checks assert Edge fails before output and record native's exit status."
+  },
+  "unsupported": [
+    "libm curves qsin, esin, hsin, log, cbr, exp, iqsin, ihsin, dese, losi, sinc, isinc, quatr, qsin2, hsin2",
+    "runtime commands (process_command), timeline enable, quoted/escaped values, expressions and numeric curve/type values",
+    "sample counts and durations above 2^53 and durations that rescale to zero samples",
+    "silence=0 on floating working formats (flt/dbl, including u8 sources into f32/f64 outputs) when samples lie on the silence side of the window: fade-outs and fade-ins starting after sample 0 (native output depends on native frame boundaries: +0 fill vs s*0)",
+    "nofade with silence != unity when samples lie on the silence side of the window (frame-boundary dependent)",
+    "silence/unity pairs where silence+(unity-silence)*1 does not round to unity (frame-boundary dependent)",
+    "non-finite floating input in scaled or faded frames",
+    "FLAC input (refused before decoding)",
+    "acrossfade"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "summary": "13 failed tests and 3 failed suites (6 failed files) of 2266 tests, all in the two expected categories",
+    "failures": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts (suite: missing .build/codecs/flac/edge-flac.wasm)",
+      "tests/unit/flac-decoder.test.ts (suite: missing .build/codecs/flac/edge-flac.wasm)",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts (suite: missing FLAC build artifacts)",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ]
+  },
+  "finalUnitFailures": {
+    "summary": "13 failed tests and 3 failed suites (6 failed files) of 2278 tests, identical to the baseline",
+    "failures": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts (suite: missing .build/codecs/flac/edge-flac.wasm)",
+      "tests/unit/flac-decoder.test.ts (suite: missing .build/codecs/flac/edge-flac.wasm)",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts (suite: missing FLAC build artifacts)",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ]
+  },
+  "proposedContracts": [
+    {
+      "id": "filter.afade.curves",
+      "file": "tests/differential/afade.test.ts",
+      "name": "matches native fade-in and fade-out bytes for every implemented curve and the ss/ns, st/d and positional spellings",
+      "modes": [
+        "linux-x64-native"
+      ],
+      "scope": "tri/qua/cub/squ/par/ipar/desi/quat on in/out with ss/ns, st/d and positional spellings on integer formats; from-zero fade-ins for every curve on f32/f64; nofade refusals"
+    },
+    {
+      "id": "filter.afade.formats",
+      "file": "tests/differential/afade.test.ts",
+      "name": "matches native WAV and framecrc output from every source format into u8, s16 and f32 outputs",
+      "modes": [
+        "linux-x64-native"
+      ],
+      "scope": "u8/s16/s32/f32/f64 sources into u8/s16/f32 WAV and framecrc; floating fade-out refusals"
+    },
+    {
+      "id": "filter.afade.time",
+      "file": "tests/differential/afade.test.ts",
+      "name": "matches native fades crossing frame boundaries, outside the input, and under input and output time selection",
+      "modes": [
+        "linux-x64-native"
+      ],
+      "scope": "fades across frame boundaries, outside the input, with asetnsamples/volume/asetrate neighbours, input -ss/-t and output -ss/-t/-frames:a"
+    },
+    {
+      "id": "filter.afade.gains",
+      "file": "tests/differential/afade.test.ts",
+      "name": "matches native non-default silence and unity gains on linux x64",
+      "modes": [
+        "linux-x64-native"
+      ],
+      "scope": "non-default silence/unity on s16/s32/f32/f64, gated to linux x64"
+    },
+    {
+      "id": "filter.afade.refusals",
+      "file": "tests/differential/afade.test.ts",
+      "name": "refuses libm curves, unimplemented syntax and frame-boundary-dependent fades before output, recording native status",
+      "modes": [
+        "linux-x64-native"
+      ],
+      "scope": "libm curves, unimplemented syntax and frame-boundary-dependent configurations refused before output, with native exit status"
+    },
+    {
+      "id": "filter.afade.unit",
+      "file": "tests/unit/afade.test.ts",
+      "name": "matches a direct C transcription for every curve, format and branch, and is invariant under frame splits where native is",
+      "modes": [
+        "unit"
+      ],
+      "scope": "C transcription of filter_frame/fade_gain for every format, curve and branch, with frame-split invariance"
+    }
+  ],
+  "notes": [
+    "Setup durations: submodule init 44s; npm ci 9s; npm run reference:build 175s; baseline typecheck+lint+boundaries 55s; baseline unit run 81s.",
+    "Status is partial because the PCM CLI filters frames grouped by its memory plan (packages/avformat/src/index.ts reads packets of memoryPlan.packetSamples, and a reframing chain receives the whole selected input as one frame), not native's demuxer/atrim frames. af_afade.c chooses its branch per frame, so with silence=0 on float samples, nofade, or silence/unity pairs whose full gain does not round to unity, native output depends on those boundaries (+0 from av_samples_set_silence vs -0 from s*0 for negative floats). Those configurations are refused explicitly before output; everything else is boundary-invariant and is pinned against native.",
+    "Implementing the refused float fade-outs would need a shared edit outside this capability: the PCM and FLAC paths would have to feed filters native-sized decoder frames (ff_pcm_default_packet_size for raw, the WAV demuxer's packet size, atrim splits) or expose those boundaries to apply(). Not made, per the wave rules.",
+    "The first-frame float refusal is raised from apply(), because constraint() does not see the sample format; the differential tests confirm no output file is created.",
+    "spec says u8 maps to s16; the chain's native negotiation actually maps u8 per output codec (u8/s16 -> s16, s32 -> s32, f32 -> flt, f64 -> dbl), and the differential tests pin those against native.",
+    "Native output to WAV is compared from a file, not stdout, because native cannot patch WAV sizes on a pipe."
+  ]
+}
