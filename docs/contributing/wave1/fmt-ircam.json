@@ -1,0 +1,253 @@
+{
+  "capabilityId": "demuxer.ircam",
+  "slug": "fmt-ircam",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/ircam.ts",
+    "packages/containers/NOTICE-IRCAM",
+    "docs/contributing/ircam-support.md",
+    "tests/unit/ircam.test.ts",
+    "tests/differential/ircam.test.ts",
+    "docs/contributing/wave1/fmt-ircam.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/containers/src/registry.ts",
+      "edit": "+1 line: export {ircam} from './ircam.js'; (alphabetical, after framecrc)"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/ircam.test.ts",
+      "title": "parses all seven IRCAM magics with their field endianness and both tag tables",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/ircam.test.ts",
+      "title": "rounds the float rate with lrintf semantics and refuses platform-dependent rates",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/ircam.test.ts",
+      "title": "refuses IRCAM headers with native exit statuses in native order",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/ircam.test.ts",
+      "title": "probes native IRCAM heads, confirms the second form with bounded reads and never detects by extension",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/ircam.test.ts",
+      "title": "ports av_q2intfloat for IRCAM output rates and writes the 1024-byte little-endian header",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/ircam.test.ts",
+      "title": "aborts IRCAM output exactly once and honors cancellation",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/ircam.test.ts",
+      "title": "registers the IRCAM descriptor with native names, extensions, codecs and packet span",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/ircam.test.ts",
+      "title": "matches native IRCAM mux bytes for 8 codecs x 3 layouts x 5 rates x 4 lengths and decodes them back",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/ircam.test.ts",
+      "title": "matches native IRCAM demux for all seven magics and both tag tables through copy framecrc, WAV decode and raw output",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/ircam.test.ts",
+      "title": "matches native IRCAM packet timing through copy and filtered framecrc with seeks, durations and frame limits",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/ircam.test.ts",
+      "title": "matches the native lrintf IRCAM float sample rate on ties and fractions",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/ircam.test.ts",
+      "title": "refuses IRCAM inputs and outputs with the native exit status before any output exists",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/ircam.test.ts",
+      "title": "matches the FATE lavf-ircam reference exactly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry.test.ts",
+      "title": "(whole file, unchanged)",
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry-extension.test.ts",
+      "title": "(whole file, unchanged)",
+      "passed": 7,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 1187,
+    "details": [
+      "480 whole-file mux byte comparisons (8 codecs x 3 channel counts x 5 rates x 4 lengths)",
+      "96 raw copy comparisons of native-written files",
+      "504 demux comparisons: 7 magics x 8 tags x 3 channel counts x (copy framecrc, WAV decode, raw copy)",
+      "14 detection/-f ircam framecrc and exit-status comparisons",
+      "32 packet-timing framecrc comparisons",
+      "42 float-rate framecrc comparisons (21 rates x LE/BE)",
+      "15 refusal exit-status comparisons (8 demux, 7 mux)",
+      "4 FATE lavf-ircam checks: md5, size, decode CRC against tests/ref/lavf/ircam, plus native md5 with the original options"
+    ]
+  },
+  "unsupported": [
+    "Extension-score detection of unprobed heads (0x64A30400) without -f ircam: native's score-1 extension match is payload dependent",
+    "Non-finite, >=2^31, < -2^31 or negative float rates (exit 1 refusal)",
+    "Channel counts >= 2^31 (exit 1 refusal)",
+    "Trailing partial sample frames",
+    "Input seek at or beyond EOF",
+    "BE, unsigned and other non-LE-table output codecs (refused with 234 like native, but native leaves an empty file)",
+    "FLAC input to the ircam muxer",
+    "Unknown-length / pipe output",
+    "Workers-runtime and macOS arm64 evidence"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "files": 6,
+    "tests": 13,
+    "entries": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+      "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ]
+  },
+  "finalUnitFailures": {
+    "files": 6,
+    "tests": 13,
+    "entries": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+      "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ],
+    "identicalToBaseline": true
+  },
+  "proposedContracts": [
+    {
+      "id": "ircam.bitexact-mux",
+      "file": "tests/differential/ircam.test.ts",
+      "name": "matches native IRCAM mux bytes for 8 codecs x 3 layouts x 5 rates x 4 lengths and decodes them back",
+      "modes": [
+        "semantic",
+        "bit-exact",
+        "bit-exact-pcm"
+      ],
+      "scope": "480 whole-file native -bitexact -f ircam comparisons: 8 LE codecs x 1/2/5 channels x 8000/22050/44100/96000/16777217 Hz x 0/1/67/4097 samples (av_q2intfloat rate word), plus 96 raw copy demux comparisons of native files."
+    },
+    {
+      "id": "ircam.demux-magics",
+      "file": "tests/differential/ircam.test.ts",
+      "name": "matches native IRCAM demux for all seven magics and both tag tables through copy framecrc, WAV decode and raw output",
+      "modes": [
+        "semantic",
+        "bit-exact",
+        "bit-exact-pcm"
+      ],
+      "scope": "All 7 native magics x 8 tags (LE and BE variants) x 1/2/5 channels through copy framecrc, -cpuflags 0 WAV decode and raw copy; undeclared detection and -f ircam for each magic."
+    },
+    {
+      "id": "ircam.packet-timing",
+      "file": "tests/differential/ircam.test.ts",
+      "name": "matches native IRCAM packet timing through copy and filtered framecrc with seeks, durations and frame limits",
+      "modes": [
+        "semantic",
+        "bit-exact"
+      ],
+      "scope": "32 framecrc cases: 4 codecs x 4 seek/duration/frame-limit profiles x copy or a fixed volume/asetnsamples/asetrate chain at 8000 Hz stereo."
+    },
+    {
+      "id": "ircam.float-rate",
+      "file": "tests/differential/ircam.test.ts",
+      "name": "matches the native lrintf IRCAM float sample rate on ties and fractions",
+      "modes": [
+        "semantic",
+        "numerical"
+      ],
+      "scope": "21 finite in-range float32 rates (ties, fractions, large powers of two) in LE and BE headers; whole copy framecrc including #sample_rate. Non-finite and >=2^31 rates are refused, not compared."
+    },
+    {
+      "id": "ircam.refusals",
+      "file": "tests/differential/ircam.test.ts",
+      "name": "refuses IRCAM inputs and outputs with the native exit status before any output exists",
+      "modes": [
+        "semantic",
+        "diagnostic"
+      ],
+      "scope": "Native exit statuses for unknown tags, 0/513 channels, zero rates, unknown magic, truncated header (183/218) and 7 unsupported mux codecs (234), with no Edge output created."
+    },
+    {
+      "id": "ircam.fate-lavf",
+      "file": "tests/differential/ircam.test.ts",
+      "name": "matches the FATE lavf-ircam reference exactly",
+      "modes": [
+        "semantic",
+        "bit-exact"
+      ],
+      "scope": "FATE lavf-ircam: audiogen asynth1.sw compiled at test time; Edge output md5/size equal tests/ref/lavf/ircam and the Adler-32 of its decode equals the reference CRC. -metadata/-qscale dropped (no effect on native md5, checked)."
+    }
+  ],
+  "notes": [
+    "No shared edit beyond the registry line was needed; packages/containers/src/index.ts is unchanged (tests import the module by path).",
+    "The ircam descriptor overrides packetSpan with ff_pcm_default_packet_size (including the INT_MAX/block_align clip); it equals pcmPacketSpan for every non-clipped case.",
+    "Input header bytes past EOF read as zero (avio_rl32 semantics), so truncated headers reach native's own refusals.",
+    "Setup durations: submodule init 48s, npm ci 8s, reference:build 197s, baseline typecheck+lint+boundaries 65s, baseline unit suite 87s; own differential file ~14s.",
+    "Baseline failures are the expected FLAC artifact (downloads.xiph.org blocked) and resample-checkpoint macOS-digest failures."
+  ]
+}
