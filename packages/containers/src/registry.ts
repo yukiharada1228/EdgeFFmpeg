@@ -4,6 +4,7 @@
  */
 export {aiff} from './formats/aiff.js';
 export {au} from './formats/au.js';
+export {epaf} from './epaf.js';
 export {framecrc} from './formats/framecrc.js';
 export * from './formats/raw-pcm.js';
 export {w64} from './formats/w64.js';
