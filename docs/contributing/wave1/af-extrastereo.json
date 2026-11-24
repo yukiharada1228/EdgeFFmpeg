@@ -1,0 +1,85 @@
+{
+  "capabilityId": "filter.extrastereo",
+  "slug": "af-extrastereo",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/audio/extrastereo.ts",
+    "packages/avfilter/NOTICE-EXTRASTEREO",
+    "packages/avfilter/src/audio/registry.ts",
+    "tests/unit/extrastereo.test.ts",
+    "tests/differential/extrastereo.test.ts",
+    "docs/contributing/extrastereo.md",
+    "docs/contributing/wave1/af-extrastereo.json"
+  ],
+  "sharedEdits": [
+    {"file": "packages/avfilter/src/audio/registry.ts", "change": "+1 line: export {extrastereo} from './extrastereo.js';"}
+  ],
+  "tests": [
+    {"file": "tests/unit/extrastereo.test.ts", "title": "parses extrastereo options with native shorthand order and refuses everything else with exact messages", "passed": 1, "failed": 0},
+    {"file": "tests/unit/extrastereo.test.ts", "title": "pins packed flt for every input format and plans one frame-producing stage without count changes", "passed": 1, "failed": 0},
+    {"file": "tests/unit/extrastereo.test.ts", "title": "refuses every layout native would remix, including a masked two-channel WAV layout", "passed": 1, "failed": 0},
+    {"file": "tests/unit/extrastereo.test.ts", "title": "matches the C transcription per sample for every m and clip setting, including zeros, opposite signs and subnormals", "passed": 1, "failed": 0},
+    {"file": "tests/unit/extrastereo.test.ts", "title": "produces frame-split invariant owned output from integer and float frames without mutating inputs", "passed": 1, "failed": 0},
+    {"file": "tests/unit/extrastereo.test.ts", "title": "observes allocation limits and cancellation", "passed": 1, "failed": 0},
+    {"file": "tests/differential/extrastereo.test.ts", "title": "matches native extrastereo bytes for stereo sources, every m and clip setting, raw, WAV and framecrc outputs (Linux x64 unfused float)", "passed": 1, "failed": 0},
+    {"file": "tests/differential/extrastereo.test.ts", "title": "matches native extrastereo framecrc in composed chains, frame splits, defaults and output time selection (Linux x64 unfused float)", "passed": 1, "failed": 0},
+    {"file": "tests/differential/extrastereo.test.ts", "title": "refuses layouts native would remix and unimplemented options before output, recording native status", "passed": 1, "failed": 0},
+    {"file": "tests/unit/audio-filter-registry.test.ts + audio-filter-registry-extension.test.ts + audio-filter-registry-contract.test.ts", "title": "(all, unchanged)", "passed": 26, "failed": 0}
+  ],
+  "nativeComparisons": {
+    "count": 573,
+    "details": [
+      "360 byte comparisons (linux/x64): stereo u8/s16le/s32le/f32le/f64le sources x m {-10,-1,0,1,2.5,10} x c {0,1} x outputs raw f32le, raw s16le, WAV pcm_f32le, WAV pcm_s16le, framecrc pcm_f32le, framecrc pcm_s16le; -cpuflags 0; inputs include zero, negative-zero, opposite-sign, equal and +-1.5 pairs",
+      "200 framecrc comparisons (linux/x64): s16le/f32le sources x 10 chains (defaults, shorthand, asetnsamples before/after and n=1, chained extrastereo, apad, anull, asetrate) x 5 output selections (none, -ss, -t, -frames:a, -ss+-t) x pcm_f32le/pcm_s16le",
+      "13 native exit statuses for refusals: mono and 3-channel input (native 0, implicit remix), 6 forms native rejects, 5 forms native accepts but are unimplemented; no output file is created"
+    ]
+  },
+  "unsupported": [
+    "Non-stereo layouts and non-default two-channel WAV/W64 masks (native remixes implicitly)",
+    "Timeline enable",
+    "Runtime commands (process_command); no command filter exists",
+    "m expressions and constants (only decimal literals)",
+    "Boolean spellings other than 0, 1, true, false for c",
+    "FLAC input (flacInput not declared)",
+    "Non-finite input samples; NaN output with c=0 (overflowing finite float input)",
+    "Fused-float platforms: float comparisons skip outside linux/x64 (no fused profile implemented)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "summary": "13 failed tests in 6 files, 2253 passed (2266)",
+    "files": [
+      "tests/unit/flac-build-inputs.test.ts (1 test, needs .build/codecs/flac)",
+      "tests/unit/flac-decode-backend.test.ts (file, needs edge-flac.wasm)",
+      "tests/unit/flac-decoder.test.ts (file, needs edge-flac.wasm)",
+      "tests/unit/flac-expanded-fixtures.test.ts (2 tests)",
+      "tests/unit/flac-max-frames.test.ts (file, needs edge-flac.wasm)",
+      "tests/unit/resample-checkpoint.test.ts (10 tests, macOS arm64 golden digests)"
+    ]
+  },
+  "finalUnitFailures": {
+    "summary": "13 failed tests in 6 files, 2259 passed (2272); identical to the baseline failures",
+    "files": [
+      "tests/unit/flac-build-inputs.test.ts",
+      "tests/unit/flac-decode-backend.test.ts",
+      "tests/unit/flac-decoder.test.ts",
+      "tests/unit/flac-expanded-fixtures.test.ts",
+      "tests/unit/flac-max-frames.test.ts",
+      "tests/unit/resample-checkpoint.test.ts"
+    ]
+  },
+  "proposedContracts": [
+    {"id": "filter.extrastereo.native-bytes", "file": "tests/differential/extrastereo.test.ts", "name": "matches native extrastereo bytes for stereo sources, every m and clip setting, raw, WAV and framecrc outputs (Linux x64 unfused float)", "modes": ["differential"], "scope": "linux/x64; stereo u8/s16/s32/f32/f64 sources, m {-10,-1,0,1,2.5,10}, c {0,1}, raw/WAV/framecrc f32 and s16 outputs"},
+    {"id": "filter.extrastereo.native-chains", "file": "tests/differential/extrastereo.test.ts", "name": "matches native extrastereo framecrc in composed chains, frame splits, defaults and output time selection (Linux x64 unfused float)", "modes": ["differential"], "scope": "linux/x64; composed chains, asetnsamples splits, -ss/-t/-frames:a"},
+    {"id": "filter.extrastereo.refusals", "file": "tests/differential/extrastereo.test.ts", "name": "refuses layouts native would remix and unimplemented options before output, recording native status", "modes": ["differential"], "scope": "mono/3-channel refusal, option refusals with native status, no output written"},
+    {"id": "filter.extrastereo.arithmetic", "file": "tests/unit/extrastereo.test.ts", "name": "matches the C transcription per sample for every m and clip setting, including zeros, opposite signs and subnormals", "modes": ["unit"], "scope": "per-sample float formula and av_clipf_c clipping"},
+    {"id": "filter.extrastereo.syntax", "file": "tests/unit/extrastereo.test.ts", "name": "parses extrastereo options with native shorthand order and refuses everything else with exact messages", "modes": ["unit"], "scope": "option parsing and exact refusal messages"}
+  ],
+  "notes": [
+    "Setup durations: git submodule update 48 s, npm ci 9 s, npm run reference:build 206 s.",
+    "No shared edit beyond the registry line was needed.",
+    "The differential comparison tests skip outside linux/x64 (darwin needs a fused-multiply-add profile, which is not implemented). The refusal test runs on every platform.",
+    "Native WAV references are written to a seekable file, because WAV written to a pipe keeps unpatched header sizes.",
+    "Sensitivity check: replacing the rounded product with average+m*(l-average) in double made both comparison tests fail.",
+    "The masked two-channel layout refusal is covered through validateInputFormat with native layout names; no masked-WAV CLI file test is committed for this filter."
+  ]
+}

@@ -1,0 +1,17 @@
+extrastereo audio filter (src/audio/extrastereo.ts)
+
+src/audio/extrastereo.ts adapts the extrastereo filter of FFmpeg
+libavfilter/af_extrastereo.c: its m and c options and their ranges and
+defaults, the packed float format and stereo layout of query_formats, and the
+per-sample loop of filter_frame (average, difference scaling and av_clipf_c
+clipping), with every intermediate rounded to float as in the C source.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2015 The FFmpeg Project
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation keeps the filter stateless and frame by frame. It
+refuses, instead of approximating, every layout native would remix implicitly
+(anything but stereo), timeline enable, runtime commands, option expressions
+and constants, non-finite input samples, and NaN output without clipping. It
+adds no FFmpeg runtime code. The original source and full notices remain in
+the pinned upstream submodule.
