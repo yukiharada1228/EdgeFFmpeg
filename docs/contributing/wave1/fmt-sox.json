@@ -1,0 +1,208 @@
+{
+ "capabilityId": "demuxer.sox",
+ "slug": "fmt-sox",
+ "status": "complete",
+ "filesChanged": [
+  "packages/containers/src/sox.ts",
+  "packages/containers/NOTICE-SOX",
+  "docs/contributing/sox-support.md",
+  "tests/unit/sox.test.ts",
+  "tests/differential/sox.test.ts",
+  "docs/contributing/wave1/fmt-sox.json",
+  "packages/containers/src/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  "packages/containers/src/registry.ts: +1 line `export {sox} from './sox.js';` (probe '.SoX'/'XoS.' precedence 100 with sox_probe confirm, -f sox, .sox output extension, default codec pcm_s32le)"
+ ],
+ "tests": [
+  {
+   "file": "tests/differential/sox.test.ts",
+   "title": "writes SoX files byte-identical to native seekable output for both codecs, channel counts, rates, lengths and source formats",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/sox.test.ts",
+   "title": "demuxes native SoX files like native through copy framecrc, WAV, AIFF and raw decode, seeks, limits and volume",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/sox.test.ts",
+   "title": "matches native exit codes for malformed SoX headers and refuses unmirrored ones before output",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/sox.test.ts",
+   "title": "reproduces the FATE lavf-sox reference file and its decode",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/sox.test.ts",
+   "title": "parses both byte orders skips header padding without reads and seeks by frame",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/sox.test.ts",
+   "title": "probes both magics and the zero-padded 28-byte probe words like sox_probe",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/sox.test.ts",
+   "title": "refuses native-invalid headers with INVALIDDATA and unmirrored ones explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/sox.test.ts",
+   "title": "round-trips the header within a 128-byte budget and writes the sample-word count up front",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/sox.test.ts",
+   "title": "aborts SoX output exactly once and honors cancellation before reads",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/sox.test.ts",
+   "title": "registers the sox descriptor fields",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/container-registry.test.ts",
+   "title": "(all, unchanged)",
+   "passed": 9,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/container-registry-extension.test.ts",
+   "title": "(all, unchanged)",
+   "passed": 7,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 517,
+  "details": [
+   "288 mux file byte comparisons vs native writing a seekable file: {pcm_s32le,pcm_s32be} x channels {1,2,3,6} x rates {8000,44100,96000} x lengths {0,1,67,4097} x sources {s16le,s32le,f32le} (-cpuflags 0 for f32le)",
+   "190 demux byte comparisons: native-written files (2 codecs x 1/2/3/6 channels, auto-detected and -f sox) through copy framecrc, decoded framecrc, -ss/-t (input/output), -frames:a 2, -af volume=0.5, -guess_layout_max 0 and 2, WAV, AIFF (<=2 channels), s16le decode, -ss with volume; plus 6 hand-built header-padding/fractional-rate files through framecrc and s16le",
+   "31 exit-status comparisons: 13 malformed headers x {detected,-f sox} = 26 matched 183 (zero-channel detected case: native 183 undetected, Edge exit 1 'Unsupported audio container signature'); 5 native-accepted unmirrored inputs checked against native status (0 or 234) with Edge explicit refusal",
+   "4 muxer codec refusals (pcm_s16le, pcm_f32le, pcm_s24le, pcm_u8) match native exit 234, no Edge output created",
+   "FATE lavf-sox: md5 683635d5cb1344e44fa96df90c3a993c and size 176432 exact; identical to native running the FATE command; native crc 0x3a1da17e; copy framecrc decode identical"
+  ]
+ },
+ "unsupported": [
+  "SoX comments on input (refused, exit 1) and output (no metadata reaches muxers)",
+  "AIFF output from >=3-channel SoX input: native writes a CHAN layout tag for the guessed layout, the shared AIFF muxer does not (same divergence for raw PCM input); not refused, excluded from tests",
+  "Headers shorter than 32 bytes, header_size past EOF, partial trailing frames and non-.SoX/XoS. magics under -f sox: refused explicitly though native accepts them",
+  "Rates truncating to 0 Hz: refused with exit 234 (native's decoder also fails with 234)",
+  "Undetected (sox_probe-failing) input: Edge exit 1 vs native 183",
+  "Channel conversion other than mono/stereo (backend refusal)",
+  "Non-seekable/pipe and unknown-length output, FLAC input to the SoX muxer, Workers/R2 runs and macOS reproducibility were not run"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": {
+  "summary": "6 failed files, 13 failed tests (2253 passed of 2266)",
+  "failures": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts (file failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+   "tests/unit/flac-decoder.test.ts (file failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-max-frames.test.ts (file failed to load: missing FLAC artifacts)",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ]
+ },
+ "finalUnitFailures": {
+  "summary": "6 failed files, 13 failed tests (2259 passed of 2272); identical to baseline",
+  "failures": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts (file failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+   "tests/unit/flac-decoder.test.ts (file failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-max-frames.test.ts (file failed to load: missing FLAC artifacts)",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ]
+ },
+ "proposedContracts": [
+  {
+   "id": "demuxer.sox.mux-bytes",
+   "file": "tests/differential/sox.test.ts",
+   "name": "writes SoX files byte-identical to native seekable output for both codecs, channel counts, rates, lengths and source formats",
+   "modes": [
+    "differential"
+   ],
+   "scope": "SoX mux pcm_s32le/pcm_s32be, 1/2/3/6 channels, 8000/44100/96000 Hz, 0/1/67/4097 frames from s16le/s32le/f32le; bytes equal native seekable output"
+  },
+  {
+   "id": "demuxer.sox.demux",
+   "file": "tests/differential/sox.test.ts",
+   "name": "demuxes native SoX files like native through copy framecrc, WAV, AIFF and raw decode, seeks, limits and volume",
+   "modes": [
+    "differential"
+   ],
+   "scope": "SoX demux (detected and -f sox) through copy/decode framecrc, seeks, -t, -frames, volume, -guess_layout_max, WAV, AIFF (<=2 ch), s16le; header padding and fractional rates"
+  },
+  {
+   "id": "demuxer.sox.refusals",
+   "file": "tests/differential/sox.test.ts",
+   "name": "matches native exit codes for malformed SoX headers and refuses unmirrored ones before output",
+   "modes": [
+    "differential"
+   ],
+   "scope": "Native exit 183 for invalid SoX headers, 234 for muxer codecs; explicit refusal before output for unmirrored inputs"
+  },
+  {
+   "id": "demuxer.sox.fate-lavf",
+   "file": "tests/differential/sox.test.ts",
+   "name": "reproduces the FATE lavf-sox reference file and its decode",
+   "modes": [
+    "differential"
+   ],
+   "scope": "FATE lavf-sox reference md5/size/crc"
+  },
+  {
+   "id": "demuxer.sox.unit",
+   "file": "tests/unit/sox.test.ts",
+   "name": "round-trips the header within a 128-byte budget and writes the sample-word count up front",
+   "modes": [
+    "unit"
+   ],
+   "scope": "SoX header round trip within a 128-byte read budget, chunked header writes"
+  }
+ ],
+ "notes": [
+  "Setup durations: submodule init 43s (946fcce0 matches compat/upstream.lock.json), npm ci 8s, reference:build 200s, baseline typecheck+lint+boundaries 59s, baseline unit 81s.",
+  "Native-INVALIDDATA header refusals use containerRefusal(message,183) so exit codes match native; unmirrored inputs use SoxError (exit 1) or 234 where native fails with EINVAL.",
+  "The demuxer passes a null channel mask so the backend's -guess_layout_max rules match native for the unspecified SoX layout (verified for -guess_layout_max 0 and 2). A default mask would misreport -guess_layout_max below the channel count, because declared.guessLayout is computed from one channel for non-headerless inputs.",
+  "Needed shared edit, not made: the AIFF muxer would need native CHAN layout tags for guessed >=2.1 layouts to match native for >=3-channel SoX (and raw) inputs.",
+  "Native to stdout leaves WAV sizes unset (non-seekable), so WAV/AIFF demux comparisons write native output to a file.",
+  "The FATE test compiles upstream tests/audiogen.c with cc at test time; -metadata title does not reach the SoX header, so Edge runs the command without it."
+ ]
+}
