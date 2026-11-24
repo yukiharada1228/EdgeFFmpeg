@@ -68,13 +68,14 @@ All refusals throw `AudioFilterError` before any output is opened:
 
 The Linux x86_64 reference is `.build/reference/ffmpeg`, sha256 `ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c`.
 
-`tests/differential/afade.test.ts` makes 1,080 byte-exact comparisons with native CLI output and checks native's exit status for 156 refusals. The inputs are generated stereo 8000 Hz raw PCM. Native runs with `-cpuflags 0 -bitexact`.
+`tests/differential/afade.test.ts` makes 1,080 byte-exact comparisons with native CLI output and checks native's exit status for 156 refusals; 624 comparisons and 70 refusals run on every platform, the rest only on linux/x64. The inputs are generated stereo 8000 Hz raw PCM. Native runs with `-cpuflags 0 -bitexact`.
 
 | Test | Native comparisons | Refusals |
 |---|---|---|
-| `matches native fade-in and fade-out bytes for every implemented curve and the ss/ns, st/d and positional spellings` | 300: in/out × 8 curves × 4 spellings on s16/s32/u8 outputs, plus from-zero fade-ins × 9 curves × 4 spellings on f32/f64/s16 | 8 (nofade) |
-| `matches native WAV and framecrc output from every source format into u8, s16 and f32 outputs` | 168: u8/s16/s32/f32/f64 sources × u8/s16/f32 outputs × WAV/framecrc | 42 (floating fade-outs) |
-| `matches native fades crossing frame boundaries, outside the input, and under input and output time selection` | 252: 18 chains (asetnsamples before and after, fades before and after the input, stacked fades, volume, asetrate) × input `-ss`/`-t`, output `-ss`/`-t`/`-frames:a` × 2 formats, framecrc | 0 |
+| `matches native fade-in and fade-out bytes for every implemented curve and the ss/ns, st/d and positional spellings` | 264: in/out × 7 curves × 4 spellings on s16/s32/u8 outputs, plus from-zero fade-ins × 8 curves × 4 spellings on f32/f64/s16 (ipar runs in the linux/x64 ipar test) | 8 (nofade) |
+| `matches native WAV and framecrc output from every source format into u8, s16 and f32 outputs` | 122: u8/s16/s32/f32/f64 sources × u8/s16/f32 outputs × WAV/framecrc (ipar in the linux/x64 ipar test) | 28 (floating fade-outs) |
+| `matches native fades crossing frame boundaries, outside the input, and under input and output time selection` | 238: 17 chains (asetnsamples before and after, fades before and after the input, stacked fades, volume, asetrate) × input `-ss`/`-t`, output `-ss`/`-t`/`-frames:a` × 2 formats, framecrc | 0 |
+| `matches native ipar fades on linux x64 for every spelling, source format, output and time selection` (linux/x64 only) | 96: every ipar case of the three tests above (36 curve and spelling cases, 46 format cases, 14 time-selection cases) | 14 (floating fade-outs) |
 | `matches native non-default silence and unity gains on linux x64` (linux/x64 only) | 360: 9 curves × in/out × 6 silence/unity pairs × s16/s32/f32/f64 | 72 |
 | `refuses libm curves, unimplemented syntax and frame-boundary-dependent fades before output, recording native status` | 0 | 34 |
 
@@ -82,7 +83,7 @@ Native exits 0 for every libm curve, for the frame-boundary cases, and for `c=7`
 
 `tests/unit/afade.test.ts` (12 tests) covers the exact syntax messages, `fade_gain` per curve, duration rescaling, branch selection, the `pts` mapping in foreign time bases, negotiation for u8/s16/s32/flt/dbl into every output, `planSamples`, `packetSections`, `plannedReservations`, the constraint and first-frame refusals, output against a direct transcription of `filter_frame` for every format, curve and branch, invariance under frame splits, stream processing after `asetnsamples`, ownership, allocation limits, cancellation and the non-finite refusal.
 
-Default `silence=0` and `unity=1` are exact on every platform: each operation is a single correctly rounded IEEE operation. Non-default pairs are pinned only on linux/x64, the unfused profile: the wave specification records that `silence=0.1:unity=0.9` differs on macOS, where `silence + (unity - silence) * gain` is fused.
+With default `silence=0` and `unity=1`, every curve except `ipar` is exact on every platform: each operation is a single correctly rounded IEEE operation, and `silence + (unity - silence) * gain` is exact. `ipar` is not: the macOS arm64 reference build contracts `1 - (1 - gain) * (1 - gain)` into a fused multiply-add, and native probes there differ from the unfused formula in 78 of 302 gains for `ns=301`, 6 of 18 for `ns=17` and 5,427 of 20,000 for `ns=20000`. EdgeFFmpeg follows the unfused linux/x64 profile, so every `ipar` comparison runs only on linux/x64 (`matches native ipar fades on linux x64 ...`); `ipar` refusals run everywhere. Non-default pairs are also pinned only on linux/x64: the wave specification records that `silence=0.1:unity=0.9` differs on macOS, where `silence + (unity - silence) * gain` is fused.
 
 ## Scoped test contracts
 
@@ -91,6 +92,7 @@ Default `silence=0` and `unity=1` are exact on every platform: each operation is
 | `filter.afade.curves` | `tests/differential/afade.test.ts` | `matches native fade-in and fade-out bytes for every implemented curve and the ss/ns, st/d and positional spellings` | implemented curves, in/out, option spellings |
 | `filter.afade.formats` | `tests/differential/afade.test.ts` | `matches native WAV and framecrc output from every source format into u8, s16 and f32 outputs` | source formats, outputs, containers, floating refusals |
 | `filter.afade.time` | `tests/differential/afade.test.ts` | `matches native fades crossing frame boundaries, outside the input, and under input and output time selection` | frame boundaries, pts, time selection |
+| `filter.afade.ipar` | `tests/differential/afade.test.ts` | `matches native ipar fades on linux x64 for every spelling, source format, output and time selection` | ipar on linux x64 |
 | `filter.afade.gains` | `tests/differential/afade.test.ts` | `matches native non-default silence and unity gains on linux x64` | silence/unity on linux x64 |
 | `filter.afade.refusals` | `tests/differential/afade.test.ts` | `refuses libm curves, unimplemented syntax and frame-boundary-dependent fades before output, recording native status` | explicit refusals |
 | `filter.afade.unit` | `tests/unit/afade.test.ts` | `matches a direct C transcription for every curve, format and branch, and is invariant under frame splits where native is` | arithmetic, branches, split invariance |

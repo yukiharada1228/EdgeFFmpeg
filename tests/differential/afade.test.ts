@@ -37,36 +37,58 @@ async function harness(prefix:string,budget=65536){
 /** Whether afade works in a floating format: the source format when listed, else (u8) the encoder's. */
 const floating=(raw:string,codec:string)=>raw.startsWith('f')||(raw==='u8'&&codec==='pcm_f32le');
 const boundary=/afade with silence=0 on (flt|dbl) samples outside the fade depends on native frame boundaries/;
-it('matches native fade-in and fade-out bytes for every implemented curve and the ss/ns, st/d and positional spellings',async()=>{
-  const {root,compare,refuse,counts}=await harness('edgeffmpeg-afade-curves-');
-  try{
-    for(const curve of curves)for(const type of ['in','out']){
-      for(const spelling of [`t=${type}:ss=150:ns=301:c=${curve}`,`type=${type}:start_sample=150:nb_samples=301:curve=${curve}`,`${type}:st=0.01875:d=0.037625:curve=${curve}`,`${type}:150:301:c=${curve}`])if(curve==='nofade')expect(await refuse('s16le',`afade=${spelling}`,/afade nofade with silence outside the fade/),spelling).toBe(0);
-      else for(const [raw,codec]of [['s16le','pcm_s16le'],['s32le','pcm_s32le'],['s16le','pcm_u8']] as const)await compare(raw,[],['-af',`afade=${spelling}`,'-c:a',codec],codec==='pcm_u8'?'u8':raw);
-      // A fade-in from sample 0 has no samples before its window, so it runs on floating samples too.
-      if(type==='in')for(const zero of [`t=in:ss=0:ns=301:c=${curve}`,`in:d=0.037625:c=${curve}`,`c=${curve}:ns=1`,`in:0:100000:0:0:${curve}`])for(const [raw,codec]of [['f32le','pcm_f32le'],['f64le','pcm_f64le'],['s16le','pcm_s16le']] as const)await compare(raw,[],['-af',`afade=${zero}`,'-c:a',codec],raw);
+/** ipar's 1 - (1 - gain) * (1 - gain) is fused by the macOS arm64 reference build, so every ipar case runs only on linux/x64. */
+const platformCurves=curves.filter(curve=>curve!=='ipar');
+type Harness=Awaited<ReturnType<typeof harness>>;
+async function curveCases({compare,refuse}:Harness,curve:typeof curves[number]){
+  for(const type of ['in','out']){
+    for(const spelling of [`t=${type}:ss=150:ns=301:c=${curve}`,`type=${type}:start_sample=150:nb_samples=301:curve=${curve}`,`${type}:st=0.01875:d=0.037625:curve=${curve}`,`${type}:150:301:c=${curve}`])if(curve==='nofade')expect(await refuse('s16le',`afade=${spelling}`,/afade nofade with silence outside the fade/),spelling).toBe(0);
+    else for(const [raw,codec]of [['s16le','pcm_s16le'],['s32le','pcm_s32le'],['s16le','pcm_u8']] as const)await compare(raw,[],['-af',`afade=${spelling}`,'-c:a',codec],codec==='pcm_u8'?'u8':raw);
+    // A fade-in from sample 0 has no samples before its window, so it runs on floating samples too.
+    if(type==='in')for(const zero of [`t=in:ss=0:ns=301:c=${curve}`,`in:d=0.037625:c=${curve}`,`c=${curve}:ns=1`,`in:0:100000:0:0:${curve}`])for(const [raw,codec]of [['f32le','pcm_f32le'],['f64le','pcm_f64le'],['s16le','pcm_s16le']] as const)await compare(raw,[],['-af',`afade=${zero}`,'-c:a',codec],raw);
+  }
+}
+async function formatCases({compare,refuse}:Harness,fades:readonly string[],windows:readonly string[]){
+  for(const [raw]of formats)for(const codec of ['pcm_u8','pcm_s16le','pcm_f32le'])for(const container of ['wav','framecrc']){
+    for(const filter of fades)await compare(raw,[],['-af',filter,'-c:a',codec],container);
+    for(const filter of windows){
+      if(floating(raw,codec))expect(await refuse(raw,filter,boundary,['-c:a',codec,'-f',container]),filter).toBe(0);
+      else await compare(raw,[],['-af',filter,'-c:a',codec],container);
     }
+  }
+}
+const profiles:[string[],string[]][]=[[[],[]],[['-ss','0.01'],[]],[['-ss','0.005','-t','0.05'],[]],[[],['-ss','0.02']],[[],['-t','0.03']],[[],['-ss','0.01','-t','0.04']],[[],['-frames:a','3']]];
+/** [chain, runs on floating samples] under every input and output time selection profile. */
+async function timeCases({compare}:Harness,chains:readonly [string,boolean][]){
+  for(const [chain,float]of chains)for(const [before,after]of profiles)for(const [raw,codec]of float?[['s16le','pcm_s16le'],['f64le','pcm_f64le']] as const:[['s16le','pcm_s16le'],['s32le','pcm_s32le']] as const)await compare(raw,before,[...after,'-af',chain,'-c:a',codec],'framecrc');
+}
+it('matches native fade-in and fade-out bytes for every implemented curve and the ss/ns, st/d and positional spellings',async()=>{
+  const context=await harness('edgeffmpeg-afade-curves-'),{root,counts}=context;
+  try{
+    for(const curve of platformCurves)await curveCases(context,curve);
   }finally{console.info('afade native comparisons',JSON.stringify(counts));rmSync(root,{recursive:true,force:true});}
 },240000);
 it('matches native WAV and framecrc output from every source format into u8, s16 and f32 outputs',async()=>{
-  const {root,compare,refuse,counts}=await harness('edgeffmpeg-afade-formats-');
+  const context=await harness('edgeffmpeg-afade-formats-'),{root,counts}=context;
   try{
-    for(const [raw]of formats)for(const codec of ['pcm_u8','pcm_s16le','pcm_f32le'])for(const container of ['wav','framecrc']){
-      for(const filter of ['afade=ns=400','afade=in:ns=1:c=squ','afade=st=0:d=0.05:c=desi','afade=ns=650:c=ipar'])await compare(raw,[],['-af',filter,'-c:a',codec],container);
-      for(const filter of ['afade=ss=100:ns=400','afade=t=out:ss=200:ns=333:c=ipar','afade=out:st=0.05:d=0.01:c=desi']){
-        if(floating(raw,codec))expect(await refuse(raw,filter,boundary,['-c:a',codec,'-f',container]),filter).toBe(0);
-        else await compare(raw,[],['-af',filter,'-c:a',codec],container);
-      }
-    }
+    await formatCases(context,['afade=ns=400','afade=in:ns=1:c=squ','afade=st=0:d=0.05:c=desi'],['afade=ss=100:ns=400','afade=out:st=0.05:d=0.01:c=desi']);
   }finally{console.info('afade native comparisons',JSON.stringify(counts));rmSync(root,{recursive:true,force:true});}
 },240000);
 it('matches native fades crossing frame boundaries, outside the input, and under input and output time selection',async()=>{
-  const {root,compare,counts}=await harness('edgeffmpeg-afade-time-');
-  // [chain, runs on floating samples]
-  const chains:[string,boolean][]=[['asetnsamples=37:p=0,afade=ss=100:ns=250:c=cub',false],['asetnsamples=37,afade=t=out:ss=111:ns=73:c=par',false],['asetnsamples=64:p=0,afade=t=out:ss=0:ns=1',false],['afade=ss=5000:ns=10',false],['afade=t=out:ss=5000:ns=10',false],['afade=ss=0:ns=100000',true],['afade=t=out:ss=0:ns=100000:c=qua',false],['afade=c=nofade',true],['afade',true],['afade=t=out',false],['afade=st=1:d=0.01',false],['asetnsamples=50:p=0,afade=in:ns=350:c=quat,asetnsamples=7',true],['asetnsamples=29,afade=in:ns=333:c=desi',true],['afade=t=out:ss=90:ns=200,volume=0.5:precision=fixed',false],['asetrate=16000,afade=st=0.01:d=0.02',false],['asetrate=16000,afade=d=0.02:c=squ',true],['afade=ss=600:ns=99,afade=t=out:ss=0:ns=650:c=desi',false],['afade=ns=400,afade=ns=17:c=ipar',true]];
-  const profiles:[string[],string[]][]=[[[],[]],[['-ss','0.01'],[]],[['-ss','0.005','-t','0.05'],[]],[[],['-ss','0.02']],[[],['-t','0.03']],[[],['-ss','0.01','-t','0.04']],[[],['-frames:a','3']]];
+  const context=await harness('edgeffmpeg-afade-time-'),{root,counts}=context;
+  const chains:[string,boolean][]=[['asetnsamples=37:p=0,afade=ss=100:ns=250:c=cub',false],['asetnsamples=37,afade=t=out:ss=111:ns=73:c=par',false],['asetnsamples=64:p=0,afade=t=out:ss=0:ns=1',false],['afade=ss=5000:ns=10',false],['afade=t=out:ss=5000:ns=10',false],['afade=ss=0:ns=100000',true],['afade=t=out:ss=0:ns=100000:c=qua',false],['afade=c=nofade',true],['afade',true],['afade=t=out',false],['afade=st=1:d=0.01',false],['asetnsamples=50:p=0,afade=in:ns=350:c=quat,asetnsamples=7',true],['asetnsamples=29,afade=in:ns=333:c=desi',true],['afade=t=out:ss=90:ns=200,volume=0.5:precision=fixed',false],['asetrate=16000,afade=st=0.01:d=0.02',false],['asetrate=16000,afade=d=0.02:c=squ',true],['afade=ss=600:ns=99,afade=t=out:ss=0:ns=650:c=desi',false]];
   try{
-    for(const [chain,float]of chains)for(const [before,after]of profiles)for(const [raw,codec]of float?[['s16le','pcm_s16le'],['f64le','pcm_f64le']] as const:[['s16le','pcm_s16le'],['s32le','pcm_s32le']] as const)await compare(raw,before,[...after,'-af',chain,'-c:a',codec],'framecrc');
+    await timeCases(context,chains);
+  }finally{console.info('afade native comparisons',JSON.stringify(counts));rmSync(root,{recursive:true,force:true});}
+},240000);
+it.runIf(linux64)('matches native ipar fades on linux x64 for every spelling, source format, output and time selection',async()=>{
+  // Every ipar case of the three tests above. The macOS arm64 reference fuses 1 - (1 - gain) * (1 - gain) (78 of 302 gains
+  // differ for ns=301), while EdgeFFmpeg follows the unfused linux/x64 profile.
+  const context=await harness('edgeffmpeg-afade-ipar-'),{root,counts}=context;
+  try{
+    await curveCases(context,'ipar');
+    await formatCases(context,['afade=ns=650:c=ipar'],['afade=t=out:ss=200:ns=333:c=ipar']);
+    await timeCases(context,[['afade=ns=400,afade=ns=17:c=ipar',true]]);
   }finally{console.info('afade native comparisons',JSON.stringify(counts));rmSync(root,{recursive:true,force:true});}
 },240000);
 it.runIf(linux64)('matches native non-default silence and unity gains on linux x64',async()=>{
