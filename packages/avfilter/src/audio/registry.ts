@@ -16,3 +16,4 @@ export {aintegral} from './aintegral.js';
 export {earwax} from './earwax.js';
 export {channelmap} from './channelmap.js';
 export {asoftclip} from './asoftclip.js';
+export {adynamicsmooth} from './adynamicsmooth.js';

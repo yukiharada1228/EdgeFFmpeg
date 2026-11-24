@@ -1,0 +1,233 @@
+{
+  "capabilityId": "filter.adynamicsmooth",
+  "slug": "af-adynamicsmooth",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/audio/adynamicsmooth.ts",
+    "packages/avfilter/NOTICE-ADYNAMICSMOOTH",
+    "tests/unit/adynamicsmooth.test.ts",
+    "tests/differential/adynamicsmooth.test.ts",
+    "docs/contributing/adynamicsmooth.md",
+    "docs/contributing/wave1/af-adynamicsmooth.json",
+    "packages/avfilter/src/audio/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/audio/registry.ts",
+      "change": "+1 line: export {adynamicsmooth} from './adynamicsmooth.js';"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/adynamicsmooth.test.ts",
+      "title": "parses named and positional plain decimals and refuses every other form with exact messages",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/adynamicsmooth.test.ts",
+      "title": "negotiates pinned dblp for every input format, reproduces native neighbours and declares its capabilities",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/adynamicsmooth.test.ts",
+      "title": "has no format constraint: every rate, channel count and container layout name passes validation",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/adynamicsmooth.test.ts",
+      "title": "plans unchanged counts and packets and reserves one frame plus three doubles per channel",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/adynamicsmooth.test.ts",
+      "title": "matches a direct transcription of the C loop bit for bit and is invariant to frame splits",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/adynamicsmooth.test.ts",
+      "title": "runs through the chain from packed integer input, leaves inputs untouched and owns its output planes",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/adynamicsmooth.test.ts",
+      "title": "enforces allocation, channel, finiteness and cancellation limits",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/adynamicsmooth.test.ts",
+      "title": "matches native framecrc bytes for every sensitivity and base frequency on all sources, 1-3 channels and f64/f32/s16 outputs",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/adynamicsmooth.test.ts",
+      "title": "matches native across composed chains, asetnsamples splits, defaults, positional options and output time selection",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/adynamicsmooth.test.ts",
+      "title": "writes native-identical WAV, AIFF and raw PCM files from WAV and raw inputs",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/adynamicsmooth.test.ts",
+      "title": "fails explicitly before output for native errors, unimplemented option forms, timeline enable and rate conversion",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/audio-filter-registry.test.ts + audio-filter-registry-extension.test.ts + audio-filter-registry-contract.test.ts",
+      "title": "(registry suites, unchanged)",
+      "passed": 26,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 1267,
+    "byteComparisons": 1253,
+    "statusComparisons": 14,
+    "details": [
+      "540 framecrc: sensitivity {0,2,1000} x basefreq {2,1000,22050,1000000} x u8/s16/s32/f32/f64 input x 1-3 channels x pcm_f64le/pcm_f32le/pcm_s16le output, -cpuflags 0, 44100 Hz, multi-frame input",
+      "672 framecrc: 14 composed chains (asetnsamples splits, volume, aformat, apad, adelay, defaults, positional/named options) x s16/f64 input x 1-2 channels x 6 output selections (-ss, -t, -ss+-t, -to, -frames:a) x 2 encoders",
+      "9 framecrc: 8000/22050/48000 Hz with input -ss/-t; 2 framecrc on empty input",
+      "30 files: WAV/AIFF/raw output from raw and WAV input in all five formats",
+      "14 refusals with native exit status asserted (8 native-rejected, 5 native-accepted unimplemented forms, -ar 16000 rate conversion); no output written"
+    ]
+  },
+  "unsupported": [
+    "option values other than plain decimals (exponents, signs, hex, SI suffixes, expressions)",
+    "timeline enable",
+    "runtime commands",
+    "non-finite input samples",
+    "FLAC input (refused before decoding)",
+    "automatic sample-rate conversion after the filter",
+    "bit-exactness on natives that fuse multiply-adds (e.g. macOS arm64); differential byte tests are gated to linux/x64"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "files": 6,
+    "tests": 13,
+    "list": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+      "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ]
+  },
+  "finalUnitFailures": {
+    "files": 6,
+    "tests": 13,
+    "list": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+      "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ],
+    "identicalToBaseline": true
+  },
+  "proposedContracts": [
+    {
+      "id": "filter.adynamicsmooth.unit.syntax",
+      "file": "tests/unit/adynamicsmooth.test.ts",
+      "name": "parses named and positional plain decimals and refuses every other form with exact messages",
+      "modes": [
+        "unit"
+      ],
+      "scope": "syntax and exact refusal messages"
+    },
+    {
+      "id": "filter.adynamicsmooth.unit.negotiation",
+      "file": "tests/unit/adynamicsmooth.test.ts",
+      "name": "negotiates pinned dblp for every input format, reproduces native neighbours and declares its capabilities",
+      "modes": [
+        "unit"
+      ],
+      "scope": "dblp negotiation for every input/encoder format, capabilities, stream and rate refusals"
+    },
+    {
+      "id": "filter.adynamicsmooth.unit.transcription",
+      "file": "tests/unit/adynamicsmooth.test.ts",
+      "name": "matches a direct transcription of the C loop bit for bit and is invariant to frame splits",
+      "modes": [
+        "unit"
+      ],
+      "scope": "bit-exact C-loop transcription, frame-split invariance"
+    },
+    {
+      "id": "filter.adynamicsmooth.differential.grid",
+      "file": "tests/differential/adynamicsmooth.test.ts",
+      "name": "matches native framecrc bytes for every sensitivity and base frequency on all sources, 1-3 channels and f64/f32/s16 outputs",
+      "modes": [
+        "differential"
+      ],
+      "scope": "linux/x64 native, framecrc byte-exact, option grid x sources x channels x outputs"
+    },
+    {
+      "id": "filter.adynamicsmooth.differential.chains",
+      "file": "tests/differential/adynamicsmooth.test.ts",
+      "name": "matches native across composed chains, asetnsamples splits, defaults, positional options and output time selection",
+      "modes": [
+        "differential"
+      ],
+      "scope": "linux/x64 native, composed chains, splits, time selection, empty input"
+    },
+    {
+      "id": "filter.adynamicsmooth.differential.files",
+      "file": "tests/differential/adynamicsmooth.test.ts",
+      "name": "writes native-identical WAV, AIFF and raw PCM files from WAV and raw inputs",
+      "modes": [
+        "differential"
+      ],
+      "scope": "linux/x64 native, WAV/AIFF/raw files byte-exact"
+    },
+    {
+      "id": "filter.adynamicsmooth.differential.refusals",
+      "file": "tests/differential/adynamicsmooth.test.ts",
+      "name": "fails explicitly before output for native errors, unimplemented option forms, timeline enable and rate conversion",
+      "modes": [
+        "differential"
+      ],
+      "scope": "explicit refusals before output with native status"
+    }
+  ],
+  "notes": [
+    "No shared edit beyond the registry line was needed.",
+    "Setup durations: submodule init 48s; npm ci + reference:build 3m23s; baseline typecheck+lint+boundaries 1m05s; baseline unit suite 1m32s; differential suite 23s.",
+    "Baseline failures are the expected FLAC artifact tests (downloads.xiph.org blocked) and resample-checkpoint macOS golden digests.",
+    "The upstream file has no individual copyright line; NOTICE-ADYNAMICSMOOTH says so.",
+    "Positional values follow native option order (sensitivity, basefreq)."
+  ]
+}
