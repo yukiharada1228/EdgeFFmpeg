@@ -1,0 +1,74 @@
+{
+  "capabilityId": "demuxer.wve",
+  "slug": "fmt-wve",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/wve.ts",
+    "packages/containers/NOTICE-WVE",
+    "packages/containers/src/registry.ts",
+    "docs/contributing/wve-support.md",
+    "tests/unit/wve.test.ts",
+    "tests/differential/wve.test.ts",
+    "docs/contributing/wave1/fmt-wve.json"
+  ],
+  "sharedEdits": [
+    {"file": "packages/containers/src/registry.ts", "change": "+1 line: export {wve} from './wve.js'; (alphabetical, after wav)"}
+  ],
+  "tests": [
+    {"file": "tests/unit/wve.test.ts", "title": "parses the WVE header as A-law mono 8000 Hz with data from byte 32 to EOF and an informational duration", "passed": 1, "failed": 0},
+    {"file": "tests/unit/wve.test.ts", "title": "reads only the 32 header bytes within a 64-byte budget and the requested data range afterwards", "passed": 1, "failed": 0},
+    {"file": "tests/unit/wve.test.ts", "title": "probes the 18-byte magic and bytes 22 to 31 like wve_probe with at most 32 bytes read", "passed": 1, "failed": 0},
+    {"file": "tests/unit/wve.test.ts", "title": "refuses truncated headers read budgets and input seeks against a mismatched header duration", "passed": 1, "failed": 0},
+    {"file": "tests/unit/wve.test.ts", "title": "stops on abort before and during header reads", "passed": 1, "failed": 0},
+    {"file": "tests/unit/wve.test.ts", "title": "registers a demux-only wve descriptor with an exact-magic probe and the default PCM packet span", "passed": 1, "failed": 0},
+    {"file": "tests/differential/wve.test.ts", "title": "matches native WVE copy framecrc, decode to WAV AU and s16le, and A-law remux for seven data lengths and four header durations", "passed": 1, "failed": 0},
+    {"file": "tests/differential/wve.test.ts", "title": "matches native WVE output -ss -t and -frames:a, input -ss with an exact header duration, and forced -f wve over an altered magic", "passed": 1, "failed": 0},
+    {"file": "tests/differential/wve.test.ts", "title": "fails detection like native for an altered magic byte or a nonzero byte 23 and refuses the unmirrored seek and truncated header", "passed": 1, "failed": 0},
+    {"file": "tests/unit/container-registry.test.ts", "title": "(whole file, unchanged)", "passed": 9, "failed": 0},
+    {"file": "tests/unit/container-registry-extension.test.ts", "title": "(whole file, unchanged)", "passed": 7, "failed": 0}
+  ],
+  "nativeComparisons": {
+    "count": 265,
+    "compares": [
+      "168 byte-exact outputs: 7 data lengths x 4 header durations x {copy framecrc, decoded framecrc, s16le, WAV, AU, -c copy -f alaw}",
+      "82 byte-exact framecrc outputs (copy and fixed-volume decode): output -ss/-t, -frames:a 2, -t 0.0641 over 3 lengths x 4 durations; input -ss 0.000125 and -ss 0.1 with equal duration",
+      "1 byte-exact s16le output of -f wve over an altered magic and nonzero byte 23",
+      "12 probe-negative native exit codes (183; Edge fails explicitly with exit 1 and no output)",
+      "2 truncated-header native exit codes (0; Edge refuses explicitly)"
+    ]
+  },
+  "unsupported": [
+    "wve muxer (native has none)",
+    "headers shorter than 32 bytes (native demuxes 26..31-byte files from its zero-padded probe; Edge refuses with 'Truncated WVE header')",
+    "input -ss > 0 when the rb32 header duration differs from the physical sample count",
+    "native exit status 183 for undetected input: Edge's shared detect.ts exits 1"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "summary": "13 failed tests, 6 failed files (210 files, 2266 tests)",
+    "failures": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts (suite load: missing edge-flac.wasm)",
+      "tests/unit/flac-decoder.test.ts (suite load: missing edge-flac.wasm)",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts (suite load: missing edge-flac.wasm)",
+      "tests/unit/resample-checkpoint.test.ts: 10 resampleAudio byte-identity tests (macOS arm64 golden digests)"
+    ]
+  },
+  "finalUnitFailures": {
+    "summary": "13 failed tests, 6 failed files (211 files, 2272 tests): identical to the baseline",
+    "failures": "same list as baselineUnitFailures"
+  },
+  "proposedContracts": [
+    {"id": "wve.demux-outputs", "file": "tests/differential/wve.test.ts", "name": "matches native WVE copy framecrc, decode to WAV AU and s16le, and A-law remux for seven data lengths and four header durations", "modes": ["bit-exact", "bit-exact-pcm"], "scope": "Synthesized WVE files, 7 data lengths x 4 header durations; copy framecrc, decoded framecrc, s16le, WAV, AU and A-law remux byte-exact against native."},
+    {"id": "wve.timing", "file": "tests/differential/wve.test.ts", "name": "matches native WVE output -ss -t and -frames:a, input -ss with an exact header duration, and forced -f wve over an altered magic", "modes": ["bit-exact", "semantic"], "scope": "512-sample packet timing under output -ss/-t/-frames:a, input -ss with an equal header duration only, and forced -f wve over an altered magic."},
+    {"id": "wve.probe-refusals", "file": "tests/differential/wve.test.ts", "name": "fails detection like native for an altered magic byte or a nonzero byte 23 and refuses the unmirrored seek and truncated header", "modes": ["semantic", "diagnostic"], "scope": "Twelve probe negatives fail in both (native 183, Edge 1 with no output); mismatched-duration input seek and truncated headers refused before output."}
+  ],
+  "notes": [
+    "Needed shared edit (not made): detect.ts throws a plain Error for 'Unsupported audio container signature' (exit 1); native exits 183. Mapping it to containerRefusal(...,183) or an execution error with exitCode 183 would close the gap for every format.",
+    "Native output with a header duration of equal, 100, 0 or larger than the data was identical in every tested case, including input -ss probes in exploration; input -ss with a mismatched duration is still refused, as the spec requires, because native's seek and EOF behaviour has not been mirrored systematically.",
+    "open() does not check the magic, mirroring wve_read_header under -f wve; detection checks it through the probe.",
+    "Setup durations: submodule init 39s, npm ci 8s, reference:build 173s."
+  ]
+}
