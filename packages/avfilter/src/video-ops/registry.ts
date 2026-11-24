@@ -19,6 +19,7 @@ import {setdarOperator} from './setdar.js';
 import {setptsOperator} from './setpts.js';
 import {copyOperator} from './copy.js';
 import {swapuvOperator} from './swapuv.js';
+import {limiterOperator} from './limiter.js';
 // One import above and one entry below per operator, each entry ending with a comma, so parallel
 // additions never touch the same line. Order is irrelevant: lookups are by name.
 export const videoOperators=Object.freeze([
@@ -39,6 +40,7 @@ export const videoOperators=Object.freeze([
  setptsOperator,
  copyOperator,
  swapuvOperator,
+ limiterOperator,
 ] as const);
 type Operator=typeof videoOperators[number];
 type Steps=Operator extends infer O?O extends VideoOperatorDescriptor<infer S,infer T>?{readonly scoped:S;readonly timed:T}:never:never;
