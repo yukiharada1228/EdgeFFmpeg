@@ -2999,9 +2999,13 @@ Besides those 36 entries, it picked up `filter.adelay`'s
 `tests/workers/flac-timed-filters.test.ts` reference. Progress already listed
 that file, but the committed manifest lacked it. Nothing was promoted to
 `conformant` or `bitexact`. Raw logs, JSON reports, the superseded run's logs, the
-CI failure lists and the contract check are retained in the git-ignored
-`.build/wave1-integration/` of the integration worktree. Its `receipt.json`
-records the hashes.
+CI failure lists and the contract check were written to the git-ignored
+`.build/wave1-integration/` of a temporary integration worktree, with hashes in its
+`receipt.json`. That worktree was later deleted by an operating-system temporary
+directory cleanup, so those local files and the receipt no longer exist; the counts
+above were checked against them by the audit before deletion. The Linux CI
+artifacts of runs 45321289869 and 45402980700 remain on GitHub for their retention
+period.
 
 Open after this integration:
 
