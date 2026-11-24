@@ -1,0 +1,17 @@
+Audio permission filter (src/audio/aperms.ts)
+
+src/audio/aperms.ts adapts the aperms filter of FFmpeg libavfilter/f_perms.c
+(CONFIG_APERMS_FILTER): its option table (mode none/ro/rw/toggle/random, seed in
+[-1, UINT32_MAX], positional order mode then seed) and its filter_frame, which
+only changes frame writability (ff_inlink_make_frame_writable or av_frame_clone)
+and forwards the samples, count and timestamps unchanged.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2013 Clément Bœsch
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation is the identity on frames: it has no writability
+flag, so it forwards each validated input frame without a copy or allocation.
+It refuses mode=random without an explicit seed (native draws one from
+av_get_random_seed), numeric and expression mode values, the generic timeline
+option enable, and runtime commands, and adds no FFmpeg runtime code.
+The original source and full notices remain in the pinned upstream submodule.

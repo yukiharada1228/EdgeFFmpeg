@@ -1,0 +1,190 @@
+{
+  "capabilityId": "filter.aperms",
+  "slug": "af-aperms",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/audio/aperms.ts",
+    "packages/avfilter/NOTICE-APERMS",
+    "tests/unit/aperms.test.ts",
+    "tests/differential/aperms.test.ts",
+    "docs/contributing/aperms.md",
+    "docs/contributing/wave1/af-aperms.json",
+    "packages/avfilter/src/audio/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/audio/registry.ts",
+      "change": "+1 line: export {aperms} from './aperms.js';"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/aperms.test.ts",
+      "title": "parses positional and named mode and seed options and refuses everything else with exact messages",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/aperms.test.ts",
+      "title": "declares every capability false, negotiates the input format unchanged and leaves counts, packets and reservations alone",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/aperms.test.ts",
+      "title": "returns every input frame unchanged with its own planes, for every mode, format, channel count and frame split",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/aperms.test.ts",
+      "title": "keeps the chain allocation limits and observes cancellation",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/aperms.test.ts",
+      "title": "matches native framecrc for every aperms mode and seed on u8 s16 s32 f32 f64 mono and stereo, alone and chained",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/aperms.test.ts",
+      "title": "writes native-identical WAV and raw PCM files from WAV and raw inputs",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/aperms.test.ts",
+      "title": "fails explicitly before output for native errors and the unseeded random mode native accepts",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/audio-filter-registry*.test.ts (3 files, unchanged)",
+      "title": "registry, extension and contract suites",
+      "passed": 26,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 891,
+    "framecrc": 400,
+    "files": 480,
+    "exitStatus": 11,
+    "details": "framecrc bytes: 5 raw formats (u8,s16le,s32le,f32le,f64le) x 1-2 channels x 8 mode forms (default,none,ro,rw,toggle,random seeds 0/7/4294967295) x 5 chains (alone, +volume=0.5, asetnsamples=5 before, +apad=pad_len=3, toggle+mode+asetnsamples=5+apad=pad_len=3), -cpuflags 0; WAV and raw output file bytes: 5 formats x 1-2 channels x raw/WAV input x 4 modes x 3 chains x 2 containers; native exit status for 10 option refusals plus resampling after aperms (native 0, ours refused)."
+  },
+  "unsupported": [
+    "mode=random without an explicit seed or with seed=-1 (native succeeds via av_get_random_seed; intentional refusal)",
+    "numeric or expression mode values (native accepts, e.g. mode=1)",
+    "generic timeline option enable (native accepts)",
+    "runtime commands (process_command)",
+    "FLAC input (refused before decoding; flacInput not declared)",
+    "automatic sample-rate conversion across the step (rateConversion false)",
+    "frame writability itself (frames carry no permission flag)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "files": 6,
+    "tests": 13,
+    "list": [
+      " tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      " tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+      " tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+      " tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      " tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      " tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ]
+  },
+  "finalUnitFailures": {
+    "files": 6,
+    "tests": 13,
+    "list": [
+      " tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      " tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+      " tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+      " tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      " tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      " tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      " tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ],
+    "identicalToBaseline": true
+  },
+  "proposedContracts": [
+    {
+      "id": "filter.aperms.framecrc",
+      "file": "tests/differential/aperms.test.ts",
+      "name": "matches native framecrc for every aperms mode and seed on u8 s16 s32 f32 f64 mono and stereo, alone and chained",
+      "modes": [
+        "none",
+        "ro",
+        "rw",
+        "toggle",
+        "random"
+      ],
+      "scope": "PCM CLI framecrc, raw u8/s16le/s32le/f32le/f64le input, 1-2 channels, alone and chained with volume/asetnsamples/apad"
+    },
+    {
+      "id": "filter.aperms.files",
+      "file": "tests/differential/aperms.test.ts",
+      "name": "writes native-identical WAV and raw PCM files from WAV and raw inputs",
+      "modes": [
+        "none",
+        "ro",
+        "toggle",
+        "random"
+      ],
+      "scope": "PCM CLI WAV and raw output bytes from raw and WAV input"
+    },
+    {
+      "id": "filter.aperms.refusals",
+      "file": "tests/differential/aperms.test.ts",
+      "name": "fails explicitly before output for native errors and the unseeded random mode native accepts",
+      "modes": [
+        "random",
+        "none",
+        "toggle"
+      ],
+      "scope": "explicit refusal before output, native exit status asserted"
+    },
+    {
+      "id": "filter.aperms.identity",
+      "file": "tests/unit/aperms.test.ts",
+      "name": "returns every input frame unchanged with its own planes, for every mode, format, channel count and frame split",
+      "modes": [
+        "none",
+        "ro",
+        "rw",
+        "toggle",
+        "random"
+      ],
+      "scope": "AudioFilterChain apply/process identity and ownership"
+    }
+  ],
+  "notes": [
+    "No shared edit beyond the registry line was needed.",
+    "Setup durations: submodule update 69s, npm ci 8s, reference:build 205s, baseline typecheck+lint+boundaries 60s, baseline tests/unit 88s, differential suite ~9s.",
+    "Baseline unit failures are the expected FLAC artifact tests (downloads.xiph.org blocked) and 10 resample-checkpoint golden digests recorded on macOS arm64.",
+    "Like anull, aperms omits formats() ('all') because output samples equal input samples; capabilities are all false as specified, so unlike anull it refuses resampling and FLAC input.",
+    "No float-sensitive cases: data is unaffected by every mode; volume=0.5 runs with -cpuflags 0 on both sides."
+  ]
+}
