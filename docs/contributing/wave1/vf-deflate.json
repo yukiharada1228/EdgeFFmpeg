@@ -1,0 +1,69 @@
+{
+  "capabilityId": "filter.deflate",
+  "slug": "vf-deflate",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/deflate.ts",
+    "packages/avfilter/NOTICE-DEFLATE",
+    "tests/unit/video-deflate.test.ts",
+    "tests/differential/video-deflate.test.ts",
+    "docs/contributing/deflate.md",
+    "docs/contributing/wave1/vf-deflate.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/avfilter/src/video-ops/registry.ts", "lines": ["import {deflateOperator} from './deflate.js';", " deflateOperator,"]}
+  ],
+  "tests": [
+    {"file": "tests/unit/video-deflate.test.ts", "title": "parses the deflate_inflate thresholds with native defaults, shorthand order, integer expressions and last-wins keys", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-deflate.test.ts", "title": "declares the native eight-bit planar formats in table order and keeps geometry", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-deflate.test.ts", "title": "applies the neighbour average with mirrored borders, per-plane thresholds and zero-threshold copies into owned tight planes", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-deflate.test.ts", "title": "rejects unsupported layouts, budgets, malformed storage, invalid settings and cancellation explicitly", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-deflate.test.ts", "title": "plans deflate on every path with width-1 refusals and runtime commands refused", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-operator-registry.test.ts", "title": "(all 8 registration-driven tests, including deflate examples on all five paths)", "passed": 8, "failed": 0},
+    {"file": "tests/differential/video-deflate.test.ts", "title": "matches native deflate through the linear, frame graph and replay APIs across formats, thresholds, sizes and patterns", "passed": 1, "failed": 0},
+    {"file": "tests/differential/video-deflate.test.ts", "title": "matches native deflate rawvideo and framecrc bytes on every flagged CLI path", "passed": 1, "failed": 0},
+    {"file": "tests/differential/video-deflate.test.ts", "title": "fails like native for the erosion-only coordinates option and out-of-range thresholds before opening outputs on every path", "passed": 1, "failed": 0},
+    {"file": "tests/differential/video-deflate.test.ts", "title": "copies width-1 planes with zero thresholds like native and refuses nonzero ones before opening outputs on every path", "passed": 1, "failed": 0}
+  ],
+  "nativeComparisons": {
+    "count": 4365,
+    "breakdown": [
+      {"count": 390, "compares": "native -vf rawvideo bytes vs compileVideoFilterChain, compileVideoFilterGraph and createReplayVideoExecution outputs (1170 path comparisons); 6 formats x 4 sizes x 2 patterns x 9 threshold sets, 2 frames each"},
+      {"count": 3900, "compares": "native rawvideo and framecrc bytes vs the CLI frontend on linear (-vf), graph (single-input -filter_complex), stream (multi-input -filter_complex), actor (timed backend producer scheduler) and timed (timed backend pull scheduler)"},
+      {"count": 25, "compares": "error parity: coordinates=1, coordinates with threshold, threshold0=65536, threshold2=-1 and a fifth positional value fail natively (diagnostic checked) and in EdgeFFmpeg before any output is opened, on all five paths"},
+      {"count": 50, "compares": "width-1 planes with zero thresholds: native rawvideo and framecrc bytes vs all five CLI paths"}
+    ],
+    "refusalsWithoutNative": 502,
+    "nativeFlags": ["-cpuflags", "0"]
+  },
+  "unsupported": [
+    "enable= timeline and runtime commands",
+    "generic filter options such as threads",
+    "width-1 planes with a nonzero threshold (native reads past the row into line padding)",
+    "high-bit-depth formats (not in the negotiation table)",
+    "no dedicated H.264/MP4 framecrc comparison (size unchanged, so the mp4-h264.ts aspect derivation is unaffected)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "summary": "6 failed files, 13 failed tests of 2266",
+    "files": ["tests/unit/flac-decode-backend.test.ts (load)", "tests/unit/flac-decoder.test.ts (load)", "tests/unit/flac-max-frames.test.ts (load)", "tests/unit/flac-build-inputs.test.ts (1)", "tests/unit/flac-expanded-fixtures.test.ts (2)", "tests/unit/resample-checkpoint.test.ts (10)"]
+  },
+  "finalUnitFailures": {
+    "summary": "6 failed files, 13 failed tests of 2271: identical to the baseline",
+    "files": ["tests/unit/flac-decode-backend.test.ts (load)", "tests/unit/flac-decoder.test.ts (load)", "tests/unit/flac-max-frames.test.ts (load)", "tests/unit/flac-build-inputs.test.ts (1)", "tests/unit/flac-expanded-fixtures.test.ts (2)", "tests/unit/resample-checkpoint.test.ts (10)"]
+  },
+  "proposedContracts": [
+    {"id": "filter.deflate.api", "file": "tests/differential/video-deflate.test.ts", "name": "matches native deflate through the linear, frame graph and replay APIs across formats, thresholds, sizes and patterns", "modes": ["linear", "graph", "stream"], "scope": "threshold0..3 on gray, yuv420p, yuv422p, yuv444p, yuva420p and gbrp; rawvideo bytes"},
+    {"id": "filter.deflate.cli", "file": "tests/differential/video-deflate.test.ts", "name": "matches native deflate rawvideo and framecrc bytes on every flagged CLI path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "threshold0..3 on the six eight-bit planar formats; rawvideo and framecrc"},
+    {"id": "filter.deflate.refusals", "file": "tests/differential/video-deflate.test.ts", "name": "fails like native for the erosion-only coordinates option and out-of-range thresholds before opening outputs on every path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "unknown option, range and positional errors"},
+    {"id": "filter.deflate.narrow", "file": "tests/differential/video-deflate.test.ts", "name": "copies width-1 planes with zero thresholds like native and refuses nonzero ones before opening outputs on every path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "width-1 plane copies and refusals"},
+    {"id": "filter.deflate.unit", "file": "tests/unit/video-deflate.test.ts", "name": "rejects unsupported layouts, budgets, malformed storage, invalid settings and cancellation explicitly", "modes": ["unit"], "scope": "frame limits, strides, AbortSignal"}
+  ],
+  "notes": [
+    "No shared edits beyond the two registry lines were needed. Integer options reuse the existing packages/avfilter/src/activation/integer-option.ts helper, which scale and setsar already use.",
+    "Width-1 refusal is threshold-aware: a width-1 plane with threshold 0 is a native av_image_copy_plane and is accepted and proven; with a nonzero threshold native reads src+1 beyond the row, so it is refused in geometry (all paths) and repeated in frame.",
+    "The CLI differential test takes about 135 s on 4 CPUs (3900 native spawns plus the in-process runs).",
+    "Setup durations: submodule 34 s, npm ci 7 s, reference:build 137 s, baseline checks plus unit suite 116 s."
+  ]
+}
