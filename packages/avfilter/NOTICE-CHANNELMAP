@@ -1,0 +1,20 @@
+Audio channelmap filter (src/audio/channelmap.ts)
+
+src/audio/channelmap.ts adapts FFmpeg libavfilter/af_channelmap.c:
+channelmap_init (parse-mode selection from the first character and the
+character after the first '-', entry counting with a tolerated trailing '|',
+get_channel_idx, get_channel, the output-layout derivation, the count and
+duplicate-output checks), channelmap_config_input (input channel resolution)
+and channelmap_filter_frame (plane reassignment). The native sample-format list
+is ff_planar_sample_fmts() from channelmap_query_formats. The channel-name table
+follows channel_names in libavutil/channel_layout.c.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2012 Google, Inc.
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation accepts only maps whose output layout equals the
+input's default layout, refuses every map that changes the channel count or
+layout, AMBI/USR/UNK/UNSD channel ids, signed or space-led indices, quoted
+options and non-default input masks, and copies planes instead of reassigning
+pointers so that a duplicated channel never aliases another output plane.
+The original source and full notices remain in the pinned upstream submodule.

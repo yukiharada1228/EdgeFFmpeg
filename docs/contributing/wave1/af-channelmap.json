@@ -1,0 +1,206 @@
+{
+  "capabilityId": "filter.channelmap",
+  "slug": "af-channelmap",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/audio/channelmap.ts",
+    "packages/avfilter/NOTICE-CHANNELMAP",
+    "tests/unit/channelmap.test.ts",
+    "tests/differential/channelmap.test.ts",
+    "docs/contributing/channelmap.md",
+    "docs/contributing/wave1/af-channelmap.json",
+    "packages/avfilter/src/audio/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/audio/registry.ts",
+      "change": "+1 line: export {channelmap} from './channelmap.js';"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/channelmap.test.ts",
+      "title": "channelmap parser > selects the native parse mode from the first character and the character after the first dash",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/channelmap.test.ts",
+      "title": "channelmap parser > accepts a trailing separator, keyed and positional options and an equal channel_layout",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/channelmap.test.ts",
+      "title": "channelmap parser > refuses native init failures and unimplemented syntax with exact messages",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/channelmap.test.ts",
+      "title": "channelmap chain > negotiates ff_planar_sample_fmts like native and refuses the s64p pick for double input",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/channelmap.test.ts",
+      "title": "channelmap chain > refuses every map that changes the count or layout, unavailable inputs and non-default input layouts",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/channelmap.test.ts",
+      "title": "channelmap chain > plans an unchanged count, packet boundaries and one frame-producing stage",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/channelmap.test.ts",
+      "title": "channelmap execution > matches a transcription of channelmap_filter_frame for every planar and packed input format, with frame-split invariance",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/channelmap.test.ts",
+      "title": "channelmap execution > returns owned, non-aliasing planes and leaves the input untouched",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/channelmap.test.ts",
+      "title": "channelmap execution > honours the frame allocation limit and cancellation",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/differential/channelmap.test.ts",
+      "title": "channelmap against native > matches native raw bytes for every permutation and duplication in each accepted syntax, u8/s16/s32/f32 with 1-3 channels",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/differential/channelmap.test.ts",
+      "title": "channelmap against native > matches native framecrc, WAV and W64 headers and bytes, composed chains and output time selection",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/differential/channelmap.test.ts",
+      "title": "channelmap against native > refuses out-of-scope maps, double input and non-default WAV masks before output, with native status recorded",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/audio-filter-registry.test.ts + audio-filter-registry-extension.test.ts + audio-filter-registry-contract.test.ts",
+      "title": "registry suites, unchanged, with the four channelmap examples",
+      "pass": 26,
+      "fail": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 3187,
+    "compares": [
+      "3064 raw-byte comparisons: u8/s16le/s32le/f32le x 1-3 channels x every input tuple in index and name form, and every output permutation in the four pair forms, plus trailing-separator, keyed, positional and channel_layout forms",
+      "108 comparisons of framecrc (including #channel_layout_name), WAV and W64 headers and bytes, asetnsamples/apad/double-channelmap chains and output -ss/-t and -frames:a, per format and channel count",
+      "2 raw-byte comparisons of explicit dblp (aformat=f=dblp,channelmap) on f64 input",
+      "12 native exit statuses for refusals: map=0 on stereo (0), 0|0 on mono (0), f64 input (0), unknown name XX (234), mismatched channel_layout (234), FC-FL|FL-FR on stereo (234), 0|2 on stereo (234), bare channelmap (234), 0|1 on 3 channels (0), FL-FC|FR-FL on stereo (0), WAV mask FL+FC (0) and DL+DR (0)",
+      "1 raw-byte comparison of a default-mask WAVEFORMATEXTENSIBLE input"
+    ]
+  },
+  "unsupported": [
+    "maps that change the channel count or the output layout (registry contract limit: constant channels and layout)",
+    "WAV/W64 input with a non-default channel mask, and unguessed '<n> channels' layouts",
+    "channel_layout values other than default layout names (FL+FR, downmix, masks, '<n>c')",
+    "signed or whitespace-led indices (+0, ' 0') that native sscanf accepts",
+    "USR<n>, AMBI<n>, UNK and UNSD channel ids",
+    "quoted or escaped option values",
+    "packed double input (native negotiates s64p); explicit dblp is supported and pinned",
+    "FLAC input (flacInput not declared)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "count": 13,
+    "files": 6,
+    "tests": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts (suite: missing .build/codecs/flac/edge-flac.wasm)",
+      "tests/unit/flac-decoder.test.ts (suite: missing .build/flac-investigation/native-cases.json)",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts (suite: missing .build/codecs/flac/edge-flac.wasm)",
+      "tests/unit/resample-checkpoint.test.ts: 10 golden-digest tests recorded on macOS arm64 (8000->16000, 16000->8000, 44100->48000, 48000->44100, 8000->44100, 44100->22050, 44100->48001, 48001->44100, 8000->16001, 16000->16000)"
+    ],
+    "summary": "13 failed | 2253 passed (2266)"
+  },
+  "finalUnitFailures": {
+    "count": 13,
+    "identicalToBaseline": true,
+    "summary": "13 failed | 2262 passed (2275)"
+  },
+  "proposedContracts": [
+    {
+      "id": "filter.channelmap.differential.syntax",
+      "file": "tests/differential/channelmap.test.ts",
+      "name": "matches native raw bytes for every permutation and duplication in each accepted syntax, u8/s16/s32/f32 with 1-3 channels",
+      "modes": [
+        "differential",
+        "linux-x64"
+      ],
+      "scope": "accepted map syntax (indices, names, four pair forms, trailing separator, keyed/positional, channel_layout) for u8/s16/s32/f32 with 1-3 channels, raw output"
+    },
+    {
+      "id": "filter.channelmap.differential.mux",
+      "file": "tests/differential/channelmap.test.ts",
+      "name": "matches native framecrc, WAV and W64 headers and bytes, composed chains and output time selection",
+      "modes": [
+        "differential",
+        "linux-x64"
+      ],
+      "scope": "framecrc channel_layout_name, WAV/W64 headers, asetnsamples/apad/channelmap chains, output -ss/-t/-frames:a, explicit dblp"
+    },
+    {
+      "id": "filter.channelmap.differential.refusals",
+      "file": "tests/differential/channelmap.test.ts",
+      "name": "refuses out-of-scope maps, double input and non-default WAV masks before output, with native status recorded",
+      "modes": [
+        "differential",
+        "linux-x64"
+      ],
+      "scope": "explicit refusals before output with native exit status"
+    },
+    {
+      "id": "filter.channelmap.unit.mapping",
+      "file": "tests/unit/channelmap.test.ts",
+      "name": "matches a transcription of channelmap_filter_frame for every planar and packed input format, with frame-split invariance",
+      "modes": [
+        "unit"
+      ],
+      "scope": "plane mapping"
+    },
+    {
+      "id": "filter.channelmap.unit.parser",
+      "file": "tests/unit/channelmap.test.ts",
+      "name": "refuses native init failures and unimplemented syntax with exact messages",
+      "modes": [
+        "unit"
+      ],
+      "scope": "parser refusals"
+    },
+    {
+      "id": "filter.channelmap.unit.ownership",
+      "file": "tests/unit/channelmap.test.ts",
+      "name": "returns owned, non-aliasing planes and leaves the input untouched",
+      "modes": [
+        "unit"
+      ],
+      "scope": "ownership"
+    }
+  ],
+  "notes": [
+    "Setup durations: submodule init 45s, npm ci 10s, reference:build 178s, baseline typecheck+lint+boundaries+unit 146s.",
+    "Deviation from the spec wording 'dbl/dblp input is refused': packed dbl input is refused by the chain's s64p rule before output, as the spec intends. Explicit planar double (aformat=f=dblp,channelmap=...) is not refused: native keeps dblp there and only copies, our output matches native byte for byte (2 differential comparisons), and the descriptor cannot refuse dblp before output because constraint() does not see the sample format.",
+    "Native exit status is 0 for map=0 on stereo, 0|0 on mono, 0|1 on three channels, FL-FC|FR-FL on stereo, f64 input and non-default masks (native converts implicitly or runs through s64p); we refuse all of them before opening output.",
+    "Error messages for native init/config failures reuse native's wording; the input-channel message capitalises 'Input' because it is the first word of our diagnostic.",
+    "No shared edit beyond the registry line was needed."
+  ]
+}
