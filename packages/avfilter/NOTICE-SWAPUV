@@ -1,0 +1,11 @@
+Scoped swapuv chroma plane swap
+
+The pixel-format selection and the plane exchange in src/video-ops/swapuv.ts
+follow libavfilter/vf_swapuv.c (is_planar_yuv, query_formats, do_swap,
+filter_frame, get_video_buffer).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2002 Michael Niedermayer. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete swapuv filter: its timeline
+(enable=) support is refused, and only the planar YUV formats of the negotiation table are accepted.
