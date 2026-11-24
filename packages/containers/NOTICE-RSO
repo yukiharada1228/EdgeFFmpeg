@@ -1,0 +1,13 @@
+Scoped Lego Mindstorms RSO header and payload semantics
+
+The header layout, codec tag table, header refusals, informational size field
+and read-to-EOF payload in src/rso.ts follow libavformat/rsodec.c
+(rso_read_header), rsoenc.c (rso_write_header, rso_write_trailer), rso.c
+(ff_codec_rso_tags), rso.h (RSO_HEADER_SIZE) and pcm.c (ff_pcm_read_packet,
+ff_pcm_default_packet_size, ff_pcm_read_seek).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2001 Fabrice Bellard (original AU code);(c)2003 Fabrice Bellard;
+(c)2010 Rafael Carre. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete rso demuxer or muxer.
