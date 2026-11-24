@@ -1,0 +1,49 @@
+You are one of 40 cloud agents implementing EdgeFFmpeg capabilities in parallel. EdgeFFmpeg (https://github.com/yukiharada1228/EdgeFFmpeg) reimplements FFmpeg 9.0.2 in TypeScript for Cloudflare Workers. Your capability is `filter.shuffleplanes`: shuffleplanes: remap planes. Your branch is `wave1/vf-shuffleplanes`.
+
+## Capability specification
+- Upstream source: upstream/ffmpeg/libavfilter/vf_shuffleplanes.c
+- Scope: Options map0..map3 (0..3, defaults 0, 1, 2, 3, shorthand order).
+- formats(step) reproduces native query_formats in table order: every map[i] must be below the plane count, and subsampled formats may map planes 1 and 2 only within {1,2}. With the defaults only yuva420p qualifies, all-zero maps admit packed formats, and nv12 needs 0:1:1:x.
+- Duplicated maps copy planes.
+- enable= and commands are refused.
+- Flag all five paths once the actor/timed tests pass.
+- Files you own: packages/avfilter/src/video-ops/shuffleplanes.ts, packages/avfilter/NOTICE-SHUFFLEPLANES, tests/unit/video-shuffleplanes.test.ts, tests/differential/video-shuffleplanes.test.ts, docs/contributing/shuffleplanes.md, docs/contributing/wave1/vf-shuffleplanes.json
+- Shared one-line edits you may make: packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `shuffleplanesOperator,` array-entry line
+- Test strategy: Differential against Linux native.
+- All 14 input formats x about 12 map tuples: defaults, 3:1:2:0, 1:2:0:0, 0:0:0:0, 0:2:1:0, 0:1:1:0 and others.
+- Implicit conversions run only with -cpuflags 0. Confirm with native -v verbose that negotiation lands on a table format.
+- -vf and -filter_complex, rawvideo and framecrc, plus stream and timed cases.
+- Unit: per-step format lists equal the native rule for every tuple.
+- Determinism notes: Pure plane copy. Probes were stable, and macOS and Linux matched.
+- Registry notes (these override any conflicting wording above): tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor.
+
+## Registry recipe for your area
+To add video operator <name>, create packages/avfilter/src/video-ops/<name>.ts starting with // SPDX-License-Identifier: LGPL-2.1-or-later. It exports export const <name>Operator=defineVideoOperator<<Name>Step>({name:'<name>',role,paths,examples,parse,...}), using defineVideoOperator, singlePad and VideoFilterParseError from './descriptor.js', bareStep from './options.js', negotiationOrder from './formats.js' and filterOptions from '../video-syntax.js'. bareStep is for option-free filters and refuses every option, including enable=. Use role 'identity' with no frame function for copy-like filters, or role 'frame'. formats(step) is native query_formats intersected with negotiationOrder, in table order; omit it when every table format is accepted, and throw rather than return an empty list. validate(pixelFormat,step) holds format-dependent refusals. geometry(step,[input]) returns the output size and throws size-dependent refusals; repeat those checks in frame. frame(frame,step,options) returns owned tight planes within options.maxFrameBytes and checks options.signal. Reject every unimplemented option, value, enable= and runtime command; runtime commands are refused automatically unless timeline or geometryCommands is set. Examples must be valid on an 8x8 gray source and may combine only with null, format, scale, hflip, vflip, transpose, split, nullsink, hstack or vstack. Flag paths:['linear','graph','stream'] ('stream' requires 'graph'), and add 'actor' and 'timed' only when timed-backend differential tests pass. The registry test derives the rejections on every unflagged path and checks that every flagged path gives the same output. Register the operator with two new lines in packages/avfilter/src/video-ops/registry.ts: import {<name>Operator} from './<name>.js'; after the last operator import, and ' <name>Operator,' before '] as const);'. Reflow nothing; order is irrelevant and the file is merge=union. Create packages/avfilter/NOTICE-<NAME> (or the exact name your task gives, such as NOTICE-VIDEO-COPY) in the layout of packages/containers/NOTICE-W64: the upstream vf_<name>.c functions followed, Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8, the copyright lines, LGPL-2.1-or-later, ../../LICENSES/LGPL-2.1-or-later.txt, and a sentence saying it is a scoped adaptation. Write tests/unit/video-<name>.test.ts covering parsing, refusals, budgets, malformed strides, AbortSignal and an unmutated input. Write tests/differential/video-<name>.test.ts: native at test time, inputs in the operator's own formats, -cpuflags 0 for any implicit conversion, structured patterns plus noise, and rawvideo and framecrc compared on every flagged path. Also write docs/contributing/<name>.md and docs/contributing/wave1/<slug>.json, using the exact names in your ownedFiles. Do not edit tests/unit/video-operator-registry.test.ts, packages/avfilter/src/index.ts, the shared NOTICE, the support matrix, compat/*.json or development-status.md. A size-changing operator must not claim zero-frame H.264/MP4 framecrc output, whose aspect ratio mp4-h264.ts derives by operator name. Run npx vitest run tests/unit/video-<name>.test.ts tests/unit/video-operator-registry.test.ts, then npx vitest run tests/differential/video-<name>.test.ts --maxWorkers=1, then npm run typecheck, npm run lint and npm run boundaries. The full guide is docs/contributing/video-filter-registry.md, sections 'Adding a video operator' and 'Hooks for the planned operators'.
+
+## Setup (record durations)
+1. `git fetch origin prep/registries && git checkout -B wave1/vf-shuffleplanes origin/prep/registries`
+2. `git submodule update --init upstream/ffmpeg`. Check that the result equals the commit pinned in compat/upstream.lock.json.
+3. `npm ci && npm run reference:build`. The sandbox has Node 22; that is fine, because typecheck, lint and the tests were verified with it, so do not install another Node. This builds the native FFmpeg 9.0.2 oracle at .build/reference/ffmpeg for this Linux x86_64 machine, in about 3 minutes. Record `sha256sum .build/reference/ffmpeg`.
+4. Record the baseline: `npm run typecheck && npm run lint && npm run boundaries`, then `npx vitest run tests/unit` before changing anything. Two kinds of failure are known and expected in this sandbox:
+   - FLAC tests that need .build/codecs/flac/edge-flac.wasm or .build/flac-investigation/native-cases.json. downloads.xiph.org is blocked here.
+   - About 10 tests in tests/unit/resample-checkpoint.test.ts, whose golden digests were recorded on macOS arm64.
+   Do not fix, edit or skip either of these. Just record the baseline failures.
+
+## Read first
+- docs/architecture/detailed-development-design.md, sections 1.3-1.4, 5.2 and 12.
+- The registry recipe for your area: docs/contributing/audio-filter-registry.md, video-filter-registry.md or container-registry.md. Follow it exactly: add one new module plus the registry line.
+- Existing implementations of the same kind, as style references (for example packages/avfilter/src/audio/, video-ops/, packages/containers/src/). Look at their tests under tests/unit and tests/differential too.
+
+## Rules
+- Prove behaviour against the native reference you built. Add differential tests in tests/differential that run .build/reference/ffmpeg and compare bytes, PCM or framecrc exactly, following existing tests in the same area. Options outside the implemented scope must fail explicitly before any output is written. Never claim more than your tests show.
+- Match the surrounding code style exactly: dense lines, terse names, bigint timestamps, explicit resource limits, AbortSignal. Do not use Node built-ins in packages that run on Workers. Respect tools/package-boundaries.
+- Edit only the files you own and the listed shared one-line edits. Do not refactor shared code. If your capability turns out to need any other shared edit, do not make it. Record the need in the report's notes and in your final message, and implement only what fits without it, refusing the rest explicitly.
+- Do not edit docs/contributing/development-status.md, compat/capabilities.json, compat/implementation-progress.json or compat/test-contracts.json; the merge stage updates them. Do add the docs file listed in your owned files (docs/contributing/...md), describing the scope, the evidence and what remains unsupported.
+- Write a machine-readable report to docs/contributing/wave1/vf-shuffleplanes.json with these fields: capabilityId, slug, status ("complete" or "partial" or "blocked"), filesChanged, sharedEdits, tests (file, test title and pass/fail count), nativeComparisons (count and what they compare), unsupported, linuxReferenceSha256, baselineUnitFailures, finalUnitFailures, proposedContracts (each with id, file, the exact test title as name, modes and scope) and notes.
+- Your branch must change only your owned files and your listed shared one-line edits. Check with `git diff --name-only origin/prep/registries...HEAD` before pushing. Squash your work into one commit.
+- This sandbox has 4 CPUs. Do not run the full workers, integration or differential suites. Run your own tests plus `npm run typecheck`, `npm run lint`, `npm run boundaries` and `npx vitest run tests/unit`. Any unit failures must be exactly the baseline ones.
+- Commit to `wave1/vf-shuffleplanes` and push only that branch: `git push -u origin wave1/vf-shuffleplanes`. Do not open a PR, do not merge, and do not push any other branch. End every commit message with `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
+- If you cannot finish, commit and push whatever is working, set status to "partial" or "blocked" in the report, and explain why.
+
+## Final message
+Report the branch, the final commit SHA, the status, the files you changed (mark shared ones), your tests and their counts, the native comparisons, the unsupported scope, the setup durations and any environment problems.

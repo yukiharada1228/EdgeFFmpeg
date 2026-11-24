@@ -1,0 +1,1130 @@
+{
+ "wave": [
+  {
+   "capabilityId": "filter.acopy",
+   "title": "acopy: owned pass-through copy",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_acopy.c",
+   "scope": "Accept only the bare token `acopy`. Native has no options, so `acopy=...` throws AudioFilterError; assert that native also fails. Stateless apply() returns a new frame whose planes are owned copies, in the negotiated input format (formats 'all'). Samples, pts, layout and rate are unchanged. examples: ['acopy']. Capabilities: allocatesFrames=true and every other flag false, including rateConversion and timeSelection. reserve() returns frameReservation. Untimed FLAC input reaches it but is documented as unverified.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/acopy.ts",
+    "packages/avfilter/NOTICE-ACOPY",
+    "tests/unit/acopy.test.ts",
+    "tests/differential/acopy.test.ts",
+    "docs/contributing/acopy.md",
+    "docs/contributing/wave1/af-acopy.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {acopy} from './acopy.js';`"
+   ],
+   "testStrategy": "Differential against the sandbox Linux .build/reference/ffmpeg, which runs at test time.\n- Inputs: raw u8/s16le/s32le/f32le/f64le and WAV, 1-3 channels, 8000/44100 Hz. Declare rate and channels on the input only; never use output -ar/-ac.\n- Outputs: WAV, raw s16le/f32le/f64le, AIFF, AU and framecrc.\n- Chains: acopy; acopy,acopy; asetnsamples=7,acopy; apad=pad_len=9,acopy; acopy,volume=0.5 with -cpuflags 0. Repeat with output -ss, -t and -frames:a.\n- Refusal: acopy=1, asserting native's exit status.\n- Unit: parse and refusal, output planes never alias the input, input not mutated, maxFrameBytes limit, AbortSignal.\n- No FLAC or workers test.",
+   "determinism": "memcpy only. The scout probe was identical on macOS arm64 and Linux x86_64, so every case runs on both platforms.",
+   "risk": "low",
+   "estimateHours": 1,
+   "slug": "af-acopy",
+   "order": 1,
+   "registryNotes": [
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.copy",
+   "title": "copy (video): identity copy filter",
+   "registry": "video-ops (role identity)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_copy.c",
+   "scope": "No options; any option or enable= is refused with VideoFilterParseError. Use role identity like null: no frame function, output bytes equal the input. formats() is the whole 14-entry negotiation table, since native rejects only hwaccel formats. Flag all five paths (identity is allowed on linear, graph, stream, actor and timed). Runtime commands are refused.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/copy.ts",
+    "packages/avfilter/NOTICE-VIDEO-COPY",
+    "tests/unit/video-copy-filter.test.ts",
+    "tests/differential/video-copy-filter.test.ts",
+    "docs/contributing/video-copy-filter.md",
+    "docs/contributing/wave1/vf-copy.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `copyOperator,` array-entry line (prep's one-entry-per-line layout)"
+   ],
+   "testStrategy": "Differential against Linux native.\n- Cases: -vf copy and chains copy,negate; format=nv12,copy,vflip; copy,hflip, across all 14 formats from rawvideo input in that format (no implicit conversion).\n- Sizes 5x3, 7x5 and 8x6, 3 frames, rawvideo and framecrc outputs, with and without -ss/-t.\n- -filter_complex split/copy branches (graph), createReplayVideoExecution (stream), and the timed backend (actor and timed).\n- Unit: option refusal, and the frame is forwarded unchanged on every path.",
+   "determinism": "Identity: native output md5 equals the input. Integer only.",
+   "risk": "low",
+   "estimateHours": 1,
+   "slug": "vf-copy",
+   "order": 2,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "filter.swapuv",
+   "title": "swapuv: swap U and V planes",
+   "registry": "video-ops (role frame)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_swapuv.c",
+   "scope": "No options; enable= and runtime commands are refused. formats() is native is_planar_yuv() intersected with the table, in table order: yuv420p, yuv422p, yuv444p, yuva420p. Other inputs auto-convert, as native does. frame() swaps planes 1 and 2 into owned tight planes; luma and alpha are copied. Flag all five paths once the actor/timed tests pass. Otherwise flag linear/graph/stream and add rejection tests for actor/timed.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/swapuv.ts",
+    "packages/avfilter/NOTICE-SWAPUV",
+    "tests/unit/video-swapuv.test.ts",
+    "tests/differential/video-swapuv.test.ts",
+    "docs/contributing/swapuv.md",
+    "docs/contributing/wave1/vf-swapuv.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `swapuvOperator,` array-entry line"
+   ],
+   "testStrategy": "Differential against Linux native.\n- Cases: -vf swapuv, swapuv,hflip and format=yuv422p,swapuv over the 4 native formats.\n- gray/rgba/nv12 inputs that auto-convert, run only with -cpuflags 0 so swscale uses the scalar path.\n- Sizes 5x3, 7x5 and 8x6, 3 frames, rawvideo and framecrc, with and without -ss/-t. Use structured patterns plus noise.\n- -filter_complex split branches, createReplayVideoExecution, and the timed backend.\n- Unit: option refusal, maxFrameBytes, malformed strides, AbortSignal.",
+   "determinism": "Pure plane copy. Native was stable at -filter_threads 1/3/default and on repeat runs, and macOS and Linux hashes matched.",
+   "risk": "low",
+   "estimateHours": 1,
+   "slug": "vf-swapuv",
+   "order": 3,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "filter.aperms",
+   "title": "aperms: permission no-op pass-through",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/f_perms.c (CONFIG_APERMS_FILTER)",
+   "scope": "Options mode=none|ro|rw|toggle|random (positional or named) and seed. random is accepted only with an explicit seed in [0,4294967295]; the default seed=-1 calls av_get_random_seed and is refused. Native never changes sample data, so implement an identity apply like anull: no allocation, no reservation. Refuse unknown options, bad values and runtime commands. examples: ['aperms','aperms=mode=toggle','aperms=mode=random:seed=7']. All declared capabilities false.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/aperms.ts",
+    "packages/avfilter/NOTICE-APERMS",
+    "tests/unit/aperms.test.ts",
+    "tests/differential/aperms.test.ts",
+    "docs/contributing/aperms.md",
+    "docs/contributing/wave1/af-aperms.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {aperms} from './aperms.js';`"
+   ],
+   "testStrategy": "Differential against Linux native.\n- Each accepted mode, plus random with seeds 0, 7 and 4294967295, on u8/s16/s32/f32/f64 with 1-2 channels.\n- WAV, raw and framecrc outputs, alone and chained with volume=0.5 (-cpuflags 0), asetnsamples=5 and apad=pad_len=3.\n- Refusals, asserting native status for each: mode=random without seed (native succeeds; document this as an intentional refusal), seed=-2, seed=4294967296, mode=bogus.\n- Unit: parsing, identity and ownership, abort.",
+   "determinism": "Data is unaffected by every mode, including random with a seed. The scout probe (toggle on s16, random:seed=7 on f64) was identical on both platforms.",
+   "risk": "low",
+   "estimateHours": 1,
+   "slug": "af-aperms",
+   "order": 4,
+   "registryNotes": [
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "demuxer.wve",
+   "title": "Psion 3 audio (.wve) demuxer",
+   "registry": "containers (one format module + one registry line)",
+   "nativeSource": "upstream/ffmpeg/libavformat/wvedec.c, pcm.c (ff_pcm_read_packet, ff_pcm_read_seek)",
+   "scope": "Demux only; native has no wve muxer.\n- Probe exactly as wve_probe: the 18-byte 'ALawSoundFile**\\0\\017\\020' magic, plus bytes 22..31 equal to 00 00 00 01 00 00 00 00 00 00.\n- The stream is pcm_alaw, 8000 Hz, mono, block_align 1. The rb32 duration at offset 18 is informational only: data starts at 32 and is read to EOF, as native does.\n- Default PCM packet span (512 samples at 8000 Hz), through the existing alaw decoder.\n- Refuse input -ss when the header duration differs from the physical sample count, unless native's seek and EOF behaviour has been probed and mirrored. Refuse truncated headers.\n- Unscouted; the native probe passed (see scratchpad wave-select/probe-results.txt).",
+   "ownedFiles": [
+    "packages/containers/src/wve.ts",
+    "packages/containers/NOTICE-WVE",
+    "docs/contributing/wve-support.md",
+    "tests/unit/wve.test.ts",
+    "tests/differential/wve.test.ts",
+    "docs/contributing/wave1/fmt-wve.json"
+   ],
+   "sharedEdits": [
+    "container format registry (path fixed by prep/registries): +1 demux-only registration line (magic probe, -f wve)",
+    "packages/containers/src/index.ts: +1 export line only if the registry recipe requires barrel exports"
+   ],
+   "testStrategy": "Inputs are synthesized in the test: data lengths {0,1,511,512,513,3000,8001} x header duration {equal, 100, 0, larger than the data}.\n- Native vs Edge: -c copy -f framecrc, decode to WAV/AU/raw s16le, raw -f alaw remux, output -ss/-t/-frames:a.\n- Probe negatives: one magic byte altered, or a nonzero byte at 23. Native then fails to detect and Edge must fail explicitly; compare exit codes.\n- Unit: header parse, 64-byte read budget, abort.",
+   "determinism": "Integer byte copy and the existing G.711 table decoder; platform independent.",
+   "risk": "low",
+   "estimateHours": 1,
+   "slug": "fmt-wve",
+   "order": 5,
+   "registryNotes": []
+  },
+  {
+   "capabilityId": "demuxer.epaf",
+   "title": "Ensoniq PARIS (.paf/.fap) demuxer",
+   "registry": "containers (one format module + one registry line)",
+   "nativeSource": "upstream/ffmpeg/libavformat/epafdec.c, pcm.c",
+   "scope": "Demux only.\n- Magic 'fap ' requires word@8==1 (little-endian); ' paf' requires word@8==0 (big-endian). The probe also requires word@4==0 and non-zero words at 12 and 20, as native does.\n- Codec 0 maps to s16le/s16be and codec 2 to s8. Codec 1 (24-bit) and anything else is refused, with native's INVALIDDATA status.\n- Channels 1..512, rate > 0, data at 2048, default PCM packet span.\n- Refuse partial trailing frames and truncated 2048-byte headers.",
+   "ownedFiles": [
+    "packages/containers/src/epaf.ts",
+    "packages/containers/NOTICE-EPAF",
+    "docs/contributing/epaf-support.md",
+    "tests/unit/epaf.test.ts",
+    "tests/differential/epaf.test.ts",
+    "docs/contributing/wave1/fmt-epaf.json"
+   ],
+   "sharedEdits": [
+    "container format registry: +1 demux-only registration line (native probe rules, -f epaf)",
+    "packages/containers/src/index.ts: +1 export line only if the recipe requires it"
+   ],
+   "testStrategy": "Synthesized LE/BE files x codec {0,2} x channels {1,2,6} x rates {8000,44100,96000} x odd lengths, compared byte for byte with native through copy framecrc, WAV, AIFF and raw outputs, plus -ss/-t. Refusal matrix with native exit codes: codec 1, codec 3, 0 or 513 channels, negative rate, truncated header. Unit: header parse, read budget.",
+   "determinism": "Integer only.",
+   "risk": "low",
+   "estimateHours": 1,
+   "slug": "fmt-epaf",
+   "order": 6,
+   "registryNotes": []
+  },
+  {
+   "capabilityId": "demuxer.avr",
+   "title": "Audio Visual Research (.avr) demuxer",
+   "registry": "containers (one format module + one registry line)",
+   "nativeSource": "upstream/ffmpeg/libavformat/avr.c, libavformat/utils.c (ff_get_pcm_codec_id), pcm.c",
+   "scope": "Demux only, detected by the '2BIT' magic.\n- chan 0 is mono and 0xFFFF is stereo; any other value is refused, matching native's PATCHWELCOME.\n- The codec is ff_get_pcm_codec_id(bps, 0, BE, sign mask), ported privately in this module: s8/u8, s16be/u16be, s24be/u24be, s32be/u32be. A bps that is not a multiple of 8 is refused, and so is bps 64.\n- Rate is the non-zero 24-bit field; data starts at 128, default PCM packets.\n- Native scores stereo files only 25, so stereo autodetection parity is claimed only where native's framecrc header shows the avr stream.",
+   "ownedFiles": [
+    "packages/containers/src/avr.ts",
+    "packages/containers/NOTICE-AVR",
+    "docs/contributing/avr-support.md",
+    "tests/unit/avr.test.ts",
+    "tests/differential/avr.test.ts",
+    "docs/contributing/wave1/fmt-avr.json"
+   ],
+   "sharedEdits": [
+    "container format registry: +1 demux-only registration line (probe '2BIT', -f avr)",
+    "packages/containers/src/index.ts: +1 export line only if the recipe requires it"
+   ],
+   "testStrategy": "Test-built AVR files: sign {0, 0xffff, per-width masks} x bps {8,16,24,32} x mono/stereo x rates {8000,22050,96000} x odd lengths, plus a partial trailing frame that must be refused.\n- Native vs Edge: -c copy -f framecrc, decode to WAV/raw s16le, -ss/-t, both autodetected and with -f avr.\n- Refusals with native exit status: chan=2, bps=12, rate 0.\n- Unit: header parsing and the codec-id port.",
+   "determinism": "Pure integer header parse and PCM copy.",
+   "risk": "low",
+   "estimateHours": 1,
+   "slug": "fmt-avr",
+   "order": 7,
+   "registryNotes": []
+  },
+  {
+   "capabilityId": "demuxer.pvf",
+   "title": "Portable Voice Format (.pvf) demuxer",
+   "registry": "containers (one format module + one registry line)",
+   "nativeSource": "upstream/ffmpeg/libavformat/pvfdec.c, aviobuf.c (ff_get_line), utils.c (ff_get_pcm_codec_id)",
+   "scope": "Demux only.\n- 'PVF1\\n' magic, then one header line read with ff_get_line semantics into a 32-byte buffer and parsed as sscanf '%d %d %d' (channels, rate, bps). Port ff_get_line privately in this module.\n- Validation as native: channels 1..512, rate > 0, bps > 0.\n- Codec is signed big-endian: s8, s16be, s24be, s32be. bps 64 (s64be) and bps not a multiple of 8 are refused.\n- Data follows the line; block_align is bps*ch/8; default PCM packets.\n- Plain decimal fields with single spaces are supported. Leading '+', hex, extra fields, CRLF and lines longer than 31 bytes are accepted only where native's outcome has been probed and mirrored; otherwise they are refused explicitly.",
+   "ownedFiles": [
+    "packages/containers/src/pvf.ts",
+    "packages/containers/NOTICE-PVF",
+    "docs/contributing/pvf-support.md",
+    "tests/unit/pvf.test.ts",
+    "tests/differential/pvf.test.ts",
+    "docs/contributing/wave1/fmt-pvf.json"
+   ],
+   "sharedEdits": [
+    "container format registry: +1 demux-only registration line (probe 'PVF1\\n', -f pvf)",
+    "packages/containers/src/index.ts: +1 export line only if the recipe requires it"
+   ],
+   "testStrategy": "Synthesized files: bps {8,16,24,32} x channels {1,2,3} x rates x lengths, compared through copy framecrc, WAV and raw.\n- Line-format matrix: extra spaces, CRLF, missing field, 0 channels, bps 12, bps 64, a long line. Edge either matches native's output and exit code or refuses explicitly; assert which.\n- Unit: the ff_get_line port and sscanf subset.",
+   "determinism": "Integer only.",
+   "risk": "low",
+   "estimateHours": 1,
+   "slug": "fmt-pvf",
+   "order": 8,
+   "registryNotes": []
+  },
+  {
+   "capabilityId": "filter.limiter",
+   "title": "limiter: clamp plane samples",
+   "registry": "video-ops (role frame)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_limiter.c",
+   "scope": "Options min (0..65535, default 0), max (0..65535, default 65535) and planes (0..15, default 15), shorthand min:max:planes.\n- Mirror native: init fails when min > max, before any output. Both bounds then clamp to 255 for 8-bit, and planes outside the mask are copied.\n- formats(): gray, yuv420p, yuv422p, yuv444p, yuva420p, gbrp in table order. gbrp mask bits follow plane index G, B, R.\n- enable= and runtime commands are refused.\n- Flag all five paths once the actor/timed tests pass; otherwise linear/graph/stream plus rejection tests.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/limiter.ts",
+    "packages/avfilter/NOTICE-LIMITER",
+    "tests/unit/video-limiter.test.ts",
+    "tests/differential/video-limiter.test.ts",
+    "docs/contributing/limiter.md",
+    "docs/contributing/wave1/vf-limiter.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `limiterOperator,` array-entry line"
+   ],
+   "testStrategy": "Differential against Linux native.\n- Matrix: 6 formats x min/max pairs (including values > 255, min == max, and min > max, where native errors before output) x plane masks {0,1,2,5,8,15} x odd and even sizes, rawvideo and framecrc.\n- One case each on graph, stream and timed.\n- Native-error parity with no output file opened.\n- Unit: option ranges and messages, budgets, abort.",
+   "determinism": "Integer clip; x86 asm is disabled in the Linux reference, so the C path runs. Stable across thread counts; macOS and Linux matched.",
+   "risk": "low",
+   "estimateHours": 1.25,
+   "slug": "vf-limiter",
+   "order": 9,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "filter.dcshift",
+   "title": "dcshift: DC offset with optional limiter",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_dcshift.c",
+   "scope": "Options shift [-1,1] and limitergain [0,1], positional (shift:limitergain) or named. Plain decimal literals only; refuse expressions and suffixes, as volume does. Pinned format 's32p'.\n- Without the limiter: d = shift*(INT32_MAX+1.) + x.\n- With limitergain > 0: limiterthreshold = INT32_MAX*(1-(|shift|-limitergain)), then the three native branches. Native adds the raw, unscaled shift in both limiter branches, and the else branch uses shift*INT32_MAX; mirror both.\n- Then truncate to int64 and clip to int32 (av_clipl_int32).\n- Stateless apply; allocatesFrames=true, other flags false, frameReservation.\n- Out-of-range values are refused (native fails too), as are enable and commands.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/dcshift.ts",
+    "packages/avfilter/NOTICE-DCSHIFT",
+    "tests/unit/dcshift.test.ts",
+    "tests/differential/dcshift.test.ts",
+    "docs/contributing/dcshift.md",
+    "docs/contributing/wave1/af-dcshift.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {dcshift} from './dcshift.js';`"
+   ],
+   "testStrategy": "Differential against Linux native.\n- Parameters: shift {0,0.3,-0.7,1,-1} x limitergain {0,0.4,1}.\n- Sources: u8/s16/s32 including INT_MIN/INT_MAX extremes, and f32/f64 with |x| <= 1.1 (-cpuflags 0).\n- Outputs: s32 WAV/raw, s16 WAV (s32p to s16 truncation) and framecrc. Chains with volume=0.5 and asetnsamples=7.\n- Refusals with native status: shift=2, limitergain=-1, an expression.\n- Unit: exact branch arithmetic against a Number/bigint model, clipping, negotiation to s32p, ownership.",
+   "determinism": "IEEE double. shift*2^31 is exact, so contraction cannot change it. A JS unfused simulation matched native 10000/10000, and macOS matched Linux in 3 configurations.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "af-dcshift",
+   "order": 10,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"s32p\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.aderivative",
+   "title": "aderivative: first difference per channel",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_aderivative.c",
+   "scope": "No options; refuse any argument, enable (native's timeline-internal reset path) and commands.\n- Native format set {s16p,s32p,fltp,dblp}. Use formats 'planar' with a custom negotiate that maps u8->s16p, s16->s16p, s32->s32p, flt->fltp, dbl->dblp (probed with -v debug). Refuse the neighbour-merge cases it cannot reproduce, such as fixed volume or an integer aformat pin next to it, with AudioFilterError.\n- stream(): a per-channel previous sample starts at 0 and carries across frames. dst = cur - prev, with int16 and int32 two's-complement wrap, Math.fround subtraction for flt and plain double subtraction for dbl.\n- Sample counts and packets are unchanged. reserve(): one frame plus the per-channel state bytes.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/aderivative.ts",
+    "packages/avfilter/NOTICE-ADERIVATIVE",
+    "tests/unit/aderivative.test.ts",
+    "tests/differential/aderivative.test.ts",
+    "docs/contributing/aderivative.md",
+    "docs/contributing/wave1/af-aderivative.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {aderivative} from './aderivative.js';`"
+   ],
+   "testStrategy": "Differential against Linux native.\n- Sources: u8/s16/s32/f32/f64 with 1-3 channels and full-scale extremes to force wrap.\n- Outputs in the native format and s16 (-cpuflags 0 for float to int), via WAV, raw and framecrc.\n- Multi-frame input (8000 Hz, 20000 samples). Chains asetnsamples=7,aderivative (frame splits cross state) and aderivative,apad=pad_len=5.\n- Output -ss/-t/-frames:a, which must filter the whole input.\n- Unit: wrap, state across frames, negotiation table, ownership, abort.",
+   "determinism": "Subtraction only, so no FMA exposure. A JS simulation matched native s16 10000/10000, and macOS and Linux matched for s16/s32/f32/f64.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "af-aderivative",
+   "order": 11,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"s16p\", \"fltp\", \"s32p\", \"dblp\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.aintegral",
+   "title": "aintegral: running sum per channel",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_aderivative.c (ff_af_aintegral, INTEGRAL template)",
+   "scope": "No options; refuse arguments, enable and commands.\n- Native format set {fltp,dblp}. Custom negotiate: u8/s16/s32/flt->fltp (s32->flt is lossy, as in the swr conversion) and dbl->dblp.\n- stream(): a per-channel accumulator starts at 0. dst = fround(cur + acc) for fltp or a double add for dblp, then acc = dst.\n- Float-to-integer output conversions beyond the repo's scalar conversion bound must fail explicitly, as existing conversions do.\n- Own module; do not share code with the aderivative branch.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/aintegral.ts",
+    "packages/avfilter/NOTICE-AINTEGRAL",
+    "tests/unit/aintegral.test.ts",
+    "tests/differential/aintegral.test.ts",
+    "docs/contributing/aintegral.md",
+    "docs/contributing/wave1/af-aintegral.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {aintegral} from './aintegral.js';`"
+   ],
+   "testStrategy": "Differential against Linux native.\n- f32/f64 outputs for every source format.\n- s16 outputs (-cpuflags 0) only from low-amplitude, zero-mean inputs whose integral stays within +-1.\n- Multi-frame and asetnsamples-split chains, and output -ss/-t.\n- Assert explicit failure where the conversion would exceed the supported magnitude.\n- Unit: accumulation across frames, negotiation, conversion-limit refusal.",
+   "determinism": "Addition only, so no FMA exposure. macOS and Linux matched for f32, f64 and s16->f32.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "af-aintegral",
+   "order": 12,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"fltp\", \"dblp\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.pixelize",
+   "title": "pixelize: block average/min/max",
+   "registry": "video-ops (role frame)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_pixelize.c",
+   "scope": "Options width/w and height/h (1..1024, default 16), mode avg|min|max, and planes (flags, default 15; decimal or hex integers, unknown named terms refused).\n- Mirror the per-frame block-size rounding: block_w[1] = max(1, bw >> log2w) and luma = block_w[1] << log2w, the same for height.\n- Mirror partial edge blocks, the truncating unsigned average and the copying of unselected planes.\n- formats(): gray, yuv420p, yuv422p, yuv444p, yuva420p, gbrp.\n- enable= and commands are refused.\n- Flag all five paths once the actor/timed tests pass.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/pixelize.ts",
+    "packages/avfilter/NOTICE-PIXELIZE",
+    "tests/unit/video-pixelize.test.ts",
+    "tests/differential/video-pixelize.test.ts",
+    "docs/contributing/pixelize.md",
+    "docs/contributing/wave1/vf-pixelize.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `pixelizeOperator,` array-entry line"
+   ],
+   "testStrategy": "Differential against Linux native: 6 formats x 3 modes x block sizes {1, 2x2, 3x2, 4x3, 16, larger than the frame} x plane masks x odd sizes (9x7, 33x17), with noise and block patterns. Inputs are always in the operator's format. Also one case each on graph, stream and timed. Unit: option parsing and ranges, budgets.",
+   "determinism": "Integer. Stable across thread counts; macOS and Linux matched.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "vf-pixelize",
+   "order": 13,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "filter.shuffleplanes",
+   "title": "shuffleplanes: remap planes",
+   "registry": "video-ops (role frame)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_shuffleplanes.c",
+   "scope": "Options map0..map3 (0..3, defaults 0, 1, 2, 3, shorthand order).\n- formats(step) reproduces native query_formats in table order: every map[i] must be below the plane count, and subsampled formats may map planes 1 and 2 only within {1,2}. With the defaults only yuva420p qualifies, all-zero maps admit packed formats, and nv12 needs 0:1:1:x.\n- Duplicated maps copy planes.\n- enable= and commands are refused.\n- Flag all five paths once the actor/timed tests pass.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/shuffleplanes.ts",
+    "packages/avfilter/NOTICE-SHUFFLEPLANES",
+    "tests/unit/video-shuffleplanes.test.ts",
+    "tests/differential/video-shuffleplanes.test.ts",
+    "docs/contributing/shuffleplanes.md",
+    "docs/contributing/wave1/vf-shuffleplanes.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `shuffleplanesOperator,` array-entry line"
+   ],
+   "testStrategy": "Differential against Linux native.\n- All 14 input formats x about 12 map tuples: defaults, 3:1:2:0, 1:2:0:0, 0:0:0:0, 0:2:1:0, 0:1:1:0 and others.\n- Implicit conversions run only with -cpuflags 0. Confirm with native -v verbose that negotiation lands on a table format.\n- -vf and -filter_complex, rawvideo and framecrc, plus stream and timed cases.\n- Unit: per-step format lists equal the native rule for every tuple.",
+   "determinism": "Pure plane copy. Probes were stable, and macOS and Linux matched.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "vf-shuffleplanes",
+   "order": 14,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "filter.chromashift",
+   "title": "chromashift: integer chroma plane shift",
+   "registry": "video-ops (role frame)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_chromashift.c (yuv_pix_fmts, chromashift only; rgbashift excluded)",
+   "scope": "Options cbh, cbv, crh, crv (-255..255) and edge smear|wrap (0/1).\n- Mirror native: luma is copied, smear uses clamped indices, and wrap uses C % with the negative fix-up.\n- formats(): yuv420p, yuv422p, yuv444p, yuva420p, so negotiation matches native. validate() then refuses yuva420p explicitly: native never writes its alpha plane, and the result depends on buffer-pool history.\n- frame() rechecks the frame geometry.\n- enable= and runtime commands are refused.\n- Flag all five paths once the actor/timed tests pass.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/chromashift.ts",
+    "packages/avfilter/NOTICE-CHROMASHIFT",
+    "tests/unit/video-chromashift.test.ts",
+    "tests/differential/video-chromashift.test.ts",
+    "docs/contributing/chromashift.md",
+    "docs/contributing/wave1/vf-chromashift.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `chromashiftOperator,` array-entry line"
+   ],
+   "testStrategy": "Differential against Linux native: 3 yuv formats x shifts {0, +/-1, +/-3, larger than the plane, +/-255} x both edges x sizes 5x3, 9x7, 16x12 x noise and gradient inputs, rawvideo and framecrc. Also graph, stream and timed cases. Refusal test for yuva420p and option range errors with native status.",
+   "determinism": "Integer index copy. Stable across thread counts for yuv420p/422p/444p, and macOS and Linux identical. yuva420p alpha is nondeterministic natively, hence the refusal.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "vf-chromashift",
+   "order": 15,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "demuxer.rso",
+   "title": "Lego Mindstorms RSO demux + mux (also muxer.rso)",
+   "registry": "containers (one format module + one registry line)",
+   "nativeSource": "upstream/ffmpeg/libavformat/rsodec.c, rsoenc.c, rso.c, pcm.c",
+   "scope": "Demux:\n- pcm_u8 mono only (tag 0x0100). Tag 0x0101 (adpcm_ima_wav) is refused with native's PATCHWELCOME.\n- Native has no read_probe and detects only by the .rso extension. Use the registry's extension-detection hook if prep provides one; otherwise support -f rso only, and fail explicitly when the format is undeclared.\n- The header size is informational: data is read to EOF.\nMux:\n- Default codec pcm_u8; other codecs are refused.\n- Mono only, rate < 65536; otherwise refuse with native's INVALIDDATA (exit 183), before output creation.\n- The size field is written up front from sampleCount as min(dataBytes, 0xffff), matching native's seekable trailer and its >64 KiB warning path.\n- Output extension .rso.",
+   "ownedFiles": [
+    "packages/containers/src/rso.ts",
+    "packages/containers/NOTICE-RSO",
+    "docs/contributing/rso-support.md",
+    "tests/unit/rso.test.ts",
+    "tests/differential/rso.test.ts",
+    "docs/contributing/wave1/fmt-rso.json"
+   ],
+   "sharedEdits": [
+    "container format registry: +1 registration line (declared or extension demux, mux, .rso output extension)",
+    "packages/containers/src/index.ts: +1 export line only if the recipe requires it"
+   ],
+   "testStrategy": "Mux:\n- rates {8000, 11025, 65535} x lengths {0, 1, 4097, 65535, 65536, 70000 bytes} from WAV/raw inputs, byte-compared with native written to a seekable file.\n- Refusals with native exit codes: rate 65536/70000, stereo, -c:a pcm_s16le.\nDemux:\n- Native-written files, plus synthetic files whose header size is shorter or longer than the data.\n- Through copy framecrc, WAV decode and -ss/-t.\nFAT lavf-rso is an exact reference.",
+   "determinism": "Integer only.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "fmt-rso",
+   "order": 16,
+   "registryNotes": []
+  },
+  {
+   "capabilityId": "filter.erosion",
+   "title": "erosion: 3x3 neighbourhood minimum",
+   "registry": "video-ops (role frame)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_neighbor.c (erosion)",
+   "scope": "Options coordinates (0..255, default 255) and threshold0..3 (0..65535, default 65535).\n- Mirror the native border tables: coordinateslb/coordinatesrb, the nh/ph row clamps, and the special first and last column handling. threshold=0 copies the plane.\n- formats(): gray, yuv420p, yuv422p, yuv444p, yuva420p, gbrp.\n- geometry() and frame() refuse any plane of width 1, where native reads past the row.\n- enable= and commands are refused.\n- The kernel stays self-contained in this agent's own files; do not create a shared neighbour module this wave.\n- Flag all five paths once the actor/timed tests pass.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/erosion.ts",
+    "packages/avfilter/NOTICE-EROSION",
+    "tests/unit/video-erosion.test.ts",
+    "tests/differential/video-erosion.test.ts",
+    "docs/contributing/erosion.md",
+    "docs/contributing/wave1/vf-erosion.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `erosionOperator,` array-entry line"
+   ],
+   "testStrategy": "Differential against Linux native: 6 formats x coordinates {255, 0, 85, 170, single bits} x thresholds {default, 0, 10} per plane x sizes 2x3, 3x3, 9x7, 16x12, with noise and block patterns. Also graph, stream and timed cases, and a width-1 refusal test (gray 1xN, and yuv420p 2xN, whose chroma is 1 wide). Unit: options and budgets.",
+   "determinism": "Integer min/max. Stable across thread counts; macOS and Linux matched.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "vf-erosion",
+   "order": 17,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "filter.dilation",
+   "title": "dilation: 3x3 neighbourhood maximum",
+   "registry": "video-ops (role frame)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_neighbor.c (dilation)",
+   "scope": "The same options, formats, border semantics and refusals as erosion: coordinates, threshold0..3, width-1 planes refused, enable= and commands refused. Uses max, with limit = min(p + threshold, 255). Self-contained module; no code shared with the erosion, deflate or inflate branches. Flag all five paths once the actor/timed tests pass.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/dilation.ts",
+    "packages/avfilter/NOTICE-DILATION",
+    "tests/unit/video-dilation.test.ts",
+    "tests/differential/video-dilation.test.ts",
+    "docs/contributing/dilation.md",
+    "docs/contributing/wave1/vf-dilation.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `dilationOperator,` array-entry line"
+   ],
+   "testStrategy": "The same matrix as erosion (formats x coordinates x thresholds x edge sizes x patterns) on linear, graph, stream and timed. Width-1 refusal test. Unit: options, budgets.",
+   "determinism": "Integer. Stable; macOS and Linux matched.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "vf-dilation",
+   "order": 18,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "filter.deflate",
+   "title": "deflate: neighbour-average darken",
+   "registry": "video-ops (role frame)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_neighbor.c (deflate, deflate_inflate class)",
+   "scope": "Options threshold0..3 only: deflate_inflate class, so coordinates is refused as an unknown option, as native does. dst = max(min(sum8/8, p), p - threshold), with native border tables and the width-1 refusal. Formats as erosion. enable= and commands are refused. Self-contained module. Flag all five paths once the actor/timed tests pass.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/deflate.ts",
+    "packages/avfilter/NOTICE-DEFLATE",
+    "tests/unit/video-deflate.test.ts",
+    "tests/differential/video-deflate.test.ts",
+    "docs/contributing/deflate.md",
+    "docs/contributing/wave1/vf-deflate.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `deflateOperator,` array-entry line"
+   ],
+   "testStrategy": "Differential against Linux native: 6 formats x thresholds {default, 0, 1, 10, 255} per plane x sizes 2x3, 3x3, 9x7, 16x12 x noise and block patterns, on every flagged path. Unknown-option (coordinates=1) error parity, width-1 refusal.",
+   "determinism": "Integer. Stable; macOS and Linux matched.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "vf-deflate",
+   "order": 19,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "filter.inflate",
+   "title": "inflate: neighbour-average brighten",
+   "registry": "video-ops (role frame)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_neighbor.c (inflate, deflate_inflate class)",
+   "scope": "Options threshold0..3 only. dst = min(max(sum8/8, p), min(p + threshold, 255)), with native border tables and the width-1 refusal. Formats as erosion. enable= and commands are refused. Self-contained module. Flag all five paths once the actor/timed tests pass.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/inflate.ts",
+    "packages/avfilter/NOTICE-INFLATE",
+    "tests/unit/video-inflate.test.ts",
+    "tests/differential/video-inflate.test.ts",
+    "docs/contributing/inflate.md",
+    "docs/contributing/wave1/vf-inflate.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `inflateOperator,` array-entry line"
+   ],
+   "testStrategy": "The same matrix as deflate on every flagged path, plus unknown-option error parity and the width-1 refusal.",
+   "determinism": "Integer. Stable; macOS and Linux matched.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "vf-inflate",
+   "order": 20,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "filter.il",
+   "title": "il: field interleave/deinterleave",
+   "registry": "video-ops (role frame)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_il.c",
+   "scope": "Options luma_mode/l, chroma_mode/c, alpha_mode/a (none|interleave|i|deinterleave|d) and the booleans luma_swap/ls, chroma_swap/cs, alpha_swap/as.\n- formats(): the whole table, since native rejects only pal and hwaccel.\n- Row bytes come from av_image_fill_linesizes; nv12 chroma rows are 2*ceil(w/2).\n- Mirror the probe-confirmed quirk: packed formats with alpha (rgba, bgra, argb, abgr) process plane 0 twice, so the alpha settings override the luma settings.\n- geometry() and frame() refuse any processed plane with an odd height. Native writes only 2*(h>>1) rows and leaves the last row dependent on buffer-pool history.\n- Runtime commands and enable= are refused.\n- Flag all five paths once the actor/timed tests pass.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/il.ts",
+    "packages/avfilter/NOTICE-IL",
+    "tests/unit/video-il.test.ts",
+    "tests/differential/video-il.test.ts",
+    "docs/contributing/il.md",
+    "docs/contributing/wave1/vf-il.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `ilOperator,` array-entry line"
+   ],
+   "testStrategy": "Differential against Linux native: all 14 formats x mode triples (none/i/d) x swap flags, with even plane heights only (8x8, 6x4, 16x12; yuv420p needs h%4==0). Also graph, stream and timed cases. Odd-height refusal tests. Unit: option aliases, the packed-alpha quirk, budgets.",
+   "determinism": "Row copies. Even-height cases are stable and identical on macOS and Linux. Odd heights are nondeterministic natively and refused.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "vf-il",
+   "order": 21,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "filter.field",
+   "title": "field: extract top/bottom field",
+   "registry": "video-ops (role frame, geometry change)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_field.c",
+   "scope": "Option type top|bottom (0/1).\n- geometry(): output height (h + top)/2; width and SAR unchanged, so the default timedGeometry keeps the aspect.\n- frame(): copy every second row of each plane, starting at row 1 for bottom.\n- formats(): the whole table.\n- Refuse bottom on h==1 (a zero-height link).\n- Refuse bottom with vertically subsampled chroma (yuv420p, yuva420p, nv12, nv21) when h%4==2: native reads one chroma row past the plane.\n- frame() rechecks the frame size.\n- Flag all five paths once the actor/timed tests pass.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/field.ts",
+    "packages/avfilter/NOTICE-FIELD",
+    "tests/unit/video-field.test.ts",
+    "tests/differential/video-field.test.ts",
+    "docs/contributing/field.md",
+    "docs/contributing/wave1/vf-field.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `fieldOperator,` array-entry line"
+   ],
+   "testStrategy": "Differential against Linux native.\n- 14 formats x {top, bottom} x heights {3,5,7,8,9,12}, excluding the refused cases, x rawvideo and framecrc.\n- Chains field,hflip and scale=8:10,field (scale with -cpuflags 0).\n- graph, stream and timed runs, with geometry propagated.\n- Refusal tests for the h==1 and h%4==2 cases.",
+   "determinism": "Row copy. Stable; macOS and Linux matched (7x5 top, 8x8 bottom).",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "vf-field",
+   "order": 22,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor.",
+    "Do not claim zero-frame H.264/MP4 framecrc output: packages/avformat/src/mp4-h264.ts derives the sample aspect ratio only for transpose/scale and is not a registry path."
+   ]
+  },
+  {
+   "capabilityId": "demuxer.sox",
+   "title": "SoX native (.sox) demux + mux (also muxer.sox)",
+   "registry": "containers (one format module + one registry line)",
+   "nativeSource": "upstream/ffmpeg/libavformat/soxdec.c, soxenc.c, sox.h, pcm.c",
+   "scope": "Demux:\n- '.SoX' (little-endian, pcm_s32le) and 'XoS.' (big-endian, pcm_s32be) headers.\n- header_size excludes the magic and must satisfy (header_size+4)%8==0 and header_size >= 28 + comment_size.\n- Channels 1..65535. The double rate must be finite and in (0, INT_MAX]; a fractional part is truncated, as native does.\n- Default PCM packet span.\n- Input with comment_size > 0 is refused: native exports it as comment metadata, and the WAV muxer writes it as ICMT even with +bitexact.\nMux:\n- Default pcm_s32le; -c:a pcm_s32be allowed. Other codecs are refused with native's EINVAL (exit 234), before output creation.\n- The header sample count is samples*channels, written up front from sampleCount as the seekable trailer does.\n- Inputs whose native demuxer exports a comment tag are refused; restrict tests to metadata-free inputs.",
+   "ownedFiles": [
+    "packages/containers/src/sox.ts",
+    "packages/containers/NOTICE-SOX",
+    "docs/contributing/sox-support.md",
+    "tests/unit/sox.test.ts",
+    "tests/differential/sox.test.ts",
+    "docs/contributing/wave1/fmt-sox.json"
+   ],
+   "sharedEdits": [
+    "container format registry: +1 registration line (probe '.SoX'/'XoS.', -f sox, .sox output extension, default codec pcm_s32le)",
+    "packages/containers/src/index.ts: +1 export line only if the recipe requires it"
+   ],
+   "testStrategy": "Mux:\n- {s32le, s32be} x channels {1,2,3,6} x rates {8000,44100,96000} x lengths {0,1,67,4097}, from raw s16le/s32le/f32le (-cpuflags 0 where float is involved).\n- File bytes compared with native writing to a seekable file.\nDemux:\n- Native-written files through -c:a copy -f framecrc, WAV/AIFF/raw s16le decode, -ss/-t/-frames and -af volume=0.5.\nMalformed matrix built in the test: bad alignment, 0/65536 channels, NaN, negative, >INT_MAX and fractional rates, truncated header, comment present. Exit codes match native or fail explicitly.\nUnit: header round trip within a 128-byte read budget.\nFATE lavf-sox is an exact reference.",
+   "determinism": "Integer byte copy. The double rate is truncated to int after native's range checks, which is exact.",
+   "risk": "low",
+   "estimateHours": 2,
+   "slug": "fmt-sox",
+   "order": 23,
+   "registryNotes": []
+  },
+  {
+   "capabilityId": "demuxer.ircam",
+   "title": "Berkeley/IRCAM/CARL (.sf/.ircam) demux + mux (also muxer.ircam)",
+   "registry": "containers (one format module + one registry line)",
+   "nativeSource": "upstream/ffmpeg/libavformat/ircamdec.c, ircamenc.c, ircam.c, pcm.c",
+   "scope": "Demux:\n- All 7 magic words of native's endianness table, with the LE or BE tag variant per magic.\n- Tags: alaw 0x10001, mulaw 0x20001, s8 1, s16 2, s24 3, s32 0x40004, f32 4, f64 8.\n- The rate is lrintf(float): Math.fround plus round-half-to-even (probed 22050.5->22050, 22051.5->22052).\n- Channels 1..512; data at 1024.\n- A non-finite rate or one >= 2^31 is refused: lrintf overflow differs between x86_64 and arm64.\nMux:\n- Magic 0x0001A364 LE, rate via an exact av_q2intfloat port, LE tags only.\n- Default pcm_s16le. BE codecs, u8, u16 and others are refused with native's EINVAL (exit 234).\nTag tables stay private in this module.",
+   "ownedFiles": [
+    "packages/containers/src/ircam.ts",
+    "packages/containers/NOTICE-IRCAM",
+    "docs/contributing/ircam-support.md",
+    "tests/unit/ircam.test.ts",
+    "tests/differential/ircam.test.ts",
+    "docs/contributing/wave1/fmt-ircam.json"
+   ],
+   "sharedEdits": [
+    "container format registry: +1 registration line (probe on the native magic set, -f ircam, .sf/.ircam extensions, default codec pcm_s16le)",
+    "packages/containers/src/index.ts: +1 export line only if the recipe requires it"
+   ],
+   "testStrategy": "Mux:\n- 8 LE codecs x channels {1,2,5} x rates {8000,22050,44100,96000,16777217} x lengths {0,1,67,4097}, byte-compared with native. The 2^24+1 rate exercises av_q2intfloat rounding.\nDemux:\n- Native-written files plus synthesized headers for all 7 magics and the BE tags.\n- Through copy framecrc, WAV decode and raw output.\n- A float-rate tie and fraction matrix compares the framecrc #sample_rate.\nRefusals with native status: unknown tag, 0 channels, 513 channels, rate 0, pcm_s16be mux.\nUnit: tag tables and av_q2intfloat vectors.\nFATE lavf-ircam is an exact reference.",
+   "determinism": "Integer PCM copy. The finite in-range float rate parse is exactly mirrorable; the platform-dependent overflow path is refused.",
+   "risk": "low",
+   "estimateHours": 2,
+   "slug": "fmt-ircam",
+   "order": 24,
+   "registryNotes": []
+  },
+  {
+   "capabilityId": "filter.earwax",
+   "title": "earwax: integer 32-tap headphone FIR",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_earwax.c",
+   "scope": "No options; refuse arguments, enable and commands. Pinned 's16p'.\n- constraint(): stereo layout and 44100 Hz only. Native silently inserts aresample and remix for anything else, so refuse explicitly before output.\n- stream(): 32-sample history per input channel, using the native taps[2*NUMTAPS] sliding buffer, including frames shorter than 32 samples (memmove path).\n- scalarproduct: int32 sum of x*f over the 64-entry int8 table, >>7 then clip16.\n- convolve(in_ch, out_ch, filter, tap) four times, then mix(), following the source indices.\n- Frame-size independent. reserve(): one frame plus two 64-sample s16 histories (stateBytes).",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/earwax.ts",
+    "packages/avfilter/NOTICE-EARWAX",
+    "tests/unit/earwax.test.ts",
+    "tests/differential/earwax.test.ts",
+    "docs/contributing/earwax.md",
+    "docs/contributing/wave1/af-earwax.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {earwax} from './earwax.js';`"
+   ],
+   "testStrategy": "Differential against Linux native.\n- Stereo 44100 Hz u8/s16/s32 sources, plus f32 with -cpuflags 0.\n- s16/s32 WAV, raw and framecrc outputs.\n- Chains asetnsamples=5,earwax (frames under 32 samples), earwax,apad=pad_len=9 and volume=0.5,earwax (-cpuflags 0).\n- Explicit refusals for mono, 3 channels and 48000 Hz, asserting that native succeeds there via auto-resample.\n- Unit: compare with a naive whole-signal FIR across random frame splits, clipping, ownership.",
+   "determinism": "Integer only. A JS simulation matched native 10000/10000, and macOS and Linux matched for s16 and f32 inputs.",
+   "risk": "low",
+   "estimateHours": 2,
+   "slug": "af-earwax",
+   "order": 25,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"s16p\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.channelmap",
+   "title": "channelmap: same-count, same-layout channel permutation",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_channelmap.c (channelmap_init, channelmap_filter_frame)",
+   "scope": "Stay within the registry contract limit of constant channels and an unchanged layout.\n- Accept map forms whose native output layout equals the input's default layout: indices 1|0 and map=2|0|1, names FR|FL, int pairs 0-1|1-0, and name pairs only when their mask equals the input layout. Duplication such as 0|0 on stereo is allowed.\n- channel_layout is accepted only when it equals the input layout.\n- Refuse any map that changes the channel count or output layout, unknown channel names, and input with a non-default WAV channel mask.\n- Native negotiates s64p for dbl input, producing invalid, platform-dependent values, so dbl/dblp input is refused.\n- formats 'planar' with negotiate u8->u8p, s16->s16p, s32->s32p, flt->fltp.\n- Stateless apply copies planes. Mirror native's parse-mode selection: digit or '-' detection, and trailing-separator tolerance.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/channelmap.ts",
+    "packages/avfilter/NOTICE-CHANNELMAP",
+    "tests/unit/channelmap.test.ts",
+    "tests/differential/channelmap.test.ts",
+    "docs/contributing/channelmap.md",
+    "docs/contributing/wave1/af-channelmap.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {channelmap} from './channelmap.js';`"
+   ],
+   "testStrategy": "Differential against Linux native.\n- u8/s16/s32/f32 with 1-3 channels, covering every permutation and duplication in each accepted syntax.\n- Check framecrc headers (channel_layout_name), WAV and W64 headers, and raw bytes.\n- Explicit refusals with native status: map=0 on stereo, 0|0 on mono, f64 input, an unknown channel name, a mismatched channel_layout, FC-FL|FL-FR on stereo (layout change).\n- Unit: parser modes, plane mapping, ownership.",
+   "determinism": "Copies only. macOS and Linux were identical for s16 3-channel map=2|0|1 and f32 1|0. f64 differs between platforms, hence the refusal.",
+   "risk": "low",
+   "estimateHours": 2,
+   "slug": "af-channelmap",
+   "order": 26,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"u8p\", \"s16p\", \"s32p\", \"fltp\", \"dblp\", \"s64p\"] with transparent:true. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.asoftclip",
+   "title": "asoftclip: hard and alg types, no oversampling",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_asoftclip.c (filter_flt/filter_dbl, ASC_HARD, ASC_ALG)",
+   "scope": "Supported: type=hard (cross-platform) and type=alg (Linux unfused profile), oversample=1, and threshold (1e-6..1), output (1e-6..16) and param (0.01..3), as plain decimals.\n- Refuse tanh/atan/cubic/exp/quintic/sin/erf: they use libm (tanhf/atanf/powf/expf/sinf/erff).\n- Refuse oversample > 1: its lowpass is designed with sin/cos. Its config-time get_lowpass never touches samples when oversample=1.\n- Native set {fltp,dblp}. Custom negotiate: u8/s16/s32/flt->fltp, dbl->dblp.\n- Mirror C types: float factor = 1.f/threshold; float gain = (double)output*threshold rounded to float; float param.\n- hard: clipf(x*factor)*gain.\n- alg: s = x*factor; s / sqrtf(param + s*s), then *gain, with Math.fround after every operation.\n- dbl path in double. Stateless apply; enable and commands refused.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/asoftclip.ts",
+    "packages/avfilter/NOTICE-ASOFTCLIP",
+    "tests/unit/asoftclip.test.ts",
+    "tests/differential/asoftclip.test.ts",
+    "docs/contributing/asoftclip.md",
+    "docs/contributing/wave1/af-asoftclip.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {asoftclip} from './asoftclip.js';`"
+   ],
+   "testStrategy": "Differential against Linux native.\n- hard and alg x threshold {1,0.5,1e-3} x output {1,1.3,16} x param {0.01,1,3}, on every source format.\n- f32/f64/s16 outputs (-cpuflags 0) via WAV, raw and framecrc. Include zero and negative-zero inputs.\n- alg cases run only when build-metadata reports linux/x64; otherwise skip with an explicit reason.\n- Refusals for each libm type and oversample=2.\n- Unit: clip boundaries, float-type mirroring, negotiation.",
+   "determinism": "hard has separate multiply, clip and multiply, with no contraction: identical on macOS and Linux, and a JS simulation matched 10000/10000. alg differs on macOS (fused on arm64) and follows the Linux unfused profile.",
+   "risk": "low",
+   "estimateHours": 1.5,
+   "slug": "af-asoftclip",
+   "order": 27,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"fltp\", \"dblp\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "demuxer.nistsphere",
+   "title": "NIST SPHERE (.sph/.nist) demuxer",
+   "registry": "containers (one format module + one registry line)",
+   "nativeSource": "upstream/ffmpeg/libavformat/nistspheredec.c, aviobuf.c (ff_get_line), utils.c (ff_get_pcm_codec_id)",
+   "scope": "Demux only.\n- 'NIST_1A\\n' magic; line 2 holds header_size (sscanf %d); key lines run until 'end_head'. Port ff_get_line privately (256-byte buffer, CR/LF handling); refuse longer lines.\n- Keys: channel_count (1..32767), sample_byte_format (01 LE, 10 BE, 1, mu-law), sample_coding (pcm, alaw, ulaw/mu-law), sample_n_bytes, sample_sig_bits, sample_rate, sample_count (duration only).\n- Codec from ff_get_pcm_codec_id(bits, 0, be, 0xFFFF), ported privately. Bits not a multiple of 8, 'pcm,embedded-shorten' and other codings are refused.\n- The header must end before header_size; data starts there and is read to EOF.\n- Other keys become native global metadata that can reach WAV/AIFF/AU tags, so files with extra keys are refused unless the output is raw or framecrc.",
+   "ownedFiles": [
+    "packages/containers/src/nistsphere.ts",
+    "packages/containers/NOTICE-NISTSPHERE",
+    "docs/contributing/nistsphere-support.md",
+    "tests/unit/nistsphere.test.ts",
+    "tests/differential/nistsphere.test.ts",
+    "docs/contributing/wave1/fmt-nistsphere.json"
+   ],
+   "sharedEdits": [
+    "container format registry: +1 demux-only registration line (probe 'NIST_1A\\n', -f nistsphere)",
+    "packages/containers/src/index.ts: +1 export line only if the recipe requires it"
+   ],
+   "testStrategy": "Synthesized headers: coding {pcm, alaw, ulaw, mu-law} x byte format {01, 10, 1} x n_bytes {1,2,3,4} x channels x rates, plus header_size and padding variants.\n- Compare copy framecrc, WAV, raw and -ss/-t outputs with native.\n- Text-edge matrix: CRLF, missing end_head, end_head past header_size, sig_bits 12, extra metadata keys with WAV output (refused) and raw output (accepted).\n- Unit: the line reader and key parser.",
+   "determinism": "Integer only. Metadata propagation is the only divergence risk and is refused explicitly.",
+   "risk": "low",
+   "estimateHours": 2,
+   "slug": "fmt-nistsphere",
+   "order": 28,
+   "registryNotes": []
+  },
+  {
+   "capabilityId": "muxer.md5",
+   "title": "Whole-stream hash muxers: md5, hash, crc, streamhash (also muxer.hash, muxer.crc, muxer.streamhash)",
+   "registry": "containers (output-only format descriptors)",
+   "nativeSource": "upstream/ffmpeg/libavformat/hashenc.c, crcenc.c, libavutil/md5.c, sha.c, crc.c (AV_CRC_32_IEEE_LE), adler32.c, hash.c",
+   "scope": "PCM audio CLI path only; the rawvideo path is out of scope because raw-video.ts is outside the registry.\n- Hash the concatenated encoded packet payloads of the single output stream. This is independent of packet boundaries, and timestamps are not hashed.\n- md5: 'MD5=<hex>\\n'. hash: 'SHA256=<hex>\\n'. crc: 'CRC=0x%08x\\n', adler32 seeded with 1 (framecrc uses 0). streamhash: '0,a,SHA256=<hex>\\n'.\n- Default codec pcm_s16le; any implemented PCM codec or -c copy works.\n- -hash is refused unless the registry exposes per-format output options; if it does, support md5/sha160/sha224/sha256/crc32/adler32 and refuse murmur3/ripemd*/sha384/sha512*.\n- framemd5 and framehash are deferred.\n- Digests live in an owned module; no avutil barrel edit.",
+   "ownedFiles": [
+    "packages/containers/src/hash/digests.ts",
+    "packages/containers/src/hash/hash-mux.ts",
+    "packages/containers/NOTICE-HASH",
+    "docs/contributing/hash-muxers.md",
+    "tests/unit/hash-digests.test.ts",
+    "tests/differential/hash-muxers.test.ts",
+    "docs/contributing/wave1/fmt-hash-muxers.json"
+   ],
+   "sharedEdits": [
+    "container format registry: +4 adjacent output-only registration lines (md5, hash, crc, streamhash), or one descriptor exporting the four names",
+    "packages/containers/src/index.ts: +1 export line only if the recipe requires it"
+   ],
+   "testStrategy": "Unit:\n- RFC 1321, FIPS 180-4, CRC32 and adler32 test vectors.\n- Chunked-update equivalence under a 128-byte write budget; abort.\nDifferential against Linux native:\n- Every implemented PCM codec x channels {1,2,6} x rates {8000,44100} x lengths {0,1,4097} x the 4 muxers.\n- Plus -af volume=0.5 (-cpuflags 0), output -t/-frames:a and -c copy. No -ar.\n- Each output file compared byte for byte with native's written file.\n- Refusals: -hash murmur3, and -hash itself if the hook is absent.",
+   "determinism": "Exactly specified integer digests over bytes EdgeFFmpeg already reproduces. No floating point, and packet boundaries do not matter.",
+   "risk": "low",
+   "estimateHours": 2.5,
+   "slug": "fmt-hash-muxers",
+   "order": 29,
+   "registryNotes": [
+    "-hash stays refused in wave 1: the CLI parser rejects it before any backend runs and you may not edit packages/cli. Implement the default algorithm of each muxer only and assert the refusal."
+   ]
+  },
+  {
+   "capabilityId": "filter.fillborders",
+   "title": "fillborders: integer border fill modes",
+   "registry": "video-ops (role frame)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_fillborders.c",
+   "scope": "Options left, right, top, bottom and mode (smear|mirror|fixed|reflect|wrap|fade|margins).\n- Mirror native's 'Borders are bigger than input frame size' checks and the chroma border shifts.\n- fixed and fade use integer RGB_TO_*_CCIR for YUV and the rgba map for gbrp.\n- color accepts only the default black, 0xRRGGBB[AA], #RRGGBB and @alpha. Named colours and 'random' are refused; do not create a shared colour module.\n- Refuse margins when any plane width is < 8, where native's memcpy runs at width-8.\n- formats(): yuv444p, yuv422p, yuv420p, yuva420p, gbrp, gray.\n- Runtime commands and enable= are refused.\n- Flag all five paths once the actor/timed tests pass.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/fillborders.ts",
+    "packages/avfilter/src/video-fillborders.ts",
+    "packages/avfilter/NOTICE-FILLBORDERS",
+    "tests/unit/video-fillborders.test.ts",
+    "tests/differential/video-fillborders.test.ts",
+    "docs/contributing/fillborders.md",
+    "docs/contributing/wave1/vf-fillborders.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `fillbordersOperator,` array-entry line"
+   ],
+   "testStrategy": "Differential against Linux native: 6 formats x 7 modes x border tuples (zeros, asymmetric, the maximum allowed, too large for a native error) x hex colours with and without alpha x sizes 9x7, 20x10, 33x17. Also graph, stream and timed, and refusal tests for margins on narrow chroma and for named colours.",
+   "determinism": "Integer, including the fade lerp. Every mode plus 20 fixed colours was stable across thread counts and identical on macOS and Linux.",
+   "risk": "low",
+   "estimateHours": 2,
+   "slug": "vf-fillborders",
+   "order": 30,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "filter.epx",
+   "title": "epx: EPX pixel-art scaler",
+   "registry": "video-ops (role frame, geometry change)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/vf_epx.c",
+   "scope": "Option n = 2|3 (default 3).\n- Output is w*n by h*n with SAR kept: geometry() changes the size and the default timedGeometry keeps the input aspect.\n- Integer neighbour-equality rules with native edge clamping, for EPX2 and EPX3.\n- formats(): rgba, bgra, argb, abgr.\n- Output bytes are bounded by maxFrameBytes.\n- enable= and commands are refused.\n- Flag all five paths once the actor/timed tests pass.",
+   "ownedFiles": [
+    "packages/avfilter/src/video-ops/epx.ts",
+    "packages/avfilter/src/video-epx.ts",
+    "packages/avfilter/NOTICE-EPX",
+    "tests/unit/video-epx.test.ts",
+    "tests/differential/video-epx.test.ts",
+    "docs/contributing/epx.md",
+    "docs/contributing/wave1/vf-epx.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/video-ops/registry.ts: +1 import line and +1 `epxOperator,` array-entry line"
+   ],
+   "testStrategy": "Differential against Linux native.\n- Structured inputs (few-colour blocks, diagonal lines, 1-pixel features, checkerboards) plus noise. Noise alone yields plain pixel replication natively.\n- 4 formats x n {2,3} x sizes 1x1, 3x3, 5x4, 13x9.\n- graph, stream and timed runs, and a maxFrameBytes refusal on the scaled output.",
+   "determinism": "Integer. Stable, and identical on macOS and Linux for block and gradient inputs.",
+   "risk": "low",
+   "estimateHours": 2,
+   "slug": "vf-epx",
+   "order": 31,
+   "registryNotes": [
+    "tests/unit/video-operator-registry.test.ts is registration-driven: do not edit it. Put examples on your descriptor."
+   ]
+  },
+  {
+   "capabilityId": "demuxer.sds",
+   "title": "MIDI Sample Dump Standard (.sds) demuxer",
+   "registry": "containers (one format module + one registry line; needs a per-format input packet span)",
+   "nativeSource": "upstream/ffmpeg/libavformat/sdsdec.c",
+   "scope": "Demux only.\n- Header F0 7E xx 01 with bit_depth 8..28; probe as native, including buf[20]==F7.\n- The sample period is three 7-bit bytes; rate = period ? 1e9/period (integer) : 16000. Duration is ((size-21)/127)*size/4.\n- Each 127-byte data packet (F0 7E ch 02 nn, 120 data bytes, checksum, F7) is unpacked by byte2/3/4_read into left-justified pcm_u32le: 60, 40 or 30 samples per packet. The checksum is ignored and F7 is checked.\n- Packets are uniform within a stream, so the registry's per-format input packet span hook carries 60/40/30.\n- Bad packet headers, a missing F7 or a truncated final block are validated up front with bounded reads and refused before output. Native's mid-stream demux error semantics are not mirrored.",
+   "ownedFiles": [
+    "packages/containers/src/sds.ts",
+    "packages/containers/NOTICE-SDS",
+    "docs/contributing/sds-support.md",
+    "tests/unit/sds.test.ts",
+    "tests/differential/sds.test.ts",
+    "docs/contributing/wave1/fmt-sds.json"
+   ],
+   "sharedEdits": [
+    "container format registry: +1 demux-only registration line (native probe; input packet span 60/40/30 samples)",
+    "packages/containers/src/index.ts: +1 export line only if the recipe requires it"
+   ],
+   "testStrategy": "Synthesized dumps: bit_depth {8,13,14,20,21,28} x periods (0, typical, extremes) x packet counts {0,1,7}, with random 7-bit payloads.\n- Native vs Edge: copy framecrc (pcm_u32le rows of 60/40/30 samples), decode to s16le/WAV, -t/-frames:a.\n- Error matrix: bad F07E, missing F7, truncated block, depth 7/29. Edge refuses; record native's exit status.\n- Unit: the three unpackers and the rate formula.",
+   "determinism": "Integer bit unpacking and integer rate division.",
+   "risk": "medium",
+   "estimateHours": 1.5,
+   "slug": "fmt-sds",
+   "order": 32,
+   "registryNotes": []
+  },
+  {
+   "capabilityId": "filter.adynamicsmooth",
+   "title": "adynamicsmooth: polynomial dynamic smoothing",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_adynamicsmooth.c",
+   "scope": "Options sensitivity [0,1e6] and basefreq [2,1e6], plain decimals. Refuse enable and commands. Pinned 'dblp'.\n- stream() keeps per-channel low1, low2 and inz, zero-initialised.\n- Mirror the exact double expression order with no fusion:\n  - wc = basefreq/sample_rate per frame;\n  - bandz = low2z - low1z; wd = wc + sens*|bandz|;\n  - g = fmin(1, wd*(5.9948827 + wd*(-11.969296 + wd*15.959062)));\n  - low1 = low1z + g*(0.5*(x+inz) - low1z);\n  - low2 = low2z + g*(0.5*(low1+low1z) - low2z); inz = x.\n- reserve(): one frame plus 3 doubles per channel.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/adynamicsmooth.ts",
+    "packages/avfilter/NOTICE-ADYNAMICSMOOTH",
+    "tests/unit/adynamicsmooth.test.ts",
+    "tests/differential/adynamicsmooth.test.ts",
+    "docs/contributing/adynamicsmooth.md",
+    "docs/contributing/wave1/af-adynamicsmooth.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {adynamicsmooth} from './adynamicsmooth.js';`"
+   ],
+   "testStrategy": "Differential against Linux native (linux/x64 profile gate; skip with reason on darwin).\n- sensitivity {0,2,1000} x basefreq {2,1000,22050,1e6} on all sources with 1-3 channels.\n- f64/f32/s16 outputs (-cpuflags 0), multi-frame inputs, asetnsamples splits, output -ss/-t.\n- Unit: compare with a direct transcription of the C loop, frame-split invariance, negotiation to dblp.",
+   "determinism": "Verified in wave-select: the unfused JS transcription matched Linux native 10000/10000 for sensitivity=2:basefreq=1000 on f64 stereo; macOS matched 8228/10000 (FMA). Implement plain IEEE double.",
+   "risk": "medium",
+   "estimateHours": 1.5,
+   "slug": "af-adynamicsmooth",
+   "order": 33,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"dblp\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.crystalizer",
+   "title": "crystalizer: sample-difference sharpening",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_crystalizer.c",
+   "scope": "Options i (float, [-10,10], default 2) and c (bool, default 1). Refuse enable and commands.\n- i >= 0 uses the forward filter: dst = cur + (cur-prev)*mult; prev = cur.\n- i < 0 uses the inverse filter: dst = (cur - prev*mult)*scale, with scale = one/(-mult+one); prev = dst.\n- mult is the float option promoted to the working type. Optional clip to [-1,1].\n- Native set {flt,fltp,dbl,dblp}. Probed picks: u8/s16/s32->flt, flt->flt, dbl->dbl, with planar input kept planar. Custom negotiate; mirror the packed and planar loops.\n- stream() keeps the per-channel previous value. The result is thread-count independent.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/crystalizer.ts",
+    "packages/avfilter/NOTICE-CRYSTALIZER",
+    "tests/unit/crystalizer.test.ts",
+    "tests/differential/crystalizer.test.ts",
+    "docs/contributing/crystalizer.md",
+    "docs/contributing/wave1/af-crystalizer.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {crystalizer} from './crystalizer.js';`"
+   ],
+   "testStrategy": "Differential against Linux native (linux/x64 gate).\n- i {-10,-3,0,2,10} x c {0,1} on all sources, packed and (via aformat=f=fltp/dblp) planar.\n- f32/f64/s16 outputs (-cpuflags 0), multi-frame input, asetnsamples splits.\n- Unit: forward and inverse recurrences, state across frames, negotiation table.",
+   "determinism": "Verified in wave-select: the unfused JS matched Linux 10000/10000 for i=-3:c=0 and i=2.5:c=0 on f64; macOS matched 5991/10000 for the inverse (FMA). Use Math.fround per operation for the float paths.",
+   "risk": "medium",
+   "estimateHours": 2,
+   "slug": "af-crystalizer",
+   "order": 34,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"flt\", \"fltp\", \"dbl\", \"dblp\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.compensationdelay",
+   "title": "compensationdelay: distance-based delay line",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_compensationdelay.c",
+   "scope": "Options mm (0..10), cm (0..100), m (0..100) and temp (-50..50) as integers; dry and wet as doubles in [0,1]. Refuse enable (timeline internal) and commands. Pinned 'dblp'.\n- delay = (unsigned)((m*100. + cm*1. + mm*.1) * COMP_DELAY_SOUND_FRONT_DELAY(temp) * sr), evaluated in the macro's exact order: 1.85325*(643.95*sqrt((temp+273.15)/273.15)), then *(1000.0*100.0)/(60.0*60.0), then 1.0/that.\n- dst = dry*x + wet*buf[r]; the sample is written before it is read, so delay 0 reads the current sample.\n- The output length is unchanged: there is no tail.\n- The ring may be sized delay+1 per channel (output identical) instead of native's pow2(sr*MAX_DELAY); declare it in reserve().stateBytes.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/compensationdelay.ts",
+    "packages/avfilter/NOTICE-COMPENSATIONDELAY",
+    "tests/unit/compensationdelay.test.ts",
+    "tests/differential/compensationdelay.test.ts",
+    "docs/contributing/compensationdelay.md",
+    "docs/contributing/wave1/af-compensationdelay.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {compensationdelay} from './compensationdelay.js';`"
+   ],
+   "testStrategy": "Differential against Linux native (linux/x64 gate).\n- Distance combinations including mm, temps {-50,20,50}, dry/wet {0/1, 0.3/0.6, 1/1}, input rates 8000/44100/48000 declared on raw input, all sources.\n- f64/s16 outputs (-cpuflags 0), with delays longer than one frame.\n- A resource-budget refusal for a large ring.\n- Unit: delay table against the macro transcription, ring wrap, frame-split invariance.",
+   "determinism": "Verified in wave-select: the unfused JS matched Linux 10000/10000 for cm=33:mm=7:dry=0.3:wet=0.6 on f64; macOS matched 7404/10000. sqrt is correctly rounded.",
+   "risk": "medium",
+   "estimateHours": 2,
+   "slug": "af-compensationdelay",
+   "order": 35,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"dblp\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.haas",
+   "title": "haas: Haas stereo enhancer",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_haas.c",
+   "scope": "All options with native ranges: level_in, level_out, side_gain, middle_source (left|right|mid|side), middle_phase, left/right delay (0..40 ms), balance, gain and phase. Pinned 'dbl'. constraint(): stereo only. Refuse commands.\n- Delays: delay = (uint32)(delay*0.001*sr). phase = par_phase ? 1 : -1.\n- Balance coefficients: (b+1)/2*g*phase and (1.0-(b+1)/2)*g*phase.\n- Mirror the loop: mid from the source, *level_in, written into the ring before reading s0/s1, optional negation, side = buf*side_gain; side_l = s0*bl0 - s1*bl1, side_r = s1*br1 - s0*br0; out = (mid+side)*level_out.\n- The ring can be sized max(delay)+1 (output identical); declare its stateBytes. Sample count unchanged.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/haas.ts",
+    "packages/avfilter/NOTICE-HAAS",
+    "tests/unit/haas.test.ts",
+    "tests/differential/haas.test.ts",
+    "docs/contributing/haas.md",
+    "docs/contributing/wave1/af-haas.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {haas} from './haas.js';`"
+   ],
+   "testStrategy": "Differential against Linux native (linux/x64 gate).\n- Defaults plus option sweeps: each middle_source, middle and side phases, balances, delays 0/2.05/40 ms at 8000/44100/48000 Hz.\n- Stereo from all sources, f64/f32/s16 outputs (-cpuflags 0), multi-frame input.\n- Refusals: mono, 3 channels, out-of-range values with native status.\n- Unit: delay truncation and ring wrap, coefficient derivation.",
+   "determinism": "Verified in wave-select: the unfused JS matched Linux 10000/10000 with non-default level/side/balance/gain/delays on f64; macOS matched 8921/10000.",
+   "risk": "medium",
+   "estimateHours": 2,
+   "slug": "af-haas",
+   "order": 36,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"dbl\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.extrastereo",
+   "title": "extrastereo: stereo difference widening",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_extrastereo.c",
+   "scope": "Options m (float, [-10,10], default 2.5) and c (bool, default 1). Refuse enable and runtime commands. Pinned 'flt'. constraint(): stereo only; native would auto-remix other layouts, so refuse them.\n- Stateless apply with exact C types: average = fround(fround(l+r)/2) (the division is by the double 2.).\n- l' = fround(avg + fround(m*fround(l-avg))), and the same for r.\n- Then an optional clipf to [-1,1].",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/extrastereo.ts",
+    "packages/avfilter/NOTICE-EXTRASTEREO",
+    "tests/unit/extrastereo.test.ts",
+    "tests/differential/extrastereo.test.ts",
+    "docs/contributing/extrastereo.md",
+    "docs/contributing/wave1/af-extrastereo.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {extrastereo} from './extrastereo.js';`"
+   ],
+   "testStrategy": "Differential against Linux native (linux/x64 gate; darwin skips with a reason unless a fused profile is implemented and verified).\n- Stereo u8/s16/s32/f32/f64 sources x m {-10,-1,0,1,2.5,10} x c {0,1}.\n- f32/s16 outputs (-cpuflags 0), WAV and framecrc, including zero and opposite-sign inputs (-fno-signed-zeros).\n- Refusals: mono, 3 channels.\n- Unit: per-sample formula, clip.",
+   "determinism": "Verified platform split (scout): Linux matched the unfused float simulation 10000/10000 and a fused one only 7562/10000; macOS matched the fused one 10000/10000.",
+   "risk": "medium",
+   "estimateHours": 1.5,
+   "slug": "af-extrastereo",
+   "order": 37,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"flt\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.stereowiden",
+   "title": "stereowiden: delayed cross-feed widening",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_stereowiden.c",
+   "scope": "Options delay [1,100] ms, feedback [0,0.9], crossfeed [0,0.8] and drymix [0,1], all float. Refuse enable and commands. Pinned 'flt'. constraint(): stereo.\n- length = 2*lrintf(fround(delay*sr)/1000) with round-half-even; EINVAL when 0.\n- stream() keeps a ring of previous input samples.\n- out0 = fround(fround(fround(d*l) - fround(c*r)) - fround(f*cur[1])), and symmetrically for out1, in the exact native read/write order.\n- Declare the ring in reserve().stateBytes.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/stereowiden.ts",
+    "packages/avfilter/NOTICE-STEREOWIDEN",
+    "tests/unit/stereowiden.test.ts",
+    "tests/differential/stereowiden.test.ts",
+    "docs/contributing/stereowiden.md",
+    "docs/contributing/wave1/af-stereowiden.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {stereowiden} from './stereowiden.js';`"
+   ],
+   "testStrategy": "Differential against Linux native (linux/x64 gate).\n- delay {1,20,100} x rates {8000,44100,48000} declared on raw input x option sweeps.\n- Stereo from all sources, f32/s16 outputs (-cpuflags 0), multi-frame input, asetnsamples splits.\n- Refusals: mono, out-of-range values.\n- Unit: lrintf length, ring wrap, formula.",
+   "determinism": "Verified platform split (scout): Linux matched the plain float formula 10000/10000; macOS matched only fma(-fb,x,fma(d,l,-fround(c*r))).",
+   "risk": "medium",
+   "estimateHours": 2,
+   "slug": "af-stereowiden",
+   "order": 38,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"flt\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.aecho",
+   "title": "aecho: multi-tap echo with tail",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_aecho.c",
+   "scope": "Options in_gain and out_gain (float [0,1]), delays and decays ('|' lists read as float, with native count and validation rules: delay in (0,90000] ms, decay in (0,1]). Refuse commands.\n- Native set {s16p,s32p,fltp,dblp}. Custom negotiate: u8->s16p, s16->s16p, s32->s32p, flt->fltp, dbl->dblp.\n- samples[i] = (int)(fround(delay*sr)/1000.0).\n- Per sample: out = in*in_gain plus the sum of dbuf[ix]*decay[j] in double, then *out_gain, av_clipd to the format range, then C truncation for integer formats.\n- After EOF, emit max_samples of tail fed with silence, in chunks of up to 2048. Declare generatesOutput=true, reframes=true and count() packets trailing {samples:max_samples, span:2048}.\n- Declare the per-channel delay ring in reserve() and refuse it beyond the budget.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/aecho.ts",
+    "packages/avfilter/NOTICE-AECHO",
+    "tests/unit/aecho.test.ts",
+    "tests/differential/aecho.test.ts",
+    "docs/contributing/aecho.md",
+    "docs/contributing/wave1/af-aecho.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {aecho} from './aecho.js';`"
+   ],
+   "testStrategy": "Differential against Linux native (linux/x64 gate).\n- 1-3 taps, delays shorter and longer than one frame and longer than 2048 samples, input rates 8000/44100. All sources; s16/f32/f64 outputs.\n- framecrc covers tail packet boundaries and pts.\n- Output -frames:a/-t, and configured empty input.\n- Long multi-frame inputs (20000+ samples) check that no tail frame is emitted early.\n- Refusals with native status: mismatched list lengths, zero or out-of-range values.\n- Unit: tap index math, tail sizing, packetSections, ownership.",
+   "determinism": "Verified in wave-select: the unfused JS matched Linux 10320/10320 for aecho=0.8:0.9:20|7.3:0.5|0.3 on f64 stereo, including the 160-sample tail packet; macOS matched 8931/10320 (FMA).",
+   "risk": "medium",
+   "estimateHours": 2.5,
+   "slug": "af-aecho",
+   "order": 39,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"s16p\", \"s32p\", \"fltp\", \"dblp\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  },
+  {
+   "capabilityId": "filter.afade",
+   "title": "afade: fades with polynomial and sqrt curves",
+   "registry": "audio-filter (packages/avfilter/src/audio)",
+   "nativeSource": "upstream/ffmpeg/libavfilter/af_afade.c (fade_gain, filter_frame)",
+   "scope": "Options type/t (in|out), start_sample/ss, nb_samples/ns, start_time/st, duration/d (AV_OPT_TYPE_DURATION, rescaled at the link rate), silence and unity.\n- Curves: tri (default), qua, cub, squ, par, ipar, desi, quat and nofade (sqrt is correctly rounded).\n- Refuse qsin/iqsin/esin/hsin/ihsin/log/exp/cbr/dese/losi/sinc/isinc/quatr/qsin2/hsin2, which need libm. Refuse commands.\n- The gain depends on cur_sample = rescale(frame.pts), so use a stateless apply that reads frame.pts and declares reframes=true. Mirror the unity==1 pass-through shortcut, the silence-fill branch and silence + (unity-silence)*gain.\n- Native set {s16,s16p,s32,s32p,flt,fltp,dbl,dblp}: custom negotiate; u8 maps to s16 (probe per output codec). Integer outputs use C truncation of s*gain.",
+   "ownedFiles": [
+    "packages/avfilter/src/audio/afade.ts",
+    "packages/avfilter/NOTICE-AFADE",
+    "tests/unit/afade.test.ts",
+    "tests/differential/afade.test.ts",
+    "docs/contributing/afade.md",
+    "docs/contributing/wave1/af-afade.json"
+   ],
+   "sharedEdits": [
+    "packages/avfilter/src/audio/registry.ts: +1 line `export {afade} from './afade.js';`"
+   ],
+   "testStrategy": "Differential against Linux native.\n- in/out x every supported curve x the ss/ns and st/d spellings.\n- Fades crossing frame boundaries and starting before or after the input.\n- Default silence and unity on both platforms; non-default silence/unity under the linux/x64 gate.\n- All source formats with u8/s16/f32 outputs, WAV and framecrc.\n- Input -ss, output -ss/-t, and asetnsamples upstream to exercise pts.\n- Refusals for the libm curves.\n- Unit: gain formula per curve, pts mapping, branch selection, ownership.",
+   "determinism": "With the defaults (silence=0, unity=1) the combination is exact: tri on s16 and ipar on f32 were identical on macOS and Linux, and a JS simulation matched 10000/10000. silence=0.1:unity=0.9 differs on macOS (fused), so follow the Linux unfused profile.",
+   "risk": "medium",
+   "estimateHours": 2.5,
+   "slug": "af-afade",
+   "order": 40,
+   "registryNotes": [
+    "Formats (overrides any 'planar', 'integer', pinned-string or custom-negotiate wording above): formats() returns the native array [\"s16\", \"s16p\", \"s32\", \"s32p\", \"flt\", \"fltp\", \"dbl\", \"dblp\"]. Never declare negotiate or nativeFormats; the registry refuses them.",
+    "FLAC input: do not declare flacInput. FLAC input to this filter is refused before decoding ('FLAC input to <name> requires additional Native evidence'); do not claim or document FLAC support."
+   ]
+  }
+ ],
+ "dependencies": [
+  "The container format registry must exist on prep/registries before any of the 10 media agents start. Each format needs one module and one registration line covering: magic probe with fixed precedence, the -f name, extension-based input detection, output extensions, default output codec, output validation before creation, mux, header scratch bytes for the memory plan, and a per-format input packet span (AIFF's 4096/blockAlign special case belongs there too). Without it, every media branch edits the same lines in packages/avformat/src/index.ts and packages/containers/src/detect.ts; the pilot merges already conflicted on one long line in index.ts.",
+  "Two video changes must also land before the 14 video agents start. packages/avfilter/src/video-ops/registry.ts needs one import and one array entry per line, each ending with a comma. tests/unit/video-operator-registry.test.ts must be driven by the registrations: order-insensitive name comparison, and matrix/descriptions with one entry per line or held on the descriptors. Its unflagged('linear'/'graph'/'stream'/'actor'/'timed') expectations must be derived from the legacy operators only. Without this, every video branch edits the same two lines of the test.",
+  "demuxer.sds (order 32) needs the per-format input packet span hook (60/40/30 samples). If prep does not provide it, swap sds for the vidc or sol backfill.",
+  "demuxer.rso autodetection needs an extension-based input detection hook. Without it the scope is -f rso only, with explicit failure for undeclared .rso input.",
+  "The md5/hash/crc/streamhash muxers need output-only descriptors. Supporting -hash needs a per-format output-option hook; without it -hash is refused.",
+  "There are no dependencies between candidates. The four vf_neighbor filters are self-contained, there is no shared colour parser (pad is excluded), and ff_get_line and ff_get_pcm_codec_id are ported privately by each of avr, pvf and nistsphere. Nobody touches the PcmCodec union, avcodec/src/index.ts, containers/src/framecrc.ts, avformat/src/raw-video.ts or the audio descriptor/chain contract.",
+  "The float-sensitive audio filters (orders 27 and 33-40) rely on the sandbox reference being an x86_64 build without FMA: default -march, --disable-x86asm, no -ffast-math. Each branch records `cc --version` and the ffmpeg sha256 of its sandbox build. If the sandbox compiler is not GCC on x86_64 baseline, flag it."
+ ],
+ "sharedFileHotspots": [
+  "packages/avfilter/src/audio/registry.ts: 16 audio branches each add one export line. Order is irrelevant; resolve by union.",
+  "packages/avfilter/src/video-ops/registry.ts: 14 video branches each add one import line and one videoOperators entry line. Today the array is two long lines, so prep must split it to one entry per line.",
+  "tests/unit/video-operator-registry.test.ts: 14 video branches touch the matrix and descriptions tables unless prep makes the test registration-driven.",
+  "The container format registry module (path chosen by prep): 10 media branches each add one line, and hash adds four adjacent lines.",
+  "packages/containers/src/index.ts barrel: up to 10 media branches add one export line each, only if the registry recipe requires barrel exports.",
+  "packages/avfilter/NOTICE: 30 avfilter branches would otherwise append a provenance paragraph. Avoid it: each branch owns packages/avfilter/NOTICE-<NAME>, following the NOTICE-<NAME> pattern of the containers and avcodec packages.",
+  "docs/contributing/video-filter-registry.md support matrix and docs/contributing/audio-filter-registry.md capability table: not edited by agents. The coordinator adds rows after the merge.",
+  "compat/implementation-progress.json, compat/test-contracts.json, compat/capabilities.json and docs/contributing/development-status.md: not edited by agents. Evidence is recorded in a post-merge validation commit, like 9fd9ae3.",
+  "packages/avfilter/src/index.ts and packages/avformat/src/index.ts, packages/containers/src/detect.ts, packages/avformat/src/raw-video.ts, packages/containers/src/framecrc.ts, packages/avutil/src/index.ts (PcmCodec union), packages/avcodec/src/index.ts, packages/avfilter/src/audio/descriptor.ts and chain.ts: off limits this wave. No chosen candidate needs them.",
+  "tests/helpers/*, package.json, package-lock.json, vitest/tsconfig/eslint configs and .gitattributes: off limits. Helpers needed by a branch go inside its own test files."
+ ],
+ "waveRules": [
+  "Before launch, prep/registries adds .gitattributes `merge=union` for packages/avfilter/src/audio/registry.ts, packages/avfilter/src/video-ops/registry.ts, the container registry file, packages/containers/src/index.ts and (if prep keeps per-test tables) tests/unit/video-operator-registry.test.ts. These are all one-entry-per-line files.",
+  "Every branch is cut from the same prep/registries commit and named wave1/<slug>. It holds one capability, contains no merges from other wave branches, and is squashed to one commit ending with the required Co-Authored-By trailer.",
+  "A branch may touch only its declared ownedFiles plus its declared one-line registry edits. The coordinator checks `git diff --name-only prep/registries...wave1/<slug>` against that list and sends back any branch with extra paths.",
+  "Each branch must contain:\n- the descriptor or format module;\n- the registry line(s);\n- tests/unit/<...>.test.ts;\n- tests/differential/<...>.test.ts, generating inputs in the test and running native at test time, with no committed native goldens;\n- docs/contributing/<...>.md with syntax, supported vs refused forms, determinism and arithmetic profile, evidence counts, scoped test contracts (file, exact test title, scope), and the sandbox's ffmpeg sha256 and `cc --version`;\n- a NOTICE-<NAME> provenance file citing the pinned commit 946fcce0.",
+  "Differential tests never pin the macOS sha 1b86106f and never compare against committed macOS digests.\n- Read .build/reference/build-metadata.json and assert commit 946fcce0 and --disable-x86asm.\n- Integer and copy-only cases run on any platform.\n- Float-sensitive cases (asoftclip alg; extrastereo, stereowiden, haas, crystalizer, compensationdelay, adynamicsmooth, aecho; afade non-default silence/unity) run only when platform is linux and arch is x64. Otherwise use it.skipIf with an explicit reason, unless a fused profile is implemented and verified on darwin.",
+  "Before pushing, run:\n- the branch's unit and differential files (differential with --maxWorkers=1);\n- tests/unit/audio-filter-registry.test.ts and tests/unit/audio-filter-registry-extension.test.ts (audio), or tests/unit/video-operator-registry.test.ts (video);\n- npm run typecheck, npm run lint and npm run boundaries.\nDo not run the full `npm test` or `npm run check`: they need edge-flac.wasm, which cannot be fetched in the sandbox. Each differential file should finish in about 3 minutes on 4 vCPUs, so batch native calls and keep the matrices bounded.",
+  "Sandbox setup:\n- Use Node 24+, as docs/contributing/environment-setup.md requires. Install it if the image has Node 22, or report that it was not possible.\n- Build the reference with `npm run bootstrap -- --only npm,submodule,reference --allow-unpinned-reference`. The sandbox GCC may not reproduce the pinned Linux sha 5e43da9a.\n- Use per-test mkdtemp directories, never a shared scratch path. The pilot saw agents clobber each other's files in a shared scratchpad.",
+  "Audio rules:\n- Keep rateConversion, timeSelection and formatConstraint false.\n- Never use output -ar/-ac in matrices; declare rate and channels only on raw input.\n- Use -cpuflags 0 whenever float is converted to integer.\n- No commas inside filter arguments.\n- Refuse in constraint() any input that native would silently resample or remix.\n- Declare every ring or history in reserve().\n- The untimed FLAC path always runs the chain. It cannot be tested in the sandbox, so do not add FLAC integration or workers tests; document the path as unverified.",
+  "Video rules:\n- Refuse enable= and runtime commands.\n- Flag all five paths only when actor and timed differential tests pass. Otherwise flag linear/graph/stream and add rejection tests; prep's derived unflagged expectations mean no shared line changes.\n- Put size-dependent refusals in geometry() and repeat them in frame().\n- Feed inputs in the operator's own formats. Any implicit conversion runs with -cpuflags 0, because the Linux swscale uses inline MMXEXT.\n- Use structured patterns as well as noise.\n- Never mirror native reads of uninitialised or out-of-bounds memory; refuse those cases.",
+  "Container rules:\n- Validate output before creating it.\n- Refuse inputs whose native demuxer exports metadata that the chosen output muxer would write (sox comment, extra NIST keys).\n- Refuse partial trailing frames and float-to-int paths that are platform dependent.\n- Keep codec-id, line-reader and tag tables private to the module.",
+  "Merge in ascending `order`. Resolve conflicts in the union-merge files by keeping both sides: sort the audio export lines alphabetically, keep each video array entry on its own line with a trailing comma, and keep the container registration lines (detection must not depend on line order, because every new magic is exact and non-overlapping). A conflict in any other file means the branch broke ownership: reject it and do not hand-merge.",
+  "After every 10 merges run typecheck and the three registry unit tests. After the last merge:\n- run all 40 differential files on a Linux x86_64 host;\n- run `npm run check` plus the FLAC integration and workers suites on the macOS host that has edge-flac.wasm (the linux-gated float cases skip there);\n- then record evidence in compat/*.json, development-status.md and the registry docs in one validation commit."
+ ],
+ "summary": "I chose all 40 slots: 16 audio filters, 14 video filters and 10 media formats (8 demuxers and 2 muxers). 32 are low risk and 8 are medium; the 32 low-risk ones fill orders 1-31 plus sds at 32 (rated medium only because it needs a registry hook). Total is about 64 agent-hours; the scout candidates I dropped and the backfills are listed below. No repository file was edited. My notes and probe scripts are in /private/tmp/claude-501/-Users-yukiharada-orca-EdgeFFmpeg/155de616-50a5-4318-8737-c982e4beb7ef/scratchpad/wave-select/ (probe-results.txt plus the sim*.mjs files).\n\n**Verification I ran**\n- **Float filters on Linux:** I checked the five double-heavy audio filters that the scouts had not verified on Linux. A plain IEEE-double (unfused) JavaScript transcription matched the Linux x86_64 native build (sha 5e43da9a, run under docker linux/amd64) sample for sample:\n\n| Filter and settings | Linux match | macOS match |\n|---|---|---|\n| crystalizer, i=-3 and i=2.5 | 10000/10000 | 5991/10000 for i=-3 (i=2.5 not run) |\n| compensationdelay, cm=33:mm=7:dry=0.3:wet=0.6 | 10000/10000 | 7404/10000 |\n| haas, non-default options | 10000/10000 | 8921/10000 |\n| adynamicsmooth, sensitivity=2:basefreq=1000 | 10000/10000 | 8228/10000 |\n| aecho, including the 160-sample tail | 10320/10320 | 8931/10320 |\n\n  So these filters can be reproduced exactly on Linux. Their float-sensitive tests must be gated to linux/x64, because macOS fuses the multiply-adds.\n- **New candidate wve:** native demuxes a synthesized file as pcm_alaw, 8000 Hz, 512-sample packets, and reads to end of file even when the header duration is shorter than the data.\n- **Ownership checks:**\n  - **Capability IDs:** all 40 exist in compat/capabilities.json and none is in implementation-progress.json.\n  - **Owned files:** none collides with an existing file or another candidate. The video copy filter's files are named video-copy-filter to stay clear of the existing video-copy-ts files.\n  - **Native formats:** each video format list is the native list intersected with the 14-entry table. chromashift uses only its yuv list (gbrp belongs to rgbashift).\n\n**Launch blockers that prep/registries must settle**\n- **Container registry:** it does not exist yet. All 10 media slots depend on it; without it, every media branch edits the same lines in avformat/src/index.ts and containers/src/detect.ts.\n- **Video registry layout:** videoOperators sits on two long lines, and the video registry test's matrix, descriptions and unflagged lists are single lines. Every video branch would conflict there until they are split one entry per line.\n- **Shared NOTICE:** each avfilter agent appending to packages/avfilter/NOTICE would collide. I gave every capability its own NOTICE-<NAME> file instead.\n- **Sandbox environment:**\n  - The environment doc requires Node 24+, but the sandbox has Node 22.\n  - `npm test` and `npm run check` need the FLAC Wasm, so agents run targeted tests only.\n  - Untimed FLAC input always runs the audio chain, so that path stays unverified until a post-merge run on the macOS host.\n\n**Scout candidates dropped, and why**\n- **Audio:**\n  - areverse and atrim need edits to the shared descriptor/chain packet vocabulary.\n  - aphaser has undefined integer overflow and flanger is high risk.\n  - pan duplicates channelmap and routes through swresample.\n  - biquad is a 3-hour multiply-add-heavy kernel; it is a backfill.\n- **Video:**\n  - pad would own the colour module others need, and xstack edits the shared unflagged('linear') line.\n  - swaprect, removegrain, edgedetect, colorchannelmixer, lutyuv, hqx and median are medium risk; sobel is high.\n  - The low-risk set already filled 14 slots.\n- **Media:**\n  - The null muxer is blocked by the CLI's absolute-path check and needs a no-file hook.\n  - voc's output depends on packet boundaries, which needs a framing hook.\n  - y4m needs edits to raw-video.ts and the index.ts dispatch.\n  - pcm_vidc and s24daud edit the PcmCodec union and avcodec tables (at most one such agent per wave).\n  - dfpwm, adpcm_ima_ssi and adpcm_ima_alp need a non-PCM codec hook.\n- **Backfills if a slot frees up or a hook is missing:** pcm_vidc (raw vidc only), the PCM-only subset of the sol demuxer (needs the packet-span hook), biquad, pan, and the integer video filters maskfun, floodfill and rgbashift."
+}
