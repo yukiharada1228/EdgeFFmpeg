@@ -19,6 +19,7 @@ export {hash} from './hash/hash-mux.js';
 export {md5} from './hash/hash-mux.js';
 export * from './formats/raw-pcm.js';
 export {streamhash} from './hash/hash-mux.js';
+export {sds} from './sds.js';
 export {w64} from './formats/w64.js';
 export {wav} from './formats/wav.js';
 export {wve} from './wve.js';

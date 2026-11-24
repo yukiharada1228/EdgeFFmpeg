@@ -1,0 +1,10 @@
+Scoped MIDI Sample Dump Standard demuxer
+
+The header fields, probe, sample-period rate, packet framing and the
+byte2_read, byte3_read and byte4_read unpacking in src/sds.ts follow
+libavformat/sdsdec.c (sds_probe, sds_read_header, sds_read_packet).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2017 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete sds demuxer.

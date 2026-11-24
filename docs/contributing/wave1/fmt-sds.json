@@ -1,0 +1,76 @@
+{
+  "capabilityId": "demuxer.sds",
+  "slug": "fmt-sds",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/sds.ts",
+    "packages/containers/NOTICE-SDS",
+    "packages/containers/src/registry.ts",
+    "docs/contributing/sds-support.md",
+    "docs/contributing/wave1/fmt-sds.json",
+    "tests/unit/sds.test.ts",
+    "tests/differential/sds.test.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/containers/src/registry.ts", "change": "+1 line: export {sds} from './sds.js'; (demux-only, native probe, packetSpan 60/40/30)"}
+  ],
+  "tests": [
+    {"file": "tests/unit/sds.test.ts", "title": "unpacks byte2, byte3 and byte4 packets into left-justified 32-bit words as native does", "passed": 1, "failed": 0},
+    {"file": "tests/unit/sds.test.ts", "title": "maps bit depths to widths and sample periods to integer rates", "passed": 1, "failed": 0},
+    {"file": "tests/unit/sds.test.ts", "title": "parses the header and checks every packet with bounded reads before returning samples", "passed": 1, "failed": 0},
+    {"file": "tests/unit/sds.test.ts", "title": "follows read_header in ignoring the magic and closing F7 when declared", "passed": 1, "failed": 0},
+    {"file": "tests/unit/sds.test.ts", "title": "refuses bad depths, framing and truncation up front", "passed": 1, "failed": 0},
+    {"file": "tests/unit/sds.test.ts", "title": "checks the abort signal around every read", "passed": 1, "failed": 0},
+    {"file": "tests/unit/sds.test.ts", "title": "probes exactly the 21 bytes sds_probe reads and registers a demux-only descriptor", "passed": 1, "failed": 0},
+    {"file": "tests/unit/sds.test.ts", "title": "demuxes through the PCM backend and refuses sds output and bad inputs before any output opens", "passed": 1, "failed": 0},
+    {"file": "tests/differential/sds.test.ts", "title": "matches native SDS copy framecrc, s16le decode and WAV for six bit depths four periods and zero one or seven packets", "passed": 1, "failed": 0},
+    {"file": "tests/differential/sds.test.ts", "title": "matches native SDS packet timing for -t, -frames:a, declared -f sds and filtered decode", "passed": 1, "failed": 0},
+    {"file": "tests/differential/sds.test.ts", "title": "refuses malformed SDS before any output and records native exit statuses", "passed": 1, "failed": 0},
+    {"file": "tests/unit/container-registry.test.ts", "title": "(unchanged file, all tests)", "passed": 9, "failed": 0},
+    {"file": "tests/unit/container-registry-extension.test.ts", "title": "(unchanged file, all tests)", "passed": 7, "failed": 0}
+  ],
+  "nativeComparisons": {
+    "count": 390,
+    "compares": "300 byte-exact outputs over 75 synthesized dumps (depths 8/13/14/20/21/28 x periods 0/22675/1/0x1FFFFF x 0/1/7 packets with 7-bit payloads, plus 3 dumps with 8-bit payloads), each as copy framecrc, -cpuflags 0 s16le decode, -bitexact WAV and copy to u32le; 90 byte-exact timing outputs (-t, -frames:a, declared -f sds, copy and filtered decode to framecrc/WAV). In addition, 10 error-matrix native exit statuses are asserted (0 for mid-stream framing errors, truncated and trailing data; 187 for undetected depth 7/29; 183 for declared depth 7/29; 0 for a declared 20-byte header), as are native's shifted -ss output and the missing sds muxer."
+  },
+  "unsupported": [
+    "sds muxing (native has no muxer)",
+    "input -ss (native generic-index seek gives shifted timestamps and a demux error); refused",
+    "native mid-stream demux error semantics for bad F0 7E / missing F7 packets; refused up front",
+    "truncated last packet or trailing bytes (native drops them, exit 0); refused",
+    "files shorter than the 21-byte header (native opens a declared one as empty); refused",
+    "Workers runtime evidence (no tests/workers file)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "summary": "13 failed | 2253 passed (2266) in 6 files",
+    "failures": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts (suite: missing edge-flac.wasm)",
+      "tests/unit/flac-decoder.test.ts (suite: missing edge-flac.wasm)",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts (suite: missing FLAC artifacts)",
+      "tests/unit/resample-checkpoint.test.ts: 10 'keeps resampleAudio <rates> output byte-identical to the pre-checkpoint implementation' tests (macOS arm64 golden digests)"
+    ]
+  },
+  "finalUnitFailures": {
+    "summary": "13 failed | 2261 passed (2274) in 6 files; identical failure list to the baseline (+8 passing sds unit tests)"
+  },
+  "proposedContracts": [
+    {"id": "sds.unpack", "file": "tests/unit/sds.test.ts", "name": "unpacks byte2, byte3 and byte4 packets into left-justified 32-bit words as native does", "modes": ["semantic"], "scope": "byte2/3/4_read against independent formulas, including byte2's addition for 8-bit bytes. No native run."},
+    {"id": "sds.rate", "file": "tests/unit/sds.test.ts", "name": "maps bit depths to widths and sample periods to integer rates", "modes": ["semantic"], "scope": "Depth-to-width mapping for 8..28 and refusals; integer 1e9/period with 16000 for period 0; 7-bit period decode."},
+    {"id": "sds.bounded-open", "file": "tests/unit/sds.test.ts", "name": "parses the header and checks every packet with bounded reads before returning samples", "modes": ["semantic"], "scope": "2-byte reads, no payload reads on open, re-chunked packets with seeks and budgets, packetSpan 60/40/30. Synthetic inputs."},
+    {"id": "sds.refusals", "file": "tests/unit/sds.test.ts", "name": "refuses bad depths, framing and truncation up front", "modes": ["diagnostic"], "scope": "Truncated header and packet, trailing bytes, bad F0 7E, missing F7, depth 7/29, budgets and short reads. Synthetic inputs."},
+    {"id": "sds.copy-decode", "file": "tests/differential/sds.test.ts", "name": "matches native SDS copy framecrc, s16le decode and WAV for six bit depths four periods and zero one or seven packets", "modes": ["bit-exact-pcm"], "scope": "75 synthesized dumps x 4 outputs (copy framecrc, s16le, WAV, u32le) byte-exact against the Linux oracle."},
+    {"id": "sds.timing", "file": "tests/differential/sds.test.ts", "name": "matches native SDS packet timing for -t, -frames:a, declared -f sds and filtered decode", "modes": ["bit-exact-pcm"], "scope": "-t, -frames:a and declared -f sds on three widths and two rates, copy and filtered decode, framecrc and WAV. No input -ss (refused)."},
+    {"id": "sds.error-matrix", "file": "tests/differential/sds.test.ts", "name": "refuses malformed SDS before any output and records native exit statuses", "modes": ["diagnostic"], "scope": "10 malformed inputs with native exit statuses asserted; Edge refuses all before output. Also covers the input -ss refusal and the absence of a muxer."}
+  ],
+  "notes": [
+    "Setup durations: submodule init 37 s; npm ci 8 s; npm run reference:build 143 s; baseline typecheck+lint+boundaries+unit suite 114 s.",
+    "Native accepts malformed packets mid-stream with exit 0; Edge refuses them up front as the spec directs, so exit statuses intentionally differ for those cases (recorded in the test).",
+    "Input -ss is refused because native's generic-index seek yields negative-shifted timestamps and a demux error; mirroring it would need a seek model beyond the registry contract.",
+    "The memory plan's maxBufferBytes must not exceed the filesystem read/write budget (as in the w64 tests); the differential tests align them.",
+    "No shared edit beyond the registry line was needed."
+  ]
+}
