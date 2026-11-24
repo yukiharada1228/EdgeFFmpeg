@@ -17,3 +17,4 @@ export {earwax} from './earwax.js';
 export {channelmap} from './channelmap.js';
 export {asoftclip} from './asoftclip.js';
 export {adynamicsmooth} from './adynamicsmooth.js';
+export {crystalizer} from './crystalizer.js';

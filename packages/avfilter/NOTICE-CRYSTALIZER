@@ -1,0 +1,19 @@
+crystalizer audio filter (src/audio/crystalizer.ts)
+
+src/audio/crystalizer.ts adapts FFmpeg libavfilter/af_crystalizer.c: the i
+(float intensity, [-10,10]) and c (bool clipping) options, the forward
+sample-difference recurrence for i >= 0 and the inverse recurrence for i < 0,
+the optional av_clipf/av_clipd clip to [-1,1], the one-sample per-channel
+previous-value frame carried across input frames, and the native sample-format
+list {flt, fltp, dbl, dblp} from FILTER_SAMPLEFMTS.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2016 The FFmpeg Project
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation computes the float paths with one Math.fround per C
+operation and the double paths in IEEE double, runs channels sequentially
+(slice threading does not change the result), allocates one owned output frame
+per input frame instead of filtering in place, and refuses option expressions,
+quoted values, timeline enable and runtime commands instead of evaluating them.
+It adds no FFmpeg runtime code. The original source and full notices remain in
+the pinned upstream submodule.

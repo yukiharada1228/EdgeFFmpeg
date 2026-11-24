@@ -1,0 +1,206 @@
+{
+ "capabilityId": "filter.crystalizer",
+ "slug": "af-crystalizer",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/audio/crystalizer.ts",
+  "packages/avfilter/NOTICE-CRYSTALIZER",
+  "tests/unit/crystalizer.test.ts",
+  "tests/differential/crystalizer.test.ts",
+  "docs/contributing/crystalizer.md",
+  "docs/contributing/wave1/af-crystalizer.json",
+  "packages/avfilter/src/audio/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/audio/registry.ts",
+   "change": "+1 line: export {crystalizer} from './crystalizer.js';"
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/crystalizer.test.ts",
+   "title": "parses positional and named i/c options as native does and refuses every unimplemented form with an exact message",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/crystalizer.test.ts",
+   "title": "negotiates the native list: integers widen to flt, floats keep their type, planar input stays planar, and the encoder format merges",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/crystalizer.test.ts",
+   "title": "declares no constraint, keeps counts and packet sections, and reserves one frame plus the per-channel previous value",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/crystalizer.test.ts",
+   "title": "matches a direct C transcription for forward and inverse recurrences, packed and planar, with state carried across arbitrary frame splits",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/crystalizer.test.ts",
+   "title": "converts integer input to its negotiated float format, owns every output plane and leaves inputs untouched",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/crystalizer.test.ts",
+   "title": "enforces the frame allocation limit, refuses a channel count change and observes cancellation",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/crystalizer.test.ts",
+   "title": "matches native framecrc for i {-10,-3,0,2,10} x c {0,1}, packed and planar, on every source into f32, f64 and s16",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/crystalizer.test.ts",
+   "title": "matches native across channel counts, multi-frame input, asetnsamples splits and composed chains",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/crystalizer.test.ts",
+   "title": "matches native output time selection, frame limits and WAV/raw files",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/crystalizer.test.ts",
+   "title": "fails every unimplemented form before opening output, and records native status for each",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/audio-filter-registry.test.ts + audio-filter-registry-extension.test.ts + audio-filter-registry-contract.test.ts",
+   "title": "registry suites (unchanged, include crystalizer examples)",
+   "passed": 26,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 606,
+  "compares": [
+   "450 framecrc: i {-10,-3,0,2,10} x c {0,1} x packed/fltp/dblp x u8/s16/s32/f32/f64 stereo sources x pcm_f32le/pcm_f64le/pcm_s16le, -cpuflags 0",
+   "132 framecrc: mono and 3-channel s16/f32/f64, 11 chains incl. asetnsamples splits (1/7/13/500/64), i=2.5, chained crystalizers, volume, aformat, apad, into source codec and s16",
+   "13: output -ss/-t/-to/-frames:a framecrc, WAV->WAV f32/s16 and raw f64 file bytes",
+   "11: native exit status for 10 refused option forms plus one shared negotiation-guard case, with no edge output created"
+  ],
+  "reference": ".build/reference/ffmpeg (linux x86_64)",
+  "platformGate": "byte comparisons skipped unless linux x64"
+ },
+ "unsupported": [
+  "option expressions, SI suffixes, nan/inf, quoted or escaped values",
+  "timeline enable and runtime commands",
+  "FLAC input (refused before decoding; flacInput not declared)",
+  "automatic sample-rate conversion after the filter (native-list rule)",
+  "neighbour negotiations refused by the shared guard, e.g. crystalizer,volume=0.25:precision=double on f32 input and crystalizer,volume=0.25 on f64 input",
+  "byte-exact claims on platforms other than linux x64"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": {
+  "files": 6,
+  "tests": 13,
+  "entries": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+   "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ]
+ },
+ "finalUnitFailures": {
+  "files": 6,
+  "tests": 13,
+  "entries": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+   "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ],
+  "identicalToBaseline": true
+ },
+ "proposedContracts": [
+  {
+   "id": "filter.crystalizer.native-matrix",
+   "file": "tests/differential/crystalizer.test.ts",
+   "name": "matches native framecrc for i {-10,-3,0,2,10} x c {0,1}, packed and planar, on every source into f32, f64 and s16",
+   "modes": [
+    "differential"
+   ],
+   "scope": "linux x64: i/c matrix, packed and planar, five sources, three outputs, byte-exact framecrc"
+  },
+  {
+   "id": "filter.crystalizer.native-composed",
+   "file": "tests/differential/crystalizer.test.ts",
+   "name": "matches native across channel counts, multi-frame input, asetnsamples splits and composed chains",
+   "modes": [
+    "differential"
+   ],
+   "scope": "linux x64: channel counts, multi-frame, asetnsamples splits, composed chains"
+  },
+  {
+   "id": "filter.crystalizer.native-time-files",
+   "file": "tests/differential/crystalizer.test.ts",
+   "name": "matches native output time selection, frame limits and WAV/raw files",
+   "modes": [
+    "differential"
+   ],
+   "scope": "linux x64: output time selection, frame limits, WAV/raw files"
+  },
+  {
+   "id": "filter.crystalizer.refusals",
+   "file": "tests/differential/crystalizer.test.ts",
+   "name": "fails every unimplemented form before opening output, and records native status for each",
+   "modes": [
+    "differential"
+   ],
+   "scope": "all platforms: explicit refusal before output, native status recorded"
+  },
+  {
+   "id": "filter.crystalizer.transcription",
+   "file": "tests/unit/crystalizer.test.ts",
+   "name": "matches a direct C transcription for forward and inverse recurrences, packed and planar, with state carried across arbitrary frame splits",
+   "modes": [
+    "unit"
+   ],
+   "scope": "forward/inverse recurrences vs C transcription, frame-split invariance"
+  }
+ ],
+ "notes": [
+  "No shared edit beyond the registry line was needed.",
+  "Setup durations: submodule 35s, npm ci 7s, reference:build 140s, baseline static checks 52s, baseline unit suite 67s.",
+  "The shared negotiation guard refuses some volume-after-crystalizer chains (see unsupported); that behaviour is in chain.ts and was not changed.",
+  "Baseline failures are the expected FLAC artifact tests (downloads.xiph.org blocked) and resample-checkpoint macOS digests."
+ ]
+}
