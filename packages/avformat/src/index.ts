@@ -177,7 +177,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
       if(resampling){
         if(codec==='copy'||remixing)unsupported('Rate conversion currently requires unchanged channels and encoding');
       }
-      const padding=filters?.steps.some(step=>step.name==='apad')??false;
+      const padding=filters?.steps.some(step=>step.name==='apad'||step.name==='adelay')??false;
       const packetDuration=resolveDuration(outputTime);
       const packetSubsample=(padding||resampling)&&packetDuration!==null&&packetDuration>0n&&(packetDuration*BigInt(resultRate)+500000n)/1000000n===0n;
       const packetTime=packetSubsample?{...outputTime,duration:null,stop:null}:outputTime;
@@ -186,7 +186,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
       const sampleBytes = Math.max(resampling?resampleWidth:0,getPcmFormat(pcmCodec).frameBytesPerSample, getPcmFormat(outputCodec).frameBytesPerSample, filters?.maxBytesPerSample ?? 0,remixing?(mixInternal==='dbl'?8:mixInternal==='flt'?4:2):0);
       const inputSpan=inputContainer==='aiff'?BigInt(Math.floor(4096/audio.info.blockAlign)):pcmPacketSpan(audio.info.sampleRate);
       const inputRange = pcmTimeRange(audio.info.durationSamples,audio.info.sampleRate,inputTime,timeOptions(),false,null,audio.info.sampleRate,inputSpan);
-      const filterSamplePlan=filters?.planSamples(inputRange.samples,audio.info.sampleRate,{...(rateBoundary?{rateBoundary}:{}),configuredInput:true});
+      const filterSamplePlan=filters?.planSamples(inputRange.samples,audio.info.sampleRate,{...(rateBoundary?{rateBoundary}:{}),configuredInput:true,channels:audio.info.channels});
       const filterBuffers=filterSamplePlan?.buffers??[],filterBufferSamples=Math.max(0,...filterBuffers);
       if(filterBufferSamples*Math.max(audio.info.channels,channels)*sampleBytes>context.budget.maxBufferBytes)throw new ExecutionError('resource-budget','Reframed audio exceeds the configured buffer budget');
       const transformedSamples=resampling
@@ -195,7 +195,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
       let range = resampling
         ? pcmTimeRange(transformedSamples,resultRate,timeOptions(),packetTime,false,null,resultRate)
         : filters?.reframes
-        ? pcmTimeRange(filters.outputSamples(inputRange.samples,audio.info.sampleRate,{configuredInput:true}),filteredRate,timeOptions(),padding?packetTime:outputTime,false,padding?null:maxFrames,filteredRate,filters.outputPacketSamples(inputRange.span))
+        ? pcmTimeRange(filters.outputSamples(inputRange.samples,audio.info.sampleRate,{configuredInput:true,channels:audio.info.channels}),filteredRate,timeOptions(),padding?packetTime:outputTime,false,padding?null:maxFrames,filteredRate,filters.outputPacketSamples(inputRange.span))
         : pcmTimeRange(audio.info.durationSamples, audio.info.sampleRate, inputTime, outputTime, codec === 'copy', maxFrames, filteredRate, inputSpan);
       let resampledSchedule=resampling?filteredPacketSchedule(inputRange.samples,inputSpan,audio.info.sampleRate,resultRate,filterSamplePlan):undefined;
       if(resampledSchedule){
@@ -205,7 +205,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
       }
       let paddingSections:ReturnType<typeof clipPacketSections>|undefined;
       if(padding&&!resampling){
-        paddingSections=clipPacketSections(filters!.packetSections(inputRange.samples,inputSpan,audio.info.sampleRate,true),range.start,range.samples);
+        paddingSections=clipPacketSections(filters!.packetSections(inputRange.samples,inputSpan,audio.info.sampleRate,true,audio.info.channels),range.start,range.samples);
         const limit=packetSubsample?(maxFrames===null||maxFrames>1n?1n:maxFrames):maxFrames;
         if(limit!==null){range={...range,samples:packetSectionSamplesForFrames(paddingSections,limit)};paddingSections=clipPacketSections(paddingSections,0n,range.samples);}
       }
@@ -217,7 +217,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
         if(resamplePlan.stateBytes+context.budget.maxBufferBytes>context.budget.maxResidentBytes)throw new ExecutionError('resource-budget','Resampler state and one payload buffer exceed the resident-byte budget');
       }
       const payloadBudget=resamplePlan?{...context.budget,maxResidentBytes:context.budget.maxResidentBytes-resamplePlan.stateBytes}:context.budget;
-      const memoryPlan=planPcmMemory({budget:payloadBudget,resample:resampling,channels:Math.max(audio.info.channels,channels),remix:remixing,inputBytesPerSample:getPcmFormat(pcmCodec).bytesPerSample,widestBytesPerSample:sampleBytes,copy:codec==='copy',volumeNodes:filters?.steps.filter(step=>step.name==='volume'||step.name==='apad'||step.name==='aformat'&&step.sampleFormat!==null).length??0,reframeSamples:filterBuffers,sourceSamples:range.samples===0n?0n:readRange.samples,generatedOutput:padding&&range.samples>0n&&readRange.samples===0n,inputHeaderBytes:rawInputCodec?0:128,outputScratchBytes:outputFormat==='framecrc'?512:['wav','aiff','au'].includes(outputFormat??'')?128:0});
+      const memoryPlan=planPcmMemory({budget:payloadBudget,resample:resampling,channels:Math.max(audio.info.channels,channels),remix:remixing,inputBytesPerSample:getPcmFormat(pcmCodec).bytesPerSample,widestBytesPerSample:sampleBytes,copy:codec==='copy',volumeNodes:filters?.steps.filter(step=>step.name==='volume'||step.name==='apad'||step.name==='adelay'||step.name==='aformat'&&step.sampleFormat!==null).length??0,reframeSamples:filterBuffers,sourceSamples:range.samples===0n?0n:readRange.samples,generatedOutput:padding&&range.samples>0n&&readRange.samples===0n,inputHeaderBytes:rawInputCodec?0:128,outputScratchBytes:outputFormat==='framecrc'?512:['wav','aiff','au'].includes(outputFormat??'')?128:0});
       const guessLayout = audio.info.channels <= guessLayoutMax;
       async function* selectedPackets(): AsyncIterable<MediaPacket> {
         if (readRange.samples === 0n) return;
