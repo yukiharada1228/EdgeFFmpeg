@@ -1,0 +1,13 @@
+Scoped EPX pixel-art scaler
+
+The n option, the output geometry (w*n by h*n), the packed RGBA pixel-format list
+and the epx2/epx3 neighbour-equality rules with edge clamping in src/video-epx.ts
+and src/video-ops/epx.ts follow libavfilter/vf_epx.c (epx_options, epx2_slice,
+epx3_slice, config_output, pix_fmts, filter_frame).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+vf_epx.c carries no individual copyright line; it is part of FFmpeg and was
+contributed by Paul B Mahol (2021). Copyright (c) the FFmpeg developers. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete epx filter: slice
+threading, expression-valued options, timeline support and runtime commands are not included.

@@ -1,0 +1,201 @@
+{
+ "capabilityId": "filter.epx",
+ "slug": "vf-epx",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/epx.ts",
+  "packages/avfilter/src/video-epx.ts",
+  "packages/avfilter/NOTICE-EPX",
+  "tests/unit/video-epx.test.ts",
+  "tests/differential/video-epx.test.ts",
+  "docs/contributing/epx.md",
+  "docs/contributing/wave1/vf-epx.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {epxOperator} from './epx.js';",
+    " epxOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-epx.test.ts",
+   "title": "parses n=2|3 with the native default and shorthand, and refuses other values, enable= and unknown options",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-epx.test.ts",
+   "title": "applies epx2 and epx3 neighbour rules with edge clamping into owned tight planes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-epx.test.ts",
+   "title": "refuses formats, budgets, malformed strides, bad time bases and cancellation explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-epx.test.ts",
+   "title": "plans n-times geometry on every path, keeps the timed sample aspect ratio and bounds the scaled output",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-epx.test.ts",
+   "title": "matches native epx2 and epx3 pixels across packed RGBA formats, sizes and structured patterns",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-epx.test.ts",
+   "title": "matches native linear and graph epx plans with scalar conversions around the packed RGBA stage",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-epx.test.ts",
+   "title": "matches native replayed epx streams with branches and joins frame by frame",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-epx.test.ts",
+   "title": "matches native epx CLI rawvideo and framecrc on the linear, graph, actor and timed paths",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-epx.test.ts",
+   "title": "refuses epx output above maxFrameBytes and options native rejects before any output is opened",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(whole file, unchanged; runs epx examples on all five paths)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 900,
+  "details": [
+   "320 kernel frames (raw bytes) vs native -vf epx=n=N: 4 formats x n{2,3} x sizes 1x1,3x3,5x4,13x9 x 10 patterns; 192 differ from plain replication",
+   "200 linear plans + 200 frame-graph plans (raw bytes) vs native -cpuflags 0 -vf, sources rgba/abgr/rgb24/gray/yuv420p, 5 chains, 4 targets",
+   "16 replay streams (raw bytes, 5 frames each, timestamps) vs native -filter_complex",
+   "152 CLI outputs (rawvideo and framecrc) via createMediaBackend (-vf and -filter_complex) and timed backend schedulers producer (actor), activation and pull (timed)",
+   "12 refusals: 4 native-rejected option forms x media/actor/timed backends, no output opened; plus maxFrameBytes refusal on the scaled output"
+  ]
+ },
+ "unsupported": [
+  "expression-valued or non-decimal n (e.g. n=1+1, n=0x2, n=2.0)",
+  "enable= (native has no timeline either), generic filter-context options such as threads, runtime commands",
+  "H.264/MP4 framecrc output (not compared)",
+  "timed-backend inputs that need pixel conversion before epx (only packed RGBA sources compared on actor/timed)",
+  "slice threading (results are identical; whole-frame kernel)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": [
+  "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+  "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+  "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+ ],
+ "finalUnitFailures": [
+  "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+  "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+  "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+ ],
+ "proposedContracts": [
+  {
+   "id": "filter.epx.kernel",
+   "file": "tests/differential/video-epx.test.ts",
+   "name": "matches native epx2 and epx3 pixels across packed RGBA formats, sizes and structured patterns",
+   "modes": [
+    "kernel"
+   ],
+   "scope": "rgba/bgra/argb/abgr, n 2 and 3, sizes 1x1 3x3 5x4 13x9, structured patterns plus noise"
+  },
+  {
+   "id": "filter.epx.linear-graph",
+   "file": "tests/differential/video-epx.test.ts",
+   "name": "matches native linear and graph epx plans with scalar conversions around the packed RGBA stage",
+   "modes": [
+    "linear",
+    "graph"
+   ],
+   "scope": "scalar (-cpuflags 0) conversions around epx from rgba, abgr, rgb24, gray, yuv420p"
+  },
+  {
+   "id": "filter.epx.stream",
+   "file": "tests/differential/video-epx.test.ts",
+   "name": "matches native replayed epx streams with branches and joins frame by frame",
+   "modes": [
+    "stream"
+   ],
+   "scope": "replay streams with split/hstack/nullsink/transpose"
+  },
+  {
+   "id": "filter.epx.cli",
+   "file": "tests/differential/video-epx.test.ts",
+   "name": "matches native epx CLI rawvideo and framecrc on the linear, graph, actor and timed paths",
+   "modes": [
+    "linear",
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "rawvideo and framecrc CLI outputs from packed RGBA input"
+  },
+  {
+   "id": "filter.epx.refusals",
+   "file": "tests/differential/video-epx.test.ts",
+   "name": "refuses epx output above maxFrameBytes and options native rejects before any output is opened",
+   "modes": [
+    "linear",
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "maxFrameBytes refusal on scaled output and native-rejected options before output opens"
+  }
+ ],
+ "notes": [
+  "No shared edit beyond the two registry lines was needed.",
+  "Setup durations: submodule 46s, npm ci 9s, reference:build 198s; baseline typecheck+lint+boundaries 64s, baseline unit suite 89s.",
+  "Baseline and final unit failures are identical: FLAC artifact tests (downloads.xiph.org blocked) and 10 resample-checkpoint macOS digests.",
+  "Mutation check: removing 'timed' or 'actor' from the epx flags makes the CLI differential test fail on the pull or producer scheduler.",
+  "vf_epx.c has no individual copyright line; NOTICE-EPX credits the FFmpeg developers and the original contributor."
+ ]
+}
