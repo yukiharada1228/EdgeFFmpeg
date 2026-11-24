@@ -1,0 +1,312 @@
+{
+ "capabilityId": "filter.aecho",
+ "slug": "af-aecho",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/audio/aecho.ts",
+  "packages/avfilter/NOTICE-AECHO",
+  "tests/unit/aecho.test.ts",
+  "tests/differential/aecho.test.ts",
+  "docs/contributing/aecho.md",
+  "docs/contributing/wave1/af-aecho.json",
+  "packages/avfilter/src/audio/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/audio/registry.ts",
+   "edit": "+1 line: export {aecho} from './aecho.js';"
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/differential/aecho.test.ts",
+   "name": "matches native framecrc across sources, channel counts, rates, tap lists and s16/f32/f64 outputs",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/aecho.test.ts",
+   "name": "matches native on long multi-frame inputs, where the tail only follows the last input frame",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/aecho.test.ts",
+   "name": "matches native composed chains, output -t/-ss/-to/-frames:a and input time selection over the tail",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/aecho.test.ts",
+   "name": "matches native output for configured empty input, where only the silent tail remains",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/aecho.test.ts",
+   "name": "writes native-identical WAV and raw PCM files from WAV and raw inputs",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/aecho.test.ts",
+   "name": "fails explicitly before output where native fails, and for accepted forms that remain unimplemented",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/aecho.test.ts",
+   "name": "refuses a delay ring above the buffer budget before opening output",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/aecho.test.ts",
+   "name": "parses defaults, positional and named options, empty list fields and float32 values",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/aecho.test.ts",
+   "name": "refuses native errors and unimplemented option forms with exact messages",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/aecho.test.ts",
+   "name": "computes tap indexes in float32 truncated toward zero, and refuses a rate where nothing echoes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/aecho.test.ts",
+   "name": "negotiates the native picks, refuses rate conversion and declares its tail and ring",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/aecho.test.ts",
+   "name": "matches a transcription of the C loop for every working format, frame split and tap list, with owned outputs and the tail after the last frame",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/aecho.test.ts",
+   "name": "widens u8 to s16p, emits the configured empty-input tail and enforces allocation, format and cancellation limits",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/audio-filter-registry.test.ts",
+   "name": "(whole file)",
+   "passed": 11,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/audio-filter-registry-extension.test.ts",
+   "name": "(whole file)",
+   "passed": 12,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/audio-filter-registry-contract.test.ts",
+   "name": "(whole file)",
+   "passed": 3,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit (full suite)",
+   "name": "(all)",
+   "passed": 2259,
+   "failed": 13,
+   "note": "13 failures identical to baseline (FLAC artifacts, macOS-recorded resample digests)"
+  }
+ ],
+ "nativeComparisons": {
+  "count": 1065,
+  "byteComparisons": 1040,
+  "statusComparisons": 25,
+  "compares": "CLI output bytes against .build/reference/ffmpeg run at test time: 612 framecrc (sources x channels x rates x option sets x outputs), 36 long-input framecrc with tail-placement check, 336 composed/time-selection framecrc, 36 configured-empty-input framecrc, 20 WAV/raw files; 25 refusals against native exit status"
+ },
+ "unsupported": [
+  "Option expressions/SI suffixes for in_gain/out_gain (native av_expr) - refused",
+  "List values with signs, exponents, hexadecimal, inf/nan, trailing text or escaping - refused (native sscanf accepts or skips some)",
+  "Decimals on a float32 rounding midpoint in double precision - refused",
+  "FLAC input - refused before decoding",
+  "Automatic sample-rate conversion around aecho - refused",
+  "AIFF/AU output and non-linux/x64 arithmetic - no native evidence"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": {
+  "count": 13,
+  "files": 6,
+  "tests": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts (file failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+   "tests/unit/flac-decoder.test.ts (file failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-max-frames.test.ts (file failed to load: missing FLAC codec artifacts)",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ]
+ },
+ "finalUnitFailures": {
+  "count": 13,
+  "files": 6,
+  "tests": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts (file failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+   "tests/unit/flac-decoder.test.ts (file failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-max-frames.test.ts (file failed to load: missing FLAC codec artifacts)",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ],
+  "identicalToBaseline": true
+ },
+ "proposedContracts": [
+  {
+   "id": "filter.aecho.framecrc",
+   "file": "tests/differential/aecho.test.ts",
+   "name": "matches native framecrc across sources, channel counts, rates, tap lists and s16/f32/f64 outputs",
+   "modes": [
+    "bit-exact-pcm"
+   ],
+   "scope": "linux/x64: framecrc of u8/s16/s32/f32/f64 sources, mono/stereo, 8000/44100 Hz, nine option sets (1-3 taps, short/long/>2048-sample/zero-sample taps, saturation, named/duplicated options, default), source codec plus s16/f32/f64 outputs"
+  },
+  {
+   "id": "filter.aecho.long-input-tail",
+   "file": "tests/differential/aecho.test.ts",
+   "name": "matches native on long multi-frame inputs, where the tail only follows the last input frame",
+   "modes": [
+    "bit-exact-pcm"
+   ],
+   "scope": "linux/x64: 24000-sample stereo s16/f32/f64 at 8000/44100 Hz; tail packet total equals max_samples after all input"
+  },
+  {
+   "id": "filter.aecho.time-selection",
+   "file": "tests/differential/aecho.test.ts",
+   "name": "matches native composed chains, output -t/-ss/-to/-frames:a and input time selection over the tail",
+   "modes": [
+    "bit-exact-pcm"
+   ],
+   "scope": "linux/x64: aecho with asetnsamples, apad, volume and anull neighbours under output -t/-ss/-to/-frames:a and input -ss/-t, s16/f64 mono/stereo at 8000 Hz"
+  },
+  {
+   "id": "filter.aecho.empty-input",
+   "file": "tests/differential/aecho.test.ts",
+   "name": "matches native output for configured empty input, where only the silent tail remains",
+   "modes": [
+    "bit-exact-pcm"
+   ],
+   "scope": "linux/x64: empty u8/s16/f32 stereo raw input, aecho alone and with asetnsamples, output -t/-ss/-frames:a"
+  },
+  {
+   "id": "filter.aecho.files",
+   "file": "tests/differential/aecho.test.ts",
+   "name": "writes native-identical WAV and raw PCM files from WAV and raw inputs",
+   "modes": [
+    "bit-exact-pcm"
+   ],
+   "scope": "linux/x64: WAV and raw outputs from raw and WAV inputs in all five PCM formats, one two-tap option set"
+  },
+  {
+   "id": "filter.aecho.refusals",
+   "file": "tests/differential/aecho.test.ts",
+   "name": "fails explicitly before output where native fails, and for accepted forms that remain unimplemented",
+   "modes": [
+    "diagnostic"
+   ],
+   "scope": "Native exit status for 23 option forms (14 native errors, 9 natively accepted but unimplemented), zero max_samples and rate conversion; no output file created"
+  },
+  {
+   "id": "filter.aecho.budget",
+   "file": "tests/differential/aecho.test.ts",
+   "name": "refuses a delay ring above the buffer budget before opening output",
+   "modes": [
+    "runtime"
+   ],
+   "scope": "PCM plan refuses a ring above maxBufferBytes with resource-budget before output"
+  },
+  {
+   "id": "filter.aecho.unit.syntax",
+   "file": "tests/unit/aecho.test.ts",
+   "name": "parses defaults, positional and named options, empty list fields and float32 values",
+   "modes": [
+    "semantic"
+   ],
+   "scope": "aecho option syntax, defaults, last-wins and empty-field skipping"
+  },
+  {
+   "id": "filter.aecho.unit.refusals",
+   "file": "tests/unit/aecho.test.ts",
+   "name": "refuses native errors and unimplemented option forms with exact messages",
+   "modes": [
+    "diagnostic"
+   ],
+   "scope": "Exact refusal messages for native errors and unimplemented forms"
+  },
+  {
+   "id": "filter.aecho.unit.tap-math",
+   "file": "tests/unit/aecho.test.ts",
+   "name": "computes tap indexes in float32 truncated toward zero, and refuses a rate where nothing echoes",
+   "modes": [
+    "numerical"
+   ],
+   "scope": "config_output tap sample math and the max_samples constraint"
+  },
+  {
+   "id": "filter.aecho.unit.planning",
+   "file": "tests/unit/aecho.test.ts",
+   "name": "negotiates the native picks, refuses rate conversion and declares its tail and ring",
+   "modes": [
+    "api-contract"
+   ],
+   "scope": "Native format picks, capability flags, count/packetSections/plannedReservations for the tail and ring"
+  },
+  {
+   "id": "filter.aecho.unit.transcription",
+   "file": "tests/unit/aecho.test.ts",
+   "name": "matches a transcription of the C loop for every working format, frame split and tap list, with owned outputs and the tail after the last frame",
+   "modes": [
+    "numerical"
+   ],
+   "scope": "echo_samples_<fmt>p transcription across s16p/s32p/fltp/dblp, packed/planar, frame splits; ownership and tail timestamps"
+  },
+  {
+   "id": "filter.aecho.unit.limits",
+   "file": "tests/unit/aecho.test.ts",
+   "name": "widens u8 to s16p, emits the configured empty-input tail and enforces allocation, format and cancellation limits",
+   "modes": [
+    "runtime"
+   ],
+   "scope": "u8 widening, configured empty input, allocation/format/timestamp limits and AbortSignal"
+  }
+ ],
+ "notes": [
+  "No shared edit beyond the registry line was needed.",
+  "Per spec registry notes: formats() is the native array; no negotiate/nativeFormats/flacInput declared.",
+  "Byte-exact differential tests are gated to linux/x64 (float/double arithmetic, FMA-sensitive on macOS arm64 per wave-select notes); refusal and budget tests run everywhere.",
+  "Native accepts unscannable list tokens (e.g. 'abc') by skipping them; this implementation refuses them explicitly.",
+  "Setup durations: submodule init 49s; npm ci + reference:build 3m39s; baseline typecheck+lint+boundaries 1m27s; baseline unit suite 1m37s; aecho differential suite ~26s.",
+  "Environment: FLAC codec artifacts unavailable (downloads.xiph.org blocked), as expected; no other problems."
+ ]
+}
