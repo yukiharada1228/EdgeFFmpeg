@@ -1,0 +1,20 @@
+stereowiden audio filter (src/audio/stereowiden.ts)
+
+src/audio/stereowiden.ts adapts FFmpeg libavfilter/af_stereowiden.c: the
+delay, feedback, crossfeed and drymix option table with its ranges and
+defaults, the packed float stereo format and layout list (query_formats), the
+ring length 2*lrintf(delay*sample_rate/1000) and its EINVAL for a zero-length
+ring (config_input), and the delayed cross-feed loop with its ring of previous
+input samples in native read/write order (filter_frame).
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (C) 2012 VLC authors and VideoLAN
+Author : Sukrit Sangwan < sukritsangwan at gmail dot com >
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation keeps the float arithmetic of the plain C formula
+(each product, difference and store rounded to float, no fused multiply-add),
+as the Linux x86-64 reference evaluates it. It refuses timeline enable, runtime
+commands, option expressions, non-stereo or masked layouts that native would
+convert implicitly, and non-finite input samples, instead of approximating them.
+It adds no FFmpeg runtime code. The original source and full notices remain in
+the pinned upstream submodule.

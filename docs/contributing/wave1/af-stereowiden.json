@@ -1,0 +1,74 @@
+{
+  "capabilityId": "filter.stereowiden",
+  "slug": "af-stereowiden",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/audio/stereowiden.ts",
+    "packages/avfilter/NOTICE-STEREOWIDEN",
+    "tests/unit/stereowiden.test.ts",
+    "tests/differential/stereowiden.test.ts",
+    "docs/contributing/stereowiden.md",
+    "docs/contributing/wave1/af-stereowiden.json",
+    "packages/avfilter/src/audio/registry.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/avfilter/src/audio/registry.ts", "change": "+1 line: export {stereowiden} from './stereowiden.js';"}
+  ],
+  "tests": [
+    {"file": "tests/unit/stereowiden.test.ts", "title": "parses shorthand and named float options with native ranges and refuses everything else with exact messages", "passed": 1, "failed": 0},
+    {"file": "tests/unit/stereowiden.test.ts", "title": "computes the ring length with float lrintf (round half to even) and refuses a zero-length ring", "passed": 1, "failed": 0},
+    {"file": "tests/unit/stereowiden.test.ts", "title": "refuses mono, multichannel and masked layouts and requires a configured format for empty input", "passed": 1, "failed": 0},
+    {"file": "tests/unit/stereowiden.test.ts", "title": "negotiates packed float for every input format, keeps counts and declares the ring as state", "passed": 1, "failed": 0},
+    {"file": "tests/unit/stereowiden.test.ts", "title": "matches a direct C transcription across options, rates and frame splits, without touching input frames", "passed": 1, "failed": 0},
+    {"file": "tests/unit/stereowiden.test.ts", "title": "converts integer and planar input to packed float and enforces allocation, format and cancellation limits", "passed": 1, "failed": 0},
+    {"file": "tests/differential/stereowiden.test.ts", "title": "matches native framecrc bytes for delay 1/20/100 ms at 8000/44100/48000 Hz across option sweeps, sources and f32/s16 outputs", "passed": 1, "failed": 0},
+    {"file": "tests/differential/stereowiden.test.ts", "title": "matches native raw and WAV bytes for shorthand options, asetnsamples splits, composed chains and output time selection", "passed": 1, "failed": 0},
+    {"file": "tests/differential/stereowiden.test.ts", "title": "fails explicitly before output for mono and masked input, native option errors and unimplemented forms", "passed": 1, "failed": 0},
+    {"file": "tests/unit/audio-filter-registry.test.ts + audio-filter-registry-extension.test.ts + audio-filter-registry-contract.test.ts", "title": "(all, unchanged)", "passed": 26, "failed": 0}
+  ],
+  "nativeComparisons": {
+    "count": 452,
+    "details": [
+      "252 framecrc byte comparisons: delay {1,20,100} ms x rates {8000,44100,48000} x option sweeps (4 for s16le/f32le, 2 for u8/s32le/f64le) x pcm_f32le/pcm_s16le outputs, -cpuflags 0, stereo raw input of 6000 samples (linux/x64 gated)",
+      "180 byte comparisons: raw s16le 44100, raw f32le 48000 and WAV input x 12 chains (shorthand, asetnsamples splits before/after, stacked stereowiden, volume float/fixed, apad, aformat=s32) x 5 outputs (f32le, s16le, -ss/-t, -frames:a 2 framecrc, s16 framecrc) (linux/x64 gated)",
+      "2 whole-WAV-file byte comparisons (linux/x64 gated)",
+      "18 native exit statuses for refusals: 8 out-of-range (222), 2 syntax (234), unknown option (8), zero-length ring at 500 Hz (234), FL+FC mask (234); mono, three channels, enable, expression and DL+DR mask where native succeeds (0) and we refuse before output"
+    ]
+  },
+  "unsupported": [
+    "timeline enable",
+    "runtime commands",
+    "option expressions and SI suffixes",
+    "mono, multichannel and non-default WAV/W64 masks (native converts implicitly)",
+    "FLAC input (refused before decoding)",
+    "non-finite input samples",
+    "automatic sample-rate conversion inside the chain",
+    "byte-exact claims off linux/x64 (native may contract the formula into fma)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "summary": "13 failed tests in 6 files (2253 passed)",
+    "failures": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts (suite failed to load: FLAC wasm missing)",
+      "tests/unit/flac-decoder.test.ts (suite failed to load: FLAC wasm missing)",
+      "tests/unit/flac-expanded-fixtures.test.ts > 2 tests (native FLAC fixtures missing)",
+      "tests/unit/flac-max-frames.test.ts (suite failed to load: FLAC wasm missing)",
+      "tests/unit/resample-checkpoint.test.ts > 10 tests (macOS arm64 golden digests)"
+    ]
+  },
+  "finalUnitFailures": {"summary": "13 failed tests in 6 files (2259 passed); identical to the baseline failure list", "failures": "same as baselineUnitFailures"},
+  "proposedContracts": [
+    {"id": "filter.stereowiden.syntax", "file": "tests/unit/stereowiden.test.ts", "name": "parses shorthand and named float options with native ranges and refuses everything else with exact messages", "modes": ["unit"], "scope": "option parsing, ranges and exact refusal messages"},
+    {"id": "filter.stereowiden.unit", "file": "tests/unit/stereowiden.test.ts", "name": "matches a direct C transcription across options, rates and frame splits, without touching input frames", "modes": ["unit"], "scope": "stream arithmetic, ring wrap, frame-split invariance and ownership"},
+    {"id": "filter.stereowiden.native", "file": "tests/differential/stereowiden.test.ts", "name": "matches native framecrc bytes for delay 1/20/100 ms at 8000/44100/48000 Hz across option sweeps, sources and f32/s16 outputs", "modes": ["differential"], "scope": "linux/x64 byte equality across delays, rates, sweeps and sources"},
+    {"id": "filter.stereowiden.chains", "file": "tests/differential/stereowiden.test.ts", "name": "matches native raw and WAV bytes for shorthand options, asetnsamples splits, composed chains and output time selection", "modes": ["differential"], "scope": "linux/x64 byte equality in composed chains and with output time selection"},
+    {"id": "filter.stereowiden.refusals", "file": "tests/differential/stereowiden.test.ts", "name": "fails explicitly before output for mono and masked input, native option errors and unimplemented forms", "modes": ["differential"], "scope": "explicit refusals before output, with native exit statuses"}
+  ],
+  "notes": [
+    "Setup durations: submodule init 46 s, npm ci 10 s, reference:build 183 s; baseline typecheck+lint+boundaries+unit 156 s.",
+    "Ring length uses fround(fround(fround(delay)*fround(rate))/1000) with round-half-even lrintf, then *2 floats; 0 is refused in constraint() like native EINVAL.",
+    "reserve() declares one output frame plus stateBytes = length*4.",
+    "No shared edits beyond the registry line were needed."
+  ]
+}
