@@ -1,5 +1,5 @@
 import type {Rational} from '@edge-ffmpeg/avutil';
-import {compileMultiInputVideoFilterGraph,filterTopologyOrder,synchronizationTimeBase} from '@edge-ffmpeg/avfilter';
+import {compileMultiInputVideoFilterGraph,filterTopologyOrder,synchronizationTimeBase,videoOperator} from '@edge-ffmpeg/avfilter';
 import {stackFrameRate} from './output-clock.js';
 export interface SourceClock {readonly frameRate:Rational;readonly timeBase:Rational}
 export interface LinkClock extends SourceClock {readonly durationSource:number|null}
@@ -11,7 +11,7 @@ export function videoGraphClocks(description:string,sources:readonly SourceClock
  const links=new Map<number,LinkClock>();
  for(const index of filterTopologyOrder(graph)){
   const node=graph.nodes[index]!,inputs=incoming[index]!.map((edge,pad)=>edge?links.get(edge.node)!:sourceClocks[bindings.get(`${index}:${pad}`)!]!);if(inputs.some(input=>!input))throw new Error('Unbound timing input');
-  const joined=node.configuration.name==='hstack'||node.configuration.name==='vstack';
+  const joined=videoOperator(node.configuration.name)?.role==='join';
   const clock=joined?Object.freeze({frameRate:stackFrameRate(inputs.map(input=>input.frameRate)),timeBase:synchronizationTimeBase(inputs.map(input=>input.timeBase)),durationSource:null}):inputs[0]!;
   links.set(index,clock);
  }

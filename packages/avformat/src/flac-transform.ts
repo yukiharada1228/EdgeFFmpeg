@@ -47,11 +47,14 @@ export function compileFlacTransform(command:ParsedCommand,output:FlacOutputConf
  }
  if(!timed&&channels===null&&rate===null&&description===null)return null;
  const time=compileFlacTimePolicy(command);
- const filters=description===null?null:compileFlacAudioFilters(description,channels===null?getPcmFormat(output.codec).sampleFormat:'flt');
+ const filters=description===null?null:compileFlacAudioFilters(description,channels===null?getPcmFormat(output.codec).sampleFormat:'flt',channels!==null);
  // Input duration precedes user filters; negotiated automatic rate conversion
  // can precede the trim. Finite buffering uses separate input/output trims;
  // timestamp and filter-rate stages still need their own Native scheduling.
- if(timed&&filters?.steps.some(step=>step.name!=='anull'&&step.name!=='volume'&&step.name!=='apad'&&step.name!=='asetnsamples'&&!(step.name==='aformat'&&(step.sampleFormat!==null||step.sampleRate!==undefined||step.channelLayout!==undefined))))unsupported('Combined FLAC time selection and filters/rate conversion require additional Native packet scheduling');
+ if(timed&&filters?.capabilities.some(capability=>!capability.timeSelection))unsupported('Combined FLAC time selection and filters/rate conversion require additional Native packet scheduling');
+ // Untimed FLAC input runs every step too: a step without pinned FLAC evidence is refused before decoding.
+ const unproven=filters?.steps.find((_,index)=>!filters.capabilities[index]!.flacInput);
+ if(unproven)unsupported(`FLAC input to ${unproven.name} requires additional Native evidence`);
  return Object.freeze({time,timed,channels,rate,filters,scalar:command.global.filter(option=>option.name==='-cpuflags').at(-1)?.value==='0'});
 }
 function wait<T>(pending:Promise<T>,signal:AbortSignal):Promise<T>{
@@ -68,7 +71,7 @@ export async function executeFlacTransform(reader:ReadHandle,context:BackendCont
   let result=source;
   const filteredRate=plan.filters?.outputSampleRate(info.sampleRate)??info.sampleRate;
   const timedRate=plan.timed&&plan.rate!==null&&plan.rate!==filteredRate;
-  const insertedRate=plan.rate!==null&&plan.rate!==filteredRate&&plan.filters?.steps.some(step=>step.name==='aformat');
+  const insertedRate=plan.rate!==null&&plan.rate!==filteredRate&&plan.filters?.has('formatConstraint');
   const rateBoundary=insertedRate?plan.filters!.rateBoundary(info.sampleFormat,info.sampleRate,plan.rate!):null;
   const inputTrimAfterRate=plan.timed&&rateBoundary?.beforeStep===0;
   const timedBuffered=plan.timed&&(plan.filters?.reframes??false);
@@ -101,6 +104,8 @@ export async function executeFlacTransform(reader:ReadHandle,context:BackendCont
  try{
   initial=await stream.prepare();
   if(plan.channels!==null&&(![1,2].includes(initial.channels)||initial.channelLayout!==(initial.channels===1?'mono':'stereo')))unsupported('FLAC channel conversion requires a canonical mono/stereo input layout');
+  // Native format lists were negotiated for a channel conversion; without one, native merges the encoder format instead.
+  if(plan.channels===initial.channels&&plan.filters?.nativeFormatLists)unsupported('FLAC -ac without channel conversion and native filter format lists require additional Native negotiation');
   const mixSource=plan.filters?.resolvedSampleFormat(initial.sampleFormat)??initial.sampleFormat;
   const filteredRate=plan.filters?.outputSampleRate(initial.sampleRate)??initial.sampleRate;
   const changingRate=plan.rate!==null&&plan.rate!==filteredRate;
@@ -109,16 +114,16 @@ export async function executeFlacTransform(reader:ReadHandle,context:BackendCont
   if(changingRate&&(output.format==='framecrc'||options.frameLimit!==null))unsupported('FLAC resampled framecrc/frame limits require Native packet scheduling');
   if(changingRate&&plan.filters){
    const boundary=plan.filters.rateBoundary(initial.sampleFormat,initial.sampleRate,plan.rate!);
-   const hasFormat=plan.filters.steps.some(step=>step.name==='aformat');
+   const hasFormat=plan.filters.has('formatConstraint');
    if(hasFormat){
     if(boundary&&resampleInternalFormat(boundary.inputFormat,boundary.outputFormat)==='dbl'&&['dbl','dblp'].includes(getPcmFormat(output.codec).sampleFormat))unsupported('FLAC aformat rate conversion requires reproducible double-precision FIR coefficients');
-    if(plan.filters.steps.some(step=>!['anull','volume','aformat'].includes(step.name))||plan.channels!==null&&plan.channels!==initial.channels)unsupported('FLAC resampling with this filter placement requires additional Native scheduling');
-   }else if(boundary?.beforeStep!==plan.filters.steps.length||plan.filters.steps.some(step=>!['anull','volume','asetrate'].includes(step.name)))unsupported('FLAC resampling with this filter placement requires additional Native scheduling');
+    if(plan.filters.capabilities.some(capability=>!capability.stateless||capability.changesRate)||plan.channels!==null&&plan.channels!==initial.channels)unsupported('FLAC resampling with this filter placement requires additional Native scheduling');
+   }else if(boundary?.beforeStep!==plan.filters.steps.length||plan.filters.capabilities.some(capability=>!capability.stateless))unsupported('FLAC resampling with this filter placement requires additional Native scheduling');
   }
   if(plan.filters){
    // Frame limit zero bypasses the transformation iterator entirely. Validate
    // metadata constraints here too, before counting or opening any output.
-   const boundary=changingRate&&plan.filters.steps.some(step=>step.name==='aformat')?plan.filters.rateBoundary(initial.sampleFormat,initial.sampleRate,plan.rate!):null;
+   const boundary=changingRate&&plan.filters.has('formatConstraint')?plan.filters.rateBoundary(initial.sampleFormat,initial.sampleRate,plan.rate!):null;
    plan.filters.validateInputFormat(initial,...(boundary?[{beforeStep:boundary.beforeStep,transform:(frames:AsyncIterable<AudioFrameData>)=>frames,outputFormat:{sampleRate:plan.rate!,channels:initial.channels,channelLayout:initial.channelLayout,sampleFormat:boundary.outputFormat,pts:null}}]:[]));
   }
   const scalarRequired=changingRate||plan.channels!==null&&plan.channels!==initial.channels&&remixInternalFormat(mixSource,getPcmFormat(output.codec).sampleFormat)!=='s16'||(plan.filters?.requiresScalarRounding(initial.sampleFormat)??false);

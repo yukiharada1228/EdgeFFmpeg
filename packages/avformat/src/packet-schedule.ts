@@ -1,6 +1,7 @@
 import {ExecutionError} from '@edge-ffmpeg/core';
 import {resampledSampleCount,resampledStreamingSampleCount} from '@edge-ffmpeg/swresample';
 import type {AudioPacketSchedule} from '@edge-ffmpeg/avutil';
+import {audioFilterCapabilities} from '@edge-ffmpeg/avfilter';
 import type {AudioFilterCountPlan} from '@edge-ffmpeg/avfilter';
 import type {AudioPacketSection} from './packet-sections.js';
 import {clipPacketSections} from './packet-sections.js';
@@ -78,15 +79,21 @@ export function resamplePacketSchedule(source:PlannedPacketSchedule,inputRate:nu
   return schedule(parts);
 }
 
-/** Apply the shared filter count plan while preserving semantic frame boundaries. */
+/** Apply the shared filter count plan's per-stage packet effects while preserving semantic frame boundaries. */
 export function filteredPacketSchedule(inputSamples:bigint,inputSpan:bigint,inputRate:number,outputRate:number,plan?:AudioFilterCountPlan):PlannedPacketSchedule{
   let result=schedulePacketSections(inputSamples?[{samples:inputSamples,span:inputSpan}]:[]);
   if(!plan)return resamplePacketSchedule(result,inputRate,outputRate);
   for(const stage of plan.stages){
     if(stage.inputSamples!==result.sampleCount)throw new ExecutionError('invalid-arguments','Packet schedule and filter counts disagree');
     if(stage.step===null)result=resamplePacketSchedule(result,stage.inputRate!,stage.outputRate!);
-    else if(stage.step.name==='asetnsamples')result=schedulePacketSections(stage.outputSamples?[{samples:stage.outputSamples,span:BigInt(stage.step.samples)}]:[]);
-    else if(stage.step.name==='apad')result=appendPacketSection(result,stage.outputSamples-stage.inputSamples,BigInt(stage.step.packetSamples));
+    // Resampled scheduling only covers steps with pinned rate-conversion evidence; rateBoundary() refuses the others first.
+    else if(!audioFilterCapabilities(stage.step).rateConversion)throw new ExecutionError('unsupported-command',`${stage.step.name} with sample rate conversion is not implemented`);
+    else if(stage.packets){
+      const {reframe,leading,trailing}=stage.packets;
+      if(leading)throw new ExecutionError('unsupported-command','Leading filter output requires unimplemented resampled packet scheduling');
+      if(reframe!==undefined)result=schedulePacketSections(stage.outputSamples?[{samples:stage.outputSamples,span:reframe}]:[]);
+      if(trailing)result=appendPacketSection(result,trailing.samples,trailing.span);
+    }
     if(stage.outputSamples!==result.sampleCount)throw new ExecutionError('invalid-arguments','Packet schedule and filter output counts disagree');
   }
   return result;

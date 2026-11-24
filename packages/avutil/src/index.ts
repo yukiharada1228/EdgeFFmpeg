@@ -47,3 +47,5 @@ export {videoStoragePixelFormat} from './video-storage-format.js';
 
 export {defaultChannelLayout} from './channel-layout.js';
 export type {DefaultChannelLayout} from './channel-layout.js';
+
+export {channelLayoutName} from './channel-layout-name.js';

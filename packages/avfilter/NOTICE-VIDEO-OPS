@@ -1,0 +1,28 @@
+Video operator registry (src/video-ops)
+
+src/video-ops/ holds one descriptor module per video filter. The code in it was
+moved, not rewritten, from modules whose provenance is recorded in NOTICE and in
+src/activation/NOTICE.activation. Those notices still apply to the moved code:
+- formats.ts: the negotiation table, pixel-format loss scoring, chooseFormat and
+  the union-find merge formerly copied in video-format-negotiation.ts,
+  video-graph-formats.ts and activation/formats.ts (libavfilter/formats.c,
+  avfiltergraph.c, libavutil/pixdesc.c).
+- null.ts, format.ts, scale.ts, transpose.ts, negate.ts, options.ts: scoped option
+  parsing formerly in video-parse.ts (libavfilter/avfilter.c, graphparser.c,
+  vf_format.c, vf_scale.c, vf_transpose.c, vf_negate.c), and the timed scale,
+  flip enable= and AV_OPT_TYPE_BOOL parsing formerly in activation/resolver.ts
+  (vf_scale.c, libavutil/opt.c).
+- split.ts, nullsink.ts, stack-options.ts, hstack.ts, vstack.ts: frame-graph pad
+  parsing formerly in video-graph-resolver.ts (split.c, vsink_nullsink.c,
+  vf_stack.c).
+- crop.ts, aspect-options.ts, setsar.ts, setdar.ts, setpts.ts: activation option
+  parsing and configured geometry formerly in activation/resolver.ts and
+  activation/formats.ts (vf_crop.c, vf_aspect.c, setpts.c).
+- descriptor.ts and registry.ts: the per-path descriptor contract and registry
+  validation. They contain no FFmpeg code.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+The copyright holders listed in NOTICE and src/activation/NOTICE.activation for
+the files named above apply. LGPL-2.1-or-later.
+See ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+Each operator added later records its own provenance in NOTICE-<NAME>.

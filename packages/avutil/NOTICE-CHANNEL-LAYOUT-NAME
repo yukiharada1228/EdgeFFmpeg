@@ -1,0 +1,14 @@
+Channel layout names (src/channel-layout-name.ts)
+
+src/channel-layout-name.ts adapts the channel_names and channel_layout_map
+tables and the native-order branch of av_channel_layout_describe (with
+av_channel_name_bprint's USR<id> fallback) from FFmpeg
+libavutil/channel_layout.c.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2006 Michael Niedermayer
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation describes a 64-bit native-order mask only: no custom
+or ambisonic orders, no parsing, and no FFmpeg runtime code. The layout table is
+checked against `ffmpeg -layouts` of the pinned reference build. The original
+source and full notices remain in the pinned upstream submodule.

@@ -1,0 +1,7 @@
+# One-entry-per-line registries: every parallel capability branch appends its own lines
+# (audio and container: one export line; video: one import line and one array entry line).
+# A merge keeps both sides of such a conflict; typecheck and the registry unit tests then
+# reject a lost or duplicated entry. Merge locally with git: hosted merge buttons may ignore this.
+packages/avfilter/src/audio/registry.ts merge=union
+packages/avfilter/src/video-ops/registry.ts merge=union
+packages/containers/src/registry.ts merge=union

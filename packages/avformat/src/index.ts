@@ -2,10 +2,9 @@ import {executeFlacDecode} from './flac-decode.js';
 import type {FlacBackendConfiguration} from './flac-decode.js';
 import {probeFlacInput,executeFlacCopy} from './flac-copy.js';
 import {executeFlacRemux} from './flac-wave-remux.js';
-import {defaultChannelLayout} from '@edge-ffmpeg/avutil';
+import {channelLayoutName,defaultChannelLayout} from '@edge-ffmpeg/avutil';
 import {executeSimpleMultiVideo} from './simple-multi-video.js';
 import {probeRawRead} from './raw-read-probe.js';
-import {openW64,muxW64,validateW64Output} from '@edge-ffmpeg/containers';
 import {assertOutputPolicy} from './output-policy.js';
 import {createMp4H264Backend,wantsMp4H264Decode} from './mp4-h264.js';
 import type {H264BackendConfiguration} from './mp4-h264.js';
@@ -19,6 +18,7 @@ import {clipPacketSections,packetSectionSamplesForFrames} from './packet-section
 import {remixAudioFrame,remixInternalFormat,convertAudioFrame,resampleAudio,resampleInternalFormat,resampledSampleCount,planAudioResample} from '@edge-ffmpeg/swresample';
 import type {RemixArithmetic} from '@edge-ffmpeg/swresample';
 import { planPcmMemory } from './memory-plan.js';
+import {pcmFilterMemory} from './pcm-filter-memory.js';
 import type { AudioFrameData, PcmCodec } from '@edge-ffmpeg/avutil';
 import { parseFrameLimit } from '@edge-ffmpeg/cli';
 import { compileAudioFilterChain } from '@edge-ffmpeg/avfilter';
@@ -28,7 +28,8 @@ import type { MediaPacket } from '@edge-ffmpeg/core';
 import { decodePcm, encodePcm, isIntegerPcm, getPcmFormat, isPcmCodec as isPcm } from '@edge-ffmpeg/avcodec';
 import { ExecutionError } from '@edge-ffmpeg/core';
 import type { ReadHandle, ExecutionBackend } from '@edge-ffmpeg/core';
-import { openWav, muxWav, openRawPcm, muxRawPcm, rawPcmCodec, muxFrameCrc, supportsWavCodec, openAiff, muxAiff, supportsAiffCodec, validateAiffOutput, detectAudioContainer, openAu, muxAu, supportsAuCodec, validateAuOutput } from '@edge-ffmpeg/containers';
+import {containerFormat,containerOutputListing,containerOutputOptions,detectAudioContainer,outputContainerFor} from '@edge-ffmpeg/containers';
+import type {ContainerOption,ContainerOutputStream} from '@edge-ffmpeg/containers';
 function requirePcm(codec: string | null): PcmCodec {
   if (codec === null || !isPcm(codec)) throw new ExecutionError('unsupported-command', `Unsupported PCM codec: ${codec}`);
   return codec;
@@ -107,11 +108,13 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
         else if (option.name === '-ac') inputChannels = positiveInteger(option.value,'input channel count');
         else unsupported(`Unsupported input option: ${option.name}`);
       }
-      const rawInputCodec = inputFormat === null || inputFormat === 'wav' || inputFormat === 'aiff' || inputFormat === 'au' ? null : rawPcmCodec(inputFormat);
-      if (inputFormat !== null && inputFormat !== 'wav' && inputFormat !== 'aiff' && inputFormat !== 'au' && inputFormat !== 'w64' && !rawInputCodec) unsupported(`Unsupported input format: ${inputFormat}`);
-      if (!rawInputCodec && (inputRate !== null || inputChannels !== null)) unsupported('Input rate/channel declarations currently require a raw PCM format');
+      // Container routing reads the registry (@edge-ffmpeg/containers registry.ts); no branch here names a format.
+      const declaredInput = inputFormat === null ? undefined : containerFormat(inputFormat);
+      if (inputFormat !== null && !declaredInput?.demux) unsupported(`Unsupported input format: ${inputFormat}`);
+      if (!declaredInput?.headerless && (inputRate !== null || inputChannels !== null)) unsupported('Input rate/channel declarations currently require a raw PCM format');
       let maxFrames: bigint | null = null;
       let codec: string | null = null, outputFormat: string | null = null, maps = 0, filterSpec: string | null = null, outputRate: number | null = null, outputChannels: number | null = null;
+      const formatOptions: ContainerOption[] = [];
       for (const option of output.options) {
         if (setTimeOption(outputTime, option.name, option.value)) continue;
         if (['-c', '-codec', '-c:a', '-codec:a', '-c:a:0', '-codec:a:0', '-c:0', '-codec:0'].includes(option.name)) codec = option.value;
@@ -127,12 +130,15 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
         else if (option.name === '-ac') outputChannels = positiveInteger(option.value,'output channel count');
         else if (option.name === '-map') {
           if (++maps > 1 || !['0', '0:0', '0:a', '0:a:0'].includes(option.value ?? '')) unsupported('Only one mapping of the PCM audio stream is supported');
-        } else if (!['-vn', '-sn', '-dn'].includes(option.name)) unsupported(`Unsupported output option: ${option.name}`);
+        } else if (containerOutputOptions.has(option.name)) formatOptions.push({name:option.name,value:option.value});
+        else if (!['-vn', '-sn', '-dn'].includes(option.name)) unsupported(`Unsupported output option: ${option.name}`);
       }
-      if(outputFormat===null){const path=output.url.toLowerCase();if(path.endsWith('.au')||path.endsWith('.snd'))outputFormat='au';else if(path.endsWith('.wav'))outputFormat='wav';else if(path.endsWith('.w64'))outputFormat='w64';else if(['.aif','.aiff','.aifc'].some(extension=>path.endsWith(extension)))outputFormat='aiff';}
-      const rawOutputCodec = outputFormat === null || outputFormat === 'wav' || outputFormat === 'au' ? null : rawPcmCodec(outputFormat);
-      if (outputFormat !== 'wav' && outputFormat !== 'aiff' && outputFormat !== 'au' && outputFormat !== 'w64' && outputFormat !== 'framecrc' && !rawOutputCodec) unsupported('Output requires WAV, AIFF, AU, W64, framecrc or an explicit raw PCM format');
-      if (codec === null) codec = rawOutputCodec ?? (['aiff','au'].includes(outputFormat??'')?'pcm_s16be':'pcm_s16le');
+      if (outputFormat === null) outputFormat = outputContainerFor(output.url)?.name ?? null;
+      const muxer = outputFormat === null ? undefined : containerFormat(outputFormat)?.mux;
+      if (!muxer) return unsupported(`Output requires ${containerOutputListing} or an explicit raw PCM format`);
+      const foreignOption = formatOptions.find(option => !muxer.options?.includes(option.name));
+      if (foreignOption) unsupported(`Unsupported output option: ${foreignOption.name}`);
+      if (codec === null) codec = muxer.defaultCodec;
       let filters: AudioFilterChain | undefined;
       if (filterSpec !== null) {
         try { filters = compileAudioFilterChain(filterSpec,{outputSampleFormat:getPcmFormat(requirePcm(codec === 'copy' ? 'pcm_s16le' : codec)).sampleFormat}); }
@@ -143,12 +149,10 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
       if (codec !== 'copy' && !isPcm(codec)) unsupported('Unsupported PCM codec');
       context.signal.throwIfAborted();
       const acceptedSource = await context.filesystem.openRead(input.url);
-      const rawProbe = rawInputCodec ? await probeRawRead(acceptedSource,context.signal) : {input:acceptedSource,failure:null};
+      const rawProbe = declaredInput?.headerless ? await probeRawRead(acceptedSource,context.signal) : {input:acceptedSource,failure:null};
       const source = rawProbe.input;
-      const inputContainer=rawInputCodec?'raw':inputFormat??await detectAudioContainer(source,context.budget.maxBufferBytes,context.signal);
-      const audio = rawInputCodec
-        ? await openRawPcm(source,{codec:rawInputCodec,channels:inputChannels??1,sampleRate:inputRate??44100,...((inputChannels??1)>guessLayoutMax?{channelMask:null}:{}),maxReadBytes:context.budget.maxBufferBytes,signal:context.signal})
-        : inputContainer==='w64'?await openW64(source,{maxReadBytes:context.budget.maxBufferBytes,signal:context.signal}):inputContainer==='au'?await openAu(source,{maxReadBytes:context.budget.maxBufferBytes,signal:context.signal}):inputContainer==='aiff'?await openAiff(source,{maxReadBytes:context.budget.maxBufferBytes,signal:context.signal}):await openWav(source, { maxReadBytes: context.budget.maxBufferBytes, signal: context.signal });
+      const demuxer = declaredInput?.demux ?? containerFormat(await detectAudioContainer(source,context.budget.maxBufferBytes,context.signal,input.url))!.demux!;
+      const audio = await demuxer.open(source,{maxReadBytes:context.budget.maxBufferBytes,signal:context.signal,declared:{channels:inputChannels??1,sampleRate:inputRate??44100,guessLayout:(inputChannels??1)<=guessLayoutMax},seek:inputTime.seek});
       const filteredRate = filters?.outputSampleRate(audio.info.sampleRate) ?? audio.info.sampleRate;
       const resultRate=outputRate??filteredRate,resampling=resultRate!==filteredRate;
       const channels=outputChannels??audio.info.channels,remixing=channels!==audio.info.channels;
@@ -158,18 +162,12 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
         const mask=audio.info.channelMask??0,canonical=audio.info.channels===1?4:3;
         if(mask?mask!==canonical:audio.info.channels>guessLayoutMax)unsupported('Channel conversion requires a canonical mono/stereo input layout');
       }
-      if(remixing&&filterSpec!==null)filters=compileAudioFilterChain(filterSpec,{outputSampleFormat:'flt'});
-      if (!rawProbe.failure && !['aiff','au'].includes(inputContainer) && inputTime.seek > 0n && inputTime.seek * BigInt(audio.info.sampleRate) >= audio.info.durationSamples * 1000000n) throw new ExecutionError('unsupported-seek', 'Input seek at or beyond EOF requires unimplemented native I/O fallback semantics');
+      if(remixing&&filterSpec!==null)filters=compileAudioFilterChain(filterSpec,{outputSampleFormat:'flt',outputConversion:true});
+      if (!rawProbe.failure && !demuxer.seekBeyondEnd && inputTime.seek > 0n && inputTime.seek * BigInt(audio.info.sampleRate) >= audio.info.durationSamples * 1000000n) throw new ExecutionError('unsupported-seek', 'Input seek at or beyond EOF requires unimplemented native I/O fallback semantics');
       const pcmCodec = requirePcm(audio.info.codec);
       const outputCodec = requirePcm(codec === 'copy' ? pcmCodec : codec);
-      const auCodec=supportsAuCodec(outputCodec)?outputCodec:null;
-      if(outputFormat==='au'&&auCodec===null)unsupported(`AU muxer does not support ${outputCodec}`);
-      const aiffCodec=supportsAiffCodec(outputCodec)?outputCodec:null;
-      if(outputFormat==='aiff'&&aiffCodec===null)unsupported(`AIFF muxer does not support ${outputCodec}`);
-      const wavCodec=supportsWavCodec(outputCodec)?outputCodec:null;
-      if(outputFormat==='wav'&&wavCodec===null)unsupported(`WAV muxer does not support ${outputCodec}`);
-      if(outputFormat==='w64'&&wavCodec===null)unsupported(`W64 muxer does not support ${outputCodec}`);
-      if (rawOutputCodec && rawOutputCodec !== outputCodec) unsupported('Raw PCM mux format must match the selected codec');
+      if (!muxer.supports(outputCodec)) throw muxer.refuse?.(outputCodec) ?? new ExecutionError('unsupported-command',`${muxer.label} muxer does not support ${outputCodec}`);
+      if (audio.info.metadata && !muxer.dropsMetadata) unsupported(`Input metadata for the ${muxer.label} muxer is not implemented`);
       await assertOutputPolicy(context,output.url,overwrite,noOverwrite);
       if(rawProbe.failure){if(exitOnError)throw rawProbe.failure;context.reportDiagnostic?.({code:rawProbe.failure.code,message:rawProbe.failure.message});}
       const sourceSampleFormat=getPcmFormat(pcmCodec).sampleFormat,targetSampleFormat=getPcmFormat(outputCodec).sampleFormat;
@@ -179,16 +177,16 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
       if(resampling){
         if(codec==='copy'||remixing)unsupported('Rate conversion currently requires unchanged channels and encoding');
       }
-      const padding=filters?.steps.some(step=>step.name==='apad'||step.name==='adelay')??false;
+      const padding=filters?.has('generatesOutput')??false;
       const packetDuration=resolveDuration(outputTime);
       const packetSubsample=(padding||resampling)&&packetDuration!==null&&packetDuration>0n&&(packetDuration*BigInt(resultRate)+500000n)/1000000n===0n;
       const packetTime=packetSubsample?{...outputTime,duration:null,stop:null}:outputTime;
       const scalarRequired = resampling || (remixing&&mixInternal!=='s16') || (filters ? filters.requiresScalarRounding(getPcmFormat(pcmCodec).sampleFormat) : !isIntegerPcm(pcmCodec) && isIntegerPcm(outputCodec));
       if (codec !== 'copy' && scalarRequired && !scalarConversion) unsupported('This conversion currently requires -cpuflags 0 to pin scalar rounding/rematrix arithmetic');
       const sampleBytes = Math.max(resampling?resampleWidth:0,getPcmFormat(pcmCodec).frameBytesPerSample, getPcmFormat(outputCodec).frameBytesPerSample, filters?.maxBytesPerSample ?? 0,remixing?(mixInternal==='dbl'?8:mixInternal==='flt'?4:2):0);
-      const inputSpan=inputContainer==='aiff'?BigInt(Math.floor(4096/audio.info.blockAlign)):pcmPacketSpan(audio.info.sampleRate);
+      const inputSpan=demuxer.packetSpan?.(audio.info)??pcmPacketSpan(audio.info.sampleRate);
       const inputRange = pcmTimeRange(audio.info.durationSamples,audio.info.sampleRate,inputTime,timeOptions(),false,null,audio.info.sampleRate,inputSpan);
-      const filterSamplePlan=filters?.planSamples(inputRange.samples,audio.info.sampleRate,{...(rateBoundary?{rateBoundary}:{}),configuredInput:true,channels:audio.info.channels});
+      const filterCount={...(rateBoundary?{rateBoundary}:{}),configuredInput:true,channels:audio.info.channels},filterSamplePlan=filters?.planSamples(inputRange.samples,audio.info.sampleRate,filterCount);
       const filterBuffers=filterSamplePlan?.buffers??[],filterBufferSamples=Math.max(0,...filterBuffers);
       if(filterBufferSamples*Math.max(audio.info.channels,channels)*sampleBytes>context.budget.maxBufferBytes)throw new ExecutionError('resource-budget','Reframed audio exceeds the configured buffer budget');
       const transformedSamples=resampling
@@ -218,9 +216,12 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
         catch(error){throw new ExecutionError('resource-budget',error instanceof Error?error.message:String(error));}
         if(resamplePlan.stateBytes+context.budget.maxBufferBytes>context.budget.maxResidentBytes)throw new ExecutionError('resource-budget','Resampler state and one payload buffer exceed the resident-byte budget');
       }
-      const payloadBudget=resamplePlan?{...context.budget,maxResidentBytes:context.budget.maxResidentBytes-resamplePlan.stateBytes}:context.budget;
-      const memoryPlan=planPcmMemory({budget:payloadBudget,resample:resampling,channels:Math.max(audio.info.channels,channels),remix:remixing,inputBytesPerSample:getPcmFormat(pcmCodec).bytesPerSample,widestBytesPerSample:sampleBytes,copy:codec==='copy',volumeNodes:filters?.steps.filter(step=>step.name==='volume'||step.name==='apad'||step.name==='adelay'||step.name==='aformat'&&step.sampleFormat!==null).length??0,reframeSamples:filterBuffers,sourceSamples:range.samples===0n?0n:readRange.samples,generatedOutput:padding&&range.samples>0n&&readRange.samples===0n,inputHeaderBytes:rawInputCodec?0:128,outputScratchBytes:outputFormat==='framecrc'?512:outputFormat==='w64'?168:['wav','aiff','au'].includes(outputFormat??'')?128:0});
+      const filterMemory=filters?pcmFilterMemory(filters,{sampleRate:audio.info.sampleRate,channels:audio.info.channels,sampleFormat:sourceSampleFormat},{...filterCount,samples:inputRange.samples},{width:Math.max(audio.info.channels,channels)*sampleBytes,maxBufferBytes:context.budget.maxBufferBytes,maxResidentBytes:context.budget.maxResidentBytes-(resamplePlan?.stateBytes??0)}):undefined;
+      const payloadBudget=resamplePlan||filterMemory?.stateBytes?{...context.budget,maxResidentBytes:context.budget.maxResidentBytes-(resamplePlan?.stateBytes??0)-(filterMemory?.stateBytes??0)}:context.budget;
+      const memoryPlan=planPcmMemory({budget:payloadBudget,resample:resampling,channels:Math.max(audio.info.channels,channels),remix:remixing,inputBytesPerSample:getPcmFormat(pcmCodec).bytesPerSample,widestBytesPerSample:sampleBytes,copy:codec==='copy',volumeNodes:filterMemory?.volumeNodes??0,reframeSamples:filterBuffers,sourceSamples:range.samples===0n?0n:readRange.samples,generatedOutput:padding&&range.samples>0n&&readRange.samples===0n,inputHeaderBytes:demuxer.headerBytes,outputScratchBytes:muxer.scratchBytes});
       const guessLayout = audio.info.channels <= guessLayoutMax;
+      // A container mask other than the channel count's default reaches the filters under its native name, so layout constraints see it.
+      const inputMask=audio.info.channelMask?BigInt(audio.info.channelMask):null,maskLayout=inputMask!==null&&inputMask!==defaultChannelLayout(audio.info.channels)?.mask?channelLayoutName(inputMask):null;
       async function* selectedPackets(): AsyncIterable<MediaPacket> {
         if (readRange.samples === 0n) return;
         const packets = audio.packets(readRange.start, Math.max(1,memoryPlan.packetSamples) * audio.info.blockAlign);
@@ -235,7 +236,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
       }
       const sourcePackets = selectedPackets();
       async function* decoded():AsyncIterable<AudioFrameData> {
-        for await (const packet of sourcePackets) yield decodePcm(packet,{codec:pcmCodec,channels:audio.info.channels,sampleRate:audio.info.sampleRate,...(!guessLayout && !audio.info.channelMask ? {channelLayout:`${audio.info.channels} channels`} : {})},{maxFrameBytes:context.budget.maxBufferBytes,signal:context.signal});
+        for await (const packet of sourcePackets) yield decodePcm(packet,{codec:pcmCodec,channels:audio.info.channels,sampleRate:audio.info.sampleRate,...(maskLayout ? {channelLayout:maskLayout} : !guessLayout && !audio.info.channelMask ? {channelLayout:`${audio.info.channels} channels`} : {})},{maxFrameBytes:context.budget.maxBufferBytes,signal:context.signal});
       }
       async function* selectedFrames(frames:AsyncIterable<AudioFrameData>):AsyncIterable<AudioFrameData> {
         if(range.samples===0n)return;
@@ -252,7 +253,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
           if(emitted===range.samples)break;
         }
       }
-      const filterInputFormat={sampleRate:audio.info.sampleRate,channels:audio.info.channels,channelLayout:!guessLayout&&!audio.info.channelMask?`${audio.info.channels} channels`:audio.info.channels===1?'mono':audio.info.channels===2?'stereo':'unspecified',sampleFormat:sourceSampleFormat,pts:{value:0n,timeBase:{num:1n,den:BigInt(audio.info.sampleRate)}}};
+      const filterInputFormat={sampleRate:audio.info.sampleRate,channels:audio.info.channels,channelLayout:maskLayout??(!guessLayout&&!audio.info.channelMask?`${audio.info.channels} channels`:audio.info.channels===1?'mono':audio.info.channels===2?'stereo':'unspecified'),sampleFormat:sourceSampleFormat,pts:{value:0n,timeBase:{num:1n,den:BigInt(audio.info.sampleRate)}}};
       // Validate even when an empty output never pulls the encoded generator.
       filters?.validateInputFormat(filterInputFormat,...(resampling?[{beforeStep:rateBoundary!.beforeStep,transform:(frames:AsyncIterable<AudioFrameData>)=>frames,outputFormat:{...filterInputFormat,sampleRate:resultRate,sampleFormat:rateBoundary!.outputFormat}}]:[]));
       async function* encoded() {
@@ -266,32 +267,16 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
         const frames=filters?filters.process(decoded(),{...options,inputFormat:filterInputFormat},...(resampling?[{beforeStep:rateBoundary!.beforeStep,transform,outputFormat:{...filterInputFormat,sampleRate:resultRate,sampleFormat:rateBoundary!.outputFormat,pts:{value:0n,timeBase:{num:1n,den:BigInt(resultRate)}}}}]:[])):resampling?transform(decoded()):decoded();
         for await(const frame of resampling||filters?.reframes?selectedFrames(frames):frames){const output=remixing?remixAudioFrame(frame,channels as 1|2,targetSampleFormat,{...options,arithmetic:remixArithmetic}):frame;yield encodePcm(output,outputCodec,options);}
       }
-      let channelLayout = '';
-      if (outputFormat === 'framecrc') {
-        const layouts: Record<number,string> = {4:'mono',3:'stereo',11:'2.1',7:'3.0',263:'4.0',51:'quad',55:'5.0',63:'5.1',1543:'5.0(side)',1551:'5.1(side)',1807:'6.1',1599:'7.1'};
-        const inferred=defaultChannelLayout(audio.info.channels);
-        channelLayout = remixing?(channels===1?'mono':'stereo'):audio.info.channelMask ? layouts[audio.info.channelMask] ?? (inferred?.mask===BigInt(audio.info.channelMask)?inferred.name:'') : (guessLayout ? inferred?.name : undefined) ?? `${audio.info.channels} channels`;
-        if (!channelLayout) unsupported('Unknown channel mask for framecrc output');
-      }
-      if(outputFormat==='au')validateAuOutput({codec:auCodec!,channels,sampleRate:resultRate},range.samples);
-      if(outputFormat==='w64')validateW64Output({codec:wavCodec!,channels,sampleRate:resultRate,channelMask:(remixing?null:audio.info.channelMask)??((remixing||guessLayout)?defaultChannelLayout(channels)?.mask??null:null)},range.samples);
-      if(outputFormat==='aiff')validateAiffOutput({codec:aiffCodec!,channels,sampleRate:resultRate,channelMask:remixing?null:audio.info.channelMask},range.samples);
+      const layouts: Record<number,string> = {4:'mono',3:'stereo',11:'2.1',7:'3.0',263:'4.0',51:'quad',55:'5.0',63:'5.1',1543:'5.0(side)',1551:'5.1(side)',1807:'6.1',1599:'7.1'};
+      const inferred=defaultChannelLayout(audio.info.channels),channelMask=remixing?null:audio.info.channelMask;
+      const channelLayout = remixing?(channels===1?'mono':'stereo'):audio.info.channelMask ? layouts[audio.info.channelMask] ?? (inferred?.mask===BigInt(audio.info.channelMask)?inferred.name:'') : (guessLayout ? inferred?.name : undefined) ?? `${audio.info.channels} channels`;
+      const stream: ContainerOutputStream = {codec:outputCodec,channels,sampleRate:resultRate,channelMask,layoutMask:channelMask??((remixing||guessLayout)?defaultChannelLayout(channels)?.mask??null:null),channelLayout,samples:range.samples,bitexact,options:formatOptions};
+      muxer.validate?.(stream);
       context.signal.throwIfAborted();
       const destination = await context.filesystem.openWrite(output.url, { overwrite });
-      const format = { codec: outputCodec, channels, sampleRate: resultRate, channelMask: remixing?null:audio.info.channelMask };
       const packets = codec === 'copy' ? sourcePackets : encoded();
-      const options = { ...(bitexact?{}:{metadataProfile:'ffmpeg-9.0.2' as const}),sampleCount: range.samples, maxWriteBytes: context.budget.maxBufferBytes, signal: context.signal };
-      if (outputFormat === 'framecrc') {
-        await muxFrameCrc(destination,{codec:outputCodec,sampleRate:resultRate,channelLayout},packets,{
-          ...options, bitexact,
-          framing:{blockAlign:getPcmFormat(outputCodec).bytesPerSample * channels,samplesPerPacket:range.span,firstPacketSamples:range.firstPacketSamples,sampleCount:range.samples,startPts:range.pts,...(resampledSchedule?{packetSchedule:resampledSchedule}:padding?{sections:paddingSections!}:{})}
-        });
-      }
-      else if(outputFormat==='au')await muxAu(destination,{...format,codec:auCodec!},packets,options);
-      else if(outputFormat==='aiff')await muxAiff(destination,{...format,codec:aiffCodec!},packets,options);
-      else if(outputFormat==='w64')await muxW64(destination,{...format,codec:wavCodec!,channelMask:format.channelMask??((remixing||guessLayout)?defaultChannelLayout(channels)?.mask??null:null)},packets,options);
-      else if (rawOutputCodec) await muxRawPcm(destination,format,packets,options);
-      else await muxWav(destination,{...format,codec:wavCodec!,channelMask:format.channelMask??((remixing||guessLayout)?defaultChannelLayout(channels)?.mask??null:null)},packets,{...options,metadataProfile:'ffmpeg-9.0.2',bitexact});
+      await muxer.write(destination,stream,packets,{maxWriteBytes:context.budget.maxBufferBytes,signal:context.signal,
+        framing:{blockAlign:getPcmFormat(outputCodec).bytesPerSample * channels,samplesPerPacket:range.span,firstPacketSamples:range.firstPacketSamples,sampleCount:range.samples,startPts:range.pts,...(resampledSchedule?{packetSchedule:resampledSchedule}:padding?{sections:paddingSections!}:{})}});
       return [output.url];
     }
   };

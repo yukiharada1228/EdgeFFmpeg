@@ -31,9 +31,9 @@ function rate(value:number):void {
  if(!Number.isInteger(value)||value<1||value>2147483647)throw new RangeError('Invalid FLAC filter sample rate');
 }
 /** Only the existing finite, constant, single-input audio filter subset is accepted. */
-export function compileFlacAudioFilters(description:string,outputFormat:AudioSampleFormat):CompiledFlacAudioFilters {
+export function compileFlacAudioFilters(description:string,outputFormat:AudioSampleFormat,outputConversion=false):CompiledFlacAudioFilters {
  sampleFormat(outputFormat);
- const chain=compileAudioFilterChain(description,{outputSampleFormat:outputFormat});
+ const chain=compileAudioFilterChain(description,{outputSampleFormat:outputFormat,outputConversion});
  return Object.freeze({...chain,encoderSampleFormat:outputFormat,
   plan(inputSamples:bigint,inputRate:number,inputFormat:AudioSampleFormat):FlacAudioFilterPlan {
    rate(inputRate);sampleFormat(inputFormat);
@@ -91,27 +91,21 @@ export async function* processFlacAudioFilters(frames:AsyncIterable<AudioFrameDa
  };
  const reserve=(initial:AudioPadFormat)=>{
   // Scalar stages can retain their input while their output is suspended at a
-  // downstream yield. Reserve each allocation, not just the largest one. FIFO
-  // stages get two slots (partial buffer plus output); padding gets one slot.
+  // downstream yield. Reserve each allocation, not just the largest one. Every
+  // step's descriptor declares its frames, sample buffers (FIFO: partial buffer
+  // plus output; padding: the finite tail) and state (adelay rings).
   // maxFrameBytes bounds every scalar allocation even for wider intermediates.
-  let resident=0,stageRate=initial.sampleRate;
+  let resident=0;
   const widest=Math.max(widths[sampleFormat(initial.sampleFormat)],compiled.maxBytesPerSample);
-  for(const step of compiled.steps){
-   if(step.name==='volume'||step.name==='aformat'&&step.sampleFormat!==null)resident+=maxFrameBytes;
-   else if(step.name==='asetnsamples'||step.name==='apad'){
-    let samples=step.name==='asetnsamples'?step.samples:step.packetSamples;
-    if(step.name==='apad'){
-     // padAudio allocates only the remaining finite tail, not packetSamples
-     // unconditionally. Keep the reservation and allocation bound consistent.
-     const duration=step.padDuration??step.wholeDuration;
-     const limit=step.padSamples??step.wholeSamples??(duration===null?null:(duration*BigInt(stageRate)+500000n)/1000000n);
-     if(limit!==null&&limit<BigInt(samples))samples=Number(limit);
-    }
+  for(const {frames,buffers,stateBytes} of compiled.reservations(initial)){
+   resident+=frames*maxFrameBytes;
+   for(const {samples,copies} of buffers){
     const bytes=samples*initial.channels*widest;
     if(!Number.isSafeInteger(bytes)||bytes>maxFrameBytes)throw new RangeError('FLAC filter buffer exceeds allocation limit');
-    resident+=bytes*(step.name==='asetnsamples'?2:1);
+    resident+=bytes*copies;
    }
-   if(step.name==='asetrate')stageRate=step.sampleRate;
+   if(stateBytes>BigInt(maxFrameBytes))throw new RangeError('FLAC filter buffer exceeds allocation limit');
+   resident+=Number(stateBytes);
    if(!Number.isSafeInteger(resident))throw new RangeError('FLAC filter resident envelope overflow');
   }
   release=resources.reserveExternalMemory(resident);
