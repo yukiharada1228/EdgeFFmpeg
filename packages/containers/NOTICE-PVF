@@ -1,0 +1,12 @@
+Scoped Portable Voice Format (PVF) demuxer
+
+The 'PVF1\n' probe, the "%d %d %d" header line, its channel, rate and
+bits-per-sample validation, the codec selection and the block alignment in
+src/pvf.ts follow libavformat/pvfdec.c (pvf_probe, pvf_read_header). The
+private header-line reader follows libavformat/aviobuf.c (ff_get_line), and the
+codec table follows libavformat/utils.c (ff_get_pcm_codec_id).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2012 Paul B Mahol;(c)2000,2001,2002 Fabrice Bellard. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete pvf demuxer.

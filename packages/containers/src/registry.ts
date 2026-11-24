@@ -8,6 +8,7 @@ export {epaf} from './epaf.js';
 export {avr} from './avr.js';
 export {framecrc} from './formats/framecrc.js';
 export * from './formats/raw-pcm.js';
+export {pvf} from './pvf.js';
 export {w64} from './formats/w64.js';
 export {wav} from './formats/wav.js';
 export {wve} from './wve.js';

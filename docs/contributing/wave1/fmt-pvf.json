@@ -1,0 +1,87 @@
+{
+  "capabilityId": "demuxer.pvf",
+  "slug": "fmt-pvf",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/pvf.ts",
+    "packages/containers/NOTICE-PVF",
+    "packages/containers/src/registry.ts",
+    "docs/contributing/pvf-support.md",
+    "docs/contributing/wave1/fmt-pvf.json",
+    "tests/unit/pvf.test.ts",
+    "tests/differential/pvf.test.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/containers/src/registry.ts", "change": "+1 line: export {pvf} from './pvf.js'; (demux-only, probe 'PVF1\\n', -f pvf)"}
+  ],
+  "tests": [
+    {"file": "tests/unit/pvf.test.ts", "titles": [
+      "ports ff_get_line terminators truncation CR lookahead and pending windows",
+      "ports the sscanf %d %d %d subset with C whitespace signs and conversion counts",
+      "parses PVF headers into signed big-endian PCM with bounded reads and exact seeks",
+      "refuses native INVALIDDATA headers with exit 183 and unmirrored ones explicitly",
+      "honors cancellation before and between PVF header reads",
+      "registers a demux-only pvf descriptor probing PVF1 newline with a five-byte confirm"
+    ], "pass": 6, "fail": 0},
+    {"file": "tests/differential/pvf.test.ts", "titles": [
+      "matches native PVF copy framecrc WAV and raw output across bit depths channels rates and lengths",
+      "matches native PVF seek duration and frame limits through copy framecrc",
+      "mirrors or explicitly refuses the PVF header line-format matrix against native exit codes",
+      "matches native explicit -f pvf on a truncated file and skips the magic unchecked as native does",
+      "matches native at the 512-channel maximum through copy framecrc and raw output"
+    ], "pass": 5, "fail": 0},
+    {"file": "tests/unit/container-registry.test.ts", "pass": 9, "fail": 0, "note": "unchanged"},
+    {"file": "tests/unit/container-registry-extension.test.ts", "pass": 7, "fail": 0, "note": "unchanged"}
+  ],
+  "nativeComparisons": {
+    "count": 259,
+    "details": [
+      "216 exact byte comparisons: bps {8,16,24,32} x channels {1,2,3} x rates {8000,44100} x {1,67,4100} frames, each as -c:a copy framecrc, -f wav (pcm_s16le) and -f s32le",
+      "5 copy framecrc timing profiles (input/output -ss, -t, -frames:a)",
+      "34 header lines: 26 match native framecrc bytes and exit status (0 or 183); 8 refused explicitly where native exits 0 (or 183 for an overflowing long), asserted per line",
+      "2 explicit -f pvf cases: 3-byte file (exit 183) and an unchecked wrong magic (decoded)",
+      "2 comparisons at 512 channels pcm_s8: copy framecrc and -f s8"
+    ]
+  },
+  "unsupported": [
+    "bits per sample 64 (pcm_s64be) and every value other than 8, 16, 24, 32 (native maps 12 to s16be with block_align 1, 7 to s8, 40 to no codec)",
+    "header fields outside the 32-bit int range (glibc long truncation not mirrored)",
+    "partial trailing sample frames (native emits a partial packet)",
+    "header lines not ending within the first 128 bytes of the file",
+    "input -ss at or beyond EOF (generic registry refusal; seekBeyondEnd unset)",
+    "muxing (native has no pvf muxer)",
+    "detection failure for 'PVF1\\r\\n' reports the generic Unsupported audio container signature (exit 1) where native exits 183"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "summary": "6 failed files, 13 failed tests of 2266",
+    "files": [
+      "tests/unit/flac-build-inputs.test.ts (1 test)",
+      "tests/unit/flac-decode-backend.test.ts (suite load)",
+      "tests/unit/flac-decoder.test.ts (suite load)",
+      "tests/unit/flac-expanded-fixtures.test.ts (2 tests)",
+      "tests/unit/flac-max-frames.test.ts (suite load)",
+      "tests/unit/resample-checkpoint.test.ts (10 tests, macOS arm64 golden digests)"
+    ]
+  },
+  "finalUnitFailures": {
+    "summary": "6 failed files, 13 failed tests of 2272; the FAIL list is identical to the baseline",
+    "files": "same as baselineUnitFailures"
+  },
+  "proposedContracts": [
+    {"id": "demuxer.pvf.copy-wav-raw", "file": "tests/differential/pvf.test.ts", "name": "matches native PVF copy framecrc WAV and raw output across bit depths channels rates and lengths", "modes": ["framecrc-copy", "wav", "raw"], "scope": "pcm_s8/s16be/s24be/s32be, 1-3 channels, 8000/44100 Hz"},
+    {"id": "demuxer.pvf.timing", "file": "tests/differential/pvf.test.ts", "name": "matches native PVF seek duration and frame limits through copy framecrc", "modes": ["framecrc-copy"], "scope": "input/output -ss, -t, -frames:a"},
+    {"id": "demuxer.pvf.header-lines", "file": "tests/differential/pvf.test.ts", "name": "mirrors or explicitly refuses the PVF header line-format matrix against native exit codes", "modes": ["framecrc-copy", "exit-status"], "scope": "ff_get_line and sscanf line formats; explicit refusals"},
+    {"id": "demuxer.pvf.forced-format", "file": "tests/differential/pvf.test.ts", "name": "matches native explicit -f pvf on a truncated file and skips the magic unchecked as native does", "modes": ["framecrc-copy", "exit-status"], "scope": "-f pvf"},
+    {"id": "demuxer.pvf.max-channels", "file": "tests/differential/pvf.test.ts", "name": "matches native at the 512-channel maximum through copy framecrc and raw output", "modes": ["framecrc-copy", "raw"], "scope": "512 channels pcm_s8"},
+    {"id": "demuxer.pvf.unit", "file": "tests/unit/pvf.test.ts", "name": "refuses native INVALIDDATA headers with exit 183 and unmirrored ones explicitly", "modes": ["unit"], "scope": "header validation and refusals"}
+  ],
+  "notes": [
+    "Native ff_get_line stores the LF/CR terminator in the 32-byte buffer while it fits; the port mirrors this and sscanf treats it as whitespace.",
+    "After a CR, native un-reads any following non-LF byte, including a single last byte of the file (probed: the byte stays in the data).",
+    "Mirrored native INVALIDDATA refusals use containerRefusal(message,183); unmirrored refusals use the private PvfError (exit 1).",
+    "No shared edit beyond the registry line was needed; packages/containers/src/index.ts is unchanged and tests import the module by path.",
+    "Setup durations: submodule 56 s, npm ci 9 s, reference:build 164 s, baseline typecheck+lint+boundaries 58 s, baseline unit 77 s, final unit 74 s.",
+    "Evidence is from the Linux x86_64 oracle only."
+  ]
+}
