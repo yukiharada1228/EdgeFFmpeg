@@ -16,7 +16,8 @@ These fail with `AvrError` (exit 1) before any output is opened:
 
 - a bps that is not a multiple of 8 (for example 12, which native demuxes as s16be with a 1-byte `block_align`, or 4, which native maps to u8 with a zero `block_align` and then fails while demuxing);
 - bps 64 with the sign bit set (native `pcm_s64be`, which is not in the `PcmCodec` union);
-- a data size that is not a whole number of sample frames (native emits a short final packet).
+- a data size that is not a whole number of sample frames (native emits a short final packet);
+- `-f avr` on a file whose first four bytes are not `2BIT`. `avr_read_header` skips the magic unchecked, but `openAvr` throws `AvrError` (`Expected AVR signature`) while reading the header. No unit or differential test covers this case, so its exit status and the absence of output are unverified (wave 1 integration audit).
 
 The specification asked for bps 12 to be refused "with native exit status". Native exits 0 for bps 12, so the port cannot match that status. It refuses explicitly instead, and the differential test asserts that native accepts the file.
 
@@ -33,4 +34,4 @@ Linux x86_64 oracle built in the sandbox (`.build/reference/ffmpeg`, sha256 `ac3
 
 ## Unsupported
 
-AVR output (native has none), bps values that are not whole bytes, pcm_s64be, partial trailing frames, files shorter than the 128-byte header, the loop, MIDI, replay-speed and name fields (native ignores them too), Workers-runtime verification, and FLAC input. Native comparisons ran only on Linux x86_64. They have not been repeated on the macOS arm64 oracle that the other container documents use.
+AVR output (native has none), bps values that are not whole bytes, pcm_s64be, partial trailing frames, files shorter than the 128-byte header, the loop, MIDI, replay-speed and name fields (native ignores them too), Workers-runtime verification, and FLAC input. The routine's native comparisons ran on the sandbox's Linux x86_64 reference. In the wave 1 integration, the same tests also passed against the pinned macOS arm64 reference (local run) and on Linux CI run 45402980700. CI used its own Linux build of the reference.

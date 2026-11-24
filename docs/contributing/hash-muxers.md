@@ -34,4 +34,4 @@ Output-only whole-stream digest muxers, ported from `libavformat/hashenc.c` and 
 
 ## Side effect
 
-The registry's supported-output listing now reads `WAV, AIFF, AU, W64, framecrc, crc, hash, md5, streamhash`, so the generic `Output requires ... or an explicit raw PCM format` refusal names them too. This is the registry's designed behaviour for unordered muxers; `tests/unit/container-registry.test.ts` passes unchanged.
+On this branch alone, the registry's supported-output listing read `WAV, AIFF, AU, W64, framecrc, crc, hash, md5, streamhash`. The generic `Output requires ... or an explicit raw PCM format` refusal names those formats too. This is the registry's designed behaviour for unordered muxers, and `tests/unit/container-registry.test.ts` passes unchanged. In the wave 1 integration, the IRCAM, RSO and SoX muxers also appear: `WAV, AIFF, AU, W64, framecrc, crc, hash, IRCAM, md5, RSO, SoX, streamhash`. Reconciliation commit `4bd37b1` therefore changed `tests/unit/hash-digests.test.ts`. It now asserts only that `framecrc, crc, hash, md5, streamhash` appear in that relative order, not the full listing.

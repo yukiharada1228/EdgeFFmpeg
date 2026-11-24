@@ -70,6 +70,12 @@ packets are unchanged.
 - **`refuses out-of-range options, expressions, enable and unknown options before writing output, where native also fails or accepts unimplemented forms`**:
   11 refusals checked against native's exit status, with no output written.
 
+The 300 and 840 counts hold on linux/x64 only. On any other host the test drops
+the f32 and f64 sources from both comparison tests and reports no skip. The tests
+then make 180 and 504 comparisons and still pass. That happened in the wave 1
+integration run on the macOS arm64 reference. The full counts ran on Linux CI
+(run 45402980700).
+
 Mutating either native quirk (the `INT32_MAX` scale of the else branch, or the raw shift in the limiter branches) fails the first test.
 
 `tests/unit/dcshift.test.ts` (6 tests) covers:

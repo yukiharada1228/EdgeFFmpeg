@@ -2796,11 +2796,19 @@ partial (`vf-swapuv`, `vf-chromashift`, `af-afade`). All 40 branches were merged
 registry lines that the union merge had duplicated. It also stopped the hash
 muxer unit test from asserting the full output-format listing.
 
+Three native builds are involved, and the evidence below names the one it used.
+The per-feature docs cite the sandbox build (`ac302e4d…893c`, Linux x86_64). The
+local integration run used the pinned macOS arm64 reference (`1b86106f…ab92`).
+GitHub Actions builds its own Linux x86_64 reference (`58295ca5…f966`). All three
+come from the same pinned commit, but they are different binaries.
+
 Four area reviews read each branch against its specification, its report and the
 upstream source. Every differential test runs `.build/reference/ffmpeg` at test
 time and compares exactly. None compares against a self-generated oracle or a
-digest committed from one platform. Every branch kept to the recipe: one module,
-its registry line(s), its own NOTICE and tests in new files.
+digest committed from one platform; sox's FATE test also checks upstream's
+`tests/ref/lavf/sox` MD5. Every branch kept to the recipe: new source files of
+its own (one module, or two for epx, fillborders and the hash muxers), its
+registry line(s), its own NOTICE and tests in new files.
 
 - **Audio filters (16).** channelmap and crystalizer were accepted. acopy,
   aperms, dcshift, aderivative, aintegral, earwax, adynamicsmooth, haas,
@@ -2814,42 +2822,50 @@ its registry line(s), its own NOTICE and tests in new files.
   ircam, nistsphere and the md5/hash/crc/streamhash muxers were accepted with
   notes. sds needed a fix; it was fixed and kept.
 
-Integration fixes, each committed separately:
+Integration fixes, each committed separately. Every native probe quoted in these
+bullets was made against the macOS arm64 reference, and the new and changed tests
+have run only on macOS so far (see the Linux CI paragraph below):
 
 - `d4a955f` asoftclip: the parser skipped every empty option token, so
   `asoftclip=hard::0.5` produced output while native fails with 234. Now only a
   single trailing `:` is skipped. The unit test and the native-status refusal
-  test gained four empty-token forms (native statuses probed: 234 for all four,
-  and 0 for `hard:0.5:`).
+  test gained four empty-token forms (native statuses probed on macOS: 234 for
+  all four, and 0 for `hard:0.5:`).
 - `1c59279` compensationdelay: native's ring is a power of two sized from the
   50 °C front delay, and it reads `(w + buf_size - delay) & mask`. Colder delays
   that exceed `buf_size` therefore wrap to `delay mod buf_size`, and the branch's
-  `delay + 1` ring ignored that. Native impulse probes put the echo at sample 471
+  `delay + 1` ring ignored that. Native impulse probes (macOS reference) put the echo at sample 471
   for 50000 Hz with `m=100:cm=100:mm=10:temp=-50`, where the branch put it at
   16855, and at sample 235 for 25000 Hz. The fix ports `buf_size` and reduces both
   the delay and the reservation. A new unit test checks the native ring
   transcription. A new ungated differential (30 framecrc at 25000, 50000 and
-  8000 Hz) fails without the fix: its `dry=0:wet=1` copies and non-overlapping
-  impulses are exact on every platform.
+  8000 Hz) was recorded as failing without the fix on macOS. Its `dry=0:wet=1`
+  copies and non-overlapping impulses are designed to involve no rounded float
+  arithmetic, so the test is not gated; it has passed only on macOS so far. The
+  same correction was made to `compensationdelay.md` and to the wave 1 spec
+  (`35-af-compensationdelay.md`), whose claim that a `delay + 1` ring gives
+  identical output holds only while `delay < buf_size`.
 - `ea1fe64` afade: the ungated `ipar` cases failed on macOS, because the arm64
   reference fuses `1 - (1 - g) * (1 - g)` (78 of 302 gains differ for `ns=301`).
   All 96 `ipar` comparisons and 14 `ipar` refusals moved, unchanged, into one
   linux/x64 test. The claim in `afade.md` that default gains are exact on every
-  platform was corrected.
+  platform was corrected. This is the only gate whose macOS difference this
+  record measures.
 - `de80096` sds: `sds_probe` compares `AV_RB32(buf)` with `0xF07E0001`, but the
   probe ignored byte 2. `head` and `probeSds` now require `00` there. Declared
   `-f sds` still ignores byte 2, as `sds_read_header` does; 18 new native
   comparisons cover that case. Undetected byte-2 files are refused. The test
   asserts native's status for them: 183 without the `.sds` extension, and 0 with
-  it, because native falls back to the extension. The `F0 7E xx 01` wording in the
+  it, because native falls back to the extension. The existing refusal test
+  gained two byte-2 cases where native exits 187. The `F0 7E xx 01` wording in the
   spec, [container-registry](container-registry.md) and
   [sds-support](sds-support.md) was corrected.
 - `15bfffb` ircam, found by the full macOS run: the refusal for more than 512
   channels expected native to exit 218. That is `AVERROR(ENOSYS)` on Linux; the
   macOS reference exits 178 (ENOSYS is 78 there). EdgeFFmpeg always uses the
   Linux value. The test now requires the host's ENOSYS status from native, read
-  from `os.constants.errno`, and 218 from EdgeFFmpeg. On Linux the assertion is
-  unchanged.
+  from `os.constants.errno`, and 218 from EdgeFFmpeg. On Linux, where the host
+  value is 218, the comparison is unchanged.
 - `2934bb9`: `git revert` also applies `merge=union`, so the ten video reverts
   kept their registry lines. Those lines were removed by hand.
 
@@ -2861,13 +2877,19 @@ Deferred (reverted with `git revert -m 1`; the branches stay at
 negotiation table in `packages/avfilter/src/video-ops/formats.ts` has no `gbrap`,
 `yuva444p`, `yuva422p` or `yuvj444p`. When native's `query_formats` converts into
 one of those, the planner quietly picks another table format, and the output
-differs from native instead of being refused before output. The pinned native
-probes show the cases:
+differs from native instead of being refused before output. Native probes of the
+auto-inserted scale target show the cases. They ran on the macOS arm64
+reference:
 
 - packed RGBA becomes `gbrap` natively but `yuva420p` here, for limiter,
   pixelize, erosion, dilation, deflate, inflate and fillborders;
-- gray becomes `yuvj444p` natively, for swapuv and chromashift;
-- default shuffleplanes differs in 766 of 1,568 linear probes.
+- gray becomes `yuvj444p` natively, for swapuv and chromashift, and packed RGBA
+  becomes `yuva444p` natively for swapuv;
+- shuffleplanes' own linear test has 1,568 probes: 14 sources, 14 maps
+  including the default, 2 chains and 4 targets. In 766 of them native picks a
+  format outside the table, and the test asserts only that EdgeFFmpeg's format
+  differs. That count comes from the branch's test, which passed in the Linux
+  sandbox and on Linux CI.
 
 A kernel-level fix is not possible inside a branch, because an operator's
 `validate()` sees only the negotiated format. The fix is one shared
@@ -2884,15 +2906,19 @@ macOS arm64 and the pinned reference (sha256 `1b86106f…ab92`):
 - `npm run test:differential`: **666 tests across 238 files: 642 passed, 24 skipped, none failed**.
 - `WRANGLER_SEND_METRICS=false npm run workers:bundle`: the dry-run bundle passed (wrangler 4.165.0, 1,323.97 KiB); nothing was deployed.
 
-That is **5,862 tests across 671 files: 5,838 passed, 24 skipped and none failed**. All of the previous clean totals on
+On macOS arm64 that is **5,862 tests across 671 files: 5,838 passed, 24 skipped and none failed**. All of the previous clean totals on
 `feat/initial-implementation` still pass: unit 2,602, workers 277, integration
 2,081 and differential 536. This was checked against the pilot run's JSON
 reports, per file and full test name and counting repeated names: every one of
 those 5,496 tests passes again. Workers and integration are unchanged, because no
 wave 1 branch adds tests there. The 24 skipped tests are linux/x64-gated
-differential tests from eleven audio files. The branches gate them because the
-macOS arm64 reference fuses floating-point expressions that EdgeFFmpeg evaluates
-unfused:
+differential tests from ten audio files. The specifications told routines to gate
+float-sensitive cases to linux/x64. The usual reason is that the macOS arm64
+reference fuses some floating-point expressions that EdgeFFmpeg evaluates unfused.
+The routines had only Linux references, so the gates are precautions, not macOS
+measurements. compensationdelay's test says only that unfused arithmetic was
+verified on Linux x64. This record measures a macOS difference only for afade
+(`ea1fe64` above). Skips per file:
 
 - adynamicsmooth: 3
 - aecho: 5
@@ -2905,27 +2931,42 @@ unfused:
 - haas: 2
 - stereowiden: 2
 
-Two branches gate silently. `dcshift.test.ts` drops its f32/f64 sources and
-`aderivative.test.ts` drops its float sources on any other host, without
-reporting a skip. An earlier full run on `2934bb9` was superseded. It had the same test counts
+Two branches gate silently. On any host other than linux/x64,
+`dcshift.test.ts` drops its f32/f64 sources from both comparison tests, and
+`aderivative.test.ts` drops its float sources (some loops drop them only for
+s16 output). Neither reports a skip, so the macOS pass covers fewer cases than
+the test titles say. An earlier full run on `2934bb9` was superseded. It had the same test counts
 and skips, and its only failure was the ircam case above.
 
-GitHub Actions run 45402980700 ran on Linux x86_64 (Node v24.22.3) at `b829893`.
-That is the merge of all 40 branches, before the fixes and reverts. Its failures
-match the known Linux baseline, run 45321289869, exactly:
+GitHub Actions run 45402980700 ran on Linux x86_64 (Node v24.22.3, CI-built
+reference `58295ca5…f966`) at `b829893`. That commit holds the 40 branch merges,
+the reconciliation commit `4bd37b1` and the CI safe-directory fix. It comes before
+the integration fixes and reverts. Like the baseline, the run concluded
+**failure**. Its failures match the baseline run 45321289869 exactly. The baseline
+ran at `a70c237`, which is `feat/initial-implementation` (`9fd9ae3`) plus the same
+CI fix, without the registries or wave 1:
 
-| Suite | Tests | Failed | Baseline failed |
-|---|---|---|---|
-| unit | 2,852 | 10 | 10 |
-| integration | 2,000 | 81 | 81 |
-| differential | 675 | 23 | 23 |
-| workers | 264 | 26 | 26 |
+| Suite | Tests | Failed | Baseline tests | Baseline failed |
+|---|---|---|---|---|
+| unit | 2,852 | 10 | 2,569 | 10 |
+| integration | 2,000 | 81 | 2,000 | 81 |
+| differential | 675 | 23 | 496 | 23 |
+| workers | 264 (4 skipped) | 26 | 264 (4 skipped) | 26 |
 
-The match holds per (file, full test name), and the same files fail to load in
-both runs. There are **no new Linux failures**. The baseline failures are
-macOS-pinned digests and local artifacts that CI lacks. Every other gate passed
-in both runs. The kept wave 1 files passed there: unit 185/185 and differential
-121/121, with no skips, so every linux/x64-gated case ran and passed on Linux.
+The match holds per (file, full test name), and the same 26 files fail to load
+in both runs. There are **no new Linux failures at `b829893`**. This record did
+not diagnose each baseline failure. The failure lists show 10 resample-checkpoint
+unit tests with macOS-pinned digests. They also show files that fail to load
+because `.build/flac-investigation` is missing or because BMP and MP4 evidence is
+pinned to another reference binary. The remaining failures are spread over all
+four suites. They include FLAC, H264, checkpoint, channel-layout, raw-video,
+permission and directory tests. Every non-test gate passed in both runs:
+reference extraction, the FATE inventory, the FATE audio audit and FATE
+execution, typecheck, declarations, lint, boundaries, worker types and the
+worker bundle.
+The four test gates failed in both. The kept wave 1 files passed there: unit
+185/185 and differential 121/121, with no skips, so every linux/x64-gated case
+ran and passed on Linux. They did so in their pre-fix form.
 The deferred video files also passed (unit 48/48, differential 52/52). The
 divergence that defers them is a missing refusal, which their tests pin rather
 than catch. Linux CI has not run the final head, because nothing was pushed.
@@ -2937,7 +2978,16 @@ filter-mode labels were dropped, `semantic` was added, and `bit-exact` was added
 to native comparisons. Thirteen names gained their describe prefix, so that they
 equal the Vitest full name. The 24 contracts for linux/x64-gated tests say in
 their scope that they resolve only on a linux/x64 run. Under the compatibility
-report's matcher, applied to the final run's JSON, all 830 existing contracts and 161 of the 185 new ones resolve to exactly one passed test. The other 24 are the Linux-only contracts: 23 match one skipped test, and asoftclip's alg contract has no match on macOS because its title is computed per platform. The matcher's full status also requires the whole suite to pass, and `summarizeSuite` counts a file with any skipped test as failed. The macOS differential suite therefore reads failed, and so do all 494 contracts on differential files: only 521 contracts pass under the full status. In the CI run's
+report's matcher, applied to the macOS final run's JSON, all 830 existing
+contracts and 161 of the 185 new ones resolve to exactly one passed test. The
+other 24 are the Linux-only contracts. 23 of them match one skipped test.
+asoftclip's alg contract has no match on macOS, because its title is computed per
+platform. The matcher's full status also requires the whole suite to pass, and
+`summarizeSuite` counts a file with any skipped test as failed. On macOS the ten
+gated files therefore fail, and so does the differential suite. None of the 494
+contracts on differential files passes: 493 read failed and asoftclip's alg
+contract reads unverified. Only 521 of the 1,015 contracts pass under the full
+status. In the CI run's
 JSON, 23 of the 24 Linux-only contracts resolve to a passed test. The 24th,
 `filter.afade.ipar`, names a test added after `b829893`; its cases passed there
 inside the then-ungated tests. `compat/implementation-progress.json` gains 36
@@ -2964,21 +3014,30 @@ Open after this integration:
   should become refusal assertions.
 - **No Linux CI on the final head.** The fixes and the new tests have macOS
   evidence only. The compensationdelay-wrap and sds byte-2 differentials are
-  float-insensitive and ungated. The afade `ipar` test is linux-only.
+  ungated and are designed to be float-insensitive, but neither has run on Linux.
+  The afade `ipar` test is linux-only, so it has not run at all; its cases ran on
+  Linux only inside the pre-fix tests.
 - **Silent and inconsistent gating.** dcshift and aderivative weaken silently on
   macOS. Some branches gate on `process.platform`, others on the reference's
   build metadata. asoftclip's alg test title changes per platform, so its
   contract stays unverified on macOS.
 - **Reservations.** aderivative's `reserve()` under-declares its Float64 state.
-  earwax keeps an undeclared converted frame resident.
+  earwax keeps undeclared `Int16Array` copies of each frame's two planes
+  resident across the yield. [earwax](earwax.md) now says so.
 - **aintegral's refusal test** accepts an existing empty output file.
 - **Non-finite float input.** It is handled inconsistently, either refused
   mid-stream or processed with untested NaN parity, and has no CLI coverage.
 - **Shared container gaps.** The AIFF muxer writes no CHAN chunk for guessed
   layouts of three or more channels, without refusing. More inputs now reach it.
-  Undetected input exits 1 where native exits 183. Native's extension-fallback
-  detection is not modelled.
-- **avr** refuses non-`2BIT` files under `-f avr`, which native accepts.
+  Undetected input exits 1 where native exits 183 (187 for some byte-2 SDS
+  files). Native's extension-fallback detection is not modelled.
+- **avr** refuses non-`2BIT` files under `-f avr`, which native accepts
+  (`avr_read_header` skips the magic). No test covers this case.
+  [avr-support](avr-support.md) now lists it.
+- **Review notes not fixed here.** field does not clear `AV_FRAME_FLAG_INTERLACED`.
+  The flag cannot be seen in rawvideo or framecrc output. epx's timed path is
+  compared only with packed RGBA sources. haas does not reproduce native's int
+  overflow above about 53.7 MHz.
 - **sox and ircam FATE tests** need a host C compiler.
 - **Filter combinations.** No chain combines two wave 1 filters.
 - **Registry recipe.** `merge=union` also governs `git revert`, so a reverted
@@ -2988,3 +3047,30 @@ Open after this integration:
   through symlinks.
 - No Modal run, production Cloudflare execution, compatibility certification or
   capability promotion was performed.
+
+An audit of this section checked each count against the raw run logs, the Vitest
+JSON reports of the macOS run and of both CI runs, the receipt and the branch
+reports. It corrected these claims:
+
+- ten gated files, not eleven;
+- 493 failed contracts and one unverified, not 494 failed;
+- the baseline run's head and its failure description;
+- the CI conclusion and the CI-built reference;
+- the shuffleplanes probe scope;
+- the gate rationale;
+- which evidence is macOS-only.
+
+It also spot-checked six branches' feature docs against their tests: dcshift,
+earwax, il, epx, avr and the hash muxers. The comparison counts in all six docs
+match the tests' asserted totals. These docs were corrected:
+
+- [dcshift](dcshift.md): its counts hold only on linux/x64;
+- [earwax](earwax.md): its reservation leaves out the resident plane copies;
+- [avr-support](avr-support.md): the unlisted signature refusal, and stale
+  wording that said the tests never ran on macOS;
+- [hash-muxers](hash-muxers.md): an output listing that is stale after
+  integration.
+
+The audit edits came after `receipt.json` was written, so its doc hashes and
+`changedAfterValidation` do not cover them. No test, contract or progress entry
+was changed by the audit.

@@ -41,7 +41,7 @@ Output frames keep the input sample count and timestamps. There is no tail. The 
 
 ## Capabilities and memory
 
-`generatesOutput: false`, `reframes: true` (cross-frame state; a stream step reframes anyway), `allocatesFrames: true`, `formatConstraint`, `rateConversion` and `timeSelection` false, and no `flacInput`. `reserve()` declares one frame plus 256 state bytes: one 64-sample s16 history for each of the two input channels.
+`generatesOutput: false`, `reframes: true` (cross-frame state; a stream step reframes anyway), `allocatesFrames: true`, `formatConstraint`, `rateConversion` and `timeSelection` false, and no `flacInput`. `reserve()` declares one frame plus 256 state bytes: one 64-sample s16 history for each of the two input channels. It does not declare the per-frame copies. Each frame's two converted planes are also copied into `Int16Array`s (2 bytes per sample per channel), and those copies stay resident across the `yield`. This gap was found in the wave 1 integration review and is not fixed.
 
 ## Evidence
 
