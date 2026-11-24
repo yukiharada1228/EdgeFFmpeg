@@ -1,0 +1,19 @@
+compensationdelay audio filter (src/audio/compensationdelay.ts)
+
+src/audio/compensationdelay.ts adapts FFmpeg libavfilter/af_compensationdelay.c:
+the option table (mm, cm, m, dry, wet, temp with their defaults and ranges), the
+COMP_DELAY_SOUND_SPEED_KM_H / COMP_DELAY_SOUND_SPEED_CM_S /
+COMP_DELAY_SOUND_FRONT_DELAY macros in their evaluation order, config_input's
+delay computation truncated to unsigned, and filter_frame's write-then-read
+delay line dst = dry * x + wet * buffer[r_ptr] in the pinned dblp format.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2001-2010 Krzysztof Foltman, Markus Schmidt, Thor Harald Johansen, Vladimir Sadovnikov and others
+Copyright (c) 2015 Paul B Mahol
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation sizes the per-channel ring at delay + 1 samples instead
+of native's power-of-two ring of sample_rate * COMP_DELAY_MAX_DELAY samples (the
+output is identical), declares that ring as reserved state bounded by the frame
+allocation limit, and refuses expressions, non-integer values for the integer
+options, timeline enable and runtime commands instead of implementing them.
+The original source and full notices remain in the pinned upstream submodule.
