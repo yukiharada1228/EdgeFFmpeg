@@ -1,0 +1,24 @@
+earwax headphone FIR (src/audio/earwax.ts)
+
+src/audio/earwax.ts adapts FFmpeg libavfilter/af_earwax.c: the 64-entry int8
+filt[] table split into the 30 and 330 degree 32-tap filters (config_input),
+the 32-sample taps[2*NUMTAPS] history per input channel with its memcpy and
+memmove paths (convolve), the int32 scalarproduct with >>7 and av_clip_int16,
+the four convolutions and the clipped mix() into the two output channels
+(filter_frame), and query_formats (s16p, stereo, 44100 Hz).
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2011 Mina Nagy Zaki
+Copyright (c) 2000 Edward Beingessner And Sundry Contributors.
+This source code is freely redistributable and may be used for any purpose.
+This copyright notice must be maintained.  Edward Beingessner And Sundry
+Contributors are not responsible for the consequences of using this
+software.
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation computes each output sample from the saved history
+and the current frame directly instead of keeping per-channel scratch frames,
+writing in place from the last sample backwards; the arithmetic and clipping
+order are unchanged. Instead of the format and layout conversion native inserts
+implicitly, it refuses any input that is not stereo 44100 Hz, and it accepts
+no options. The original source and full notices remain in the pinned upstream
+submodule.

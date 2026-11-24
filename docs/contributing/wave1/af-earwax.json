@@ -1,0 +1,74 @@
+{
+  "capabilityId": "filter.earwax",
+  "slug": "af-earwax",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/audio/earwax.ts",
+    "packages/avfilter/NOTICE-EARWAX",
+    "tests/unit/earwax.test.ts",
+    "tests/differential/earwax.test.ts",
+    "docs/contributing/earwax.md",
+    "docs/contributing/wave1/af-earwax.json",
+    "packages/avfilter/src/audio/registry.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/avfilter/src/audio/registry.ts", "change": "+1 line: export {earwax} from './earwax.js';"}
+  ],
+  "tests": [
+    {"file": "tests/unit/earwax.test.ts", "title": "accepts only the bare token and refuses options, enable and unknown names with exact messages", "pass": 1, "fail": 0},
+    {"file": "tests/unit/earwax.test.ts", "title": "negotiates native s16p for every input format and declares its capabilities, counts and reservation", "pass": 1, "fail": 0},
+    {"file": "tests/unit/earwax.test.ts", "title": "refuses every input native would resample or remix, including a masked two-channel WAV layout", "pass": 1, "fail": 0},
+    {"file": "tests/unit/earwax.test.ts", "title": "matches a naive whole-signal FIR across random frame splits, packed and planar input, and saturates like native", "pass": 1, "fail": 0},
+    {"file": "tests/unit/earwax.test.ts", "title": "converts float and wide integer input through the negotiated s16p, and enforces allocation limits and cancellation", "pass": 1, "fail": 0},
+    {"file": "tests/differential/earwax.test.ts", "title": "matches native WAV, raw and framecrc bytes for stereo 44100 Hz u8, s16, s32 and f32 sources and composed chains", "pass": 1, "fail": 0},
+    {"file": "tests/differential/earwax.test.ts", "title": "matches native output time selection and frame limits after the cross-frame history", "pass": 1, "fail": 0},
+    {"file": "tests/differential/earwax.test.ts", "title": "refuses mono, three-channel and 48000 Hz input before output where native converts implicitly, and refuses options native rejects", "pass": 1, "fail": 0},
+    {"file": "tests/unit/audio-filter-registry.test.ts + audio-filter-registry-extension.test.ts + audio-filter-registry-contract.test.ts", "title": "(whole files, unchanged)", "pass": 26, "fail": 0}
+  ],
+  "nativeComparisons": {
+    "count": 178,
+    "byteComparisons": 172,
+    "details": [
+      "160 exact byte comparisons: stereo 44100 Hz u8/s16le/s32le/f32le raw sources (-cpuflags 0) x 8 chains (earwax, asetnsamples=5,earwax, asetnsamples=31:p=0,earwax, asetnsamples=33,earwax,asetnsamples=7, earwax,apad=pad_len=9, volume=0.5,earwax, earwax,earwax, anull,earwax,volume=2) x 5 outputs (s16 WAV, s32 WAV, raw s16le, s16 framecrc, s32 framecrc)",
+      "12 framecrc comparisons with input -ss/-t and output -ss/-t/-to/-frames:a for earwax and asetnsamples=5,earwax",
+      "4 refusal cases (mono 44100, 3ch 44100, stereo 48000, mono 8000) asserting native exit 0 via auto-resample and EdgeFFmpeg failure before output",
+      "2 option refusals (earwax=1, earwax=enable=1) asserting native non-zero exit"
+    ]
+  },
+  "unsupported": [
+    "Inputs native converts implicitly (non-stereo, non-default two-channel WAV/W64 masks, rates other than 44100 Hz): refused with 'earwax requires stereo 44100 Hz input'",
+    "Any option, enable or runtime command: refused with 'Unsupported earwax option' (native has none)",
+    "FLAC input: refused before decoding (no flacInput)",
+    "Automatic sample-rate conversion around earwax (rateBoundary): refused",
+    "AU, AIFF and W64 outputs: same path, no native comparison"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "summary": "13 failed tests in 6 files (3 files fail to load)",
+    "files": [
+      "tests/unit/flac-build-inputs.test.ts (1 test, needs .build/codecs/flac)",
+      "tests/unit/flac-decode-backend.test.ts (suite load, needs edge-flac.wasm)",
+      "tests/unit/flac-decoder.test.ts (suite load, needs edge-flac.wasm)",
+      "tests/unit/flac-expanded-fixtures.test.ts (2 tests, needs precompiled FLAC module)",
+      "tests/unit/flac-max-frames.test.ts (suite load, needs edge-flac.wasm)",
+      "tests/unit/resample-checkpoint.test.ts (10 tests, macOS arm64 golden digests)"
+    ]
+  },
+  "finalUnitFailures": {
+    "summary": "13 failed tests in 6 files, identical to the baseline (2258 passed of 2271)",
+    "identicalToBaseline": true
+  },
+  "proposedContracts": [
+    {"id": "filter.earwax.native-bytes", "file": "tests/differential/earwax.test.ts", "name": "matches native WAV, raw and framecrc bytes for stereo 44100 Hz u8, s16, s32 and f32 sources and composed chains", "modes": ["differential"], "scope": "stereo 44100 Hz u8/s16/s32/f32 raw sources, -cpuflags 0, WAV/raw/framecrc outputs, composed chains with asetnsamples, apad, volume, anull"},
+    {"id": "filter.earwax.time-selection", "file": "tests/differential/earwax.test.ts", "name": "matches native output time selection and frame limits after the cross-frame history", "modes": ["differential"], "scope": "s16 stereo 44100 Hz, input -ss/-t, output -ss/-t/-to/-frames:a, framecrc"},
+    {"id": "filter.earwax.refusals", "file": "tests/differential/earwax.test.ts", "name": "refuses mono, three-channel and 48000 Hz input before output where native converts implicitly, and refuses options native rejects", "modes": ["differential"], "scope": "explicit refusal before output with native exit status"},
+    {"id": "filter.earwax.fir", "file": "tests/unit/earwax.test.ts", "name": "matches a naive whole-signal FIR across random frame splits, packed and planar input, and saturates like native", "modes": ["unit"], "scope": "arithmetic, clipping, frame-split invariance, ownership"}
+  ],
+  "notes": [
+    "No shared edit beyond the registry line was needed.",
+    "Native WAV to a pipe leaves header sizes unset, so the differential test writes native output to a seekable file.",
+    "The implementation computes output in place on the owned converted s16p frame, from the last sample backwards, instead of native's two scratch frames; reserve() is one frame plus 256 state bytes (one 64-entry s16 taps buffer per input channel).",
+    "Setup durations: submodule init 49 s, npm ci + reference:build 3 min 39 s, baseline typecheck+lint+boundaries 1 min 8 s, baseline unit suite 1 min 35 s.",
+    "Differential suite runtime about 9 s."
+  ]
+}

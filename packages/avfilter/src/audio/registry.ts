@@ -13,3 +13,4 @@ export {volume} from './volume.js';
 export {aperms} from './aperms.js';
 export {dcshift} from './dcshift.js';
 export {aintegral} from './aintegral.js';
+export {earwax} from './earwax.js';
