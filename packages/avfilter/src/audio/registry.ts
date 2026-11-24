@@ -2,6 +2,7 @@
  * The chain derives AudioFilterStep, parsing and every per-step query from these descriptors; order is irrelevant.
  */
 export {adelay} from './adelay.js';
+export {aderivative} from './aderivative.js';
 export {aformat} from './aformat.js';
 export {anull} from './anull.js';
 export {apad} from './apad.js';

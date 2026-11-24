@@ -1,0 +1,20 @@
+aderivative audio filter (src/audio/aderivative.ts)
+
+src/audio/aderivative.ts adapts the aderivative filter of FFmpeg
+libavfilter/af_aderivative.c: the DERIVATIVE(name,type) loops for s16p, s32p,
+fltp and dblp (dst[n] = src[n] - prev; prev = src[n], per channel, with prev
+starting at zero and carried across frames) and the FILTER_SAMPLEFMTS list
+s16p, fltp, s32p, dblp.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+libavfilter/af_aderivative.c carries no copyright line of its own; it is part
+of FFmpeg and distributed under its LGPL header.
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+
+The TypeScript adaptation keeps the previous sample as a JavaScript number per
+channel, wraps int16_t and int32_t differences in two's complement, rounds float
+differences with Math.fround and keeps double differences unrounded. It
+implements no options: the timeline-internal enable path (which resets the
+previous sample to silence) and runtime commands are refused before output. The
+aintegral filter defined in the same file is not adapted. Non-finite floating
+input is refused, because NaN payloads would not be reproduced.
