@@ -4,6 +4,7 @@
 export {acopy} from './acopy.js';
 export {adelay} from './adelay.js';
 export {aderivative} from './aderivative.js';
+export {afade} from './afade.js';
 export {aformat} from './aformat.js';
 export {anull} from './anull.js';
 export {apad} from './apad.js';

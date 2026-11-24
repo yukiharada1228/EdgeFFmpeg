@@ -1,0 +1,23 @@
+afade audio filter (src/audio/afade.ts)
+
+src/audio/afade.ts adapts the afade filter of FFmpeg libavfilter/af_afade.c:
+the afade option table (type/t, start_sample/ss, nb_samples/ns, start_time/st,
+duration/d, curve/c, silence, unity) and its positional order, init's range
+check, config_output's duration/start_time rescaling at the link rate,
+fade_gain for the TRI, QUA, CUB, SQU, PAR, IPAR, DESI, QUAT and NONE curves,
+filter_frame's cur_sample mapping and branch selection (the unity==1
+pass-through, av_samples_set_silence or scale_samples with the silence gain,
+scale_samples with the unity gain, fade_samples), the FADE/SCALE sample loops
+with C truncation for integer formats, and the sample_fmts list.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2013-2015 Paul B Mahol
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation is a stateless per-frame transform of the chain's
+negotiated format. It refuses, instead of approximating, the curves that need
+libm (qsin, esin, hsin, log, cbr, exp, iqsin, ihsin, dese, losi, sinc, isinc,
+quatr, qsin2, hsin2), runtime commands, timeline enable, expressions, numeric
+curve and type values, values above 2^53, non-finite floating input, and the
+configurations whose native output depends on native frame boundaries that
+the chain does not reproduce. acrossfade is not adapted. The original source
+and full notices remain in the pinned upstream submodule.
