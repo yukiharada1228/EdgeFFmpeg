@@ -1,0 +1,12 @@
+Scoped Sony Wave64 GUID chunk layout
+
+The GUID constants and the chunk walk, data-size and fact-count semantics in
+src/w64.ts follow libavformat/w64.c, wavdec.c (w64_probe, w64_read_header,
+find_guid) and wavenc.c (start_guid, end_guid, w64_write_header,
+w64_write_trailer).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2001,2002 Fabrice Bellard;(c)2009,2013 Daniel Verkamp;(c)2012 Paul B Mahol;
+(c)2014 Georg Lippitsch. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete w64 demuxer or muxer.

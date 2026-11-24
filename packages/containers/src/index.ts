@@ -13,6 +13,8 @@ export type { AiffCodec, AiffOptions, AiffInfo, AiffInput, AiffOutputFormat, Aif
 export { detectAudioContainer } from './detect.js';
 export { openAu, muxAu, supportsAuCodec, validateAuOutput, AuError } from './au.js';
 export type { AuCodec, AuOptions, AuInfo, AuInput, AuOutputFormat, AuMuxOptions } from './au.js';
+export {openW64,probeW64,muxW64,validateW64Output,supportsW64Codec} from './w64.js';
+export type {W64PcmCodec,W64OutputFormat,W64Options,W64Info,W64Input,W64MuxOptions} from './w64.js';
 export {openRawVideo,muxRawVideo,muxRawVideoFrameCrc,RawVideoError} from './raw-video.js';
 export type {RawVideoParameters,RawVideoOptions,RawVideoInfo,RawVideoInput,RawVideoMuxOptions} from './raw-video.js';
 
