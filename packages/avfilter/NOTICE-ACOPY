@@ -1,0 +1,19 @@
+acopy audio filter (src/audio/acopy.ts)
+
+src/audio/acopy.ts adapts the acopy filter of FFmpeg libavfilter/af_acopy.c at
+commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8: filter_frame allocates an
+output buffer of the input's sample count (ff_get_audio_buffer), copies the
+frame properties (av_frame_copy_props) and the sample data (av_frame_copy).
+
+af_acopy.c carries no copyright line of its own; it is part of FFmpeg and is
+licensed under the GNU Lesser General Public License version 2.1 or, at your
+option, any later version (LGPL-2.1-or-later). The complete license is in
+LICENSES/LGPL-2.1-or-later.txt.
+
+The TypeScript adaptation copies every plane into one owned allocation bounded
+by maxFrameBytes, observes AbortSignal, keeps samples, pts, layout and rate,
+and accepts only the bare token `acopy` (native has no options). Format
+negotiation uses the shared 'all' set of the bounded linear chain. FLAC input is
+refused. The upstream source is available in the pinned upstream/ffmpeg
+submodule. This notice does not assign a license to the whole project or
+certify completion of the project-wide license audit.
