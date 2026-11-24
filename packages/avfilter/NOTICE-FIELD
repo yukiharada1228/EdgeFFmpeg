@@ -1,0 +1,12 @@
+Scoped field extraction video filter
+
+The option table, output geometry and row selection in src/video-ops/field.ts
+follow libavfilter/vf_field.c (field_options, config_props_output,
+filter_frame).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2003 Rich Felker;(c)2012 Stefano Sabatini. LGPL-2.1-or-later.
+See ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete field filter: it copies
+rows into tight planes and refuses inputs where native emits an empty link or
+reads past a plane.

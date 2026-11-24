@@ -1,0 +1,200 @@
+{
+ "capabilityId": "filter.field",
+ "slug": "vf-field",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/field.ts",
+  "packages/avfilter/NOTICE-FIELD",
+  "tests/unit/video-field.test.ts",
+  "tests/differential/video-field.test.ts",
+  "docs/contributing/field.md",
+  "docs/contributing/wave1/vf-field.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {fieldOperator} from './field.js';",
+    " fieldOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-field.test.ts",
+   "title": "parses the type option, its shorthand and constants into frozen steps and refuses everything else",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-field.test.ts",
+   "title": "computes (h + top) / 2 and refuses the empty bottom link and the chroma over-read heights",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-field.test.ts",
+   "title": "copies alternate rows of every plane into owned tight planes from padded input without mutating it",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-field.test.ts",
+   "title": "rejects budgets, malformed storage, mismatched sizes, bad time bases and cancellation explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-field.test.ts",
+   "title": "matches native field across every table format, both types, heights and the chained scopes on linear graph actor and timed paths",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-field.test.ts",
+   "title": "matches native replayed field streams with a second branch and geometry propagated into vstack",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-field.test.ts",
+   "title": "matches native two-input field streams in rawvideo and framecrc through the multi-input CLI",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-field.test.ts",
+   "title": "refuses bottom fields of one-row inputs and of subsampled chroma at h % 4 == 2 before opening any output on every path",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "all 8 registry tests (unchanged file, field examples on all five paths)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 3260,
+  "details": [
+   "3136 byte-exact rawvideo/framecrc comparisons: 784 cases (14 formats x heights {3,5,7,8,9,12} x top/bottom forms plus field,hflip and scale=8:10,field / scale=8:12,field=bottom chains at h=7, x rawvideo and framecrc) on each of linear (-vf), graph (-filter_complex), actor (timed backend activation scheduler) and timed (pull scheduler)",
+   "98 replay-stream (createReplayVideoExecution) rawvideo comparisons with split/vstack and scale chains, timestamps checked",
+   "20 multi-input CLI (stream path) output comparisons, rawvideo and framecrc",
+   "6 native runs confirming native accepts the 6 refused inputs (h==1 bottom; bottom with subsampled chroma at h%4==2), refused here on 4 paths each (24 checks)"
+  ]
+ },
+ "unsupported": [
+  "type values other than top, bottom, 0, 1; option expressions",
+  "enable= and runtime commands",
+  "bottom on h==1 (native emits a zero-height link) - refused",
+  "bottom with yuv420p/yuva420p/nv12/nv21 at h%4==2 (native reads one chroma row past the plane) - refused",
+  "AV_FRAME_FLAG_INTERLACED clearing is not modelled",
+  "zero-frame H.264/MP4 framecrc output is not claimed (mp4-h264.ts derives SAR by operator name)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": {
+  "files": 6,
+  "tests": 13,
+  "entries": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+   "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ]
+ },
+ "finalUnitFailures": {
+  "files": 6,
+  "tests": 13,
+  "entries": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+   "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ]
+ },
+ "proposedContracts": [
+  {
+   "id": "filter.field.native-paths",
+   "file": "tests/differential/video-field.test.ts",
+   "name": "matches native field across every table format, both types, heights and the chained scopes on linear graph actor and timed paths",
+   "modes": [
+    "linear",
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "14 table formats, top/bottom, heights 3,5,7,8,9,12, field,hflip and scale chains, rawvideo and framecrc"
+  },
+  {
+   "id": "filter.field.stream",
+   "file": "tests/differential/video-field.test.ts",
+   "name": "matches native replayed field streams with a second branch and geometry propagated into vstack",
+   "modes": [
+    "stream"
+   ],
+   "scope": "replay streams, 14 formats, heights 5 and 8, split/vstack and scale chains"
+  },
+  {
+   "id": "filter.field.multi-input-cli",
+   "file": "tests/differential/video-field.test.ts",
+   "name": "matches native two-input field streams in rawvideo and framecrc through the multi-input CLI",
+   "modes": [
+    "stream"
+   ],
+   "scope": "two-input -filter_complex, 5 formats, rawvideo and framecrc"
+  },
+  {
+   "id": "filter.field.refusals",
+   "file": "tests/differential/video-field.test.ts",
+   "name": "refuses bottom fields of one-row inputs and of subsampled chroma at h % 4 == 2 before opening any output on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "h==1 bottom and subsampled-chroma h%4==2 bottom refused before any output"
+  },
+  {
+   "id": "filter.field.unit",
+   "file": "tests/unit/video-field.test.ts",
+   "name": "rejects budgets, malformed storage, mismatched sizes, bad time bases and cancellation explicitly",
+   "modes": [
+    "unit"
+   ],
+   "scope": "budgets, strides, time bases, AbortSignal"
+  }
+ ],
+ "notes": [
+  "No shared edits beyond the two registry lines were needed.",
+  "Setup durations: submodule init 47s, npm ci 8s, reference:build 200s, baseline checks + unit suite 150s.",
+  "Baseline typecheck, lint and boundaries were clean; unit failures are the known FLAC artifact and resample-checkpoint (macOS digest) ones, identical before and after.",
+  "The two native-accepted bottom cases are refused deliberately; native outputs for them are degenerate (zero-height) or read out of bounds."
+ ]
+}
