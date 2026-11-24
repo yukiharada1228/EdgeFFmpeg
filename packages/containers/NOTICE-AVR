@@ -1,0 +1,11 @@
+Scoped Audio Visual Research (AVR) demuxer
+
+The 2BIT magic, the 128-byte header walk, the chan, bps, sign and 24-bit rate
+semantics and the PCM codec-id mapping in src/avr.ts follow libavformat/avr.c
+(avr_probe, avr_read_header), utils.c (ff_get_pcm_codec_id) and pcm.c
+(ff_pcm_read_packet, ff_pcm_read_seek).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2012 Paul B Mahol;(c)2000,2001,2002,2003 Fabrice Bellard. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete avr demuxer.

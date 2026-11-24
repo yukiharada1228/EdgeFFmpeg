@@ -1,0 +1,181 @@
+{
+  "capabilityId": "demuxer.avr",
+  "slug": "fmt-avr",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/avr.ts",
+    "packages/containers/NOTICE-AVR",
+    "docs/contributing/avr-support.md",
+    "tests/unit/avr.test.ts",
+    "tests/differential/avr.test.ts",
+    "docs/contributing/wave1/fmt-avr.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/containers/src/registry.ts",
+      "change": "+1 line: export {avr} from './avr.js'; (alphabetical, after au)"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/avr.test.ts",
+      "title": "ports ff_get_pcm_codec_id for big-endian integer PCM with per-width sign masks",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/avr.test.ts",
+      "title": "parses the 128-byte AVR header with bounded reads and serves PCM packets from offset 128",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/avr.test.ts",
+      "title": "refuses AVR headers in native order with native exit statuses and unported layouts explicitly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/avr.test.ts",
+      "title": "aborts AVR opens and packet reads on the signal",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/avr.test.ts",
+      "title": "registers a demux-only avr descriptor detected by the 2BIT magic",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/avr.test.ts",
+      "title": "matches native AVR stream copy framecrc and s16le decode for sign masks widths channels rates and odd lengths",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/avr.test.ts",
+      "title": "matches native AVR WAV decode and seek duration selections with and without -f avr",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/avr.test.ts",
+      "title": "refuses AVR chan, rate, unmapped bps, unported bps and partial trailing frames before any output",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry.test.ts",
+      "title": "(whole file, unchanged)",
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry-extension.test.ts",
+      "title": "(whole file, unchanged)",
+      "passed": 7,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 372,
+    "details": [
+      "288 byte-exact: 96 test-built AVR files (bps 8/16/24/32 x sign 0/0xffff/width sign bit/all-but-sign-bit x mono/stereo x 8000/22050/96000 Hz, odd frame counts 1023/2207/9601) compared for -c:a copy -bitexact -f framecrc autodetected and with -f avr, and -cpuflags 0 -f s16le decode; native framecrc header checked to show the AVR stream before autodetection parity is claimed (96/96 did)",
+      "72 byte-exact: 4 files x {autodetected, -f avr} x (-bitexact WAV decode + 8 framecrc profiles: input -ss, output -ss/-t, input -ss with -t, -frames:a 2; copy and pcm_s16le)",
+      "12 exit-status: chan 2, rate 0, bps 0/40/65/unsigned 64, autodetected and -f avr; Edge exit status equals native 176 (PATCHWELCOME) or 183 (INVALIDDATA), no output created",
+      "plus 4 native-acceptance checks for inputs Edge refuses (bps 12, bps 4, signed bps 64, partial trailing frame)"
+    ]
+  },
+  "unsupported": [
+    "AVR output (native has no muxer)",
+    "bps not a multiple of 8 (native accepts, e.g. 12 as s16be with block_align 1)",
+    "bps 64 signed (native pcm_s64be; not in PcmCodec)",
+    "partial trailing sample frame (native emits a short final packet)",
+    "files shorter than the 128-byte header",
+    "FLAC input",
+    "Workers runtime and macOS arm64 oracle not verified"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": [
+    "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+    "tests/unit/flac-decode-backend.test.ts (suite fails to load: missing .build/codecs/flac/edge-flac.wasm)",
+    "tests/unit/flac-decoder.test.ts (suite fails to load)",
+    "tests/unit/flac-max-frames.test.ts (suite fails to load)",
+    "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+    "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ],
+  "finalUnitFailures": [
+    "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+    "tests/unit/flac-decode-backend.test.ts (suite fails to load: missing .build/codecs/flac/edge-flac.wasm)",
+    "tests/unit/flac-decoder.test.ts (suite fails to load)",
+    "tests/unit/flac-max-frames.test.ts (suite fails to load)",
+    "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+    "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ],
+  "proposedContracts": [
+    {
+      "id": "demuxer.avr.copy-decode",
+      "file": "tests/differential/avr.test.ts",
+      "name": "matches native AVR stream copy framecrc and s16le decode for sign masks widths channels rates and odd lengths",
+      "modes": [
+        "bit-exact-pcm"
+      ],
+      "scope": "AVR 2BIT demux: integer PCM 8/16/24/32-bit, sign masks, mono/stereo, three rates; copy framecrc (autodetected and -f avr) and s16le decode."
+    },
+    {
+      "id": "demuxer.avr.time-wav",
+      "file": "tests/differential/avr.test.ts",
+      "name": "matches native AVR WAV decode and seek duration selections with and without -f avr",
+      "modes": [
+        "bit-exact-pcm"
+      ],
+      "scope": "AVR WAV decode and -ss/-t/-frames:a framecrc selections, copy and pcm_s16le, four layouts."
+    },
+    {
+      "id": "demuxer.avr.refusals",
+      "file": "tests/differential/avr.test.ts",
+      "name": "refuses AVR chan, rate, unmapped bps, unported bps and partial trailing frames before any output",
+      "modes": [
+        "semantic"
+      ],
+      "scope": "AVR chan/rate/unmapped-bps refusals with native exit statuses 176/183; explicit refusal of native-accepted unported bps and partial trailing frames before output."
+    },
+    {
+      "id": "demuxer.avr.unit",
+      "file": "tests/unit/avr.test.ts",
+      "name": "refuses AVR headers in native order with native exit statuses and unported layouts explicitly",
+      "modes": [
+        "semantic"
+      ],
+      "scope": "AVR header refusal order, classes and native exit statuses."
+    }
+  ],
+  "notes": [
+    "Spec listed bps=12 among refusals with native exit status, but native FFmpeg 9.0.2 exits 0 for bps 12 (maps to pcm_s16be with block_align 1). The port refuses it explicitly with AvrError (exit 1); the differential test asserts native accepts it.",
+    "Native avr_probe returns 25 (AVPROBE_SCORE_EXTENSION/2) for every valid file, mono and stereo alike; Edge detects 2BIT at precedence 100. All 96 differential files were autodetected as AVR by native too; other payloads could be misdetected natively.",
+    "No index.ts export was needed; tests import the module by path.",
+    "Setup durations: submodule init 41 s, npm ci 9 s, reference:build 176 s, baseline checks 57 s, baseline unit suite 87 s."
+  ]
+}
