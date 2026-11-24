@@ -1,0 +1,17 @@
+Audio soft clipper (src/audio/asoftclip.ts)
+
+src/audio/asoftclip.ts adapts the ASC_HARD and ASC_ALG loops of filter_flt and
+filter_dbl, the option table and the FILTER_SAMPLEFMTS list (fltp, dblp) of
+FFmpeg libavfilter/af_asoftclip.c.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2019 The FFmpeg Project
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation keeps the C float types of filter_flt (factor, gain
+and param as float, every float operation rounded with Math.fround, no
+contraction) and the double arithmetic of filter_dbl. It implements only
+oversample=1, so get_lowpass and run_lowpassf/run_lowpassd are not adapted, and
+it refuses the tanh, atan, cubic, exp, quintic, sin and erf types, oversampling,
+timeline enable, runtime commands and non-finite input instead of approximating
+them. It adds no FFmpeg runtime code. The original source and full notices
+remain in the pinned upstream submodule.
