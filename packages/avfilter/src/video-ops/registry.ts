@@ -18,18 +18,8 @@ import {setsarOperator} from './setsar.js';
 import {setdarOperator} from './setdar.js';
 import {setptsOperator} from './setpts.js';
 import {copyOperator} from './copy.js';
-import {swapuvOperator} from './swapuv.js';
-import {limiterOperator} from './limiter.js';
-import {pixelizeOperator} from './pixelize.js';
-import {shuffleplanesOperator} from './shuffleplanes.js';
-import {chromashiftOperator} from './chromashift.js';
-import {erosionOperator} from './erosion.js';
-import {dilationOperator} from './dilation.js';
-import {deflateOperator} from './deflate.js';
-import {inflateOperator} from './inflate.js';
 import {ilOperator} from './il.js';
 import {fieldOperator} from './field.js';
-import {fillbordersOperator} from './fillborders.js';
 import {epxOperator} from './epx.js';
 // One import above and one entry below per operator, each entry ending with a comma, so parallel
 // additions never touch the same line. Order is irrelevant: lookups are by name.
@@ -50,18 +40,8 @@ export const videoOperators=Object.freeze([
  setdarOperator,
  setptsOperator,
  copyOperator,
- swapuvOperator,
- limiterOperator,
- pixelizeOperator,
- shuffleplanesOperator,
- chromashiftOperator,
- erosionOperator,
- dilationOperator,
- deflateOperator,
- inflateOperator,
  ilOperator,
  fieldOperator,
- fillbordersOperator,
  epxOperator,
 ] as const);
 type Operator=typeof videoOperators[number];
