@@ -17647,9 +17647,12 @@
       "id": "demuxer.avr",
       "kind": "demuxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/avr.test.ts",
+        "tests/differential/avr.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -17658,7 +17661,8 @@
         "name": "avr",
         "kind": "demuxer",
         "flags": "D"
-      }
+      },
+      "notes": "Audio Visual Research (.avr) demuxer. Wave 1 cloud branch wave1/fmt-avr (d0c72b0, status complete); scope, refusals and evidence in docs/contributing/avr-support.md. Explicitly refused or not compared: AVR output (native has no muxer); bps not a multiple of 8 (native accepts, e.g. 12 as s16be with block_align 1); bps 64 signed (native pcm_s64be; not in PcmCodec); partial trailing sample frame (native emits a short final packet); files shorter than the 128-byte header; FLAC input; Workers runtime and macOS arm64 oracle not verified. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 372 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "demuxer.avs",
@@ -18531,9 +18535,12 @@
       "id": "demuxer.epaf",
       "kind": "demuxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/epaf.test.ts",
+        "tests/differential/epaf.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -18542,7 +18549,8 @@
         "name": "epaf",
         "kind": "demuxer",
         "flags": "D"
-      }
+      },
+      "notes": "Ensoniq PARIS (.paf/.fap) demuxer. Wave 1 cloud branch wave1/fmt-epaf (2683f88, status complete); scope, refusals and evidence in docs/contributing/epaf-support.md. Explicitly refused or not compared: Codec 1 (24-bit) and codecs other than 0 and 2: refused with 183 as natively; Partial trailing sample frames: refused (exit 1) where native decodes with an error and exits 0; AIFF output of a guessed multichannel layout (3+ channels, guessing enabled): native writes a CHAN layout tag, the shared PCM path passes no mask to the AIFF muxer; not refusable from the demuxer and untested beyond 6 channels; Undetected inputs whose probe fails (zero channel word, <24 bytes) exit 1 with 'Unsupported audio container signature' from the shared detector; native exits 183; No mux (native has none); Workers/R2/FLAC paths not exercised. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 279 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "demuxer.evc",
@@ -19451,9 +19459,12 @@
       "id": "demuxer.ircam",
       "kind": "demuxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/ircam.test.ts",
+        "tests/differential/ircam.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -19462,7 +19473,8 @@
         "name": "ircam",
         "kind": "demuxer",
         "flags": "DE"
-      }
+      },
+      "notes": "Berkeley/IRCAM/CARL (.sf/.ircam) demux + mux (also muxer.ircam). Wave 1 cloud branch wave1/fmt-ircam (0226fe8, status complete); scope, refusals and evidence in docs/contributing/ircam-support.md. Explicitly refused or not compared: Extension-score detection of unprobed heads (0x64A30400) without -f ircam: native's score-1 extension match is payload dependent; Non-finite, >=2^31, < -2^31 or negative float rates (exit 1 refusal); Channel counts >= 2^31 (exit 1 refusal); Trailing partial sample frames; Input seek at or beyond EOF; BE, unsigned and other non-LE-table output codecs (refused with 234 like native, but native leaves an empty file); FLAC input to the ircam muxer; Unknown-length / pipe output; Workers-runtime and macOS arm64 evidence. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 1187 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "demuxer.iss",
@@ -20600,9 +20612,12 @@
       "id": "demuxer.nistsphere",
       "kind": "demuxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/nistsphere.test.ts",
+        "tests/differential/nistsphere.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -20611,7 +20626,8 @@
         "name": "nistsphere",
         "kind": "demuxer",
         "flags": "D"
-      }
+      },
+      "notes": "NIST SPHERE (.sph/.nist) demuxer. Wave 1 cloud branch wave1/fmt-nistsphere (f0e98c3, status complete); scope, refusals and evidence in docs/contributing/nistsphere-support.md. Explicitly refused or not compared: pcm,embedded-shorten and other codings; bit depths not a multiple of 8 (sig_bits 12), 0-bit, 40-56-bit and 64-bit PCM; A-law/mu-law with other than 8 bits; metadata keys with WAV/AIFF/AU output (refused; raw, framecrc and W64 accepted); missing or zero sample_rate or channel_count; header_size past EOF and partial trailing frames; header lines over 255 bytes and headers over 65536 bytes; input -ss when sample_count differs from the physical sample count; detection by .sph/.nist extension without the NIST_1A magic; FLAC input paths, workerd runs, macOS reproduction. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 480 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "demuxer.nsp",
@@ -21093,9 +21109,12 @@
       "id": "demuxer.pvf",
       "kind": "demuxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/pvf.test.ts",
+        "tests/differential/pvf.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -21104,7 +21123,8 @@
         "name": "pvf",
         "kind": "demuxer",
         "flags": "D"
-      }
+      },
+      "notes": "Portable Voice Format (.pvf) demuxer. Wave 1 cloud branch wave1/fmt-pvf (154ebed, status complete); scope, refusals and evidence in docs/contributing/pvf-support.md. Explicitly refused or not compared: bits per sample 64 (pcm_s64be) and every value other than 8, 16, 24, 32 (native maps 12 to s16be with block_align 1, 7 to s8, 40 to no codec); header fields outside the 32-bit int range (glibc long truncation not mirrored); partial trailing sample frames (native emits a partial packet); header lines not ending within the first 128 bytes of the file; input -ss at or beyond EOF (generic registry refusal; seekBeyondEnd unset); muxing (native has no pvf muxer); detection failure for 'PVF1\\r\\n' reports the generic Unsupported audio container signature (exit 1) where native exits 183. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 259 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "demuxer.qcp",
@@ -21410,9 +21430,12 @@
       "id": "demuxer.rso",
       "kind": "demuxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/rso.test.ts",
+        "tests/differential/rso.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -21421,7 +21444,8 @@
         "name": "rso",
         "kind": "demuxer",
         "flags": "DE"
-      }
+      },
+      "notes": "Lego Mindstorms RSO demux + mux (also muxer.rso). Wave 1 cloud branch wave1/fmt-rso (ac47f2f, status complete); scope, refusals and evidence in docs/contributing/rso-support.md. Explicitly refused or not compared: adpcm_ima_wav (tag 0x0101) and unknown tags: refused with exit 176; headers shorter than 8 bytes and sample rate 0: refused explicitly; native's own failure path and exit status are not mirrored; input -ss at or beyond EOF (no seekBeyondEnd); non-seekable/pipe output; FLAC input to the RSO muxer (FLAC output dispatcher does not iterate the registry); native st->duration from the header size is not exported; Edge uses the physical length. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 161 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "demuxer.rtp",
@@ -21788,9 +21812,12 @@
       "id": "demuxer.sds",
       "kind": "demuxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/sds.test.ts",
+        "tests/differential/sds.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -21799,7 +21826,8 @@
         "name": "sds",
         "kind": "demuxer",
         "flags": "D"
-      }
+      },
+      "notes": "MIDI Sample Dump Standard (.sds) demuxer. Wave 1 cloud branch wave1/fmt-sds (e4a7307, status complete); scope, refusals and evidence in docs/contributing/sds-support.md. Explicitly refused or not compared: sds muxing (native has no muxer); input -ss (native generic-index seek gives shifted timestamps and a demux error); refused; native mid-stream demux error semantics for bad F0 7E / missing F7 packets; refused up front; truncated last packet or trailing bytes (native drops them, exit 0); refused; files shorter than the 21-byte header (native opens a declared one as empty); refused; Workers runtime evidence (no tests/workers file). Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 390 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. Integration fix: the probe requires byte 2 to be 00 (AV_RB32==0xF07E0001); declared -f sds still ignores it, as sds_read_header does. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "demuxer.sdx",
@@ -22009,9 +22037,12 @@
       "id": "demuxer.sox",
       "kind": "demuxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/sox.test.ts",
+        "tests/differential/sox.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -22020,7 +22051,8 @@
         "name": "sox",
         "kind": "demuxer",
         "flags": "DE"
-      }
+      },
+      "notes": "SoX native (.sox) demux + mux (also muxer.sox). Wave 1 cloud branch wave1/fmt-sox (74f285f, status complete); scope, refusals and evidence in docs/contributing/sox-support.md. Explicitly refused or not compared: SoX comments on input (refused, exit 1) and output (no metadata reaches muxers); AIFF output from >=3-channel SoX input: native writes a CHAN layout tag for the guessed layout, the shared AIFF muxer does not (same divergence for raw PCM input); not refused, excluded from tests; Headers shorter than 32 bytes, header_size past EOF, partial trailing frames and non-.SoX/XoS. magics under -f sox: refused explicitly though native accepts them; Rates truncating to 0 Hz: refused with exit 234 (native's decoder also fails with 234); Undetected (sox_probe-failing) input: Edge exit 1 vs native 183; Channel conversion other than mono/stereo (backend refusal); Non-seekable/pipe and unknown-length output, FLAC input to the SoX muxer, Workers/R2 runs and macOS reproducibility were not run. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 517 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "demuxer.spdif",
@@ -23112,9 +23144,12 @@
       "id": "demuxer.wve",
       "kind": "demuxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/wve.test.ts",
+        "tests/differential/wve.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -23123,7 +23158,8 @@
         "name": "wve",
         "kind": "demuxer",
         "flags": "D"
-      }
+      },
+      "notes": "Psion 3 audio (.wve) demuxer. Wave 1 cloud branch wave1/fmt-wve (0c9c768, status complete); scope, refusals and evidence in docs/contributing/wve-support.md. Explicitly refused or not compared: wve muxer (native has none); headers shorter than 32 bytes (native demuxes 26..31-byte files from its zero-padded probe; Edge refuses with 'Truncated WVE header'); input -ss > 0 when the rb32 header duration differs from the physical sample count; native exit status 183 for undetected input: Edge's shared detect.ts exits 1. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 265 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "demuxer.xa",
@@ -26387,9 +26423,12 @@
       "id": "filter.acopy",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/acopy.test.ts",
+        "tests/differential/acopy.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -26397,7 +26436,8 @@
       "reference": {
         "name": "acopy",
         "flags": ".."
-      }
+      },
+      "notes": "acopy: owned pass-through copy. Wave 1 cloud branch wave1/af-acopy (bcdeeb9, status complete); scope, refusals and evidence in docs/contributing/acopy.md. Explicitly refused or not compared: any acopy option, including the native-accepted empty 'acopy='; FLAC input (refused before decoding; flacInput not declared); automatic sample-rate conversion across acopy (rateConversion false); three-channel AIFF output not compared (pre-existing AIFF muxer mismatch without any filter). Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 991 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.acrossfade",
@@ -26536,7 +26576,8 @@
       "testCases": [
         "tests/unit/adelay.test.ts",
         "tests/differential/adelay.test.ts",
-        "tests/integration/flac-timed-filters.test.ts"
+        "tests/integration/flac-timed-filters.test.ts",
+        "tests/workers/flac-timed-filters.test.ts"
       ],
       "compatibility": {
         "functional": false,
@@ -26568,9 +26609,12 @@
       "id": "filter.aderivative",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/aderivative.test.ts",
+        "tests/differential/aderivative.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -26578,7 +26622,8 @@
       "reference": {
         "name": "aderivative",
         "flags": "T."
-      }
+      },
+      "notes": "aderivative: first difference per channel. Wave 1 cloud branch wave1/af-aderivative (1604f11, status complete); scope, refusals and evidence in docs/contributing/aderivative.md. Explicitly refused or not compared: any option, including the empty argument 'aderivative='; timeline enable (native's reset-to-silence path); runtime commands; automatic sample-rate conversion; FLAC input (refused before decoding); non-finite floating input; neighbour merges the negotiation model cannot reproduce (fixed volume before it on float/u8/dbl input); aintegral. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 542 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.adrawgraph",
@@ -26632,9 +26677,12 @@
       "id": "filter.adynamicsmooth",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/adynamicsmooth.test.ts",
+        "tests/differential/adynamicsmooth.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -26642,15 +26690,19 @@
       "reference": {
         "name": "adynamicsmooth",
         "flags": "T."
-      }
+      },
+      "notes": "adynamicsmooth: polynomial dynamic smoothing. Wave 1 cloud branch wave1/af-adynamicsmooth (3c6102d, status complete); scope, refusals and evidence in docs/contributing/adynamicsmooth.md. Explicitly refused or not compared: option values other than plain decimals (exponents, signs, hex, SI suffixes, expressions); timeline enable; runtime commands; non-finite input samples; FLAC input (refused before decoding); automatic sample-rate conversion after the filter; bit-exactness on natives that fuse multiply-adds (e.g. macOS arm64); differential byte tests are gated to linux/x64. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 1267 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); 3 of the branch's tests are gated to linux/x64 and skipped on the pinned macOS arm64 reference. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.aecho",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/aecho.test.ts",
+        "tests/differential/aecho.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -26658,7 +26710,8 @@
       "reference": {
         "name": "aecho",
         "flags": ".."
-      }
+      },
+      "notes": "aecho: multi-tap echo with tail. Wave 1 cloud branch wave1/af-aecho (0082f90, status complete); scope, refusals and evidence in docs/contributing/aecho.md. Explicitly refused or not compared: Option expressions/SI suffixes for in_gain/out_gain (native av_expr) - refused; List values with signs, exponents, hexadecimal, inf/nan, trailing text or escaping - refused (native sscanf accepts or skips some); Decimals on a float32 rounding midpoint in double precision - refused; FLAC input - refused before decoding; Automatic sample-rate conversion around aecho - refused; AIFF/AU output and non-linux/x64 arithmetic - no native evidence. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 1065 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); 5 of the branch's tests are gated to linux/x64 and skipped on the pinned macOS arm64 reference. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.aemphasis",
@@ -26728,9 +26781,12 @@
       "id": "filter.afade",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/afade.test.ts",
+        "tests/differential/afade.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -26738,7 +26794,8 @@
       "reference": {
         "name": "afade",
         "flags": "T."
-      }
+      },
+      "notes": "afade: fades with polynomial and sqrt curves. Wave 1 cloud branch wave1/af-afade (3dceb78, status partial); scope, refusals and evidence in docs/contributing/afade.md. Explicitly refused or not compared: libm curves qsin, esin, hsin, log, cbr, exp, iqsin, ihsin, dese, losi, sinc, isinc, quatr, qsin2, hsin2; runtime commands (process_command), timeline enable, quoted/escaped values, expressions and numeric curve/type values; sample counts and durations above 2^53 and durations that rescale to zero samples; silence=0 on floating working formats (flt/dbl, including u8 sources into f32/f64 outputs) when samples lie on the silence side of the window: fade-outs and fade-ins starting after sample 0 (native output depends on native frame boundaries: +0 fill vs s*0); nofade with silence != unity when samples lie on the silence side of the window (frame-boundary dependent); silence/unity pairs where silence+(unity-silence)*1 does not round to unity (frame-boundary dependent); non-finite floating input in scaled or faded frames; FLAC input (refused before decoding); acrossfade. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 1080 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); 2 of the branch's tests are gated to linux/x64 and skipped on the pinned macOS arm64 reference. Integration fix: every ipar comparison runs only on linux/x64, because the macOS arm64 reference fuses 1-(1-g)*(1-g). No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.afdelaysrc",
@@ -26960,9 +27017,12 @@
       "id": "filter.aintegral",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/aintegral.test.ts",
+        "tests/differential/aintegral.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -26970,7 +27030,8 @@
       "reference": {
         "name": "aintegral",
         "flags": "T."
-      }
+      },
+      "notes": "aintegral: running sum per channel. Wave 1 cloud branch wave1/af-aintegral (da41373, status complete); scope, refusals and evidence in docs/contributing/aintegral.md. Explicitly refused or not compared: timeline enable and any option; FLAC input (refused before decoding); automatic sample-rate conversion around the step; float-to-integer output where the integral exceeds the scalar conversion bound of 32768 (native clips); s16 output beyond integrals within +-1 is not claimed; u8 and s32 encoder output not compared. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 1163 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); 2 of the branch's tests are gated to linux/x64 and skipped on the pinned macOS arm64 reference. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.ainterleave",
@@ -27385,9 +27446,12 @@
       "id": "filter.aperms",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/aperms.test.ts",
+        "tests/differential/aperms.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -27395,7 +27459,8 @@
       "reference": {
         "name": "aperms",
         "flags": "T."
-      }
+      },
+      "notes": "aperms: permission no-op pass-through. Wave 1 cloud branch wave1/af-aperms (9fbe28d, status complete); scope, refusals and evidence in docs/contributing/aperms.md. Explicitly refused or not compared: mode=random without an explicit seed or with seed=-1 (native succeeds via av_get_random_seed; intentional refusal); numeric or expression mode values (native accepts, e.g. mode=1); generic timeline option enable (native accepts); runtime commands (process_command); FLAC input (refused before decoding; flacInput not declared); automatic sample-rate conversion across the step (rateConversion false); frame writability itself (frames carry no permission flag). Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 891 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.aphasemeter",
@@ -27770,9 +27835,12 @@
       "id": "filter.asoftclip",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/asoftclip.test.ts",
+        "tests/differential/asoftclip.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -27780,7 +27848,8 @@
       "reference": {
         "name": "asoftclip",
         "flags": "TS"
-      }
+      },
+      "notes": "asoftclip: hard and alg types, no oversampling. Wave 1 cloud branch wave1/af-asoftclip (3974f32, status complete); scope, refusals and evidence in docs/contributing/asoftclip.md. Explicitly refused or not compared: type tanh/atan/cubic/exp/quintic/sin/erf (libm); oversample > 1 (sin/cos lowpass); option expressions, exponents, suffixes and integer type values; timeline enable and runtime commands; FLAC input; non-finite input samples and alg inputs that overflow to infinity; alg parity on platforms other than linux/x64 (fused arithmetic on macOS arm64). Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 1545 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); 1 of the branch's tests are gated to linux/x64 and skipped on the pinned macOS arm64 reference. Integration fix: empty option tokens other than one trailing colon are refused, as native fails with 234. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.aspectralstats",
@@ -28378,9 +28447,12 @@
       "id": "filter.channelmap",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/channelmap.test.ts",
+        "tests/differential/channelmap.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -28388,7 +28460,8 @@
       "reference": {
         "name": "channelmap",
         "flags": ".."
-      }
+      },
+      "notes": "channelmap: same-count, same-layout channel permutation. Wave 1 cloud branch wave1/af-channelmap (e9767a6, status complete); scope, refusals and evidence in docs/contributing/channelmap.md. Explicitly refused or not compared: maps that change the channel count or the output layout (registry contract limit: constant channels and layout); WAV/W64 input with a non-default channel mask, and unguessed '<n> channels' layouts; channel_layout values other than default layout names (FL+FR, downmix, masks, '<n>c'); signed or whitespace-led indices (+0, ' 0') that native sscanf accepts; USR<n>, AMBI<n>, UNK and UNSD channel ids; quoted or escaped option values; packed double input (native negotiates s64p); explicit dblp is supported and pinned; FLAC input (flacInput not declared). Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 3187 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.channelsplit",
@@ -28778,9 +28851,12 @@
       "id": "filter.compensationdelay",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/compensationdelay.test.ts",
+        "tests/differential/compensationdelay.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -28788,7 +28864,8 @@
       "reference": {
         "name": "compensationdelay",
         "flags": "T."
-      }
+      },
+      "notes": "compensationdelay: distance-based delay line. Wave 1 cloud branch wave1/af-compensationdelay (7b1f543, status complete); scope, refusals and evidence in docs/contributing/compensationdelay.md. Explicitly refused or not compared: FLAC input (refused before decoding; flacInput not declared); timeline enable; runtime commands; option expressions and exponents (e.g. cm=10+5, dry=1e-1); non-integer values for mm/cm/m/temp, which native rounds; signs on dry/wet and escaped/quoted option values; automatic sample-rate conversion around the step; rings larger than the buffer budget / maxFrameBytes (native allocates them). Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 665 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); 2 of the branch's tests are gated to linux/x64 and skipped on the pinned macOS arm64 reference. Integration fix: the delay is reduced modulo native's power-of-two ring (delay mod buf_size), which differs at, for example, 25000 and 50000 Hz with cold temperatures; an ungated exact differential covers it. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.concat",
@@ -28842,9 +28919,12 @@
       "id": "filter.copy",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/video-copy-filter.test.ts",
+        "tests/differential/video-copy-filter.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -28852,7 +28932,8 @@
       "reference": {
         "name": "copy",
         "flags": ".."
-      }
+      },
+      "notes": "copy (video): identity copy filter. Wave 1 cloud branch wave1/vf-copy (db02e99, status complete); scope, refusals and evidence in docs/contributing/video-copy-filter.md. Explicitly refused or not compared: every option, including enable= (native also refuses) and the generic threads option (native accepts; refused here instead of being ignored); runtime commands (enable answers AVERROR_PATCHWELCOME, all others ENOSYS, as native); hwaccel formats and formats outside the shared 14-entry negotiation table. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 2246 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.corr",
@@ -28914,9 +28995,12 @@
       "id": "filter.crystalizer",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/crystalizer.test.ts",
+        "tests/differential/crystalizer.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -28924,7 +29008,8 @@
       "reference": {
         "name": "crystalizer",
         "flags": "TS"
-      }
+      },
+      "notes": "crystalizer: sample-difference sharpening. Wave 1 cloud branch wave1/af-crystalizer (8629169, status complete); scope, refusals and evidence in docs/contributing/crystalizer.md. Explicitly refused or not compared: option expressions, SI suffixes, nan/inf, quoted or escaped values; timeline enable and runtime commands; FLAC input (refused before decoding; flacInput not declared); automatic sample-rate conversion after the filter (native-list rule); neighbour negotiations refused by the shared guard, e.g. crystalizer,volume=0.25:precision=double on f32 input and crystalizer,volume=0.25 on f64 input; byte-exact claims on platforms other than linux x64. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 606 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); 3 of the branch's tests are gated to linux/x64 and skipped on the pinned macOS arm64 reference. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.cue",
@@ -28994,9 +29079,12 @@
       "id": "filter.dcshift",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/dcshift.test.ts",
+        "tests/differential/dcshift.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -29004,7 +29092,8 @@
       "reference": {
         "name": "dcshift",
         "flags": "T."
-      }
+      },
+      "notes": "dcshift: DC offset with optional limiter. Wave 1 cloud branch wave1/af-dcshift (be30642, status complete); scope, refusals and evidence in docs/contributing/dcshift.md. Explicitly refused or not compared: FLAC input (refused before decoding; flacInput not declared); option expressions, suffixes, nan and empty values; timeline enable and runtime commands; automatic sample-rate conversion around dcshift; fixed volume before dcshift on u8/s16 input (registry negotiation guard refuses: 'dcshift with <fmt> input requires unimplemented format negotiation'); s64/s64p and other formats are not applicable: work format is always s32p. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 1151 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.dctdnoiz",
@@ -29362,9 +29451,12 @@
       "id": "filter.earwax",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/earwax.test.ts",
+        "tests/differential/earwax.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -29372,7 +29464,8 @@
       "reference": {
         "name": "earwax",
         "flags": ".."
-      }
+      },
+      "notes": "earwax: integer 32-tap headphone FIR. Wave 1 cloud branch wave1/af-earwax (21c3744, status complete); scope, refusals and evidence in docs/contributing/earwax.md. Explicitly refused or not compared: Inputs native converts implicitly (non-stereo, non-default two-channel WAV/W64 masks, rates other than 44100 Hz): refused with 'earwax requires stereo 44100 Hz input'; Any option, enable or runtime command: refused with 'Unsupported earwax option' (native has none); FLAC input: refused before decoding (no flacInput); Automatic sample-rate conversion around earwax (rateBoundary): refused; AU, AIFF and W64 outputs: same path, no native comparison. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 178 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.ebur128",
@@ -29442,9 +29535,12 @@
       "id": "filter.epx",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/video-epx.test.ts",
+        "tests/differential/video-epx.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -29452,7 +29548,8 @@
       "reference": {
         "name": "epx",
         "flags": ".S"
-      }
+      },
+      "notes": "epx: EPX pixel-art scaler. Wave 1 cloud branch wave1/vf-epx (8be33d7, status complete); scope, refusals and evidence in docs/contributing/epx.md. Explicitly refused or not compared: expression-valued or non-decimal n (e.g. n=1+1, n=0x2, n=2.0); enable= (native has no timeline either), generic filter-context options such as threads, runtime commands; H.264/MP4 framecrc output (not compared); timed-backend inputs that need pixel conversion before epx (only packed RGBA sources compared on actor/timed); slice threading (results are identical; whole-frame kernel). Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 900 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.equalizer",
@@ -29538,9 +29635,12 @@
       "id": "filter.extrastereo",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/extrastereo.test.ts",
+        "tests/differential/extrastereo.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -29548,7 +29648,8 @@
       "reference": {
         "name": "extrastereo",
         "flags": "T."
-      }
+      },
+      "notes": "extrastereo: stereo difference widening. Wave 1 cloud branch wave1/af-extrastereo (29e4d87, status complete); scope, refusals and evidence in docs/contributing/extrastereo.md. Explicitly refused or not compared: Non-stereo layouts and non-default two-channel WAV/W64 masks (native remixes implicitly); Timeline enable; Runtime commands (process_command); no command filter exists; m expressions and constants (only decimal literals); Boolean spellings other than 0, 1, true, false for c; FLAC input (flacInput not declared); Non-finite input samples; NaN output with c=0 (overflowing finite float input); Fused-float platforms: float comparisons skip outside linux/x64 (no fused profile implemented). Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 573 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); 2 of the branch's tests are gated to linux/x64 and skipped on the pinned macOS arm64 reference. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.fade",
@@ -29618,9 +29719,12 @@
       "id": "filter.field",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/video-field.test.ts",
+        "tests/differential/video-field.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -29628,7 +29732,8 @@
       "reference": {
         "name": "field",
         "flags": ".."
-      }
+      },
+      "notes": "field: extract top/bottom field. Wave 1 cloud branch wave1/vf-field (6c560eb, status complete); scope, refusals and evidence in docs/contributing/field.md. Explicitly refused or not compared: type values other than top, bottom, 0, 1; option expressions; enable= and runtime commands; bottom on h==1 (native emits a zero-height link) - refused; bottom with yuv420p/yuva420p/nv12/nv21 at h%4==2 (native reads one chroma row past the plane) - refused; AV_FRAME_FLAG_INTERLACED clearing is not modelled; zero-frame H.264/MP4 framecrc output is not claimed (mp4-h264.ts derives SAR by operator name). Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 3260 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.fieldhint",
@@ -30032,9 +30137,12 @@
       "id": "filter.haas",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/haas.test.ts",
+        "tests/differential/haas.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -30042,7 +30150,8 @@
       "reference": {
         "name": "haas",
         "flags": ".."
-      }
+      },
+      "notes": "haas: Haas stereo enhancer. Wave 1 cloud branch wave1/af-haas (20d355b, status complete); scope, refusals and evidence in docs/contributing/haas.md. Explicitly refused or not compared: FLAC input (refused before decoding: FLAC input to haas requires additional Native evidence); expressions, SI suffixes and other non-literal numeric values (native accepts); fractional middle_source values (native rounds); quoted or escaped option values; enable / timeline; runtime commands (haas has no process_command; the chain has none); mono, 3+ channel and non-default-mask stereo input (native remixes implicitly); automatic sample-rate conversion next to haas; float output on platforms other than linux/x64. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 642 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); 2 of the branch's tests are gated to linux/x64 and skipped on the pinned macOS arm64 reference. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.haldclut",
@@ -30455,9 +30564,12 @@
       "id": "filter.il",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/video-il.test.ts",
+        "tests/differential/video-il.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -30465,7 +30577,8 @@
       "reference": {
         "name": "il",
         "flags": "T."
-      }
+      },
+      "notes": "il: field interleave/deinterleave. Wave 1 cloud branch wave1/vf-il (96a87d9, status complete); scope, refusals and evidence in docs/contributing/il.md. Explicitly refused or not compared: odd processed plane heights (refused: native output is buffer-pool dependent); expression-valued modes such as l=1.5 or l=i+0 (refused; native evaluates them); enable= timeline (refused); runtime commands (refused automatically); H.264/MP4 framecrc not compared. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 10170 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.inflate",
@@ -32721,9 +32834,12 @@
       "id": "filter.stereowiden",
       "kind": "filter",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/stereowiden.test.ts",
+        "tests/differential/stereowiden.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -32731,7 +32847,8 @@
       "reference": {
         "name": "stereowiden",
         "flags": "T."
-      }
+      },
+      "notes": "stereowiden: delayed cross-feed widening. Wave 1 cloud branch wave1/af-stereowiden (5b91f99, status complete); scope, refusals and evidence in docs/contributing/stereowiden.md. Explicitly refused or not compared: timeline enable; runtime commands; option expressions and SI suffixes; mono, multichannel and non-default WAV/W64 masks (native converts implicitly); FLAC input (refused before decoding); non-finite input samples; automatic sample-rate conversion inside the chain; byte-exact claims off linux/x64 (native may contract the formula into fma). Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 452 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); 2 of the branch's tests are gated to linux/x64 and skipped on the pinned macOS arm64 reference. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "filter.streamselect",
@@ -34336,9 +34453,12 @@
       "id": "muxer.crc",
       "kind": "muxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/hash-digests.test.ts",
+        "tests/differential/hash-muxers.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -34347,7 +34467,8 @@
         "name": "crc",
         "kind": "muxer",
         "flags": "E"
-      }
+      },
+      "notes": "Whole-stream hash muxers: md5, hash, crc, streamhash (also muxer.hash, muxer.crc, muxer.streamhash). Wave 1 cloud branch wave1/fmt-hash-muxers (c659302, status complete); scope, refusals and evidence in docs/contributing/hash-muxers.md. Explicitly refused or not compared: -hash option (CLI parser refuses it; packages/cli not editable in wave 1); validate also refuses any -hash value; framemd5, framehash (deferred); rawvideo input to hash muxers (raw-video.ts outside the registry); FLAC input (FLAC output dispatcher does not iterate the registry); multiple streams. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 1496 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "muxer.dash",
@@ -35059,9 +35180,12 @@
       "id": "muxer.hash",
       "kind": "muxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/hash-digests.test.ts",
+        "tests/differential/hash-muxers.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -35070,7 +35194,8 @@
         "name": "hash",
         "kind": "muxer",
         "flags": "E"
-      }
+      },
+      "notes": "Whole-stream hash muxers: md5, hash, crc, streamhash (also muxer.hash, muxer.crc, muxer.streamhash). Wave 1 cloud branch wave1/fmt-hash-muxers (c659302, status complete); scope, refusals and evidence in docs/contributing/hash-muxers.md. Explicitly refused or not compared: -hash option (CLI parser refuses it; packages/cli not editable in wave 1); validate also refuses any -hash value; framemd5, framehash (deferred); rawvideo input to hash muxers (raw-video.ts outside the registry); FLAC input (FLAC output dispatcher does not iterate the registry); multiple streams. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 1496 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "muxer.hds",
@@ -35243,9 +35368,12 @@
       "id": "muxer.ircam",
       "kind": "muxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/ircam.test.ts",
+        "tests/differential/ircam.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -35254,7 +35382,8 @@
         "name": "ircam",
         "kind": "muxer",
         "flags": "DE"
-      }
+      },
+      "notes": "Berkeley/IRCAM/CARL (.sf/.ircam) demux + mux (also muxer.ircam). Wave 1 cloud branch wave1/fmt-ircam (0226fe8, status complete); scope, refusals and evidence in docs/contributing/ircam-support.md. Explicitly refused or not compared: Extension-score detection of unprobed heads (0x64A30400) without -f ircam: native's score-1 extension match is payload dependent; Non-finite, >=2^31, < -2^31 or negative float rates (exit 1 refusal); Channel counts >= 2^31 (exit 1 refusal); Trailing partial sample frames; Input seek at or beyond EOF; BE, unsigned and other non-LE-table output codecs (refused with 234 like native, but native leaves an empty file); FLAC input to the ircam muxer; Unknown-length / pipe output; Workers-runtime and macOS arm64 evidence. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 1187 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "muxer.ismv",
@@ -35430,9 +35559,12 @@
       "id": "muxer.md5",
       "kind": "muxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/hash-digests.test.ts",
+        "tests/differential/hash-muxers.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -35441,7 +35573,8 @@
         "name": "md5",
         "kind": "muxer",
         "flags": "E"
-      }
+      },
+      "notes": "Whole-stream hash muxers: md5, hash, crc, streamhash (also muxer.hash, muxer.crc, muxer.streamhash). Wave 1 cloud branch wave1/fmt-hash-muxers (c659302, status complete); scope, refusals and evidence in docs/contributing/hash-muxers.md. Explicitly refused or not compared: -hash option (CLI parser refuses it; packages/cli not editable in wave 1); validate also refuses any -hash value; framemd5, framehash (deferred); rawvideo input to hash muxers (raw-video.ts outside the registry); FLAC input (FLAC output dispatcher does not iterate the registry); multiple streams. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 1496 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "muxer.microdvd",
@@ -36118,9 +36251,12 @@
       "id": "muxer.rso",
       "kind": "muxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/rso.test.ts",
+        "tests/differential/rso.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -36129,7 +36265,8 @@
         "name": "rso",
         "kind": "muxer",
         "flags": "DE"
-      }
+      },
+      "notes": "Lego Mindstorms RSO demux + mux (also muxer.rso). Wave 1 cloud branch wave1/fmt-rso (ac47f2f, status complete); scope, refusals and evidence in docs/contributing/rso-support.md. Explicitly refused or not compared: adpcm_ima_wav (tag 0x0101) and unknown tags: refused with exit 176; headers shorter than 8 bytes and sample rate 0: refused explicitly; native's own failure path and exit status are not mirrored; input -ss at or beyond EOF (no seekBeyondEnd); non-seekable/pipe output; FLAC input to the RSO muxer (FLAC output dispatcher does not iterate the registry); native st->duration from the header size is not exported; Edge uses the physical length. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 161 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "muxer.rtp",
@@ -36445,9 +36582,12 @@
       "id": "muxer.sox",
       "kind": "muxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/sox.test.ts",
+        "tests/differential/sox.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -36456,7 +36596,8 @@
         "name": "sox",
         "kind": "muxer",
         "flags": "DE"
-      }
+      },
+      "notes": "SoX native (.sox) demux + mux (also muxer.sox). Wave 1 cloud branch wave1/fmt-sox (74f285f, status complete); scope, refusals and evidence in docs/contributing/sox-support.md. Explicitly refused or not compared: SoX comments on input (refused, exit 1) and output (no metadata reaches muxers); AIFF output from >=3-channel SoX input: native writes a CHAN layout tag for the guessed layout, the shared AIFF muxer does not (same divergence for raw PCM input); not refused, excluded from tests; Headers shorter than 32 bytes, header_size past EOF, partial trailing frames and non-.SoX/XoS. magics under -f sox: refused explicitly though native accepts them; Rates truncating to 0 Hz: refused with exit 234 (native's decoder also fails with 234); Undetected (sox_probe-failing) input: Edge exit 1 vs native 183; Channel conversion other than mono/stereo (backend refusal); Non-seekable/pipe and unknown-length output, FLAC input to the SoX muxer, Workers/R2 runs and macOS reproducibility were not run. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 517 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "muxer.spdif",
@@ -36547,9 +36688,12 @@
       "id": "muxer.streamhash",
       "kind": "muxer",
       "upstream": "9.0.2",
-      "implementation": "unimplemented",
+      "implementation": "partial",
       "runtime": "cloudflare",
-      "testCases": [],
+      "testCases": [
+        "tests/unit/hash-digests.test.ts",
+        "tests/differential/hash-muxers.test.ts"
+      ],
       "compatibility": {
         "functional": false,
         "bitexact": false
@@ -36558,7 +36702,8 @@
         "name": "streamhash",
         "kind": "muxer",
         "flags": "E"
-      }
+      },
+      "notes": "Whole-stream hash muxers: md5, hash, crc, streamhash (also muxer.hash, muxer.crc, muxer.streamhash). Wave 1 cloud branch wave1/fmt-hash-muxers (c659302, status complete); scope, refusals and evidence in docs/contributing/hash-muxers.md. Explicitly refused or not compared: -hash option (CLI parser refuses it; packages/cli not editable in wave 1); validate also refuses any -hash value; framemd5, framehash (deferred); rawvideo input to hash muxers (raw-video.ts outside the registry); FLAC input (FLAC output dispatcher does not iterate the registry); multiple streams. Native evidence: the branch's tests compare with the reference binary at test time; the agent recorded 1496 native comparisons on its Linux x86_64 reference (sha256 ac302e4d...); all of the branch's unit and differential tests passed in GitHub Actions run 45402980700 on Linux x86_64 (at b829893, before the integration fixes); none of the branch's tests are platform-gated. No workerd, production Cloudflare or compatibility certification evidence."
     },
     {
       "id": "muxer.sup",

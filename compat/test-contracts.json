@@ -8830,5 +8830,1779 @@
       "bit-exact"
     ],
     "scope": "16 replay executions: four source/target pairs and four graphs including split, hstack join and nullsink branches; concatenated raw frames match native and PTS are 0, 1, 2."
+  },
+  {
+    "id": "filter.acopy.syntax",
+    "file": "tests/unit/acopy.test.ts",
+    "name": "accepts only the bare acopy token and refuses every option form with an exact message",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "bare token only; exact refusal message for options. Wave 1 branch wave1/af-acopy."
+  },
+  {
+    "id": "filter.acopy.copy",
+    "file": "tests/unit/acopy.test.ts",
+    "name": "returns owned planes byte-equal to a transcription of av_frame_copy, without mutating the input, at any frame split",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "av_frame_copy transcription, ownership, no mutation, frame-split invariance. Wave 1 branch wave1/af-acopy."
+  },
+  {
+    "id": "filter.acopy.limits",
+    "file": "tests/unit/acopy.test.ts",
+    "name": "enforces maxFrameBytes and observes AbortSignal",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "maxFrameBytes and AbortSignal. Wave 1 branch wave1/af-acopy."
+  },
+  {
+    "id": "filter.acopy.framecrc",
+    "file": "tests/differential/acopy.test.ts",
+    "name": "matches native framecrc bytes across raw formats, channel counts, rates and composed chains",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "raw PCM inputs, 1-3 channels, 8000/44100 Hz, 5 chains, framecrc. Wave 1 branch wave1/af-acopy."
+  },
+  {
+    "id": "filter.acopy.time",
+    "file": "tests/differential/acopy.test.ts",
+    "name": "matches native output time selection and frame limits after acopy",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "output -ss, -t, -frames:a after acopy chains. Wave 1 branch wave1/af-acopy."
+  },
+  {
+    "id": "filter.acopy.files",
+    "file": "tests/differential/acopy.test.ts",
+    "name": "writes native-identical WAV, AIFF, AU and raw PCM files from WAV and raw inputs",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "WAV/AIFF/AU/raw output bytes from raw and WAV input. Wave 1 branch wave1/af-acopy."
+  },
+  {
+    "id": "filter.acopy.refusal",
+    "file": "tests/differential/acopy.test.ts",
+    "name": "fails before output for acopy options, which native also refuses",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "acopy=1 refused before output; native status 234. Wave 1 branch wave1/af-acopy."
+  },
+  {
+    "id": "filter.copy.unit.parse",
+    "file": "tests/unit/video-copy-filter.test.ts",
+    "name": "parses copy as an option-free identity operator over the whole negotiation table on every path",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "option-free identity descriptor, no conversion stage for any of the 14 table formats. Wave 1 branch wave1/vf-copy."
+  },
+  {
+    "id": "filter.copy.unit.refusal",
+    "file": "tests/unit/video-copy-filter.test.ts",
+    "name": "refuses every copy option and enable= with VideoFilterParseError before planning on every path",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "VideoFilterParseError for options and enable= before planning. Wave 1 branch wave1/vf-copy."
+  },
+  {
+    "id": "filter.copy.unit.scoped-forward",
+    "file": "tests/unit/video-copy-filter.test.ts",
+    "name": "forwards the frame unchanged on the linear, graph and replay paths within budgets and signals",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "unchanged forwarding, budgets, AbortSignal, frame-shape mismatch, padded strides, unmutated input. Wave 1 branch wave1/vf-copy."
+  },
+  {
+    "id": "filter.copy.unit.timed-forward",
+    "file": "tests/unit/video-copy-filter.test.ts",
+    "name": "forwards the frame unchanged through activation actors and the timed executor and refuses runtime commands",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "unchanged forwarding and native runtime command codes. Wave 1 branch wave1/vf-copy."
+  },
+  {
+    "id": "filter.copy.differential.linear",
+    "file": "tests/differential/video-copy-filter.test.ts",
+    "name": "matches native -vf copy chains across all 14 formats, sizes and timing scopes as rawvideo and framecrc",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "-vf copy, copy,negate, format=nv12,copy,vflip and copy,hflip over all 14 rawvideo input formats, 5x3/7x5/8x6, 3 frames, three -ss/-t scopes, rawvideo and framecrc. Wave 1 branch wave1/vf-copy."
+  },
+  {
+    "id": "filter.copy.differential.graph",
+    "file": "tests/differential/video-copy-filter.test.ts",
+    "name": "matches native -filter_complex split and copy branches across all 14 formats as rawvideo and framecrc",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "four split/copy -filter_complex graphs, two outputs each, all 14 formats at 7x5, rawvideo and framecrc, with and without -ss/-frames:v. Wave 1 branch wave1/vf-copy."
+  },
+  {
+    "id": "filter.copy.differential.stream",
+    "file": "tests/differential/video-copy-filter.test.ts",
+    "name": "matches native replayed copy graphs frame by frame across all 14 formats and sizes",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "createReplayVideoExecution over four copy graphs, all 14 formats and three sizes, rawvideo bytes and pts. Wave 1 branch wave1/vf-copy."
+  },
+  {
+    "id": "filter.copy.differential.timed",
+    "file": "tests/differential/video-copy-filter.test.ts",
+    "name": "matches native copy through activation actors and the timed backend as rawvideo and framecrc",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "createFrameActors rawvideo and createTimedVideoBackend rawvideo/framecrc for copy, copy,hflip, format=nv12,copy,vflip and copy,copy over all 14 formats and three sizes. Wave 1 branch wave1/vf-copy."
+  },
+  {
+    "id": "filter.copy.differential.refusal",
+    "file": "tests/differential/video-copy-filter.test.ts",
+    "name": "refuses copy options before opening any output, as native does except for the generic threads option",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "option and enable= refusal before any output is opened on the media and timed backends. Wave 1 branch wave1/vf-copy."
+  },
+  {
+    "id": "filter.aperms.framecrc",
+    "file": "tests/differential/aperms.test.ts",
+    "name": "matches native framecrc for every aperms mode and seed on u8 s16 s32 f32 f64 mono and stereo, alone and chained",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "PCM CLI framecrc, raw u8/s16le/s32le/f32le/f64le input, 1-2 channels, alone and chained with volume/asetnsamples/apad. Wave 1 branch wave1/af-aperms."
+  },
+  {
+    "id": "filter.aperms.files",
+    "file": "tests/differential/aperms.test.ts",
+    "name": "writes native-identical WAV and raw PCM files from WAV and raw inputs",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "PCM CLI WAV and raw output bytes from raw and WAV input. Wave 1 branch wave1/af-aperms."
+  },
+  {
+    "id": "filter.aperms.refusals",
+    "file": "tests/differential/aperms.test.ts",
+    "name": "fails explicitly before output for native errors and the unseeded random mode native accepts",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "explicit refusal before output, native exit status asserted. Wave 1 branch wave1/af-aperms."
+  },
+  {
+    "id": "filter.aperms.identity",
+    "file": "tests/unit/aperms.test.ts",
+    "name": "returns every input frame unchanged with its own planes, for every mode, format, channel count and frame split",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "AudioFilterChain apply/process identity and ownership. Wave 1 branch wave1/af-aperms."
+  },
+  {
+    "id": "wve.demux-outputs",
+    "file": "tests/differential/wve.test.ts",
+    "name": "matches native WVE copy framecrc, decode to WAV AU and s16le, and A-law remux for seven data lengths and four header durations",
+    "modes": [
+      "semantic",
+      "bit-exact",
+      "bit-exact-pcm"
+    ],
+    "scope": "Synthesized WVE files, 7 data lengths x 4 header durations; copy framecrc, decoded framecrc, s16le, WAV, AU and A-law remux byte-exact against native. Wave 1 branch wave1/fmt-wve."
+  },
+  {
+    "id": "wve.timing",
+    "file": "tests/differential/wve.test.ts",
+    "name": "matches native WVE output -ss -t and -frames:a, input -ss with an exact header duration, and forced -f wve over an altered magic",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "512-sample packet timing under output -ss/-t/-frames:a, input -ss with an equal header duration only, and forced -f wve over an altered magic. Wave 1 branch wave1/fmt-wve."
+  },
+  {
+    "id": "wve.probe-refusals",
+    "file": "tests/differential/wve.test.ts",
+    "name": "fails detection like native for an altered magic byte or a nonzero byte 23 and refuses the unmirrored seek and truncated header",
+    "modes": [
+      "semantic",
+      "diagnostic"
+    ],
+    "scope": "Twelve probe negatives fail in both (native 183, Edge 1 with no output); mismatched-duration input seek and truncated headers refused before output. Wave 1 branch wave1/fmt-wve."
+  },
+  {
+    "id": "demuxer.epaf.differential.matrix",
+    "file": "tests/differential/epaf.test.ts",
+    "name": "matches native copy framecrc WAV AIFF and raw output for LE/BE files, codecs 0 and 2, 1/2/6 channels and three rates",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "LE/BE codec 0/2, 1/2/6 channels, 3 rates: copy framecrc, WAV, AIFF (<=2ch), raw copy, s16le decode byte-exact. Wave 1 branch wave1/fmt-epaf."
+  },
+  {
+    "id": "demuxer.epaf.differential.timing",
+    "file": "tests/differential/epaf.test.ts",
+    "name": "matches native packet timing under input and output -ss/-t, -frames and filtered decode",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "input/output -ss/-t, -frames, filtered decode framecrc. Wave 1 branch wave1/fmt-epaf."
+  },
+  {
+    "id": "demuxer.epaf.differential.layout",
+    "file": "tests/differential/epaf.test.ts",
+    "name": "matches native layout guessing for 6 unlabelled channels under -guess_layout_max",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "6-channel layout guessing under -guess_layout_max. Wave 1 branch wave1/fmt-epaf."
+  },
+  {
+    "id": "demuxer.epaf.differential.refusals",
+    "file": "tests/differential/epaf.test.ts",
+    "name": "refuses with native exit codes for invalid fields and short headers and refuses partial frames before any output",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "native exit 183 for invalid fields and short headers; zero-sample files; partial frames refused before output. Wave 1 branch wave1/fmt-epaf."
+  },
+  {
+    "id": "demuxer.epaf.unit.header",
+    "file": "tests/unit/epaf.test.ts",
+    "name": "epaf demuxer parses LE and BE headers with bounded reads and never reads the 2024 skipped bytes or payload while opening",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "header parse and bounded reads. Wave 1 branch wave1/fmt-epaf."
+  },
+  {
+    "id": "demuxer.epaf.unit.probe",
+    "file": "tests/unit/epaf.test.ts",
+    "name": "epaf demuxer mirrors epaf_probe over exactly 24 bytes",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "24-byte epaf_probe. Wave 1 branch wave1/fmt-epaf."
+  },
+  {
+    "id": "demuxer.epaf.unit.refusals",
+    "file": "tests/unit/epaf.test.ts",
+    "name": "epaf demuxer refuses invalid fields and short headers with native INVALIDDATA status and partial frames explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "refusal messages, codes and statuses, read budget. Wave 1 branch wave1/fmt-epaf."
+  },
+  {
+    "id": "demuxer.epaf.unit.abort",
+    "file": "tests/unit/epaf.test.ts",
+    "name": "epaf demuxer honours abort before and between bounded header reads",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "abort before and between header reads. Wave 1 branch wave1/fmt-epaf."
+  },
+  {
+    "id": "demuxer.epaf.unit.descriptor",
+    "file": "tests/unit/epaf.test.ts",
+    "name": "epaf demuxer registers a demux-only descriptor with an exact probe",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "demux-only descriptor fields. Wave 1 branch wave1/fmt-epaf."
+  },
+  {
+    "id": "demuxer.epaf.unit.backend",
+    "file": "tests/unit/epaf.test.ts",
+    "name": "epaf demuxer decodes through the media backend and refuses before any output exists",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "backend decode and refusals before output creation. Wave 1 branch wave1/fmt-epaf."
+  },
+  {
+    "id": "demuxer.avr.copy-decode",
+    "file": "tests/differential/avr.test.ts",
+    "name": "matches native AVR stream copy framecrc and s16le decode for sign masks widths channels rates and odd lengths",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "AVR 2BIT demux: integer PCM 8/16/24/32-bit, sign masks, mono/stereo, three rates; copy framecrc (autodetected and -f avr) and s16le decode. Wave 1 branch wave1/fmt-avr."
+  },
+  {
+    "id": "demuxer.avr.time-wav",
+    "file": "tests/differential/avr.test.ts",
+    "name": "matches native AVR WAV decode and seek duration selections with and without -f avr",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "AVR WAV decode and -ss/-t/-frames:a framecrc selections, copy and pcm_s16le, four layouts. Wave 1 branch wave1/fmt-avr."
+  },
+  {
+    "id": "demuxer.avr.refusals",
+    "file": "tests/differential/avr.test.ts",
+    "name": "refuses AVR chan, rate, unmapped bps, unported bps and partial trailing frames before any output",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "AVR chan/rate/unmapped-bps refusals with native exit statuses 176/183; explicit refusal of native-accepted unported bps and partial trailing frames before output. Wave 1 branch wave1/fmt-avr."
+  },
+  {
+    "id": "demuxer.avr.unit",
+    "file": "tests/unit/avr.test.ts",
+    "name": "refuses AVR headers in native order with native exit statuses and unported layouts explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "AVR header refusal order, classes and native exit statuses. Wave 1 branch wave1/fmt-avr."
+  },
+  {
+    "id": "demuxer.pvf.copy-wav-raw",
+    "file": "tests/differential/pvf.test.ts",
+    "name": "matches native PVF copy framecrc WAV and raw output across bit depths channels rates and lengths",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "pcm_s8/s16be/s24be/s32be, 1-3 channels, 8000/44100 Hz. Wave 1 branch wave1/fmt-pvf."
+  },
+  {
+    "id": "demuxer.pvf.timing",
+    "file": "tests/differential/pvf.test.ts",
+    "name": "matches native PVF seek duration and frame limits through copy framecrc",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "input/output -ss, -t, -frames:a. Wave 1 branch wave1/fmt-pvf."
+  },
+  {
+    "id": "demuxer.pvf.header-lines",
+    "file": "tests/differential/pvf.test.ts",
+    "name": "mirrors or explicitly refuses the PVF header line-format matrix against native exit codes",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "ff_get_line and sscanf line formats; explicit refusals. Wave 1 branch wave1/fmt-pvf."
+  },
+  {
+    "id": "demuxer.pvf.forced-format",
+    "file": "tests/differential/pvf.test.ts",
+    "name": "matches native explicit -f pvf on a truncated file and skips the magic unchecked as native does",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "-f pvf. Wave 1 branch wave1/fmt-pvf."
+  },
+  {
+    "id": "demuxer.pvf.max-channels",
+    "file": "tests/differential/pvf.test.ts",
+    "name": "matches native at the 512-channel maximum through copy framecrc and raw output",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "512 channels pcm_s8. Wave 1 branch wave1/fmt-pvf."
+  },
+  {
+    "id": "demuxer.pvf.unit",
+    "file": "tests/unit/pvf.test.ts",
+    "name": "refuses native INVALIDDATA headers with exit 183 and unmirrored ones explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "header validation and refusals. Wave 1 branch wave1/fmt-pvf."
+  },
+  {
+    "id": "filter.dcshift.parse",
+    "file": "tests/unit/dcshift.test.ts",
+    "name": "parses positional and named decimal options and refuses expressions, suffixes, unknown options and out-of-range values with exact messages",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "syntax acceptance and exact refusal messages. Wave 1 branch wave1/af-dcshift."
+  },
+  {
+    "id": "filter.dcshift.arithmetic",
+    "file": "tests/unit/dcshift.test.ts",
+    "name": "matches the C transcription on every branch, threshold edge and clip, for every parameter pair, with frame-split invariance",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "C transcription of all branches, clipping and frame-split invariance. Wave 1 branch wave1/af-dcshift."
+  },
+  {
+    "id": "filter.dcshift.native-grid",
+    "file": "tests/differential/dcshift.test.ts",
+    "name": "matches native dcshift s32 raw, s32 WAV, s16 WAV and framecrc bytes for every shift and limiter gain on integer and float sources",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "shift x limitergain grid on u8/s16/s32 (all platforms) and f32/f64 (linux x64) to s32 raw/WAV, s16 WAV and framecrc. Wave 1 branch wave1/af-dcshift. On hosts other than linux/x64 the test drops f32/f64 sources without reporting a skip; Linux CI is the evidence for them."
+  },
+  {
+    "id": "filter.dcshift.native-chains",
+    "file": "tests/differential/dcshift.test.ts",
+    "name": "matches native dcshift chains with volume and asetnsamples, named options, mono and three-channel input and output time selection",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "chains with volume and asetnsamples, mono/3-channel, output time selection. Wave 1 branch wave1/af-dcshift. On hosts other than linux/x64 the test drops f32/f64 sources without reporting a skip; Linux CI is the evidence for them."
+  },
+  {
+    "id": "filter.dcshift.refusals",
+    "file": "tests/differential/dcshift.test.ts",
+    "name": "refuses out-of-range options, expressions, enable and unknown options before writing output, where native also fails or accepts unimplemented forms",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "explicit refusals before output against native exit status. Wave 1 branch wave1/af-dcshift."
+  },
+  {
+    "id": "filter.aderivative.cli-framecrc",
+    "file": "tests/differential/aderivative.test.ts",
+    "name": "matches native framecrc across source formats, channel counts, frame splits and padding in the native format and s16",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "framecrc bytes for all PCM source formats, 1-3 channels, frame splits and apad tail. Wave 1 branch wave1/af-aderivative. On hosts other than linux/x64 the test drops f32/f64 sources into s16 output without reporting a skip; Linux CI is the evidence for them."
+  },
+  {
+    "id": "filter.aderivative.cli-files",
+    "file": "tests/differential/aderivative.test.ts",
+    "name": "writes native-identical WAV and raw PCM from WAV and raw inputs",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "WAV and raw output bytes. Wave 1 branch wave1/af-aderivative. On hosts other than linux/x64 the test drops f32/f64 sources into s16 output without reporting a skip; Linux CI is the evidence for them."
+  },
+  {
+    "id": "filter.aderivative.cli-time-selection",
+    "file": "tests/differential/aderivative.test.ts",
+    "name": "filters the whole input before output -ss, -t, -to and -frames:a, as native does",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "output -ss/-t/-to/-frames:a filter the whole input. Wave 1 branch wave1/af-aderivative."
+  },
+  {
+    "id": "filter.aderivative.cli-negotiation",
+    "file": "tests/differential/aderivative.test.ts",
+    "name": "matches native where neighbouring format lists merge with its own, across source formats",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "native format-list merges with aformat and volume neighbours. Wave 1 branch wave1/af-aderivative. On hosts other than linux/x64 the test drops every f32/f64 source without reporting a skip; Linux CI is the evidence for them."
+  },
+  {
+    "id": "filter.aderivative.cli-refusals",
+    "file": "tests/differential/aderivative.test.ts",
+    "name": "fails explicitly before output for options, timeline enable and neighbour merges native would run in another format",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "explicit failure before output with native exit status. Wave 1 branch wave1/af-aderivative."
+  },
+  {
+    "id": "filter.aderivative.stream-arithmetic",
+    "file": "tests/unit/aderivative.test.ts",
+    "name": "matches a C transcription with two's-complement wrap and float32 rounding, independent of frame splits",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "C transcription, wrap, float32 rounding, frame-split invariance. Wave 1 branch wave1/af-aderivative."
+  },
+  {
+    "id": "filter.aderivative.negotiation",
+    "file": "tests/unit/aderivative.test.ts",
+    "name": "negotiates native picks: u8 and s16 to s16p, s32 to s32p, flt to fltp and dbl to dblp, with a single rounding only from float input",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "negotiatedSampleFormats for every input format. Wave 1 branch wave1/af-aderivative."
+  },
+  {
+    "id": "filter.aintegral.float",
+    "file": "tests/differential/aintegral.test.ts",
+    "name": "matches native aintegral f32 and f64 output for every source format, frame split and output time selection",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "f32/f64 raw and framecrc output from u8/s16/s32/f32/f64 stereo input, five chains with asetnsamples splits, output -ss/-t/-frames:a and input trim; Linux x64 reference. Wave 1 branch wave1/af-aintegral. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.aintegral.s16",
+    "file": "tests/differential/aintegral.test.ts",
+    "name": "matches native aintegral s16 output with -cpuflags 0 from low-amplitude zero-mean input whose integral stays within one",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "s16le, framecrc and WAV output with -cpuflags 0 from low-amplitude zero-mean input whose integral stays within +-1; Linux x64 reference. Wave 1 branch wave1/af-aintegral. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.aintegral.refusals",
+    "file": "tests/differential/aintegral.test.ts",
+    "name": "refuses aintegral options, timeline enable, and integer output beyond the scalar conversion bound before writing output",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Explicit CLI refusals with exact messages and no output, against native exit status. Wave 1 branch wave1/af-aintegral."
+  },
+  {
+    "id": "filter.aintegral.transcription",
+    "file": "tests/unit/aintegral.test.ts",
+    "name": "matches the C transcription across frames and frame splits for float and double",
+    "modes": [
+      "semantic",
+      "numerical"
+    ],
+    "scope": "INTEGRAL(flt/dbl) loop transcription with the accumulator carried across five frame splits, 1-3 channels. Wave 1 branch wave1/af-aintegral."
+  },
+  {
+    "id": "rso.mux-bytes",
+    "file": "tests/differential/rso.test.ts",
+    "name": "matches native RSO mux bytes from raw u8 and WAV s16le inputs for three rates and six lengths",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "pcm_u8 mono RSO mux from raw u8 and WAV s16le, rates 8000/11025/65535, lengths 0-70000 bytes, size field min(data,0xffff); seekable native output. Wave 1 branch wave1/fmt-rso."
+  },
+  {
+    "id": "rso.mux-refusals",
+    "file": "tests/differential/rso.test.ts",
+    "name": "refuses RSO rates of 65536 and above stereo and pcm_s16le with native exit 183 before output creation",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Native exit 183 for rate >= 65536, stereo and non-pcm_u8 codecs, before Edge output creation. Wave 1 branch wave1/fmt-rso."
+  },
+  {
+    "id": "rso.demux",
+    "file": "tests/differential/rso.test.ts",
+    "name": "matches native RSO demux of native-written and short or long header-size files through copy framecrc WAV decode and seeks",
+    "modes": [
+      "semantic",
+      "bit-exact",
+      "bit-exact-pcm"
+    ],
+    "scope": "pcm_u8 RSO demux read to EOF regardless of header size, through copy framecrc, WAV and pcm_s16le framecrc, with -ss/-t/-frames. Wave 1 branch wave1/fmt-rso."
+  },
+  {
+    "id": "rso.detect-refusals",
+    "file": "tests/differential/rso.test.ts",
+    "name": "detects undeclared RSO only by extension and refuses ADPCM and unknown tags with native exit 176",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "Undeclared detection only by .rso extension; -f rso; tag 0x0101/unknown refused with native exit 176. Wave 1 branch wave1/fmt-rso."
+  },
+  {
+    "id": "filter.il.linear",
+    "file": "tests/differential/video-il.test.ts",
+    "name": "matches native linear il for all 14 formats, every mode triple and every swap combination at even plane heights",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "14 formats x 8x8/6x4/16x12 x 27 mode triples x 8 swap combinations, rawvideo. Wave 1 branch wave1/vf-il."
+  },
+  {
+    "id": "filter.il.cli",
+    "file": "tests/differential/video-il.test.ts",
+    "name": "matches native il CLI rawvideo and framecrc through -vf and -filter_complex with timing scopes",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "14 formats x 6 chains x rawvideo/framecrc x 2 timing scopes plus 4 -cpuflags 0 conversions. Wave 1 branch wave1/vf-il."
+  },
+  {
+    "id": "filter.il.stream",
+    "file": "tests/differential/video-il.test.ts",
+    "name": "matches native il graphs through replayed streams frame by frame",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "14 formats x 4 replay graphs. Wave 1 branch wave1/vf-il."
+  },
+  {
+    "id": "filter.il.timed",
+    "file": "tests/differential/video-il.test.ts",
+    "name": "matches native il through the timed backend actor and pull schedulers in rawvideo and framecrc",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "14 formats x 3 graphs x rawvideo/framecrc x 2 frame counts x activation/pull schedulers. Wave 1 branch wave1/vf-il."
+  },
+  {
+    "id": "filter.il.options",
+    "file": "tests/differential/video-il.test.ts",
+    "name": "matches native il option aliases, shorthand and numeric forms, and refuses what native refuses",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "option aliases, shorthand, numeric modes and native refusals. Wave 1 branch wave1/vf-il."
+  },
+  {
+    "id": "filter.il.odd-heights",
+    "file": "tests/differential/video-il.test.ts",
+    "name": "refuses odd processed plane heights on every flagged path before opening outputs, where native output is pool dependent",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "odd processed plane heights refused before outputs open. Wave 1 branch wave1/vf-il."
+  },
+  {
+    "id": "filter.field.native-paths",
+    "file": "tests/differential/video-field.test.ts",
+    "name": "matches native field across every table format, both types, heights and the chained scopes on linear graph actor and timed paths",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "14 table formats, top/bottom, heights 3,5,7,8,9,12, field,hflip and scale chains, rawvideo and framecrc. Wave 1 branch wave1/vf-field."
+  },
+  {
+    "id": "filter.field.stream",
+    "file": "tests/differential/video-field.test.ts",
+    "name": "matches native replayed field streams with a second branch and geometry propagated into vstack",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "replay streams, 14 formats, heights 5 and 8, split/vstack and scale chains. Wave 1 branch wave1/vf-field."
+  },
+  {
+    "id": "filter.field.multi-input-cli",
+    "file": "tests/differential/video-field.test.ts",
+    "name": "matches native two-input field streams in rawvideo and framecrc through the multi-input CLI",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "two-input -filter_complex, 5 formats, rawvideo and framecrc. Wave 1 branch wave1/vf-field."
+  },
+  {
+    "id": "filter.field.refusals",
+    "file": "tests/differential/video-field.test.ts",
+    "name": "refuses bottom fields of one-row inputs and of subsampled chroma at h % 4 == 2 before opening any output on every path",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "h==1 bottom and subsampled-chroma h%4==2 bottom refused before any output. Wave 1 branch wave1/vf-field."
+  },
+  {
+    "id": "filter.field.unit",
+    "file": "tests/unit/video-field.test.ts",
+    "name": "rejects budgets, malformed storage, mismatched sizes, bad time bases and cancellation explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "budgets, strides, time bases, AbortSignal. Wave 1 branch wave1/vf-field."
+  },
+  {
+    "id": "demuxer.sox.mux-bytes",
+    "file": "tests/differential/sox.test.ts",
+    "name": "writes SoX files byte-identical to native seekable output for both codecs, channel counts, rates, lengths and source formats",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "SoX mux pcm_s32le/pcm_s32be, 1/2/3/6 channels, 8000/44100/96000 Hz, 0/1/67/4097 frames from s16le/s32le/f32le; bytes equal native seekable output. Wave 1 branch wave1/fmt-sox."
+  },
+  {
+    "id": "demuxer.sox.demux",
+    "file": "tests/differential/sox.test.ts",
+    "name": "demuxes native SoX files like native through copy framecrc, WAV, AIFF and raw decode, seeks, limits and volume",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "SoX demux (detected and -f sox) through copy/decode framecrc, seeks, -t, -frames, volume, -guess_layout_max, WAV, AIFF (<=2 ch), s16le; header padding and fractional rates. Wave 1 branch wave1/fmt-sox."
+  },
+  {
+    "id": "demuxer.sox.refusals",
+    "file": "tests/differential/sox.test.ts",
+    "name": "matches native exit codes for malformed SoX headers and refuses unmirrored ones before output",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "Native exit 183 for invalid SoX headers, 234 for muxer codecs; explicit refusal before output for unmirrored inputs. Wave 1 branch wave1/fmt-sox."
+  },
+  {
+    "id": "demuxer.sox.fate-lavf",
+    "file": "tests/differential/sox.test.ts",
+    "name": "reproduces the FATE lavf-sox reference file and its decode",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "FATE lavf-sox reference md5/size/crc. Wave 1 branch wave1/fmt-sox."
+  },
+  {
+    "id": "demuxer.sox.unit",
+    "file": "tests/unit/sox.test.ts",
+    "name": "round-trips the header within a 128-byte budget and writes the sample-word count up front",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "SoX header round trip within a 128-byte read budget, chunked header writes. Wave 1 branch wave1/fmt-sox."
+  },
+  {
+    "id": "ircam.bitexact-mux",
+    "file": "tests/differential/ircam.test.ts",
+    "name": "matches native IRCAM mux bytes for 8 codecs x 3 layouts x 5 rates x 4 lengths and decodes them back",
+    "modes": [
+      "semantic",
+      "bit-exact",
+      "bit-exact-pcm"
+    ],
+    "scope": "480 whole-file native -bitexact -f ircam comparisons: 8 LE codecs x 1/2/5 channels x 8000/22050/44100/96000/16777217 Hz x 0/1/67/4097 samples (av_q2intfloat rate word), plus 96 raw copy demux comparisons of native files. Wave 1 branch wave1/fmt-ircam."
+  },
+  {
+    "id": "ircam.demux-magics",
+    "file": "tests/differential/ircam.test.ts",
+    "name": "matches native IRCAM demux for all seven magics and both tag tables through copy framecrc, WAV decode and raw output",
+    "modes": [
+      "semantic",
+      "bit-exact",
+      "bit-exact-pcm"
+    ],
+    "scope": "All 7 native magics x 8 tags (LE and BE variants) x 1/2/5 channels through copy framecrc, -cpuflags 0 WAV decode and raw copy; undeclared detection and -f ircam for each magic. Wave 1 branch wave1/fmt-ircam."
+  },
+  {
+    "id": "ircam.packet-timing",
+    "file": "tests/differential/ircam.test.ts",
+    "name": "matches native IRCAM packet timing through copy and filtered framecrc with seeks, durations and frame limits",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "32 framecrc cases: 4 codecs x 4 seek/duration/frame-limit profiles x copy or a fixed volume/asetnsamples/asetrate chain at 8000 Hz stereo. Wave 1 branch wave1/fmt-ircam."
+  },
+  {
+    "id": "ircam.float-rate",
+    "file": "tests/differential/ircam.test.ts",
+    "name": "matches the native lrintf IRCAM float sample rate on ties and fractions",
+    "modes": [
+      "semantic",
+      "numerical"
+    ],
+    "scope": "21 finite in-range float32 rates (ties, fractions, large powers of two) in LE and BE headers; whole copy framecrc including #sample_rate. Non-finite and >=2^31 rates are refused, not compared. Wave 1 branch wave1/fmt-ircam."
+  },
+  {
+    "id": "ircam.refusals",
+    "file": "tests/differential/ircam.test.ts",
+    "name": "refuses IRCAM inputs and outputs with the native exit status before any output exists",
+    "modes": [
+      "semantic",
+      "diagnostic"
+    ],
+    "scope": "Native exit statuses for unknown tags, 0/513 channels, zero rates, unknown magic, truncated header (183/218) and 7 unsupported mux codecs (234), with no Edge output created. Wave 1 branch wave1/fmt-ircam."
+  },
+  {
+    "id": "ircam.fate-lavf",
+    "file": "tests/differential/ircam.test.ts",
+    "name": "matches the FATE lavf-ircam reference exactly",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "FATE lavf-ircam: audiogen asynth1.sw compiled at test time; Edge output md5/size equal tests/ref/lavf/ircam and the Adler-32 of its decode equals the reference CRC. -metadata/-qscale dropped (no effect on native md5, checked). Wave 1 branch wave1/fmt-ircam."
+  },
+  {
+    "id": "filter.earwax.native-bytes",
+    "file": "tests/differential/earwax.test.ts",
+    "name": "matches native WAV, raw and framecrc bytes for stereo 44100 Hz u8, s16, s32 and f32 sources and composed chains",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "stereo 44100 Hz u8/s16/s32/f32 raw sources, -cpuflags 0, WAV/raw/framecrc outputs, composed chains with asetnsamples, apad, volume, anull. Wave 1 branch wave1/af-earwax."
+  },
+  {
+    "id": "filter.earwax.time-selection",
+    "file": "tests/differential/earwax.test.ts",
+    "name": "matches native output time selection and frame limits after the cross-frame history",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "s16 stereo 44100 Hz, input -ss/-t, output -ss/-t/-to/-frames:a, framecrc. Wave 1 branch wave1/af-earwax."
+  },
+  {
+    "id": "filter.earwax.refusals",
+    "file": "tests/differential/earwax.test.ts",
+    "name": "refuses mono, three-channel and 48000 Hz input before output where native converts implicitly, and refuses options native rejects",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "explicit refusal before output with native exit status. Wave 1 branch wave1/af-earwax."
+  },
+  {
+    "id": "filter.earwax.fir",
+    "file": "tests/unit/earwax.test.ts",
+    "name": "matches a naive whole-signal FIR across random frame splits, packed and planar input, and saturates like native",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "arithmetic, clipping, frame-split invariance, ownership. Wave 1 branch wave1/af-earwax."
+  },
+  {
+    "id": "filter.channelmap.differential.syntax",
+    "file": "tests/differential/channelmap.test.ts",
+    "name": "channelmap against native matches native raw bytes for every permutation and duplication in each accepted syntax, u8/s16/s32/f32 with 1-3 channels",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "accepted map syntax (indices, names, four pair forms, trailing separator, keyed/positional, channel_layout) for u8/s16/s32/f32 with 1-3 channels, raw output. Wave 1 branch wave1/af-channelmap."
+  },
+  {
+    "id": "filter.channelmap.differential.mux",
+    "file": "tests/differential/channelmap.test.ts",
+    "name": "channelmap against native matches native framecrc, WAV and W64 headers and bytes, composed chains and output time selection",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "framecrc channel_layout_name, WAV/W64 headers, asetnsamples/apad/channelmap chains, output -ss/-t/-frames:a, explicit dblp. Wave 1 branch wave1/af-channelmap."
+  },
+  {
+    "id": "filter.channelmap.differential.refusals",
+    "file": "tests/differential/channelmap.test.ts",
+    "name": "channelmap against native refuses out-of-scope maps, double input and non-default WAV masks before output, with native status recorded",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "explicit refusals before output with native exit status. Wave 1 branch wave1/af-channelmap."
+  },
+  {
+    "id": "filter.channelmap.unit.mapping",
+    "file": "tests/unit/channelmap.test.ts",
+    "name": "channelmap execution matches a transcription of channelmap_filter_frame for every planar and packed input format, with frame-split invariance",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "plane mapping. Wave 1 branch wave1/af-channelmap."
+  },
+  {
+    "id": "filter.channelmap.unit.parser",
+    "file": "tests/unit/channelmap.test.ts",
+    "name": "channelmap parser refuses native init failures and unimplemented syntax with exact messages",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "parser refusals. Wave 1 branch wave1/af-channelmap."
+  },
+  {
+    "id": "filter.channelmap.unit.ownership",
+    "file": "tests/unit/channelmap.test.ts",
+    "name": "channelmap execution returns owned, non-aliasing planes and leaves the input untouched",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "ownership. Wave 1 branch wave1/af-channelmap."
+  },
+  {
+    "id": "filter.asoftclip.hard",
+    "file": "tests/differential/asoftclip.test.ts",
+    "name": "matches native asoftclip type=hard over the threshold, output and param grid on every source format byte for byte",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "type=hard, oversample=1, plain-decimal threshold/output/param, u8/s16/s32/f32/f64 input, raw/WAV/framecrc output, all platforms. Wave 1 branch wave1/af-asoftclip."
+  },
+  {
+    "id": "filter.asoftclip.alg-linux",
+    "file": "tests/differential/asoftclip.test.ts",
+    "name": "matches native asoftclip type=alg over the threshold, output and param grid on every source format byte for byte (linux/x64)",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "type=alg, oversample=1, linux/x64 unfused profile only. Wave 1 branch wave1/af-asoftclip. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700). Its title is computed per platform: on other hosts the skipped test carries the skip reason instead of \"(linux/x64)\"."
+  },
+  {
+    "id": "filter.asoftclip.chains",
+    "file": "tests/differential/asoftclip.test.ts",
+    "name": "matches native asoftclip hard in composed chains with frame splits, positional options and output time selection",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "type=hard in composed chains with output time selection. Wave 1 branch wave1/af-asoftclip."
+  },
+  {
+    "id": "filter.asoftclip.refusals",
+    "file": "tests/differential/asoftclip.test.ts",
+    "name": "refuses every libm type, oversampling and unscoped options before writing output, where native succeeds or fails",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "libm types, oversampling and unscoped options refused before output. Wave 1 branch wave1/af-asoftclip."
+  },
+  {
+    "id": "filter.asoftclip.kernel",
+    "file": "tests/unit/asoftclip.test.ts",
+    "name": "matches the C transcription for hard and alg over the option grid in float and double, packed and planar, and is frame-split invariant",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "float/double kernel against C transcription, frame-split invariance. Wave 1 branch wave1/af-asoftclip."
+  },
+  {
+    "id": "demuxer.nistsphere.matrix",
+    "file": "tests/differential/nistsphere.test.ts",
+    "name": "matches native NIST SPHERE copy framecrc raw and WAV output across codings byte formats widths channels and rates",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "copy framecrc, raw, WAV and f32le parity across codings, byte formats, widths, channels and rates. Wave 1 branch wave1/fmt-nistsphere."
+  },
+  {
+    "id": "demuxer.nistsphere.timing",
+    "file": "tests/differential/nistsphere.test.ts",
+    "name": "matches native NIST SPHERE seek duration and frame-limit timing with copy and decode",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "-ss/-t/-frames:a parity with copy and decode; mismatched sample_count seek refusal. Wave 1 branch wave1/fmt-nistsphere."
+  },
+  {
+    "id": "demuxer.nistsphere.text-edges",
+    "file": "tests/differential/nistsphere.test.ts",
+    "name": "matches native NIST SPHERE header text edges and native exit statuses for refused headers",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "header text edges, metadata routing and native exit statuses. Wave 1 branch wave1/fmt-nistsphere."
+  },
+  {
+    "id": "demuxer.nistsphere.line-reader",
+    "file": "tests/unit/nistsphere.test.ts",
+    "name": "ports ff_get_line CR LF CRLF and NUL termination and the 255-byte line limit",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "ff_get_line port. Wave 1 branch wave1/fmt-nistsphere."
+  },
+  {
+    "id": "demuxer.nistsphere.key-parser",
+    "file": "tests/unit/nistsphere.test.ts",
+    "name": "parses keys in native order with prefix matching and native statuses",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "key parsing, codec selection and native statuses. Wave 1 branch wave1/fmt-nistsphere."
+  },
+  {
+    "id": "demuxer.nistsphere.open",
+    "file": "tests/unit/nistsphere.test.ts",
+    "name": "opens the data range with bounded reads seeks and explicit refusals",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "bounded reads, packets, seeks and refusals. Wave 1 branch wave1/fmt-nistsphere."
+  },
+  {
+    "id": "demuxer.nistsphere.descriptor",
+    "file": "tests/unit/nistsphere.test.ts",
+    "name": "probes NIST_1A with bounded reads and registers a demux-only descriptor",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "probe and descriptor fields. Wave 1 branch wave1/fmt-nistsphere."
+  },
+  {
+    "id": "muxer.hash-family.pcm",
+    "file": "tests/differential/hash-muxers.test.ts",
+    "name": "matches native md5 hash crc and streamhash files for every PCM codec channel count rate and length",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "md5/hash/crc/streamhash default algorithms over 20 PCM codecs, 1/2/6 channels, 8000/44100 Hz, 0/1/4097 samples; byte-identical output files. No -hash, no video. Wave 1 branch wave1/fmt-hash-muxers."
+  },
+  {
+    "id": "muxer.hash-family.profiles",
+    "file": "tests/differential/hash-muxers.test.ts",
+    "name": "matches native hash muxer files after volume filtering time and frame limits and stream copy",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "Hash muxer output after -af volume=0.5 (-cpuflags 0), output -t/-frames:a, WAV and raw -c copy; byte-identical output files. Wave 1 branch wave1/fmt-hash-muxers."
+  },
+  {
+    "id": "muxer.hash-family.hash-option-refusal",
+    "file": "tests/differential/hash-muxers.test.ts",
+    "name": "refuses -hash before any output exists while native accepts murmur3 and sha256",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "-hash is refused explicitly with no output file; native acceptance recorded. Wave 1 branch wave1/fmt-hash-muxers."
+  },
+  {
+    "id": "filter.epx.kernel",
+    "file": "tests/differential/video-epx.test.ts",
+    "name": "matches native epx2 and epx3 pixels across packed RGBA formats, sizes and structured patterns",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "rgba/bgra/argb/abgr, n 2 and 3, sizes 1x1 3x3 5x4 13x9, structured patterns plus noise. Wave 1 branch wave1/vf-epx."
+  },
+  {
+    "id": "filter.epx.linear-graph",
+    "file": "tests/differential/video-epx.test.ts",
+    "name": "matches native linear and graph epx plans with scalar conversions around the packed RGBA stage",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "scalar (-cpuflags 0) conversions around epx from rgba, abgr, rgb24, gray, yuv420p. Wave 1 branch wave1/vf-epx."
+  },
+  {
+    "id": "filter.epx.stream",
+    "file": "tests/differential/video-epx.test.ts",
+    "name": "matches native replayed epx streams with branches and joins frame by frame",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "replay streams with split/hstack/nullsink/transpose. Wave 1 branch wave1/vf-epx."
+  },
+  {
+    "id": "filter.epx.cli",
+    "file": "tests/differential/video-epx.test.ts",
+    "name": "matches native epx CLI rawvideo and framecrc on the linear, graph, actor and timed paths",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "rawvideo and framecrc CLI outputs from packed RGBA input. Wave 1 branch wave1/vf-epx."
+  },
+  {
+    "id": "filter.epx.refusals",
+    "file": "tests/differential/video-epx.test.ts",
+    "name": "refuses epx output above maxFrameBytes and options native rejects before any output is opened",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "maxFrameBytes refusal on scaled output and native-rejected options before output opens. Wave 1 branch wave1/vf-epx."
+  },
+  {
+    "id": "sds.unpack",
+    "file": "tests/unit/sds.test.ts",
+    "name": "unpacks byte2, byte3 and byte4 packets into left-justified 32-bit words as native does",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "byte2/3/4_read against independent formulas, including byte2's addition for 8-bit bytes. No native run. Wave 1 branch wave1/fmt-sds."
+  },
+  {
+    "id": "sds.rate",
+    "file": "tests/unit/sds.test.ts",
+    "name": "maps bit depths to widths and sample periods to integer rates",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Depth-to-width mapping for 8..28 and refusals; integer 1e9/period with 16000 for period 0; 7-bit period decode. Wave 1 branch wave1/fmt-sds."
+  },
+  {
+    "id": "sds.bounded-open",
+    "file": "tests/unit/sds.test.ts",
+    "name": "parses the header and checks every packet with bounded reads before returning samples",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "2-byte reads, no payload reads on open, re-chunked packets with seeks and budgets, packetSpan 60/40/30. Synthetic inputs. Wave 1 branch wave1/fmt-sds."
+  },
+  {
+    "id": "sds.refusals",
+    "file": "tests/unit/sds.test.ts",
+    "name": "refuses bad depths, framing and truncation up front",
+    "modes": [
+      "semantic",
+      "diagnostic"
+    ],
+    "scope": "Truncated header and packet, trailing bytes, bad F0 7E, missing F7, depth 7/29, budgets and short reads. Synthetic inputs. Wave 1 branch wave1/fmt-sds."
+  },
+  {
+    "id": "sds.copy-decode",
+    "file": "tests/differential/sds.test.ts",
+    "name": "matches native SDS copy framecrc, s16le decode and WAV for six bit depths four periods and zero one or seven packets",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "75 synthesized dumps x 4 outputs (copy framecrc, s16le, WAV, u32le) byte-exact against the Linux oracle. Wave 1 branch wave1/fmt-sds."
+  },
+  {
+    "id": "sds.timing",
+    "file": "tests/differential/sds.test.ts",
+    "name": "matches native SDS packet timing for -t, -frames:a, declared -f sds and filtered decode",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "-t, -frames:a and declared -f sds on three widths and two rates, copy and filtered decode, framecrc and WAV. No input -ss (refused). Wave 1 branch wave1/fmt-sds."
+  },
+  {
+    "id": "sds.error-matrix",
+    "file": "tests/differential/sds.test.ts",
+    "name": "refuses malformed SDS before any output and records native exit statuses",
+    "modes": [
+      "semantic",
+      "diagnostic"
+    ],
+    "scope": "10 malformed inputs with native exit statuses asserted; Edge refuses all before output. Also covers the input -ss refusal and the absence of a muxer. Wave 1 branch wave1/fmt-sds."
+  },
+  {
+    "id": "sds.byte2",
+    "file": "tests/differential/sds.test.ts",
+    "name": "matches native when a declared -f sds ignores byte 2, which sds_read_header skips unchecked, and refuses it undetected",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "18 declared -f sds comparisons with byte 2 set to 0x05/0x7F/0xFF (depths 8, 16, 24; copy framecrc and WAV); undetected byte-2 files are refused with native status 183 without the .sds extension and 0 with it (extension fallback). Wave 1 branch wave1/fmt-sds. Added by the integration fix for the byte-2 probe bug."
+  },
+  {
+    "id": "filter.adynamicsmooth.unit.syntax",
+    "file": "tests/unit/adynamicsmooth.test.ts",
+    "name": "parses named and positional plain decimals and refuses every other form with exact messages",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "syntax and exact refusal messages. Wave 1 branch wave1/af-adynamicsmooth."
+  },
+  {
+    "id": "filter.adynamicsmooth.unit.negotiation",
+    "file": "tests/unit/adynamicsmooth.test.ts",
+    "name": "negotiates pinned dblp for every input format, reproduces native neighbours and declares its capabilities",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "dblp negotiation for every input/encoder format, capabilities, stream and rate refusals. Wave 1 branch wave1/af-adynamicsmooth."
+  },
+  {
+    "id": "filter.adynamicsmooth.unit.transcription",
+    "file": "tests/unit/adynamicsmooth.test.ts",
+    "name": "matches a direct transcription of the C loop bit for bit and is invariant to frame splits",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "bit-exact C-loop transcription, frame-split invariance. Wave 1 branch wave1/af-adynamicsmooth."
+  },
+  {
+    "id": "filter.adynamicsmooth.differential.grid",
+    "file": "tests/differential/adynamicsmooth.test.ts",
+    "name": "matches native framecrc bytes for every sensitivity and base frequency on all sources, 1-3 channels and f64/f32/s16 outputs",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "linux/x64 native, framecrc byte-exact, option grid x sources x channels x outputs. Wave 1 branch wave1/af-adynamicsmooth. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.adynamicsmooth.differential.chains",
+    "file": "tests/differential/adynamicsmooth.test.ts",
+    "name": "matches native across composed chains, asetnsamples splits, defaults, positional options and output time selection",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "linux/x64 native, composed chains, splits, time selection, empty input. Wave 1 branch wave1/af-adynamicsmooth. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.adynamicsmooth.differential.files",
+    "file": "tests/differential/adynamicsmooth.test.ts",
+    "name": "writes native-identical WAV, AIFF and raw PCM files from WAV and raw inputs",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "linux/x64 native, WAV/AIFF/raw files byte-exact. Wave 1 branch wave1/af-adynamicsmooth. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.adynamicsmooth.differential.refusals",
+    "file": "tests/differential/adynamicsmooth.test.ts",
+    "name": "fails explicitly before output for native errors, unimplemented option forms, timeline enable and rate conversion",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "explicit refusals before output with native status. Wave 1 branch wave1/af-adynamicsmooth."
+  },
+  {
+    "id": "filter.crystalizer.native-matrix",
+    "file": "tests/differential/crystalizer.test.ts",
+    "name": "matches native framecrc for i {-10,-3,0,2,10} x c {0,1}, packed and planar, on every source into f32, f64 and s16",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "linux x64: i/c matrix, packed and planar, five sources, three outputs, byte-exact framecrc. Wave 1 branch wave1/af-crystalizer. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.crystalizer.native-composed",
+    "file": "tests/differential/crystalizer.test.ts",
+    "name": "matches native across channel counts, multi-frame input, asetnsamples splits and composed chains",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "linux x64: channel counts, multi-frame, asetnsamples splits, composed chains. Wave 1 branch wave1/af-crystalizer. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.crystalizer.native-time-files",
+    "file": "tests/differential/crystalizer.test.ts",
+    "name": "matches native output time selection, frame limits and WAV/raw files",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "linux x64: output time selection, frame limits, WAV/raw files. Wave 1 branch wave1/af-crystalizer. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.crystalizer.refusals",
+    "file": "tests/differential/crystalizer.test.ts",
+    "name": "fails every unimplemented form before opening output, and records native status for each",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "all platforms: explicit refusal before output, native status recorded. Wave 1 branch wave1/af-crystalizer."
+  },
+  {
+    "id": "filter.crystalizer.transcription",
+    "file": "tests/unit/crystalizer.test.ts",
+    "name": "matches a direct C transcription for forward and inverse recurrences, packed and planar, with state carried across arbitrary frame splits",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "forward/inverse recurrences vs C transcription, frame-split invariance. Wave 1 branch wave1/af-crystalizer."
+  },
+  {
+    "id": "filter.compensationdelay.differential.0",
+    "file": "tests/differential/compensationdelay.test.ts",
+    "name": "matches native framecrc for distances, temperatures, dry/wet mixes, rates and source formats into f64 and s16",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "linux-x64. Wave 1 branch wave1/af-compensationdelay. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.compensationdelay.differential.1",
+    "file": "tests/differential/compensationdelay.test.ts",
+    "name": "writes native-identical f64le, s16le and WAV files with the longest delay and output time selection",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "linux-x64. Wave 1 branch wave1/af-compensationdelay. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.compensationdelay.differential.2",
+    "file": "tests/differential/compensationdelay.test.ts",
+    "name": "matches native output for empty input",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "all. Wave 1 branch wave1/af-compensationdelay."
+  },
+  {
+    "id": "filter.compensationdelay.differential.3",
+    "file": "tests/differential/compensationdelay.test.ts",
+    "name": "refuses unsupported options before output, with native status for each case",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "all. Wave 1 branch wave1/af-compensationdelay."
+  },
+  {
+    "id": "filter.compensationdelay.differential.4",
+    "file": "tests/differential/compensationdelay.test.ts",
+    "name": "refuses a ring beyond the buffer budget before output, where native allocates it",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "all. Wave 1 branch wave1/af-compensationdelay."
+  },
+  {
+    "id": "filter.compensationdelay.unit.0",
+    "file": "tests/unit/compensationdelay.test.ts",
+    "name": "parses named and positional options and refuses expressions, enable, unknown names and out-of-range values with exact messages",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "all. Wave 1 branch wave1/af-compensationdelay."
+  },
+  {
+    "id": "filter.compensationdelay.unit.1",
+    "file": "tests/unit/compensationdelay.test.ts",
+    "name": "computes the delay from the macro transcription, truncating toward zero",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "all. Wave 1 branch wave1/af-compensationdelay."
+  },
+  {
+    "id": "filter.compensationdelay.unit.2",
+    "file": "tests/unit/compensationdelay.test.ts",
+    "name": "negotiates pinned dblp for every input format and keeps counts, packet sections and planned reservations",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "all. Wave 1 branch wave1/af-compensationdelay."
+  },
+  {
+    "id": "filter.compensationdelay.unit.3",
+    "file": "tests/unit/compensationdelay.test.ts",
+    "name": "matches the C transcription across ring wraps, delay 0 and arbitrary frame splits, keeping timestamps and owning output",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "all. Wave 1 branch wave1/af-compensationdelay."
+  },
+  {
+    "id": "filter.compensationdelay.unit.4",
+    "file": "tests/unit/compensationdelay.test.ts",
+    "name": "converts packed and integer input to dblp, enforces allocation and format limits, and stops on abort",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "all. Wave 1 branch wave1/af-compensationdelay."
+  },
+  {
+    "id": "filter.compensationdelay.differential.wrap",
+    "file": "tests/differential/compensationdelay.test.ts",
+    "name": "matches native delays that wrap the power-of-two ring at 25000 and 50000 Hz, with exact dry/wet copies on every platform",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "30 framecrc comparisons: s16le and f64le input at 25000, 50000 and 8000 Hz, mono and stereo, temp -50/-45/-40 delays that exceed native's buf_size and wrap to delay mod buf_size, after asetnsamples=997:p=0; dry=0:wet=1 copies and non-overlapping dry=1:wet=1 impulses, exact on every platform. Wave 1 branch wave1/af-compensationdelay. Added by the integration fix for the ring-wrap bug."
+  },
+  {
+    "id": "filter.compensationdelay.unit.wrap",
+    "file": "tests/unit/compensationdelay.test.ts",
+    "name": "reduces the delay modulo native's power-of-two ring where colder temperatures exceed it, as the masked read does",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "buf_size and effective delay at 25000/48000/50000/44100/8000 Hz (16855 -> 471 and 8427 -> 235 as native probes show), the reservation of effective delay + 1 doubles, and bit-exact output against the native ring transcription over three frame splits. Wave 1 branch wave1/af-compensationdelay. Added by the integration fix for the ring-wrap bug."
+  },
+  {
+    "id": "filter.haas.parse",
+    "file": "tests/unit/haas.test.ts",
+    "name": "parses named and positional options with native defaults, names and ranges, and refuses everything else with exact messages",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "option syntax, native defaults/ranges and exact refusal messages. Wave 1 branch wave1/af-haas."
+  },
+  {
+    "id": "filter.haas.config",
+    "file": "tests/unit/haas.test.ts",
+    "name": "truncates delays as config_input does, reduces them modulo native's power-of-two ring and derives balance coefficients",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "delay truncation, ring modulo reduction and balance coefficients. Wave 1 branch wave1/af-haas."
+  },
+  {
+    "id": "filter.haas.planning",
+    "file": "tests/unit/haas.test.ts",
+    "name": "pins dbl for every input format, refuses non-stereo layouts and plans an unchanged count with an exact ring reservation",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "dbl negotiation, stereo constraint, counts, packet sections and reservations. Wave 1 branch wave1/af-haas."
+  },
+  {
+    "id": "filter.haas.transcription",
+    "file": "tests/unit/haas.test.ts",
+    "name": "matches a transcription of the C loop for every option family, independent of frame splits, without touching its input",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "output against a C-loop transcription under frame splits, ownership. Wave 1 branch wave1/af-haas."
+  },
+  {
+    "id": "filter.haas.limits",
+    "file": "tests/unit/haas.test.ts",
+    "name": "refuses non-stereo frames, rate changes, oversized rings and frames, emits nothing for empty input and observes cancellation",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "stream refusals, allocation limits, empty input and cancellation. Wave 1 branch wave1/af-haas."
+  },
+  {
+    "id": "filter.haas.native-pcm",
+    "file": "tests/differential/haas.test.ts",
+    "name": "matches native PCM bytes for every option sweep at 8000/44100/48000 Hz, stereo from every source format into f64/f32/s16",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "raw PCM bytes vs native across option sweeps, rates, sources and outputs (linux/x64). Wave 1 branch wave1/af-haas. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.haas.native-framecrc",
+    "file": "tests/differential/haas.test.ts",
+    "name": "matches native framecrc across frame splits, WAV input, output selection and frame limits, and at rates where native wraps its power-of-two ring",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "framecrc vs native across frame splits, WAV, time selection, frame limits and ring-wrap rates (linux/x64). Wave 1 branch wave1/af-haas. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.haas.native-refusals",
+    "file": "tests/differential/haas.test.ts",
+    "name": "refuses mono, three-channel, out-of-range and unimplemented forms before output, beside native status",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "explicit refusals before output beside native exit status. Wave 1 branch wave1/af-haas."
+  },
+  {
+    "id": "filter.extrastereo.native-bytes",
+    "file": "tests/differential/extrastereo.test.ts",
+    "name": "matches native extrastereo bytes for stereo sources, every m and clip setting, raw, WAV and framecrc outputs (Linux x64 unfused float)",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "linux/x64; stereo u8/s16/s32/f32/f64 sources, m {-10,-1,0,1,2.5,10}, c {0,1}, raw/WAV/framecrc f32 and s16 outputs. Wave 1 branch wave1/af-extrastereo. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.extrastereo.native-chains",
+    "file": "tests/differential/extrastereo.test.ts",
+    "name": "matches native extrastereo framecrc in composed chains, frame splits, defaults and output time selection (Linux x64 unfused float)",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "linux/x64; composed chains, asetnsamples splits, -ss/-t/-frames:a. Wave 1 branch wave1/af-extrastereo. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.extrastereo.refusals",
+    "file": "tests/differential/extrastereo.test.ts",
+    "name": "refuses layouts native would remix and unimplemented options before output, recording native status",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "mono/3-channel refusal, option refusals with native status, no output written. Wave 1 branch wave1/af-extrastereo."
+  },
+  {
+    "id": "filter.extrastereo.arithmetic",
+    "file": "tests/unit/extrastereo.test.ts",
+    "name": "matches the C transcription per sample for every m and clip setting, including zeros, opposite signs and subnormals",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "per-sample float formula and av_clipf_c clipping. Wave 1 branch wave1/af-extrastereo."
+  },
+  {
+    "id": "filter.extrastereo.syntax",
+    "file": "tests/unit/extrastereo.test.ts",
+    "name": "parses extrastereo options with native shorthand order and refuses everything else with exact messages",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "option parsing and exact refusal messages. Wave 1 branch wave1/af-extrastereo."
+  },
+  {
+    "id": "filter.stereowiden.syntax",
+    "file": "tests/unit/stereowiden.test.ts",
+    "name": "parses shorthand and named float options with native ranges and refuses everything else with exact messages",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "option parsing, ranges and exact refusal messages. Wave 1 branch wave1/af-stereowiden."
+  },
+  {
+    "id": "filter.stereowiden.unit",
+    "file": "tests/unit/stereowiden.test.ts",
+    "name": "matches a direct C transcription across options, rates and frame splits, without touching input frames",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "stream arithmetic, ring wrap, frame-split invariance and ownership. Wave 1 branch wave1/af-stereowiden."
+  },
+  {
+    "id": "filter.stereowiden.native",
+    "file": "tests/differential/stereowiden.test.ts",
+    "name": "matches native framecrc bytes for delay 1/20/100 ms at 8000/44100/48000 Hz across option sweeps, sources and f32/s16 outputs",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "linux/x64 byte equality across delays, rates, sweeps and sources. Wave 1 branch wave1/af-stereowiden. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.stereowiden.chains",
+    "file": "tests/differential/stereowiden.test.ts",
+    "name": "matches native raw and WAV bytes for shorthand options, asetnsamples splits, composed chains and output time selection",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "linux/x64 byte equality in composed chains and with output time selection. Wave 1 branch wave1/af-stereowiden. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.stereowiden.refusals",
+    "file": "tests/differential/stereowiden.test.ts",
+    "name": "fails explicitly before output for mono and masked input, native option errors and unimplemented forms",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "explicit refusals before output, with native exit statuses. Wave 1 branch wave1/af-stereowiden."
+  },
+  {
+    "id": "filter.aecho.framecrc",
+    "file": "tests/differential/aecho.test.ts",
+    "name": "matches native framecrc across sources, channel counts, rates, tap lists and s16/f32/f64 outputs",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "linux/x64: framecrc of u8/s16/s32/f32/f64 sources, mono/stereo, 8000/44100 Hz, nine option sets (1-3 taps, short/long/>2048-sample/zero-sample taps, saturation, named/duplicated options, default), source codec plus s16/f32/f64 outputs. Wave 1 branch wave1/af-aecho. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.aecho.long-input-tail",
+    "file": "tests/differential/aecho.test.ts",
+    "name": "matches native on long multi-frame inputs, where the tail only follows the last input frame",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "linux/x64: 24000-sample stereo s16/f32/f64 at 8000/44100 Hz; tail packet total equals max_samples after all input. Wave 1 branch wave1/af-aecho. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.aecho.time-selection",
+    "file": "tests/differential/aecho.test.ts",
+    "name": "matches native composed chains, output -t/-ss/-to/-frames:a and input time selection over the tail",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "linux/x64: aecho with asetnsamples, apad, volume and anull neighbours under output -t/-ss/-to/-frames:a and input -ss/-t, s16/f64 mono/stereo at 8000 Hz. Wave 1 branch wave1/af-aecho. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.aecho.empty-input",
+    "file": "tests/differential/aecho.test.ts",
+    "name": "matches native output for configured empty input, where only the silent tail remains",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "linux/x64: empty u8/s16/f32 stereo raw input, aecho alone and with asetnsamples, output -t/-ss/-frames:a. Wave 1 branch wave1/af-aecho. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.aecho.files",
+    "file": "tests/differential/aecho.test.ts",
+    "name": "writes native-identical WAV and raw PCM files from WAV and raw inputs",
+    "modes": [
+      "semantic",
+      "bit-exact-pcm"
+    ],
+    "scope": "linux/x64: WAV and raw outputs from raw and WAV inputs in all five PCM formats, one two-tap option set. Wave 1 branch wave1/af-aecho. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.aecho.refusals",
+    "file": "tests/differential/aecho.test.ts",
+    "name": "fails explicitly before output where native fails, and for accepted forms that remain unimplemented",
+    "modes": [
+      "semantic",
+      "diagnostic"
+    ],
+    "scope": "Native exit status for 23 option forms (14 native errors, 9 natively accepted but unimplemented), zero max_samples and rate conversion; no output file created. Wave 1 branch wave1/af-aecho."
+  },
+  {
+    "id": "filter.aecho.budget",
+    "file": "tests/differential/aecho.test.ts",
+    "name": "refuses a delay ring above the buffer budget before opening output",
+    "modes": [
+      "semantic",
+      "runtime"
+    ],
+    "scope": "PCM plan refuses a ring above maxBufferBytes with resource-budget before output. Wave 1 branch wave1/af-aecho."
+  },
+  {
+    "id": "filter.aecho.unit.syntax",
+    "file": "tests/unit/aecho.test.ts",
+    "name": "parses defaults, positional and named options, empty list fields and float32 values",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "aecho option syntax, defaults, last-wins and empty-field skipping. Wave 1 branch wave1/af-aecho."
+  },
+  {
+    "id": "filter.aecho.unit.refusals",
+    "file": "tests/unit/aecho.test.ts",
+    "name": "refuses native errors and unimplemented option forms with exact messages",
+    "modes": [
+      "semantic",
+      "diagnostic"
+    ],
+    "scope": "Exact refusal messages for native errors and unimplemented forms. Wave 1 branch wave1/af-aecho."
+  },
+  {
+    "id": "filter.aecho.unit.tap-math",
+    "file": "tests/unit/aecho.test.ts",
+    "name": "computes tap indexes in float32 truncated toward zero, and refuses a rate where nothing echoes",
+    "modes": [
+      "semantic",
+      "numerical"
+    ],
+    "scope": "config_output tap sample math and the max_samples constraint. Wave 1 branch wave1/af-aecho."
+  },
+  {
+    "id": "filter.aecho.unit.planning",
+    "file": "tests/unit/aecho.test.ts",
+    "name": "negotiates the native picks, refuses rate conversion and declares its tail and ring",
+    "modes": [
+      "semantic",
+      "api-contract"
+    ],
+    "scope": "Native format picks, capability flags, count/packetSections/plannedReservations for the tail and ring. Wave 1 branch wave1/af-aecho."
+  },
+  {
+    "id": "filter.aecho.unit.transcription",
+    "file": "tests/unit/aecho.test.ts",
+    "name": "matches a transcription of the C loop for every working format, frame split and tap list, with owned outputs and the tail after the last frame",
+    "modes": [
+      "semantic",
+      "numerical"
+    ],
+    "scope": "echo_samples_<fmt>p transcription across s16p/s32p/fltp/dblp, packed/planar, frame splits; ownership and tail timestamps. Wave 1 branch wave1/af-aecho."
+  },
+  {
+    "id": "filter.aecho.unit.limits",
+    "file": "tests/unit/aecho.test.ts",
+    "name": "widens u8 to s16p, emits the configured empty-input tail and enforces allocation, format and cancellation limits",
+    "modes": [
+      "semantic",
+      "runtime"
+    ],
+    "scope": "u8 widening, configured empty input, allocation/format/timestamp limits and AbortSignal. Wave 1 branch wave1/af-aecho."
+  },
+  {
+    "id": "filter.afade.curves",
+    "file": "tests/differential/afade.test.ts",
+    "name": "matches native fade-in and fade-out bytes for every implemented curve and the ss/ns, st/d and positional spellings",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "tri/qua/cub/squ/par/ipar/desi/quat on in/out with ss/ns, st/d and positional spellings on integer formats; from-zero fade-ins for every curve on f32/f64; nofade refusals. Wave 1 branch wave1/af-afade."
+  },
+  {
+    "id": "filter.afade.formats",
+    "file": "tests/differential/afade.test.ts",
+    "name": "matches native WAV and framecrc output from every source format into u8, s16 and f32 outputs",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "u8/s16/s32/f32/f64 sources into u8/s16/f32 WAV and framecrc; floating fade-out refusals. Wave 1 branch wave1/af-afade."
+  },
+  {
+    "id": "filter.afade.time",
+    "file": "tests/differential/afade.test.ts",
+    "name": "matches native fades crossing frame boundaries, outside the input, and under input and output time selection",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "fades across frame boundaries, outside the input, with asetnsamples/volume/asetrate neighbours, input -ss/-t and output -ss/-t/-frames:a. Wave 1 branch wave1/af-afade."
+  },
+  {
+    "id": "filter.afade.gains",
+    "file": "tests/differential/afade.test.ts",
+    "name": "matches native non-default silence and unity gains on linux x64",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "non-default silence/unity on s16/s32/f32/f64, gated to linux x64. Wave 1 branch wave1/af-afade. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+  },
+  {
+    "id": "filter.afade.refusals",
+    "file": "tests/differential/afade.test.ts",
+    "name": "refuses libm curves, unimplemented syntax and frame-boundary-dependent fades before output, recording native status",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "libm curves, unimplemented syntax and frame-boundary-dependent configurations refused before output, with native exit status. Wave 1 branch wave1/af-afade."
+  },
+  {
+    "id": "filter.afade.unit",
+    "file": "tests/unit/afade.test.ts",
+    "name": "afade output matches a direct C transcription for every curve, format and branch, and is invariant under frame splits where native is",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "C transcription of filter_frame/fade_gain for every format, curve and branch, with frame-split invariance. Wave 1 branch wave1/af-afade."
+  },
+  {
+    "id": "filter.afade.ipar",
+    "file": "tests/differential/afade.test.ts",
+    "name": "matches native ipar fades on linux x64 for every spelling, source format, output and time selection",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "96 byte-exact comparisons and 14 native-status refusals: every ipar case formerly in the curve, format and time tests. Wave 1 branch wave1/af-afade. Added by the integration fix that moved every ipar case to linux/x64. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
   }
 ]
