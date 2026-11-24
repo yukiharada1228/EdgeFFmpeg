@@ -1,0 +1,12 @@
+Scoped field interleave/deinterleave video filter
+
+The option table, shorthand order, plane roles, row bytes, chroma heights and
+row-copy semantics in src/video-ops/il.ts follow libavfilter/vf_il.c
+(il_options, query_formats, config_input, interleave, filter_frame) and the
+option handling of libavfilter/avfilter.c (process_options).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2002 Michael Niedermayer;(c)2013 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete il filter: odd plane
+heights, option expressions, enable= and runtime commands are refused.

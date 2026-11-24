@@ -1,0 +1,242 @@
+{
+ "capabilityId": "filter.il",
+ "slug": "vf-il",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/il.ts",
+  "packages/avfilter/NOTICE-IL",
+  "tests/unit/video-il.test.ts",
+  "tests/differential/video-il.test.ts",
+  "docs/contributing/il.md",
+  "docs/contributing/wave1/vf-il.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {ilOperator} from './il.js';",
+    " ilOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-il.test.ts",
+   "title": "parses declared names, aliases, shorthand order, numeric modes and booleans into frozen steps",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-il.test.ts",
+   "title": "deinterleaves, interleaves and swaps rows into owned tight planes from padded input without mutating it",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-il.test.ts",
+   "title": "keeps the native packed-alpha quirk: one packed plane runs as luma then alpha, so alpha settings win",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-il.test.ts",
+   "title": "refuses odd processed plane heights on every path before any output",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-il.test.ts",
+   "title": "rejects budgets, malformed strides, plane counts, time bases and cancellation explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-il.test.ts",
+   "title": "matches native linear il for all 14 formats, every mode triple and every swap combination at even plane heights",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-il.test.ts",
+   "title": "matches native il CLI rawvideo and framecrc through -vf and -filter_complex with timing scopes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-il.test.ts",
+   "title": "matches native il graphs through replayed streams frame by frame",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-il.test.ts",
+   "title": "matches native il through the timed backend actor and pull schedulers in rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-il.test.ts",
+   "title": "matches native il option aliases, shorthand and numeric forms, and refuses what native refuses",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-il.test.ts",
+   "title": "refuses odd processed plane heights on every flagged path before opening outputs, where native output is pool dependent",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(whole file, unedited)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 10170,
+  "details": [
+   {
+    "what": "linear rawvideo bytes, all 14 formats x 3 sizes x 27 mode triples x 8 swap combinations (42 native runs, split into 216 outputs each)",
+    "count": 9072
+   },
+   {
+    "what": "CLI -vf and -filter_complex rawvideo and framecrc bytes, including timing scopes and 4 -cpuflags 0 conversions",
+    "count": 676
+   },
+   {
+    "what": "replay stream rawvideo bytes and timestamps",
+    "count": 56
+   },
+   {
+    "what": "timed backend activation (actor) and pull (timed) rawvideo and framecrc bytes",
+    "count": 336
+   },
+   {
+    "what": "option alias/shorthand/numeric outputs",
+    "count": 30
+   }
+  ],
+  "refusalAgreements": 24,
+  "oddHeightRefusals": 30
+ },
+ "unsupported": [
+  "odd processed plane heights (refused: native output is buffer-pool dependent)",
+  "expression-valued modes such as l=1.5 or l=i+0 (refused; native evaluates them)",
+  "enable= timeline (refused)",
+  "runtime commands (refused automatically)",
+  "H.264/MP4 framecrc not compared"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": {
+  "summary": "13 failed tests, 6 failed files, of 2266 tests",
+  "failures": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts (file)",
+   "tests/unit/flac-decoder.test.ts (file)",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture",
+   "tests/unit/flac-max-frames.test.ts (file)",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ]
+ },
+ "finalUnitFailures": {
+  "summary": "13 failed tests, 6 failed files, of 2271 tests; identical to baseline",
+  "failures": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-decode-backend.test.ts (file)",
+   "tests/unit/flac-decoder.test.ts (file)",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture",
+   "tests/unit/flac-max-frames.test.ts (file)",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+   "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ]
+ },
+ "proposedContracts": [
+  {
+   "id": "filter.il.linear",
+   "file": "tests/differential/video-il.test.ts",
+   "name": "matches native linear il for all 14 formats, every mode triple and every swap combination at even plane heights",
+   "modes": [
+    "linear"
+   ],
+   "scope": "14 formats x 8x8/6x4/16x12 x 27 mode triples x 8 swap combinations, rawvideo"
+  },
+  {
+   "id": "filter.il.cli",
+   "file": "tests/differential/video-il.test.ts",
+   "name": "matches native il CLI rawvideo and framecrc through -vf and -filter_complex with timing scopes",
+   "modes": [
+    "linear",
+    "graph"
+   ],
+   "scope": "14 formats x 6 chains x rawvideo/framecrc x 2 timing scopes plus 4 -cpuflags 0 conversions"
+  },
+  {
+   "id": "filter.il.stream",
+   "file": "tests/differential/video-il.test.ts",
+   "name": "matches native il graphs through replayed streams frame by frame",
+   "modes": [
+    "stream"
+   ],
+   "scope": "14 formats x 4 replay graphs"
+  },
+  {
+   "id": "filter.il.timed",
+   "file": "tests/differential/video-il.test.ts",
+   "name": "matches native il through the timed backend actor and pull schedulers in rawvideo and framecrc",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "14 formats x 3 graphs x rawvideo/framecrc x 2 frame counts x activation/pull schedulers"
+  },
+  {
+   "id": "filter.il.options",
+   "file": "tests/differential/video-il.test.ts",
+   "name": "matches native il option aliases, shorthand and numeric forms, and refuses what native refuses",
+   "modes": [
+    "linear"
+   ],
+   "scope": "option aliases, shorthand, numeric modes and native refusals"
+  },
+  {
+   "id": "filter.il.odd-heights",
+   "file": "tests/differential/video-il.test.ts",
+   "name": "refuses odd processed plane heights on every flagged path before opening outputs, where native output is pool dependent",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "odd processed plane heights refused before outputs open"
+  }
+ ],
+ "notes": [
+  "Setup durations: submodule 44 s (matches compat/upstream.lock.json commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8), npm ci 9 s, reference:build 188 s, baseline typecheck+lint+boundaries+unit 147 s.",
+  "Packed-alpha quirk confirmed: mutating rgba/bgra/argb/abgr to use the luma settings fails the linear, CLI, stream and timed differential tests.",
+  "All five paths flagged; il is a stateless frame operator with no actorFrame.",
+  "No shared edits beyond the two registry lines were needed."
+ ]
+}
