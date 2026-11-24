@@ -1,0 +1,18 @@
+dcshift audio filter (src/audio/dcshift.ts)
+
+src/audio/dcshift.ts adapts FFmpeg libavfilter/af_dcshift.c: the shift and
+limitergain options with their ranges, the limiter threshold computed in init(),
+the three limiter branches and the unlimited path of filter_frame() in double
+arithmetic, the int64 truncation and av_clipl_int32 clipping, and the pinned
+s32p sample format (FILTER_SINGLE_SAMPLEFMT).
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2000 Chris Ausbrooks <weed@bucket.pp.ualr.edu>
+Copyright (c) 2000 Fabien COELHO <fabien@coelho.net>
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation accepts only constant decimal option values (no
+expressions or suffixes), refuses timeline enable and runtime commands, always
+writes a new owned frame instead of filtering in place, and makes the x86-64
+conversion of a non-finite or out-of-range double (INT64_MIN, clipped to
+INT32_MIN) explicit. It adds no FFmpeg runtime code.
+The original source and full notices remain in the pinned upstream submodule.

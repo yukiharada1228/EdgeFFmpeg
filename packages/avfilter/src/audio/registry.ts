@@ -10,3 +10,4 @@ export {asetnsamples} from './asetnsamples.js';
 export {asetrate} from './asetrate.js';
 export {volume} from './volume.js';
 export {aperms} from './aperms.js';
+export {dcshift} from './dcshift.js';

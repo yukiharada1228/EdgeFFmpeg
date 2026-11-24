@@ -1,0 +1,185 @@
+{
+ "capabilityId": "filter.dcshift",
+ "slug": "af-dcshift",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/audio/dcshift.ts",
+  "packages/avfilter/NOTICE-DCSHIFT",
+  "tests/unit/dcshift.test.ts",
+  "tests/differential/dcshift.test.ts",
+  "docs/contributing/dcshift.md",
+  "docs/contributing/wave1/af-dcshift.json",
+  "packages/avfilter/src/audio/registry.ts"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/audio/registry.ts: +1 line `export {dcshift} from './dcshift.js';`"
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/dcshift.test.ts",
+   "title": "parses positional and named decimal options and refuses expressions, suffixes, unknown options and out-of-range values with exact messages",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/dcshift.test.ts",
+   "title": "declares stateless frame allocation, refuses rate conversion and FLAC timing, and leaves counts, packets and reservations unchanged",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/dcshift.test.ts",
+   "title": "negotiates every input format to s32p and keeps native merges with volume and asetnsamples",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/dcshift.test.ts",
+   "title": "matches the C transcription on every branch, threshold edge and clip, for every parameter pair, with frame-split invariance",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/dcshift.test.ts",
+   "title": "converts integer and floating input to s32p first, owns its output and never mutates the input",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/dcshift.test.ts",
+   "title": "enforces frame allocation limits and observes cancellation",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/dcshift.test.ts",
+   "title": "matches native dcshift s32 raw, s32 WAV, s16 WAV and framecrc bytes for every shift and limiter gain on integer and float sources",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/dcshift.test.ts",
+   "title": "matches native dcshift chains with volume and asetnsamples, named options, mono and three-channel input and output time selection",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/dcshift.test.ts",
+   "title": "refuses out-of-range options, expressions, enable and unknown options before writing output, where native also fails or accepts unimplemented forms",
+   "passed": 1,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": [
+  {
+   "count": 300,
+   "compares": "byte-exact s32le raw, s32 WAV, s16 WAV and framecrc: shift {0,0.3,-0.7,1,-1} x limitergain {0,0.4,1} x stereo u8/s16/s32 (with INT_MIN/INT_MAX and threshold-edge samples) and f32/f64 |x|<=1.1 sources (-cpuflags 0, float sources gated to linux x64)"
+  },
+  {
+   "count": 840,
+   "compares": "byte-exact framecrc for 7 chains (volume=0.5 before/after, fixed volume after, asetnsamples=7 with and without padding, named options, two dcshifts) x mono/3-channel x 5 sources x 4 output selections (none, -ss/-t, -frames:a 3, -t 0.001) x pcm_s32le/pcm_s16le/pcm_f64le"
+  },
+  {
+   "count": 11,
+   "compares": "native exit status for refusals: 6 that native also rejects (shift=2, limitergain=-1, -1.5:0.5, 0:1.5, three positional values, unknown option), 4 that native accepts but are refused unimplemented (two expressions, a fraction expression, enable), and fixed volume before dcshift on s16 (registry negotiation guard); no output written in each case"
+  }
+ ],
+ "unsupported": [
+  "FLAC input (refused before decoding; flacInput not declared)",
+  "option expressions, suffixes, nan and empty values",
+  "timeline enable and runtime commands",
+  "automatic sample-rate conversion around dcshift",
+  "fixed volume before dcshift on u8/s16 input (registry negotiation guard refuses: 'dcshift with <fmt> input requires unimplemented format negotiation')",
+  "s64/s64p and other formats are not applicable: work format is always s32p"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": [
+  "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+  "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+  "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+ ],
+ "finalUnitFailures": [
+  "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+  "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+  "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+ ],
+ "proposedContracts": [
+  {
+   "id": "filter.dcshift.parse",
+   "file": "tests/unit/dcshift.test.ts",
+   "name": "parses positional and named decimal options and refuses expressions, suffixes, unknown options and out-of-range values with exact messages",
+   "modes": [
+    "unit"
+   ],
+   "scope": "syntax acceptance and exact refusal messages"
+  },
+  {
+   "id": "filter.dcshift.arithmetic",
+   "file": "tests/unit/dcshift.test.ts",
+   "name": "matches the C transcription on every branch, threshold edge and clip, for every parameter pair, with frame-split invariance",
+   "modes": [
+    "unit"
+   ],
+   "scope": "C transcription of all branches, clipping and frame-split invariance"
+  },
+  {
+   "id": "filter.dcshift.native-grid",
+   "file": "tests/differential/dcshift.test.ts",
+   "name": "matches native dcshift s32 raw, s32 WAV, s16 WAV and framecrc bytes for every shift and limiter gain on integer and float sources",
+   "modes": [
+    "differential"
+   ],
+   "scope": "shift x limitergain grid on u8/s16/s32 (all platforms) and f32/f64 (linux x64) to s32 raw/WAV, s16 WAV and framecrc"
+  },
+  {
+   "id": "filter.dcshift.native-chains",
+   "file": "tests/differential/dcshift.test.ts",
+   "name": "matches native dcshift chains with volume and asetnsamples, named options, mono and three-channel input and output time selection",
+   "modes": [
+    "differential"
+   ],
+   "scope": "chains with volume and asetnsamples, mono/3-channel, output time selection"
+  },
+  {
+   "id": "filter.dcshift.refusals",
+   "file": "tests/differential/dcshift.test.ts",
+   "name": "refuses out-of-range options, expressions, enable and unknown options before writing output, where native also fails or accepts unimplemented forms",
+   "modes": [
+    "differential"
+   ],
+   "scope": "explicit refusals before output against native exit status"
+  }
+ ],
+ "notes": [
+  "No shared edit beyond the registry line was needed.",
+  "Baseline unit failures are the expected sandbox ones: FLAC tests missing .build/codecs/flac artifacts (downloads.xiph.org blocked) and 10 resample-checkpoint golden digests recorded on macOS arm64. Final unit failures are identical.",
+  "The divide-by-zero in native's negative limiter branch (shift=-1:limitergain=1 on INT32_MIN) gives -inf; x86-64 cvttsd2si converts it to INT64_MIN, clipped to INT32_MIN. The implementation makes that explicit and the s32 differential grid covers it.",
+  "Setup durations: submodule init 97 s, npm ci + reference:build 207 s, baseline static checks + unit suite 159 s."
+ ]
+}
