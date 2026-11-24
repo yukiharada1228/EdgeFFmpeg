@@ -1,0 +1,15 @@
+Scoped whole-stream hash muxers and integer digests
+
+The md5, hash, streamhash and crc trailer lines in src/hash/hash-mux.ts follow
+libavformat/hashenc.c (hash_init, streamhash_init, hash_write_packet,
+hash_write_trailer) and crcenc.c (crc_init, crc_write_packet,
+crc_write_trailer). The digests in src/hash/digests.ts follow libavutil/md5.c,
+sha.c, crc.c (AV_CRC_32_IEEE_LE), adler32.c and hash.c (names, seeds, final
+byte order).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2002 Fabrice Bellard;(c)2009 Reimar Döffinger;(c)2013 Reimar Döffinger;
+(c)2006,2007 Michael Niedermayer;(c)2003-2005 Christopher R. Hertel;(c)2009 Konstantin Shishkov;
+(c)1995 Mark Adler. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete hash, framehash or crc muxers.

@@ -1,0 +1,196 @@
+{
+  "capabilityId": "muxer.md5",
+  "slug": "fmt-hash-muxers",
+  "status": "complete",
+  "alsoCovers": [
+    "muxer.hash",
+    "muxer.crc",
+    "muxer.streamhash"
+  ],
+  "filesChanged": [
+    "packages/containers/src/hash/digests.ts",
+    "packages/containers/src/hash/hash-mux.ts",
+    "packages/containers/NOTICE-HASH",
+    "docs/contributing/hash-muxers.md",
+    "tests/unit/hash-digests.test.ts",
+    "tests/differential/hash-muxers.test.ts",
+    "docs/contributing/wave1/fmt-hash-muxers.json",
+    "packages/containers/src/registry.ts (shared)"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/containers/src/registry.ts",
+      "change": "+4 registration lines (crc, hash, md5, streamhash) from './hash/hash-mux.js', each at its alphabetical position per the registry recipe (so not physically adjacent: crc before framecrc, hash and md5 before the raw-pcm line, streamhash after it)"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/hash-digests.test.ts",
+      "title": "hash digests > matches RFC 1321 MD5 test vectors",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/hash-digests.test.ts",
+      "title": "hash digests > matches FIPS 180-4 SHA-1 SHA-224 and SHA-256 test vectors",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/hash-digests.test.ts",
+      "title": "hash digests > matches CRC32 IEEE and adler32 test vectors with their seeds",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/hash-digests.test.ts",
+      "title": "hash digests > gives chunk-independent digests under a 128-byte write budget and refuses unknown names",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/hash-digests.test.ts",
+      "title": "hash muxers > registers four output-only descriptors with their native defaults and options",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/hash-digests.test.ts",
+      "title": "hash muxers > writes the native trailer lines of the concatenated payloads independent of packet boundaries",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/hash-digests.test.ts",
+      "title": "hash muxers > aborts the output exactly once on write failures invalid packets budgets and cancellation",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/hash-digests.test.ts",
+      "title": "hash muxers > refuses any -hash value before output since only the default algorithm is implemented",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/hash-muxers.test.ts",
+      "title": "matches native md5 hash crc and streamhash files for every PCM codec channel count rate and length",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/hash-muxers.test.ts",
+      "title": "matches native hash muxer files after volume filtering time and frame limits and stream copy",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/hash-muxers.test.ts",
+      "title": "refuses -hash before any output exists while native accepts murmur3 and sha256",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry.test.ts",
+      "title": "(whole file, unchanged)",
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry-extension.test.ts",
+      "title": "(whole file, unchanged)",
+      "passed": 7,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 1496,
+    "details": [
+      "1440 byte-for-byte output file comparisons: 20 PCM codecs x channels {1,2,6} x rates {8000,44100} x lengths {0,1,4097} x muxers {md5,hash,crc,streamhash}",
+      "48 byte-for-byte output file comparisons: 12 profiles (-cpuflags 0 -af volume=0.5 to s16le and pcm_f32be, output -t, -frames:a, WAV -c copy with and without -t, WAV decode, raw -c copy of 5 codecs) x 4 muxers",
+      "8 refusal checks: Edge refuses -hash murmur3/sha256 for each muxer with invalid-arguments and writes no file; native exit status (0, accepted) recorded and asserted"
+    ]
+  },
+  "unsupported": [
+    "-hash option (CLI parser refuses it; packages/cli not editable in wave 1); validate also refuses any -hash value",
+    "framemd5, framehash (deferred)",
+    "rawvideo input to hash muxers (raw-video.ts outside the registry)",
+    "FLAC input (FLAC output dispatcher does not iterate the registry)",
+    "multiple streams"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": [
+    "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+    "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+    "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+    "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+    "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+    "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ],
+  "finalUnitFailures": [
+    "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+    "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+    "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+    "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+    "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+    "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+    "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+  ],
+  "proposedContracts": [
+    {
+      "id": "muxer.hash-family.pcm",
+      "file": "tests/differential/hash-muxers.test.ts",
+      "name": "matches native md5 hash crc and streamhash files for every PCM codec channel count rate and length",
+      "modes": [
+        "bit-exact",
+        "semantic"
+      ],
+      "scope": "md5/hash/crc/streamhash default algorithms over 20 PCM codecs, 1/2/6 channels, 8000/44100 Hz, 0/1/4097 samples; byte-identical output files. No -hash, no video."
+    },
+    {
+      "id": "muxer.hash-family.profiles",
+      "file": "tests/differential/hash-muxers.test.ts",
+      "name": "matches native hash muxer files after volume filtering time and frame limits and stream copy",
+      "modes": [
+        "bit-exact",
+        "semantic"
+      ],
+      "scope": "Hash muxer output after -af volume=0.5 (-cpuflags 0), output -t/-frames:a, WAV and raw -c copy; byte-identical output files."
+    },
+    {
+      "id": "muxer.hash-family.hash-option-refusal",
+      "file": "tests/differential/hash-muxers.test.ts",
+      "name": "refuses -hash before any output exists while native accepts murmur3 and sha256",
+      "modes": [
+        "semantic"
+      ],
+      "scope": "-hash is refused explicitly with no output file; native acceptance recorded."
+    }
+  ],
+  "notes": [
+    "Setup durations: submodule init 36 s, npm ci 8 s, reference:build 141 s, typecheck+lint+boundaries 46 s, unit baseline 66 s; differential file 44 s.",
+    "Baseline and final unit runs are identical: 13 failed tests in 6 files (FLAC wasm/native fixtures unavailable because downloads.xiph.org is blocked; resample-checkpoint macOS arm64 goldens), 2261 passed after the change (2253 before + 8 new).",
+    "Supporting -hash needs one entry in packages/cli/src/index.ts's values set (a shared edit not allowed in wave 1). digests.ts already implements md5, sha160, sha224, sha256, crc32 and adler32 for it.",
+    "Side effect by registry design: containerOutputListing (and the generic 'Output requires ...' refusal) now lists crc, hash, md5, streamhash after framecrc.",
+    "Native crc with -hash exits 0 (option unused by crc), recorded in the refusal test."
+  ]
+}
