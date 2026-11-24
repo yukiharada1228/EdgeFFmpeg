@@ -44,8 +44,9 @@ export interface VideoOperatorDescriptor<S extends VideoStep=VideoStep,T extends
  parse?(token:FilterToken):FilterPads<S>;
  /** Activation option parser; falls back to parse. */
  parseTimed?(token:FilterToken):FilterPads<T>;
- /** Candidate formats shared by every pad, in preference order: a non-empty list of negotiationOrder
-  * entries without duplicates. Absent means every negotiable format. */
+ /** Candidate formats shared by every pad, in preference order: a non-empty list of negotiableFormats
+  * entries without duplicates, as native query_formats declares them. A negotiated format outside
+  * negotiationOrder is refused before output. Absent means every negotiable format. */
  formats?(step:S|T):readonly string[];
  /** Output size from the negotiated input shapes, on every path. Size-dependent refusals throw here and are repeated in frame. */
  geometry?(step:S|T,inputs:readonly VideoShape[]):VideoSize;

@@ -1,0 +1,24 @@
+Video pixel-format negotiation table (src/video-ops/formats.ts)
+
+src/video-ops/formats.ts adapts the video pixel-format negotiation of FFmpeg
+libavfilter/avfiltergraph.c (pick_format with a reference link) and
+libavfilter/formats.c (merge_formats_internal) shared by the linear,
+frame-graph and timed negotiators. The loss scoring follows get_pix_fmt_score,
+get_color_type and av_find_best_pix_fmt_of_2 in libavutil/pixdesc.c.
+
+The table of every non-hwaccel pixel format, in AVPixelFormat order, records
+nb_components, log2_chroma_w, log2_chroma_h, flags, component depths and
+av_get_padded_bits_per_pixel from av_pix_fmt_desc_get, and the vf_scale
+query_formats lists (libavfilter/vf_scale.c, sws_test_format in
+libswscale/format.c), as built from the pinned sources.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2007 Bobby Bingham
+Copyright (c) 2008 Vitor Sessak
+Copyright (c) 2009 Michael Niedermayer
+Copyright (C) 2024 Niklas Haas
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation negotiates over the whole table and refuses, before
+any output, every negotiated format that has no frame storage or conversion
+here instead of substituting another format. It adds no FFmpeg runtime code.
+The original source and full notices remain in the pinned upstream submodule.

@@ -8,7 +8,7 @@ import {parseFilterTopology,filterTopologyOrder} from "../filter-topology.js";
 import {resolveVideoFilter} from "./resolver.js";
 import type {GraphVideoStep} from "./resolver.js";
 import {videoOperator} from "../video-ops/registry.js";
-import {negotiationOrder as order,chooseFormat as choose,formatGroup as group,formatRoot as root,mergeFormats as merge} from "../video-ops/formats.js";
+import {negotiableFormats as order,scaleInputFormats,scaleOutputFormats,requireExecutableFormat,chooseFormat as choose,formatGroup as group,formatRoot as root,mergeFormats as merge} from "../video-ops/formats.js";
 import type {FormatGroup as Group} from "../video-ops/formats.js";
 export interface Geometry{readonly sampleAspectRatio?:Rational;readonly format:string;readonly width:number;readonly height:number}
 export type NegotiatedStep=GraphVideoStep|{readonly name:'source';readonly geometry:Geometry}|{readonly name:'sink'|'trim'};
@@ -24,7 +24,7 @@ export function negotiateVideoTopology(description:string,source:Geometry|readon
  const inputOrder=options.inputRegistrationOrder??sources.map((_,index)=>index);if(inputOrder.length!==sources.length||new Set(inputOrder).size!==sources.length||inputOrder.some(index=>!Number.isInteger(index)||index<0||index>=sources.length))throw new Error('Invalid input registration order');
  const trims=Array.isArray(options.inputTrim)?options.inputTrim:sources.map(()=>options.inputTrim===true);if(trims.length!==sources.length||trims.some(value=>typeof value!=='boolean'))throw new Error('Invalid input trim bindings');
  // Pseudo nodes (source, trim, sink) are never registered operators and accept every format.
- const make=(step:NegotiatedStep,inputs:number,outputs:number):Node=>{const op=videoOperator(step.name),common=group(op?.formats?.(step)??order);return {step,inputs:[],outputs:[],inputGroups:Array.from({length:inputs},()=>common),outputGroups:Array.from({length:outputs},()=>op?.role==='resize'?group(order):common)};};
+ const make=(step:NegotiatedStep,inputs:number,outputs:number):Node=>{const op=videoOperator(step.name),resize=op?.role==='resize',common=group(op?.formats?.(step)??(resize?scaleInputFormats:order));return {step,inputs:[],outputs:[],inputGroups:Array.from({length:inputs},()=>common),outputGroups:Array.from({length:outputs},()=>resize?group(scaleOutputFormats):common)};};
  const nodes=topology.nodes.map(node=>make(node.configuration,node.inputs,node.outputs)),registration=[...nodes],sourceBindings=new Map<Node,number>(),automaticNodes=new Set<Node>();
  const connect=(from:Node,fromPad:number,to:Node,toPad:number):Link=>{const link:Link={from,fromPad,to,toPad,selected:null,geometry:null};from.outputs[fromPad]=link;to.inputs[toPad]=link;return link;};
  for(const edge of topology.edges)connect(nodes[edge.from.node]!,edge.from.pad,nodes[edge.to.node]!,edge.to.pad);
@@ -57,6 +57,8 @@ export function negotiateVideoTopology(description:string,source:Geometry|readon
   const reference=node.inputs[0]?.selected;if(reference)for(const link of node.outputs)if(link.selected===null){select(link,reference);changed=true;}
  }}
  for(const node of registration)for(const link of [...node.inputs,...node.outputs])if(link.selected===null)select(link);
+ // Refuse before geometry or output: a negotiated format without storage here is never substituted.
+ for(const node of registration)for(const link of node.inputs)requireExecutableFormat(link.selected!,node.step.name==='sink'?'Video output':`Video filter ${node.step.name} input`);
  // Geometry follows dependencies independently of declaration/query registration.
  const remaining=new Set(registration);for(let round=0;remaining.size&&round<=registration.length;round++){
   let progressed=false;for(const node of remaining){if(node.inputs.some(link=>link.geometry===null))continue;const input=node.inputs[0]?.geometry??(node.step.name==='source'?node.step.geometry:sources[0]!);let width=input.width,height=input.height,aspect=input.sampleAspectRatio;
