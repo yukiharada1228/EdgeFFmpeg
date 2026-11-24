@@ -1,0 +1,13 @@
+Scoped limiter video filter
+
+The option table, init min > max refusal, eight-bit pix_fmts subset, bound
+clamp, plane mask and plane copy semantics in src/video-ops/limiter.ts follow
+libavfilter/vf_limiter.c (limiter_options, init, pix_fmts, limiter8,
+config_input, filter_slice, filter_frame, process_command).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+vf_limiter.c carries no per-file copyright line; it is part of FFmpeg and
+authored by Paul B Mahol and the FFmpeg contributors. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete limiter filter: only
+eight-bit formats, no timeline and no runtime commands.
