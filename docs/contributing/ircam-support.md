@@ -10,7 +10,7 @@
 - **Rate.** The rate is `lrintf` of the float32 field: round half to even, so 22050.5 gives 22050 and 22051.5 gives 22052. Results of 0 (for example 0.5) are refused as native does.
 - **Refusals with native exit statuses, in native order:**
   - an unknown magic, zero channels or a zero rate: `INVALIDDATA` (183);
-  - more than 512 channels (`FF_SANE_NB_CHANNELS`): `ENOSYS` (218);
+  - more than 512 channels (`FF_SANE_NB_CHANNELS`): `ENOSYS` (218). `AVERROR(ENOSYS)` exits with `-ENOSYS & 255`, which depends on the host's errno table: 218 on Linux, 178 from the macOS arm64 reference (ENOSYS is 78 there). EdgeFFmpeg always uses the Linux value, and the differential test maps the host's status through `os.constants.errno.ENOSYS` (integration fix);
   - an unknown tag (`unknown tag <hex>`): 183.
 - **Refused as unimplemented (exit 1):**
   - non-finite rates, and rates that round to 2^31 or more, or below -2^31. `lrintf` overflow differs between x86_64 and arm64.

@@ -1,13 +1,16 @@
 import {expect,it} from 'vitest';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {mkdtempSync,writeFileSync,readFileSync,rmSync,existsSync} from 'node:fs';
-import {tmpdir} from 'node:os';
+import {constants,tmpdir} from 'node:os';
 import {createHash} from 'node:crypto';
 import {join,resolve} from 'node:path';
 import {FFmpeg} from '@edge-ffmpeg/core';
 import {createMediaBackend} from '@edge-ffmpeg/avformat';
 import {createNodeFileSystem} from '@edge-ffmpeg/runtime-node';
 const native=resolve('.build/reference/ffmpeg');
+/** AVERROR(e) exits with (-e) & 255, so errno-based statuses follow the reference host's errno table: ENOSYS is 38 on
+ * Linux (218) and 78 on macOS (178). EdgeFFmpeg always uses the Linux numbering, so the host's status maps to Linux's. */
+const hostEnosys=(256-constants.errno.ENOSYS)&255,linuxEnosys=218,linuxStatus=(status:number|null)=>status===hostEnosys?linuxEnosys:status;
 const codecs=['pcm_alaw','pcm_mulaw','pcm_s8','pcm_s16le','pcm_s24le','pcm_s32le','pcm_f32le','pcm_f64le'];
 const tags:Record<string,number>={pcm_alaw:0x10001,pcm_mulaw:0x20001,pcm_s8:1,pcm_s16le:2,pcm_s24le:3,pcm_s32le:0x40004,pcm_f32le:4,pcm_f64le:8};
 const raw:Record<string,string>={pcm_alaw:'alaw',pcm_mulaw:'mulaw',pcm_s8:'s8',pcm_s16le:'s16le',pcm_s24le:'s24le',pcm_s32le:'s32le',pcm_f32le:'f32le',pcm_f64le:'f64le',pcm_s16be:'s16be',pcm_s24be:'s24be',pcm_s32be:'s32be',pcm_f32be:'f32be',pcm_f64be:'f64be'};
@@ -112,7 +115,8 @@ it('refuses IRCAM inputs and outputs with the native exit status before any outp
     for(const [name,bytes]of cases){
       writeFileSync(join(root,`${name}.sf`),bytes);
       const expected=spawnSync(native,['-v','error','-i',join(root,`${name}.sf`),'-f','framecrc','-']),result=await ffmpeg.exec(['-i',`/${name}.sf`,'-f','framecrc',`/${name}.crc`]);
-      expect(expected.status,name).not.toBe(0);expect(result.exitCode,`${name} ${JSON.stringify(result.diagnostics)}`).toBe(expected.status);expect(existsSync(join(root,`${name}.crc`))).toBe(false);
+      expect(expected.status,name).not.toBe(0);if(name==='channels513')expect(expected.status,name).toBe(hostEnosys);
+      expect(result.exitCode,`${name} ${JSON.stringify(result.diagnostics)}`).toBe(linuxStatus(expected.status));expect(existsSync(join(root,`${name}.crc`))).toBe(false);
     }
     writeFileSync(join(root,'input.raw'),payload(64));
     for(const codec of ['pcm_s16be','pcm_u8','pcm_u16le','pcm_f32be','pcm_s24be','pcm_s32be','pcm_f64be']){
