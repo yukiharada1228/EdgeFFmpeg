@@ -10603,6 +10603,6 @@
       "semantic",
       "bit-exact"
     ],
-    "scope": "96 byte-exact comparisons and 14 native-status refusals: every ipar case formerly in the curve, format and time tests. Wave 1 branch wave1/af-afade. Added by the integration fix that moved every ipar case to linux/x64. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (it passed in GitHub Actions run 45402980700)."
+    "scope": "96 byte-exact comparisons and 14 native-status refusals: every ipar case formerly in the curve, format and time tests. Wave 1 branch wave1/af-afade. Added by the integration fix that moved every ipar case to linux/x64. Linux x86_64 only: the test is gated to linux/x64 because the macOS arm64 reference build fuses floating-point expressions that EdgeFFmpeg evaluates unfused; it is skipped on macOS arm64, so this contract resolves only on a linux/x64 run (the test was added after GitHub Actions run 45402980700; its 96 comparisons and 14 refusals passed there inside the then-ungated curve, format and time tests)."
   }
 ]
