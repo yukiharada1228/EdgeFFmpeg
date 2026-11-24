@@ -1,0 +1,229 @@
+{
+  "capabilityId": "demuxer.nistsphere",
+  "slug": "fmt-nistsphere",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/nistsphere.ts",
+    "packages/containers/NOTICE-NISTSPHERE",
+    "docs/contributing/nistsphere-support.md",
+    "tests/unit/nistsphere.test.ts",
+    "tests/differential/nistsphere.test.ts",
+    "docs/contributing/wave1/fmt-nistsphere.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/containers/src/registry.ts",
+      "change": "+1 line: export {nistsphere} from './nistsphere.js'; (demux-only, probe 'NIST_1A\\n', -f nistsphere)"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/differential/nistsphere.test.ts",
+      "title": "matches native NIST SPHERE copy framecrc raw and WAV output across codings byte formats widths channels and rates",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/differential/nistsphere.test.ts",
+      "title": "matches native NIST SPHERE seek duration and frame-limit timing with copy and decode",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/differential/nistsphere.test.ts",
+      "title": "matches native NIST SPHERE header text edges and native exit statuses for refused headers",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/nistsphere.test.ts",
+      "title": "scans NIST SPHERE key lines with sscanf semantics",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/nistsphere.test.ts",
+      "title": "ports ff_get_line CR LF CRLF and NUL termination and the 255-byte line limit",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/nistsphere.test.ts",
+      "title": "parses keys in native order with prefix matching and native statuses",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/nistsphere.test.ts",
+      "title": "opens the data range with bounded reads seeks and explicit refusals",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/nistsphere.test.ts",
+      "title": "probes NIST_1A with bounded reads and registers a demux-only descriptor",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/nistsphere.test.ts",
+      "title": "aborts before and between bounded header reads",
+      "pass": 1,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/container-registry.test.ts",
+      "title": "(whole file, unchanged)",
+      "pass": 9,
+      "fail": 0
+    },
+    {
+      "file": "tests/unit/container-registry-extension.test.ts",
+      "title": "(whole file, unchanged)",
+      "pass": 7,
+      "fail": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 480,
+    "byteComparisons": 469,
+    "exitStatusComparisons": 11,
+    "compares": [
+      "336 matrix byte comparisons: copy framecrc, copy raw, -cpuflags 0 decoded WAV and f32le for 84 accepted coding/byte-format/width/channel/rate files",
+      "78 timing byte comparisons: -ss/-t/-frames:a profiles, copy and filtered decode, framecrc/WAV/s16le, sample_count exact/absent/mismatched",
+      "55 text-edge byte comparisons: CRLF, CR, header_size variants, blank/NUL/254-byte lines, sig_bits, -f nistsphere, metadata keys to framecrc/raw/W64",
+      "11 native refusal exit statuses (183, 176, 187) with no output",
+      "8 scope refusals also record native's exit status (0, or 234 for a missing rate)"
+    ]
+  },
+  "unsupported": [
+    "pcm,embedded-shorten and other codings",
+    "bit depths not a multiple of 8 (sig_bits 12), 0-bit, 40-56-bit and 64-bit PCM",
+    "A-law/mu-law with other than 8 bits",
+    "metadata keys with WAV/AIFF/AU output (refused; raw, framecrc and W64 accepted)",
+    "missing or zero sample_rate or channel_count",
+    "header_size past EOF and partial trailing frames",
+    "header lines over 255 bytes and headers over 65536 bytes",
+    "input -ss when sample_count differs from the physical sample count",
+    "detection by .sph/.nist extension without the NIST_1A magic",
+    "FLAC input paths, workerd runs, macOS reproduction"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "files": 6,
+    "tests": 13,
+    "list": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts (suite failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+      "tests/unit/flac-decoder.test.ts (suite failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts (suite failed to load)",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ]
+  },
+  "finalUnitFailures": {
+    "files": 6,
+    "tests": 13,
+    "list": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts (suite failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+      "tests/unit/flac-decoder.test.ts (suite failed to load: missing .build/codecs/flac/edge-flac.wasm)",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts (suite failed to load)",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ],
+    "sameAsBaseline": true
+  },
+  "proposedContracts": [
+    {
+      "id": "demuxer.nistsphere.matrix",
+      "file": "tests/differential/nistsphere.test.ts",
+      "name": "matches native NIST SPHERE copy framecrc raw and WAV output across codings byte formats widths channels and rates",
+      "modes": [
+        "differential"
+      ],
+      "scope": "copy framecrc, raw, WAV and f32le parity across codings, byte formats, widths, channels and rates"
+    },
+    {
+      "id": "demuxer.nistsphere.timing",
+      "file": "tests/differential/nistsphere.test.ts",
+      "name": "matches native NIST SPHERE seek duration and frame-limit timing with copy and decode",
+      "modes": [
+        "differential"
+      ],
+      "scope": "-ss/-t/-frames:a parity with copy and decode; mismatched sample_count seek refusal"
+    },
+    {
+      "id": "demuxer.nistsphere.text-edges",
+      "file": "tests/differential/nistsphere.test.ts",
+      "name": "matches native NIST SPHERE header text edges and native exit statuses for refused headers",
+      "modes": [
+        "differential"
+      ],
+      "scope": "header text edges, metadata routing and native exit statuses"
+    },
+    {
+      "id": "demuxer.nistsphere.line-reader",
+      "file": "tests/unit/nistsphere.test.ts",
+      "name": "ports ff_get_line CR LF CRLF and NUL termination and the 255-byte line limit",
+      "modes": [
+        "unit"
+      ],
+      "scope": "ff_get_line port"
+    },
+    {
+      "id": "demuxer.nistsphere.key-parser",
+      "file": "tests/unit/nistsphere.test.ts",
+      "name": "parses keys in native order with prefix matching and native statuses",
+      "modes": [
+        "unit"
+      ],
+      "scope": "key parsing, codec selection and native statuses"
+    },
+    {
+      "id": "demuxer.nistsphere.open",
+      "file": "tests/unit/nistsphere.test.ts",
+      "name": "opens the data range with bounded reads seeks and explicit refusals",
+      "modes": [
+        "unit"
+      ],
+      "scope": "bounded reads, packets, seeks and refusals"
+    },
+    {
+      "id": "demuxer.nistsphere.descriptor",
+      "file": "tests/unit/nistsphere.test.ts",
+      "name": "probes NIST_1A with bounded reads and registers a demux-only descriptor",
+      "modes": [
+        "unit"
+      ],
+      "scope": "probe and descriptor fields"
+    }
+  ],
+  "notes": [
+    "No shared edit beyond the registry line was needed.",
+    "Setup durations: submodule 50 s, npm ci 10 s, reference:build 192 s, baseline static checks 70 s, baseline unit suite 96 s.",
+    "Native extra-key metadata is exactly native's sscanf(\"%31s %*s %31s\")==2 test; native WAV output for such files succeeds, EdgeFFmpeg refuses it.",
+    "Header scanning is capped at 65536 bytes so headerBytes stays 512 (line buffer plus one read chunk)."
+  ]
+}

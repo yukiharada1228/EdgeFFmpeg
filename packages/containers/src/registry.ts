@@ -8,6 +8,7 @@ export {epaf} from './epaf.js';
 export {avr} from './avr.js';
 export {framecrc} from './formats/framecrc.js';
 export {ircam} from './ircam.js';
+export {nistsphere} from './nistsphere.js';
 export * from './formats/raw-pcm.js';
 export {pvf} from './pvf.js';
 export {rso} from './rso.js';
