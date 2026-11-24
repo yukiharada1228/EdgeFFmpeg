@@ -1,0 +1,11 @@
+Scoped Ensoniq PARIS Audio File (EPAF) demuxer
+
+The probe, header field checks, codec mapping, channel and rate limits and the
+fixed 2048-byte data offset in src/epaf.ts follow libavformat/epafdec.c
+(epaf_probe, epaf_read_header); packet reads use the shared raw PCM reader,
+following libavformat/pcm.c (ff_pcm_read_packet, ff_pcm_read_seek).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2012 Paul B Mahol;(c)2003 Fabrice Bellard. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete epaf demuxer.

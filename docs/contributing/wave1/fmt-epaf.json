@@ -1,0 +1,258 @@
+{
+  "capabilityId": "demuxer.epaf",
+  "slug": "fmt-epaf",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/epaf.ts",
+    "packages/containers/NOTICE-EPAF",
+    "packages/containers/src/registry.ts (shared, +1 line)",
+    "docs/contributing/epaf-support.md",
+    "tests/unit/epaf.test.ts",
+    "tests/differential/epaf.test.ts",
+    "docs/contributing/wave1/fmt-epaf.json"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/containers/src/registry.ts",
+      "change": "+1 line: export {epaf} from './epaf.js'; (alphabetical, after au)"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/differential/epaf.test.ts",
+      "title": "matches native copy framecrc WAV AIFF and raw output for LE/BE files, codecs 0 and 2, 1/2/6 channels and three rates",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/epaf.test.ts",
+      "title": "matches native packet timing under input and output -ss/-t, -frames and filtered decode",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/epaf.test.ts",
+      "title": "matches native layout guessing for 6 unlabelled channels under -guess_layout_max",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/epaf.test.ts",
+      "title": "refuses with native exit codes for invalid fields and short headers and refuses partial frames before any output",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/epaf.test.ts",
+      "title": "parses LE and BE headers with bounded reads and never reads the 2024 skipped bytes or payload while opening",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/epaf.test.ts",
+      "title": "mirrors epaf_probe over exactly 24 bytes",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/epaf.test.ts",
+      "title": "refuses invalid fields and short headers with native INVALIDDATA status and partial frames explicitly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/epaf.test.ts",
+      "title": "honours abort before and between bounded header reads",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/epaf.test.ts",
+      "title": "registers a demux-only descriptor with an exact probe",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/epaf.test.ts",
+      "title": "decodes through the media backend and refuses before any output exists",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry.test.ts",
+      "title": "(whole file, unchanged)",
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry-extension.test.ts",
+      "title": "(whole file, unchanged)",
+      "passed": 7,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 279,
+    "details": [
+      "204 byte-for-byte outputs: LE/BE x codec 0/2 x 1/2/6 channels x 8000/44100/96000 Hz, odd frame counts, as copy framecrc (detected and -f epaf), WAV, AIFF (1-2 channels), raw copy and s16le decode",
+      "40 framecrc timings: input/output -ss/-t, -t, -frames:a 2, input -ss; copy and volume/asetnsamples chain; 4 LE/BE codec files",
+      "17 outputs for 6 unlabelled channels under default, -guess_layout_max 2 and 0 (WAV, W64, AU, copy/decoded framecrc, AIFF when not guessed)",
+      "2 zero-sample outputs (WAV, copy framecrc)",
+      "16 exit-code comparisons: codec 1, codec 3, 0 and 513 channels, negative rate, 1000- and 23-byte headers (183), detected and -f epaf; partial trailing frame (native 0, refused)"
+    ]
+  },
+  "unsupported": [
+    "Codec 1 (24-bit) and codecs other than 0 and 2: refused with 183 as natively",
+    "Partial trailing sample frames: refused (exit 1) where native decodes with an error and exits 0",
+    "AIFF output of a guessed multichannel layout (3+ channels, guessing enabled): native writes a CHAN layout tag, the shared PCM path passes no mask to the AIFF muxer; not refusable from the demuxer and untested beyond 6 channels",
+    "Undetected inputs whose probe fails (zero channel word, <24 bytes) exit 1 with 'Unsupported audio container signature' from the shared detector; native exits 183",
+    "No mux (native has none); Workers/R2/FLAC paths not exercised"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "baselineUnitFailures": {
+    "files": 6,
+    "tests": 13,
+    "failures": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts (file failed to load: .build/codecs/flac/edge-flac.wasm missing)",
+      "tests/unit/flac-decoder.test.ts (file failed to load: .build/codecs/flac/edge-flac.wasm missing)",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts (file failed to load: .build/codecs/flac/edge-flac.wasm missing)",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ],
+    "totals": "6 failed | 204 passed (210) files; 13 failed | 2253 passed (2266) tests"
+  },
+  "finalUnitFailures": {
+    "files": 6,
+    "tests": 13,
+    "failures": [
+      "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+      "tests/unit/flac-decode-backend.test.ts (file failed to load: .build/codecs/flac/edge-flac.wasm missing)",
+      "tests/unit/flac-decoder.test.ts (file failed to load: .build/codecs/flac/edge-flac.wasm missing)",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+      "tests/unit/flac-max-frames.test.ts (file failed to load: .build/codecs/flac/edge-flac.wasm missing)",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+      "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+    ],
+    "identicalToBaseline": true,
+    "totals": "6 failed | 205 passed (211) files; 13 failed | 2259 passed (2272) tests"
+  },
+  "proposedContracts": [
+    {
+      "id": "demuxer.epaf.differential.matrix",
+      "file": "tests/differential/epaf.test.ts",
+      "name": "matches native copy framecrc WAV AIFF and raw output for LE/BE files, codecs 0 and 2, 1/2/6 channels and three rates",
+      "modes": [
+        "linux-reference"
+      ],
+      "scope": "LE/BE codec 0/2, 1/2/6 channels, 3 rates: copy framecrc, WAV, AIFF (<=2ch), raw copy, s16le decode byte-exact"
+    },
+    {
+      "id": "demuxer.epaf.differential.timing",
+      "file": "tests/differential/epaf.test.ts",
+      "name": "matches native packet timing under input and output -ss/-t, -frames and filtered decode",
+      "modes": [
+        "linux-reference"
+      ],
+      "scope": "input/output -ss/-t, -frames, filtered decode framecrc"
+    },
+    {
+      "id": "demuxer.epaf.differential.layout",
+      "file": "tests/differential/epaf.test.ts",
+      "name": "matches native layout guessing for 6 unlabelled channels under -guess_layout_max",
+      "modes": [
+        "linux-reference"
+      ],
+      "scope": "6-channel layout guessing under -guess_layout_max"
+    },
+    {
+      "id": "demuxer.epaf.differential.refusals",
+      "file": "tests/differential/epaf.test.ts",
+      "name": "refuses with native exit codes for invalid fields and short headers and refuses partial frames before any output",
+      "modes": [
+        "linux-reference"
+      ],
+      "scope": "native exit 183 for invalid fields and short headers; zero-sample files; partial frames refused before output"
+    },
+    {
+      "id": "demuxer.epaf.unit.header",
+      "file": "tests/unit/epaf.test.ts",
+      "name": "parses LE and BE headers with bounded reads and never reads the 2024 skipped bytes or payload while opening",
+      "modes": [
+        "unit"
+      ],
+      "scope": "header parse and bounded reads"
+    },
+    {
+      "id": "demuxer.epaf.unit.probe",
+      "file": "tests/unit/epaf.test.ts",
+      "name": "mirrors epaf_probe over exactly 24 bytes",
+      "modes": [
+        "unit"
+      ],
+      "scope": "24-byte epaf_probe"
+    },
+    {
+      "id": "demuxer.epaf.unit.refusals",
+      "file": "tests/unit/epaf.test.ts",
+      "name": "refuses invalid fields and short headers with native INVALIDDATA status and partial frames explicitly",
+      "modes": [
+        "unit"
+      ],
+      "scope": "refusal messages, codes and statuses, read budget"
+    },
+    {
+      "id": "demuxer.epaf.unit.abort",
+      "file": "tests/unit/epaf.test.ts",
+      "name": "honours abort before and between bounded header reads",
+      "modes": [
+        "unit"
+      ],
+      "scope": "abort before and between header reads"
+    },
+    {
+      "id": "demuxer.epaf.unit.descriptor",
+      "file": "tests/unit/epaf.test.ts",
+      "name": "registers a demux-only descriptor with an exact probe",
+      "modes": [
+        "unit"
+      ],
+      "scope": "demux-only descriptor fields"
+    },
+    {
+      "id": "demuxer.epaf.unit.backend",
+      "file": "tests/unit/epaf.test.ts",
+      "name": "decodes through the media backend and refuses before any output exists",
+      "modes": [
+        "unit"
+      ],
+      "scope": "backend decode and refusals before output creation"
+    }
+  ],
+  "notes": [
+    "Setup durations: submodule init 42s; npm ci + reference:build 3m03s; baseline typecheck+lint+boundaries+unit 2m18s.",
+    "Probe score is 75 natively; the registry probe is exact with precedence 100. Native's .paf/.fap extension match only scores 1, so no demux.extensions are declared.",
+    "Truncated headers (<2048 bytes) are INVALIDDATA natively (avio_skip past EOF fails), so they are refused with 183 rather than as unimplemented.",
+    "Needed shared edit, not made: packages/avformat/src/index.ts passes stream.channelMask=null for guessed layouts, so the AIFF muxer omits the CHAN chunk native writes; packages/containers/src/aiff.ts also writes a channel bitmap where native's ff_mov_write_chan writes a layout tag (e.g. MPEG_5_1_A for 5.1, also for WAV input).",
+    "Unit baseline failures are the expected FLAC (missing edge-flac.wasm / native-cases.json) and resample-checkpoint macOS digest failures; the final set is identical."
+  ]
+}
