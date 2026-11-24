@@ -1,0 +1,200 @@
+{
+ "capabilityId": "filter.pixelize",
+ "slug": "vf-pixelize",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/pixelize.ts",
+  "packages/avfilter/NOTICE-PIXELIZE",
+  "tests/unit/video-pixelize.test.ts",
+  "tests/differential/video-pixelize.test.ts",
+  "docs/contributing/pixelize.md",
+  "docs/contributing/wave1/vf-pixelize.json",
+  "packages/avfilter/src/video-ops/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {pixelizeOperator} from './pixelize.js';",
+    " pixelizeOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-pixelize.test.ts",
+   "title": "parses defaults, shorthand order, aliases, modes and folded plane flags into frozen steps",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-pixelize.test.ts",
+   "title": "refuses out-of-range, non-integer, named, expression, timeline and unknown options explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-pixelize.test.ts",
+   "title": "averages with truncation, keeps partial edge blocks, rounds blocks to the chroma grid and copies unselected planes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-pixelize.test.ts",
+   "title": "declares the native eight-bit formats in table order and plans one format-preserving stage",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-pixelize.test.ts",
+   "title": "rejects unsupported layouts, budgets, malformed storage, bad settings and cancellation explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-pixelize.test.ts",
+   "title": "matches native pixelize across formats, modes, block sizes, plane masks and odd sizes on the linear and graph planners",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-pixelize.test.ts",
+   "title": "matches native pixelize rawvideo and framecrc CLI outputs on the linear, graph, stream, actor and timed paths",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-pixelize.test.ts",
+   "title": "matches native replayed pixelize branches frame by frame through createReplayVideoExecution",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-pixelize.test.ts",
+   "title": "matches native option acceptance and outputs for integer, hex, folded and out-of-range values, refusing expressions explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(whole file, registration-driven, unedited)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 1240,
+  "details": [
+   {
+    "count": 1080,
+    "compares": "rawvideo bytes, native -vf vs compileVideoFilterChain and compileVideoFilterGraph (each run checked on both planners)"
+   },
+   {
+    "count": 120,
+    "compares": "complete rawvideo and framecrc CLI outputs on linear, graph, stream, actor and timed paths (24 per path)"
+   },
+   {
+    "count": 12,
+    "compares": "rawvideo bytes and pts, native -filter_complex vs createReplayVideoExecution"
+   },
+   {
+    "count": 28,
+    "compares": "native option acceptance/rejection and rawvideo output"
+   }
+  ]
+ },
+ "unsupported": [
+  "enable= timeline (native AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC)",
+  "runtime commands (native process_command)",
+  "av_expr expression values and named constants for width/height/mode/planes (e.g. w=2*3, w=max, h=4.5, planes=all)",
+  "native high-bit-depth and other formats outside the negotiation table (gray9-16, yuv410p/411p/440p, yuvj*, 9-16 bit YUV/GBR, yuva422p/444p, gbrap*)",
+  "H.264/MP4 framecrc input was not compared (linear path shared; size unchanged)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": [
+  "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+  "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+  "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+ ],
+ "finalUnitFailures": [
+  "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+  "tests/unit/flac-decode-backend.test.ts [ tests/unit/flac-decode-backend.test.ts ]",
+  "tests/unit/flac-decoder.test.ts [ tests/unit/flac-decoder.test.ts ]",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-max-frames.test.ts [ tests/unit/flac-max-frames.test.ts ]",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+ ],
+ "proposedContracts": [
+  {
+   "id": "filter.pixelize.planners",
+   "file": "tests/differential/video-pixelize.test.ts",
+   "name": "matches native pixelize across formats, modes, block sizes, plane masks and odd sizes on the linear and graph planners",
+   "modes": [
+    "linear",
+    "graph"
+   ],
+   "scope": "6 formats x {9x7,33x17} x avg/min/max x blocks {1x1,2x2,3x2,4x3,16,40x40} x planes {15,1,0x6,8+1,-1}, noise and block-pattern frames, padded strides, rawvideo bytes"
+  },
+  {
+   "id": "filter.pixelize.cli-paths",
+   "file": "tests/differential/video-pixelize.test.ts",
+   "name": "matches native pixelize rawvideo and framecrc CLI outputs on the linear, graph, stream, actor and timed paths",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "6 formats x {9x7,33x17} x rawvideo/framecrc CLI outputs through -vf, -filter_complex, two-input hstack and the timed backend producer/pull schedulers"
+  },
+  {
+   "id": "filter.pixelize.replay",
+   "file": "tests/differential/video-pixelize.test.ts",
+   "name": "matches native replayed pixelize branches frame by frame through createReplayVideoExecution",
+   "modes": [
+    "stream"
+   ],
+   "scope": "6 formats x 2 replay graphs (single node, split/vstack branches), rawvideo bytes and pts"
+  },
+  {
+   "id": "filter.pixelize.options",
+   "file": "tests/differential/video-pixelize.test.ts",
+   "name": "matches native option acceptance and outputs for integer, hex, folded and out-of-range values, refusing expressions explicitly",
+   "modes": [
+    "linear"
+   ],
+   "scope": "28 option strings: shorthand, aliases, hex, folded plane flags, out-of-range values, scoped refusals of expressions"
+  }
+ ],
+ "notes": [
+  "No shared edit beyond the two registry lines was needed.",
+  "Each CLI path case was shown to reach its intended executor by removing that path flag in turn: only that case failed, with the registry rejection for that path.",
+  "Setup durations: submodule 35 s, npm ci 8 s, reference:build 153 s; baseline typecheck+lint+boundaries 66 s, baseline unit 67 s.",
+  "Baseline and final unit failures are identical: 13 tests in 6 files (FLAC artifacts unavailable, resample-checkpoint macOS golden digests).",
+  "Parse errors are VideoFilterParseError; kernel errors are plain Error because packages/avfilter/src/index.ts may not be edited to export a new error class; pixelizeVideoFrame and parsePixelizeOptions are reachable from the module but not from the public barrel."
+ ]
+}
