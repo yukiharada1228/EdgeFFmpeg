@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "base": "compat/behavior-specs/flac-timed-rate",
+  "generate": "tools/differential-runner/flac-timed-rate/generate.mjs",
+  "unprivileged": false,
+  "outputs": ["cases.json"]
+}

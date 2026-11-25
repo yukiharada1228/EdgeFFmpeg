@@ -3,13 +3,21 @@ import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
+import {DRAFT_ENV,corpusTarget,writePlatformCorpus} from '../platform-corpus.mjs';
+import {LEGACY_CORPUS_PLATFORM,localReferenceIdentity} from '../reference-identity.mjs';
+// darwin-arm64 rewrites its tracked corpus in compat/behavior-specs/node-input-directory/ and keeps its recorded outcome histogram
+// as a check. Any other pin, and --draft, writes results.json and sources.json (the provenance record without `reference`) into
+// compat/behavior-specs/node-input-directory/<pin id>/ through platform-corpus.mjs, as tools/linux/generate-corpora.mjs runs it
+// (committed only from the Linux probe corpora job); its histogram is recorded there and checked by tests/helpers/node-input-directory.ts.
 const read=p=>fs.readFileSync(p),hash=b=>createHash('sha256').update(b).digest('hex');
 const singleRoot='compat/behavior-specs/output-open/',graphRoot='compat/behavior-specs/multi-output-policy/';
 const profiles=JSON.parse(read(singleRoot+'profiles.json')),graphs=JSON.parse(read(graphRoot+'profiles.json')),graphInputs=JSON.parse(read(graphRoot+'inputs.json'));
 const reference=JSON.parse(read('.build/reference/build-metadata.json')),lock=JSON.parse(read('compat/upstream.lock.json'));
 const generator='tools/differential-runner/node-input-directory/generate.mjs',out='compat/behavior-specs/node-input-directory/';
+const identity=localReferenceIdentity(),draft=process.argv.includes('--draft')||process.env[DRAFT_ENV]==='1',legacy=identity.id===LEGACY_CORPUS_PLATFORM;
 const sources=[generator,...[singleRoot,graphRoot].flatMap(root=>[root+'manifest.json',...Object.keys(JSON.parse(read(root+'manifest.json')).sha256).map(n=>root+n)])];
 const sourceHashes=Object.fromEntries(sources.map(p=>[p,hash(read(p))]));
+const target=legacy&&!draft?null:corpusTarget('compat/behavior-specs/node-input-directory',generator);
 function verify(){
  if(reference.commit!==lock.commit)throw Error('Reference commit changed');
  for(const n of ['ffmpeg','ffprobe'])if(hash(read('.build/reference/'+n))!==reference.artifacts[n])throw Error('Reference binary changed');
@@ -49,7 +57,9 @@ try{
  }
  verify();const counts=Object.fromEntries(['single','graph','termination','automatic'].map(g=>[g,results.filter(r=>r.group===g).length])),histogram={};for(const r of results)histogram[r.exitCode]=(histogram[r.exitCode]??0)+1;
  if(JSON.stringify(counts)!==JSON.stringify({single:1360,graph:360,termination:200,automatic:12})||results.length!==1932)throw Error('Incomplete directory corpus');
- for(const[status,count]of [[0,548],[183,600],[234,520],[235,264]])if(histogram[status]!==count)throw Error('Unexpected Native directory outcomes');
- fs.mkdirSync(out,{recursive:true});for(const[n,value]of [['results.json',results],['provenance.json',{reference,sources:sourceHashes,caseCount:1932,counts,histogram,scope:'Native-only initial directory read/discovery,declared raw streams,selected-input policy;default metadata retained alongside bitexact raw cases. No midstream or full-conformance certification.'}]])fs.writeFileSync(out+n,JSON.stringify(value,null,2)+'\n');
- fs.writeFileSync(out+'manifest.json',JSON.stringify({sha256:Object.fromEntries(['results.json','provenance.json'].map(n=>[n,hash(read(out+n))]))},null,2)+'\n');console.log(JSON.stringify({cases:results.length,counts,histogram}));
+ if(legacy)for(const[status,count]of [[0,548],[183,600],[234,520],[235,264]])if(histogram[status]!==count)throw Error('Unexpected Native directory outcomes');
+ const record={sources:sourceHashes,caseCount:1932,counts,histogram,scope:'Native-only initial directory read/discovery,declared raw streams,selected-input policy;default metadata retained alongside bitexact raw cases. No midstream or full-conformance certification.'};
+ if(target)writePlatformCorpus(target,{'results.json':results,'sources.json':record});
+ else{fs.mkdirSync(out,{recursive:true});for(const[n,value]of [['results.json',results],['provenance.json',{reference,...record}]])fs.writeFileSync(out+n,JSON.stringify(value,null,2)+'\n');
+ fs.writeFileSync(out+'manifest.json',JSON.stringify({sha256:Object.fromEntries(['results.json','provenance.json'].map(n=>[n,hash(read(out+n))]))},null,2)+'\n');}console.log(JSON.stringify({cases:results.length,counts,histogram,...(target?{dir:target.dir}:{})}));
 }finally{fs.rmSync(root,{recursive:true,force:true});}

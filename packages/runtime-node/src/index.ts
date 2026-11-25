@@ -1,6 +1,6 @@
 import {constants} from 'node:fs';
 import {InputNotFoundError,OutputParentNotFoundError,PermissionDeniedError,ExecutionError,InputReadError,PathNotDirectoryError,OutputIsDirectoryError} from '@edge-ffmpeg/core';
-import { open, realpath, stat, link, rename, unlink, access } from 'node:fs/promises';
+import { open, realpath, stat, lstat, link, rename, unlink, access } from 'node:fs/promises';
 import { resolve, dirname, basename, relative, isAbsolute, sep } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import type { BigIntStats } from 'node:fs';
@@ -40,13 +40,34 @@ export async function createNodeFileSystem(options: NodeFileSystemOptions): Prom
     if (!parts.length || parts.some(part => part === '.' || part === '..')) throw new Error('Invalid file path');
     const local=contained(resolve(root,...parts));return path.endsWith('/')?local+sep:local;
   }
+  /**
+   * The error the native create-open reports for an output path ending in '/' that does not name an existing directory.
+   * FFmpeg opens outputs with open(path, O_WRONLY|O_CREAT|O_TRUNC). With a trailing slash the kernel refuses before
+   * creating anything, and the errno is the host's: XNU gives ENOENT for a missing name and ENOTDIR for a regular file,
+   * Linux gives EISDIR for both. The same open on the slash path lets the host decide. Called only for slash paths whose
+   * final name is missing (and not a dangling symbolic link) or already resolved inside the root; other errors keep `cause`.
+   */
+  async function slashCreateError(slashPath:string,path:string,cause:Error):Promise<Error>{
+    let file:Awaited<ReturnType<typeof open>>;
+    try{file=await open(slashPath,constants.O_WRONLY|constants.O_CREAT,0o666);}
+    catch(error){if(error instanceof Error&&'code'in error){if(error.code==='EISDIR')return new OutputIsDirectoryError(path,error);if(error.code==='ENOENT')return new OutputParentNotFoundError(path,error);if(error.code==='ENOTDIR')return new PathNotDirectoryError('write',path,error);if(error.code==='EACCES')return new PermissionDeniedError('write',path,error);}return cause;}
+    await file.close();return cause;
+  }
+  /** The path to probe for a trailing-slash name that did not resolve: missing names only, never a dangling symbolic link. */
+  async function unresolvedSlashPath(name:string):Promise<string|null>{
+    try{return (await lstat(name)).isSymbolicLink()?null:name+sep;}
+    catch(error){if(error instanceof Error&&'code'in error&&(error.code==='ENOENT'||error.code==='ENOTDIR'))return name+sep;return null;}
+  }
   async function outputParent(target:string,path:string):Promise<string>{
     try{return contained(await realpath(dirname(target)));}
-    catch(error){if(error instanceof Error&&'code'in error){if(error.code==='ENOENT')throw new OutputParentNotFoundError(path,error);if(error.code==='EACCES')throw new PermissionDeniedError('write',path,error);if(error.code==='ENOTDIR')throw new PathNotDirectoryError('write',path,error);}throw error;}
+    catch(error){if(error instanceof Error&&'code'in error){if(path.endsWith('/')&&(error.code==='ENOENT'||error.code==='ENOTDIR'))throw await slashCreateError(target,path,error);if(error.code==='ENOENT')throw new OutputParentNotFoundError(path,error);if(error.code==='EACCES')throw new PermissionDeniedError('write',path,error);if(error.code==='ENOTDIR')throw new PathNotDirectoryError('write',path,error);}throw error;}
   }
   async function targetExists(output:string,path:string):Promise<boolean>{
-    try{contained(await realpath(path.endsWith('/')?output.slice(0,-sep.length):output));if(path.endsWith('/'))await stat(output);return true;}
-    catch(error){if(error instanceof Error&&'code'in error){if(error.code==='ENOENT'){if(path.endsWith('/'))throw new OutputParentNotFoundError(path,error);return false;}if(error.code==='EACCES')throw new PermissionDeniedError('write',path,error);if(error.code==='ENOTDIR')throw new PathNotDirectoryError('write',path,error);}throw error;}
+    const slash=path.endsWith('/'),name=slash?output.slice(0,-sep.length):output;let canonical:string|null=null;
+    try{canonical=contained(await realpath(name));if(slash)await stat(output);return true;}
+    catch(error){if(error instanceof Error&&'code'in error){
+      if(slash&&(error.code==='ENOENT'||error.code==='ENOTDIR')){const probe=canonical!==null?canonical+sep:await unresolvedSlashPath(name);if(probe!==null)throw await slashCreateError(probe,path,error);}
+      if(error.code==='ENOENT'){if(slash)throw new OutputParentNotFoundError(path,error);return false;}if(error.code==='EACCES')throw new PermissionDeniedError('write',path,error);if(error.code==='ENOTDIR')throw new PathNotDirectoryError('write',path,error);}throw error;}
   }
   async function requireOutputAccess(output:string,parent:string,path:string,exists:boolean,overwrite:boolean,staging=false):Promise<void>{
     if(exists&&!overwrite&&!staging)return;

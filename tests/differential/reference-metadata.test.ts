@@ -1,11 +1,13 @@
 import {it,expect} from 'vitest';import {createHash} from 'node:crypto';import {readFile,mkdtemp,mkdir,writeFile,rm} from 'node:fs/promises';import {join} from 'node:path';import {tmpdir} from 'node:os';
 import {FFmpeg} from '@edge-ffmpeg/core';import {createMediaBackend,createTimedVideoBackend} from '@edge-ffmpeg/avformat';import {createNodeFileSystem} from '@edge-ffmpeg/runtime-node';import type {TimedVideoOutputEvent} from '@edge-ffmpeg/avfilter';import {loadH264Module} from '../helpers/h264-corpus.js';
-import {spawnSync} from 'node:child_process';import {resolve} from 'node:path';
+import {spawnSync} from 'node:child_process';import {resolve} from 'node:path';import {selectNativeCorpus} from '../helpers/native-corpus.js';
+// Native rows recorded from this host's pinned reference: the darwin-arm64 corpus or compat/behavior-specs/reference-metadata/<pin id>/.
+const metadataCorpus=()=>selectNativeCorpus('compat/behavior-specs/reference-metadata','tools/differential-runner/reference-metadata/generate.mjs');
 it('matches fixed Native default and bitexact metadata bytes across 336 cases and all timed graph schedulers',async()=>{
- const source='compat/behavior-specs/reference-metadata/',hash=(b:Uint8Array)=>createHash('sha256').update(b).digest('hex'),manifest=JSON.parse(await readFile(source+'manifest.json','utf8'));
+ const corpus=metadataCorpus(),source=corpus.dir+'/',hash=(b:Uint8Array)=>createHash('sha256').update(b).digest('hex'),manifest=corpus.manifest;
  for(const[n,digest]of Object.entries(manifest.sha256))expect(hash(await readFile(source+n))).toBe(digest);
- const provenance=JSON.parse(await readFile(source+'provenance.json','utf8'));for(const[p,digest]of Object.entries(provenance.sources))expect(hash(await readFile(p))).toBe(digest);
- for(const n of ['ffmpeg','ffprobe'])expect(hash(await readFile('.build/reference/'+n))).toBe(provenance.reference.artifacts[n]);
+ const provenance=corpus.record;for(const[p,digest]of Object.entries(provenance.sources))expect(hash(await readFile(p))).toBe(digest);
+ for(const n of ['ffmpeg','ffprobe'] as const)expect(hash(await readFile('.build/reference/'+n))).toBe(provenance.reference.artifacts[n]);
  const rows=JSON.parse(await readFile(source+'cases.json','utf8')) as {id:string;group:string;inputs:{path:string;base64:string}[];argv:string[];outputs:{path:string;bytes:number;sha256:string;base64:string}[]}[];
  expect(rows).toHaveLength(336);const root=await mkdtemp(join(tmpdir(),'reference-metadata-')),module=new WebAssembly.Module(loadH264Module()),media=createMediaBackend({h264:{module,maxMemoryBytes:67108864,maxPacketBytes:1048576,maxFrameBytes:4194304,maxDisplayBytes:16777216,maxNalUnits:16384}}),failures:unknown[]=[];let executions=0,matched=0;
  try{for(const row of rows)for(const scheduler of row.group==='graph'?['media','pull','activation','read-frames','queued','scheduled','producer'] as const:['media'] as const){
@@ -22,10 +24,10 @@ it('matches fixed Native default and bitexact metadata bytes across 336 cases an
  }finally{await rm(root,{recursive:true,force:true});}
 },120000);
 it('matches all 336 fixed Native metadata outputs through independent cached Node launcher processes',async()=>{
- const source='compat/behavior-specs/reference-metadata/',hash=(b:Uint8Array)=>createHash('sha256').update(b).digest('hex'),manifest=JSON.parse(await readFile(source+'manifest.json','utf8'));
+ const corpus=metadataCorpus(),source=corpus.dir+'/',hash=(b:Uint8Array)=>createHash('sha256').update(b).digest('hex'),manifest=corpus.manifest;
  for(const[n,digest]of Object.entries(manifest.sha256))expect(hash(await readFile(source+n))).toBe(digest);
- const provenance=JSON.parse(await readFile(source+'provenance.json','utf8'));for(const[p,digest]of Object.entries(provenance.sources))expect(hash(await readFile(p))).toBe(digest);
- for(const n of ['ffmpeg','ffprobe'])expect(hash(await readFile('.build/reference/'+n))).toBe(provenance.reference.artifacts[n]);
+ const provenance=corpus.record;for(const[p,digest]of Object.entries(provenance.sources))expect(hash(await readFile(p))).toBe(digest);
+ for(const n of ['ffmpeg','ffprobe'] as const)expect(hash(await readFile('.build/reference/'+n))).toBe(provenance.reference.artifacts[n]);
  const rows=JSON.parse(await readFile(source+'cases.json','utf8')) as {id:string;group:string;inputs:{path:string;base64:string}[];argv:string[];outputs:{path:string;sha256:string;base64:string}[]}[];
  expect(rows).toHaveLength(336);const root=await mkdtemp(join(tmpdir(),'metadata-cached-cli-')),failures:unknown[]=[];let matched=0;
  try{for(const row of rows){const folder=join(root,row.id);try{
