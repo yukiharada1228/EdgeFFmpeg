@@ -1,7 +1,10 @@
 {
-  "comment": "Integration timing probe: Worker dispatch time of one workers/mp4-stream-id row with Miniflare storage on the default /tmp and on tmpfs. Not for merging.",
+  "comment": "Budget evidence probe (not for merging): the four MP4 Workers files with mp4-stream-id at 120 s per case and the other three at 180 s, to show they pass on real x86_64 when given time. Assertions unchanged.",
   "tests": [
-    "tests/workers/zz-mp4-dispatch-storage.test.ts"
+    "tests/workers/mp4-stream-id.test.ts",
+    "tests/workers/mp4-language.test.ts",
+    "tests/workers/mp4-negative-map.test.ts",
+    "tests/workers/mp4-copy-cli.test.ts"
   ],
   "shards": 1,
   "corpora": []
