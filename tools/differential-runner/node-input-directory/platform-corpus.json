@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "base": "compat/behavior-specs/node-input-directory",
+  "generate": "tools/differential-runner/node-input-directory/generate.mjs",
+  "unprivileged": true,
+  "outputs": ["results.json", "sources.json"]
+}

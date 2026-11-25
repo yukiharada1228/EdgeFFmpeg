@@ -21,7 +21,7 @@
   "profileCount": 26,
   "caseCount": 650,
   "sources": {
-    "tools/differential-runner/node-output-directory/generate.mjs": "51fabdc3de124256cd4ccb6a57896c2d09daca75839d2d7ca85c2cc8f93f4817",
+    "tools/differential-runner/node-output-directory/generate.mjs": "b674a70b7be51286df7879a3c6f2648199faed55eecbac25e6ce2e07505328e0",
     "compat/behavior-specs/output-open/manifest.json": "abcf880e2b12d64ae4bff98e8a942af6eda5867f2ca132208ac189c9a8f603cb",
     "compat/behavior-specs/output-open/profiles.json": "e575c400cfa4d97c026bd3dfc6a6efa86dbaa225d7b67e908977d3d889669dc6",
     "compat/behavior-specs/output-open/results.json": "79c9caed194c322d396308dce1e5d77a2d1febe2d35c9d33fda9063324f709d1",

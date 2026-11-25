@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "base": "compat/behavior-specs/flac-timed-filters",
+  "generate": "tools/differential-runner/flac-timed-filters/generate.mjs",
+  "unprivileged": false,
+  "outputs": ["cases.json"]
+}

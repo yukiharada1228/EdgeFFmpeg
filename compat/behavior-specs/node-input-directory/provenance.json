@@ -19,7 +19,7 @@
     "reproducibleToolchainPinned": false
   },
   "sources": {
-    "tools/differential-runner/node-input-directory/generate.mjs": "e8813fd28c62953301e6a19bc4c283c5ed5867f78b7057fea50d484e3e0d323e",
+    "tools/differential-runner/node-input-directory/generate.mjs": "79deeff884871832e658870df3de6f1984dedefffb7442d0b85c377070983532",
     "compat/behavior-specs/output-open/manifest.json": "abcf880e2b12d64ae4bff98e8a942af6eda5867f2ca132208ac189c9a8f603cb",
     "compat/behavior-specs/output-open/profiles.json": "e575c400cfa4d97c026bd3dfc6a6efa86dbaa225d7b67e908977d3d889669dc6",
     "compat/behavior-specs/output-open/results.json": "79c9caed194c322d396308dce1e5d77a2d1febe2d35c9d33fda9063324f709d1",

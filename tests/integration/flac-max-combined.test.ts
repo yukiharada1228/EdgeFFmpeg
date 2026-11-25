@@ -3,9 +3,10 @@ import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {FFmpeg} from '@edge-ffmpeg/core';
 import {createMediaBackend} from '@edge-ffmpeg/avformat';
-import corpus from '../../compat/behavior-specs/flac-max-combined/cases.json' with {type:'json'};
-import scalar from '../../compat/behavior-specs/flac-max-combined/scalar.json' with {type:'json'};
+import {flacNativeCorpus} from '../helpers/flac-native-corpus.js';
+import {assertCorpusReference,pinnedReference,referencePin,verifyPlatformCorpus} from '../helpers/reference-identity.js';
 import arithmeticProfile from '../../compat/behavior-specs/flac-max-remix/arithmetic.json' with {type:'json'};
+const {corpus,darwin}=flacNativeCorpus('flac-max-combined'),{corpus:scalar,darwin:darwinScalar}=flacNativeCorpus('flac-max-combined','scalar.json');
 
 const wasm=readFileSync('.build/codecs/flac/edge-flac.wasm');
 const module=new WebAssembly.Module(wasm);
@@ -15,6 +16,10 @@ it('pins the independently captured combined-feature oracle and decoder',()=>{
  expect(hash(wasm)).toBe(corpus.wasmSha256);
  expect(corpus.rows).toHaveLength(40);
  expect(scalar.rows).toHaveLength(18);expect(scalar.binarySha256).toBe(corpus.binarySha256);expect(scalar.wasmSha256).toBe(corpus.wasmSha256);
+ // Rows come from this host's pinned reference; the darwin-arm64 rows stay labelled evidence with the same ids.
+ expect(corpus.binarySha256).toBe(pinnedReference().ffmpeg);expect(darwin.binarySha256).toBe(referencePin('darwin-arm64').artifacts.ffmpeg);expect(corpus.rows.map(row=>row.id)).toEqual(darwin.rows.map(row=>row.id));
+ expect(scalar.binarySha256).toBe(pinnedReference().ffmpeg);expect(darwinScalar.binarySha256).toBe(darwin.binarySha256);expect(scalar.rows.map(row=>row.id).sort()).toEqual(darwinScalar.rows.map(row=>row.id).sort());
+ if(pinnedReference().id!=='darwin-arm64')assertCorpusReference(verifyPlatformCorpus('compat/behavior-specs/flac-max-combined'));
 });
 const needsScalar=(row:{id:string;args:string[]})=>!row.args.includes('-cpuflags')&&(row.args.includes('-ar')||row.id.endsWith('/volume-remix')||row.id.startsWith('24-')&&row.id.endsWith('/pad-remix'));
 for(const row of [...corpus.rows,...scalar.rows])it(`${row.args.slice(0,row.args.indexOf('-i')).includes('-ss')?'records explicit input-seek compatibility gap':needsScalar(row)?'records explicit CPU rounding compatibility gap':'public FLAC backend matches Native combined features'}: ${row.id}`,async()=>{

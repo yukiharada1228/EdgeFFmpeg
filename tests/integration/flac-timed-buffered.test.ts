@@ -6,11 +6,16 @@ import {join,resolve} from 'node:path';
 import {tmpdir} from 'node:os';
 import {FFmpeg} from '@edge-ffmpeg/core';
 import {createMediaBackend} from '@edge-ffmpeg/avformat';
-import corpus from '../../compat/behavior-specs/flac-timed-buffered/cases.json' with {type:'json'};
+import {flacNativeCorpus} from '../helpers/flac-native-corpus.js';
+import {assertCorpusReference,pinnedReference,referencePin,verifyPlatformCorpus} from '../helpers/reference-identity.js';
+const {corpus,darwin}=flacNativeCorpus('flac-timed-buffered');
 const wasm=readFileSync('.build/codecs/flac/edge-flac.wasm'),module=new WebAssembly.Module(wasm);
 const hash=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 it('pins the independent timed FLAC buffered-filter oracle and decoder',()=>{
  expect(corpus.rows).toHaveLength(24);expect(hash(wasm)).toBe(corpus.wasmSha256);expect(hash(readFileSync('.build/reference/ffmpeg'))).toBe(corpus.binarySha256);
+ // Rows come from this host's pinned reference; the darwin-arm64 rows stay labelled evidence with the same ids.
+ expect(corpus.binarySha256).toBe(pinnedReference().ffmpeg);expect(darwin.binarySha256).toBe(referencePin('darwin-arm64').artifacts.ffmpeg);expect(corpus.rows.map(row=>row.id)).toEqual(darwin.rows.map(row=>row.id));
+ if(pinnedReference().id!=='darwin-arm64')assertCorpusReference(verifyPlatformCorpus('compat/behavior-specs/flac-timed-buffered'));
 });
 for(const row of corpus.rows)it(`public timed FLAC buffered filters matches Native: ${row.id}`,async()=>{
  const input=Buffer.from(row.input,'base64'),chunks:Uint8Array[]=[];let opens=0,commits=0,aborts=0;

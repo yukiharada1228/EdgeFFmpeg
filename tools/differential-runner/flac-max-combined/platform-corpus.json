@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "base": "compat/behavior-specs/flac-max-combined",
+  "generate": "tools/differential-runner/flac-max-combined/generate.mjs",
+  "unprivileged": false,
+  "outputs": ["cases.json", "scalar.json"]
+}

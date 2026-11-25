@@ -1,0 +1,9 @@
+{
+  "schema": "edge-ffmpeg/platform-corpus@1",
+  "referenceId": "linux-x64",
+  "sha256": {
+    "cases.json": "bd23a9da2ac9abf9fec1b0799a1269432ee9825264fe95be45c5fdd16a0670d2",
+    "sources.json": "b25b78e2d57063a4190684a5e36afaa2a75129a6e4a2e5d62780b61a0cc80671",
+    "provenance.json": "304cd98a46925b136d089174201cce9bdab027112862f73d7c6cd05d31e89008"
+  }
+}

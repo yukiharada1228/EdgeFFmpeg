@@ -26,7 +26,7 @@
     "uid": 501
   },
   "sources": {
-    "tools/differential-runner/node-permissions/generate.mjs": "2749908f09419017168b94d8c2f68fdf97dbc02d0796d700831426756128bf8b",
+    "tools/differential-runner/node-permissions/generate.mjs": "615c86f5bba34d9bf3746ca3db47ec734ebe9911a0a7c660a92f88b4a6812716",
     "compat/behavior-specs/output-open/manifest.json": "abcf880e2b12d64ae4bff98e8a942af6eda5867f2ca132208ac189c9a8f603cb",
     "compat/behavior-specs/output-open/profiles.json": "e575c400cfa4d97c026bd3dfc6a6efa86dbaa225d7b67e908977d3d889669dc6",
     "compat/behavior-specs/output-open/results.json": "79c9caed194c322d396308dce1e5d77a2d1febe2d35c9d33fda9063324f709d1",
