@@ -68,7 +68,9 @@ The filter is all integer arithmetic, with no SIMD-dependent path. The native re
 
 `tests/differential/video-fillborders.test.ts` runs the native reference that
 `npm run reference:build` produces on Linux x86_64; after the shared negotiation fix every test
-was rerun on macOS arm64 against the pinned reference (sha256 `1b86106f…ab92`):
+ran on macOS arm64 against the pinned reference (sha256 `1b86106f…ab92`). The Linux x86_64 runs
+predate the re-land, which changed this operator's module and tests. The re-landed code,
+including the per-source negotiation test, has run only on macOS arm64:
 
 | Test | Cases |
 |---|---|

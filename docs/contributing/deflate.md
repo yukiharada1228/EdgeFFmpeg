@@ -87,8 +87,10 @@ per-plane sets; and an expression/rounding set). Each input has two frames.
 | `copies width-1 planes with zero thresholds like native and refuses nonzero ones before opening outputs on every path` | 50 accepted width-1 copies matched, and 40 refusals. |
 | `negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path` | `deflate=threshold0=10:threshold2=3` from 17 sources (the 14 executable formats and yuvj420p/422p/444p), native's pick read from showinfo: 13 run byte-exact (`-cpuflags 0`, scalar) on the five paths (yuvj on linear chains); argb, rgba, abgr and bgra are refused naming `gbrap` on the five paths and through the media `-vf`/`-filter_complex` and timed producer/pull CLIs with no output opened. 89 checks. |
 
-After the shared negotiation fix every test was rerun on macOS arm64 against the
-pinned reference (sha256 `1b86106f…ab92`).
+After the shared negotiation fix every test ran on macOS arm64 against the
+pinned reference (sha256 `1b86106f…ab92`). The Linux x86_64 runs predate the
+re-land, which changed this operator's module and tests. The re-landed code,
+including the per-source negotiation test, has run only on macOS arm64.
 
 `tests/unit/video-deflate.test.ts` covers parsing, refusals, budgets, malformed
 strides, plane counts, the time base, `AbortSignal`, hand-computed border cases

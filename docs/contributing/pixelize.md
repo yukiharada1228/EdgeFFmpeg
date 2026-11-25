@@ -78,8 +78,10 @@ Against `.build/reference/ffmpeg` built on Linux x86_64
   - *matches native option acceptance and outputs for integer, hex, folded and out-of-range values, refusing expressions explicitly*: 28 option strings: 15 accepted with identical output, 7 rejected by both, 6 accepted natively but refused here as out of scope.
   - *negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path*: `pixelize=3:2` from 17 sources (the 14 executable formats and yuvj420p/422p/444p), native's pick read from showinfo. 13 run byte-exact (`-cpuflags 0`, scalar) on the five paths (yuvj on linear chains); argb, rgba, abgr and bgra are refused naming `gbrap` on the five paths and through the media `-vf`/`-filter_complex` and timed producer/pull CLIs with no output opened: 89 checks.
 
-After the shared negotiation fix the tests above were rerun on macOS arm64 against
-the pinned reference (sha256 `1b86106f…ab92`).
+After the shared negotiation fix the tests above ran on macOS arm64 against
+the pinned reference (sha256 `1b86106f…ab92`). The Linux x86_64 runs predate the
+re-land, which changed this operator's module and tests. The re-landed code,
+including the per-source negotiation test, has run only on macOS arm64.
 - `tests/unit/video-pixelize.test.ts`: parsing, refusals, kernel values (truncating average, partial edges, chroma block rounding, plane copies), formats, budgets, malformed strides, settings validation, `AbortSignal` and unmutated input.
 - `tests/unit/video-operator-registry.test.ts` runs the three descriptor examples on all five paths and checks they agree.
 

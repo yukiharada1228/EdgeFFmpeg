@@ -43,8 +43,10 @@ All comparisons run `.build/reference/ffmpeg` (Linux x86_64) at test time, on
 three-frame structured-plus-noise inputs in yuv420p, yuv422p, yuv444p, yuva420p,
 nv12, rgb24 and gbrp (the last three auto-convert under `-cpuflags 0`), at 5x3, 7x5 and 8x6.
 
-After the shared negotiation fix every test below was rerun on macOS arm64 against
-the pinned reference (sha256 `1b86106f…ab92`).
+After the shared negotiation fix every test below ran on macOS arm64 against
+the pinned reference (sha256 `1b86106f…ab92`). The Linux x86_64 runs predate the
+re-land, which changed this operator's module and tests. The re-landed code,
+including the per-source negotiation test, has run only on macOS arm64.
 
 `tests/differential/video-swapuv.test.ts`:
 

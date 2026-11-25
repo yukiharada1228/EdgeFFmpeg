@@ -3104,8 +3104,9 @@ executable table (`negotiationOrder`).
 
 The linear, frame-graph and timed negotiators now negotiate over the full table
 and use vf_scale's lists for scale pads. When a negotiated link has no frame
-storage here, they refuse it at plan time, before geometry, input reads or any
-output: `Video filter X input negotiates F, which is not implemented`, or
+storage here, they refuse it at plan time, before geometry and before any
+output is opened, with
+`Video filter X input negotiates F, which is not implemented` or
 `Video output negotiates F, which is not implemented`. They never substitute
 another format.
 
@@ -3128,12 +3129,17 @@ The native evidence was taken on macOS arm64 with the pinned reference (sha256
   a CI test.
 - **Negotiation probes.** `tests/differential/video-negotiation.test.ts` reads
   native's negotiated format from showinfo for 2,601 cases: 17 accepted inputs,
-  51 operator lists and 3 targets. Every case picks native's format. 830 run and
-  1,771 are refused, naming exactly native's format.
+  51 filters and 3 targets. The 51 filters are null, negate, `transpose=1` and
+  epx, eight native operator lists, 15 representative `format=` lists and 24
+  seeded `format=` lists. Every case picks native's format. This test compares
+  picks only: 830 picks have storage here and 1,771 are refused, naming exactly
+  native's format.
 - **Refusal paths.** A second test refuses five reachable picks without storage
-  by name on the linear, graph, stream, actor and timed paths and on four CLI
-  backends, with no output opened (45 refusals). It also runs three executable
-  picks byte-exact on all five paths (15 runs).
+  by name on the linear, graph, stream, actor and timed paths and through four
+  CLI configurations (the media backend with `-vf` and with `-filter_complex`,
+  the timed backend with its producer and pull schedulers), with no output
+  opened (45 refusals). It also runs three executable picks byte-exact on all
+  five paths (15 runs).
 - **yuvj sources.** A third test runs seven yuvj chains byte-exact. Five of them
   picked another format before the fix, when they were negotiated from the
   storage name.
@@ -3144,17 +3150,25 @@ These behaviour changes are intentional:
   `monob` and so on) used to fail with `Invalid video format candidates`. They
   now negotiate. They run when native's pick has storage and are refused by name
   otherwise.
-- Graph-path sources outside the 14 formats fail with the named refusal instead
-  of `Unsupported branch converter`.
+- Graph-path sources that have a frame layout here but are outside the 14
+  formats, such as `rgb0` or `pal8`, fail with the named refusal instead of
+  `Unsupported branch converter`. Sources without a frame layout here, such as
+  `yuv410p`, `gbrap` or `yuvj420p` on the graph path, still fail earlier with
+  `Unsupported video pixel format`.
 - yuvj sources follow native's picks. For example, `yuvj420p` with
   `format=rgb24|yuv444p` now outputs rgb24, as native does; it was yuv444p.
 
 **Reintegrated video operators.** All ten deferred operators are back: swapuv,
 limiter, pixelize, shuffleplanes, chromashift, erosion, dilation, deflate,
 inflate and fillborders. None remains deferred, and none had to be reverted
-again. Each re-land applies the inverse of its revert commit. That did not
-restore the registry lines, which `2934bb9` had removed by hand, so each
-operator's import line and array entry were added by hand again.
+again. Each re-land commit restores every file its revert commit removed. In
+the same commit, the operator's module, its two test files and its doc are
+changed for the shared negotiation, as described below. So no re-land is a plain
+inverse of its revert. The other restored files are byte-identical to the
+pre-revert files. Among them are the NOTICE file and the
+`docs/contributing/wave1/` specification. The reverts did not touch the
+registry lines, which `2934bb9` had removed by hand, so each operator's import
+line and array entry were added by hand again.
 `packages/avfilter/src/video-ops/registry.ts` now has 29 operator imports and
 29 entries, each once. Compared with `origin/wave1/<slug>`, each operator
 differs only in its module, its two test files and its doc.
@@ -3192,20 +3206,29 @@ The tests that pinned the divergence now assert the refusals:
   EdgeFFmpeg's pick: 195 direct, 510 converted and 2,879 refused by name.
 
 Each operator also gained a per-source negotiation test, built on
-`tests/helpers/video-negotiation-cases.ts`. For 17 sources (16 for chromashift,
-which refuses yuva420p) it reads native's pick from showinfo. It then requires
-either byte-exact native rawvideo on the linear, graph, stream, actor and timed
-paths, or the named refusal on those five paths and on four CLI backends with
-no output opened. Two other changes were needed:
+`tests/helpers/video-negotiation-cases.ts`. It reads native's pick from showinfo
+for 17 sources. chromashift uses 16, because it refuses yuva420p, and
+shuffleplanes runs the test for three maps. Each source then has one of two
+outcomes:
+
+- It runs byte-exact against native rawvideo on the linear, graph, stream,
+  actor and timed paths.
+- It is refused by name on those five paths and through the same four CLI
+  configurations, with no output opened.
+
+The three yuvj sources run only on linear chains, so both outcomes are checked
+there only, with no CLI check. Two other changes were needed:
 
 - `tests/unit/video-operator-registry.test.ts` (`fe89971`) used to require every
   `formats()` list to sit inside the 14 executable formats. It now requires a
   non-empty list of negotiable formats, without duplicates, with at least one
-  executable member, as `descriptor.ts` documents. This is the one check that
-  was relaxed, and native lists need it.
-- inflate's refusal test (`280c518`) compares native's ERANGE text through the
-  host's strerror ("Result too large" on macOS). The comparison on Linux is
-  unchanged.
+  executable member, as `descriptor.ts` documents. This relaxes the check, and
+  native lists need it.
+- inflate's refusal test (`280c518`) now takes native's expected ERANGE text from
+  the host's strerror ("Result too large" on macOS). It still requires
+  EdgeFFmpeg to print glibc's "Numerical result out of range". On macOS the test
+  therefore accepts that EdgeFFmpeg's message differs from native's. On Linux
+  the comparison is unchanged.
 
 **Platform-aware compatibility report.** A contract may declare
 `"platforms": [...]`, a non-empty list of distinct `<process.platform>-<process.arch>`
@@ -3297,9 +3320,10 @@ v24.12.0, took 4,871 s and passed:
   Its four Vitest reports equal the standalone run's, per file, full test name,
   status and occurrence.
 
-Free disk space fell to about 3 GiB during the run's tests-workers. Other
-processes were active on the machine at the time, among them another project's
-workerd and Spotlight indexing, and the drop was not attributed to a test.
+Free disk space fell to about 3 GiB (3,124 MiB) during the run's tests-workers.
+A minute after the run ended it was back at 8,287 MiB. `disk.log` records only
+free space, once a minute from 03:20:54Z. It names no process, so the drop is not
+attributed to a test or to anything else.
 
 **Linux CI on `1cf5b96`.** GitHub Actions runs 45499928633 and 45499919847 ran
 `1cf5b96` on Linux x86_64 (Node v24.22.3, CI-built reference `58295ca5…f966`).
@@ -3380,3 +3404,56 @@ The wave 1 record's open items on compat:report on macOS, the deferred video
 branches and asoftclip's per-platform title are closed by this follow-up. Its
 note that the afade `ipar` test had not run at all is superseded: it passed on
 Linux at `1cf5b96`.
+
+An audit of this section and of the follow-up's other doc changes checked them
+against the raw logs and JSON reports in `.build/video-followup/validate/`, the
+compat:report run, the native helper evidence and the code. Four extra checks
+were run, and their logs are in the same directory:
+
+- `audit-shuffleplanes-lists-verify.log`: the 256 native shuffleplanes lists
+  were regenerated, byte-identical, and checked against the committed module.
+- `audit-ipar-fma-check.log`: the pinned macOS reference's 302 `ipar` gains
+  equal the fused formula in every case, and differ from the unfused one in 78.
+- `audit-ci-conclusions.log`: `gh run view` reports `failure` for all four
+  Linux CI runs.
+- `audit-graph-source.log`: a graph-path probe of sources outside the 14
+  formats.
+
+It corrected these claims in this section:
+
+- The re-lands are not plain inverses of their reverts. Each one also changes
+  the module, the two test files and the doc.
+- The negotiation probe test compares picks. It does not run the 830 cases.
+- The four CLI checks are two backends, each used in two ways.
+- The per-source negotiation tests check the yuvj sources on linear chains only,
+  with no CLI check.
+- Only graph-path sources that have a frame layout here get the named refusal.
+- inflate's ERANGE test accepts a differing EdgeFFmpeg message on macOS.
+- The refusal is not shown to come before input reads.
+- No log names the processes active during the disk-space drop.
+
+These docs were corrected:
+
+- [compatibility-report](compatibility-report.md): the asoftclip title note was
+  stale after `9d0c088`.
+- The ten operator docs said every test was rerun on macOS after the Linux runs.
+  The re-landed code, including each per-source negotiation test, has run only
+  on macOS.
+- [shuffleplanes](shuffleplanes.md): two of the 18 refusals are linear only.
+
+It also spot-checked swapuv, chromashift and fillborders, plus limiter. Their
+per-source negotiation tests run `.build/reference/ffmpeg` (sha256
+`1b86106f…ab92` in this run) and cover these sources:
+
+- rgba, argb, abgr and bgra, which are refused naming native's `yuva444p` or
+  `gbrap`;
+- gray, which is refused as `yuvj444p` for swapuv and chromashift, and runs
+  byte-exact for fillborders and limiter;
+- yuv422p and yuv444p, which run byte-exact on all five paths.
+
+Each source must produce native's bytes or a refusal that names native's format.
+All four tests passed in the macOS run.
+
+The audit edits came after `receipt.json` was written, so its doc hashes and
+`changedAfterValidation` do not cover them. No source file, test, contract or
+progress entry was changed by the audit.

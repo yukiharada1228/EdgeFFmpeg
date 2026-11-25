@@ -69,8 +69,10 @@ and diverged. Sources with alpha that have storage (`yuva420p`) are unaffected.
 
 All comparisons run the locally built `.build/reference/ffmpeg` (Linux x86_64) at
 test time, with `-cpuflags 0` where conversions occur and scalar arithmetic on our
-side; after the shared negotiation fix every test was rerun on macOS arm64 against
-the pinned reference (sha256 `1b86106f…ab92`). They are in
+side; after the shared negotiation fix every test ran on macOS arm64 against
+the pinned reference (sha256 `1b86106f…ab92`). The Linux x86_64 runs predate the
+re-land, which changed this operator's module and tests. The re-landed code,
+including the per-source negotiation test, has run only on macOS arm64. They are in
 `tests/differential/video-inflate.test.ts`. `negotiates every accepted source as
 native does and refuses the packed-alpha gbrap picks before output on every path`
 runs `inflate=threshold0=12:threshold1=0` from 17 sources (the 14 executable

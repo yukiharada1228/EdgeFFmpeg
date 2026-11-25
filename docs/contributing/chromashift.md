@@ -39,7 +39,7 @@ The descriptor flags `linear`, `graph`, `stream`, `actor` and `timed`. Each is c
 
 ## Evidence
 
-All comparisons are byte-exact against `.build/reference/ffmpeg` (Linux x86_64, sha256 `ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c`), run at test time. After the shared negotiation fix every test was rerun on macOS arm64 against the pinned reference (sha256 `1b86106f…ab92`):
+All comparisons are byte-exact against `.build/reference/ffmpeg` (Linux x86_64, sha256 `ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c`), run at test time. After the shared negotiation fix every test ran on macOS arm64 against the pinned reference (sha256 `1b86106f…ab92`). The Linux x86_64 runs predate the re-land, which changed this operator's module and tests. The re-landed code, including the per-source negotiation test, has run only on macOS arm64:
 
 | Test (tests/differential/video-chromashift.test.ts) | Cases |
 |---|---|

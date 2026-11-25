@@ -30,7 +30,7 @@ Pure byte copy: no arithmetic profile involved. Implicit conversions around the 
 
 ## Evidence (tests/differential/video-shuffleplanes.test.ts)
 
-Written against the native Linux x86_64 reference; after the shared negotiation fix every test was rerun on macOS arm64 against the pinned reference (sha256 `1b86106f…ab92`).
+Written against the native Linux x86_64 reference; after the shared negotiation fix every test ran on macOS arm64 against the pinned reference (sha256 `1b86106f…ab92`). The Linux x86_64 runs predate the re-land, which changed this operator's module and tests. The re-landed code, including the per-source negotiation test, has run only on macOS arm64.
 
 | Test | Native comparisons |
 |---|---|
@@ -41,7 +41,7 @@ Written against the native Linux x86_64 reference; after the shared negotiation 
 | matches native replayed shuffleplanes branches and joins frame by frame | 30 |
 | matches native shuffleplanes framecrc and rawvideo through the actor and timed schedulers | 240 (`pull`, `activation`, `producer`) |
 | refuses shuffleplanes timelines, unimplemented values and picks without storage before opening CLI outputs | 16 (media and timed backends, -vf and -filter_complex); `3:3:3:3` on gray names native's `gbrap` |
-| negotiates every accepted source as native does for three maps and refuses picks without storage before output on every path | the default map, `0:0:0:0` and `0:2:1:0` from 17 sources (the 14 executable formats and yuvj420p/422p/444p): 33 run byte-exact (`-cpuflags 0`, scalar) on the five paths (yuvj on linear chains), 18 are refused naming native's pick on the five paths and through the media `-vf`/`-filter_complex` and timed producer/pull CLIs with no output opened: 283 checks |
+| negotiates every accepted source as native does for three maps and refuses picks without storage before output on every path | the default map, `0:0:0:0` and `0:2:1:0` from 17 sources (the 14 executable formats and yuvj420p/422p/444p): 33 run byte-exact (`-cpuflags 0`, scalar) on the five paths (yuvj on linear chains), 18 are refused naming native's pick on the five paths and through the media `-vf`/`-filter_complex` and timed producer/pull CLIs with no output opened, except yuvj422p and yuvj444p with the default map, which are refused on linear chains only: 283 checks |
 
 Unit tests (`tests/unit/video-shuffleplanes.test.ts`, 5 tests) cover parsing, every one of the 256 per-step format lists (AVPixelFormat order, 9,619 entries, members with frame storage against the native rule recomputed from `pixelLayout`), plane remapping and duplication, budgets, malformed strides, AbortSignal, the unmutated input and the planners.
 

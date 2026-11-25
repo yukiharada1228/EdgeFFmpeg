@@ -47,7 +47,7 @@ Integer clipping only, with no rounding or arithmetic profile. The Linux referen
 
 ## Evidence
 
-`tests/differential/video-limiter.test.ts` runs `.build/reference/ffmpeg` at test time. After the shared negotiation fix it was rerun on macOS arm64 against the pinned reference (sha256 `1b86106f…ab92`). Its inputs combine ramps and 0/255 extremes with LCG noise:
+`tests/differential/video-limiter.test.ts` runs `.build/reference/ffmpeg` at test time. After the shared negotiation fix it ran on macOS arm64 against the pinned reference (sha256 `1b86106f…ab92`). The Linux x86_64 runs predate the re-land, which changed this operator's module and tests. The re-landed code, including the per-source negotiation test, has run only on macOS arm64. Its inputs combine ramps and 0/255 extremes with LCG noise:
 
 | Test title | Path | Comparisons |
 |---|---|---|

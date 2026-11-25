@@ -78,8 +78,11 @@ result.
 
 All comparisons run the sandbox `.build/reference/ffmpeg` (Linux x86_64,
 sha256 `ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c`) at
-test time. After the shared negotiation fix every test was rerun on macOS arm64
-against the pinned reference (sha256 `1b86106f…ab92`).
+test time. After the shared negotiation fix every test ran on macOS arm64
+against the pinned reference (sha256 `1b86106f…ab92`). The Linux x86_64 runs
+predate the re-land, which changed this operator's module and tests. The
+re-landed code, including the per-source negotiation test, has run only on macOS
+arm64.
 
 `negotiates every accepted source as native does and refuses the packed-alpha
 gbrap picks before output on every path` runs `erosion=coordinates=85:threshold0=10`
