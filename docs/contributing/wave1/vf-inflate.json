@@ -1,0 +1,231 @@
+{
+ "capabilityId": "filter.inflate",
+ "slug": "vf-inflate",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/inflate.ts",
+  "packages/avfilter/NOTICE-INFLATE",
+  "tests/unit/video-inflate.test.ts",
+  "tests/differential/video-inflate.test.ts",
+  "docs/contributing/inflate.md",
+  "docs/contributing/wave1/vf-inflate.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/video-ops/registry.ts: +1 import line (import {inflateOperator} from './inflate.js';) and +1 ' inflateOperator,' array-entry line"
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-inflate.test.ts",
+   "title": "parses threshold shorthand, named options, AV_OPT_TYPE_INT expressions and rounding into frozen steps",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-inflate.test.ts",
+   "title": "registers a frozen frame descriptor flagged on every path with native formats in table order",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-inflate.test.ts",
+   "title": "matches the native kernel transcription on borders, impulses, saturation and every threshold class",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-inflate.test.ts",
+   "title": "filters each plane with its own threshold and copies threshold-zero planes",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-inflate.test.ts",
+   "title": "materializes owned tight planes from padded input without mutating it or changing timestamps and metadata",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-inflate.test.ts",
+   "title": "enforces frame budgets, plane counts, malformed strides and storage, time bases and filtered width-1 planes",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-inflate.test.ts",
+   "title": "observes AbortSignal before and during row processing",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-inflate.test.ts",
+   "title": "compiles linear chains and frame graphs, refusing width-1 planes at plan time",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-inflate.test.ts",
+   "title": "matches native inflate kernels across formats, sizes, thresholds, patterns and borders",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-inflate.test.ts",
+   "title": "matches native inflate CLI rawvideo and framecrc outputs across conversions and timing",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-inflate.test.ts",
+   "title": "matches native complex inflate graphs on the frame-graph path",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-inflate.test.ts",
+   "title": "matches native replayed inflate streams frame by frame",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-inflate.test.ts",
+   "title": "matches native inflate through the timed backend actor and pull schedulers",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-inflate.test.ts",
+   "title": "fails like native for unknown and out-of-range inflate options and refuses filtered width-1 planes before opening outputs",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(whole file, unchanged, 8 tests)",
+   "pass": 8,
+   "fail": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 501,
+  "details": [
+   "264 rawvideo kernel comparisons (6 frames each) via compileVideoFilterChain vs native -vf",
+   "112 linear CLI rawvideo/framecrc comparisons through the public frontend",
+   "48 frame-graph output comparisons (24 two-output -filter_complex runs)",
+   "18 replay-stream comparisons",
+   "48 timed-backend comparisons (producer, activation, pull) against 16 native outputs",
+   "11 refusal cases: native stderr message checked for 7, native success checked for 4 scope-only refusals"
+  ]
+ },
+ "unsupported": [
+  "High-bit-depth formats and formats outside the shared negotiation table (yuv440p, yuv411p, yuv410p, yuvj*, yuva422p/444p, gbrap, inflate16)",
+  "enable= timeline, generic context options threads/thread_type/extra_hw_frames, runtime commands",
+  "Filtered (nonzero-threshold) planes narrower than two pixels (native reads past the row); threshold-0 width-1 planes are supported",
+  "Known unrefused divergence: packed-alpha RGB sources (rgba/bgra/argb/abgr) whose inflate negotiation group is not merged with a table format; native negotiates gbrap, absent from the shared table",
+  "H.264/MP4 framecrc not compared"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": [
+  "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+  "tests/unit/flac-decode-backend.test.ts (suite: missing .build/codecs/flac/edge-flac.wasm)",
+  "tests/unit/flac-decoder.test.ts (suite: missing .build/codecs/flac/edge-flac.wasm)",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-max-frames.test.ts (suite: missing FLAC build artifacts)",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+ ],
+ "finalUnitFailures": [
+  "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+  "tests/unit/flac-decode-backend.test.ts (suite: missing .build/codecs/flac/edge-flac.wasm)",
+  "tests/unit/flac-decoder.test.ts (suite: missing .build/codecs/flac/edge-flac.wasm)",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+  "tests/unit/flac-max-frames.test.ts (suite: missing FLAC build artifacts)",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+  "tests/unit/resample-checkpoint.test.ts > keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation"
+ ],
+ "proposedContracts": [
+  {
+   "id": "filter.inflate.kernel",
+   "file": "tests/differential/video-inflate.test.ts",
+   "name": "matches native inflate kernels across formats, sizes, thresholds, patterns and borders",
+   "modes": [
+    "linear"
+   ],
+   "scope": "8-bit planar formats yuv420p/yuv422p/yuv444p/gray/yuva420p/gbrp, threshold0..3, native border tables, threshold-0 copy incl. width-1 planes"
+  },
+  {
+   "id": "filter.inflate.cli",
+   "file": "tests/differential/video-inflate.test.ts",
+   "name": "matches native inflate CLI rawvideo and framecrc outputs across conversions and timing",
+   "modes": [
+    "linear"
+   ],
+   "scope": "-vf rawvideo/framecrc via public frontend with conversions (-cpuflags 0 / scalar), -ss/-frames:v, scale chains"
+  },
+  {
+   "id": "filter.inflate.graph",
+   "file": "tests/differential/video-inflate.test.ts",
+   "name": "matches native complex inflate graphs on the frame-graph path",
+   "modes": [
+    "graph"
+   ],
+   "scope": "-filter_complex two-output branches, rawvideo/framecrc"
+  },
+  {
+   "id": "filter.inflate.stream",
+   "file": "tests/differential/video-inflate.test.ts",
+   "name": "matches native replayed inflate streams frame by frame",
+   "modes": [
+    "stream"
+   ],
+   "scope": "createReplayVideoExecution incl. split/hstack"
+  },
+  {
+   "id": "filter.inflate.timed",
+   "file": "tests/differential/video-inflate.test.ts",
+   "name": "matches native inflate through the timed backend actor and pull schedulers",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "createTimedVideoBackend producer/activation (actor) and pull (timed) schedulers, rawvideo/framecrc"
+  },
+  {
+   "id": "filter.inflate.refusals",
+   "file": "tests/differential/video-inflate.test.ts",
+   "name": "fails like native for unknown and out-of-range inflate options and refuses filtered width-1 planes before opening outputs",
+   "modes": [
+    "linear",
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "unknown/out-of-range option messages vs native stderr; enable= and filtered width-1 planes refused before outputs open"
+  }
+ ],
+ "notes": [
+  "All five paths flagged; the unchanged registry test passes on every path.",
+  "The width-1 refusal applies only to planes with a nonzero threshold; threshold-0 planes are copied as native does, verified against native at 1x4 and 2xN chroma.",
+  "Unknown options use native wording \"Error applying option '<key>' to filter 'inflate': Option not found\"; out-of-range uses \"Numerical result out of range\". For 'nan' our suffix differs (out of range vs native Invalid argument); the test checks only the common prefix.",
+  "Needed shared edit not made: adding gbrap to packages/avfilter/src/video-ops/formats.ts negotiation table would remove the packed-alpha RGB divergence.",
+  "Setup durations: submodule init 47s; npm ci + reference:build 193s; baseline typecheck+lint+boundaries passed; baseline unit run 83s (13 failed / 2253 passed). Final unit: 13 failed (identical) / 2261 passed."
+ ]
+}
