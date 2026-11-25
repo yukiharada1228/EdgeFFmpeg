@@ -10,7 +10,7 @@ import {spawnSync} from 'node:child_process';
 import {existsSync,mkdirSync,readFileSync,readdirSync,writeFileSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {LEGACY_CORPUS_PLATFORM,localReferenceIdentity,loadReferencePins,platformCorpusDirFor} from '../differential-runner/reference-identity.mjs';
-import {DRAFT_ENV,DRAFT_ROOT,executionEnvironment,verifyPlatformCorpusDir} from '../differential-runner/platform-corpus.mjs';
+import {DRAFT_ENV,DRAFT_ROOT,IMAGE_ENV,ciRecord,committedOriginRefusal,executionEnvironment,verifyPlatformCorpusDir} from '../differential-runner/platform-corpus.mjs';
 
 const root=resolve(import.meta.dirname,'../..'),runners='tools/differential-runner';
 process.chdir(root);
@@ -37,7 +37,7 @@ if(!descriptors.length)throw new Error(`No platform-corpus descriptors (${runner
 const selected=only==='all'?descriptors:only.split(',').map(id=>descriptors.find(item=>item.id===id)??(()=>{throw new Error(`Unknown platform-corpus descriptor ${id}; known: ${descriptors.map(item=>item.id).join(', ')}`);})());
 const identity=localReferenceIdentity(root),pins=loadReferencePins(root),environment=executionEnvironment();
 if(identity.id===LEGACY_CORPUS_PLATFORM&&!draft)throw new Error(`${LEGACY_CORPUS_PLATFORM} corpora keep their tracked layout; regenerate them with each generator's own command`);
-if(environment.emulated&&!draft)throw new Error(`Refusing to generate committed ${identity.id} corpora on an emulated CPU (${environment.cpuModel}); pass --draft`);
+if(!draft){const refusal=committedOriginRefusal({id:identity.id,tracked:`${identity.id} corpora`,environment,ci:ciRecord(),image:process.env[IMAGE_ENV]??null,pinImage:identity.pin.image??null});if(refusal)throw new Error(refusal);}
 console.log(`[linux-corpora] reference ${identity.id} ffmpeg ${identity.ffmpeg.slice(0,12)} on ${environment.cpuModel} (uid ${environment.uid})${draft?', drafts under '+DRAFT_ROOT:''}`);
 
 const summary={reference:identity.id,ffmpeg:identity.ffmpeg,draft,environment,startedAt:new Date().toISOString(),corpora:[]};

@@ -34,8 +34,10 @@ image in the workflows.
 The library hashes are those of a build whose programs equal the pin. For
 `darwin-arm64` they reproduce the link-input digest pinned in
 `tools/bootstrap/lock.json`. For `linux-x64` they come from the local container
-build in `.build/linux-x64/reference`; the GitHub reference job must reproduce
-them.
+build in `.build/linux-x64/reference`. The reference job of GitHub Actions run
+45580321573 reproduced them, with both programs. `bootstrap --check` compares
+every library in `libraries` as well as the programs. The oracles and corpus
+generators link these libraries, so binaries that match the pin are not enough.
 
 ## Reference identity for tests: `tests/helpers/reference-identity.ts`
 
@@ -50,9 +52,10 @@ rules live in `tools/differential-runner/reference-identity.mjs` (typed by
 | `resolvePinnedReference(inputs)` | The same rules over injected inputs, for unit tests. |
 | `referencePin(id)`, `referencePinIds()` | One pin, read-only, and the pinned ids. For platform-independent checks of tracked evidence, for example that a darwin corpus still names `referencePin('darwin-arm64').artifacts.ffmpeg`. |
 | `verifyPinnedLibrary(path)` | The sha256 of `.build/reference/<path>` after checking it equals `pinnedReference().libraries[path]`. |
-| `platformCorpusDir(base, id?)` | `base` for `darwin-arm64`, `base/linux-x64` for `linux-x64`; any other id throws. There is no fallback. |
-| `readPlatformCorpus(base, file, id?)` | `<platformCorpusDir(base)>/<file>` as JSON. A non-darwin corpus is verified first with `verifyPlatformCorpus`. A missing Linux corpus throws `Missing linux-x64 corpus …; generate it with the linux-corpora job (docs/contributing/linux-reference.md)`. |
-| `verifyPlatformCorpus(base, id?)` | Verifies a `<base>/<id>/` corpus: its manifest covers exactly the files present and their hashes, its provenance is not a draft and names the pin, and for the local id the local binaries. Returns the provenance. Not for `darwin-arm64`, whose corpora keep their own checks. |
+| `platformCorpusDir(base)` | The corpus directory of the verified local reference: `base` for `darwin-arm64`, `base/linux-x64` for `linux-x64`. It takes no platform id, so a test cannot pick another platform's corpus. There is no fallback. |
+| `readPlatformCorpus(base, file)` | `<platformCorpusDir(base)>/<file>` as JSON. A non-darwin corpus is verified first with `verifyPlatformCorpus`. A missing Linux corpus throws `Missing linux-x64 corpus …; generate it with the linux-corpora job (docs/contributing/linux-reference.md)`. |
+| `verifyPlatformCorpus(base)` | Verifies the local reference's `<base>/<id>/` corpus. Its manifest must cover exactly the files present, with their hashes. Its provenance must not be a draft, must come from the `corpora` job of the `Linux probe` workflow on a real CPU in the pinned image, and must name the pin and the local binaries. Returns the provenance. Not for `darwin-arm64`, whose corpora keep their own checks. |
+| `trackedPlatformCorpusDir(base, id)`, `verifyTrackedPlatformCorpus(base, id)` | The same directory and verification for pin `id`, without the local reference. These are for static checks of tracked evidence only, such as checking on macOS that a committed Linux corpus is valid. They never supply the expected output of a comparison on this host; use `platformCorpusDir` and `readPlatformCorpus` for that. |
 | `assertCorpusReference(recorded)` | A recorded reference (`{platform, arch, artifacts}`, or a platform-corpus provenance) names the verified local pin: platform, arch and `ffmpeg` (and `ffprobe` when recorded) equal both the pin and the local hashes. Returns `pinnedReference()`. |
 | `assertRecordedPin(recorded, id)` | The same check against pin `id`, without the local reference. |
 | `requireGeneratedInput(path, how)` | The bytes of a git-ignored generated input, or `Missing generated input <path>; run <how>`. |
@@ -84,11 +87,20 @@ writePlatformCorpus(target, {'cases.json': rows});
 ```
 
 `corpusTarget` resolves the local reference with the same rules as the tests and
-refuses an unpinned one. It refuses to write committed evidence:
+refuses an unpinned one. `committedOriginRefusal` decides where committed
+evidence may come from. It refuses:
 
-- on an emulated CPU (`/proc/cpuinfo` reports VirtualApple or QEMU);
-- for a non-darwin pin, outside a GitHub Actions run, or when
-  `EDGEFFMPEG_CONTAINER_IMAGE` does not name the pinned image.
+- an emulated or unverifiable CPU (`detectEmulation`): Rosetta or QEMU in
+  `/proc/cpuinfo`; qemu-user, where an x64 process sees no x86 `vendor_id`; an
+  unreadable `/proc/cpuinfo`; or an x64 process on an Apple CPU on macOS;
+- for a non-darwin pin, anything but a GitHub Actions run of the `corpora` job of
+  the `Linux probe` workflow (`GITHUB_WORKFLOW`, `GITHUB_JOB`), or a run whose
+  `EDGEFFMPEG_CONTAINER_IMAGE` does not name the pinned image. The CI reference
+  job also sets that variable, but its corpora are refused.
+
+The same function checks the recorded provenance when a committed corpus is
+verified, so a corpus from another origin fails when it is read, and also in the
+static scan.
 
 With `--draft` (or `EDGEFFMPEG_CORPUS_DRAFT=1`) it writes under
 `.build/linux-green/drafts/<corpus path>/` instead. `writePlatformCorpus`
@@ -100,7 +112,8 @@ atomically, and refuses the darwin tracked layout. The provenance
 - `reference`: `build-metadata.json` verbatim;
 - `generator`: path and sha256;
 - `image`: the image the job ran in;
-- `environment`: platform, arch, Node, kernel, CPU model, `emulated`, uid;
+- `environment`: platform, arch, Node, kernel, CPU model, `emulated` and the
+  reason (`emulation`), uid;
 - `ci`: GitHub repository, workflow, job, run id, attempt and commit;
 - `draft` and `generatedAt`.
 
@@ -108,8 +121,9 @@ atomically, and refuses the darwin tracked layout. The provenance
 
 - every `{platform, arch, artifacts}` reference record under
   `compat/behavior-specs` names that platform's pin;
-- every `<corpus>/<pin id>/` directory verifies, was recorded on a real CPU by a
-  CI run in the pinned image, and names no other platform's binaries;
+- every `<corpus>/<pin id>/` directory verifies, was recorded on a real CPU by the
+  `corpora` job of the `Linux probe` workflow in the pinned image, and names no
+  other platform's binaries;
 - the darwin files beside it name no Linux binary.
 
 A Linux run therefore cannot pass against macOS data, or the reverse.
@@ -138,7 +152,11 @@ it with your local drafts, review it, and commit it.
 
 ## CI: `.github/workflows/ci.yml`
 
-- Runs on pushes, except to `linux-probe/**` branches, and on pull requests.
+- Runs on pushes of branches, except `linux-probe/**`, on pushes of tags, and on
+  pull requests.
+- Actions are pinned by commit, with the release in a comment. Checkouts set
+  `persist-credentials: false`, because nothing after them needs the token. The
+  `n9.0.2` tag comes from the public FFmpeg remote.
 - Every job runs in the pinned image. Steps run as root, so each job runs
   `chown -R node:node "$GITHUB_WORKSPACE"` and then runs npm and the tests as
   the image's `node` user (uid 1000) with `runuser`. The permission tests refuse
@@ -148,17 +166,22 @@ it with your local drafts, review it, and commit it.
   the tag, FFmpeg's `version.sh` embeds the abbreviated commit and the binaries
   differ from the linux-x64 pin only in that string.
 - After the codec builds, it runs
-  `node tools/bootstrap/bootstrap.mjs --only flac-investigation` as `node`. This
-  fails the job when the reference is not the linux-x64 pin. The three outputs
-  are added to the `worker-reference-and-codec` artifact. On failure,
-  `reference-diagnostics` uploads `.build/reference/` and `.build/bootstrap/`
-  for comparison with `.build/linux-x64/reference`.
-- `npm run compat:report` runs as `node`.
+  `node tools/bootstrap/bootstrap.mjs --only flac-investigation` and `--check` as
+  `node`. These fail the job when the programs or any pinned library are not
+  the linux-x64 pin, or when the outputs differ from their content pins. The
+  three outputs are added to the `worker-reference-and-codec` artifact. On
+  failure, `reference-diagnostics` uploads `.build/reference/` and
+  `.build/bootstrap/` for comparison with `.build/linux-x64/reference`.
+- `npm run compat:report` runs as `node` after the artifact upload.
+- `foundation` and `workers` need only that artifact. They run unless the run is
+  cancelled, so a failing `compat:report` does not skip them. Without the
+  artifact, their download step fails them explicitly.
 
-The FLAC investigation outputs have no Linux content pins in
-`tools/bootstrap/lock.json` yet, and `flac-decoder-native.test.ts` has no Linux
-malformed-divergence counts. Both are added from the first reference job that
-produces them, and the counts must equal the local container drafts.
+The linux-x64 FLAC investigation content pins in `tools/bootstrap/lock.json`
+come from the reference job of run 45580321573. So do the linux-x64
+malformed-divergence counts in `flac-decoder-native.test.ts`, taken from that
+job's `malformed-prototype-result.json`. Both equal the local container drafts,
+but the drafts are not their source.
 
 ## Probe workflow: `.github/workflows/linux-probe.yml`
 
@@ -178,9 +201,13 @@ validates the file.
   `compat/configure.flags`, `compat/reference-container.lock.json`,
   `tools/upstream-build/build.mjs` and `tools/codecs/**`. On a miss it builds them
   as the reference job does. It generates the FLAC investigation files and runs
-  `bootstrap --check` as `node`, which re-verifies the restored files against
-  the pins and codec locks, so a wrong cache entry fails instead of being used.
-  Caches are scoped to the branch, so reuse one probe branch to keep the cache.
+  `bootstrap --check` as `node`, on a hit and before a miss is saved. The check
+  compares `ffmpeg`, `ffprobe` and every pinned library with the linux-x64 pin,
+  the Wasm modules with their locks and the FLAC outputs with their content
+  pins. A wrong cache entry therefore fails instead of being used. Caches are
+  scoped to the branch, so reuse one probe branch to keep the cache.
+- The workflow needs only `contents: read`. Same-run artifacts and the cache use
+  the runner's runtime token.
 - `probe` runs `node tools/linux/probe.mjs test --shard i/n` as `node`. Files are
   sharded round-robin, grouped by suite, and run with that suite's npm-script
   Vitest options. JSON reports are uploaded as `linux-probe-shard-<i>`.

@@ -13,8 +13,12 @@ interface CleanRow {id:string;flac:string;pcm:string;flacSha256:string;pcmSha256
 const clean=flacInvestigationInput<{rows:CleanRow[]}>('native-cases.json').value;
 // Edge-versus-Native malformed-input divergences per pinned reference, recorded from that platform's own Native
 // evidence; a platform without an entry fails instead of borrowing another platform's counts.
+// darwin-arm64: the macOS arm64 malformed-prototype-result.json content-pinned in tools/bootstrap/lock.json.
+// linux-x64: malformed-prototype-result.json (pcmDifferent, completionDifferent, unsupportedPolicyCases) from the
+// reference job of GitHub Actions run 45580321573 on x86_64 in the pinned image, content-pinned in tools/bootstrap/lock.json.
 const malformedDivergences:Readonly<Record<string,{pcmDifferent:number;completionDifferent:number;unsupported:number}>>={
- 'darwin-arm64':{pcmDifferent:22,completionDifferent:31,unsupported:56}
+ 'darwin-arm64':{pcmDifferent:22,completionDifferent:31,unsupported:56},
+ 'linux-x64':{pcmDifferent:22,completionDifferent:31,unsupported:56}
 };
 function pcm(item:FlacDecodedFrame,bits:number):Buffer{
  const width=bits<=16?2:4,output=Buffer.alloc(item.samples*item.metadata.channels*width),planes=item.planes;

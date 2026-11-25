@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {describe,expect,it} from 'vitest';
-import {assertCorpusReference,assertRecordedPin,pinnedReference,platformCorpusDir,readPlatformCorpus,referencePin,referencePinIds,requireGeneratedInput,resolvePinnedReference,verifyPinnedLibrary} from '../helpers/reference-identity.js';
+import {assertCorpusReference,assertRecordedPin,pinnedReference,platformCorpusDir,readPlatformCorpus,referencePin,referencePinIds,requireGeneratedInput,resolvePinnedReference,trackedPlatformCorpusDir,verifyPinnedLibrary,verifyPlatformCorpus,verifyTrackedPlatformCorpus} from '../helpers/reference-identity.js';
 import type {BuildMetadata,ReferenceInputs,ReferencePins} from '../helpers/reference-identity.js';
 import {loadReferencePins} from '../../tools/differential-runner/reference-identity.mjs';
 
@@ -53,13 +53,22 @@ describe('pinned Native reference identity',()=>{
   expect(()=>resolvePinnedReference(linuxInputs(inputs=>{(inputs.pins as {commit:string}).commit='0'.repeat(40);}))).toThrow('compat/reference-pins.json records');
  });
  it('maps corpora to the darwin base or a per-platform directory, never a fallback',()=>{
+  const base='compat/behavior-specs/reference-metadata',absent='compat/behavior-specs/absent-corpus';
   expect(referencePinIds()).toEqual(['darwin-arm64','linux-x64']);
-  expect(platformCorpusDir('compat/behavior-specs/reference-metadata','darwin-arm64')).toBe('compat/behavior-specs/reference-metadata');
-  expect(platformCorpusDir('compat/behavior-specs/reference-metadata','linux-x64')).toBe('compat/behavior-specs/reference-metadata/linux-x64');
-  expect(()=>platformCorpusDir('compat/behavior-specs/reference-metadata','linux-arm64')).toThrow('No pinned Native reference for linux-arm64');
-  expect(()=>readPlatformCorpus('compat/behavior-specs/reference-metadata','cases.json','linux-x64'))
-   .toThrow('Missing linux-x64 corpus compat/behavior-specs/reference-metadata/linux-x64; generate it with the linux-corpora job (docs/contributing/linux-reference.md)');
-  expect(readPlatformCorpus<unknown[]>('compat/behavior-specs/reference-metadata','cases.json','darwin-arm64')).toHaveLength(336);
+  expect(trackedPlatformCorpusDir(base,'darwin-arm64')).toBe(base);
+  expect(trackedPlatformCorpusDir(base,'linux-x64')).toBe(`${base}/linux-x64`);
+  expect(()=>trackedPlatformCorpusDir(base,'linux-arm64')).toThrow('No pinned Native reference for linux-arm64');
+  expect(JSON.parse(readFileSync(`${trackedPlatformCorpusDir(base,'darwin-arm64')}/cases.json`,'utf8'))).toHaveLength(336);
+  expect(()=>verifyTrackedPlatformCorpus(absent,'linux-x64'))
+   .toThrow(`Missing linux-x64 corpus ${absent}/linux-x64; generate it with the linux-corpora job (docs/contributing/linux-reference.md)`);
+  expect(()=>verifyTrackedPlatformCorpus(base,'darwin-arm64')).toThrow('darwin-arm64 corpora keep their tracked layout');
+ });
+ it('binds platformCorpusDir, readPlatformCorpus and verifyPlatformCorpus to the local reference only',()=>{
+  const absent='compat/behavior-specs/absent-corpus',local=pinnedReference();
+  expect(platformCorpusDir(absent)).toBe(trackedPlatformCorpusDir(absent,local.id));
+  expect(()=>readPlatformCorpus(absent,'cases.json')).toThrow(`Missing ${local.id} corpus ${platformCorpusDir(absent)}`);
+  if(local.id==='darwin-arm64')expect(()=>verifyPlatformCorpus(absent)).toThrow('darwin-arm64 corpora keep their tracked layout');
+  else expect(()=>verifyPlatformCorpus(absent)).toThrow(`Missing ${local.id} corpus ${absent}/${local.id}`);
  });
  it('checks that a recorded reference names one pin',()=>{
   const recorded={platform:'darwin',arch:'arm64',artifacts:{...darwin.artifacts}};

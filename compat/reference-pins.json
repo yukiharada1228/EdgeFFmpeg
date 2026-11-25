@@ -44,7 +44,7 @@
         "libswresample/libswresample.a": "acf824905b972dd7f0c64afdb896ecef59e8433babfdab245b2736879c580f3c",
         "libswscale/libswscale.a": "9f3a02b8a0923dece9609b31c29a1f1e9da8e53c8ccc784dab3566b7a560c098"
       },
-      "librariesSource": "the isolated container build in .build/linux-x64/reference (tools/upstream-build/linux.mjs, completed 2026-11-20) whose ffmpeg and ffprobe equal this pin; the GitHub reference job must reproduce them once it builds from the n9.0.2 tag",
+      "librariesSource": "the isolated container build in .build/linux-x64/reference (tools/upstream-build/linux.mjs, completed 2026-11-20) whose ffmpeg and ffprobe equal this pin; reproduced, with both programs, by the reference job of GitHub Actions run 45580321573 building from the n9.0.2 tag on x86_64",
       "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0",
       "image": "docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496",
       "source": "compat/behavior-specs/inverse-linux-x64.json"

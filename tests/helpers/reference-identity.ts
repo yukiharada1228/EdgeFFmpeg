@@ -7,7 +7,10 @@
  *   compat/upstream.lock.json, compat/configure.flags and this host, the binaries match build-metadata.json, and the
  *   binaries equal exactly the compat/reference-pins.json entry for that platform.
  * - referencePin(id): one pin, read-only, for platform-independent checks of tracked evidence.
- * - platformCorpusDir(base) / readPlatformCorpus(base, file): the corpus for the verified reference, no fallback.
+ * - platformCorpusDir(base) / readPlatformCorpus(base, file) / verifyPlatformCorpus(base): the corpus for the
+ *   verified local reference only, no fallback and no way to name another platform.
+ * - trackedPlatformCorpusDir(base, id) / verifyTrackedPlatformCorpus(base, id): static checks of tracked evidence for
+ *   any pin, never the expected output of a comparison on this host.
  * - assertCorpusReference(recorded): a stored record names the verified pin.
  * - requireGeneratedInput(path, how): a git-ignored generated input, or an actionable error.
  */
@@ -51,8 +54,15 @@ export function verifyPinnedLibrary(path:string):string{
  return actual;
 }
 
-/** base for darwin-arm64, base/linux-x64 for linux-x64; any other id throws. */
-export function platformCorpusDir(base:string,id:string=pinnedReference().id):string{return platformCorpusDirFor(base,id,loadedPins());}
+/** The corpus directory of the verified local reference: base for darwin-arm64, base/linux-x64 for linux-x64. */
+export function platformCorpusDir(base:string):string{return platformCorpusDirFor(base,pinnedReference().id,loadedPins());}
+
+/**
+ * Static checks of tracked evidence only: the corpus directory of pin `id` (base for darwin-arm64, base/<id> otherwise;
+ * an unpinned id throws). Never use it to pick the expected output of a comparison with this host's reference; that is
+ * platformCorpusDir(base) / readPlatformCorpus(base, file).
+ */
+export function trackedPlatformCorpusDir(base:string,id:string):string{return platformCorpusDirFor(base,id,loadedPins());}
 
 /** A stored record ({platform, arch, artifacts} or a platform-corpus provenance) names the pin `id`; independent of the local reference. */
 export function assertRecordedPin(recorded:RecordedReference|RecordedCorpusProvenance,id:string):ReferencePin{return assertRecordedPinIn(recorded,id,loadedPins());}
@@ -63,23 +73,28 @@ export function assertCorpusReference(recorded:RecordedReference|RecordedCorpusP
 }
 
 const verifiedCorpora=new Map<string,PlatformCorpusProvenance>();
-/**
- * Verifies a <base>/<id>/ corpus written by tools/differential-runner/platform-corpus.mjs (manifest, provenance, pin,
- * not a draft) and returns its provenance. darwin-arm64 corpora keep their tracked layout and their own checks.
- */
-export function verifyPlatformCorpus(base:string,id:string=pinnedReference().id):PlatformCorpusProvenance{
+function verifyCorpus(base:string,id:string):PlatformCorpusProvenance{
  if(id===LEGACY_CORPUS_PLATFORM)throw new Error(`${LEGACY_CORPUS_PLATFORM} corpora keep their tracked layout in ${base}; verify them with their own checks`);
- const dir=platformCorpusDir(base,id),cached=verifiedCorpora.get(dir);if(cached)return cached;
+ const dir=platformCorpusDirFor(base,id,loadedPins()),cached=verifiedCorpora.get(dir);if(cached)return cached;
  if(!existsSync(join(dir,'provenance.json')))throw new Error(`Missing ${id} corpus ${dir}; ${LINUX_CORPUS_HINT}`);
  const provenance=verifyPlatformCorpusDir(dir,id,{pins:loadedPins()});
- if(id===pinnedReference().id)assertCorpusReference(provenance);
  verifiedCorpora.set(dir,provenance);return provenance;
 }
+/**
+ * Verifies the <base>/<id>/ corpus of the verified local reference, written by tools/differential-runner/platform-corpus.mjs:
+ * manifest, provenance, pin, committed origin (not a draft; the corpora job on real hardware) and the local binaries.
+ * Returns its provenance. darwin-arm64 corpora keep their tracked layout and their own checks.
+ */
+export function verifyPlatformCorpus(base:string):PlatformCorpusProvenance{
+ const provenance=verifyCorpus(base,pinnedReference().id);assertCorpusReference(provenance);return provenance;
+}
+/** Static checks of tracked evidence only: the same verification for pin `id`, without the local reference. */
+export function verifyTrackedPlatformCorpus(base:string,id:string):PlatformCorpusProvenance{return verifyCorpus(base,id);}
 
-/** Reads <platformCorpusDir(base)>/<file> as JSON, verifying a non-darwin corpus first; a missing corpus throws. */
-export function readPlatformCorpus<T=unknown>(base:string,file:string,id:string=pinnedReference().id):T{
- const dir=platformCorpusDir(base,id),path=join(dir,file);
- if(id!==LEGACY_CORPUS_PLATFORM)verifyPlatformCorpus(base,id);
+/** Reads <platformCorpusDir(base)>/<file> as JSON for the verified local reference, verifying a non-darwin corpus first; a missing corpus throws. */
+export function readPlatformCorpus<T=unknown>(base:string,file:string):T{
+ const id=pinnedReference().id,dir=platformCorpusDir(base),path=join(dir,file);
+ if(id!==LEGACY_CORPUS_PLATFORM)verifyPlatformCorpus(base);
  if(!existsSync(path))throw new Error(`Missing ${id} corpus ${path}; ${id===LEGACY_CORPUS_PLATFORM?'it is tracked evidence, restore it from git':LINUX_CORPUS_HINT}`);
  return JSON.parse(readFileSync(path,'utf8')) as T;
 }

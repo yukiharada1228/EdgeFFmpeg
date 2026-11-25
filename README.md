@@ -74,11 +74,12 @@ npm run check
 
 `npm run bootstrap:check` reports what is missing without building anything. See
 [environment setup](docs/contributing/environment-setup.md) for prerequisites,
-reuse and offline options, measured durations and single-test commands. Tests
-compare against the pinned Native reference of their own platform (macOS arm64 or
-Linux x86_64 in the pinned container); see [Linux reference](docs/contributing/linux-reference.md)
-for the per-platform pins, the CI and probe workflows and the local Linux container
-loop (`npm run linux:test -- <files>`). The individual steps remain available:
+reuse and offline options, measured durations and single-test commands. Native
+references are pinned per platform in `compat/reference-pins.json`: macOS arm64,
+and Linux x86_64 in the pinned container. See [Linux reference](docs/contributing/linux-reference.md)
+for the pins, how tests resolve them, the CI and probe workflows and
+the local Linux container loop (`npm run linux:test -- <files>`). The individual
+steps remain available:
 
 ```sh
 git submodule update --init

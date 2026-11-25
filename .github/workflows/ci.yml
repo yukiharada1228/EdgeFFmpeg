@@ -1,26 +1,33 @@
 name: CI
 on:
   push:
-    # linux-probe/** branches run only .github/workflows/linux-probe.yml.
+    # linux-probe/** branches run only .github/workflows/linux-probe.yml. A branch filter alone would exclude tags,
+    # so tags are listed to keep running CI on every tag push as `on: [push, pull_request]` did.
     branches-ignore: ['linux-probe/**']
+    tags: ['**']
   pull_request:
 permissions:
   contents: read
 # Every job runs in the pinned Linux image (keep in sync with compat/reference-container.lock.json and the linux-x64
 # entry of compat/reference-pins.json). The image runs steps as root over a runner-owned checkout, so each job hands the
 # workspace to the image's unprivileged node user (uid 1000) and runs npm and the tests as that user: the permission
-# tests refuse to run as root. See docs/contributing/linux-reference.md.
+# tests refuse to run as root. Actions are pinned by commit, with the release in a comment. Checkouts do not persist
+# the token: nothing after them needs it. See docs/contributing/linux-reference.md.
 jobs:
+  # foundation and workers need only the reference job's artifact, which is uploaded before its compat:report step, so
+  # they also run when that report fails. Without the artifact, the download step fails them explicitly.
   foundation:
     needs: reference
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     container:
       image: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           submodules: true
-      - uses: actions/download-artifact@v4
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: worker-reference-and-codec
           path: .build
@@ -39,9 +46,10 @@ jobs:
         run: |
           apt-get update
           apt-get install -y --no-install-recommends cmake python3 xz-utils
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           submodules: true
+          persist-credentials: false
       # Root runs git over a runner-owned checkout until the workspace is handed to node below.
       - run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -57,13 +65,13 @@ jobs:
           test "$described" = "$tag"
       - run: npm ci
       - run: npm run reference:build
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: cisco/openh264
           ref: 1bca62311e447fd9c39fc93de2c4b96cd5ce971c
           path: .build/vendor/openh264
           persist-credentials: false
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: emscripten-core/emsdk
           ref: 708dcbcc9ee23bc7d2dad44fc90db377e38b771c
@@ -82,9 +90,13 @@ jobs:
       - run: chown -R node:node "$GITHUB_WORKSPACE"
       # Generated unit/integration/Workers inputs (docs/contributing/environment-setup.md). Without
       # --allow-unpinned-reference this fails unless the reference equals the linux-x64 pin.
+      # --check then re-verifies everything the artifact carries: ffmpeg, ffprobe and all six pinned libraries against
+      # the linux-x64 pin, both Wasm modules against their locks, and the FLAC outputs against their lock.json content pins.
       - name: Generate the FLAC investigation inputs against the pinned reference
-        run: runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --only flac-investigation
-      - uses: actions/upload-artifact@v4
+        run: |
+          runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --only flac-investigation
+          runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --check
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: worker-reference-and-codec
           include-hidden-files: true
@@ -97,7 +109,7 @@ jobs:
             .build/flac-investigation/native-error-cases.json
             .build/flac-investigation/malformed-prototype-result.json
       # Diagnostics when the reference or the bootstrap fails before the artifact above is uploaded.
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: failure()
         with:
           name: reference-diagnostics
@@ -107,7 +119,7 @@ jobs:
             .build/bootstrap/
       # Includes integration tests that invoke .build/reference/ffmpeg.
       - run: runuser -u node -- env HOME=/home/node npm run compat:report
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
           name: reference-evidence
@@ -121,14 +133,16 @@ jobs:
             .build/fate-execution/
   workers:
     needs: reference
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     container:
       image: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           submodules: true
-      - uses: actions/download-artifact@v4
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: worker-reference-and-codec
           path: .build

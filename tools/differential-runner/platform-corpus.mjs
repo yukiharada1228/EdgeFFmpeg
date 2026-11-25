@@ -1,8 +1,9 @@
 // Where a Native corpus generator writes, and what it records, for the pinned reference of the executing host.
 // Generators call corpusTarget(base, generator) and then writePlatformCorpus(target, outputs). The target refuses an
-// unpinned reference, refuses to write committed evidence from an emulated CPU (Rosetta or QEMU) unless it is a
-// draft, and records the provenance docs/contributing/linux-reference.md describes. darwin-arm64 corpora keep their
-// tracked layout and their generators' own writers; this library writes only <base>/<id>/ layouts.
+// unpinned reference, refuses to write committed evidence from an emulated CPU (Rosetta, QEMU or qemu-user) or, for a
+// non-darwin pin, from anywhere but the corpora job of the Linux probe workflow, unless it is a draft, and records the
+// provenance docs/contributing/linux-reference.md describes. darwin-arm64 corpora keep their tracked layout and their
+// generators' own writers; this library writes only <base>/<id>/ layouts.
 import {existsSync,mkdirSync,readFileSync,readdirSync,renameSync,rmSync,writeFileSync} from 'node:fs';
 import {cpus,release,version} from 'node:os';
 import {dirname,isAbsolute,join,normalize,relative,resolve,sep} from 'node:path';
@@ -14,28 +15,52 @@ export const DRAFT_ENV='EDGEFFMPEG_CORPUS_DRAFT';
 export const IMAGE_ENV='EDGEFFMPEG_CONTAINER_IMAGE';
 const reserved=new Set(['manifest.json','provenance.json']);
 
-/** CPU and kernel facts of the executing machine; emulated is true under Rosetta (VirtualApple) or QEMU. */
+/**
+ * Whether the CPU executing this process is emulated, and why. Linux: /proc/cpuinfo must describe a CPU of the process
+ * architecture (x86 vendor_id for x64, CPU implementer for arm64) and not Rosetta (VirtualApple) or QEMU; qemu-user
+ * passes the host's cpuinfo through, so an x64 process on an arm64 host shows no x86 vendor. An unreadable cpuinfo is
+ * treated as emulated. macOS: a VirtualApple or QEMU model, or an x64 process on an Apple CPU (Rosetta).
+ */
+export function detectEmulation({platform,arch,cpuinfo='',model=''}){
+ if(/VirtualApple|QEMU/i.test(model)||/VirtualApple/i.test(cpuinfo))return `the CPU reports ${/VirtualApple/i.test(model+cpuinfo)?'VirtualApple (Rosetta)':'QEMU'}`;
+ if(platform==='linux'){
+  if(!cpuinfo.trim())return '/proc/cpuinfo is unreadable, so the CPU cannot be verified';
+  if(arch==='x64'&&!/^vendor_id\s*:\s*(GenuineIntel|AuthenticAMD|HygonGenuine)\s*$/m.test(cpuinfo))return 'an x64 process but /proc/cpuinfo names no x86 vendor (qemu-user emulation)';
+  if(arch==='arm64'&&!/^CPU implementer\s*:/m.test(cpuinfo))return 'an arm64 process but /proc/cpuinfo names no Arm implementer (emulation)';
+  if(arch!=='x64'&&arch!=='arm64')return `no real-hardware check exists for ${arch}`;
+ }
+ if(platform==='darwin'&&arch==='x64'&&/^Apple\b/.test(model))return 'an x64 process on an Apple CPU (Rosetta)';
+ return null;
+}
+/** CPU and kernel facts of the executing machine; emulated is true under Rosetta (VirtualApple), QEMU or qemu-user. */
 export function executionEnvironment(){
  let cpuinfo='';if(process.platform==='linux'){try{cpuinfo=readFileSync('/proc/cpuinfo','utf8');}catch{cpuinfo='';}}
  const model=/^model name\s*:\s*(.+)$/m.exec(cpuinfo)?.[1]?.trim()??cpus()[0]?.model??'unknown';
- const uid=process.getuid?.()??null;
- return {platform:process.platform,arch:process.arch,node:process.version,kernel:release(),kernelVersion:version(),cpuModel:model,emulated:/VirtualApple|QEMU/i.test(model)||/VirtualApple/.test(cpuinfo),uid,unprivileged:uid!==null&&uid!==0};
+ const uid=process.getuid?.()??null,emulation=detectEmulation({platform:process.platform,arch:process.arch,cpuinfo,model});
+ return {platform:process.platform,arch:process.arch,node:process.version,kernel:release(),kernelVersion:version(),cpuModel:model,emulated:emulation!==null,emulation,uid,unprivileged:uid!==null&&uid!==0};
 }
-function ciRecord(env=process.env){
+/** The GitHub Actions run executing this process, or null outside one. */
+export function ciRecord(env=process.env){
  return env.GITHUB_ACTIONS==='true'?{provider:'github-actions',repository:env.GITHUB_REPOSITORY??null,workflow:env.GITHUB_WORKFLOW??null,job:env.GITHUB_JOB??null,runId:env.GITHUB_RUN_ID??null,runAttempt:env.GITHUB_RUN_ATTEMPT??null,sha:env.GITHUB_SHA??null,ref:env.GITHUB_REF??null,runnerName:env.RUNNER_NAME??null}:null;
 }
+/** The only workflow and job that may produce committed evidence for a non-darwin pin (.github/workflows/linux-probe.yml). */
+export const CORPORA_WORKFLOW='Linux probe';
+export const CORPORA_JOB='corpora';
 /**
- * Why a corpus write must be refused, or null. Committed (non-draft) evidence needs a real CPU; committed evidence for
- * a non-darwin pin also needs a GitHub Actions run id and the pinned container image (the linux-corpora job).
+ * Why evidence from this origin cannot be committed, or null. Committed evidence needs a real CPU; for a non-darwin
+ * pin it also needs a GitHub Actions run of the corpora job of the Linux probe workflow in the pinned image. Used at
+ * write time with the live environment and at verification time with the recorded provenance.
  */
-export function corpusWriteRefusal({id,tracked,draft,environment,ci,image,pinImage}){
- if(draft)return null;
- if(environment.emulated)return `Refusing to write ${tracked} on an emulated CPU (${environment.cpuModel}); committed ${id} corpora come only from real hardware (the linux-corpora job). Pass --draft to write under ${DRAFT_ROOT}/`;
+export function committedOriginRefusal({id,tracked,environment,ci,image,pinImage}){
+ if(!environment||environment.emulated!==false)return `Refusing ${tracked} as committed evidence from an emulated or unverified CPU (${environment?.cpuModel??'unknown'}${environment?.emulation?`; ${environment.emulation}`:''}); committed ${id} corpora come only from real hardware (the linux-corpora job). Pass --draft to write under ${DRAFT_ROOT}/`;
  if(id===LEGACY_CORPUS_PLATFORM)return null;
- if(!ci?.runId)return `Refusing to write committed ${id} evidence outside the GitHub linux-corpora job; pass --draft for a local draft`;
+ if(ci?.provider!=='github-actions'||!/^\d+$/.test(String(ci?.runId??'')))return `Refusing committed ${id} evidence ${tracked} from outside a GitHub Actions run of the linux-corpora job; pass --draft for a local draft`;
+ if(ci.workflow!==CORPORA_WORKFLOW||ci.job!==CORPORA_JOB)return `Refusing committed ${id} evidence ${tracked} from workflow ${JSON.stringify(ci.workflow)} job ${JSON.stringify(ci.job)}; it comes only from the ${CORPORA_JOB} job of the ${CORPORA_WORKFLOW} workflow`;
  if(pinImage&&image!==pinImage)return `${IMAGE_ENV} must name the pinned ${id} image ${pinImage}, got ${image??'nothing'}`;
  return null;
 }
+/** Why a corpus write must be refused, or null: drafts are always allowed, committed evidence needs committedOriginRefusal to pass. */
+export function corpusWriteRefusal({draft,...origin}){return draft?null:committedOriginRefusal(origin);}
 const draftRequested=()=>process.argv.includes('--draft')||process.env[DRAFT_ENV]==='1';
 const inside=(root,path)=>{const local=relative(root,path);return local===''||!local.startsWith('..')&&!isAbsolute(local);};
 
@@ -77,7 +102,9 @@ export function writePlatformCorpus(target,outputs,{root=process.cwd()}={}){
 
 /**
  * Verifies a <base>/<id>/ corpus written by writePlatformCorpus: the manifest covers exactly the files present and
- * their hashes, the provenance is not a draft and names the pin `id`. Returns the provenance.
+ * their hashes, the provenance is not a draft, names the pin `id` and, for committed evidence, passes
+ * committedOriginRefusal (real CPU; for a non-darwin pin the corpora job of the Linux probe workflow in the pinned
+ * image). Returns the provenance.
  */
 export function verifyPlatformCorpusDir(dir,id,{root=process.cwd(),pins=loadReferencePins(root),allowDraft=false}={}){
  const path=resolve(root,dir),read=name=>{try{return JSON.parse(readFileSync(join(path,name),'utf8'));}catch(error){throw new Error(`${dir}/${name} is unreadable (${error.code??error.message})`);}};
@@ -88,7 +115,8 @@ export function verifyPlatformCorpusDir(dir,id,{root=process.cwd(),pins=loadRefe
  if(JSON.stringify(present)!==JSON.stringify(listed))throw new Error(`${dir} files ${present.join(', ')} differ from its manifest ${listed.join(', ')}`);
  for(const name of listed)if(sha256File(join(path,name))!==manifest.sha256[name])throw new Error(`${dir}/${name} differs from its manifest`);
  if(provenance.draft!==false&&!allowDraft)throw new Error(`${dir} is a draft; committed corpora come only from the linux-corpora job`);
- assertRecordedPin(provenance,id,pins);
+ const pin=assertRecordedPin(provenance,id,pins);
+ if(provenance.draft===false){const refusal=committedOriginRefusal({id,tracked:dir,environment:provenance.environment,ci:provenance.ci,image:provenance.image,pinImage:pin.image??null});if(refusal)throw new Error(refusal);}
  if(provenance.pin?.ffmpeg!==provenance.reference?.artifacts?.ffmpeg)throw new Error(`${dir} provenance pin and reference disagree`);
  return provenance;
 }

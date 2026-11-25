@@ -11,7 +11,7 @@
   "openh264": {"url": "https://github.com/cisco/openh264.git", "directory": ".build/vendor/openh264"},
   "flac": {"url": "https://downloads.xiph.org/releases/flac/flac-1.5.0.tar.xz", "archive": ".build/vendor/flac-1.5.0.tar.xz", "source": ".build/vendor/flac-1.5.0"},
   "flacInvestigation": {
-    "comment": "Byte-identical copies of the untracked generators that produced the original .build/flac-investigation evidence. They are staged at their original paths so recorded generatorSha256/adapterSha256 values stay true.",
+    "comment": "Byte-identical copies of the untracked generators that produced the original .build/flac-investigation evidence. They are staged at their original paths so recorded generatorSha256/adapterSha256 values stay true. outputs: content pins per pinned reference ffmpeg hash; every ffmpeg in compat/reference-pins.json must have one, and each is recorded only from a run of that platform's reference ('source').",
     "files": {
       "generate-native-cases.mjs": "ada8af842272a93cc45c482f2d738038773ed00b086193cfca30c7a7ee00b6c6",
       "generate-error-cases.mjs": "49a516d40628716728dc569d18817ab919fe76aaf0d1a52a52fa5d2e88a17c5a",
@@ -24,6 +24,12 @@
         "native-cases.json": {"sha256": "27b76ec8598c0a985a24eb3f2495646d539d509e3daf655fe3b51a1254fcb590"},
         "native-error-cases.json": {"normalizedSha256": "4f9b8cf827ed419c9ff9683ef6abd2fbcb0e3c0ccd87fabc660f68c30cf2f3d3", "originalSha256": "a5cce41e926a2c6babb0e0abb7bae25f8274dd24515135498378eee3af02e267"},
         "malformed-prototype-result.json": {"normalizedSha256": "8c41dc298c1317ff116d5154f3fb3a7e1d75fcddb67096fdb1882f31f472edb6", "originalSha256": "3041c78bf7bafb38a6d090dce2f9afbbe27d4cafa2198b09586cd30ad26dc4cd"}
+      },
+      "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91": {
+        "source": "linux-x64: worker-reference-and-codec artifact of the reference job (139088434864) of GitHub Actions run 45580321573 (.github/workflows/ci.yml at ddaa9dc1b758), a GitHub-hosted x86_64 runner in the pinned image; that job's reference equals the linux-x64 pin, all six pinned libraries included",
+        "native-cases.json": {"sha256": "ad68e2348ea91a3a370174297e7fb1903407096029920136ee25e0a4be1b8249"},
+        "native-error-cases.json": {"normalizedSha256": "a395d1bb851faa5dc7681e1e29b3a36b04cf7a906fade28a61929e83126e9f62", "originalSha256": "355aa0ab3de37e052b54911c6c6df7944a60b90fcf4d08f21929418a99a88295"},
+        "malformed-prototype-result.json": {"normalizedSha256": "8c41dc298c1317ff116d5154f3fb3a7e1d75fcddb67096fdb1882f31f472edb6", "originalSha256": "317829347d3fcb94d5a0081f345eebf0938bf1c77fc53978c44cbab3780846c0"}
       }
     }
   }

@@ -124,8 +124,16 @@ function referencePin(){
  if(pins.schemaVersion!==1||pins.commit!==upstream.commit||pins.tag!==upstream.tag||JSON.stringify(pins.flags)!==JSON.stringify(configureFlags()))throw Error(`${file} no longer pins ${upstream.tag} ${upstream.commit} built with ${upstream.configureFile}; update it or reference.pins in tools/bootstrap/lock.json`);
  const record=Object.hasOwn(pins.platforms??{},host)?pins.platforms[host]:null;if(!record)return pinned=null;
  if(record.platform!==platform()||record.arch!==arch()||!digest.test(record.artifacts?.ffmpeg)||!digest.test(record.artifacts?.ffprobe))throw Error(`${file} platforms.${host} is not a ${host} reference pin`);
- return pinned={ffmpeg:record.artifacts.ffmpeg,ffprobe:record.artifacts.ffprobe,file,compiler:String(record.compiler??'an unrecorded compiler').split('\n')[0]};
+ const libraries=record.libraries&&typeof record.libraries==='object'?Object.entries(record.libraries):[];
+ if(!libraries.length||libraries.some(([path,value])=>!/^lib\w+\/lib\w+\.a$/.test(path)||!digest.test(value)))throw Error(`${file} platforms.${host} must pin the sha256 of every oracle link library`);
+ return pinned={ffmpeg:record.artifacts.ffmpeg,ffprobe:record.artifacts.ffprobe,libraries:Object.fromEntries(libraries),file,compiler:String(record.compiler??'an unrecorded compiler').split('\n')[0]};
 }
+// Every pinned static library: the oracles and corpus generators link these, so programs that match the pin are not enough.
+function libraryMismatches(pin){
+ return Object.entries(pin.libraries).flatMap(([path,expected])=>{const file=resolve(referenceDir,path);if(!existsSync(file))return [`${path} is missing`];const actual=sha(readFileSync(file));return actual===expected?[]:[`${path} ${actual.slice(0,12)} is not the pinned ${expected.slice(0,12)}`];});
+}
+// Every ffmpeg hash pinned in the reference pins: a reference listed there must have content-pinned FLAC investigation outputs.
+function pinnedFfmpegHashes(){const pins=json(lock.reference.pins);return new Set(Object.values(pins.platforms??{}).map(record=>record?.artifacts?.ffmpeg).filter(Boolean));}
 const programHashes=()=>Object.fromEntries(['ffmpeg','ffprobe'].map(name=>[name,sha(readFileSync(resolve(referenceDir,name)))]));
 const pair=hashes=>`${hashes.ffmpeg.slice(0,12)}/${hashes.ffprobe.slice(0,12)}`;
 // Digest of what the programs link: every lib*/lib*.a and fftools object, as `shasum -a 256` lines sorted by path.
@@ -147,7 +155,11 @@ function verifyReference(){
  if(missing.length)return fail('incomplete','oracle link inputs missing: '+missing.join(', '));
  const pin=referencePin(),summary=`ffmpeg ${actual.ffmpeg.slice(0,12)} ffprobe ${actual.ffprobe.slice(0,12)}`,accept=options['allow-unpinned-reference'];
  if(!pin){const detail=`${summary}; no reference pin exists for ${host} in compat/reference-pins.json, so tests that resolve the pinned reference cannot pass on this host`;return accept?ok(detail+'; accepted by --allow-unpinned-reference',{warning:`unpinned reference on ${host}`}):fail('unpinned',detail+'; --allow-unpinned-reference accepts it');}
- if(pin.ffmpeg===actual.ffmpeg&&pin.ffprobe===actual.ffprobe)return ok(`${summary} match the ${host} pin in ${pin.file}`);
+ if(pin.ffmpeg===actual.ffmpeg&&pin.ffprobe===actual.ffprobe){
+  const libraries=libraryMismatches(pin);if(!libraries.length)return ok(`${summary} and the ${Object.keys(pin.libraries).length} pinned libraries match the ${host} pin in ${pin.file}`);
+  const detail=`${summary} match the ${host} pin in ${pin.file}, but its libraries do not: ${libraries.join('; ')}`;
+  return accept?ok(detail+'; accepted by --allow-unpinned-reference',{warning:'reference libraries differ from the pin; oracles and corpora linked against them are not pinned evidence'}):fail('mismatch',detail);
+ }
  const detail=`${summary} differ from the ${host} pin ${pair(pin)} in ${pin.file}; ${linkDiagnosis(pin,String(metadata.compiler??'an unrecorded compiler').split('\n')[0])}`;
  return accept?ok(detail+'; accepted by --allow-unpinned-reference',{warning:`reference differs from the pin; tests that pin ffmpeg ${pin.ffmpeg.slice(0,12)} will fail`}):fail('mismatch',detail);
 }
@@ -248,8 +260,11 @@ function verifyInvestigation(dir=resolve(root,'.build/flac-investigation')){
  const [cases,errors,prototype]=outputs.map(name=>readFileSync(join(dir,name))),[c,e,p]=outputs.map(name=>json(join(dir,name))),ffmpeg=sha(readFileSync(resolve(referenceDir,'ffmpeg'))),files=investigation.files;
  const links=[[c.generatorSha256===files['generate-native-cases.mjs'],'native-cases generator'],[c.reference?.artifacts?.ffmpeg===ffmpeg,'native-cases reference'],[e.sourceSha256===sha(cases),'error cases source'],[e.generatorSha256===files['generate-error-cases.mjs'],'error cases generator'],[e.reference?.artifacts?.ffmpeg===ffmpeg,'error cases reference'],[p.oracleSha256===sha(errors),'prototype oracle'],[p.wasmSha256===flac.wasmSha256,'prototype Wasm'],[p.adapterSha256===files['prototype/adapter.mjs'],'prototype adapter']];
  const broken=links.filter(([valid])=>!valid).map(([,name])=>name);if(broken.length)return fail('mismatch','provenance differs: '+broken.join(', '));
- const pin=investigation.outputs[ffmpeg];
- if(!pin)return ok('generated against an unpinned reference; provenance links verified',{warning:'FLAC investigation outputs are not content-pinned for this reference'});
+ const pin=Object.hasOwn(investigation.outputs,ffmpeg)?investigation.outputs[ffmpeg]:null;
+ if(!pin){
+  if(pinnedFfmpegHashes().has(ffmpeg))return fail('unpinned',`no content pin in tools/bootstrap/lock.json flacInvestigation.outputs for the pinned reference ffmpeg ${ffmpeg.slice(0,12)}`);
+  return ok('generated against an unpinned reference; provenance links verified',{warning:'FLAC investigation outputs are not content-pinned for this reference'});
+ }
  if(sha(cases)!==pin['native-cases.json'].sha256)return fail('mismatch','native-cases.json differs from the pinned '+pin['native-cases.json'].sha256.slice(0,12));
  if(normalizeErrors(e)!==pin['native-error-cases.json'].normalizedSha256)return fail('mismatch','native-error-cases.json differs beyond Native heap addresses');
  if(normalizePrototype(p)!==pin['malformed-prototype-result.json'].normalizedSha256)return fail('mismatch','malformed-prototype-result.json differs beyond its oracle hash');

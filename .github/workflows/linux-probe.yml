@@ -8,9 +8,10 @@ on:
   push:
     branches: ['linux-probe/**']
   workflow_dispatch:
+# Same-run artifacts and the Actions cache use the runner's runtime token, not GITHUB_TOKEN scopes. Actions are pinned
+# by commit, with the release in a comment; checkouts do not persist the token.
 permissions:
   contents: read
-  actions: read
 env:
   EDGEFFMPEG_CONTAINER_IMAGE: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
 jobs:
@@ -23,9 +24,10 @@ jobs:
       shard-list: ${{ steps.plan.outputs.shard-list }}
       corpora: ${{ steps.plan.outputs.corpora }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           submodules: true
+          persist-credentials: false
       - run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --global --add safe.directory "$GITHUB_WORKSPACE/upstream/ffmpeg"
@@ -36,10 +38,11 @@ jobs:
           test "$(git -C upstream/ffmpeg describe --tags --always)" = "$tag"
       - id: plan
         run: node tools/linux/probe.mjs plan
-      # A restored entry is only a cache: the bootstrap steps below re-verify it against compat/reference-pins.json and
-      # the codec locks, so a wrong entry fails explicitly instead of being used.
+      # A restored entry is only a cache: the bootstrap steps below re-verify it, on a hit and before a miss is saved,
+      # against compat/reference-pins.json (ffmpeg, ffprobe and every pinned library the oracles link) and the codec
+      # locks, so a wrong entry fails explicitly instead of being used.
       - id: cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           key: linux-probe-reference-v1-${{ hashFiles('compat/upstream.lock.json', 'compat/configure.flags', 'compat/reference-container.lock.json', 'tools/upstream-build/build.mjs', 'tools/codecs/**') }}
           path: |
@@ -55,14 +58,14 @@ jobs:
       - if: steps.cache.outputs.cache-hit != 'true'
         run: npm run reference:build
       - if: steps.cache.outputs.cache-hit != 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: cisco/openh264
           ref: 1bca62311e447fd9c39fc93de2c4b96cd5ce971c
           path: .build/vendor/openh264
           persist-credentials: false
       - if: steps.cache.outputs.cache-hit != 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: emscripten-core/emsdk
           ref: 708dcbcc9ee23bc7d2dad44fc90db377e38b771c
@@ -85,14 +88,14 @@ jobs:
           runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --only flac-investigation
           runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --check
       - if: steps.cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           key: ${{ steps.cache.outputs.cache-primary-key }}
           path: |
             .build/reference
             .build/codecs/openh264/openh264.wasm
             .build/codecs/flac/edge-flac.wasm
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: linux-probe-inputs
           include-hidden-files: true
@@ -116,15 +119,16 @@ jobs:
       matrix:
         shard: ${{ fromJSON(needs.prepare.outputs.shard-list) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           submodules: true
+          persist-credentials: false
       - run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --global --add safe.directory "$GITHUB_WORKSPACE/upstream/ffmpeg"
           tag=$(node -p "require('./compat/upstream.lock.json').tag")
           git -C upstream/ffmpeg fetch --no-tags --depth 1 origin "refs/tags/$tag:refs/tags/$tag"
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: linux-probe-inputs
           path: .build
@@ -133,7 +137,7 @@ jobs:
       - run: runuser -u node -- env HOME=/home/node npm ci
       - run: runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --check
       - run: runuser -u node -- env HOME=/home/node node tools/linux/probe.mjs test --shard ${{ matrix.shard }}/${{ needs.prepare.outputs.shards }} --out .build/linux-probe
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
           name: linux-probe-shard-${{ matrix.shard }}
@@ -146,15 +150,16 @@ jobs:
     container:
       image: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           submodules: true
+          persist-credentials: false
       - run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --global --add safe.directory "$GITHUB_WORKSPACE/upstream/ffmpeg"
           tag=$(node -p "require('./compat/upstream.lock.json').tag")
           git -C upstream/ffmpeg fetch --no-tags --depth 1 origin "refs/tags/$tag:refs/tags/$tag"
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: linux-probe-inputs
           path: .build
@@ -163,7 +168,7 @@ jobs:
       - run: runuser -u node -- env HOME=/home/node npm ci
       - run: runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --check
       - run: runuser -u node -- env HOME=/home/node node tools/linux/generate-corpora.mjs --only "${{ needs.prepare.outputs.corpora }}"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
           name: linux-x64-corpora

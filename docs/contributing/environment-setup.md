@@ -44,7 +44,7 @@ verification fails, then verifies again.
 | --- | --- | --- | --- |
 | `npm` | `node_modules/` | `npm ci` | every non-optional `package-lock.json` entry is installed at its locked version |
 | `submodule` | `upstream/ffmpeg` | `git submodule update` (shallow from a URL, a full local clone from a local path) | the superproject gitlink and `compat/upstream.lock.json` commit; the tree is clean; `git describe --tags --always` gives `n9.0.2` |
-| `reference` | `.build/reference/` (binaries, static libraries, headers, `ffbuild/config.mak`) | `tools/upstream-build/build.mjs` (`npm run reference:build`) | `build-metadata.json` matches the binaries, commit, flags and host; the six static libraries are present; the `platforms.<host>` pin in `compat/reference-pins.json` (named by `tools/bootstrap/lock.json`) |
+| `reference` | `.build/reference/` (binaries, static libraries, headers, `ffbuild/config.mak`) | `tools/upstream-build/build.mjs` (`npm run reference:build`) | `build-metadata.json` matches the binaries, commit, flags and host; the six static libraries are present; `ffmpeg`, `ffprobe` and every library in `libraries` equal the `platforms.<host>` pin in `compat/reference-pins.json` (named by `tools/bootstrap/lock.json`) |
 | `openh264` | `.build/codecs/openh264/openh264.wasm` | `tools/codecs/openh264/build.mjs` | `expectedWasmSha256` in `tools/codecs/openh264/build.lock.json` |
 | `flac` | `.build/codecs/flac/edge-flac.wasm` | `tools/codecs/flac/build.py` | `wasmSha256` and `wasmBytes` in `tools/codecs/flac/inputs.json` |
 | `flac-investigation` | `.build/flac-investigation/native-cases.json`, `native-error-cases.json`, `malformed-prototype-result.json` | generators in `tools/bootstrap/flac-investigation/`, run against the verified reference and FLAC module | see [FLAC investigation evidence](#flac-investigation-evidence) |
@@ -124,9 +124,9 @@ so the `generatorSha256` and `adapterSha256` values recorded inside the outputs
 remain true. It then installs the outputs.
 
 - `native-cases.json` is reproduced byte for byte against the pinned reference.
-  Its SHA-256 `27b76ec8…` is also the `sourceSha256` recorded by
+  On macOS arm64 its SHA-256 `27b76ec8…` is also the `sourceSha256` recorded by
   `compat/behavior-specs/flac-decode-workers`, `flac-comments` and
-  `flac-metadata`.
+  `flac-metadata`. Against the linux-x64 pin it is `ad68e234…`.
 - `native-error-cases.json` records native stderr, and that stderr contains heap
   addresses (`[flac @ 0x…]`) that change on every run. Its byte hash therefore
   cannot be reproduced. The bootstrap pins the hash of the content with those
@@ -137,6 +137,14 @@ remain true. It then installs the outputs.
   its `oracleSha256` is pinned. `oracleSha256` must equal the hash of the
   regenerated `native-error-cases.json`, which is what
   `tests/integration/flac-decoder-native.test.ts` checks.
+
+`tools/bootstrap/lock.json` `flacInvestigation.outputs` holds these content pins
+per pinned reference `ffmpeg` hash, each with the run it was recorded from. Every
+`ffmpeg` listed in `compat/reference-pins.json` must have an entry: a pinned
+reference without one fails `bootstrap --check`. Only a reference accepted with
+`--allow-unpinned-reference` passes with a warning. The linux-x64 entry comes from
+the reference job of GitHub Actions run 45580321573. Its masked hashes equal the
+local Rosetta drafts, but those drafts are not its source.
 
 The generator that produced the existing `native-error-cases.json` is the
 investigation's `generate-error-cases-initial.mjs`. Its hash matches the
@@ -248,13 +256,14 @@ it explicitly for single differential files.
   reference is accepted only with `--allow-unpinned-reference`. On a host with a
   pin, a mismatch needs `--allow-unpinned-reference`, and tests that resolve the
   pinned reference then fail.
-- The FLAC investigation outputs are content-pinned only for the macOS arm64
-  reference so far. Against the Linux pin they are generated and their
-  provenance links are verified; their Linux content pins are added from the
-  first GitHub reference job that produces them.
-- Reproducibility was verified on one macOS arm64 machine: a fresh clone rebuilt
-  the reference with the pinned hashes. Other machines with the same Apple clang
-  version, and Linux, are unverified.
+- The FLAC investigation outputs are content-pinned for both pins: the macOS
+  arm64 reference, and the linux-x64 reference from GitHub Actions run
+  45580321573. That run's reference job also reproduced the linux-x64 `ffmpeg`,
+  `ffprobe` and all six pinned libraries.
+- Reproducibility was verified on one macOS arm64 machine, where a fresh clone
+  rebuilt the reference with the pinned hashes, and on GitHub's x86_64 runners in
+  the pinned image (run 45580321573). Other macOS machines with the same Apple
+  clang version are unverified.
 
 ## CI
 
@@ -264,8 +273,9 @@ URL and SHA-256. Every job runs in the pinned image and runs npm and the tests a
 the image's unprivileged `node` user. The reference job fetches the `n9.0.2` tag
 into the shallow submodule before `reference:build`, so FFmpeg embeds the same
 version string as the pinned builds. After the codec builds it runs
-`node tools/bootstrap/bootstrap.mjs --only flac-investigation` as `node`, without
-`--allow-unpinned-reference`, so a reference that is not the linux-x64 pin fails
-the job there. The three outputs are added to the `worker-reference-and-codec`
-artifact. See [Linux reference](linux-reference.md) for the probe workflow and
+`node tools/bootstrap/bootstrap.mjs --only flac-investigation` and then
+`--check` as `node`, without `--allow-unpinned-reference`. A reference whose
+programs or libraries are not the linux-x64 pin, or outputs that differ from their
+content pins, therefore fail the job there. The three outputs are added to the
+`worker-reference-and-codec` artifact. See [Linux reference](linux-reference.md) for the probe workflow and
 the local container loop.
