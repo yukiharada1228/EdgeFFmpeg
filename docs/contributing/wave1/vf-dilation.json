@@ -1,0 +1,190 @@
+{
+ "capabilityId": "filter.dilation",
+ "slug": "vf-dilation",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/dilation.ts",
+  "packages/avfilter/NOTICE-DILATION",
+  "tests/unit/video-dilation.test.ts",
+  "tests/differential/video-dilation.test.ts",
+  "docs/contributing/dilation.md",
+  "docs/contributing/wave1/vf-dilation.json",
+  "packages/avfilter/src/video-ops/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/video-ops/registry.ts: +1 line `import {dilationOperator} from './dilation.js';`, +1 line ` dilationOperator,`"
+ ],
+ "tests": [
+  {
+   "file": "tests/differential/video-dilation.test.ts",
+   "title": "matches native dilation bytes across formats coordinates thresholds edge sizes and patterns",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-dilation.test.ts",
+   "title": "matches native linear dilation chains with negotiated conversion and scalar or default arithmetic",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-dilation.test.ts",
+   "title": "matches native dilation CLI -vf and -filter_complex rawvideo and framecrc outputs across timing and size scopes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-dilation.test.ts",
+   "title": "matches native replayed dilation branches and joins frame by frame",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-dilation.test.ts",
+   "title": "matches native dilation framecrc and rawvideo through the timed executor and activation actors",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-dilation.test.ts",
+   "title": "refuses width-1 dilation planes on every path before opening outputs",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-dilation.test.ts",
+   "title": "parses declared defaults, shorthand order, integer expressions and ranges into frozen settings",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-dilation.test.ts",
+   "title": "applies the native border reflection, coordinate mask and threshold limit on padded input without mutating it",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-dilation.test.ts",
+   "title": "refuses unsupported layouts, width-1 planes, budgets, malformed storage, settings and cancellation explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-dilation.test.ts",
+   "title": "plans dilation as a size-preserving stage and refuses width-1 planes on the linear, graph and actor planners",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(whole file, unedited; runs the 3 dilation examples on all five paths)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 2070,
+  "breakdown": {
+   "kernelRawvideo": 741,
+   "linearChains": 540,
+   "cliLinear": 288,
+   "cliFilterComplex": 48,
+   "replayStream": 20,
+   "timedBackend": 432,
+   "nativeAcceptsWidth1": 1
+  },
+  "compares": "Exact rawvideo bytes and framecrc text from .build/reference/ffmpeg run at test time, against dilateVideoFrame, compileVideoFilterChain, the FFmpeg frontend with createMediaBackend (-vf and -filter_complex), createReplayVideoExecution, and createTimedVideoBackend with pull/activation/producer schedulers (432 runs = 144 native runs x 3 schedulers). Plus 171 kernel and 25 path refusals of width-1 planes."
+ },
+ "unsupported": [
+  "High-bit-depth native formats (9..16-bit YUV/GBR(A)P/gray) and yuva422p, yuva444p, yuv440p, yuv411p, yuv410p, gbrap, yuvj*: absent from the shared negotiation table",
+  "Packed RGB sources with alpha (rgba/bgra/argb/abgr): native negotiates gbrap, which the shared table lacks, so the output diverges from native (not refused; the descriptor cannot see the source format)",
+  "Planes narrower than 2 pixels (native reads past the row): refused",
+  "enable= timeline expressions: refused",
+  "Runtime commands (threshold*, coordinates): refused with ENOSYS; enable command gives AVERROR_PATCHWELCOME"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": {
+  "summary": "13 failed tests, 6 failed files (3 of them fail to load)",
+  "tests": [
+   "tests/unit/flac-build-inputs.test.ts > pinned FLAC build inputs > inspects the canonical or supplied fresh artifact and exact bytes",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC output fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-expanded-fixtures.test.ts > expanded Native FLAC prepass fixture > retains explicit Native provenance and the required precompiled module",
+   "tests/unit/flac-decode-backend.test.ts (suite load)",
+   "tests/unit/flac-decoder.test.ts (suite load)",
+   "tests/unit/flac-max-frames.test.ts (suite load)",
+   "tests/unit/resample-checkpoint.test.ts: 10 resampleAudio byte-identity tests (macOS arm64 golden digests)"
+  ]
+ },
+ "finalUnitFailures": {
+  "summary": "identical to baseline: 13 failed tests, 6 failed files; 2257 passed of 2270 (baseline 2253 of 2266)",
+  "sameAsBaseline": true
+ },
+ "proposedContracts": [
+  {
+   "id": "filter.dilation.kernel",
+   "file": "tests/differential/video-dilation.test.ts",
+   "name": "matches native dilation bytes across formats coordinates thresholds edge sizes and patterns",
+   "modes": [
+    "kernel"
+   ],
+   "scope": "dilateVideoFrame vs native rawvideo: gray/yuv420p/yuv422p/yuv444p/yuva420p/gbrp x 8 edge sizes x 19 coordinate/threshold sets x noise/peaks/checkerboard frames; width-1 planes refused"
+  },
+  {
+   "id": "filter.dilation.linear",
+   "file": "tests/differential/video-dilation.test.ts",
+   "name": "matches native linear dilation chains with negotiated conversion and scalar or default arithmetic",
+   "modes": [
+    "linear"
+   ],
+   "scope": "compileVideoFilterChain vs native -vf rawvideo with negotiated conversion (nv12/nv21/rgb24 and target nv12/rgba), default and -cpuflags 0 scalar arithmetic"
+  },
+  {
+   "id": "filter.dilation.cli",
+   "file": "tests/differential/video-dilation.test.ts",
+   "name": "matches native dilation CLI -vf and -filter_complex rawvideo and framecrc outputs across timing and size scopes",
+   "modes": [
+    "linear",
+    "graph"
+   ],
+   "scope": "FFmpeg frontend -vf and two-output -filter_complex, rawvideo and framecrc, -ss/-t/-frames:v and -s scopes"
+  },
+  {
+   "id": "filter.dilation.stream",
+   "file": "tests/differential/video-dilation.test.ts",
+   "name": "matches native replayed dilation branches and joins frame by frame",
+   "modes": [
+    "stream"
+   ],
+   "scope": "createReplayVideoExecution branches, hstack joins and nullsink vs native -filter_complex rawvideo"
+  },
+  {
+   "id": "filter.dilation.timed",
+   "file": "tests/differential/video-dilation.test.ts",
+   "name": "matches native dilation framecrc and rawvideo through the timed executor and activation actors",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "public timed video backend with pull (timed DAG executor), activation and producer (actors) schedulers vs native framecrc and rawvideo"
+  },
+  {
+   "id": "filter.dilation.width1-refusal",
+   "file": "tests/differential/video-dilation.test.ts",
+   "name": "refuses width-1 dilation planes on every path before opening outputs",
+   "modes": [
+    "linear",
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "width-1 planes refused before any output is opened on linear, CLI -vf/-filter_complex and the three timed schedulers"
+  }
+ ],
+ "notes": [
+  "Kernel is self-contained in video-ops/dilation.ts and imports only the existing filterIntegerOption (activation/integer-option.ts) for AV_OPT_TYPE_INT parsing; nothing is shared with the erosion/deflate/inflate branches.",
+  "All five paths flagged (linear, graph, stream, actor, timed) after the timed-backend tests passed on pull, activation and producer schedulers.",
+  "Needed shared edit (not made): adding gbrap to packages/avfilter/src/video-ops/formats.ts negotiationOrder and avutil pixelLayout would make packed RGBA-family sources match native; today they silently negotiate a different format.",
+  "Kernel, pixel-format list and border tables are also exported from the module (not from packages/avfilter/src/index.ts, which this branch must not edit); tests import them by path.",
+  "Setup durations: submodule 40s, npm ci 9s, reference:build 143s, baseline checks 55s, baseline unit 73s, differential suite ~17s."
+ ]
+}
