@@ -6,11 +6,12 @@ import {createHash} from 'node:crypto';
 import {expect,it} from 'vitest';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+import {pinnedReference} from '../helpers/reference-identity.js';
 // Same order as pad-checkpoint-fixture.ts; split 2 lands between input frames, split 4 after the first silence packet.
 const filters=['pad_len=5:packet_size=2','whole_len=13:packet_size=3','pad_dur=625us:packet_size=4','whole_dur=0.002','whole_len=4:packet_size=2'],splits=[2,4];
 const expected=[[[2,131],[2,133],[1,135]],[[3,131],[2,134]],[[4,131],[1,135]],[[8,131]],[]].map(tail=>[{samples:3,pts:'123'},{samples:3,pts:'126'},{samples:2,pts:'129'},...tail.map(([samples,pts])=>({samples:samples!,pts:String(pts)}))]);
 it('restores serialized apad state in a fresh Worker and matches uninterrupted Native PCM and framecrc timestamps',async()=>{
- const directory=mkdtempSync(join(tmpdir(),'edge-pad-handoff-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ const directory=mkdtempSync(join(tmpdir(),'edge-pad-handoff-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe(pinnedReference().ffmpeg);
  const bundle=await build({entryPoints:[root+'/pad-checkpoint-fixture.ts'],bundle:true,write:false,format:'esm',platform:'browser',target:'es2022',metafile:true});for(const path of Object.keys(bundle.metafile!.inputs))expect(path.startsWith('node:')).toBe(false);
  const start=()=>new Miniflare(convertV4MiniflareOptions({name:'pad-handoff',modules:[{type:'ESModule',path:root+'/pad-checkpoint-bundle.mjs',contents:bundle.outputFiles[0]!.text}],modulesRoot:root,compatibilityDate:'2026-11-18',compatibilityFlags:[],resourcePersistencePath:join(directory,'persist'),r2Buckets:['MEDIA_BUCKET']}));let mf=start();
  type Result={metadata:{samples:number;pts:string}[];bytes:number;checkpointBytes?:number;filterStateRef?:string};

@@ -10,7 +10,7 @@
     "upstream/ffmpeg/libavcodec/get_buffer.c": "83d8594171732675c131248b212b41d3efebc59f5f9bc388b5f792e8edce6782",
     "upstream/ffmpeg/libavcodec/utils.c": "8679acf63c09d658b385c5b52987b75fb4441b106f3352eaac1bd5f72031ea2a",
     "tools/differential-runner/bmp-rle/oracle.c": "f242041721e9cb213f9f304526e5bbd9d87174229a5c830f27e4d48bd682be89",
-    "tools/differential-runner/bmp-rle/generate.mjs": "3c23463f2052646373e221ff52d8d6c4f8e1979f8930dcc27e5d7bb3dab10d3c",
+    "tools/differential-runner/bmp-rle/generate.mjs": "e6696d00d517111d123b7f5edbe3e3034b77f5989af385fc681203b1301087e5",
     "upstream/ffmpeg/libavfilter/vf_hflip.c": "798a49e9fc32372d9bac8ce50e8b6c7de39cabc6a5dbdfa2eab98c84d38f18f0",
     "upstream/ffmpeg/libavfilter/vf_vflip.c": "189b045af43059b654eef2c8fd5c849ea07a3e72a78334dd654f7abfed0a2b69",
     "upstream/ffmpeg/libavfilter/vf_transpose.c": "c1d4c8213419c75063626e8474f45e1987408b5cb5b7db3a43c70427a65f622e",
@@ -20,7 +20,7 @@
     "tests/helpers/bmp-fixture.ts": "962a8af4094c174fae91513d6050ab79ecdc13082a026948755bbfad3e561f7d",
     "tests/differential/bmp-codec.test.ts": "aa6aab995baebd0cf5a2691b52d354677d5ad41ada4a2098247b5eca380acef4",
     "tests/differential/bmp-rle.test.ts": "d050739b19890e2bb667e5ae74633b645f4d2ab6b3b90df591c6bb4b10a5f528",
-    "tests/differential/bmp-rle-malformed.test.ts": "9eb09b9eb8f191d123348e91b0b449ac5e97a3b946277b3b416be7971d94c516",
+    "tests/differential/bmp-rle-malformed.test.ts": "ca52aa2cf9d9d55c29eb5bd6c8c4d917adeac4fbe473619bd3dee8d0bce35c54",
     "tests/differential/bmp-stream.test.ts": "1333cbc62a9cf262e8852cfaea7240f39ace4f695b6d9c68b9858b5ad8d4d4ef",
     "tests/differential/bmp-cli.test.ts": "9df4e048a7aaae4e74c36a3143728f9141bf499e4e7792f947b2d14010e01fa7",
     "tests/differential/bmp-copy-errors.test.ts": "778df80c7213355429b1b65b22684b5f94aabf7c399c331e4ec6ad851ab7f5cc",
@@ -31,7 +31,7 @@
     "tests/workers/bmp-cli.test.ts": "8113c029823e23db91489aec98b5667cb76d3bd23b8791f427ebc33f53f073f9",
     "tests/workers/bmp-codec-fixture.ts": "bbe70dfc6a579518e83fec0895f26d079807bee3e9bbb71c1b6f340ca14e7f1a",
     "tests/workers/bmp-cli-fixture.ts": "a365a85b2a8399eb2d80ab535bdf98cf198b326ecad98fc4d617993d4431e763",
-    "tests/differential/bmp-rle-profiles.test.ts": "d05ab318eb148cfa4822d6f5371cee6c3485945e43d610491fbdbe5e7d1f8e6e",
+    "tests/differential/bmp-rle-profiles.test.ts": "d8d8bcb7c3bcd958e023c40998369329b8837364f9509159722f07320e288908",
     "tests/differential/bmp-spatial.test.ts": "73864eff1b2517cbc26ee0633526911d1c6d7d8f7dd5cf959dc5de866c51c0c6"
   },
   "reference": {

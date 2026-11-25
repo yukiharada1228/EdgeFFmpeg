@@ -8,6 +8,7 @@ import {audioCheckpointPipelinePatches,createAudioCheckpointPipeline,deserialize
 import type {AudioCheckpointPipelineConfig,AudioCheckpointPipelinePosition,AudioCheckpointPipelineSnapshot,AudioCheckpointPipelineStage} from '@edge-ffmpeg/avformat';
 import type {ResampleSampleFormat} from '@edge-ffmpeg/swresample';
 import {memoryInput} from '../helpers/wav.js';
+import {pinnedReference} from '../helpers/reference-identity.js';
 type Codec='pcm_s16le'|'pcm_f32le'|'pcm_f64le';
 type Profile=readonly [Codec,ResampleSampleFormat,Codec];
 type Case={readonly inputRate:number;readonly outputRate:number;readonly channels:number;readonly input:Codec;readonly precision:ResampleSampleFormat;readonly codec:Codec;readonly stage:AudioCheckpointPipelineStage;readonly samples:number;readonly unitSamples:number;readonly tight:boolean;readonly bitexact:boolean};
@@ -63,7 +64,7 @@ function coverage(cases:readonly Case[]):void{
  for(const stage of stages){const mine=cases.filter(c=>c.stage===stage);expect([new Set(mine.map(c=>c.samples)).size,new Set(mine.map(c=>c.unitSamples)).size,new Set(mine.map(c=>c.tight)).size,new Set(mine.map(c=>c.bitexact)).size],stageKey(stage)).toEqual([7,5,2,2]);}
 }
 it('matches pinned native aresample/asetnsamples/apad into WAV byte for byte after a serialized restore at every unit boundary, for the s16 FIR, the recorded non-interpolating float s16 and f32 fixtures, and every format pair without a rate change',async()=>{
- expect(createHash('sha256').update(readFileSync(native)).digest('hex')).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ expect(createHash('sha256').update(readFileSync(native)).digest('hex')).toBe(pinnedReference().ffmpeg);
  const directory=mkdtempSync(join(tmpdir(),'edge-audio-checkpoint-pipeline-')),checked:Case[]=[],seen=new Set<string>();let held=0;
  const fir:Profile[]=[['pcm_s16le','s16','pcm_s16le'],['pcm_f32le','s16','pcm_s16le'],['pcm_s16le','flt','pcm_s16le'],['pcm_f32le','flt','pcm_f32le']];
  // Without a rate change native's full_convert ignores tsf: all nine input/output pairs, mostly with a precision narrower than one of them.

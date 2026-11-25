@@ -6,10 +6,11 @@ import {createHash} from 'node:crypto';
 import {expect,it} from 'vitest';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+import {pinnedReference} from '../helpers/reference-identity.js';
 // Same order as resample-checkpoint-fixture.ts. Split 3 lands mid-stream, 8 after the last input frame, 9 after one EOF tail frame.
 const rates=[[44100,48000],[48000,8000],[44100,48001],[8000,44100]] as const,splits=[3,8,9],samples=400;
 it('restores serialized resampler state in a fresh Worker and matches uninterrupted and pinned Native aresample PCM',async()=>{
- const directory=mkdtempSync(join(tmpdir(),'edge-resample-handoff-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ const directory=mkdtempSync(join(tmpdir(),'edge-resample-handoff-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe(pinnedReference().ffmpeg);
  const bundle=await build({entryPoints:[root+'/resample-checkpoint-fixture.ts'],bundle:true,write:false,format:'esm',platform:'browser',target:'es2022',metafile:true});for(const path of Object.keys(bundle.metafile!.inputs))expect(path.startsWith('node:')).toBe(false);
  const start=()=>new Miniflare(convertV4MiniflareOptions({name:'resample-handoff',modules:[{type:'ESModule',path:root+'/resample-checkpoint-bundle.mjs',contents:bundle.outputFiles[0]!.text}],modulesRoot:root,compatibilityDate:'2026-11-18',compatibilityFlags:[],resourcePersistencePath:join(directory,'persist'),r2Buckets:['MEDIA_BUCKET']}));let mf=start();
  type Result={metadata:{samples:number;pts:string}[];bytes:number;checkpointBytes?:number;filterStateRef?:string;received?:string;historyBytes?:number;pendingBytes?:number;eof?:boolean;finished?:boolean};

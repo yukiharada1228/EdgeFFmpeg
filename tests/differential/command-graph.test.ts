@@ -7,9 +7,10 @@ import {expect,it} from 'vitest';
 import {FFmpeg,FeatureRegistry,planIndependentGraph,lowerIndependentCommand} from '@edge-ffmpeg/core';
 import type {OperatorDescriptor,CommandOperatorBinding} from '@edge-ffmpeg/core';
 import {createMediaBackend} from '@edge-ffmpeg/avformat';
+import {pinnedReference} from '../helpers/reference-identity.js';
 const budget={maxResidentBytes:33554432,maxBufferBytes:65536,maxCpuTimeMs:15000,maxPendingPackets:16};
 for(const filters of [1,2])it(`lowers ${filters} typed audio filter nodes to Native-equivalent PCM commands`,async()=>{
- const binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ const binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe(pinnedReference().ffmpeg);
  const registry=new FeatureRegistry<OperatorDescriptor>();
  for(const kind of ['source','decode','filter','encode','mux','sink'] as const){const input=kind==='source'?null:kind==='filter'||kind==='encode'?'audio-frame':'packet',output=kind==='sink'?null:kind==='decode'||kind==='filter'?'audio-frame':'packet';registry.register({id:kind,kind,status:'partial',testCases:[],runtimes:['node'],inputs:input?[{name:'in',type:input}]:[],outputs:output?[{name:'out',type:output}]:[],traits:{state:kind==='filter'?'stateless':'stateful',access:'sequential',checkpointable:false,temporal:kind!=='filter',deterministic:true,minimumMemoryBytes:1024,estimatedCpuTimeMs:1}});}
  const nodes=[{id:'source',featureId:'source'},{id:'decode',featureId:'decode'},...Array.from({length:filters},(_,index)=>({id:'filter'+index,featureId:'filter'})),{id:'encode',featureId:'encode'},{id:'mux',featureId:'mux'},{id:'sink',featureId:'sink'}];

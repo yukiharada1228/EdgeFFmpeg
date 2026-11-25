@@ -29,7 +29,10 @@ value; `m:language:und:?` supplies a separate optional remainder.
 Evidence includes320negative-map jobs each through Node/R2;1812Node and780R2
 ID jobs; all65536 language-code conversions against the pinned C library; and342
 language preservation/selection jobs each through Node/R2, including wide MDHD.
-Static corpora and reference source are hash-pinned. Container-byte identity,
+Static corpora and reference source are hash-pinned. Native comparisons use the
+pinned reference of the platform they run on. The language oracle record and
+`language-results.txt` are darwin-arm64 evidence: the oracle must name exactly the
+darwin-arm64 pinned libraries. Container-byte identity,
 exact diagnostics, output codec ID/metadata specifiers, other metadata keys,
 general selector grammar/codecs/formats and production runtime certification are
 unfinished. See [MP4 mux scope](mp4-mux.md).

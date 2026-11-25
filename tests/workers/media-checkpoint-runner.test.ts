@@ -7,9 +7,10 @@ import {expect,it} from 'vitest';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import type {MediaCheckpointStatus} from '@edge-ffmpeg/runtime-cloudflare/checkpoints';
+import {pinnedReference} from '../helpers/reference-identity.js';
 type Run={outcome:string;units:number;commitRetries:number;status:MediaCheckpointStatus|null;finalized:{bytes:string;revisions:number;outputChunks:number;existing?:true}|null;conflict:string|null;stages:number;error?:string};
 it('automatically resumes an R2-backed audio FIFO across killed runtimes, a lost commit reply and a crash after commit, then publishes Native-identical bytes',async()=>{
- const directory=mkdtempSync(join(tmpdir(),'edge-media-checkpoint-runner-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ const directory=mkdtempSync(join(tmpdir(),'edge-media-checkpoint-runner-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe(pinnedReference().ffmpeg);
  const bundle=await build({entryPoints:[root+'/media-checkpoint-runner-fixture.ts'],bundle:true,write:false,format:'esm',platform:'browser',target:'es2022',external:['cloudflare:workers'],metafile:true});for(const path of Object.keys(bundle.metafile!.inputs))expect(path.startsWith('node:')).toBe(false);
  const start=()=>new Miniflare(convertV4MiniflareOptions({name:'media-checkpoint-runner-test',modules:[{type:'ESModule',path:root+'/media-checkpoint-runner-bundle.mjs',contents:bundle.outputFiles[0]!.text}],modulesRoot:root,compatibilityDate:'2026-11-18',compatibilityFlags:[],resourcePersistencePath:join(directory,'persist'),durableObjects:{CHECKPOINTS:{className:'MediaCheckpointCoordinator',useSQLite:true}},r2Buckets:['MEDIA_BUCKET']}));let mf=start();
  // 23 stereo samples (not a multiple of the 5-sample unit or 3-sample frame), including int16 extremes.

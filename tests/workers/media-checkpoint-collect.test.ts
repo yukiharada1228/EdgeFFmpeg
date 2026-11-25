@@ -7,8 +7,9 @@ import {expect,it} from 'vitest';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import type {MediaCheckpointClaim,MediaCheckpointCollectionReport,MediaCheckpointDescriptor,MediaCheckpointLease,MediaCheckpointStatus} from '@edge-ffmpeg/runtime-cloudflare/checkpoints';
+import {pinnedReference} from '../helpers/reference-identity.js';
 it('collects only fenced orphan attempts left by lost acknowledgements and stale owners while committed state/output stay loadable and finalize matches Native',async()=>{
- const directory=mkdtempSync(join(tmpdir(),'edge-media-checkpoint-collect-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ const directory=mkdtempSync(join(tmpdir(),'edge-media-checkpoint-collect-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe(pinnedReference().ffmpeg);
  const bundle=await build({entryPoints:[root+'/media-checkpoint-collect-fixture.ts'],bundle:true,write:false,format:'esm',platform:'browser',target:'es2022',external:['cloudflare:workers'],metafile:true});for(const path of Object.keys(bundle.metafile!.inputs))expect(path.startsWith('node:')).toBe(false);
  const start=()=>new Miniflare(convertV4MiniflareOptions({name:'media-checkpoint-collect-test',modules:[{type:'ESModule',path:root+'/media-checkpoint-collect-bundle.mjs',contents:bundle.outputFiles[0]!.text}],modulesRoot:root,compatibilityDate:'2026-11-18',compatibilityFlags:[],resourcePersistencePath:join(directory,'persist'),durableObjects:{CHECKPOINTS:{className:'MediaCheckpointCoordinator',useSQLite:true}},r2Buckets:['MEDIA_BUCKET']}));let mf=start();
  const request=(path:string,pad:number,body?:object)=>{const [name,query]=path.split('?');return mf.dispatchFetch('https://collect.test/'+name+'?pad='+pad+(query?'&'+query:''),body?{method:'POST',body:JSON.stringify(body)}:{});};
