@@ -23,6 +23,20 @@ export function verifyBmpReference(requireReference=true){
  }
 }
 
+/**
+ * The Native default BMP row capacity of the verified local reference, as BmpOptions.rleLineAlignment: a test
+ * configuration read from that build, never execution-host detection. libavcodec allocates decoder frames with
+ * STRIDE_ALIGN linesizes (libavcodec/internal.h, get_buffer.c and utils.c, pinned in bmp/provenance.json), 64, 32, 16
+ * or 8 from HAVE_SIMD_ALIGN_{64,32,16} of its config.h. darwin-arm64 gives 16 (NEON), linux-x64 gives 64 (AVX-512
+ * enabled at configure time). config.h must record the pinned configure flags and the pin's architecture.
+ */
+export function referenceRleLineAlignment():8|16|32|64{
+ const reference=pinnedReference(),config=readFileSync('.build/reference/config.h','utf8'),define=(name:string)=>{const match=new RegExp(`^#define ${name} (.+)$`,'m').exec(config);if(!match)throw Error(`.build/reference/config.h has no ${name}`);return match[1]!.trim();};
+ if(define('FFMPEG_CONFIGURATION')!==JSON.stringify(reference.metadata.flags.join(' ')))throw Error('.build/reference/config.h does not record the pinned configure flags');
+ const arch={x64:'ARCH_X86_64',arm64:'ARCH_AARCH64'}[reference.arch];if(!arch||define(arch)!=='1')throw Error(`.build/reference/config.h is not a ${reference.id} build`);
+ return define('HAVE_SIMD_ALIGN_64')==='1'?64:define('HAVE_SIMD_ALIGN_32')==='1'?32:define('HAVE_SIMD_ALIGN_16')==='1'?16:8;
+}
+
 export interface BmpRleProfile {alignment:8|16|32|64;depth:number;top:boolean;width:number;seed:number;stride:number;sha256:string}
 interface BmpRleOracle {sourceSha256:string;reference:RecordedReference;librarySha256:Record<string,string>}
 /**

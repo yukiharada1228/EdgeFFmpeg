@@ -20,7 +20,7 @@
     "tests/helpers/bmp-fixture.ts": "962a8af4094c174fae91513d6050ab79ecdc13082a026948755bbfad3e561f7d",
     "tests/differential/bmp-codec.test.ts": "aa6aab995baebd0cf5a2691b52d354677d5ad41ada4a2098247b5eca380acef4",
     "tests/differential/bmp-rle.test.ts": "d050739b19890e2bb667e5ae74633b645f4d2ab6b3b90df591c6bb4b10a5f528",
-    "tests/differential/bmp-rle-malformed.test.ts": "9eb09b9eb8f191d123348e91b0b449ac5e97a3b946277b3b416be7971d94c516",
+    "tests/differential/bmp-rle-malformed.test.ts": "ca52aa2cf9d9d55c29eb5bd6c8c4d917adeac4fbe473619bd3dee8d0bce35c54",
     "tests/differential/bmp-stream.test.ts": "1333cbc62a9cf262e8852cfaea7240f39ace4f695b6d9c68b9858b5ad8d4d4ef",
     "tests/differential/bmp-cli.test.ts": "9df4e048a7aaae4e74c36a3143728f9141bf499e4e7792f947b2d14010e01fa7",
     "tests/differential/bmp-copy-errors.test.ts": "778df80c7213355429b1b65b22684b5f94aabf7c399c331e4ec6ad851ab7f5cc",
