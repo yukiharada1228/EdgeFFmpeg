@@ -10676,5 +10676,1119 @@
       "linux-x64"
     ],
     "scope": "96 byte-exact comparisons and 14 native-status refusals: every ipar case formerly in the curve, format and time tests. Wave 1 branch wave1/af-afade. Added by the integration fix that moved every ipar case to linux/x64. Linux x86_64 only: measured on the pinned macOS arm64 reference (sha256 1b86106f…ab92), which contracts ipar's 1 - (1 - gain) * (1 - gain) into a fused multiply-add: the formerly ungated ipar cases failed there (78 of 302 gains differ for ns=301), while EdgeFFmpeg follows the unfused linux/x64 profile. It is skipped on other platforms and reported there as not applicable, so this contract resolves only on a linux/x64 run (the test was added after GitHub Actions run 45402980700; its 96 comparisons and 14 refusals passed there inside the then-ungated curve, format and time tests)."
+  },
+  {
+    "id": "filter.swapuv.cli",
+    "file": "tests/differential/video-swapuv.test.ts",
+    "name": "matches native -vf swapuv rawvideo and framecrc across formats sizes and time scopes",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "yuv420p/yuv422p/yuv444p/yuva420p plus nv12/rgb24/gbrp under -cpuflags 0; 5x3,7x5,8x6; rawvideo/framecrc; -ss/-t. Wave 1 branch wave1/vf-swapuv, re-landed at 83f11b1 on the shared video negotiation."
+  },
+  {
+    "id": "filter.swapuv.graph",
+    "file": "tests/differential/video-swapuv.test.ts",
+    "name": "matches native -filter_complex swapuv split branches through the media and timed backends",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "split branches with hflip/vflip/format=yuv422p, media and timed backends. Wave 1 branch wave1/vf-swapuv, re-landed at 83f11b1 on the shared video negotiation."
+  },
+  {
+    "id": "filter.swapuv.stream",
+    "file": "tests/differential/video-swapuv.test.ts",
+    "name": "matches native swapuv frame by frame through replay streams and activation actors",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "replay streams and activation actors, 3 frames. Wave 1 branch wave1/vf-swapuv, re-landed at 83f11b1 on the shared video negotiation."
+  },
+  {
+    "id": "filter.swapuv.refusals",
+    "file": "tests/differential/video-swapuv.test.ts",
+    "name": "refuses swapuv options and timeline before opening outputs on every backend",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "enable= and options refused before outputs open. Wave 1 branch wave1/vf-swapuv, re-landed at 83f11b1 on the shared video negotiation."
+  },
+  {
+    "id": "filter.swapuv.negotiation",
+    "file": "tests/differential/video-swapuv.test.ts",
+    "name": "negotiates every accepted source as native does and refuses the gray and packed-alpha picks without storage before output",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "swapuv from 17 sources (14 executable formats and yuvj420p/422p/444p), native pick read from showinfo. 12 run byte-exact on linear/graph/stream/actor/timed (yuvj on linear only). gray (yuvj444p) and argb/rgba/abgr/bgra (yuva444p) are refused by name on the five paths and the media -vf/-filter_complex and timed producer/pull CLIs with no output opened. 93 checks. Replaces the branch's negotiation-gap record. Wave 1 branch wave1/vf-swapuv, re-landed at 83f11b1 on the shared video negotiation."
+  },
+  {
+    "id": "filter.swapuv.unit.parses-bare",
+    "file": "tests/unit/video-swapuv.test.ts",
+    "name": "parses bare swapuv and refuses every option, enable= and runtime commands before planning",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Parses bare swapuv and refuses every option, enable= and runtime commands before planning. Wave 1 branch wave1/vf-swapuv, re-landed at 83f11b1 on the shared video negotiation."
+  },
+  {
+    "id": "filter.swapuv.unit.swaps-chroma",
+    "file": "tests/unit/video-swapuv.test.ts",
+    "name": "swaps chroma into owned tight planes from padded input without mutating it",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Swaps chroma into owned tight planes from padded input without mutating it. Wave 1 branch wave1/vf-swapuv, re-landed at 83f11b1 on the shared video negotiation."
+  },
+  {
+    "id": "filter.swapuv.unit.plans-swapuv",
+    "file": "tests/unit/video-swapuv.test.ts",
+    "name": "plans swapuv with native auto-conversion and runs it on the linear chain",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Plans swapuv with native auto-conversion and runs it on the linear chain. Wave 1 branch wave1/vf-swapuv, re-landed at 83f11b1 on the shared video negotiation."
+  },
+  {
+    "id": "filter.swapuv.unit.rejects-unsupported",
+    "file": "tests/unit/video-swapuv.test.ts",
+    "name": "rejects unsupported layouts, budgets, malformed storage and cancellation explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Rejects unsupported layouts, budgets, malformed storage and cancellation explicitly. Wave 1 branch wave1/vf-swapuv, re-landed at 83f11b1 on the shared video negotiation."
+  },
+  {
+    "id": "filter.limiter.linear",
+    "file": "tests/differential/video-limiter.test.ts",
+    "name": "matches native linear limiter bounds, plane masks and min > max refusals across every declared format",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "six eight-bit formats, min/max classes including >255, min==max and min>max, plane masks {0,1,2,5,8,15}, odd and even sizes. Wave 1 branch wave1/vf-limiter, re-landed at 6b7b2a3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.limiter.cli",
+    "file": "tests/differential/video-limiter.test.ts",
+    "name": "matches native limiter CLI rawvideo and framecrc on the linear path, including implicit conversions",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "-vf rawvideo and framecrc, including nv12 and rgb24 implicit conversions. Wave 1 branch wave1/vf-limiter, re-landed at 6b7b2a3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.limiter.graph",
+    "file": "tests/differential/video-limiter.test.ts",
+    "name": "matches native limiter filter_complex branches on the graph path in rawvideo and framecrc",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "-filter_complex split branches with two outputs, rawvideo and framecrc. Wave 1 branch wave1/vf-limiter, re-landed at 6b7b2a3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.limiter.stream",
+    "file": "tests/differential/video-limiter.test.ts",
+    "name": "matches native limiter on the stream path through replay execution and the multi-input CLI",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "replay execution and multi-input CLI. Wave 1 branch wave1/vf-limiter, re-landed at 6b7b2a3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.limiter.timed",
+    "file": "tests/differential/video-limiter.test.ts",
+    "name": "matches native limiter through the timed backend on the actor and timed paths in rawvideo and framecrc",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "timed backend producer and pull schedulers, rawvideo and framecrc. Wave 1 branch wave1/vf-limiter, re-landed at 6b7b2a3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.limiter.reject",
+    "file": "tests/differential/video-limiter.test.ts",
+    "name": "fails like native for limiter min > max before opening any output on every path",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "native init min>max refusal parity with no output opened. Wave 1 branch wave1/vf-limiter, re-landed at 6b7b2a3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.limiter.negotiation",
+    "file": "tests/differential/video-limiter.test.ts",
+    "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "limiter=16:235 from 17 sources (14 executable formats and yuvj420p/422p/444p), native pick read from showinfo: 13 run byte-exact (-cpuflags 0, scalar) on linear/graph/stream/actor/timed (yuvj on linear only); argb, rgba, abgr and bgra are refused naming gbrap on the five paths and the media -vf/-filter_complex and timed producer/pull CLIs with no output opened. 89 checks. Wave 1 branch wave1/vf-limiter, re-landed at 6b7b2a3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.limiter.unit.parses-declared",
+    "file": "tests/unit/video-limiter.test.ts",
+    "name": "parses declared defaults, shorthand, integer expressions, ranges and the init min > max refusal",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Parses declared defaults, shorthand, integer expressions, ranges and the init min > max refusal. Wave 1 branch wave1/vf-limiter, re-landed at 6b7b2a3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.limiter.unit.clamps-masked",
+    "file": "tests/unit/video-limiter.test.ts",
+    "name": "clamps masked planes with eight-bit bound clamping into owned tight planes without mutating padded input",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Clamps masked planes with eight-bit bound clamping into owned tight planes without mutating padded input. Wave 1 branch wave1/vf-limiter, re-landed at 6b7b2a3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.limiter.unit.rejects-unsupported",
+    "file": "tests/unit/video-limiter.test.ts",
+    "name": "rejects unsupported layouts, budgets, malformed storage, settings and cancellation explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Rejects unsupported layouts, budgets, malformed storage, settings and cancellation explicitly. Wave 1 branch wave1/vf-limiter, re-landed at 6b7b2a3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.limiter.unit.plans-limiter",
+    "file": "tests/unit/video-limiter.test.ts",
+    "name": "plans limiter on linear, graph and actor paths, refuses min > max before frames and refuses runtime commands",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Plans limiter on linear, graph and actor paths, refuses min > max before frames and refuses runtime commands. Wave 1 branch wave1/vf-limiter, re-landed at 6b7b2a3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.pixelize.planners",
+    "file": "tests/differential/video-pixelize.test.ts",
+    "name": "matches native pixelize across formats, modes, block sizes, plane masks and odd sizes on the linear and graph planners",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "6 formats x {9x7,33x17} x avg/min/max x blocks {1x1,2x2,3x2,4x3,16,40x40} x planes {15,1,0x6,8+1,-1}, noise and block-pattern frames, padded strides, rawvideo bytes. Wave 1 branch wave1/vf-pixelize, re-landed at 39ba8b3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.pixelize.cli-paths",
+    "file": "tests/differential/video-pixelize.test.ts",
+    "name": "matches native pixelize rawvideo and framecrc CLI outputs on the linear, graph, stream, actor and timed paths",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "6 formats x {9x7,33x17} x rawvideo/framecrc CLI outputs through -vf, -filter_complex, two-input hstack and the timed backend producer/pull schedulers. Wave 1 branch wave1/vf-pixelize, re-landed at 39ba8b3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.pixelize.replay",
+    "file": "tests/differential/video-pixelize.test.ts",
+    "name": "matches native replayed pixelize branches frame by frame through createReplayVideoExecution",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "6 formats x 2 replay graphs (single node, split/vstack branches), rawvideo bytes and pts. Wave 1 branch wave1/vf-pixelize, re-landed at 39ba8b3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.pixelize.options",
+    "file": "tests/differential/video-pixelize.test.ts",
+    "name": "matches native option acceptance and outputs for integer, hex, folded and out-of-range values, refusing expressions explicitly",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "28 option strings: shorthand, aliases, hex, folded plane flags, out-of-range values, scoped refusals of expressions. Wave 1 branch wave1/vf-pixelize, re-landed at 39ba8b3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.pixelize.negotiation",
+    "file": "tests/differential/video-pixelize.test.ts",
+    "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "pixelize=3:2 from 17 sources (14 executable formats and yuvj420p/422p/444p), native pick read from showinfo: 13 run byte-exact (-cpuflags 0, scalar) on linear/graph/stream/actor/timed (yuvj on linear only); argb, rgba, abgr and bgra are refused naming gbrap on the five paths and the media -vf/-filter_complex and timed producer/pull CLIs with no output opened. 89 checks. Wave 1 branch wave1/vf-pixelize, re-landed at 39ba8b3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.pixelize.unit.parses-defaults",
+    "file": "tests/unit/video-pixelize.test.ts",
+    "name": "parses defaults, shorthand order, aliases, modes and folded plane flags into frozen steps",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Parses defaults, shorthand order, aliases, modes and folded plane flags into frozen steps. Wave 1 branch wave1/vf-pixelize, re-landed at 39ba8b3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.pixelize.unit.refuses-out-of-range",
+    "file": "tests/unit/video-pixelize.test.ts",
+    "name": "refuses out-of-range, non-integer, named, expression, timeline and unknown options explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Refuses out-of-range, non-integer, named, expression, timeline and unknown options explicitly. Wave 1 branch wave1/vf-pixelize, re-landed at 39ba8b3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.pixelize.unit.averages-with",
+    "file": "tests/unit/video-pixelize.test.ts",
+    "name": "averages with truncation, keeps partial edge blocks, rounds blocks to the chroma grid and copies unselected planes",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Averages with truncation, keeps partial edge blocks, rounds blocks to the chroma grid and copies unselected planes. Wave 1 branch wave1/vf-pixelize, re-landed at 39ba8b3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.pixelize.unit.declares-the",
+    "file": "tests/unit/video-pixelize.test.ts",
+    "name": "declares the native pix_fmts in declared order, plans one format-preserving stage and refuses picks without storage",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Declares the native pix_fmts in declared order, plans one format-preserving stage and refuses picks without storage. Wave 1 branch wave1/vf-pixelize, re-landed at 39ba8b3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.pixelize.unit.rejects-unsupported",
+    "file": "tests/unit/video-pixelize.test.ts",
+    "name": "rejects unsupported layouts, budgets, malformed storage, bad settings and cancellation explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Rejects unsupported layouts, budgets, malformed storage, bad settings and cancellation explicitly. Wave 1 branch wave1/vf-pixelize, re-landed at 39ba8b3 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.kernel",
+    "file": "tests/differential/video-shuffleplanes.test.ts",
+    "name": "matches native shuffleplanes plane copies for every accepted map tuple and table format",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "plane copy for every accepted tuple and format. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.cli",
+    "file": "tests/differential/video-shuffleplanes.test.ts",
+    "name": "matches native shuffleplanes CLI rawvideo and framecrc through -vf and -filter_complex",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "CLI rawvideo/framecrc, -vf and -filter_complex, stream and -ss/-frames timing. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.stream",
+    "file": "tests/differential/video-shuffleplanes.test.ts",
+    "name": "matches native replayed shuffleplanes branches and joins frame by frame",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "replay streams with split, hstack, transpose and nullsink. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.timed",
+    "file": "tests/differential/video-shuffleplanes.test.ts",
+    "name": "matches native shuffleplanes framecrc and rawvideo through the actor and timed schedulers",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "timed backend pull/activation/producer schedulers, rawvideo and framecrc. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.formats",
+    "file": "tests/differential/video-shuffleplanes.test.ts",
+    "name": "matches native shuffleplanes query_formats and picks for every map tuple, refusing picks without storage",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "3,584 native probes (256 maps x 14 sources). Native inserts no conversion exactly when the source is in formats(step); native's pick is in the list. EdgeFFmpeg's linear negotiation picks it (195 direct, 510 converted) or refuses naming it (2,879). Negotiation only, no pixel bytes. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.linear",
+    "file": "tests/differential/video-shuffleplanes.test.ts",
+    "name": "matches native linear shuffleplanes chains, refusing conversions into formats without storage by name",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "1,568 linear chains (14 sources x 14 maps x 2 chains x 4 targets). 802 byte-exact with native's format; 766 refused naming native's format. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.refusals",
+    "file": "tests/differential/video-shuffleplanes.test.ts",
+    "name": "refuses shuffleplanes timelines, unimplemented values and picks without storage before opening CLI outputs",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "16 refusals on the media and timed backends (-vf and -filter_complex) with no output opened: enable=, expression values, unknown options and picks without storage. 3:3:3:3 on gray names native's gbrap. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.negotiation",
+    "file": "tests/differential/video-shuffleplanes.test.ts",
+    "name": "negotiates every accepted source as native does for three maps and refuses picks without storage before output on every path",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "Default map, 0:0:0:0 and 0:2:1:0 from 17 sources. 33 byte-exact on the five paths; 18 refused naming native's pick (gbrap, yuva422p, yuva444p, yuvj444p) on every path and CLI backend. 283 checks. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.unit.parses-the",
+    "file": "tests/unit/video-shuffleplanes.test.ts",
+    "name": "parses the declared defaults, shorthand order and named maps into frozen steps",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Parses the declared defaults, shorthand order and named maps into frozen steps. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.unit.derives-every",
+    "file": "tests/unit/video-shuffleplanes.test.ts",
+    "name": "derives every per-step format list from the native query_formats rule for all 256 tuples",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Derives every per-step format list from the native query_formats rule for all 256 tuples. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.unit.remaps-and",
+    "file": "tests/unit/video-shuffleplanes.test.ts",
+    "name": "remaps and duplicates planes into owned tight planes from padded input without mutating it",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Remaps and duplicates planes into owned tight planes from padded input without mutating it. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.unit.rejects-unsupported",
+    "file": "tests/unit/video-shuffleplanes.test.ts",
+    "name": "rejects unsupported formats, budgets, malformed strides and cancellation explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Rejects unsupported formats, budgets, malformed strides and cancellation explicitly. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.shuffleplanes.unit.plans-shuffleplanes",
+    "file": "tests/unit/video-shuffleplanes.test.ts",
+    "name": "plans shuffleplanes through linear, graph and actor planners and refuses timelines and commands",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Plans shuffleplanes through linear, graph and actor planners and refuses timelines and commands. Wave 1 branch wave1/vf-shuffleplanes, re-landed at c6ab325 on the shared video negotiation."
+  },
+  {
+    "id": "filter.chromashift.linear",
+    "file": "tests/differential/video-chromashift.test.ts",
+    "name": "matches native linear chromashift rawvideo across formats, shifts, edges, sizes and noise and gradient inputs",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "yuv420p/yuv422p/yuv444p, cbh/cbv/crh/crv -255..255, edge smear|wrap, rawvideo. Wave 1 branch wave1/vf-chromashift, re-landed at cb95c15 on the shared video negotiation."
+  },
+  {
+    "id": "filter.chromashift.cli",
+    "file": "tests/differential/video-chromashift.test.ts",
+    "name": "matches native chromashift -vf and -filter_complex CLI rawvideo and framecrc including implicit conversions",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "CLI -vf and -filter_complex, rawvideo and framecrc, implicit nv12/rgb24/bgr24/gbrp conversion with -cpuflags 0. Wave 1 branch wave1/vf-chromashift, re-landed at cb95c15 on the shared video negotiation."
+  },
+  {
+    "id": "filter.chromashift.graph-stream",
+    "file": "tests/differential/video-chromashift.test.ts",
+    "name": "matches native chromashift frame graphs and replayed streams with split and stack branches",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "compileVideoFilterGraph and createReplayVideoExecution with split, hstack, vstack, nullsink. Wave 1 branch wave1/vf-chromashift, re-landed at cb95c15 on the shared video negotiation."
+  },
+  {
+    "id": "filter.chromashift.actor-timed",
+    "file": "tests/differential/video-chromashift.test.ts",
+    "name": "matches native chromashift through activation actors and the timed backend in rawvideo and framecrc",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "createFrameActors rawvideo and createTimedVideoBackend CLI rawvideo and framecrc. Wave 1 branch wave1/vf-chromashift, re-landed at cb95c15 on the shared video negotiation."
+  },
+  {
+    "id": "filter.chromashift.refusals",
+    "file": "tests/differential/video-chromashift.test.ts",
+    "name": "refuses chromashift yuva420p and out-of-range options before output where native accepts or fails them",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "yuva420p/rgba refusal and option range/value refusals with no output. 24 CLI refusals with no output; rgba now names native's yuva444p pick. Wave 1 branch wave1/vf-chromashift, re-landed at cb95c15 on the shared video negotiation."
+  },
+  {
+    "id": "filter.chromashift.negotiation",
+    "file": "tests/differential/video-chromashift.test.ts",
+    "name": "negotiates every accepted source as native does and refuses the gray and packed-alpha picks without storage before output",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "chromashift=cbh=1:crv=-2 from 16 sources (yuva420p excluded; validate refuses it). 11 byte-exact on the five paths. gray (yuvj444p) and the four packed-alpha sources (yuva444p) refused by name on every path and CLI backend. 88 checks. Wave 1 branch wave1/vf-chromashift, re-landed at cb95c15 on the shared video negotiation."
+  },
+  {
+    "id": "filter.chromashift.unit.parses-declared",
+    "file": "tests/unit/video-chromashift.test.ts",
+    "name": "parses declared defaults, shorthand order, edge constants and duplicate keys into frozen steps",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Parses declared defaults, shorthand order, edge constants and duplicate keys into frozen steps. Wave 1 branch wave1/vf-chromashift, re-landed at cb95c15 on the shared video negotiation."
+  },
+  {
+    "id": "filter.chromashift.unit.copies-luma",
+    "file": "tests/unit/video-chromashift.test.ts",
+    "name": "copies luma and shifts chroma with smear clamping and C-remainder wrap into owned tight planes",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Copies luma and shifts chroma with smear clamping and C-remainder wrap into owned tight planes. Wave 1 branch wave1/vf-chromashift, re-landed at cb95c15 on the shared video negotiation."
+  },
+  {
+    "id": "filter.chromashift.unit.rejects-yuva420p",
+    "file": "tests/unit/video-chromashift.test.ts",
+    "name": "rejects yuva420p and unsupported layouts, budgets, malformed storage, settings and cancellation explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Rejects yuva420p and unsupported layouts, budgets, malformed storage, settings and cancellation explicitly. Wave 1 branch wave1/vf-chromashift, re-landed at cb95c15 on the shared video negotiation."
+  },
+  {
+    "id": "filter.chromashift.unit.negotiates-its",
+    "file": "tests/unit/video-chromashift.test.ts",
+    "name": "negotiates its yuv formats and refuses yuva420p on the linear, graph and timed planners before output",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Negotiates its yuv formats and refuses yuva420p on the linear, graph and timed planners before output. Wave 1 branch wave1/vf-chromashift, re-landed at cb95c15 on the shared video negotiation."
+  },
+  {
+    "id": "video.erosion-matrix",
+    "file": "tests/differential/video-erosion.test.ts",
+    "name": "matches native erosion for every format, coordinate mask, per-plane threshold and size on the linear and graph planners",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "3024 linear/graph raw comparisons over 6 formats, 12 coordinate masks, 6 per-plane threshold sets and 4 sizes with noise and block frames. Wave 1 branch wave1/vf-erosion, re-landed at 0d4a055 on the shared video negotiation."
+  },
+  {
+    "id": "video.erosion-cli",
+    "file": "tests/differential/video-erosion.test.ts",
+    "name": "matches native rawvideo and framecrc bytes through the -vf, -filter_complex and timed backend CLIs",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "576 rawvideo and framecrc CLI outputs on linear, graph, stream, actor (activation, producer) and timed (pull). Wave 1 branch wave1/vf-erosion, re-landed at 0d4a055 on the shared video negotiation."
+  },
+  {
+    "id": "video.erosion-stream",
+    "file": "tests/differential/video-erosion.test.ts",
+    "name": "matches native replayed erosion branches frame by frame",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "24 replay graphs with split/hstack/transpose/nullsink branches; raw bytes and PTS. Wave 1 branch wave1/vf-erosion, re-landed at 0d4a055 on the shared video negotiation."
+  },
+  {
+    "id": "video.erosion-width-one",
+    "file": "tests/differential/video-erosion.test.ts",
+    "name": "refuses one pixel wide erosion planes on every path before opening outputs",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Explicit refusal on all five paths with no output opened for one pixel wide luma or chroma planes; no native comparison (native reads out of bounds). Wave 1 branch wave1/vf-erosion, re-landed at 0d4a055 on the shared video negotiation."
+  },
+  {
+    "id": "video.erosion-options-api",
+    "file": "tests/unit/video-erosion.test.ts",
+    "name": "parses native defaults, shorthand order, ranges and integer expressions into frozen steps",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Parser defaults, shorthand, AV_OPT_TYPE_INT ranges/expressions, refusals and descriptor facts. Wave 1 branch wave1/vf-erosion, re-landed at 0d4a055 on the shared video negotiation."
+  },
+  {
+    "id": "video.erosion-frame-api",
+    "file": "tests/unit/video-erosion.test.ts",
+    "name": "erodes with mirrored borders, clamped rows, coordinate masks and thresholds into owned tight planes",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Hand-computed kernel results; owned tight output, copied PTS/metadata, unmutated input. Wave 1 branch wave1/vf-erosion, re-landed at 0d4a055 on the shared video negotiation."
+  },
+  {
+    "id": "video.erosion-refusals",
+    "file": "tests/unit/video-erosion.test.ts",
+    "name": "refuses one pixel wide planes, unsupported layouts, budgets, malformed storage, settings and cancellation explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Width-1 geometry, formats, maxFrameBytes, strides, plane counts, time base, invalid steps, AbortSignal. Wave 1 branch wave1/vf-erosion, re-landed at 0d4a055 on the shared video negotiation."
+  },
+  {
+    "id": "video.erosion-plans",
+    "file": "tests/unit/video-erosion.test.ts",
+    "name": "budgets linear and graph plans, negotiates native formats and refuses timeline and runtime commands",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Linear plan budgets, nv12 negotiation to yuv420p, width-1 graph refusal, enable= and runtime command refusal. Wave 1 branch wave1/vf-erosion, re-landed at 0d4a055 on the shared video negotiation."
+  },
+  {
+    "id": "video.erosion-negotiation",
+    "file": "tests/differential/video-erosion.test.ts",
+    "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "erosion=coordinates=85:threshold0=10 from 17 sources (14 executable formats and yuvj420p/422p/444p), native pick read from showinfo: 13 run byte-exact (-cpuflags 0, scalar) on linear/graph/stream/actor/timed (yuvj on linear only); argb, rgba, abgr and bgra are refused naming gbrap on the five paths and the media -vf/-filter_complex and timed producer/pull CLIs with no output opened. 89 checks. Wave 1 branch wave1/vf-erosion, re-landed at 0d4a055 on the shared video negotiation."
+  },
+  {
+    "id": "filter.dilation.kernel",
+    "file": "tests/differential/video-dilation.test.ts",
+    "name": "matches native dilation bytes across formats coordinates thresholds edge sizes and patterns",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "dilateVideoFrame vs native rawvideo: gray/yuv420p/yuv422p/yuv444p/yuva420p/gbrp x 8 edge sizes x 19 coordinate/threshold sets x noise/peaks/checkerboard frames; width-1 planes refused. Wave 1 branch wave1/vf-dilation, re-landed at 8be873e on the shared video negotiation."
+  },
+  {
+    "id": "filter.dilation.linear",
+    "file": "tests/differential/video-dilation.test.ts",
+    "name": "matches native linear dilation chains with negotiated conversion and scalar or default arithmetic",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "compileVideoFilterChain vs native -vf rawvideo with negotiated conversion (nv12/nv21/rgb24 and target nv12/rgba), default and -cpuflags 0 scalar arithmetic. Wave 1 branch wave1/vf-dilation, re-landed at 8be873e on the shared video negotiation."
+  },
+  {
+    "id": "filter.dilation.cli",
+    "file": "tests/differential/video-dilation.test.ts",
+    "name": "matches native dilation CLI -vf and -filter_complex rawvideo and framecrc outputs across timing and size scopes",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "FFmpeg frontend -vf and two-output -filter_complex, rawvideo and framecrc, -ss/-t/-frames:v and -s scopes. Wave 1 branch wave1/vf-dilation, re-landed at 8be873e on the shared video negotiation."
+  },
+  {
+    "id": "filter.dilation.stream",
+    "file": "tests/differential/video-dilation.test.ts",
+    "name": "matches native replayed dilation branches and joins frame by frame",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "createReplayVideoExecution branches, hstack joins and nullsink vs native -filter_complex rawvideo. Wave 1 branch wave1/vf-dilation, re-landed at 8be873e on the shared video negotiation."
+  },
+  {
+    "id": "filter.dilation.timed",
+    "file": "tests/differential/video-dilation.test.ts",
+    "name": "matches native dilation framecrc and rawvideo through the timed executor and activation actors",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "public timed video backend with pull (timed DAG executor), activation and producer (actors) schedulers vs native framecrc and rawvideo. Wave 1 branch wave1/vf-dilation, re-landed at 8be873e on the shared video negotiation."
+  },
+  {
+    "id": "filter.dilation.width1-refusal",
+    "file": "tests/differential/video-dilation.test.ts",
+    "name": "refuses width-1 dilation planes on every path before opening outputs",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "width-1 planes refused before any output is opened on linear, CLI -vf/-filter_complex and the three timed schedulers. Wave 1 branch wave1/vf-dilation, re-landed at 8be873e on the shared video negotiation."
+  },
+  {
+    "id": "filter.dilation.negotiation",
+    "file": "tests/differential/video-dilation.test.ts",
+    "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "dilation=coordinates=90:threshold0=12 from 17 sources (14 executable formats and yuvj420p/422p/444p), native pick read from showinfo: 13 run byte-exact (-cpuflags 0, scalar) on linear/graph/stream/actor/timed (yuvj on linear only); argb, rgba, abgr and bgra are refused naming gbrap on the five paths and the media -vf/-filter_complex and timed producer/pull CLIs with no output opened. 89 checks. Wave 1 branch wave1/vf-dilation, re-landed at 8be873e on the shared video negotiation."
+  },
+  {
+    "id": "filter.dilation.unit.parses-declared",
+    "file": "tests/unit/video-dilation.test.ts",
+    "name": "parses declared defaults, shorthand order, integer expressions and ranges into frozen settings",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Parses declared defaults, shorthand order, integer expressions and ranges into frozen settings. Wave 1 branch wave1/vf-dilation, re-landed at 8be873e on the shared video negotiation."
+  },
+  {
+    "id": "filter.dilation.unit.applies-the",
+    "file": "tests/unit/video-dilation.test.ts",
+    "name": "applies the native border reflection, coordinate mask and threshold limit on padded input without mutating it",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Applies the native border reflection, coordinate mask and threshold limit on padded input without mutating it. Wave 1 branch wave1/vf-dilation, re-landed at 8be873e on the shared video negotiation."
+  },
+  {
+    "id": "filter.dilation.unit.refuses-unsupported",
+    "file": "tests/unit/video-dilation.test.ts",
+    "name": "refuses unsupported layouts, width-1 planes, budgets, malformed storage, settings and cancellation explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Refuses unsupported layouts, width-1 planes, budgets, malformed storage, settings and cancellation explicitly. Wave 1 branch wave1/vf-dilation, re-landed at 8be873e on the shared video negotiation."
+  },
+  {
+    "id": "filter.dilation.unit.plans-dilation",
+    "file": "tests/unit/video-dilation.test.ts",
+    "name": "plans dilation as a size-preserving stage and refuses width-1 planes on the linear, graph and actor planners",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Plans dilation as a size-preserving stage and refuses width-1 planes on the linear, graph and actor planners. Wave 1 branch wave1/vf-dilation, re-landed at 8be873e on the shared video negotiation."
+  },
+  {
+    "id": "filter.deflate.api",
+    "file": "tests/differential/video-deflate.test.ts",
+    "name": "matches native deflate through the linear, frame graph and replay APIs across formats, thresholds, sizes and patterns",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "threshold0..3 on gray, yuv420p, yuv422p, yuv444p, yuva420p and gbrp; rawvideo bytes. Wave 1 branch wave1/vf-deflate, re-landed at 3975859 on the shared video negotiation."
+  },
+  {
+    "id": "filter.deflate.cli",
+    "file": "tests/differential/video-deflate.test.ts",
+    "name": "matches native deflate rawvideo and framecrc bytes on every flagged CLI path",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "threshold0..3 on the six eight-bit planar formats; rawvideo and framecrc. Wave 1 branch wave1/vf-deflate, re-landed at 3975859 on the shared video negotiation."
+  },
+  {
+    "id": "filter.deflate.refusals",
+    "file": "tests/differential/video-deflate.test.ts",
+    "name": "fails like native for the erosion-only coordinates option and out-of-range thresholds before opening outputs on every path",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "unknown option, range and positional errors. Wave 1 branch wave1/vf-deflate, re-landed at 3975859 on the shared video negotiation."
+  },
+  {
+    "id": "filter.deflate.narrow",
+    "file": "tests/differential/video-deflate.test.ts",
+    "name": "copies width-1 planes with zero thresholds like native and refuses nonzero ones before opening outputs on every path",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "width-1 plane copies and refusals. Wave 1 branch wave1/vf-deflate, re-landed at 3975859 on the shared video negotiation."
+  },
+  {
+    "id": "filter.deflate.unit",
+    "file": "tests/unit/video-deflate.test.ts",
+    "name": "rejects unsupported layouts, budgets, malformed storage, invalid settings and cancellation explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "frame limits, strides, AbortSignal. Wave 1 branch wave1/vf-deflate, re-landed at 3975859 on the shared video negotiation."
+  },
+  {
+    "id": "filter.deflate.negotiation",
+    "file": "tests/differential/video-deflate.test.ts",
+    "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "deflate=threshold0=10:threshold2=3 from 17 sources (14 executable formats and yuvj420p/422p/444p), native pick read from showinfo: 13 run byte-exact (-cpuflags 0, scalar) on linear/graph/stream/actor/timed (yuvj on linear only); argb, rgba, abgr and bgra are refused naming gbrap on the five paths and the media -vf/-filter_complex and timed producer/pull CLIs with no output opened. 89 checks. Wave 1 branch wave1/vf-deflate, re-landed at 3975859 on the shared video negotiation."
+  },
+  {
+    "id": "filter.deflate.unit.parses-the",
+    "file": "tests/unit/video-deflate.test.ts",
+    "name": "parses the deflate_inflate thresholds with native defaults, shorthand order, integer expressions and last-wins keys",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Parses the deflate_inflate thresholds with native defaults, shorthand order, integer expressions and last-wins keys. Wave 1 branch wave1/vf-deflate, re-landed at 3975859 on the shared video negotiation."
+  },
+  {
+    "id": "filter.deflate.unit.declares-the",
+    "file": "tests/unit/video-deflate.test.ts",
+    "name": "declares the native pix_fmts in declared order and keeps geometry",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Declares the native pix_fmts in declared order and keeps geometry. Wave 1 branch wave1/vf-deflate, re-landed at 3975859 on the shared video negotiation."
+  },
+  {
+    "id": "filter.deflate.unit.applies-the",
+    "file": "tests/unit/video-deflate.test.ts",
+    "name": "applies the neighbour average with mirrored borders, per-plane thresholds and zero-threshold copies into owned tight planes",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Applies the neighbour average with mirrored borders, per-plane thresholds and zero-threshold copies into owned tight planes. Wave 1 branch wave1/vf-deflate, re-landed at 3975859 on the shared video negotiation."
+  },
+  {
+    "id": "filter.deflate.unit.plans-deflate",
+    "file": "tests/unit/video-deflate.test.ts",
+    "name": "plans deflate on every path with width-1 refusals and runtime commands refused",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Plans deflate on every path with width-1 refusals and runtime commands refused. Wave 1 branch wave1/vf-deflate, re-landed at 3975859 on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.kernel",
+    "file": "tests/differential/video-inflate.test.ts",
+    "name": "matches native inflate kernels across formats, sizes, thresholds, patterns and borders",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "8-bit planar formats yuv420p/yuv422p/yuv444p/gray/yuva420p/gbrp, threshold0..3, native border tables, threshold-0 copy incl. width-1 planes. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.cli",
+    "file": "tests/differential/video-inflate.test.ts",
+    "name": "matches native inflate CLI rawvideo and framecrc outputs across conversions and timing",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "-vf rawvideo/framecrc via public frontend with conversions (-cpuflags 0 / scalar), -ss/-frames:v, scale chains. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.graph",
+    "file": "tests/differential/video-inflate.test.ts",
+    "name": "matches native complex inflate graphs on the frame-graph path",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "-filter_complex two-output branches, rawvideo/framecrc. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.stream",
+    "file": "tests/differential/video-inflate.test.ts",
+    "name": "matches native replayed inflate streams frame by frame",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "createReplayVideoExecution incl. split/hstack. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.timed",
+    "file": "tests/differential/video-inflate.test.ts",
+    "name": "matches native inflate through the timed backend actor and pull schedulers",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "createTimedVideoBackend producer/activation (actor) and pull (timed) schedulers, rawvideo/framecrc. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.refusals",
+    "file": "tests/differential/video-inflate.test.ts",
+    "name": "fails like native for unknown and out-of-range inflate options and refuses filtered width-1 planes before opening outputs",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "unknown/out-of-range option messages vs native stderr; enable= and filtered width-1 planes refused before outputs open. 11 refusals on -vf, -filter_complex and the timed producer/pull backends. Native's ERANGE text follows the host's strerror (glibc on Linux, Darwin on macOS); EdgeFFmpeg's stays glibc's. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.negotiation",
+    "file": "tests/differential/video-inflate.test.ts",
+    "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "inflate=threshold0=12:threshold1=0 from 17 sources (14 executable formats and yuvj420p/422p/444p), native pick read from showinfo: 13 run byte-exact (-cpuflags 0, scalar) on linear/graph/stream/actor/timed (yuvj on linear only); argb, rgba, abgr and bgra are refused naming gbrap on the five paths and the media -vf/-filter_complex and timed producer/pull CLIs with no output opened. 89 checks. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.unit.parses-threshold",
+    "file": "tests/unit/video-inflate.test.ts",
+    "name": "parses threshold shorthand, named options, AV_OPT_TYPE_INT expressions and rounding into frozen steps",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Parses threshold shorthand, named options, AV_OPT_TYPE_INT expressions and rounding into frozen steps. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.unit.registers-a",
+    "file": "tests/unit/video-inflate.test.ts",
+    "name": "registers a frozen frame descriptor flagged on every path with the native pix_fmts in declared order",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Registers a frozen frame descriptor flagged on every path with the native pix_fmts in declared order. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.unit.matches-the",
+    "file": "tests/unit/video-inflate.test.ts",
+    "name": "matches the native kernel transcription on borders, impulses, saturation and every threshold class",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Matches the native kernel transcription on borders, impulses, saturation and every threshold class. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.unit.filters-each",
+    "file": "tests/unit/video-inflate.test.ts",
+    "name": "filters each plane with its own threshold and copies threshold-zero planes",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Filters each plane with its own threshold and copies threshold-zero planes. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.unit.materializes-owned",
+    "file": "tests/unit/video-inflate.test.ts",
+    "name": "materializes owned tight planes from padded input without mutating it or changing timestamps and metadata",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Materializes owned tight planes from padded input without mutating it or changing timestamps and metadata. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.unit.enforces-frame",
+    "file": "tests/unit/video-inflate.test.ts",
+    "name": "enforces frame budgets, plane counts, malformed strides and storage, time bases and filtered width-1 planes",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Enforces frame budgets, plane counts, malformed strides and storage, time bases and filtered width-1 planes. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.unit.observes-abortsignal",
+    "file": "tests/unit/video-inflate.test.ts",
+    "name": "observes AbortSignal before and during row processing",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Observes AbortSignal before and during row processing. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.inflate.unit.compiles-linear",
+    "file": "tests/unit/video-inflate.test.ts",
+    "name": "compiles linear chains and frame graphs, refusing width-1 planes at plan time",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Compiles linear chains and frame graphs, refusing width-1 planes at plan time. Wave 1 branch wave1/vf-inflate, re-landed at 8b7109a on the shared video negotiation."
+  },
+  {
+    "id": "filter.fillborders.linear",
+    "file": "tests/differential/video-fillborders.test.ts",
+    "name": "matches native linear fillborders across formats, modes, border tuples, colours and sizes",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "6 formats x 7 modes x 8 border tuples x colours x 9x7/20x10/33x17 rawvideo, native size errors and out-of-plane refusals. Wave 1 branch wave1/vf-fillborders, re-landed at c8f2e66 on the shared video negotiation."
+  },
+  {
+    "id": "filter.fillborders.cli",
+    "file": "tests/differential/video-fillborders.test.ts",
+    "name": "matches native fillborders rawvideo and framecrc through linear, graph, actor and timed CLI execution",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "rawvideo and framecrc through -vf, -filter_complex and the timed backend producer and pull schedulers. Wave 1 branch wave1/vf-fillborders, re-landed at c8f2e66 on the shared video negotiation."
+  },
+  {
+    "id": "filter.fillborders.stream",
+    "file": "tests/differential/video-fillborders.test.ts",
+    "name": "matches native replayed fillborders branches and joins frame by frame",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "replay-stream branches and joins. Wave 1 branch wave1/vf-fillborders, re-landed at c8f2e66 on the shared video negotiation."
+  },
+  {
+    "id": "filter.fillborders.refusals",
+    "file": "tests/differential/video-fillborders.test.ts",
+    "name": "refuses margins on narrow chroma, named colours and timeline options before opening outputs where native runs",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "narrow-chroma margins, named colours and enable= refused before outputs open. Wave 1 branch wave1/vf-fillborders, re-landed at c8f2e66 on the shared video negotiation."
+  },
+  {
+    "id": "filter.fillborders.negotiation",
+    "file": "tests/differential/video-fillborders.test.ts",
+    "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "fillborders=2:1:1:2:fixed:0x4080c0 from 17 sources (14 executable formats and yuvj420p/422p/444p), native pick read from showinfo: 13 run byte-exact (-cpuflags 0, scalar) on linear/graph/stream/actor/timed (yuvj on linear only); argb, rgba, abgr and bgra are refused naming gbrap on the five paths and the media -vf/-filter_complex and timed producer/pull CLIs with no output opened. 89 checks. Wave 1 branch wave1/vf-fillborders, re-landed at c8f2e66 on the shared video negotiation."
+  },
+  {
+    "id": "filter.fillborders.unit.parses-declared",
+    "file": "tests/unit/video-fillborders.test.ts",
+    "name": "parses declared defaults, shorthand, modes and colours into frozen settings",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Parses declared defaults, shorthand, modes and colours into frozen settings. Wave 1 branch wave1/vf-fillborders, re-landed at c8f2e66 on the shared video negotiation."
+  },
+  {
+    "id": "filter.fillborders.unit.applies-native",
+    "file": "tests/unit/video-fillborders.test.ts",
+    "name": "applies native border checks, chroma shifts and fill colours per negotiated format",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Applies native border checks, chroma shifts and fill colours per negotiated format. Wave 1 branch wave1/vf-fillborders, re-landed at c8f2e66 on the shared video negotiation."
+  },
+  {
+    "id": "filter.fillborders.unit.materializes-owned",
+    "file": "tests/unit/video-fillborders.test.ts",
+    "name": "materializes owned tight planes for every mode from padded input without mutating it",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Materializes owned tight planes for every mode from padded input without mutating it. Wave 1 branch wave1/vf-fillborders, re-landed at c8f2e66 on the shared video negotiation."
+  },
+  {
+    "id": "filter.fillborders.unit.rejects-unsupported",
+    "file": "tests/unit/video-fillborders.test.ts",
+    "name": "rejects unsupported layouts, budgets, malformed storage, time bases and cancellation explicitly",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Rejects unsupported layouts, budgets, malformed storage, time bases and cancellation explicitly. Wave 1 branch wave1/vf-fillborders, re-landed at c8f2e66 on the shared video negotiation."
+  },
+  {
+    "id": "filter.fillborders.unit.plans-fillborders",
+    "file": "tests/unit/video-fillborders.test.ts",
+    "name": "plans fillborders on every flagged path and refuses size-dependent borders before output",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Unit test, no native comparison: Plans fillborders on every flagged path and refuses size-dependent borders before output. Wave 1 branch wave1/vf-fillborders, re-landed at c8f2e66 on the shared video negotiation."
+  },
+  {
+    "id": "video.negotiation.native-picks",
+    "file": "tests/differential/video-negotiation.test.ts",
+    "name": "picks the format native picks, or refuses that exact format, for every accepted input and operator list",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "2,601 linear negotiation probes against native showinfo: 17 accepted inputs (14 executable formats, yuvj420p/422p/444p) x 51 operator lists (null, negate, transpose=1, epx; the registered limiter/erosion/fillborders/pixelize/chromashift/rgbashift/swapuv/shuffleplanes lists; 15 representative and 24 seeded format= lists) x no/yuv420p/rgba target; 830 executable picks match, 1,771 refused naming native's exact format. Every registered list (dilation, deflate and inflate included) must equal native's transcribed pix_fmts. Negotiation only, no pixel bytes. Shared negotiation fix e08639e."
+  },
+  {
+    "id": "video.negotiation.refusal-paths",
+    "file": "tests/differential/video-negotiation.test.ts",
+    "name": "refuses a negotiated format without storage on every path before output, and runs executable picks as native does",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "Five reachable non-executable picks (rgb555le, monob, bgr8, rgb0, rgb565le) refused by name on linear, graph, stream, actor and timed, and through the CLI (media -vf and -filter_complex, timed producer and pull) with no output opened; three lists naming non-executable formats with executable picks byte-exact vs native (-cpuflags 0, scalar) on all five paths. 4x4, two frames. Shared negotiation fix e08639e."
+  },
+  {
+    "id": "video.negotiation.yuvj-sources",
+    "file": "tests/differential/video-negotiation.test.ts",
+    "name": "converts legacy JPEG-range sources into the format native negotiates for them on linear chains",
+    "modes": [
+      "semantic",
+      "bit-exact"
+    ],
+    "scope": "Seven yuvj420p/422p/444p linear chains (format lists, transpose, negate) byte-exact vs native rawvideo with scalar arithmetic and -cpuflags 0, negotiated format equal to native's storage name, colorRange metadata 2; five of them picked another format before. 4x4, one frame. Legacy yuvj fix 7d965fd."
+  },
+  {
+    "id": "video.operator-registry.examples",
+    "file": "tests/unit/video-operator-registry.test.ts",
+    "name": "runs every registered example on each flagged path with identical frames",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "Every registered operator example runs on each flagged path with identical frames; every formats() list is non-empty, duplicate-free, made of negotiable formats and has at least one member with frame storage (widened from the 14 executable formats in fe89971 so operators can declare native lists). No native comparison."
+  },
+  {
+    "id": "tool.compat-report.platform-not-applicable",
+    "file": "tests/unit/compat-report.test.js",
+    "name": "reports a declared platform-gated skip as not applicable only on platforms the contract does not list",
+    "modes": [
+      "host-tool-contract"
+    ],
+    "scope": "A declared skip on darwin-arm64 is not applicable (file and suite passed-with-not-applicable, contract not-applicable with observed skipped, ungated contract passed). The same skip on linux-x64 fails the file, suite and both contracts. When the test runs and passes on linux-x64, everything passes."
+  },
+  {
+    "id": "tool.compat-report.unexpected-skips",
+    "file": "tests/unit/compat-report.test.js",
+    "name": "fails every skip that no platform-gated contract declares for this platform",
+    "modes": [
+      "host-tool-contract"
+    ],
+    "scope": "Undeclared skips, skips of ungated tests, todo/pending/disabled tests, a test also named by a contract without platforms, and no policy or an unknown platform are unexpected skips that fail. A suite with only not-applicable tests fails validation; passed-with-not-applicable passes it."
+  },
+  {
+    "id": "tool.compat-report.not-evidence",
+    "file": "tests/unit/compat-report.test.js",
+    "name": "never counts a platform-gated skip as evidence of passing",
+    "modes": [
+      "host-tool-contract"
+    ],
+    "scope": "A file with a not-applicable test is not a passing referenced file. A missing gated test on an unlisted platform is not-applicable (observed absent), never passed. A gated test that runs and fails there makes its contract fail."
+  },
+  {
+    "id": "tool.compat-report.platform-ids",
+    "file": "tests/unit/compat-report.test.js",
+    "name": "validates the platforms declaration and derives the run platform from host and reference",
+    "modes": [
+      "host-tool-contract"
+    ],
+    "scope": "Rejects an empty list, a string, linux-x86_64, linux/x64, duplicates, non-strings and capitalised ids. runPlatform turns gating on only when host and reference agree; a mismatch or missing metadata gives policy null, and every skip fails."
+  },
+  {
+    "id": "tool.compat-report.contract-platforms",
+    "file": "tests/unit/compat-report.test.js",
+    "name": "accepts the platform declarations in compat/test-contracts.json",
+    "modes": [
+      "host-tool-contract"
+    ],
+    "scope": "The real contracts file passes platform validation, and every gated contract's scope says it is reported as not applicable elsewhere."
+  },
+  {
+    "id": "tool.compat-report.render-platform",
+    "file": "tests/unit/compat-report.test.js",
+    "name": "states the producing platform for every suite and contract row and lists unexpected skips",
+    "modes": [
+      "host-tool-contract"
+    ],
+    "scope": "renderMarkdown prints the platform in the validation line, the platform/reference/gating line, the suite row (with not-applicable and unexpected-skip counts) and the contract rows (with required platforms), lists each unexpected skip and the not-applicable summary."
   }
 ]
