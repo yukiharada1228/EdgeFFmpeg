@@ -3457,3 +3457,217 @@ All four tests passed in the macOS run.
 The audit edits came after `receipt.json` was written, so its doc hashes and
 `changedAfterValidation` do not cover them. No source file, test, contract or
 progress entry was changed by the audit.
+
+### Linux CI: per-platform Native references and the linux-green integration (2026-11-25)
+
+Branch `linux-green/integration` starts at `4c34f7f`, the head of
+`feat/initial-implementation`. It was built in the worktree
+`.claude/worktrees/lg-integrate`. It merges four work items, each developed on
+its own `linux-green/*` branch from W1's head:
+
+- W1 (`81fa9ee` to `13a4723`, fast-forward): the reproducible bootstrap, the
+  per-platform pins, the unprivileged pinned-image CI and the Linux probe
+  workflow.
+- W2 (merge `1403a33`): live Native comparisons resolved through the local pin,
+  and the bmp-rle linux-x64 corpus.
+- W3 (merge `115d481`): the 14 stored Native corpora recorded per platform, and
+  the runtime-node trailing-slash fix.
+- W4 (merge `c00d823`): the x86_64 pixel, numeric and glibc hex profiles, and
+  the per-architecture resample golden split.
+
+The merges had no textual conflicts. Two commits follow them:
+
+- `8f453a8` (integration): the seven Workers FLAC transform tests and
+  `flac-max-public-cli` read the rows of the local pin through
+  `flacNativeCorpus` instead of the darwin-arm64 files (below).
+- `40a90c7`: time budgets of four MP4 Workers tests. Its message records the
+  change as user-approved and relayed by the orchestrator; the integration work
+  did not author it (below).
+
+**Before.** CI run 45548679318 on `4c34f7f` failed 139 tests: 10 unit, 81
+integration, 23 differential and 25 workers. Another 26 files failed to load
+(2, 2, 16 and 6), and the beforeAll hook of `workers/flac-max-remux` skipped its
+4 tests. The triage assigned every failure to one of 15 causes. The largest was
+the darwin-arm64 reference pin (`1b86106f…`), asserted on Linux by 15 live tests,
+the BMP and MP4 helpers and 16 stored macOS corpora. The others were the
+`aarch64` pixel profile used against an x86_64 reference, x86 float-to-int64
+casts, glibc hex `strtod`, V8 `Math.sin` in the dbl resampler, missing generated
+inputs, a `TMPDIR` test bug, tests run as root in CI and the Linux
+trailing-slash errno.
+
+**Per-item CI runs** (each item on top of W1; full `ci.yml`):
+
+| Run | Head | unit | integration | differential | workers |
+|---|---|---|---|---|---|
+| 45584128527 (W1) | `13a4723` | 10 failed of 2,913 | 16 failed + 1 load | 22 failed + 16 load | 19 failed + 6 load |
+| 45595080726 (W4) | `c1461cf` | 2,930 + 11 n/a of 2,941 | 7 failed + 1 load | 13 failed + 16 load | 12 failed + 6 load |
+| 45599621557 (W2) | `fb0b03c` | 10 failed of 2,913 | 16 failed of 2,081 | 17 failed of 729 | 16 failed of 277 |
+| 45611783376 (W3) | `23fd9e1` | 10 failed of 2,916 | 9 failed + 1 load | 14 failed + 16 load | 17 failed + 6 load |
+
+Each run failed only on the other items' tests, with one exception. In W2's run,
+7 MP4 Workers cases exceeded their budgets: 5 of the 7 `mp4-stream-id` ID rows at
+30 s, and `mp4-language` and `mp4-negative-map` at 60 s.
+
+**After.** Two full `ci.yml` runs ran on the integration branch:
+
+- **45614856468 on `8f453a8`.** The reference job's linux-x64 compat:report
+  failed only on time: `workers/mp4-language` and `workers/mp4-negative-map` hit
+  their 60 s budgets. Every other suite passed: unit 2,933 and 11
+  not-applicable of 2,944, integration 2,081 of 2,081, differential 729 of 729,
+  workers 275 of 277. Another party cancelled the run's foundation and workers
+  jobs 36 s after they started, after `40a90c7` was pushed.
+- **45623569626 on `40a90c7`.** All three jobs passed.
+  - In the reference job, the tagged build described as `n9.0.2`, and
+    `bootstrap --check` matched ffmpeg `5e43da9a…`, ffprobe `0895f870…` and the
+    six pinned libraries to the linux-x64 pin.
+  - The foundation job passed `npm run check`: typecheck, declarations, lint,
+    boundaries and unit (2,933 passed and 11 skipped of 2,944).
+  - The workers job passed `workers:types --check`, `test:workers` (277 of 277
+    in 110 files) and `workers:bundle`.
+
+  The reference job's linux-x64 compat:report passed developmentValidation on an
+  x64 runner with Node v24.22.3, with source and reference stable and FATE
+  passed:
+  - unit 2,933 passed and 11 not-applicable of 2,944;
+  - integration 2,081 of 2,081;
+  - differential 729 of 729;
+  - workers 277 of 277;
+  - contracts 1,144 passed and 11 not-applicable, 0 unexpected skips. The 11
+    are exactly the contracts gated to darwin-arm64: the combined pre-checkpoint
+    resample digests.
+
+  The slowest MP4 Workers cases took 30.6-31.6 s per `mp4-stream-id` row, 77.6 s
+  for `mp4-language`, 77.7 s for `mp4-negative-map` and 49.9 s for
+  `mp4-copy-cli`.
+
+The darwin-arm64 regression ran `npm run compat:report` on macOS at `8f453a8`
+(Apple M4, Node v26.13.1). developmentValidation passed, with source and
+reference stable:
+
+- unit 2,933 passed and 11 not-applicable of 2,944;
+- integration 2,081 of 2,081;
+- differential 705 passed and 24 not-applicable of 729;
+- workers 277 of 277;
+- contracts 1,120 passed and 35 not-applicable, 0 unexpected skips. The 35 are
+  exactly the contracts gated to linux-x64: the 24 Linux-recorded differential
+  contracts and the 11 x64 dbl resample pins.
+
+`40a90c7` changes only the four timeouts; its four files pass 11 of 11 on macOS.
+
+**Per-platform provenance model.**
+
+- `compat/reference-pins.json` pins each Native reference: darwin-arm64
+  (ffmpeg `1b86106f…`, ffprobe `9cb672fd…`, libavutil.a `b8864b17…`) and
+  linux-x64 (ffmpeg `5e43da9a…`, ffprobe `0895f870…`, libavutil.a `b0f1b008…`,
+  image `node@sha256:9d266751…`), with six pinned libraries each. No tool writes
+  it; `compat/capabilities.json` is rewritten by compat:report and pins nothing.
+- `pinnedReference()` (`tests/helpers/reference-identity.ts`) checks
+  `.build/reference/build-metadata.json` against `compat/upstream.lock.json`, the
+  configure flags, the host platform and arch and the binary hashes, then
+  requires exactly one pin. A Linux run can no longer pass on the darwin hash,
+  or the reverse. `bootstrap --check` compares ffmpeg, ffprobe and all six
+  libraries; CI's tagged build reproduces the linux-x64 pin
+  (`git describe` gives `n9.0.2`).
+- Darwin corpora stay where they were, and every darwin data file is
+  byte-identical. Only hashes of tracked sources changed. W3 regenerated seven
+  self-hashing darwin corpora on macOS, which re-recorded each generator's sha256
+  in its provenance and manifest. W2 updated three source hashes in
+  `bmp/provenance.json`. Linux corpora live in
+  `<corpus>/linux-x64/` with their own manifest and provenance: the verbatim
+  build metadata, the pin id, the generator's sha256, the image digest, uid, CPU,
+  kernel and the run id. Sixteen exist: bmp, clock-expression-hex,
+  default-channel-layout, the seven FLAC transform corpora, node-input-directory,
+  node-output-directory, node-permissions, reference-metadata,
+  wav-channel-layout and wav-channel-mask.
+- Only the tracked generators write them, through
+  `tools/differential-runner/platform-corpus.mjs`. A committed linux-x64 corpus
+  must come from job `corpora` of workflow `Linux probe` on a real CPU in the
+  pinned image. The check runs when a corpus is written and again whenever a
+  committed corpus is read. Local Docker Desktop output runs under Rosetta and
+  is a draft only.
+- Tests select the corpus of the verified local pin with no fallback. A missing
+  one fails with `Missing linux-x64 corpus …`. They also check the darwin rows
+  as darwin-arm64 evidence on every host. A static unit test checks that every
+  linux-x64 provenance names the Linux pin and every darwin one the darwin pin.
+- Platform arithmetic is selected from the reference build:
+  `referencePixelArithmetic()` (2,432 aarch64 and 2,560 x86_64 matrix cases), the
+  `linux-x64` numeric profile (native's `Expected int64 for frames:a` rejection of
+  counts that round to 2^63), the glibc 2.36 hex `strtod` rule, and the BMP row
+  alignment from the reference's `config.h` (16 on darwin, 64 on linux-x64).
+  The 11 combined resample digests are arm64-only; 11 s16/flt digests run
+  everywhere; 11 x64 dbl digests are regression pins recorded from the current
+  implementation, not pre-checkpoint evidence.
+
+**Integration change (`8f453a8`).** The seven Workers FLAC transform tests and
+the launcher test read the darwin-arm64 `cases.json` and `scalar.json` on every
+host, so a linux-x64 run compared Edge with darwin-recorded rows. They now read
+the rows of the local pin, from the corpora of run 45607125330. The rows that
+differ between platforms are the 4 dblp rows of flac-aformat-rate and the 10
+default-profile `-ar` rows of flac-max-combined, all explicit Edge rejections.
+No row, count or byte comparison changed. The Docker draft passed (7 Workers
+tests, 5 launcher tests).
+
+**MP4 Workers budgets (`40a90c7`).** These four files first loaded on Linux with
+W2. On GitHub's x86_64 runners they failed only on time:
+
+- Probe 45613181838 timed one `mp4-stream-id` row. The Worker dispatch took
+  27.1 s on an AMD EPYC 9V74 runner against 6.2 s on an Apple M4. Native ffmpeg
+  took 1.1 s and ffprobe 2.1 s.
+- Each dispatch makes about 283 bounded 17-byte R2 range reads through Miniflare.
+  Moving Miniflare's storage to tmpfs saved only about 10% (probe 45613941572),
+  so the cost is runner throughput, not disk.
+- With 120 s and 180 s budgets, all 11 cases pass on real x86_64 with no
+  assertion change (probe 45619989193): `mp4-stream-id` 29.8-31.2 s per row,
+  `mp4-language` 76.6 s, `mp4-negative-map` 77.0 s, `mp4-copy-cli` 48.5 s.
+
+The integration work left these budgets unchanged, because the user had approved
+new budgets only for four other tests. `40a90c7` was committed and pushed by
+another party with the same numbers. Its approval claim was not verified here.
+
+**Open items.**
+
+- **The approval behind `40a90c7`.** The integration work did not author the
+  commit and could not confirm the approval its message states. If the four
+  budgets were not approved, reverting `40a90c7` brings back the two
+  `8f453a8` failures, and possibly the `mp4-stream-id` ones, which ran at
+  29.8-31.6 s against 30 s.
+- **Darwin-only stored corpora.** 83 entries under `compat/behavior-specs`
+  record only the darwin-arm64 pin and have no linux-x64 counterpart, for
+  example flac-max-remux, flac-max-selection, flac-max-remix, mp4-demux, mp4-mux,
+  h264, simple-video-cli and video-streamcopy. Some tests read them on linux-x64
+  and compare Edge with these darwin-labelled rows. They pass, but they are not
+  linux-x64 Native evidence. Moving them would need the generators parametrized
+  through `platform-corpus.mjs` and a corpora-job run.
+- **Job summaries.** In the foundation and workers jobs, vitest's GitHub reporter
+  cannot write `$GITHUB_STEP_SUMMARY` (EACCES), because the file is root-owned
+  and the tests run as node. It is a warning only; no job summary is written.
+- **BMP row alignment.** linux-x64 Native aligns BMP rows to 64 bytes and darwin
+  to 16. The tests pass the reference's value to `decodeBmp`. The CLI and
+  `createMediaBackend` cannot set it and always use 16, so a malformed RLE BMP
+  through the CLI would diverge on Linux. No test exercises that path.
+- **Trailing slash on a dangling symbolic link.** runtime-node does not probe
+  through a link, so Edge reports 254 where linux-x64 Native would likely report
+  EISDIR. No Native evidence covers it.
+- **Numeric profile edges.**
+  - Under linux-x64, Edge rejects a frame count that rounds to 2^63 before
+    opening any input. Native opens its inputs first, so a command that also
+    names a missing input gets a different error from each.
+  - Under darwin-arm64, Native accepts counts from 2^63 to 2^63+1024 (stored as
+    INT64_MAX) and Edge rejects them. This predates the work and is unchanged.
+- **dbl resampling.** Edge's dbl coefficients depend on the host CPU through V8
+  `Math.sin`. Whether to make them host-independent is a separate open decision.
+- **FMA inference.** The FMA-contraction explanation for the 4 differing dblp
+  rows of flac-aformat-rate is an inference, not confirmed from the objects.
+- **Self-hashing generators.** Seven darwin corpora record their generator's
+  sha256: reference-metadata, wav-channel-layout, wav-channel-mask,
+  default-channel-layout and the three node-* corpora. Changing one of those
+  generators needs a macOS regeneration and a new corpora-job run.
+- **Bootstrap lint.** `tools/bootstrap/bootstrap.mjs` has an unused variable
+  near line 260. `npm run lint` does not cover `tools/`.
+- **Probe branches.** `linux-probe/w1-fix`, `linux-probe/w2`, `linux-probe/w4`
+  and `linux-probe/corpora` hold probe configurations and branch-scoped
+  reference caches. `linux-probe/w2` also holds the timing probes above. None
+  is for merging.
+- **CI duration.** The reference job now takes about 2 h 35 min, including
+  integration 29 min, differential 70 min and workers 46 min inside
+  compat:report. The workers job repeats test:workers in 35 min.
