@@ -1,0 +1,4 @@
+{
+  "comment": "W3 corpora run: regenerate every per-platform Native corpus descriptor of linux-green/w3 (14 corpora) on real x86_64 in the pinned image and upload linux-x64-corpora. Not for merging.",
+  "corpora": "all"
+}
