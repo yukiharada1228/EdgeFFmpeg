@@ -2,6 +2,7 @@
 import {readFileSync} from 'node:fs';
 import {mkdtemp,writeFile,readFile,readdir,rm} from 'node:fs/promises';
 import {join} from 'node:path';
+import {tmpdir} from 'node:os';
 import {createHash} from 'node:crypto';
 import {describe,expect,it} from 'vitest';
 import {FFmpeg,ResourceContext} from '@edge-ffmpeg/core';
@@ -83,7 +84,7 @@ describe('FLAC helper pipeline vs pinned independent Native filter evidence',()=
 
 describe('public FLAC filters through the real Node filesystem',()=>{
  for(const row of corpus.rows)it(`Native evidence through public exec: ${row.id}`,async()=>{
-  const root=await mkdtemp(join(process.env.TMPDIR!,'edge-flac-filters-'));
+  const root=await mkdtemp(join(tmpdir(),'edge-flac-filters-'));
   try{
    const input=Buffer.from(row.input,'base64');expect(hash(input)).toBe(row.inputSha256);
    await writeFile(join(root,'in.flac'),input);

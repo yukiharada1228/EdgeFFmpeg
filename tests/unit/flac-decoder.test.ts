@@ -2,8 +2,9 @@ import {readFileSync} from 'node:fs';
 import {beforeAll,describe,it,expect} from 'vitest';
 import {createFlacDecoder} from '../../packages/avcodec/src/flac/decoder.js';
 import type {FlacDecoderOptions} from '../../packages/avcodec/src/flac/decoder-types.js';
+import {flacInvestigationInput} from '../helpers/flac-investigation.js';
 let module:WebAssembly.Module;
-const corpus=JSON.parse(readFileSync('.build/flac-investigation/native-cases.json','utf8')) as {rows:{flac:string}[]};
+const corpus=flacInvestigationInput<{rows:{flac:string}[]}>('native-cases.json').value;
 const bytes=Buffer.from(corpus.rows[1]!.flac,'base64');
 const input={size:BigInt(bytes.length),async readAt(offset:bigint,length:number){return bytes.subarray(Number(offset),Number(offset)+length);}};
 function accounting(){let owned=0,releases=0;return {get owned(){return owned;},get releases(){return releases;},reserveExternalMemory(size:number){owned+=size;return()=>{owned-=size;releases++;};}};}

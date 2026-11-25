@@ -4,11 +4,18 @@ import {createHash} from 'node:crypto';
 import {describe,it,expect} from 'vitest';
 import {createFlacDecoder} from '../../packages/avcodec/src/flac/decoder.js';
 import type {FlacDecodedFrame} from '../../packages/avcodec/src/flac/decoder-types.js';
+import {flacInvestigationInput} from '../helpers/flac-investigation.js';
+import {pinnedReference} from '../helpers/reference-identity.js';
 const hash=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 const wasm=readFileSync('.build/codecs/flac/edge-flac.wasm');
 const module=new WebAssembly.Module(wasm);
 interface CleanRow {id:string;flac:string;pcm:string;flacSha256:string;pcmSha256:string;bits:number;channels:number;samples:number}
-const clean=JSON.parse(readFileSync('.build/flac-investigation/native-cases.json','utf8')) as {rows:CleanRow[]};
+const clean=flacInvestigationInput<{rows:CleanRow[]}>('native-cases.json').value;
+// Edge-versus-Native malformed-input divergences per pinned reference, recorded from that platform's own Native
+// evidence; a platform without an entry fails instead of borrowing another platform's counts.
+const malformedDivergences:Readonly<Record<string,{pcmDifferent:number;completionDifferent:number;unsupported:number}>>={
+ 'darwin-arm64':{pcmDifferent:22,completionDifferent:31,unsupported:56}
+};
 function pcm(item:FlacDecodedFrame,bits:number):Buffer{
  const width=bits<=16?2:4,output=Buffer.alloc(item.samples*item.metadata.channels*width),planes=item.planes;
  for(let sample=0;sample<item.samples;sample++)for(let channel=0;channel<planes.length;channel++){
@@ -38,9 +45,8 @@ describe('FLAC finite Native PCM evidence',()=>{
  it('retains explicit malformed and unsupported CLI policy divergences',async()=>{
   interface Row {id:string;profile:string;input:string;inputSha256:string;output:string|null;exitCode:number;inputOptions:string[]}
   interface Baseline {id:string;profile:string;prototypeEnded:boolean;prototypeSha256:string;frames:{position:string;samples:number}[]}
-  const oracleBytes=readFileSync('.build/flac-investigation/native-error-cases.json');
-  const oracle=JSON.parse(oracleBytes.toString()) as {rows:Row[]};
-  const baseline=JSON.parse(readFileSync('.build/flac-investigation/malformed-prototype-result.json','utf8')) as {oracleSha256:string;results:Baseline[]};
+  const {bytes:oracleBytes,value:oracle}=flacInvestigationInput<{rows:Row[]}>('native-error-cases.json');
+  const baseline=flacInvestigationInput<{oracleSha256:string;results:Baseline[]}>('malformed-prototype-result.json').value;
   expect(hash(oracleBytes)).toBe(baseline.oracleSha256);expect(oracle.rows).toHaveLength(70);
   let pcmDifferent=0,completionDifferent=0,unsupported=0;
   for(const row of oracle.rows){
@@ -51,6 +57,8 @@ describe('FLAC finite Native PCM evidence',()=>{
    if(row.output===null||!result.output.equals(Buffer.from(row.output,'base64')))pcmDifferent++;
    if(result.ended!==(row.exitCode===0))completionDifferent++;if(row.inputOptions.length)unsupported++;
   }
-  expect({pcmDifferent,completionDifferent,unsupported}).toEqual({pcmDifferent:22,completionDifferent:31,unsupported:56});
+  const {id}=pinnedReference(),expected=malformedDivergences[id],observed={pcmDifferent,completionDifferent,unsupported};
+  if(!expected)throw new Error(`No malformed-divergence counts are recorded for ${id}; observed ${JSON.stringify(observed)} against this platform's Native evidence`);
+  expect(observed).toEqual(expected);
  });
 });

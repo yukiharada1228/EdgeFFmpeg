@@ -4,14 +4,15 @@ import {ResourceContext} from '../../packages/core/src/resources.js';
 import {createFlacDecoder} from '../../packages/avcodec/src/flac/decoder.js';
 import type {FlacDecoderInput} from '../../packages/avcodec/src/flac/decoder-types.js';
 import {decodeFlacAudioFrames,prepareFlacAudioFrames} from '../../packages/avformat/src/flac-wave-frames.js';
+import {flacInvestigationInput} from '../helpers/flac-investigation.js';
 
 const decoderBytes=16777216;
 const module=new WebAssembly.Module(readFileSync('.build/codecs/flac/edge-flac.wasm'));
 // Existing independent Native evidence is sufficient for decoder ownership tests;
 // the bridge's separate Native corpus is owned by the oracle worker.
-const corpus=JSON.parse(readFileSync('.build/flac-investigation/native-cases.json','utf8')) as {
+const corpus=flacInvestigationInput<{
  rows:{id:string;flac:string;samples:number;bits:number;channels:number}[];
-};
+}>('native-cases.json').value;
 const row=corpus.rows.find(item=>item.bits===16&&item.channels===2&&item.samples>192);
 if(!row)throw Error('Missing multiframe stereo Native FLAC fixture');
 const inputBytes=Buffer.from(row.flac,'base64');
