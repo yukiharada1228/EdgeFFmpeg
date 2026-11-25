@@ -9,7 +9,7 @@ import {mkdirSync,openSync,closeSync,writeFileSync,existsSync} from 'node:fs';
 import {availableParallelism,totalmem} from 'node:os';
 import {resolve,relative} from 'node:path';
 import {snapshotSource} from '../compatibility-report/source.mjs';
-import {fullPlan,shardMatrix} from './plan.mjs';
+import {fullPlan,readDurations,shardMatrix} from './plan.mjs';
 
 const root=resolve(import.meta.dirname,'../..'),args=process.argv.slice(2),option=name=>{const at=args.indexOf(name);return at<0?null:args[at+1]??null;};
 export const defaultConcurrency=(cpus=availableParallelism(),memory=totalmem())=>Math.max(1,Math.min(8,Math.floor(cpus*0.6),Math.floor(memory/(2.5*1024**3))));
@@ -23,8 +23,11 @@ console.log(`[validate:fast] shards in ${relative(root,out)}, concurrency ${conc
 const prepare=spawnSync('npm',['run','reference:extract'],{cwd:root,encoding:'utf8'});
 writeFileSync(resolve(out,'prepare.log'),`${prepare.stdout??''}${prepare.stderr??''}`);
 console.log(`[validate:fast] reference:extract: ${prepare.status===0?'passed':'failed'} (the report's own reference-extract gate decides validation)`);
-const plan=fullPlan(snapshotSource(root).files.map(entry=>entry.file)),matrix=shardMatrix(plan),runs=[],children=new Set();
-console.log(`[validate:fast] plan ${plan.sha256.slice(0,12)}: ${matrix.length} shards ${JSON.stringify(plan.counts)}`);
+// Same shards as CI; only the start order is local: longest first by this host's measured profile when there is one.
+const plan=fullPlan(snapshotSource(root).files.map(entry=>entry.file)),local=readDurations().profiles?.[`${process.platform}-${process.arch}`]?.files??null,runs=[],children=new Set();
+const localSeconds=entry=>{const files=plan.suites[entry.suite][entry.index-1],known=Object.values(local??{}),mean=known.length?known.reduce((a,b)=>a+b,0)/known.length:1;return files.reduce((sum,file)=>sum+(local?.[file]??mean),0);};
+const matrix=local?shardMatrix(plan).sort((a,b)=>localSeconds(b)-localSeconds(a)||(a.id<b.id?-1:1)):shardMatrix(plan);
+console.log(`[validate:fast] plan ${plan.sha256.slice(0,12)}: ${matrix.length} shards ${JSON.stringify(plan.counts)}; start order ${local?`by the ${process.platform}-${process.arch} durations`:'by the CI estimates'}: ${matrix.map(entry=>entry.id).join(' ')}`);
 const stop=signal=>{for(const child of children)child.kill(signal);process.exit(130);};
 process.on('SIGINT',()=>stop('SIGINT'));process.on('SIGTERM',()=>stop('SIGTERM'));
 function runOne(entry){

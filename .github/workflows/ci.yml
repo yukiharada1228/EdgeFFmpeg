@@ -300,6 +300,13 @@ jobs:
           pattern: shard-*
           merge-multiple: true
           path: .build/shards
+      # The FATE gate runs make in .build/reference. An artifact does not keep the build tree's timestamps, and this
+      # checkout's sources are newer than any restored object, so make would rebuild FFmpeg (and time out). One
+      # timestamp, newer than the checkout, for every file of the restored tree makes make treat it as built, as it was
+      # in the job that built it. bootstrap --check verifies the programs and libraries, and the report's
+      # referenceStable fails if make relinks either program.
+      - name: Give the restored build tree one timestamp newer than the checkout
+        run: find .build/reference -exec touch -h -d "@$(date +%s)" {} +
       - run: chmod +x .build/reference/ffmpeg .build/reference/ffprobe
       - run: chown -R node:node "$GITHUB_WORKSPACE"
       - run: runuser -u node -- env HOME=/home/node npm ci
