@@ -4,11 +4,12 @@ import {mkdtempSync,readFileSync,writeFileSync,readdirSync,rmSync} from 'node:fs
 import {join,resolve} from 'node:path';
 import {tmpdir} from 'node:os';
 import {createHash} from 'node:crypto';
-import combined from '../../compat/behavior-specs/flac-max-combined/cases.json' with {type:'json'};
-import scalar from '../../compat/behavior-specs/flac-max-combined/scalar.json' with {type:'json'};
+import {flacNativeCorpus} from '../helpers/flac-native-corpus.js';
 import remux from '../../compat/behavior-specs/flac-max-remux/cases.json' with {type:'json'};
 import policy from '../../compat/behavior-specs/flac-max-combined/remux-policy.json' with {type:'json'};
 import arithmeticProfile from '../../compat/behavior-specs/flac-max-remix/arithmetic.json' with {type:'json'};
+// Combined and scalar rows come from this host's pinned Native reference; the remux, policy and remix rows stay darwin-arm64 evidence.
+const {corpus:combined}=flacNativeCorpus('flac-max-combined'),{corpus:scalar}=flacNativeCorpus('flac-max-combined','scalar.json');
 
 for(const [kind,row] of [
  ['scalar-volume-rate',scalar.rows.find(row=>row.id==='16-2-ramp-5/known/volume-resample/scalar')!],

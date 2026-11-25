@@ -4,11 +4,12 @@ import {createHash} from 'node:crypto';
 import {expect,it} from 'vitest';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
-import corpus from '../../compat/behavior-specs/flac-max-combined/cases.json' with {type:'json'};
-import scalar from '../../compat/behavior-specs/flac-max-combined/scalar.json' with {type:'json'};
+import {flacNativeCorpus} from '../helpers/flac-native-corpus.js';
 import remux from '../../compat/behavior-specs/flac-max-remux/cases.json' with {type:'json'};
 import selection from '../../compat/behavior-specs/flac-max-selection/cases.json' with {type:'json'};
 import arithmeticProfile from '../../compat/behavior-specs/flac-max-remix/arithmetic.json' with {type:'json'};
+// Combined and scalar rows come from this host's pinned Native reference; the remux, selection and remix rows stay darwin-arm64 evidence.
+const {corpus}=flacNativeCorpus('flac-max-combined'),{corpus:scalar}=flacNativeCorpus('flac-max-combined','scalar.json');
 
 it('runs combined FLAC features through the public backend on actual R2/workerd',async()=>{
  const root=resolve('tests/workers'),wasm=readFileSync('.build/codecs/flac/edge-flac.wasm');
