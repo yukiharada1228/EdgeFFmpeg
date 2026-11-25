@@ -3078,3 +3078,305 @@ match the tests' asserted totals. These docs were corrected:
 The audit edits came after `receipt.json` was written, so its doc hashes and
 `changedAfterValidation` do not cover them. No test, contract or progress entry
 was changed by the audit.
+
+### Video follow-up: shared negotiation, platform-aware report and the ten deferred video operators (2026-11-25)
+
+Branch `wave1/video-followup` starts at `1cf5b96`, the pushed head of
+`feat/initial-implementation` and `wave1/integration`. It was built in the
+worktree `.claude/worktrees/wave1-int`. Nothing was pushed. Its 21 commits before
+this record, in order:
+
+- `b3c5c90`, `5fe0db6`, `1a7e9e8`: the compatibility report handles
+  platform-gated tests (below).
+- `e08639e`, `7d965fd`, `1bf81e9`: the shared video negotiation fix and its test.
+- `fe89971` to `b288a9d` (13 commits): the ten deferred video operators re-landed.
+- `9d0c088`: asoftclip's alg test title no longer depends on the platform.
+- `7c5e0e1`: contracts and progress entries.
+
+**Shared negotiation fix.** `packages/avfilter/src/video-ops/formats.ts` now
+lists every non-hwaccel pixel format of the pinned build: 251, in AVPixelFormat
+order. Each entry has its component count, chroma shifts, flags, component
+depths, padded bits per pixel and whether vf_scale accepts it as input or
+output. A C helper generated the table from the pinned libavutil and
+libswscale. The scoring reimplements `get_pix_fmt_score`, `get_color_type` and
+`av_find_best_pix_fmt_of_2`. The 14 formats with frame storage remain the
+executable table (`negotiationOrder`).
+
+The linear, frame-graph and timed negotiators now negotiate over the full table
+and use vf_scale's lists for scale pads. When a negotiated link has no frame
+storage here, they refuse it at plan time, before geometry, input reads or any
+output: `Video filter X input negotiates F, which is not implemented`, or
+`Video output negotiates F, which is not implemented`. They never substitute
+another format.
+
+Legacy `yuvj420p`, `yuvj422p` and `yuvj444p` sources on linear chains, such as
+full-range H.264, now negotiate under their own names, as native does. A yuvj
+link stores planar YUV and runs only when its producer reads a yuvj link.
+negate and transpose still declare lists trimmed to the executable table. A new
+descriptor flag, `jpegSiblings`, adds back the yuvj siblings that native lists.
+
+The native evidence was taken on macOS arm64 with the pinned reference (sha256
+`1b86106f…ab92`):
+
+- **Picks.** The chooser agrees with the pinned libavutil
+  `av_find_best_pix_fmt_of_2` on all 7,875,125 picks: every one of the 251
+  sources against each of the 31,375 pairs `d1 < d2` in AVPixelFormat order,
+  with `has_alpha` taken from the source as `pick_format` does. The check ran on
+  a candidate copy of `formats.ts` whose table and chooser are those committed;
+  the committed file adds only the yuvj handling of `7d965fd` and a comment.
+  It links a C helper against the pinned libavutil, so it is evidence only, not
+  a CI test.
+- **Negotiation probes.** `tests/differential/video-negotiation.test.ts` reads
+  native's negotiated format from showinfo for 2,601 cases: 17 accepted inputs,
+  51 operator lists and 3 targets. Every case picks native's format. 830 run and
+  1,771 are refused, naming exactly native's format.
+- **Refusal paths.** A second test refuses five reachable picks without storage
+  by name on the linear, graph, stream, actor and timed paths and on four CLI
+  backends, with no output opened (45 refusals). It also runs three executable
+  picks byte-exact on all five paths (15 runs).
+- **yuvj sources.** A third test runs seven yuvj chains byte-exact. Five of them
+  picked another format before the fix, when they were negotiated from the
+  storage name.
+
+These behaviour changes are intentional:
+
+- `format=` lists naming layout-only formats (`rgb0`, `rgb555le`, `pal8`,
+  `monob` and so on) used to fail with `Invalid video format candidates`. They
+  now negotiate. They run when native's pick has storage and are refused by name
+  otherwise.
+- Graph-path sources outside the 14 formats fail with the named refusal instead
+  of `Unsupported branch converter`.
+- yuvj sources follow native's picks. For example, `yuvj420p` with
+  `format=rgb24|yuv444p` now outputs rgb24, as native does; it was yuv444p.
+
+**Reintegrated video operators.** All ten deferred operators are back: swapuv,
+limiter, pixelize, shuffleplanes, chromashift, erosion, dilation, deflate,
+inflate and fillborders. None remains deferred, and none had to be reverted
+again. Each re-land applies the inverse of its revert commit. That did not
+restore the registry lines, which `2934bb9` had removed by hand, so each
+operator's import line and array entry were added by hand again.
+`packages/avfilter/src/video-ops/registry.ts` now has 29 operator imports and
+29 entries, each once. Compared with `origin/wave1/<slug>`, each operator
+differs only in its module, its two test files and its doc.
+
+`formats()` now returns native's full `query_formats` list in declared order,
+not its intersection with the 14-format table:
+
+- swapuv: 70 formats (`is_planar_yuv`);
+- limiter, erosion, dilation, deflate, inflate and fillborders: 57;
+- pixelize: 58;
+- chromashift: 39 (`yuv_pix_fmts`);
+- shuffleplanes: native's rule over every non-palette format. Its plane counts
+  and subsampling were transcribed from the pinned libavutil, and all 256 maps
+  (9,619 entries) match a C helper linked against `libavutil.a`. That check is
+  evidence only.
+
+Frames still run only in formats with storage here, plus yuvj sources on linear
+chains. The shared negotiators refuse every other pick by name. As a result:
+
+- packed RGB with alpha (rgba, bgra, argb, abgr) is refused as `gbrap` for
+  limiter, pixelize, the four neighbour filters and fillborders;
+- gray is refused as `yuvj444p` for swapuv and chromashift;
+- packed RGB with alpha is refused as `yuva444p` for swapuv and chromashift;
+- shuffleplanes' picks without storage are refused by name. Its 163 maps that
+  admit no format with storage, such as `3:3:3:3`, now parse, as they do
+  natively. They are refused at plan time instead of at parse.
+
+The tests that pinned the divergence now assert the refusals:
+
+- swapuv's gray and packed-alpha test, and chromashift's gray test;
+- chromashift's rgba refusal, which now names `yuva444p` (it named `yuva420p`);
+- fillborders' unit test, which expects rgba to be refused as `gbrap`;
+- shuffleplanes' 766 "outside the table" linear cases, which are now refusals
+  naming native's format. Its 3,584-case `query_formats` test also checks
+  EdgeFFmpeg's pick: 195 direct, 510 converted and 2,879 refused by name.
+
+Each operator also gained a per-source negotiation test, built on
+`tests/helpers/video-negotiation-cases.ts`. For 17 sources (16 for chromashift,
+which refuses yuva420p) it reads native's pick from showinfo. It then requires
+either byte-exact native rawvideo on the linear, graph, stream, actor and timed
+paths, or the named refusal on those five paths and on four CLI backends with
+no output opened. Two other changes were needed:
+
+- `tests/unit/video-operator-registry.test.ts` (`fe89971`) used to require every
+  `formats()` list to sit inside the 14 executable formats. It now requires a
+  non-empty list of negotiable formats, without duplicates, with at least one
+  executable member, as `descriptor.ts` documents. This is the one check that
+  was relaxed, and native lists need it.
+- inflate's refusal test (`280c518`) compares native's ERANGE text through the
+  host's strerror ("Result too large" on macOS). The comparison on Linux is
+  unchanged.
+
+**Platform-aware compatibility report.** A contract may declare
+`"platforms": [...]`, a non-empty list of distinct `<process.platform>-<process.arch>`
+identifiers. A skipped test is not applicable only when every contract naming it
+declares `platforms` and none lists the run's platform. Every other skip fails,
+including todo, pending and disabled tests. Gating applies only when the host
+and the reference's `build-metadata.json` name the same platform. Files and
+suites can now be `passed-with-not-applicable` or `not-applicable`, and
+validation rejects a suite with no passed test. Not-applicable results never
+count as passed tests, passing contracts, bit-exact PCM cases or passing
+referenced files. The report's `schemaVersion` is 2. Every suite and contract
+row records its platform. The rules are in
+[compatibility-report](compatibility-report.md#platform-gated-tests).
+
+The 24 linux/x64-gated contracts declare `["linux-x64"]`. Only
+`filter.afade.ipar` has a measured macOS difference: 78 of 302 gains for
+`ns=301`. The other 23 scopes attribute the gate to the wave specification, not
+to a macOS measurement. On macOS one more fix was needed (`9d0c088`).
+asoftclip's alg test built its title from the build metadata, so on macOS the
+skipped test did not carry the contract's `(linux/x64)` title, and its skip read
+as unexpected. The title is now constant, and the gate and the comparison are
+unchanged.
+
+**Records.** `7c5e0e1` adds 118 contracts, so `compat/test-contracts.json` now
+has 1,133:
+
+- 108 for the ten operators: their branches' proposed contracts resolved to the
+  current titles; the renamed and new negotiation tests, with the reintegration
+  scopes; and every unit test in the branches' files;
+- 3 for the shared negotiation test;
+- 1 for the widened registry check;
+- 6 for the platform-aware report.
+
+None of the new contracts is platform-gated. It also adds ten `partial` progress
+entries with runtime `node`, because there is no workerd evidence. Each entry
+lists the operator's unit and differential files and the shared negotiation
+test. `compat/capabilities.json` was regenerated with `npm run reference:extract`,
+and only those ten entries changed. Nothing was promoted to `conformant` or
+`bitexact`.
+
+**Validation.** Every suite ran on one source snapshot (`47310ec4…26eb`, head
+`7c5e0e1`, 2,155 files). The snapshot was identical before the suites, between
+them and compat:report, and after compat:report. The host was macOS arm64 with
+the pinned reference (sha256 `1b86106f…ab92`) and nvm Node v24.12.0. The
+standalone steps did not log their Node version, but they ran from one script,
+and the crash trace of their compat:report names Node.js v24.12.0. The final
+compat:report logged v24.12.0.
+
+- typecheck, declarations, lint, boundaries and `npm test` (the `npm run check`
+  sequence, with JSON output): all passed; unit **2,892/2,892 tests across 250
+  files** (86 s for the whole step).
+- `npm run test:workers`: **277/277 tests across 110 files** (999 s).
+- `npm run test:integration`: **2,081/2,081 tests across 83 files** (866 s).
+- `npm run test:differential`: **729 tests across 249 files: 705 passed, 24
+  skipped, none failed** (2,709 s).
+- `WRANGLER_SEND_METRICS=false npm run workers:bundle`: the dry-run bundle
+  passed (wrangler 4.165.0, 1,401.96 KiB); nothing was deployed.
+
+On macOS arm64 that is **5,979 tests across 692 files: 5,955 passed, 24 skipped
+and none failed**. The 24 skipped tests are the linux/x64-gated differential tests
+of the same ten audio files as before: adynamicsmooth 3, aecho 5, afade 2,
+aintegral 2, asoftclip 1, compensationdelay 2, crystalizer 3, extrastereo 2,
+haas 2 and stereowiden 2. Every test in the Linux CI JSON of run 45499919847 at
+`1cf5b96` still exists on macOS and passes, per file, full test name and
+occurrence, except those 24 gated tests. That covers unit 2,805, integration
+2,000, differential 626 and workers 264 tests; files that failed to load there
+contribute no tests.
+
+**compat:report.** The first `WRANGLER_SEND_METRICS=false npm run compat:report`
+stopped with ENOSPC (disk full) during tests-integration, and wrote no report.
+After space was freed (about 16 GiB), a second attempt was stopped after about a
+minute, because it had started under Node v26.13.1. The third run used Node
+v24.12.0, took 4,871 s and passed:
+
+- `developmentValidation` is `passed` (`compatibilityCertified` stays `false`).
+  The host and the reference build metadata both name `darwin-arm64`, so the
+  platform policy applied.
+- All 14 gates passed: reference extraction, the FATE inventory, the FATE audio
+  audit, typecheck, declarations, lint, boundaries, worker types, the worker
+  bundle, the four test suites and FATE execution (5 of 5 profiles).
+- Suites: unit, integration and workers `passed`. Differential is
+  `passed-with-not-applicable`: 705 passed, 24 not applicable, 0 failed, 0
+  unexpected skips and no missing file. Its ten gated files are
+  `passed-with-not-applicable`, and the other 239 files are `passed`.
+- Contracts: 1,109 of 1,133 passed. The other 24 are not applicable, and they are
+  exactly the 24 contracts that declare `["linux-x64"]`. No contract failed or
+  is unverified. Scoped bit-exact PCM cases: 94 of 101 passed, 7 not applicable.
+- The source (`47310ec4…26eb`) and the reference were stable across the run.
+  Its four Vitest reports equal the standalone run's, per file, full test name,
+  status and occurrence.
+
+Free disk space fell to about 3 GiB during the run's tests-workers. Other
+processes were active on the machine at the time, among them another project's
+workerd and Spotlight indexing, and the drop was not attributed to a test.
+
+**Linux CI on `1cf5b96`.** GitHub Actions runs 45499928633 and 45499919847 ran
+`1cf5b96` on Linux x86_64 (Node v24.22.3, CI-built reference `58295ca5…f966`).
+Both concluded **failure**, like the baselines 45402980700 (`b829893`) and
+45321289869 (`a70c237`):
+
+| Suite | 45499928633 | 45499919847 | Baseline 45402980700 | Baseline 45321289869 |
+|---|---|---|---|---|
+| unit | 2,805, 10 failed | 2,805, 10 failed | 2,852, 10 failed | 2,569, 10 failed |
+| integration | 2,000, 81 failed | 2,000, 81 failed | 2,000, 81 failed | 2,000, 81 failed |
+| differential | 626, 23 failed | 626, 23 failed | 675, 23 failed | 496, 23 failed |
+| workers | 264, 25 failed (4 skipped) | 264, 26 failed (4 skipped) | 264, 26 failed (4 skipped) | 264, 26 failed (4 skipped) |
+
+The comparison was made per file and full test name, counting repeated names. It
+was then recomputed independently from the same JSON reports. **Neither run has a
+failure that is not in either baseline.** No file fails to load that loaded in
+either baseline; the same 26 files fail to load in all four runs. Every non-test
+gate passed in both runs, and the four test gates failed, as in the baselines.
+One workers test is not stable on this head. `tests/workers/simple-video-cli.test.ts`
+"matches 1369 Native simple video CLI cases and 42 selector boundaries through
+local R2" failed in both baselines and in 45499919847, but passed in 45499928633.
+That is the only difference between the two runs.
+
+All 24 linux/x64-gated tests passed in both runs. So did the unit and
+differential files of the integration fixes (afade, asoftclip, compensationdelay,
+ircam and sds), including the afade `ipar` test and the compensationdelay-wrap
+and sds byte-2 differentials. The test counts are lower than at `b829893`
+because `1cf5b96` has the ten video reverts: 48 unit and 52 differential tests in
+the deferred operators' files are absent. The integration fixes add 1 unit test
+(compensationdelay) and 3 differential tests (afade, compensationdelay and sds).
+**The 21 follow-up commits and this record have not run on Linux CI**, because
+nothing was pushed. Everything they add has macOS evidence only.
+
+**Evidence.** Raw logs, Vitest JSON reports, the compat:report run directory, the
+CI artifacts and their comparison, the source snapshots, a disk log and the
+scripts are in the git-ignored `.build/video-followup/validate/` of the worktree
+`.claude/worktrees/wave1-int`. They are not committed. `receipt.json` there records
+the source snapshot with per-file hashes, the reference hashes, each step's
+command, exit code and duration, the counts, and the sha256 of every log and JSON
+report. The native helpers and probes behind the negotiation and reintegration
+evidence are in `.build/video-followup/{video-negotiation,video-reintegrate,platform-report}/`.
+Those files are lost if this worktree is deleted, as the wave 1 integration
+evidence was. The Linux CI artifacts remain on GitHub for their retention period.
+
+Open after this follow-up:
+
+- **No Linux CI on this branch.** The negotiation fix, the ten operators' new and
+  changed tests, the platform-aware report and the asoftclip title change have
+  run only on macOS. On Linux the 24 gated contracts should pass, not read as
+  not applicable.
+- **Linux baseline failures.** The 10 unit, 81 integration, 23 differential and
+  25 or 26 workers failures, and the 26 files that fail to load, are still not
+  diagnosed. The simple-video-cli workers test passes in only one of the two
+  runs at `1cf5b96`.
+- **Video storage.** Frames run only in the 14 formats with storage, plus yuvj
+  sources on linear chains. Every other native pick is refused by name. That
+  covers high bit depth, `gbrap`, `yuva444p`, `yuva422p`, `yuvj444p` as a
+  converted target, and the layout-only formats. Those are refusals, not parity.
+- **Evidence-only native checks.** The 7,875,125-pick oracle and the 256
+  shuffleplanes lists link C helpers against the pinned libavutil. They are not
+  CI tests.
+- **Operator status.** The ten operators are `partial` with runtime `node`. None
+  has workerd evidence. No chain combines two wave 1 filters.
+- **Carried over from the wave 1 integration and not changed here.** dcshift and
+  aderivative still drop float cases silently on macOS. aderivative's and
+  earwax's reservations, aintegral's refusal test and non-finite float input are
+  unchanged. So are the shared container gaps, avr's `-f avr` refusal, the review
+  notes on field, epx and haas, and the host C compiler that the sox and ircam
+  FATE tests need. `merge=union` still governs `git revert` of a registry merge.
+- **This worktree.** `git merge` and `git revert` refuse to run while
+  `upstream/ffmpeg` is a symlink. `npm run check` still needs the git-ignored
+  `.build` artifacts and the submodule, which this worktree reaches through
+  symlinks.
+- No Modal run, production Cloudflare execution, compatibility certification or
+  capability promotion was performed.
+
+The wave 1 record's open items on compat:report on macOS, the deferred video
+branches and asoftclip's per-platform title are closed by this follow-up. Its
+note that the afade `ipar` test had not run at all is superseded: it passed on
+Linux at `1cf5b96`.
