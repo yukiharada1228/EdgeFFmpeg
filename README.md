@@ -60,7 +60,22 @@ conformant or bitexact. Earlier failed runs remain recorded.
 
 ## Development
 
-Requires Node.js 24+, npm, Git, a C compiler and Make.
+Requires Node.js 24+, npm, Git, a C compiler and Make. Building the Wasm codecs
+also needs Bash, Python 3, CMake and tar with xz support.
+
+A fresh clone does not contain the git-ignored reference build, Wasm codecs or
+generated test inputs that `npm run check` and the other suites read. One command
+prepares them from pinned inputs and verifies their hashes:
+
+```sh
+npm run bootstrap   # reuse local toolchains/sources with --emsdk, --ffmpeg-source, ...; --offline never downloads
+npm run check
+```
+
+`npm run bootstrap:check` reports what is missing without building anything. See
+[environment setup](docs/contributing/environment-setup.md) for prerequisites,
+reuse and offline options, measured durations and single-test commands. The
+individual steps remain available:
 
 ```sh
 git submodule update --init

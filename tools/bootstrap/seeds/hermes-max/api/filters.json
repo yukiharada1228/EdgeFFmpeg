@@ -1,0 +1,28 @@
+{
+  "module": "packages/avformat/src/flac-wave-filters.ts",
+  "status": "implemented bounded helper; wired by flac-transform.ts into the public FLAC backend",
+  "exports": {
+    "compileFlacAudioFilters": "(description: string, outputFormat: AudioSampleFormat) => CompiledFlacAudioFilters",
+    "processFlacAudioFilters": "(frames: AsyncIterable<AudioFrameData>, compiled: CompiledFlacAudioFilters, options: {resources: ResourceContext, signal: AbortSignal, maxFrameBytes: number, inputFormat?: AudioPadFormat}) => AsyncIterable<AudioFrameData>"
+  },
+  "compiled": "Extends existing AudioFilterChain without changing semantics; encoderSampleFormat is the requested output hint. plan(inputSamples: bigint, inputRate: number, inputFormat: AudioSampleFormat) returns finite samples, buffers, stages, outputRate, sampleFormat (filter output), encoderSampleFormat, requiresScalarRounding. Existing outputSamples/outputSampleRate/resolvedSampleFormat/packetSections also remain available.",
+  "supported": [
+    "anull",
+    "constant volume",
+    "asetrate",
+    "single-format aformat",
+    "asetnsamples",
+    "finite apad"
+  ],
+  "input": "AudioFrameData, not FlacDecodedFrame; backend must supply accounted packed/planar PCM frames with stable rate/channels/layout/sampleFormat and preserve sample-aligned contiguous timestamps for buffering filters. Optional inputFormat snapshots decoded source rate/channels/layout/sampleFormat/pts before awaits, enables configured empty padding, and must agree with nonempty source format.",
+  "lifetime": "Single consumer; each output is borrowed until next()/return(). Do not retain frames unless copied into independently accounted memory. Producer owns/releases input memory. Always close iterator on early stop.",
+  "memory": "Before filtering first input (or before opening source when inputFormat is supplied), reserveExternalMemory acquires a conservative resident envelope: maxFrameBytes per allocating scalar node, two bounded slots per asetnsamples node, one bounded packet per apad node. Every actual allocation must fit min(maxFrameBytes, resources.budget.maxBufferBytes); finite padding uses min(packet_size, finite tail bound), not the configured packet_size alone. Reservations survive yields and release on EOF/error/abort/return. Source and separately owned PCM encoding/output writer allocations are not double-accounted here and must be accounted by backend.",
+  "cancellation": "Either options.signal or resources.signal cancels; pending next()/return() are abort-aware and late rejection is observed. Uncooperative source cleanup can finish after cancellation and remains producer-owned.",
+  "integration": "flac-transform.ts imports this helper directly, compiles before output creation, and executes two bounded passes with shared Core resources: count actual transformed samples, then independently encode/mux through the atomic output group. Do not substitute encoderSampleFormat for filter output sampleFormat. The backend enforces -cpuflags 0 when scalar rounding is required. The helper plan remains available for callers with an exact selected decoded count.",
+  "limitations": [
+    "Helper itself does not resample/remix/evaluate graphs or invoke Native; separate backend stages own supported transforms",
+    "Conservative envelope may reject budgets that a finer per-allocation allocator could fit",
+    "Header count must be computed from actual selected input count, not unknown STREAMINFO total",
+    "Full 22-chapter architecture goal remains incomplete"
+  ]
+}

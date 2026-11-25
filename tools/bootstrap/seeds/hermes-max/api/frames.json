@@ -1,0 +1,31 @@
+{
+  "module": "packages/avformat/src/flac-wave-frames.ts",
+  "status": "implemented-backend-integrated-focused-node-and-workers-verified",
+  "exports": {
+    "decodeFlacAudioFrames": "(module: WebAssembly.Module, reader: ReadHandle, options: FlacAudioFramesOptions) => FlacAudioFrames",
+    "prepareFlacAudioFrames": "(module: WebAssembly.Module, reader: ReadHandle, options: FlacAudioFramesOptions) => Promise<FlacAudioFrames>",
+    "FlacAudioFramesOptions": "{resources: ResourceContext, signal: AbortSignal, maxFrameBytes: number, maxReadBytes?: number}",
+    "FlacAudioFrames": "AsyncIterableIterator<AudioFrameData> & {prepare(): Promise<FlacAudioFramesMetadata>, readonly metadata: FlacAudioFramesMetadata | null, close(): Promise<void>}",
+    "FlacAudioFramesMetadata": "FlacDecoderMetadata & {channelLayout: string, channelMask: bigint, sampleFormat: 's16' | 's32', timeBase: {num: bigint, den: bigint}}"
+  },
+  "opening": "decodeFlacAudioFrames is synchronous and lazy. Await stream.prepare() or use prepareFlacAudioFrames to expose metadata without pulling a PCM frame. STREAMINFO and comment/layout metadata are read by bounded random-access reads; packet payload iteration is not started. The same single decoder is retained for subsequent next() calls. Always close/return in backend finally, including after prepare-only validation.",
+  "semantics": {
+    "format": "Packed little-endian s16 for 4..16-bit sources, left shifted by 16-bitsPerSample; packed little-endian s32 for 17..32-bit sources, left shifted by 32-bitsPerSample. FLAC-specific channel layout and valid channel-mask comments are preserved via existing demux metadata.",
+    "pts": "Absolute contiguous sample positions starting at zero, timeBase 1/sampleRate. Rejects noncontiguous decoded sample positions, changing parameters and known total-sample mismatches at EOF.",
+    "bounds": "maxFrameBytes bounds decoder planar frame storage and each packed chunk. Output chunks also fit Core maxBufferBytes, so decoder frames may be split. maxReadBytes is capped at 65536 and Core maxBufferBytes. Exactly one live decoder; no prepass, full-input buffering, output writes or Native/Node/.build production dependency."
+  },
+  "lifetime": {
+    "packed": "One Core reservation before each packed allocation. Output planes borrowed until next(), return(), throw(), close() or either abort signal. Consumers retaining data must copy with their own accounting.",
+    "decoder": "Decoder reserves its fixed 16777216 bytes through ResourceContext. Planar views never escape helper; release before decoder advance and on all exits. A partially packed decoder frame remains borrowed only until remaining chunks are pulled or cleanup occurs.",
+    "reads": "One readBound reservation covers maximum borrowed provider result while decoder lives; metadata reader accounts its own scratch. Reader remains caller-owned. Runtime bookkeeping/provider-owned underlying storage beyond the requested read span is not owned by helper.",
+    "cleanup": "return/throw/close/EOF/failure and options.signal or resources.signal abort release packed chunks, frame lease and decoder reservations. Waits detach on abort and observe late provider rejection. No concurrent next() calls; prepare() is cached."
+  },
+  "integration": "Root's packages/avformat/src/flac-transform.ts imports decodeFlacAudioFrames and uses prepare(), metadata and close() in its sequential two-pass transform pipeline. The helper itself retains exactly one decoder, never publishes output, and does not own downstream buffers. Consumers must account downstream buffers separately and publish only through the existing atomic output group. The backend rejects ambiguous chunking for framecrc/frame-limit paths. Backend/barrel changes remain Root-owned.",
+  "verification": {
+    "focusedCommand": "npx vitest run tests/unit/flac-max-frames.test.ts tests/workers/flac-max-frames.test.ts --maxWorkers=1",
+    "focusedResult": "2 files / 8 tests passed. The Workers driver exercises the actual helper against 34 Native raw-format corpus rows through R2/workerd, plus eager/split/prepare-only/return/throw/abort/budget/write-failure modes. The existing Node unit file still tests decoder prerequisites, not the bridge itself.",
+    "additionalNodeAcceptance": "A scratch-only esbuild browser-bundle Node driver exercised the actual helper against all 34 Native raw-format rows and 15 unlimited-frame rows with maxBufferBytes=256 splitting. Exact output bytes/hashes, metadata, contiguous PTS, bounded reads, laziness and zero remaining Core ownership passed. No Native execution or fixture edits. Scratch driver is not a committed test replacement.",
+    "isolatedChecks": "npx eslint packages/avformat/src/flac-wave-frames.ts passed. TypeScript createProgram rooted at the owned helper reported zero owned-file diagnostics. Production browser bundle contained no Node or .build inputs."
+  },
+  "limitations": ["STREAMINFO required; raw frame fallback unsupported", "No seeking, prepass, chapter/tag preservation policy or output publication within this helper", "Chunking can split decoder frame boundaries; framecrc/frame-limit integration must explicitly choose its framing policy", "Node bridge acceptance was run as a scratch driver; converting the prerequisite-only unit tests to persistent bridge tests remains the test owner's work", "Full 22-chapter architecture and complete malformed-input Native parity remain outside this helper"]
+}

@@ -1,0 +1,30 @@
+{
+  "status": "implemented and backend-wired; focused Node and Workers selection acceptance passed",
+  "module": "packages/avformat/src/flac-selection.ts",
+  "exports": ["snapshotFlacSelection", "selectFlacStreams", "FlacSelectionOptions", "FlacSelectionPolicy", "FlacStreamIdentities", "FlacStreamDescriptor", "FlacStreamSelection"],
+  "identities": {
+    "audioStreamId": "0",
+    "pictureStreamIds": "readonly number[], positive ascending demux IDs",
+    "streamDescriptors": "optional readonly FlacStreamDescriptor[]",
+    "descriptor": {"streamId": "existing demux ID", "tags": "optional readonly Record<string,string>; actual stream metadata only", "dispositions": "optional readonly string[]; attached_pic intrinsic to pictureStreamIds", "usable": "optional boolean; proven codec parameters after probing"}
+  },
+  "selectors": ["existing all/absolute/a/v and relative numeric selectors", "0:V and 0:V:N (no matches in FLAC attached-picture-only video model)", "0:m:key[:value] and a/v/V-prefixed metadata selectors", "0:disp:attached_pic and a/v/V-prefixed disposition selectors", "0:u and 0:a:u / 0:v:u / 0:V:u with explicit usable facts"],
+  "metadataRules": "ASCII case-insensitive key, case-sensitive exact value, first matching dictionary key; absent descriptor is unknown and throws unsupported-command; present descriptor without tags means known empty stream metadata. Native parses metadata before opt_map examines its remainder: a trailing ? is a literal metadata key/value character, NOT optional-map syntax. Colon/quote/backslash escaping is explicitly unsupported.",
+  "lifetime": "Snapshot command synchronously before first provider await. Descriptors are immutable borrowed scalar data consumed synchronously by selectFlacStreams, never retained; output and policy are frozen. No reader, payload, await, cancellation listener or output side effect in helper.",
+  "memory": "64 maps / streams / selected duplicates / descriptors; 128 map characters; aggregate 1024 own tags and 65536 UTF-16 tag characters; 64 flags per descriptor with max64 chars. No media buffers allocated: caller owns actual Core metadata/codec reservations and release, bounded abort-aware reads, late rejection observation, demux cleanup and transactional publication.",
+  "integration": [
+    "flac-copy.ts, flac-decode.ts and flac-wave-remux.ts snapshot selection before provider awaits and call selectFlacStreams with the Root-owned flacStreamIdentities(demux) helper.",
+    "flac-stream-identities.ts constructs frozen streamDescriptors: audio {streamId:0,tags:Object.freeze({}),dispositions:Object.freeze([])} with usable:true when STREAMINFO proves sample rate/channels/bits per sample. FLAC Vorbis metadata.tags are container tags, NOT audio stream tags; they are not copied onto stream0.",
+    "Each demux.attachedPictures[index] maps to streamId:index+1, tags:picture.descriptor.tags after accepted-kind narrowing, dispositions:Object.freeze(['attached_pic']). The descriptor list is frozen and retains no picture chunks or payload.",
+    "Picture usable remains unknown: it requires nonzero dimensions and a known decoded pixel format after probing, not declared dimensions alone. Usable selectors requiring unknown picture facts reject explicitly.",
+    "Continue rejecting selected picture output unless the output mux path explicitly supports it. Never filter pictureStreamIds to make an audio backend succeed. Keep Core reservations, abort-aware waits, close/finally and atomic output group publication in caller."
+  ],
+  "validation": {
+    "command": "npx vitest run tests/unit/flac-selection.test.ts tests/unit/flac-max-selection.test.ts tests/integration/flac-selection.test.ts tests/integration/flac-decoded-selection.test.ts tests/integration/flac-max-public-selection.test.ts tests/workers/flac-max-selection.test.ts --maxWorkers=1",
+    "result": "6 files passed; 398 tests passed",
+    "nativeCorpus": "flac-max-selection: 60 rows; 21 successful audio-only public output matches, 20 explicit attached-picture output gaps, 19 matching Native rejection outcomes. Legacy Native144 selection also exercised in Node and Workers.",
+    "workers": "Actual browser-platform bundle and Miniflare R2/Wasm exercise; Node/.build runtime imports rejected, bounded reads/writes, Core reservation release, cancellation and failure cleanup checked. Advanced selection uses corpus stream descriptors; the public backend corpus runs in the Node integration driver.",
+    "isolatedChecks": "Owned flac-selection.ts ESLint passed; TypeScript compiler diagnostics filtered to the owned source and global option diagnostics: 0. No whole-project check run."
+  },
+  "limitations": ["Selected attached-picture output remains an explicit unsupported-command in the exercised public decode backend; selection itself preserves picture identities and order", "Picture usability remains unknown without decoded pixel-format probing", "Only attached_pic disposition is supported; other disposition syntax rejects explicitly", "No program/group/ID/subtitle/data/general stream support", "Full 22-chapter architecture target remains; this bounded selector is a partial helper, not overall conformance"]
+}

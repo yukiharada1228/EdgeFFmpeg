@@ -43,7 +43,9 @@
     "types:declarations": "tsc --declaration --emitDeclarationOnly --noEmit false --rootDir packages --outDir .build/types",
     "codec:h264:build": "node tools/codecs/openh264/build.mjs",
     "codec:flac:build": "python3 tools/codecs/flac/build.py",
-    "reference:flac-characterization": "node tools/differential-runner/flac-characterization/generate.mjs"
+    "reference:flac-characterization": "node tools/differential-runner/flac-characterization/generate.mjs",
+    "bootstrap": "node tools/bootstrap/bootstrap.mjs",
+    "bootstrap:check": "node tools/bootstrap/bootstrap.mjs --check"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261119.1",

@@ -1,0 +1,19 @@
+{
+  "module": "packages/avformat/src/flac-wave-time.ts",
+  "status": "partial-helper-not-backend-wired",
+  "exports": {
+    "compileFlacTimePolicy": "(command: ParsedCommand) => Readonly<FlacTimePolicy>",
+    "resolveFlacTimePolicy": "(policy: Readonly<FlacTimePolicy>, sampleRate: number, totalSamples: bigint | null) => Readonly<ResolvedFlacTimePolicy>",
+    "types": ["FlacTimeScope", "FlacTimePolicy", "ResolvedFlacTimePolicy"]
+  },
+  "policy": {"input": "frozen {seek,duration,stop}: bigint microseconds, nullable duration/stop", "output": "same; last occurrence per key, -t wins over -to regardless of ordering in each independent scope"},
+  "result": {"startSample": "bigint absolute source sample index, inclusive", "endSampleExclusive": "bigint exclusive source sample index, or null for unknown EOF", "outputPtsSamples": "bigint first output PTS in 1/sampleRate time base; currently zero"},
+  "inputs": "Exactly one input/output. Unchanged-rate decoded FLAC PCM only. Pass null for unknown STREAMINFO count (including STREAMINFO zero); explicit 0n means proven empty input. Sample rate integer 1..655350.",
+  "rounding": "Parse to integer microseconds with existing FFmpeg duration parser (fractional truncation), then nearest sample with half ties away from zero. Output -t 0 is empty; input zero/rounded-zero -t is unlimited. EOF clips interval.",
+  "unsupported": ["Nonzero input -ss: Native FLAC demux seeking is not equivalent to sample trimming, including tiny positive seeks observed to yield EOF", "Negative output -ss: Native shifts PTS and recording-time semantics", "Positive output duration rounded to zero samples: Native emits one surviving decoder frame; cannot resolve boundary from these inputs", "copyts/start_at_zero enabled", "Time sentinels and overflowed derived duration", "Stream copy, resampling, user filters and additional timestamp modes must be validated by integration owner"],
+  "errors": "ExecutionError invalid-time for syntax/negative duration/active -to <= -ss; unsupported-command for explicit gaps; invalid-arguments for invalid sample rate/count",
+  "lifetime": "Synchronous immutable scalar snapshots, safe across awaits and command mutation. No borrowed option arrays. No I/O or promises.",
+  "memory": "Fixed scalar state only, no media allocation, Core reservations or handles. Decoder/integration owns all Core memory reservations, cancellation, frame release, bounded slicing and atomic output group publication.",
+  "integration": "Import directly from ./flac-wave-time.js. Compile before any await. Resolve after sample rate known; unknown EOF may require bounded decoder prepass for header counts. Intersect decoded frames with interval; preserve decoder frame boundaries; PTS = outputPtsSamples + emitted samples. Validate/reject copy, resampling, filters and other unsupported command options separately. Do not wire by modifying shared files in this wave.",
+  "reference": {"binarySha256": "1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92", "upstreamCommit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8", "sources": ["fftools/ffmpeg_demux.c", "fftools/ffmpeg_mux_init.c", "fftools/ffmpeg_filter.c", "libavfilter/trim.c"], "developmentOnly": true}
+}

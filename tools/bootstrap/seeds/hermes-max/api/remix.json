@@ -1,0 +1,25 @@
+{
+  "module": "packages/avformat/src/flac-wave-remix.ts",
+  "exports": [
+    "remixFlacAudio",
+    "FlacAudioRemixOptions"
+  ],
+  "signature": "remixFlacAudio(frames: AsyncIterable<AudioFrameData>, channels: 1 | 2, targetFormat: AudioSampleFormat, options: FlacAudioRemixOptions): AsyncGenerator<AudioFrameData, void, unknown>",
+  "options": {
+    "resources": "Required Core ResourceContext; input storage must already be accounted by its producer.",
+    "signal": "Required AbortSignal; waits also observe resources.signal.",
+    "maxFrameBytes": "Required positive safe integer; effective per-frame cap is min(value, resources.budget.maxBufferBytes). Oversized frames are rejected, not split.",
+    "arithmetic": "Optional RemixArithmetic: separate (default) or fused; forwarded to existing remixAudioFrame without alternate arithmetic."
+  },
+  "formats": "Packed and planar u8, s16, s32, flt, dbl; unchanged sample rate, frame sample count, boundaries and exact PTS.",
+  "layouts": "Only source/destination mono or stereo. Empty, unknown, unspecified and count-only '1 channels'/'2 channels' source layouts normalize to canonical mono/stereo. Explicit noncanonical or multichannel layouts reject.",
+  "lifetime": "Output owns its planes. Reservation remains live while yielded and releases upon next(), return(), throw(), error or abort-driven resumed iteration. Consumers must finish reading before advancing, or copy under their own reservation. Producer owns input planes and any decoder-frame release.",
+  "memory": "Before allocating, reserve actual destination bytes plus converted-source internal bytes and (when final conversion occurs) internal mixed bytes. Scratch releases after synchronous remix; output remains reserved across yield. Validate source and every generated frame against effective cap; no prefetch, queues or whole-stream retention. JS/runtime object overhead is outside ResourceContext payload accounting.",
+  "cancellation": "Iterator next and return waits detach on abort and observe late rejection. Source return is requested on early close/failure; input producer is responsible for eventual cleanup of an uncooperative outstanding next. Close the iterator in consumer finally; abort cannot forcibly finalize a generator suspended at yield until it resumes/closes.",
+  "integration": "Import remixFlacAudio directly from './flac-wave-remix.js'. Insert after selected/filtered FLAC AudioFrameData and before PCM encoding. Pass the same ResourceContext and execution signal; consume each output synchronously before requesting the next. Preserve existing atomic output-group commit/abort. Coordinator must wire backend options and any root exports separately.",
+  "status": "Production helper only; backend/CLI integration, oracle comparisons and complete 22-chapter architecture conformance are not claimed.",
+  "coordinatorExtension": {
+    "matrixSampleFormat": "Optional AudioSampleFormat: final encoder matrix normalization independent of intermediate FIR precision; default preserves existing behavior",
+    "evidence": "18 pinned scalar Native combined rows; 32 public output comparisons on Node and R2/workerd, 26 explicit gap rejection cases"
+  }
+}

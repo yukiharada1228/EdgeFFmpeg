@@ -1,0 +1,31 @@
+{
+  "module": "packages/avformat/src/flac-wave-trim.ts",
+  "status": "implemented-backend-integrated-domain-verified",
+  "exports": {
+    "trimFlacAudio": "(frames: AsyncIterable<AudioFrameData>, range: FlacAudioTrimRange, options: FlacAudioTrimOptions) => AsyncIterable<AudioFrameData>",
+    "countTrimmedFlacSamples": "(totalSamples: bigint, range: FlacAudioTrimRange) => bigint",
+    "FlacAudioTrimRange": "{startSample: bigint, endSampleExclusive: bigint | null, outputPtsSamples: bigint}",
+    "FlacAudioTrimOptions": "{resources: ResourceContext, signal: AbortSignal, maxFrameBytes: number}"
+  },
+  "semantics": {
+    "range": "Zero-based decoded sample ordinals, end exclusive, null means EOF. Negative start or end before start is rejected. Input PTS is not the selection clock.",
+    "pts": "Always contiguous from outputPtsSamples, timeBase {num: 1n, den: BigInt(sampleRate)}.",
+    "formats": ["u8", "s16", "s32", "flt", "dbl", "u8p", "s16p", "s32p", "fltp", "dblp"],
+    "formatChanges": "Rejected; channels, layout, sample rate, and sample format must remain stable.",
+    "bounds": "Each decoded frame must be <= maxFrameBytes, selected output allocation must also be <= resources.budget.maxBufferBytes. No full-stream retention. No upstream pull beyond the frame containing the exclusive end."
+  },
+  "lifetime": {
+    "input": "Producer-owned; adapter never mutates input. Source next/return must manage any decoder leases because AudioFrameData has no release method.",
+    "output": "Copied planes are borrowed until next(), return(), throw(), or abort. Retaining consumers must make their own Core-accounted copy.",
+    "memory": "One actual PCM allocation, reserveExternalMemory(bytes) before new Uint8Array(bytes), retained across yield and released before the next pull, on failure, return, throw, or either signal abort. Array/view/runtime bookkeeping is not charged by Core's media-byte accounting.",
+    "cancellation": "Both options.signal and resources.signal are observed. Pending next is interrupted; upstream return is requested once; late next/return rejections are observed. Idle explicit return awaits cooperative source cleanup and propagates cleanup failures; either signal can interrupt that wait. Pending-read return and abort detach without waiting for uncooperative providers, whose cleanup may complete later."
+  },
+  "integration": "Exported by packages/avformat/src/index.ts and called by packages/avformat/src/flac-transform.ts for timed transforms. The coordinator-owned backend runs bounded sequential count and output passes and publishes through the existing atomic output group. Wrap decoder frame leases in an AsyncIterable<AudioFrameData> whose next/return release the prior lease. Use countTrimmedFlacSamples only with a known actual decoded length (FLAC totalSamples=0 may mean unknown). The helper performs no I/O.",
+  "verification": {
+    "node": "npx vitest run tests/unit/flac-max-trim.test.ts tests/integration/flac-max-trim.test.ts --maxWorkers=1: 2 files, 59 tests passed; existing immutable Native corpus and real Wasm decoder exercised, with no Native invocation.",
+    "workers": "npx vitest run tests/workers/flac-max-trim.test.ts --maxWorkers=1: 1 file, 1 test passed; local R2/workerd, Native bytes, all ten packed/planar formats, bounded short reads, PTS, reservation cleanup, cancellation and output rollback exercised. Browser bundle assertions exclude Node and .build production imports.",
+    "lint": "npx eslint packages/avformat/src/flac-wave-trim.ts: passed.",
+    "types": "npx tsc --ignoreConfig --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext --strict --noUncheckedIndexedAccess --exactOptionalPropertyTypes --verbatimModuleSyntax --skipLibCheck --lib ES2022,DOM packages/avformat/src/flac-wave-trim.ts: passed.",
+    "scope": "Focused helper/decoder/Workers checks only; these are not public CLI-route acceptance or full architecture certification. Native planar PCM to packed s32le muxer rejection is preserved by the corpus, not claimed as positive parity. No fixtures or tests changed."
+  }
+}
