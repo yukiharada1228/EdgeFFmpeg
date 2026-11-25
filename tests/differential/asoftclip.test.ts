@@ -11,7 +11,6 @@ const native=resolve('.build/reference/ffmpeg');
 const metadata=JSON.parse(readFileSync('.build/reference/build-metadata.json','utf8')) as {commit:string;platform:string;arch:string};
 /** alg divides by sqrtf(param+s*s): the native result depends on contraction (fused on macOS arm64), so it is pinned to the Linux x64 unfused profile only. */
 const linuxX64=metadata.platform==='linux'&&metadata.arch==='x64';
-const algSkip='requires the linux/x64 reference (unfused alg arithmetic); build-metadata reports '+`${metadata.platform}/${metadata.arch}`;
 const sources=[['u8',1],['s16le',2],['s32le',4],['f32le',4],['f64le',8]] as const;
 const frames=203,channels=2;
 /** Stereo 8000 Hz input with zero, negative zero (float sources), clip boundaries, full-scale values and a ramp. */
@@ -57,7 +56,9 @@ it('checks the pinned native reference build',()=>{
 it('matches native asoftclip type=hard over the threshold, output and param grid on every source format byte for byte',async()=>{
   expect(await compare(grid('hard'),'hard')).toBe(27*5*5);
 },600000);
-it.skipIf(!linuxX64)(`matches native asoftclip type=alg over the threshold, output and param grid on every source format byte for byte (${linuxX64?'linux/x64':algSkip})`,async()=>{
+// Skipped unless build-metadata reports linux/x64: it requires that reference's unfused alg arithmetic. The title is the
+// same on every platform so that the linux-x64 contract also names the skip elsewhere.
+it.skipIf(!linuxX64)('matches native asoftclip type=alg over the threshold, output and param grid on every source format byte for byte (linux/x64)',async()=>{
   expect(await compare(grid('alg'),'alg')).toBe(27*5*5);
 },600000);
 it('matches native asoftclip hard in composed chains with frame splits, positional options and output time selection',async()=>{
