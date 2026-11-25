@@ -3480,12 +3480,12 @@ The merges had no textual conflicts. Two commits follow them:
 - `8f453a8` (integration): the seven Workers FLAC transform tests and
   `flac-max-public-cli` read the rows of the local pin through
   `flacNativeCorpus` instead of the darwin-arm64 files (below).
-- `40a90c7` (integration): user-approved time budgets for four MP4 Workers
-  tests (below).
+- `40a90c7` (integration): time budgets for four MP4 Workers tests, relayed by
+  the orchestrator as user-approved (below).
 
-This record was added in `af0e296` and corrected in the commit after it. Both
-commits change only this file and skip CI. Run 45623569626 validated their
-parent, `40a90c7`, on all three jobs.
+This record was added in `af0e296`, corrected in `1875563` and audited in the
+commit after it. All three commits change only this file and skip CI. Run
+45623569626 validated their parent, `40a90c7`, on all three jobs.
 
 **Before.** CI run 45548679318 on `4c34f7f` failed 139 tests: 10 unit, 81
 integration, 23 differential and 25 workers. Another 26 files failed to load
@@ -3517,9 +3517,12 @@ Each run failed only on the other items' tests, with one exception. In W2's run,
   failed only on time: `workers/mp4-language` and `workers/mp4-negative-map` hit
   their 60 s budgets. Every other suite passed: unit 2,933 and 11
   not-applicable of 2,944, integration 2,081 of 2,081, differential 729 of 729,
-  workers 275 of 277. `40a90c7` had already been pushed, so the integration
-  work cancelled this run's foundation and workers jobs once the reference
-  evidence was downloaded; they would only have repeated the two timeouts.
+  workers 275 of 277. Because the Workers suite failed, the report also marks
+  all 183 Workers contracts failed: 961 contracts passed, 183 failed and 11 were
+  not applicable. No contract outside the Workers suite failed. The run's
+  foundation and workers jobs were cancelled 36 s after they started.
+  `40a90c7` had already been pushed by then. The workers job would only have
+  repeated the two timeouts, and run 45623569626 ran both jobs on `40a90c7`.
 - **45623569626 on `40a90c7`.** All three jobs passed.
   - In the reference job, the tagged build described as `n9.0.2`, and
     `bootstrap --check` matched ffmpeg `5e43da9a…`, ffprobe `0895f870…` and the
@@ -3624,18 +3627,19 @@ W2. On GitHub's x86_64 runners they failed only on time:
   assertion change (probe 45619989193): `mp4-stream-id` 29.8-31.2 s per row,
   `mp4-language` 76.6 s, `mp4-negative-map` 77.0 s, `mp4-copy-cli` 48.5 s.
 
-**User-approved budget changes.** Only timeouts changed; no case list, matrix or
-assertion did.
+**Budget changes.** Only timeouts changed; no case list, matrix or assertion
+did.
 
-- The user approved this budget change, and the orchestrator relayed the decision
-  to the integration work: `mp4-stream-id` goes from 30 s to 120 s per case, and
+- The orchestrator relayed this budget change to the integration work as
+  approved by the user: `mp4-stream-id` goes from 30 s to 120 s per case, and
   `mp4-language`, `mp4-negative-map` and `mp4-copy-cli` go from 60 s to 180 s.
-  The integration work applied it in `40a90c7`, with the values the probe above
-  had already validated. The reasons are the Linux timings above: at the old
+  `40a90c7` applies it, with the values the probe above had already
+  validated. The reasons are the Linux timings above: at the old
   budgets, run 45599621557 timed out 5 of the 7 `mp4-stream-id` ID rows together
   with `mp4-language` and `mp4-negative-map`, and run 45614856468 timed out the
   last two. In run 45623569626 the same tests took 30.6-31.6 s, 77.6 s, 77.7 s
-  and 49.9 s.
+  and 49.9 s. The plan's recorded user decisions do not include this change
+  (see the open items).
 - This is the same kind of change as decision 6 of the plan, which the user
   approved earlier. That decision raised `simple-video-cli`, `signed-video-time`,
   `video-option-order` and `video-streamcopy` from 60 s to 180 s (`d257ed8`),
@@ -3647,13 +3651,23 @@ assertion did.
 
 - **Tight budgets.** Some budgets have little headroom on the runner, for example
   `workers/timed-video-backend` at 37.8-38.1 s of 60 s.
+- **MP4 budget approval.** The approval of the `40a90c7` budgets is recorded
+  only as the orchestrator's relay, in `40a90c7` and `1875563`. The plan's
+  recorded user decisions do not include it, and the audit below could not
+  confirm it with the user. Without these budgets, the two `8f453a8` failures
+  come back. The `mp4-stream-id` rows, at 29.8-31.6 s against 30 s, might fail
+  as well.
 - **Darwin-only stored corpora.** 83 entries under `compat/behavior-specs`
-  record only the darwin-arm64 pin and have no linux-x64 counterpart, for
-  example flac-max-remux, flac-max-selection, flac-max-remix, mp4-demux, mp4-mux,
-  h264, simple-video-cli and video-streamcopy. Some tests read them on linux-x64
-  and compare Edge with these darwin-labelled rows. They pass, but they are not
-  linux-x64 Native evidence. Moving them would need the generators parametrized
-  through `platform-corpus.mjs` and a corpora-job run.
+  record the darwin-arm64 pin and have no `linux-x64/` corpus, for example
+  flac-max-remux, flac-max-selection, flac-max-remix, mp4-demux, mp4-mux, h264,
+  simple-video-cli and video-streamcopy. 71 of them name no other pin. The
+  other 12 also carry x86_64 records that name the linux-x64 binaries, and
+  these records predate this work: complex-video-worker, the six
+  filter-*-worker files, resize-inverse-worker, transpose-worker,
+  video-stack-worker, timed-frame-sync and video-setpts. Some tests read these
+  entries on linux-x64 and compare Edge with their darwin-labelled rows. They
+  pass, but they are not linux-x64 Native evidence. Moving them would need the
+  generators parametrized through `platform-corpus.mjs` and a corpora-job run.
 - **Job summaries.** In the foundation and workers jobs, vitest's GitHub reporter
   cannot write `$GITHUB_STEP_SUMMARY` (EACCES), because the file is root-owned
   and the tests run as node. It is a warning only; no job summary is written.
@@ -3677,7 +3691,14 @@ assertion did.
 - **Self-hashing generators.** Seven darwin corpora record their generator's
   sha256: reference-metadata, wav-channel-layout, wav-channel-mask,
   default-channel-layout and the three node-* corpora. Changing one of those
-  generators needs a macOS regeneration and a new corpora-job run.
+  generators needs a macOS regeneration and a new corpora-job run. The linux-x64
+  side is broader. Tests compare the generator sha256 recorded in every
+  linux-x64 corpus, except clock-expression-hex, with the tracked generator
+  (`selectNativeCorpus`, `flacNativeCorpus` and `readBmpRleProfiles`). Changing
+  any of those 15 generators, including bmp-rle and the seven FLAC transform
+  generators, therefore needs a new corpora-job run. `bmp/provenance.json` also
+  pins the bmp-rle generator as a source and 16 BMP test files as recipes, so
+  editing any of them means updating that record.
 - **Bootstrap lint.** `tools/bootstrap/bootstrap.mjs` has an unused variable
   near line 260. `npm run lint` does not cover `tools/`.
 - **Probe branches.** `linux-probe/w1-fix`, `linux-probe/w2`, `linux-probe/w4`
@@ -3687,3 +3708,49 @@ assertion did.
 - **CI duration.** The reference job now takes about 2 h 35 min, including
   integration 29 min, differential 70 min and workers 46 min inside
   compat:report. The workers job repeats test:workers in 35 min.
+- **Unpinned live H264 and pixel checks.** `verifyH264Reference()` and
+  `referencePixelArithmetic()` check `build-metadata.json` against the local
+  binaries and the upstream commit, but not against `compat/reference-pins.json`.
+  The live H264 and pixel tests therefore accept any consistent build at the
+  pinned commit. In CI, `bootstrap --check` enforces the pin before any test
+  runs. This predates the work.
+
+**Audit (2026-11-26).** An adversarial audit of `1875563` changed only this
+section. It found no weakened test and no evidence recorded on one platform but
+labelled as the other's. It checked the following:
+
+- **Tests.** Every changed test file was compared with `4c34f7f`. No assertion,
+  row, count or comparison matrix was removed or loosened.
+  - The only new skips are the approved resample split (`skipIf` on
+    `process.arch`).
+  - The only new time budgets are the four approved 180 s budgets and those of
+    the four MP4 files in `40a90c7`.
+  - No Vitest configuration changed.
+  - Every test of baseline run 45548679318 is still present in run 45623569626,
+    and each test name occurs as often as before.
+  - `compat/test-contracts.json` keeps all 1,133 base contracts and adds 22. The
+    11 combined resample contracts are gated to darwin-arm64: the existing one
+    and 10 of the new ones.
+- **Provenance.** All 60 files of the 16 committed linux-x64 corpora are
+  byte-identical to the `linux-x64-corpora` artifacts of the corpora jobs they
+  name:
+  - run 45607125330 for 14 corpora;
+  - run 45596404811 for bmp;
+  - run 45592397699 for clock-expression-hex.
+
+  Each of those jobs recorded a real x86_64 CPU, uid 1000 and the pinned image.
+  Regenerating wav-channel-mask and wav-channel-layout on macOS reproduced their
+  tracked darwin files byte for byte, provenance included.
+- **This section.** Its counts and timings match the following:
+  - the job metadata and reference-evidence artifacts of runs 45548679318,
+    45584128527, 45595080726, 45599621557, 45611783376, 45614856468 and
+    45623569626;
+  - the job logs of 45623569626;
+  - the probe artifacts;
+  - the macOS report at `8f453a8`.
+- **CI.** Every action is pinned to the commit of its tagged release. Every job
+  uses the same image digest. Both workflows set `contents: read`, and every
+  checkout sets `persist-credentials: false`. The probe workflow validates the
+  `.github/linux-probe.json` values it interpolates into shell steps.
+
+The approval of the `40a90c7` budgets remains unconfirmed (see the open items).
