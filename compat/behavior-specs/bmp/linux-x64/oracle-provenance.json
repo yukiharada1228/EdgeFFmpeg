@@ -1,0 +1,35 @@
+{
+  "name": "bmp-rle",
+  "source": "tools/differential-runner/bmp-rle/oracle.c",
+  "sourceSha256": "f242041721e9cb213f9f304526e5bbd9d87174229a5c830f27e4d48bd682be89",
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91",
+      "ffprobe": "0895f870196845f40002238980f908e2dfed7dcf8197a1074b98e4312431671b"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "linux",
+    "arch": "x64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 12 (Debian 12.2.0-14+deb12u1)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": true,
+    "reproducibleToolchainPinned": false
+  },
+  "librarySha256": {
+    ".build/reference/libavfilter/libavfilter.a": "8f5821221423526d123767cb948c711f05e42b160917de4153dc9b860ba2417e",
+    ".build/reference/libavformat/libavformat.a": "0267653359746cc8e383c948447fb65f31edbecc98580d8b83ff0ec16b6d41cb",
+    ".build/reference/libavcodec/libavcodec.a": "aa5c00c8bef4da62c5bab961a2010de6c81148b3d15179598148abb8701e31b2",
+    ".build/reference/libswscale/libswscale.a": "9f3a02b8a0923dece9609b31c29a1f1e9da8e53c8ccc784dab3566b7a560c098",
+    ".build/reference/libswresample/libswresample.a": "acf824905b972dd7f0c64afdb896ecef59e8433babfdab245b2736879c580f3c",
+    ".build/reference/libavutil/libavutil.a": "b0f1b0085398cb212c387b983137812b6f7033f4228f7e50dad7292c4534b4c1"
+  },
+  "compiler": "cc",
+  "compilerVersion": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "binarySha256": "402da33be94eb2b2187e52ac1ba93ef515cce84923419599bde4a40581c3da51"
+}

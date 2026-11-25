@@ -96,6 +96,20 @@ darwin corpus. For a Linux corpus it also requires the provenance written by
 source, and an oracle record that names the linux-x64 pin and links exactly its
 pinned libraries. The platform corpus records checkout-relative oracle paths.
 
+The committed linux-x64 corpus comes from the `corpora` job of Linux probe run
+45596404811, on an Intel Xeon 6975P-C as uid 1000 in the pinned image, with the
+oracle linked against the six linux-x64 pinned libraries. Its `rle-profiles.json`
+happens to equal the darwin-arm64 rows byte for byte: these explicit-alignment
+profiles are integer-only. That is an observation on each platform's own
+reference, and neither corpus stands in for the other.
+
+Native's default row capacity is a property of the reference build: libavcodec
+allocates `STRIDE_ALIGN` linesizes, 16 on darwin-arm64 and 64 on linux-x64
+(`HAVE_SIMD_ALIGN_64`). `bmp-rle-malformed.test.ts` compares with Native's
+default, so it passes `referenceRleLineAlignment()`, read from the verified
+reference's `config.h`, to `decodeBmp`. The CLI and `createMediaBackend` do not
+expose `rleLineAlignment` yet and always use16.
+
 `tools/differential-runner/bmp-rle/platform-corpus.json` is the descriptor for
 `tools/linux/generate-corpora.mjs`, which builds the `bmp-rle` oracle first. A
 local container run (`npm run linux:corpora -- --draft --only bmp-rle`) writes a
