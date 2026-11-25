@@ -69,7 +69,8 @@ it.each(goldenS16Flt)('keeps resampleAudio %i->%i s16 and flt output byte-identi
  expect(await goldenDigest(inputRate,outputRate,['s16','flt'])).toBe(expected);
 });
 // Regression pins, not pre-checkpoint evidence: the dbl rows recorded from the current implementation on x64 V8 (Node 24.22.3, pinned
-// linux/amd64 image). The combined digests of that run equal the eleven CI observed on x86_64 in GitHub Actions run 45548679318.
+// linux/amd64 image). The combined digests of that run equal the eleven CI observed on x86_64 in GitHub Actions run 45548679318, and the
+// pins passed on real x86_64 in Linux probe run 45592397699.
 const dblX64=[[8000,16000,'52ef47f467cd8742e0300888b1099c57:362'],[16000,8000,'ddcb95cbc2c0b213ee29212d9fa30302:98'],[44100,48000,'f057e5b86febe5993e7a25c3688bdf91:198'],[48000,44100,'25cb8508e777cded9930a4c746425381:168'],[8000,44100,'da8042fc75409071281a61554a50af76:984'],[48000,8000,'2f1b1b5ddf92463ea2ae02e41d11aedc:36'],[44100,22050,'c8b7da28e59b01933c3ba3224627208d:98'],[44100,48001,'b23b84bbaa2e89775e4c86a40d7409e9:198'],[48001,44100,'c75d6a7b6d42eec5fb76fe07b14caf2a:168'],[8000,16001,'c1cd10f4c77576002eed1700b76a7201:362'],[16000,16000,'a556bcb9d1d847dacab97209a8c592d6:452']] as const;
 it.skipIf(process.arch!=='x64').each(dblX64)('pins resampleAudio %i->%i dbl output recorded from the current implementation on x64 V8',async(inputRate,outputRate,expected)=>{
  expect(await goldenDigest(inputRate,outputRate,['dbl'])).toBe(expected);

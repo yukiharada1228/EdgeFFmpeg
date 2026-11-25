@@ -8072,7 +8072,7 @@
     "platforms": [
       "linux-x64"
     ],
-    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
   },
   {
     "id": "checkpoint.resample-dbl-x64-16000-8000",
@@ -8084,7 +8084,7 @@
     "platforms": [
       "linux-x64"
     ],
-    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
   },
   {
     "id": "checkpoint.resample-dbl-x64-44100-48000",
@@ -8096,7 +8096,7 @@
     "platforms": [
       "linux-x64"
     ],
-    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
   },
   {
     "id": "checkpoint.resample-dbl-x64-48000-44100",
@@ -8108,7 +8108,7 @@
     "platforms": [
       "linux-x64"
     ],
-    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
   },
   {
     "id": "checkpoint.resample-dbl-x64-8000-44100",
@@ -8120,7 +8120,7 @@
     "platforms": [
       "linux-x64"
     ],
-    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
   },
   {
     "id": "checkpoint.resample-dbl-x64-48000-8000",
@@ -8132,7 +8132,7 @@
     "platforms": [
       "linux-x64"
     ],
-    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
   },
   {
     "id": "checkpoint.resample-dbl-x64-44100-22050",
@@ -8144,7 +8144,7 @@
     "platforms": [
       "linux-x64"
     ],
-    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
   },
   {
     "id": "checkpoint.resample-dbl-x64-44100-48001",
@@ -8156,7 +8156,7 @@
     "platforms": [
       "linux-x64"
     ],
-    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
   },
   {
     "id": "checkpoint.resample-dbl-x64-48001-44100",
@@ -8168,7 +8168,7 @@
     "platforms": [
       "linux-x64"
     ],
-    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
   },
   {
     "id": "checkpoint.resample-dbl-x64-8000-16001",
@@ -8180,7 +8180,7 @@
     "platforms": [
       "linux-x64"
     ],
-    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
   },
   {
     "id": "checkpoint.resample-dbl-x64-16000-16000",
@@ -8192,7 +8192,7 @@
     "platforms": [
       "linux-x64"
     ],
-    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
   },
   {
     "id": "checkpoint.resample-short-streams",

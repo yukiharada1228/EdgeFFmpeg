@@ -164,7 +164,8 @@ The tests are split three ways, and `compat/test-contracts.json` gates them:
 - 11 tests pin the dbl rows on x64 V8. These are regression pins recorded from the
   current implementation in the pinned linux/amd64 image, not pre-checkpoint
   evidence. The combined digests of that run equal the eleven GitHub Actions run
-  45548679318 observed on x86_64. They run on linux-x64 only.
+  45548679318 observed on x86_64, and the pins passed on real x86_64 in Linux
+  probe run 45592397699. They run on linux-x64 only.
 
 Edge's own dbl resampling output therefore depends on the host CPU through
 `Math.sin`. Making the dbl coefficients host-independent is a separate decision.
