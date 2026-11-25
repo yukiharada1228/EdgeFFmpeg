@@ -1,0 +1,8842 @@
+[
+  {
+    "profileId": "wav-copy",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 142,
+      "sha256": "00790fc980691c9373d5497516abd3e2cfef9e132df5e5588767fa5bd81c1f99",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 142,
+      "sha256": "00790fc980691c9373d5497516abd3e2cfef9e132df5e5588767fa5bd81c1f99",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "wav-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 118,
+      "sha256": "21e862a15bf67f09a109e7c66b49f9d31789a84d218dd698d67df0dd0ae01622",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "aiff-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 96,
+      "sha256": "cb2c3aafde383f080523474adc398ad703317d204f498f3364eb2dd8fab32cc2",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "au-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 64,
+      "sha256": "87bf8ed53a2887b2199a1c237b619713b5c5c53c0e566a1f14c764fa8e23f7f6",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-pcm",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 190,
+      "sha256": "abb1d596d4763a1e89ceb34b2226435a10b5c5ef1beac7459dfb0dac67d16e48",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "audio-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 24,
+      "sha256": "24d479a4696b06357463c3c6c1e4955949576f385c8b4a55bbc5b6ee6846e7c7",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "raw-video-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 226,
+      "sha256": "3819238468b421155f2d115c7225b37caa0615169bbe64027d0d8f9992fe4307",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "video-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 70,
+      "sha256": "a6432bc06769fe177f99959bfa1d0eb01f23ff3319198fb816de867f03b12d35",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 70,
+      "sha256": "41e47af89da2bc2e03fa63f240153e462bbc6d5773e220d92c76ce74455c95b7",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-encode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 12,
+      "sha256": "8636e91271fe60ebd7f7b38be0270603511711effdea726b58702ca294f92f06",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "bmp-decode",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 2304,
+      "sha256": "94bba45152e12cc6efcc2eea556134551b1ed5f3bc4dc22dc7f1c9b7578ad77f",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 460,
+      "sha256": "20f38367d99da6d6f1f529d3eb69d02f8e140bf255e0d978a427be6389028037",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "h264-framecrc",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": null,
+    "output": {
+      "exists": true,
+      "bytes": 1782,
+      "sha256": "99602bca24223abb7403eb905529a0cba08063881ed5a8eff63793e30b06a99b",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "mp4-copy",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "output": {
+      "exists": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "output": {
+      "exists": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "output": {
+      "exists": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "output": {
+      "exists": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "output": {
+      "exists": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "output": {
+      "exists": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "output": {
+      "exists": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "output": {
+      "exists": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "output": {
+      "exists": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "output": {
+      "exists": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "output": {
+      "exists": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "input-unreadable",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "input-unreadable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "output-unwritable",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "output-unwritable",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 0,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 243,
+    "reason": "Permission denied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "parent-unwritable-absent",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": false,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": false,
+      "bytes": null,
+      "sha256": null,
+      "mode": null,
+      "preserved": null
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 0,
+    "reason": "already exists",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "sample rate not set",
+    "output": {
+      "exists": true,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 384,
+      "preserved": false
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "mode": "parent-unwritable-existing",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "existing": true,
+    "exitCode": 234,
+    "reason": "both -y and -n supplied",
+    "output": {
+      "exists": true,
+      "bytes": 3,
+      "sha256": "7ff73abc34dabb914ea3b008d679d0a3491215c184d26376c3af3847267a533a",
+      "mode": 384,
+      "preserved": true
+    }
+  }
+]
