@@ -7,6 +7,7 @@ export function renderMarkdown(report) {
     '**Full FFmpeg compatibility is not certified.**', '',
     `Platform: ${report.platform?.host ?? 'unknown'} (reference build: ${report.platform?.reference ?? 'unknown'}; platform gating: ${report.platform?.policy ?? 'disabled'}). Every result below was produced on this platform.`,
     `Platform gating: ${report.platform?.reason ?? 'not evaluated'}.`, '',
+    ...(report.execution?.mode === 'shards' ? [`Test execution: ${Object.values(report.execution.plan?.counts ?? {}).reduce((sum, count) => sum + count, 0)} shards of plan ${report.execution.plan?.sha256?.slice(0, 12) ?? 'unknown'} (${Object.entries(report.execution.plan?.counts ?? {}).map(([suite, count]) => `${suite} ${count}`).join(', ')}), collected from ${report.execution.directory}; every other gate ran in this report.`, ''] : []),
     `Source snapshot stable: ${report.sourceStable ?? false}`, `Reference artifacts stable: ${report.referenceStable ?? false}`, '',
     '| Suite | Platform | Result | Passed | Failed | Not applicable | Unexpected skips | Total |', '|---|---|---|---:|---:|---:|---:|---:|'
   ];

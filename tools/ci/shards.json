@@ -1,0 +1,13 @@
+{
+ "schemaVersion": 1,
+ "comment": "Sharded validation (docs/contributing/ci.md). shards: CI jobs per suite; each shard runs its files with the options of the suite's npm script, and compat:report --from-shards requires every planned shard. profile: the tools/ci/test-durations.json profile that balances them. fastLane: the affected-test selection of wave2/** pushes (tools/ci/affected.mjs); bases are the remote branches whose nearest merge base with HEAD is the branch point.",
+ "profile": "linux-x64",
+ "shards": {"unit": 1, "integration": 3, "differential": 7, "workers": 5},
+ "fastLane": {
+  "bases": ["feat/**", "develop", "main", "prep/**", "*/integration*", "linux-green/**", "ci-fast/**"],
+  "shardSeconds": 360,
+  "registryTest": "registry",
+  "hubs": ["packages/*/src/index.ts", "packages/**/registry.ts", "packages/**/registry-*.ts"],
+  "allTestsWhenChanged": ["package.json", "package-lock.json", "vitest.config.mjs", "tsconfig*.json", "wrangler.jsonc", ".gitmodules", "upstream/ffmpeg", "compat/upstream.lock.json", "compat/configure.flags", "compat/reference-pins.json", "compat/reference-container.lock.json", "tools/bootstrap/**", "tools/upstream-build/**", "tools/codecs/**", "tools/testing/**", "tools/ci/**", "tools/compatibility-report/**", ".github/workflows/ci.yml"]
+ }
+}

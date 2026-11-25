@@ -24,6 +24,7 @@
     "test:integration": "vitest run tests/integration --maxWorkers=1",
     "ffmpeg": "node tools/cli/run.mjs",
     "compat:report": "node tools/compatibility-report/run.mjs",
+    "validate:fast": "node tools/ci/validate-fast.mjs",
     "fate:run": "node tools/fate-adapter/run.mjs",
     "fate:audit": "node tools/fate-adapter/audit.mjs",
     "reference:filter-syntax": "node tools/differential-runner/filter-syntax/generate.mjs",

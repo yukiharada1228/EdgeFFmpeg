@@ -8,44 +8,61 @@ on:
   pull_request:
 permissions:
   contents: read
+# A newer push to a wave2/** fast-lane branch replaces its running fast lane. Every other run, the full pipeline
+# included, has its own group and is never cancelled.
+concurrency:
+  group: ci-${{ github.ref }}-${{ startsWith(github.ref, 'refs/heads/wave2/') && !contains(github.ref, '/integration') && github.event_name == 'push' && 'fast-lane' || github.run_id }}
+  cancel-in-progress: true
+env:
+  EDGEFFMPEG_CONTAINER_IMAGE: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
+# Pipeline (docs/contributing/ci.md). plan picks the lane and the shards; reference provides the pinned native
+# reference and Wasm codecs, from the cache when every pinned input is unchanged; one job per shard runs a slice of a
+# suite with that suite's npm-script options. The full lane (every push except wave2/** feature branches, every tag
+# and pull request) ends in report: compat:report --from-shards runs every other gate once and accepts the suites only
+# when every test file ran in exactly one complete shard. The fast lane (wave2/** pushes) runs typecheck, lint and
+# boundaries in checks and only the affected tests, checked by fast.
 # Every job runs in the pinned Linux image (keep in sync with compat/reference-container.lock.json and the linux-x64
 # entry of compat/reference-pins.json). The image runs steps as root over a runner-owned checkout, so each job hands the
-# workspace to the image's unprivileged node user (uid 1000) and runs npm and the tests as that user: the permission
-# tests refuse to run as root. Actions are pinned by commit, with the release in a comment. Checkouts do not persist
-# the token: nothing after them needs it. See docs/contributing/linux-reference.md.
+# workspace to the image's unprivileged node user (uid 1000) and runs npm, the tools and the tests as that user: the
+# permission tests refuse to run as root. Actions are pinned by commit, with the release in a comment. Checkouts do not
+# persist the token: nothing after them needs it. See docs/contributing/linux-reference.md.
 jobs:
-  # foundation and workers need only the reference job's artifact, which is uploaded before its compat:report step, so
-  # they also run when that report fails. Without the artifact, the download step fails them explicitly.
-  foundation:
-    needs: reference
-    if: ${{ !cancelled() }}
+  plan:
     runs-on: ubuntu-latest
     container:
       image: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
+    outputs:
+      mode: ${{ steps.plan.outputs.mode }}
+      shards: ${{ steps.plan.outputs.shards }}
+      matrix: ${{ steps.plan.outputs.matrix }}
+      plan: ${{ steps.plan.outputs.plan }}
     steps:
+      # Full history: the fast lane selects tests from the changes since the merge base with its base branch.
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
-          submodules: true
+          fetch-depth: 0
           persist-credentials: false
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
-        with:
-          name: worker-reference-and-codec
-          path: .build
-      - run: chmod +x .build/reference/ffmpeg .build/reference/ffprobe
       - run: chown -R node:node "$GITHUB_WORKSPACE"
       - run: runuser -u node -- env HOME=/home/node npm ci
-      - run: runuser -u node -- env HOME=/home/node npm run check
+      # The step-output file is root-owned, so the planner writes its outputs to a file that root then appends.
+      - id: plan
+        run: |
+          runuser -u node -- env HOME=/home/node GITHUB_OUTPUT="$GITHUB_WORKSPACE/.build/ci/outputs" node tools/ci/plan.mjs auto
+          cat .build/ci/outputs >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ci-plan
+          path: .build/ci/plan.json
+          if-no-files-found: error
   reference:
     runs-on: ubuntu-latest
     container:
       image: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
-    env:
-      EDGEFFMPEG_CONTAINER_IMAGE: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
+    # actions: read only lets a cache miss reuse the reference-build artifact of another run of this repository.
+    permissions:
+      contents: read
+      actions: read
     steps:
-      - name: Install codec build prerequisites
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends cmake python3 xz-utils
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           submodules: true
@@ -63,39 +80,110 @@ jobs:
           described=$(git -C upstream/ffmpeg describe --tags --always)
           echo "upstream/ffmpeg describes as $described"
           test "$described" = "$tag"
+      # The cache key hashes every pinned input; the build steps below take their pins from the same outputs.
+      - id: pins
+        run: node tools/ci/reference-cache.mjs pins
+      # A restored entry is only a cache: bootstrap --check below re-verifies it, on a hit and before a miss is saved,
+      # against compat/reference-pins.json (ffmpeg, ffprobe and every pinned library the oracles link) and the codec
+      # locks, so a wrong entry fails explicitly instead of being used.
+      - id: cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          key: ${{ steps.pins.outputs.key }}
+          path: |
+            .build/reference
+            .build/codecs/openh264/openh264.wasm
+            .build/codecs/flac/edge-flac.wasm
+      # A cache entry is visible only to its branch and the default branch, so a first push of a branch looks for the
+      # same key's build uploaded by another run of this repository. It is verified exactly like a cache hit.
+      - id: shared
+        if: steps.cache.outputs.cache-hit != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          KEY: ${{ steps.pins.outputs.key }}
+        run: node tools/ci/reference-cache.mjs find "$KEY"
+      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id != ''
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: reference-build-${{ steps.pins.outputs.key }}
+          run-id: ${{ steps.shared.outputs.run-id }}
+          github-token: ${{ github.token }}
+          path: .build
       - run: npm ci
-      - run: npm run reference:build
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id == ''
+        name: Install codec build prerequisites
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends cmake python3 xz-utils
+      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id == ''
+        run: npm run reference:build
+      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id == ''
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: cisco/openh264
-          ref: 1bca62311e447fd9c39fc93de2c4b96cd5ce971c
+          ref: ${{ steps.pins.outputs.openh264-commit }}
           path: .build/vendor/openh264
           persist-credentials: false
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id == ''
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: emscripten-core/emsdk
-          ref: 708dcbcc9ee23bc7d2dad44fc90db377e38b771c
+          ref: ${{ steps.pins.outputs.emsdk-commit }}
           path: .build/toolchains/emsdk
           persist-credentials: false
-      - run: .build/toolchains/emsdk/emsdk install 7.0.0
-      - run: .build/toolchains/emsdk/emsdk activate 7.0.0
-      - run: npm run codec:h264:build -- --source .build/vendor/openh264 --emsdk .build/toolchains/emsdk
-      - name: Fetch verified libFLAC release inputs
+      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id == ''
+        name: Build the Wasm codecs from their locked inputs
+        env:
+          EMSDK_VERSION: ${{ steps.pins.outputs.emsdk-version }}
+          FLAC_URL: ${{ steps.pins.outputs.flac-url }}
+          FLAC_SHA256: ${{ steps.pins.outputs.flac-sha256 }}
+          FLAC_ARCHIVE: ${{ steps.pins.outputs.flac-archive }}
+          FLAC_SOURCE: ${{ steps.pins.outputs.flac-source }}
         run: |
+          .build/toolchains/emsdk/emsdk install "$EMSDK_VERSION"
+          .build/toolchains/emsdk/emsdk activate "$EMSDK_VERSION"
+          npm run codec:h264:build -- --source .build/vendor/openh264 --emsdk .build/toolchains/emsdk
           mkdir -p .build/vendor
-          curl --fail --location --retry 3 https://downloads.xiph.org/releases/flac/flac-1.5.0.tar.xz --output .build/vendor/flac-1.5.0.tar.xz
-          echo 'f2c1c76592a82ffff8413ba3c4a1299b6c7ab06c734dee03fd88630485c2b920  .build/vendor/flac-1.5.0.tar.xz' | sha256sum --check
-          tar -xJf .build/vendor/flac-1.5.0.tar.xz -C .build/vendor
-      - run: npm run codec:flac:build -- --source .build/vendor/flac-1.5.0 --archive .build/vendor/flac-1.5.0.tar.xz --emsdk .build/toolchains/emsdk --out .build/codecs/flac
+          curl --fail --location --retry 3 "$FLAC_URL" --output "$FLAC_ARCHIVE"
+          echo "$FLAC_SHA256  $FLAC_ARCHIVE" | sha256sum --check
+          tar -xJf "$FLAC_ARCHIVE" -C .build/vendor
+          npm run codec:flac:build -- --source "$FLAC_SOURCE" --archive "$FLAC_ARCHIVE" --emsdk .build/toolchains/emsdk --out .build/codecs/flac
+      # Artifacts do not keep the executable bit.
+      - run: chmod +x .build/reference/ffmpeg .build/reference/ffprobe
       - run: chown -R node:node "$GITHUB_WORKSPACE"
       # Generated unit/integration/Workers inputs (docs/contributing/environment-setup.md). Without
       # --allow-unpinned-reference this fails unless the reference equals the linux-x64 pin.
       # --check then re-verifies everything the artifact carries: ffmpeg, ffprobe and all six pinned libraries against
       # the linux-x64 pin, both Wasm modules against their locks, and the FLAC outputs against their lock.json content pins.
-      - name: Generate the FLAC investigation inputs against the pinned reference
+      - name: Generate the FLAC investigation inputs and verify every pin
         run: |
           runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --only flac-investigation
           runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --check
+      - name: Record where the reference came from
+        env:
+          CACHE_HIT: ${{ steps.cache.outputs.cache-hit }}
+          SHARED_RUN: ${{ steps.shared.outputs.run-id }}
+        run: |
+          if [ "$CACHE_HIT" = true ]; then source=cache; elif [ -n "$SHARED_RUN" ]; then source="artifact of run $SHARED_RUN"; else source=built; fi
+          echo "reference and codecs: $source" | tee .build/bootstrap/reference-source.txt
+      - if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          key: ${{ steps.pins.outputs.key }}
+          path: |
+            .build/reference
+            .build/codecs/openh264/openh264.wasm
+            .build/codecs/flac/edge-flac.wasm
+      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id == ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: reference-build-${{ steps.pins.outputs.key }}
+          include-hidden-files: true
+          if-no-files-found: error
+          path: |
+            .build/reference/
+            .build/codecs/openh264/openh264.wasm
+            .build/codecs/flac/edge-flac.wasm
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: worker-reference-and-codec
@@ -108,6 +196,14 @@ jobs:
             .build/flac-investigation/native-cases.json
             .build/flac-investigation/native-error-cases.json
             .build/flac-investigation/malformed-prototype-result.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: reference-provenance
+          include-hidden-files: true
+          path: |
+            .build/reference/build-metadata.json
+            .build/bootstrap/
       # Diagnostics when the reference or the bootstrap fails before the artifact above is uploaded.
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: failure()
@@ -117,8 +213,99 @@ jobs:
           path: |
             .build/reference/
             .build/bootstrap/
-      # Includes integration tests that invoke .build/reference/ffmpeg.
-      - run: runuser -u node -- env HOME=/home/node npm run compat:report
+  checks:
+    needs: plan
+    if: needs.plan.outputs.mode == 'fast'
+    runs-on: ubuntu-latest
+    container:
+      image: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - run: chown -R node:node "$GITHUB_WORKSPACE"
+      - run: runuser -u node -- env HOME=/home/node npm ci
+      - run: runuser -u node -- env HOME=/home/node npm run typecheck
+      - run: runuser -u node -- env HOME=/home/node npm run lint
+      - run: runuser -u node -- env HOME=/home/node npm run boundaries
+  # One job per shard of the plan. Shards only need the reference job's artifact, and fail explicitly without it.
+  shard:
+    name: test ${{ matrix.id }}
+    needs: [plan, reference]
+    if: needs.plan.outputs.shards != '0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    container:
+      image: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    env:
+      EDGEFFMPEG_CI_PLAN: ${{ needs.plan.outputs.plan }}
+      SHARD_SUITE: ${{ matrix.suite }}
+      SHARD_INDEX: ${{ matrix.index }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          submodules: true
+          persist-credentials: false
+      - name: Fetch the pinned FFmpeg release tag for bootstrap --check
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/upstream/ffmpeg"
+          tag=$(node -p "require('./compat/upstream.lock.json').tag")
+          git -C upstream/ffmpeg fetch --no-tags --depth 1 origin "refs/tags/$tag:refs/tags/$tag"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: worker-reference-and-codec
+          path: .build
+      - run: chmod +x .build/reference/ffmpeg .build/reference/ffprobe
+      - run: chown -R node:node "$GITHUB_WORKSPACE"
+      - run: runuser -u node -- env HOME=/home/node npm ci
+      - run: runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --check
+      # --prepare runs reference:extract first, so the shard tests the tree a serial compat:report run would test.
+      - run: runuser -u node -- env HOME=/home/node node tools/ci/shard.mjs --suite "$SHARD_SUITE" --index "$SHARD_INDEX" --out .build/shards --prepare
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: shard-${{ matrix.id }}
+          include-hidden-files: true
+          path: .build/shards/
+  report:
+    needs: [plan, reference, shard]
+    if: ${{ !cancelled() && needs.plan.outputs.mode == 'full' }}
+    runs-on: ubuntu-latest
+    container:
+      image: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          submodules: true
+          persist-credentials: false
+      - name: Fetch the pinned FFmpeg release tag for bootstrap --check
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/upstream/ffmpeg"
+          tag=$(node -p "require('./compat/upstream.lock.json').tag")
+          git -C upstream/ffmpeg fetch --no-tags --depth 1 origin "refs/tags/$tag:refs/tags/$tag"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: worker-reference-and-codec
+          path: .build
+      # A shard that uploaded nothing is reported as missing by compat:report, never skipped.
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        continue-on-error: true
+        with:
+          pattern: shard-*
+          merge-multiple: true
+          path: .build/shards
+      - run: chmod +x .build/reference/ffmpeg .build/reference/ffprobe
+      - run: chown -R node:node "$GITHUB_WORKSPACE"
+      - run: runuser -u node -- env HOME=/home/node npm ci
+      - run: runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --check
+      # Every gate that runs no test runs here, once; the four suites come from the shards.
+      - run: runuser -u node -- env HOME=/home/node npm run compat:report -- --from-shards .build/shards
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
@@ -131,24 +318,35 @@ jobs:
             .build/bootstrap/last-run.json
             .build/evidence/
             .build/fate-execution/
-  workers:
-    needs: reference
-    if: ${{ !cancelled() }}
+  fast:
+    needs: [plan, reference, checks, shard]
+    if: ${{ !cancelled() && needs.plan.outputs.mode == 'fast' }}
     runs-on: ubuntu-latest
     container:
       image: docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496
+    env:
+      EDGEFFMPEG_CI_PLAN: ${{ needs.plan.outputs.plan }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
-          submodules: true
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        continue-on-error: true
         with:
-          name: worker-reference-and-codec
-          path: .build
-      - run: chmod +x .build/reference/ffmpeg .build/reference/ffprobe
-      - run: chown -R node:node "$GITHUB_WORKSPACE"
-      - run: runuser -u node -- env HOME=/home/node npm ci
-      - run: runuser -u node -- env HOME=/home/node npm run workers:types -- --check
-      - run: runuser -u node -- env HOME=/home/node npm run test:workers
-      - run: runuser -u node -- env HOME=/home/node npm run workers:bundle
+          pattern: shard-*
+          merge-multiple: true
+          path: .build/shards
+      - run: mkdir -p .build/shards && chown -R node:node "$GITHUB_WORKSPACE"
+      - run: runuser -u node -- env HOME=/home/node node tools/ci/verify-fast.mjs --shards .build/shards --out .build/ci/fast
+      - name: Require the reference and the typecheck, lint and boundaries checks
+        env:
+          REFERENCE: ${{ needs.reference.result }}
+          CHECKS: ${{ needs.checks.result }}
+        run: |
+          echo "reference: $REFERENCE; checks: $CHECKS"
+          test "$REFERENCE" = success && test "$CHECKS" = success
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: fast-lane
+          path: .build/ci/fast/
