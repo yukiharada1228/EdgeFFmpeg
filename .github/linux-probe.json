@@ -1,10 +1,7 @@
 {
-  "comment": "W2 follow-up probe: the committed bmp/linux-x64 corpus from run 45596404811 and the static provenance checks. Not for merging.",
+  "comment": "Integration timing probe: where one workers/mp4-stream-id iteration spends its time on real x86_64. Not for merging.",
   "tests": [
-    "tests/unit/platform-provenance.test.ts",
-    "tests/unit/reference-identity.test.ts",
-    "tests/differential/bmp-rle-profiles.test.ts",
-    "tests/differential/bmp-rle-malformed.test.ts"
+    "tests/workers/zz-mp4-iteration-timing.test.ts"
   ],
   "shards": 1,
   "corpora": []
