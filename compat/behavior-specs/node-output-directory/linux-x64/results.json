@@ -1,0 +1,7152 @@
+[
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "wav-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "aiff-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "au-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-pcm",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "audio-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "raw-video-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "video-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-encode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "bmp-decode",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-rawvideo",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "h264-framecrc",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "mp4-copy",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-0-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-1-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-2-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-3-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-4-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-5-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-6-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-7-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-8-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-9-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-10-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-directory",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 0,
+    "reason": "already exists"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-directory-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/directory/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-absent-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/absent/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 235,
+    "reason": "Is a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "output-file-slash",
+    "inputPath": "/input.bin",
+    "outputPath": "/file/",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 234,
+    "reason": "both -y and -n supplied"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-y",
+      "-n"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  },
+  {
+    "profileId": "owned-audio-11-zero-one",
+    "scenario": "input-file-slash",
+    "inputPath": "/input.bin/",
+    "outputPath": "/result.bin",
+    "flags": [
+      "-n",
+      "-y"
+    ],
+    "exitCode": 236,
+    "reason": "Not a directory"
+  }
+]

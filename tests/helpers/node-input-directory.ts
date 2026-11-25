@@ -6,8 +6,11 @@ export interface DirectoryCase {
  outputs:({bytes:number;sha256:string;base64:string}|null)[];stderr:string;
 }
 const hash=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
-/** Native exit-status histogram of each pin's corpus, recorded from that platform's corpus; no fallback. */
-export const DIRECTORY_OUTCOMES:Readonly<Record<string,readonly (readonly [number,number])[]>>={'darwin-arm64':[[0,548],[183,600],[234,520],[235,264]]};
+/**
+ * Native exit-status histogram of each pin's corpus, recorded from that platform's corpus; no fallback. linux-x64 is
+ * compat/behavior-specs/node-input-directory/linux-x64 from the Linux probe corpora job (run 45607125330).
+ */
+export const DIRECTORY_OUTCOMES:Readonly<Record<string,readonly (readonly [number,number])[]>>={'darwin-arm64':[[0,548],[183,600],[234,520],[235,264]],'linux-x64':[[0,548],[183,600],[234,520],[235,264]]};
 /** The directory corpus recorded from this host's pinned reference (selectNativeCorpus), with its group and outcome counts. */
 export function nodeInputDirectoryCases():DirectoryCase[]{
  const corpus=selectNativeCorpus<NativeCorpusRecord&{caseCount:number}>('compat/behavior-specs/node-input-directory','tools/differential-runner/node-input-directory/generate.mjs'),root=corpus.dir+'/',manifest=corpus.manifest;

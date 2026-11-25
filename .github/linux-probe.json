@@ -1,4 +1,25 @@
 {
-  "comment": "W3 corpora run: regenerate every per-platform Native corpus descriptor of linux-green/w3 (14 corpora) on real x86_64 in the pinned image and upload linux-x64-corpora. Not for merging.",
-  "corpora": "all"
+  "comment": "W3 probe: the tests that read the 14 committed linux-x64 stored corpora, the runtime-node trailing-slash tests and the static provenance check, on real x86_64 in the pinned image. Not for merging.",
+  "tests": [
+    "tests/differential/node-permissions.test.ts",
+    "tests/differential/node-output-directory.test.ts",
+    "tests/differential/node-input-directory.test.ts",
+    "tests/differential/default-channel-layout.test.ts",
+    "tests/differential/reference-metadata.test.ts",
+    "tests/differential/wav-channel-layout.test.ts",
+    "tests/differential/wav-channel-mask.test.ts",
+    "tests/workers/default-channel-layout.test.ts",
+    "tests/workers/wav-layout.test.ts",
+    "tests/integration/flac-aformat-constraints.test.ts",
+    "tests/integration/flac-aformat-rate.test.ts",
+    "tests/integration/flac-max-combined.test.ts",
+    "tests/integration/flac-timed-aformat.test.ts",
+    "tests/integration/flac-timed-buffered.test.ts",
+    "tests/integration/flac-timed-filters.test.ts",
+    "tests/integration/flac-timed-rate.test.ts",
+    "tests/integration/node-output-directory.test.ts",
+    "tests/unit/runtime-node-trailing-slash.test.ts",
+    "tests/unit/platform-provenance.test.ts"
+  ],
+  "shards": 3
 }

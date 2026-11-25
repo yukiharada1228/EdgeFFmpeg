@@ -1,0 +1,9 @@
+{
+  "sources": {
+    "tools/differential-runner/wav-channel-mask/generate.mjs": "eccf939b20fae6230e27d3b8c7ab8ba3e76a286284ecd1dd1a339b9f783eb21e",
+    "upstream/ffmpeg/libavformat/riffenc.c": "c445eb042610fe77fd9deb585f32722d8f08578ced8333eba0e99cc218bbe25a",
+    "upstream/ffmpeg/libavformat/wavenc.c": "e4e026947aad2395982acb134743026e0c4fe30ea49dcccfe31ed456f1c226ca"
+  },
+  "caseCount": 14,
+  "scope": "Finite PCM16 WAV stream copy, default compliance, explicit output bitexact; high channel masks serialize as zero. No strict-mode or arbitrary channel-layout certification."
+}
