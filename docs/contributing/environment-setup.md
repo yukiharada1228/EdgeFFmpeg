@@ -18,10 +18,12 @@ anything is not ready.
 
 ## Prerequisites
 
-- macOS arm64 with Apple clang 21.0.0 is the only host whose Native reference
-  matches the hashes the tests and `compat/behavior-specs` provenance pin
-  (`ffmpeg` `1b86106f…ab92`). Other hosts can bootstrap, but tests that pin that
-  oracle fail there. See [Host limits](#host-limits).
+- A host with an entry in `compat/reference-pins.json`: macOS arm64 with Apple
+  clang 21.0.0 (`ffmpeg` `1b86106f…ab92`), or Linux x86_64 in the pinned
+  container image (`ffmpeg` `5e43da9a…8c91`). Tests resolve the local reference
+  to the pin for its own platform and fail when it matches none. Other hosts can
+  bootstrap, but those tests fail there. See [Host limits](#host-limits) and
+  [Linux reference](linux-reference.md).
 - Node.js 24+ and npm.
 - Git, a C compiler (`cc`) and Make for the reference and the oracles that tests
   compile at run time.
@@ -42,11 +44,10 @@ verification fails, then verifies again.
 | --- | --- | --- | --- |
 | `npm` | `node_modules/` | `npm ci` | every non-optional `package-lock.json` entry is installed at its locked version |
 | `submodule` | `upstream/ffmpeg` | `git submodule update` (shallow from a URL, a full local clone from a local path) | the superproject gitlink and `compat/upstream.lock.json` commit; the tree is clean; `git describe --tags --always` gives `n9.0.2` |
-| `reference` | `.build/reference/` (binaries, static libraries, headers, `ffbuild/config.mak`) | `tools/upstream-build/build.mjs` (`npm run reference:build`) | `build-metadata.json` matches the binaries, commit, flags and host; the six static libraries are present; the per-host pin in `tools/bootstrap/lock.json` |
+| `reference` | `.build/reference/` (binaries, static libraries, headers, `ffbuild/config.mak`) | `tools/upstream-build/build.mjs` (`npm run reference:build`) | `build-metadata.json` matches the binaries, commit, flags and host; the six static libraries are present; the `platforms.<host>` pin in `compat/reference-pins.json` (named by `tools/bootstrap/lock.json`) |
 | `openh264` | `.build/codecs/openh264/openh264.wasm` | `tools/codecs/openh264/build.mjs` | `expectedWasmSha256` in `tools/codecs/openh264/build.lock.json` |
 | `flac` | `.build/codecs/flac/edge-flac.wasm` | `tools/codecs/flac/build.py` | `wasmSha256` and `wasmBytes` in `tools/codecs/flac/inputs.json` |
 | `flac-investigation` | `.build/flac-investigation/native-cases.json`, `native-error-cases.json`, `malformed-prototype-result.json` | generators in `tools/bootstrap/flac-investigation/`, run against the verified reference and FLAC module | see [FLAC investigation evidence](#flac-investigation-evidence) |
-| `seeds` | `.build/hermes-max/api/*.json` (seven files) | copied from `tools/bootstrap/seeds/` | byte hashes in `tools/bootstrap/lock.json` |
 
 The step that verifies the submodule also checks for the release tag. FFmpeg's
 `ffbuild/version.sh` uses `git describe` for the version string it embeds. A
@@ -63,8 +64,9 @@ Which suites need which outputs:
 - Integration and differential tests run `.build/reference/ffmpeg` and
   `ffprobe`. `flac-decoder-native.test.ts` reads all three FLAC investigation
   files.
-- Workers tests read both Wasm modules, the FLAC investigation corpus and the
-  `hermes-max` seeds.
+- Workers tests read both Wasm modules and the FLAC investigation corpus. The
+  `hermes-max` API notes they also read are tracked fixtures in
+  `tests/fixtures/hermes-max/api/`.
 - Tests also compile some outputs themselves. `.build/oracles/*` (through
   `tools/differential-runner/build-oracle.mjs`), `.build/aac-native-probe/` and
   `.build/cli-launcher/` are built from `cc`, the reference's static libraries
@@ -141,10 +143,19 @@ investigation's `generate-error-cases-initial.mjs`. Its hash matches the
 recorded `generatorSha256`. The later, edited `generate-error-cases.mjs` does
 not.
 
+The tests load these files through `tests/helpers/flac-investigation.ts`. A
+missing file fails with `Missing generated input … run npm run bootstrap -- --only
+flac-investigation`. Loading also checks that the embedded reference is the local
+binary and the pin for this platform, that both generators and the prototype
+adapter are the `lock.json` pins and that the three files link by hash. The
+malformed-input divergence counts in `flac-decoder-native.test.ts` are recorded
+per pinned reference; a platform without an entry fails rather than reusing
+another platform's counts.
+
 The `hermes-max` API notes are hand-written descriptions of FLAC helper modules
-from an earlier agent run. Workers tests read them, and they have no generator,
-so the bootstrap installs the vendored copies unchanged. These tests would be
-reproducible without the seeds if their assertions moved to tracked fixtures.
+from an earlier agent run. They have no generator and are not Native evidence,
+so they are tracked test fixtures in `tests/fixtures/hermes-max/api/`, byte for
+byte the files the bootstrap's former `seeds` step installed.
 
 ## Measured durations
 
@@ -163,7 +174,7 @@ with the bootstrap files overlaid, bootstrapped with
 | `openh264` step | 28.8 s | `1b14bb76…`, equal to `build.lock.json` |
 | `flac` step | 62.6 s | `d5f5015f…`, 69,607 bytes, equal to `inputs.json` |
 | `flac-investigation` step | 4.9 s | `native-cases.json` `27b76ec8…`; the other two equal their masked pins |
-| `seeds` step | 0.0 s | 7 files |
+| `seeds` step (since removed; the notes are tracked fixtures) | 0.0 s | 7 files |
 | **`npm run bootstrap` total** | **256.8 s** | |
 | `npm run check` | 119.0 s | 2,602/2,602 unit tests across 204 files |
 | `npm run test:integration` | 1,789 s | 2,079/2,081 tests across 83 files; 2 hit 60 s test timeouts |
@@ -229,13 +240,18 @@ it explicitly for single differential files.
 
 ## Host limits
 
-- `tools/bootstrap/lock.json` pins the macOS arm64 reference that tests use, and
-  the Linux x86_64 container build from `compat/behavior-specs/inverse-linux-x64.json`.
-  On a host without a pin, a consistent reference is accepted with a warning.
-  On a host with a pin, a mismatch needs `--allow-unpinned-reference`.
+- `compat/reference-pins.json` pins the macOS arm64 reference and the Linux
+  x86_64 container build first recorded in
+  `compat/behavior-specs/inverse-linux-x64.json`. No tool writes it.
+  `compat/capabilities.json` cannot serve as a pin, because `compat:report`
+  rewrites it with the host's build. On a host without a pin, a consistent
+  reference is accepted only with `--allow-unpinned-reference`. On a host with a
+  pin, a mismatch needs `--allow-unpinned-reference`, and tests that resolve the
+  pinned reference then fail.
 - The FLAC investigation outputs are content-pinned only for the macOS arm64
-  reference. Against any other reference they are generated, and their
-  provenance links are verified, but their content is not pinned.
+  reference so far. Against the Linux pin they are generated and their
+  provenance links are verified; their Linux content pins are added from the
+  first GitHub reference job that produces them.
 - Reproducibility was verified on one macOS arm64 machine: a fresh clone rebuilt
   the reference with the pinned hashes. Other machines with the same Apple clang
   version, and Linux, are unverified.
@@ -244,12 +260,12 @@ it explicitly for single differential files.
 
 `.github/workflows/ci.yml` keeps its explicit, pinned build steps: the
 container image, OpenH264 and emsdk commits, Emscripten 7.0.0, and the libFLAC
-URL and SHA-256. After the codec builds, the reference job now runs
-`node tools/bootstrap/bootstrap.mjs --only flac-investigation,seeds --allow-unpinned-reference`
-and adds those outputs to the `worker-reference-and-codec` artifact. Before this
-change, `npm run check` in the foundation job could not pass, because CI never
-produced `native-cases.json`. CI cannot run on this repository because of an
-account billing block, so this change is unverified. That job's reference is
-expected to differ from both pins, because by default `actions/checkout` fetches
-the submodule shallow and without tags. Tests that pin the macOS arm64 reference cannot pass on Linux
-CI.
+URL and SHA-256. Every job runs in the pinned image and runs npm and the tests as
+the image's unprivileged `node` user. The reference job fetches the `n9.0.2` tag
+into the shallow submodule before `reference:build`, so FFmpeg embeds the same
+version string as the pinned builds. After the codec builds it runs
+`node tools/bootstrap/bootstrap.mjs --only flac-investigation` as `node`, without
+`--allow-unpinned-reference`, so a reference that is not the linux-x64 pin fails
+the job there. The three outputs are added to the `worker-reference-and-codec`
+artifact. See [Linux reference](linux-reference.md) for the probe workflow and
+the local container loop.

@@ -98,7 +98,7 @@ describe('compat/reference-pins.json',()=>{
  it('pins the Linux image that the container lock and every CI job use',()=>{
   const image=json<{image:string}>('compat/reference-container.lock.json').image;
   expect(linux.image).toBe(image);expect(darwin.image).toBeUndefined();
-  for(const workflow of ['.github/workflows/ci.yml']){
+  for(const workflow of ['.github/workflows/ci.yml','.github/workflows/linux-probe.yml']){
    const images=[...readFileSync(workflow,'utf8').matchAll(/(?:image|EDGEFFMPEG_CONTAINER_IMAGE):\s*(\S+)/g)].map(match=>match[1]);
    expect(images.length,workflow).toBeGreaterThan(0);expect(new Set(images),workflow).toEqual(new Set([image]));
   }

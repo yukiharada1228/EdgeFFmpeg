@@ -45,7 +45,9 @@
     "codec:flac:build": "python3 tools/codecs/flac/build.py",
     "reference:flac-characterization": "node tools/differential-runner/flac-characterization/generate.mjs",
     "bootstrap": "node tools/bootstrap/bootstrap.mjs",
-    "bootstrap:check": "node tools/bootstrap/bootstrap.mjs --check"
+    "bootstrap:check": "node tools/bootstrap/bootstrap.mjs --check",
+    "linux:test": "node tools/linux/container-run.mjs test",
+    "linux:corpora": "node tools/linux/container-run.mjs corpora"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261119.1",

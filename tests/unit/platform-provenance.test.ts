@@ -55,34 +55,34 @@ describe('tracked Native evidence is labelled with the platform whose pin produc
 
 describe('platform corpus writer',()=>{
  const linux=pins.platforms['linux-x64']!,reference={...pinnedReference().metadata,platform:'linux',arch:'x64',artifacts:{...linux.artifacts}};
- function target(root:string,change:Partial<CorpusTarget>={}):CorpusTarget{
+ function target(change:Partial<CorpusTarget>={}):CorpusTarget{
   const provenance={schema:PROVENANCE_SCHEMA,referenceId:'linux-x64',pin:{file:'compat/reference-pins.json',ffmpeg:linux.artifacts.ffmpeg,ffprobe:linux.artifacts.ffprobe,source:linux.source,image:linux.image??null},reference,
    generator:{path:'tools/differential-runner/reference-metadata/generate.mjs',sha256:'0'.repeat(64)},image:linux.image??null,environment:{platform:'linux',arch:'x64',node:'v24',kernel:'6',kernelVersion:'6',cpuModel:'AMD EPYC',emulated:false,uid:1000,unprivileged:true},ci:null,draft:false,generatedAt:'2026-11-25T00:00:00.000Z'} as const;
-  void root;return {id:'linux-x64',base:'compat/behavior-specs/example',dir:'compat/behavior-specs/example/linux-x64',draft:false,legacyLayout:false,provenance,identity:pinnedReference(),...change} as CorpusTarget;
+  return {id:'linux-x64',base:'compat/behavior-specs/example',dir:'compat/behavior-specs/example/linux-x64',draft:false,legacyLayout:false,provenance,identity:pinnedReference(),...change} as CorpusTarget;
  }
  it('writes outputs with a manifest and provenance that verify, and rejects tampering, drafts and foreign labels',()=>{
   const root=mkdtempSync(join(tmpdir(),'platform-corpus-'));temporary.push(root);
-  const written=writePlatformCorpus(target(root),{'cases.json':{rows:[1,2]},'raw.bin':new Uint8Array([1,2,3])},{root});
+  const written=writePlatformCorpus(target(),{'cases.json':{rows:[1,2]},'raw.bin':new Uint8Array([1,2,3])},{root});
   expect(written).toEqual({dir:'compat/behavior-specs/example/linux-x64',files:['cases.json','raw.bin']});
   const dir=join(root,written.dir);expect(readdirSync(dir).sort()).toEqual(['cases.json','manifest.json','provenance.json','raw.bin']);
   expect(verifyPlatformCorpusDir(written.dir,'linux-x64',{root,pins}).referenceId).toBe('linux-x64');
   expect(()=>verifyPlatformCorpusDir(written.dir,'darwin-arm64',{root,pins})).toThrow('records reference linux-x64, not darwin-arm64');
   writeFileSync(join(dir,'raw.bin'),new Uint8Array([1,2,4]));
   expect(()=>verifyPlatformCorpusDir(written.dir,'linux-x64',{root,pins})).toThrow('raw.bin differs from its manifest');
-  writePlatformCorpus(target(root),{'cases.json':'{}\n'},{root});writeFileSync(join(dir,'extra.json'),'{}');
+  writePlatformCorpus(target(),{'cases.json':'{}\n'},{root});writeFileSync(join(dir,'extra.json'),'{}');
   expect(()=>verifyPlatformCorpusDir(written.dir,'linux-x64',{root,pins})).toThrow('differ from its manifest');
-  writePlatformCorpus(target(root,{provenance:{...target(root).provenance,draft:true}}),{'cases.json':'{}\n'},{root});
+  writePlatformCorpus(target({provenance:{...target().provenance,draft:true}}),{'cases.json':'{}\n'},{root});
   expect(()=>verifyPlatformCorpusDir(written.dir,'linux-x64',{root,pins})).toThrow('is a draft');
   const darwin=pins.platforms['darwin-arm64']!;
-  writePlatformCorpus(target(root,{provenance:{...target(root).provenance,reference:{...reference,platform:'darwin',arch:'arm64',artifacts:{...darwin.artifacts}}}}),{'cases.json':'{}\n'},{root});
+  writePlatformCorpus(target({provenance:{...target().provenance,reference:{...reference,platform:'darwin',arch:'arm64',artifacts:{...darwin.artifacts}}}}),{'cases.json':'{}\n'},{root});
   expect(()=>verifyPlatformCorpusDir(written.dir,'linux-x64',{root,pins})).toThrow('Corpus records Native reference darwin-arm64, not linux-x64');
  });
  it('refuses to write the darwin tracked layout, reserved names and paths outside the corpus roots',()=>{
   const root=mkdtempSync(join(tmpdir(),'platform-corpus-'));temporary.push(root);
-  expect(()=>writePlatformCorpus(target(root,{id:'darwin-arm64',dir:'compat/behavior-specs/example',legacyLayout:true}),{'cases.json':'{}'},{root})).toThrow('darwin-arm64 corpora keep their tracked layout');
-  expect(()=>writePlatformCorpus(target(root),{'manifest.json':'{}'},{root})).toThrow('Invalid corpus output name manifest.json');
-  expect(()=>writePlatformCorpus(target(root),{'../x.json':'{}'},{root})).toThrow('Invalid corpus output name');
-  expect(()=>writePlatformCorpus(target(root,{dir:'tests/fixtures/x'}),{'cases.json':'{}'},{root})).toThrow('Refusing to write outside the corpus roots');
+  expect(()=>writePlatformCorpus(target({id:'darwin-arm64',dir:'compat/behavior-specs/example',legacyLayout:true}),{'cases.json':'{}'},{root})).toThrow('darwin-arm64 corpora keep their tracked layout');
+  expect(()=>writePlatformCorpus(target(),{'manifest.json':'{}'},{root})).toThrow('Invalid corpus output name manifest.json');
+  expect(()=>writePlatformCorpus(target(),{'../x.json':'{}'},{root})).toThrow('Invalid corpus output name');
+  expect(()=>writePlatformCorpus(target({dir:'tests/fixtures/x'}),{'cases.json':'{}'},{root})).toThrow('Refusing to write outside the corpus roots');
   expect(existsSync(join(root,'compat'))).toBe(false);
  });
  it('admits committed evidence only from real hardware, and non-darwin evidence only from the CI job and pinned image',()=>{
