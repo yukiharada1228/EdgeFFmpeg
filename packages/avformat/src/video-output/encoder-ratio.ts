@@ -2,7 +2,7 @@
 // av_reduce/av_d2q adapted from pinned libavutil/rational.c,
 // Copyright (c) 2003 Michael Niedermayer. General av_expr functions/state remain unimplemented.
 import {evaluateClockExpression} from './clock-expression.js';
-import type {Rational} from '@edge-ffmpeg/avutil';
+import type {ExpressionNumericProfile,Rational} from '@edge-ffmpeg/avutil';
 const MAX=2147483647n;
 function reduce(numerator:bigint,denominator:bigint):Rational{
  const sign=(numerator<0n)!==(denominator<0n);let num=numerator<0n?-numerator:numerator,den=denominator<0n?-denominator:denominator,a=num,b=den;
@@ -15,10 +15,10 @@ function fromDouble(value:number):Rational{
  if(Number.isNaN(value))return {num:0n,den:0n};if(Math.abs(value)>2147483650)return {num:value<0?-1n:1n,den:0n};
  const bytes=new ArrayBuffer(8),view=new DataView(bytes);view.setFloat64(0,value,false);const exponent=Math.max(Number((view.getBigUint64(0,false)>>52n)&2047n)-1023,0),den=1n<<BigInt(62-exponent),num=BigInt(Math.floor(value*Number(den)+0.5));return reduce(num,den);
 }
-/** Bounded arithmetic/scientific expressions and exact integer colon ratios. */
-export function parseEncoderTimeBase(value:string):Rational|'demux'|'filter'|undefined{
+/** Bounded arithmetic/scientific expressions and exact integer colon ratios; numericProfile selects evaluateClockExpression's reference libc. */
+export function parseEncoderTimeBase(value:string,numericProfile:ExpressionNumericProfile='darwin-arm64'):Rational|'demux'|'filter'|undefined{
  if(value==='demux'||value==='filter')return value;if(value.length>256)throw new Error('Encoder clock expression exceeds bound');
  const colon=/^([+-]?\d+):([+-]?\d+)$/.exec(value);let result:Rational;
- if(colon){const n=BigInt(colon[1]!),d=BigInt(colon[2]!);if(n< -2147483648n||n>MAX||d< -2147483648n||d>MAX)throw new Error('Encoder integer ratio exceeds signed32');result=reduce(n,d);}else result=fromDouble(evaluateClockExpression(value));
+ if(colon){const n=BigInt(colon[1]!),d=BigInt(colon[2]!);if(n< -2147483648n||n>MAX||d< -2147483648n||d>MAX)throw new Error('Encoder integer ratio exceeds signed32');result=reduce(n,d);}else result=fromDouble(evaluateClockExpression(value,numericProfile));
  if(result.den<=0n||result.num<0n)throw new Error('Invalid encoder timebase');return result.num===0n?undefined:Object.freeze(result);
 }

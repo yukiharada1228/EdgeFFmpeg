@@ -4,7 +4,7 @@ import {ExecutionError} from '@edge-ffmpeg/core';
 import type {ResourceBudget} from '@edge-ffmpeg/core';
 import {parseFrameLimit} from '@edge-ffmpeg/cli';
 import {pixelLayout,parseVideoSize,parseVideoFrameRate} from '@edge-ffmpeg/avutil';
-import type {Rational} from '@edge-ffmpeg/avutil';
+import type {ExpressionNumericProfile,Rational} from '@edge-ffmpeg/avutil';
 import type {PixelArithmetic} from '@edge-ffmpeg/swscale';
 import {timeOptions,setVideoTimeOption as setTimeOption,resolveDuration} from './time-range.js';
 import {compileMultiInputVideoFilterGraph as compileFrameGraph,createReplayVideoExecution} from '@edge-ffmpeg/avfilter';
@@ -15,8 +15,8 @@ const invalid=(message:string):never=>{throw new ExecutionError('invalid-argumen
 const unsupported=(message:string):never=>{throw new ExecutionError('unsupported-command',message);};
 function path(value:string):string{if(!value.startsWith('/')||/[\\\0]/.test(value))invalid('Expected an absolute virtual file path');const parts=value.split('/').filter(Boolean);if(!parts.length||parts.some(part=>part==='.'||part==='..'))invalid('Invalid virtual file path');return '/'+parts.join('/');}
 /** Declared rawvideo sources bound to external graph pads with named output maps. */
-export function planMultiVideo(argv:readonly string[],budget:Readonly<ResourceBudget>,defaultArithmetic:PixelArithmetic='aarch64'){return planMultiCommand(parseArgv(argv),budget,defaultArithmetic);}
-export function planMultiCommand(command:ParsedCommand,budget:Readonly<ResourceBudget>,defaultArithmetic:PixelArithmetic='aarch64'){
+export function planMultiVideo(argv:readonly string[],budget:Readonly<ResourceBudget>,defaultArithmetic:PixelArithmetic='aarch64',numericProfile:ExpressionNumericProfile=defaultArithmetic==='x86_64'?'linux-x64':'darwin-arm64'){return planMultiCommand(parseArgv(argv),budget,defaultArithmetic,numericProfile);}
+export function planMultiCommand(command:ParsedCommand,budget:Readonly<ResourceBudget>,defaultArithmetic:PixelArithmetic='aarch64',numericProfile:ExpressionNumericProfile=defaultArithmetic==='x86_64'?'linux-x64':'darwin-arm64'){
  command=resolveVideoCommandOptions(command);
  if(Object.values(budget).some(value=>!Number.isSafeInteger(value)||value<=0)||budget.maxBufferBytes>budget.maxResidentBytes)throw new ExecutionError('resource-budget','Invalid complex video budget');if(!command.inputs.length||command.inputs.length>32||!command.outputs.length)unsupported('Complex rawvideo requires one to thirty-two inputs and at least one output');
  let description:string|null=null,overwrite=false,noOverwrite=false,arithmetic=defaultArithmetic;
@@ -29,7 +29,7 @@ export function planMultiCommand(command:ParsedCommand,budget:Readonly<ResourceB
 
  const bound=new Set<number>(),destinations=new Set<string>();
  const outputs=command.outputs.map(file=>{
-  const declaredFormat=file.options.filter(option=>option.name==='-f').at(-1)?.value;if(declaredFormat!=='rawvideo'&&declaredFormat!=='framecrc')unsupported('Unsupported output format');const timing=parseVideoOutputOptions(file.options,declaredFormat as 'rawvideo'|'framecrc',{copyTs:videoTimestampOptions(command.global).copyTs,directVideoSource:hasDirectVideoSource(file)});
+  const declaredFormat=file.options.filter(option=>option.name==='-f').at(-1)?.value;if(declaredFormat!=='rawvideo'&&declaredFormat!=='framecrc')unsupported('Unsupported output format');const timing=parseVideoOutputOptions(file.options,declaredFormat as 'rawvideo'|'framecrc',{copyTs:videoTimestampOptions(command.global).copyTs,directVideoSource:hasDirectVideoSource(file),numericProfile});
   const outputPath=path(file.url);if(sources.some(source=>source.path===outputPath)||destinations.has(outputPath))invalid('Input and output paths must be distinct');destinations.add(outputPath);
   const time=timeOptions();let map:string|null=null,codec='rawvideo',format:string|null=null,pixelFormat:string|null=null,size:{width:number;height:number}|null=null,frames:bigint|null=null,bitexact=false;
   for(const option of timing.remaining){if(setTimeOption(time,option.name,option.value))continue;

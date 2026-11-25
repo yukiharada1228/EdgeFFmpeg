@@ -4,6 +4,7 @@ import type {ExecutionBackend} from '@edge-ffmpeg/core';
 import type {TimedVideoOutputEvent} from '@edge-ffmpeg/avfilter';
 import type {Store} from './spool/index.js';
 import {executeParsedTimedVideoCommand} from './command.js';
+import {rejectNativeNumericOptions} from '../native-numeric.js';
 export type TimedVideoStore=Store<TimedVideoOutputEvent>;
 /** Each call returns an independent, execution-owned store. */
 export type TimedVideoStoreFactory=(kind:'input'|'graph'|'output',index:number)=>TimedVideoStore;
@@ -23,5 +24,5 @@ export function createTimedVideoBackend(options:TimedVideoBackendOptions):Execut
  if(typeof storage!=='function'||!Number.isSafeInteger(limits.maxEvents)||limits.maxEvents<1)throw new Error('Invalid timed video backend options');
  compileExpression('1',{numericProfile:limits.numericProfile});
  if(!['pull','activation','read-frames','queued','scheduled','producer'].includes(limits.scheduler))throw new Error('Invalid timed video scheduler');
- return Object.freeze({execute(command,context){return executeParsedTimedVideoCommand(command,context.filesystem,context.budget,storage,{...limits,signal:context.signal,...(context.reportDiagnostic?{reportDiagnostic:context.reportDiagnostic}:{})});}} as ExecutionBackend);
+ return Object.freeze({execute(command,context){rejectNativeNumericOptions(command,limits.numericProfile);return executeParsedTimedVideoCommand(command,context.filesystem,context.budget,storage,{...limits,signal:context.signal,...(context.reportDiagnostic?{reportDiagnostic:context.reportDiagnostic}:{})});}} as ExecutionBackend);
 }

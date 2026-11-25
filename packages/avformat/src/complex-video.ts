@@ -8,6 +8,7 @@ import {PacketQueue} from '@edge-ffmpeg/core';
 import type {BackendContext,MediaPacket} from '@edge-ffmpeg/core';
 import type {ParsedCommand} from '@edge-ffmpeg/cli';
 import type {PixelArithmetic} from '@edge-ffmpeg/swscale';
+import type {ExpressionNumericProfile} from '@edge-ffmpeg/avutil';
 import {openRawVideo,muxRawVideo,muxRawVideoFrameCrc} from '@edge-ffmpeg/containers';
 import {decodeRawVideo,encodeRawVideo} from '@edge-ffmpeg/avcodec';
 import {complexVideoTimeRange} from './complex-video-time.js';
@@ -17,9 +18,9 @@ import {ComplexVideoFailure} from './complex-video-failure.js';
 export {ComplexVideoFailure} from './complex-video-failure.js';
 import {executeMultiVideo} from './multi-video.js';
 /** Staged single-source complex graph runner. All output muxers prepare before publication. */
-export async function executeComplexVideo(command:ParsedCommand,context:BackendContext,arithmetic:PixelArithmetic='aarch64'):Promise<readonly string[]>{
+export async function executeComplexVideo(command:ParsedCommand,context:BackendContext,arithmetic:PixelArithmetic='aarch64',numericProfile:ExpressionNumericProfile=arithmetic==='x86_64'?'linux-x64':'darwin-arm64'):Promise<readonly string[]>{
  const description=command.global.find(option=>['-filter_complex','-lavfi'].includes(option.name))?.value;
- if(command.global.some(option=>videoTimestampFlag(option.name))||[...command.inputs,...command.outputs].some(file=>file.options.some(option=>['-ss','-to'].includes(option.name)&&option.value?.startsWith('-')))||command.inputs.some(hasForcedVideoRate)||command.inputs.length!==1||command.outputs.some(file=>file.options.some(option=>['-r','-fpsmax','-fps_mode','-enc_time_base'].includes(option.name.split(':')[0]!)))||description&&compileMultiInputVideoFilterGraph(description).graph.inputs.length!==1)return executeMultiVideo(command,context,arithmetic);
+ if(command.global.some(option=>videoTimestampFlag(option.name))||[...command.inputs,...command.outputs].some(file=>file.options.some(option=>['-ss','-to'].includes(option.name)&&option.value?.startsWith('-')))||command.inputs.some(hasForcedVideoRate)||command.inputs.length!==1||command.outputs.some(file=>file.options.some(option=>['-r','-fpsmax','-fps_mode','-enc_time_base'].includes(option.name.split(':')[0]!)))||description&&compileMultiInputVideoFilterGraph(description).graph.inputs.length!==1)return executeMultiVideo(command,context,arithmetic,numericProfile);
  const plan=planComplexCommand(command,context.budget,arithmetic),controller=new AbortController(),onAbort=()=>controller.abort(context.signal.reason);context.signal.addEventListener('abort',onAbort,{once:true});if(context.signal.aborted)onAbort();const signal=controller.signal;
  let group:Awaited<ReturnType<typeof openOutputGroup>>|undefined;const tasks:Promise<unknown>[]=[],queues:PacketQueue<MediaPacket>[]=[];
  const stop=(error:unknown):never=>{if(!signal.aborted)controller.abort(error);throw error;};

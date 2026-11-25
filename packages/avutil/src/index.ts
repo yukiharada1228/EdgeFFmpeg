@@ -30,6 +30,7 @@ export {videoFrameRate,parseVideoFrameRate,VideoRateError} from './video-rate.js
 export {parseVideoSize,VideoSizeError} from './video-size.js';
 
 export {compileExpression,evaluateExpression} from './expression/index.js';
+export {hexFloatLiteral} from './expression/hex-float.js';
 export type {CompiledExpression,ExpressionNumericProfile,ExpressionOptions,ExpressionPrint} from './expression/index.js';
 
 export {createThreadFrameQueue} from './thread-frame-queue.js';

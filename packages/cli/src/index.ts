@@ -31,4 +31,4 @@ export function parseArgv(argv: readonly string[]): ParsedCommand {
   return result;
 }
 export { parseTimeDuration, TimeSyntaxError } from './time.js';
-export { parseFrameLimit, FrameLimitError } from './frame-limit.js';
+export { parseFrameLimit, FrameLimitError, nativeFrameLimitOption, nativeFrameLimitRejection } from './frame-limit.js';
