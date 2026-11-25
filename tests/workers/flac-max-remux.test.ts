@@ -31,7 +31,7 @@ const clean=(actual:Result,shortRead=1021)=>{
  expect(actual.maxRead).toBeLessThanOrEqual(65536);expect(actual.maxReturned).toBeLessThanOrEqual(shortRead);expect(actual.maxWrite).toBeLessThanOrEqual(65536);expect(actual.maxActiveWrites).toBeLessThanOrEqual(1);
 };
 beforeAll(async()=>{
- const api=JSON.parse(readFileSync('.build/hermes-max/api/remux.json','utf8')) as {exports:Record<string,string[]>};
+ const api=JSON.parse(readFileSync('tests/fixtures/hermes-max/api/remux.json','utf8')) as {exports:Record<string,string[]>};
  expect(api.exports['packages/avformat/src/flac-wave-remux.ts']?.some(value=>value.startsWith('executeFlacRemux('))).toBe(true);
  expect(corpus.binarySha256).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');expect(corpus.rows).toHaveLength(28);
  const root=resolve('tests/workers'),wasm=readFileSync('.build/codecs/flac/edge-flac.wasm');expect(sha(wasm)).toBe(corpus.wasmSha256);

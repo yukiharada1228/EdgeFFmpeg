@@ -3,8 +3,8 @@
   "comment": "Bootstrap-only pins. Upstream commit/tag come from compat/upstream.lock.json, emsdk/OpenH264 pins from tools/codecs/openh264/build.lock.json, libFLAC/Wasm pins from tools/codecs/flac/inputs.json and reference binary pins from the tracked records reference.pins names; none is repeated here.",
   "submodule": {"path": "upstream/ffmpeg", "url": "https://github.com/FFmpeg/FFmpeg.git"},
   "reference": {
-    "comment": "pins: per host, the tracked record whose top-level reference block (artifacts, commit, platform, arch, flags, compiler) is that host's pinned build; compat/capabilities.json records the macOS arm64 oracle the tests and compat/behavior-specs pin. linkInputs: per pinned ffmpeg hash, the SHA-256 of `shasum -a 256` lines (sorted by path) of every lib*/lib*.a and fftools/**/*.o, which tells a nondeterministic link apart from a different compiler.",
-    "pins": {"darwin-arm64": "compat/capabilities.json", "linux-x64": "compat/behavior-specs/inverse-linux-x64.json"},
+    "comment": "pins: the tracked record whose platforms.<host> entry (artifacts, platform, arch, compiler; commit, tag and flags at its top level) is that host's pinned build. No tool writes it; tests resolve the same pins through tests/helpers/reference-identity.ts. linkInputs: per pinned ffmpeg hash, the SHA-256 of `shasum -a 256` lines (sorted by path) of every lib*/lib*.a and fftools/**/*.o, which tells a nondeterministic link apart from a different compiler.",
+    "pins": "compat/reference-pins.json",
     "linkInputs": {"1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92": "64c7ae24b6c759cf4e1f47a4051e3a65a324a3fc177fca0671fc96c6b40b0d44"}
   },
   "emsdk": {"url": "https://github.com/emscripten-core/emsdk.git", "directory": ".build/toolchains/emsdk"},
@@ -25,18 +25,6 @@
         "native-error-cases.json": {"normalizedSha256": "4f9b8cf827ed419c9ff9683ef6abd2fbcb0e3c0ccd87fabc660f68c30cf2f3d3", "originalSha256": "a5cce41e926a2c6babb0e0abb7bae25f8274dd24515135498378eee3af02e267"},
         "malformed-prototype-result.json": {"normalizedSha256": "8c41dc298c1317ff116d5154f3fb3a7e1d75fcddb67096fdb1882f31f472edb6", "originalSha256": "3041c78bf7bafb38a6d090dce2f9afbbe27d4cafa2198b09586cd30ad26dc4cd"}
       }
-    }
-  },
-  "seeds": {
-    "comment": "Hand-written API notes from an earlier agent run that Workers tests read; no generator exists. Installed byte-for-byte.",
-    "files": {
-      "hermes-max/api/filters.json": "d9cc6a293d251ebd3545910930231694fcdcef0b73bcd090c2543acdd7c5f011",
-      "hermes-max/api/frames.json": "356231d0f1f1f3ee1ff6ea225abec6e5ca68d1e935dc83c71c8d9bfd50ee2344",
-      "hermes-max/api/remix.json": "4578cbcb5eff139f804652a66c76739bd439a6338c263c3b1dcb48e9e627fb1d",
-      "hermes-max/api/remux.json": "a16c1178aecc003796d7e9527916d6b574e4940dbfb60026f30d35808b0475ea",
-      "hermes-max/api/selection.json": "2347014da2285dd25b02b8d8a05ef96b86896511b19ce0ed74d7fae2d1f94861",
-      "hermes-max/api/time.json": "dfd835bec916220337fbba0c43771498852b163b6406d23322aaf83d98824351",
-      "hermes-max/api/trim.json": "0acb77e6b7cc2e1184e9ad691b200762703b13ba60dd2e3a052ee839e4e469bf"
     }
   }
 }

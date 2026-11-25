@@ -72,7 +72,7 @@ it('preserves Native144 selection and actual R2/Wasm PCM with bounded reads, Cor
 
 it('requires the independently generated advanced selection API and Native evidence before claiming advanced acceptance',()=>{
  // Required artifacts: absence is an explicit failure, never an optional skip or a fabricated oracle.
- const api=JSON.parse(readFileSync('.build/hermes-max/api/selection.json','utf8')) as {module:string;exports:string[]};
+ const api=JSON.parse(readFileSync('tests/fixtures/hermes-max/api/selection.json','utf8')) as {module:string;exports:string[]};
  const corpus=JSON.parse(readFileSync('compat/behavior-specs/flac-max-selection/cases.json','utf8')) as {status:string;limits:{sequential:boolean;nativeCalls:number}};
  expect(api.module).toBe('packages/avformat/src/flac-selection.ts');expect(api.exports).toContain('selectFlacStreams');expect(api.exports).toContain('FlacStreamDescriptor');expect(corpus.status).toBe('independent-native-evidence-not-production-conformance');expect(corpus.limits.sequential).toBe(true);expect(corpus.limits.nativeCalls).toBeLessThanOrEqual(64);
 });

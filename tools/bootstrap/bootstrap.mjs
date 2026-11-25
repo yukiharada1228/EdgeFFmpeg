@@ -14,8 +14,7 @@ const definitions=[
  {id:'reference',verify:verifyReference,build:buildReference,needs:['submodule'],tools:['git','cc','make']},
  {id:'openh264',verify:verifyOpenh264,build:buildOpenh264,needs:[],tools:['git','bash','make','python3']},
  {id:'flac',verify:verifyFlac,build:buildFlac,needs:[],tools:['git','bash','python3','cmake','tar']},
- {id:'flac-investigation',verify:verifyInvestigation,build:buildInvestigation,needs:['reference','flac'],tools:[]},
- {id:'seeds',verify:verifySeeds,build:buildSeeds,needs:[],tools:[]}
+ {id:'flac-investigation',verify:verifyInvestigation,build:buildInvestigation,needs:['reference','flac'],tools:[]}
 ];
 const steps=definitions.map(step=>step.id);
 for(const [index,step]of definitions.entries())if(typeof step.id!=='string'||steps.indexOf(step.id)!==index||typeof step.verify!=='function'||typeof step.build!=='function'||!Array.isArray(step.tools)||!Array.isArray(step.needs)||step.needs.some(id=>!steps.slice(0,index).includes(id)))throw Error(`Bootstrap step ${step.id}: needs a unique id, verify and build functions, a tools list and needs naming earlier steps`);
@@ -115,15 +114,16 @@ function buildSubmodule(state){
  }
 }
 
-// Reference: rebuilt in place when absent, inconsistent or different from this host's pin. Host pins are read from the tracked records lock.json names.
+// Reference: rebuilt in place when absent, inconsistent or different from this host's pin. Host pins are platforms[host] of the record lock.json reference.pins names (compat/reference-pins.json).
 // The macOS linker does not always lay out identical inputs identically (duplicate local absolute assembler symbols), so an off-pin link is relinked serially.
 const referenceDir=resolve(root,'.build/reference'),programs=['ffmpeg_g','ffmpeg','ffprobe_g','ffprobe'],relinkAttempts=6;
 const configureFlags=()=>readFileSync(resolve(root,upstream.configureFile),'utf8').trim().split(/\s+/);
 let pinned;
 function referencePin(){
- if(pinned!==undefined)return pinned;const file=lock.reference.pins[host];if(!file)return pinned=null;
- const record=json(file).reference,digest=/^[0-9a-f]{64}$/;
- if(record?.platform!==platform()||record.arch!==arch()||record.commit!==upstream.commit||JSON.stringify(record.flags)!==JSON.stringify(configureFlags())||!digest.test(record.artifacts?.ffmpeg)||!digest.test(record.artifacts?.ffprobe))throw Error(`${file} no longer records a ${host} ${upstream.tag} reference built with ${upstream.configureFile}; update reference.pins in tools/bootstrap/lock.json`);
+ if(pinned!==undefined)return pinned;const file=lock.reference.pins,pins=json(file),digest=/^[0-9a-f]{64}$/;
+ if(pins.schemaVersion!==1||pins.commit!==upstream.commit||pins.tag!==upstream.tag||JSON.stringify(pins.flags)!==JSON.stringify(configureFlags()))throw Error(`${file} no longer pins ${upstream.tag} ${upstream.commit} built with ${upstream.configureFile}; update it or reference.pins in tools/bootstrap/lock.json`);
+ const record=Object.hasOwn(pins.platforms??{},host)?pins.platforms[host]:null;if(!record)return pinned=null;
+ if(record.platform!==platform()||record.arch!==arch()||!digest.test(record.artifacts?.ffmpeg)||!digest.test(record.artifacts?.ffprobe))throw Error(`${file} platforms.${host} is not a ${host} reference pin`);
  return pinned={ffmpeg:record.artifacts.ffmpeg,ffprobe:record.artifacts.ffprobe,file,compiler:String(record.compiler??'an unrecorded compiler').split('\n')[0]};
 }
 const programHashes=()=>Object.fromEntries(['ffmpeg','ffprobe'].map(name=>[name,sha(readFileSync(resolve(referenceDir,name)))]));
@@ -146,14 +146,14 @@ function verifyReference(){
  const missing=[...components.map(part=>`lib${part}/lib${part}.a`),'ffbuild/config.mak','config.h'].filter(path=>!existsSync(resolve(referenceDir,path)));
  if(missing.length)return fail('incomplete','oracle link inputs missing: '+missing.join(', '));
  const pin=referencePin(),summary=`ffmpeg ${actual.ffmpeg.slice(0,12)} ffprobe ${actual.ffprobe.slice(0,12)}`,accept=options['allow-unpinned-reference'];
- if(!pin){const detail=`${summary}; no reference pin exists for ${host}, so tests that pin the darwin-arm64 oracle cannot pass on this host`;return accept?ok(detail+'; accepted by --allow-unpinned-reference',{warning:`unpinned reference on ${host}`}):fail('unpinned',detail+'; --allow-unpinned-reference accepts it');}
+ if(!pin){const detail=`${summary}; no reference pin exists for ${host} in compat/reference-pins.json, so tests that resolve the pinned reference cannot pass on this host`;return accept?ok(detail+'; accepted by --allow-unpinned-reference',{warning:`unpinned reference on ${host}`}):fail('unpinned',detail+'; --allow-unpinned-reference accepts it');}
  if(pin.ffmpeg===actual.ffmpeg&&pin.ffprobe===actual.ffprobe)return ok(`${summary} match the ${host} pin in ${pin.file}`);
  const detail=`${summary} differ from the ${host} pin ${pair(pin)} in ${pin.file}; ${linkDiagnosis(pin,String(metadata.compiler??'an unrecorded compiler').split('\n')[0])}`;
  return accept?ok(detail+'; accepted by --allow-unpinned-reference',{warning:`reference differs from the pin; tests that pin ffmpeg ${pin.ffmpeg.slice(0,12)} will fail`}):fail('mismatch',detail);
 }
 function buildReference(state){
  const pin=referencePin(),accept=options['allow-unpinned-reference'];
- if(!pin&&!accept)throw Error(`no reference pin exists for ${host}, so tests that pin the darwin-arm64 oracle cannot pass here; pass --allow-unpinned-reference to build and accept an unpinned reference`);
+ if(!pin&&!accept)throw Error(`no reference pin exists for ${host} in compat/reference-pins.json, so tests that resolve the pinned reference cannot pass here; pass --allow-unpinned-reference to build and accept an unpinned reference`);
  // make treats existing programs as up to date, so they are deleted and relinked; libraries and objects are rebuilt incrementally in place.
  if(state.status!=='missing')for(const name of programs)rmSync(resolve(referenceDir,name),{force:true});
  run('reference',process.execPath,['tools/upstream-build/build.mjs']);
@@ -264,18 +264,6 @@ function buildInvestigation(){
  const state=inspect({verify:()=>verifyInvestigation(generated)});if(!state.ok)throw Error('Regenerated FLAC investigation evidence failed verification: '+state.detail);
  mkdirSync(target,{recursive:true});for(const name of outputs){if(existsSync(join(target,name)))moveAside(join(target,name));renameSync(join(generated,name),join(target,name));}
  rmSync(stage,{recursive:true,force:true});try{rmdirSync(dirname(stage));}catch{/* another stage is still present */}
-}
-
-// Seeds: untracked hand-written inputs some tests read, installed byte-for-byte.
-function verifySeeds(){
- const wrong=Object.entries(lock.seeds.files).filter(([path,digest])=>{const file=resolve(root,'.build',path);return !existsSync(file)||sha(readFileSync(file))!==digest;}).map(([path])=>path);
- return wrong.length?fail(wrong.length===Object.keys(lock.seeds.files).length?'missing':'mismatch','missing or different: '+wrong.map(path=>'.build/'+path).join(', ')):ok(Object.keys(lock.seeds.files).length+' seed files match');
-}
-function buildSeeds(){
- for(const [path,digest]of Object.entries(lock.seeds.files)){
-  const file=resolve(root,'.build',path),bytes=readFileSync(resolve(here,'seeds',path));if(sha(bytes)!==digest)throw Error('Vendored seed changed: '+path);
-  if(existsSync(file)){if(sha(readFileSync(file))===digest)continue;moveAside(file);}mkdirSync(dirname(file),{recursive:true});writeFileSync(file,bytes);
- }
 }
 
 const line=(id,state,note='')=>console.log(`${state.status.padEnd(12)} ${id.padEnd(19)} ${state.detail}${note}${state.warning?`\n${' '.repeat(33)}warning: ${state.warning}`:''}`);

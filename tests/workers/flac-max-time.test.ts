@@ -23,7 +23,7 @@ const unsupported=new Set(['ss-input','repeat-ss-t-input','t-tiny-output','ss-be
 const sha=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 
 it('executes immutable scoped FLAC time policy against pinned Native PCM/PTS on R2/workerd, including explicit unsupported cases and atomic failure cleanup',async()=>{
- const api=JSON.parse(readFileSync('.build/hermes-max/api/time.json','utf8')) as {module:string;exports:Record<string,unknown>};
+ const api=JSON.parse(readFileSync('tests/fixtures/hermes-max/api/time.json','utf8')) as {module:string;exports:Record<string,unknown>};
  expect(api.module).toBe('packages/avformat/src/flac-wave-time.ts');expect(api.exports).toHaveProperty('compileFlacTimePolicy');expect(api.exports).toHaveProperty('resolveFlacTimePolicy');
  const corpus=JSON.parse(readFileSync('compat/behavior-specs/flac-max-time/cases.json','utf8')) as {binarySha256:string;wasmSha256:string;rows:Row[]};
  expect(corpus.binarySha256).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');

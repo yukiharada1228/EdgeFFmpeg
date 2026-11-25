@@ -13,7 +13,7 @@ interface Result {ok:boolean;error:string|null;size:number|null;sha256:string|nu
 const sha=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 
 it('remixes pinned Native FLAC PCM through real workerd/R2 with bounded reservations, timestamps and transactional cleanup',async()=>{
- const api=JSON.parse(readFileSync('.build/hermes-max/api/remix.json','utf8')) as {module:string;exports:string[]};expect(api.module).toBe('packages/avformat/src/flac-wave-remix.ts');expect(api.exports).toContain('remixFlacAudio');
+ const api=JSON.parse(readFileSync('tests/fixtures/hermes-max/api/remix.json','utf8')) as {module:string;exports:string[]};expect(api.module).toBe('packages/avformat/src/flac-wave-remix.ts');expect(api.exports).toContain('remixFlacAudio');
  const corpus=JSON.parse(readFileSync('compat/behavior-specs/flac-max-remix/cases.json','utf8')) as Corpus;
  expect(corpus.binarySha256).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
  const wasm=readFileSync('.build/codecs/flac/edge-flac.wasm');expect(sha(wasm)).toBe(corpus.wasmSha256);

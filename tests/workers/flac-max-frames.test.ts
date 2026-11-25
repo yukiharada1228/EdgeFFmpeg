@@ -12,7 +12,7 @@ interface Result {ok:boolean;error:string|null;cancelReasonPreserved:boolean;met
 const sha=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 
 it('accepts Native source-format FLAC frames through real R2/workerd with bounded ownership and transactional failure cleanup',async()=>{
- const api=JSON.parse(readFileSync('.build/hermes-max/api/frames.json','utf8')) as {module:string;exports:Record<string,string>};
+ const api=JSON.parse(readFileSync('tests/fixtures/hermes-max/api/frames.json','utf8')) as {module:string;exports:Record<string,string>};
  expect(api.module).toBe('packages/avformat/src/flac-wave-frames.ts');expect(api.exports).toHaveProperty('decodeFlacAudioFrames');expect(api.exports).toHaveProperty('prepareFlacAudioFrames');
  const corpus=JSON.parse(readFileSync('compat/behavior-specs/flac-max-frames/cases.json','utf8')) as {wasmSha256:string;binarySha256:string;differences:unknown[];sourcePins:Record<string,string>;rows:Row[]};
  expect(corpus.binarySha256).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');expect(corpus.rows).toHaveLength(64);expect(corpus.differences).toEqual([]);

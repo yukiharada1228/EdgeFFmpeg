@@ -36,7 +36,7 @@ function expectedFormat(pcm:Buffer,format:string,counts:number[],start:number,en
 }
 
 it('trims real FLAC on local R2/workerd: Native bytes, all packed/planar formats, PTS, bounded short reads and transactional cleanup',async()=>{
- const api=JSON.parse(readFileSync('.build/hermes-max/api/trim.json','utf8')) as {module:string};expect(api.module).toBe('packages/avformat/src/flac-wave-trim.ts');
+ const api=JSON.parse(readFileSync('tests/fixtures/hermes-max/api/trim.json','utf8')) as {module:string};expect(api.module).toBe('packages/avformat/src/flac-wave-trim.ts');
  const corpus=JSON.parse(readFileSync('compat/behavior-specs/flac-max-trim/cases.json','utf8')) as {binarySha256:string;wasmSha256:string;rows:Row[]};
  expect(corpus.binarySha256).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');expect(corpus.rows).toHaveLength(64);
  const wasm=readFileSync('.build/codecs/flac/edge-flac.wasm');expect(sha(wasm)).toBe(corpus.wasmSha256);

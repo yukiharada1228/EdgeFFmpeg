@@ -16,7 +16,7 @@ function checksum(bytes:Uint8Array):string {let low=0,high=0;for(const byte of b
 it('runs finite FLAC filters on actual local R2/workerd with exact Native PCM, frame PTS and transactional cleanup',async()=>{
  const corpus=JSON.parse(readFileSync('compat/behavior-specs/flac-max-filters/cases.json','utf8')) as {binarySha256:string;wasmSha256:string;rows:Row[]};
  expect(corpus.binarySha256).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');expect(corpus.rows).toHaveLength(64);
- const api=JSON.parse(readFileSync('.build/hermes-max/api/filters.json','utf8')) as {module:string};expect(api.module).toBe('packages/avformat/src/flac-wave-filters.ts');
+ const api=JSON.parse(readFileSync('tests/fixtures/hermes-max/api/filters.json','utf8')) as {module:string};expect(api.module).toBe('packages/avformat/src/flac-wave-filters.ts');
  const wasm=readFileSync('.build/codecs/flac/edge-flac.wasm');expect(sha(wasm)).toBe(corpus.wasmSha256);
  const root=resolve('tests/workers'),bundle=await build({entryPoints:[root+'/flac-max-filters-fixture.ts'],bundle:true,write:false,format:'esm',platform:'browser',target:'es2022',external:['./edge-flac.wasm'],metafile:true});
  for(const name of Object.keys(bundle.metafile!.inputs)){expect(name.startsWith('.build/')).toBe(false);expect(name.startsWith('node:')).toBe(false);expect(name.includes('runtime-node')).toBe(false);}
