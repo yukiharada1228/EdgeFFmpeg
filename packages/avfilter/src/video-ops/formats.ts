@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
+// Fast-lane probe (wave2/ci-fast-probe, not for merging): a comment-only change to a shared module.
 // Adapted format negotiation and loss scoring; see ../../NOTICE, ../../NOTICE-VIDEO-OPS and ../../NOTICE-VIDEO-NEGOTIATION for provenance.
 import {videoStoragePixelFormat} from '@edge-ffmpeg/avutil';
 /** The one negotiation table shared by the linear, frame-graph and timed negotiators: every non-hwaccel
