@@ -1,0 +1,214 @@
+{
+ "capabilityId": "filter.shuffleplanes",
+ "slug": "vf-shuffleplanes",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/shuffleplanes.ts",
+  "packages/avfilter/NOTICE-SHUFFLEPLANES",
+  "tests/unit/video-shuffleplanes.test.ts",
+  "tests/differential/video-shuffleplanes.test.ts",
+  "docs/contributing/shuffleplanes.md",
+  "docs/contributing/wave1/vf-shuffleplanes.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {shuffleplanesOperator} from ./shuffleplanes.js;",
+    " shuffleplanesOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-shuffleplanes.test.ts",
+   "name": "parses the declared defaults, shorthand order and named maps into frozen steps",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-shuffleplanes.test.ts",
+   "name": "derives every per-step format list from the native query_formats rule for all 256 tuples",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-shuffleplanes.test.ts",
+   "name": "remaps and duplicates planes into owned tight planes from padded input without mutating it",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-shuffleplanes.test.ts",
+   "name": "rejects unsupported formats, budgets, malformed strides and cancellation explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-shuffleplanes.test.ts",
+   "name": "plans shuffleplanes through linear, graph and actor planners and refuses timelines and commands",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "matches native shuffleplanes query_formats for every map tuple over the negotiation table",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "matches native shuffleplanes plane copies for every accepted map tuple and table format",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "matches native linear shuffleplanes chains with negotiated table conversions",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "matches native shuffleplanes CLI rawvideo and framecrc through -vf and -filter_complex",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "matches native replayed shuffleplanes branches and joins frame by frame",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "matches native shuffleplanes framecrc and rawvideo through the actor and timed schedulers",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "refuses shuffleplanes timelines, unimplemented values and empty mappings before opening CLI outputs",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "name": "(whole file, unedited)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 6538,
+  "compares": [
+   "3584 native -v verbose negotiations: auto_scale absent exactly when the format is in formats(step)",
+   "780 kernel rawvideo outputs",
+   "802 linear rawvideo outputs plus 766 negotiated-format checks where native leaves the table",
+   "320 CLI rawvideo/framecrc outputs (-vf and -filter_complex)",
+   "30 replay-stream outputs",
+   "240 timed-backend rawvideo/framecrc outputs across pull, activation and producer schedulers",
+   "16 refusals where native exits 0 (threads case unchecked)"
+  ]
+ },
+ "unsupported": [
+  "Native conversions to formats outside the negotiation table (gbrap, yuva444p, yuvj444p, ...): EdgeFFmpeg converts to a table format instead, so output differs (766 of 1568 linear probes)",
+  "163 of 256 map tuples with no qualifying table format are refused at parse time",
+  "Expression, hex or multi-digit option values",
+  "enable= timeline and runtime commands",
+  "Generic filter options such as threads"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "baselineUnitFailures": {
+  "summary": "13 failed | 2253 passed (2266); 6 files failed",
+  "files": [
+   "tests/unit/flac-build-inputs.test.ts (1)",
+   "tests/unit/flac-decode-backend.test.ts (load)",
+   "tests/unit/flac-decoder.test.ts (load)",
+   "tests/unit/flac-expanded-fixtures.test.ts (2)",
+   "tests/unit/flac-max-frames.test.ts (load)",
+   "tests/unit/resample-checkpoint.test.ts (10)"
+  ]
+ },
+ "finalUnitFailures": {
+  "summary": "13 failed | 2258 passed (2271); same 6 files and tests as the baseline",
+  "files": "identical to baselineUnitFailures"
+ },
+ "proposedContracts": [
+  {
+   "id": "filter.shuffleplanes.formats",
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "matches native shuffleplanes query_formats for every map tuple over the negotiation table",
+   "modes": [
+    "linear"
+   ],
+   "scope": "query_formats over the 14-format table, 256 tuples"
+  },
+  {
+   "id": "filter.shuffleplanes.kernel",
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "matches native shuffleplanes plane copies for every accepted map tuple and table format",
+   "modes": [
+    "linear"
+   ],
+   "scope": "plane copy for every accepted tuple and format"
+  },
+  {
+   "id": "filter.shuffleplanes.linear",
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "matches native linear shuffleplanes chains with negotiated table conversions",
+   "modes": [
+    "linear"
+   ],
+   "scope": "linear chains where native negotiation stays in the table"
+  },
+  {
+   "id": "filter.shuffleplanes.cli",
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "matches native shuffleplanes CLI rawvideo and framecrc through -vf and -filter_complex",
+   "modes": [
+    "linear",
+    "graph"
+   ],
+   "scope": "CLI rawvideo/framecrc, -vf and -filter_complex, stream and -ss/-frames timing"
+  },
+  {
+   "id": "filter.shuffleplanes.stream",
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "matches native replayed shuffleplanes branches and joins frame by frame",
+   "modes": [
+    "stream"
+   ],
+   "scope": "replay streams with split, hstack, transpose and nullsink"
+  },
+  {
+   "id": "filter.shuffleplanes.timed",
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "matches native shuffleplanes framecrc and rawvideo through the actor and timed schedulers",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "timed backend pull/activation/producer schedulers, rawvideo and framecrc"
+  },
+  {
+   "id": "filter.shuffleplanes.refusals",
+   "file": "tests/differential/video-shuffleplanes.test.ts",
+   "name": "refuses shuffleplanes timelines, unimplemented values and empty mappings before opening CLI outputs",
+   "modes": [
+    "linear",
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "enable=, expression values, empty mappings and unknown options refused before outputs open"
+  }
+ ],
+ "notes": [
+  "Setup durations: submodule 45s, npm ci 8s, reference:build 243s, baseline typecheck+lint+boundaries 75s, baseline unit 98s.",
+  "Matching native negotiation for inputs that native converts to gbrap/yuva444p/yuvj444p would need new entries in the shared negotiation table packages/avfilter/src/video-ops/formats.ts; not made (shared edit outside scope).",
+  "Registry examples start from format=yuva420p or use 0:0:0:0 so they stay inside native-equivalent negotiation on the 8x8 gray source.",
+  "Option values are limited to one decimal digit; native AV_OPT_TYPE_INT also evaluates expressions."
+ ]
+}
