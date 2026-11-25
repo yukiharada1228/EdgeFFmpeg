@@ -35,7 +35,7 @@ export function planTimedCommand(command:ParsedCommand,budget:Readonly<ResourceB
 
  const bound=new Set<number>(),destinations=new Set<string>();
  const outputs=command.outputs.map(file=>{
-  const declaredFormat=file.options.filter(option=>option.name==='-f').at(-1)?.value;if(declaredFormat!=='rawvideo'&&declaredFormat!=='framecrc')unsupported('Unsupported output format');const timing=parseVideoOutputOptions(file.options,declaredFormat as 'rawvideo'|'framecrc',{copyTs:videoTimestampOptions(command.global).copyTs,directVideoSource:hasDirectVideoSource(file)});
+  const declaredFormat=file.options.filter(option=>option.name==='-f').at(-1)?.value;if(declaredFormat!=='rawvideo'&&declaredFormat!=='framecrc')unsupported('Unsupported output format');const timing=parseVideoOutputOptions(file.options,declaredFormat as 'rawvideo'|'framecrc',{copyTs:videoTimestampOptions(command.global).copyTs,directVideoSource:hasDirectVideoSource(file),numericProfile});
   const outputPath=path(file.url);if(sources.some(source=>source.path===outputPath)||destinations.has(outputPath))invalid('Input and output paths must be distinct');destinations.add(outputPath);
   const time=timeOptions();let map:string|null=null,codec='rawvideo',format:string|null=null,pixelFormat:string|null=null,size:{width:number;height:number}|null=null,frames:bigint|null=null,bitexact=false;
   for(const option of timing.remaining){if(setTimeOption(time,option.name,option.value))continue;

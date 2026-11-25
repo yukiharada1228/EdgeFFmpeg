@@ -32,6 +32,22 @@ zero/one/two/unlimited/int64-max counts. Alias/precedence tests compare raw byte
 and WAV sample payloads/durations. Workerd verifies a one-packet copy limit
 with eight-byte reads and that no subsequent input packet is read.
 
+The native parse of a count depends on the reference CPU. fftools `parse_number`
+reads it as a double and rejects `(int64_t)d != d`. A count whose double is 2^63
+(9223372036854775296 through 9223372036854776832) makes that cast undefined:
+AArch64 saturates to INT64_MAX and accepts the count, while x86-64 returns
+INT64_MIN and rejects it with `Expected int64 for frames:a but found ...` and
+AVERROR(EINVAL), exit status 234. `createMediaBackend({numericProfile})` selects
+the reference: `darwin-arm64` (the default) or `linux-x64` (the default with the
+x86_64 pixel profile). Under `linux-x64` both backends fail such a count before
+any input or output is opened, with the native message and status, for `-frames`
+with any stream specifier and `-aframes`, `-vframes` and `-dframes`. The CLI
+launcher reads `EDGEFFMPEG_NUMERIC_PROFILE`. The frame-limit, apad, rawvideo and
+rawvideo timing differential tests select the profile from the pinned reference
+and compare the rejection on linux-x64 and the output on darwin-arm64. Native
+parses output options after opening its inputs, so a command that also names a
+missing input reports the input error natively and this error in Edge.
+
 General stream selection, video/subtitle frame limits, compressed packetization,
 filters that alter frame boundaries and explicit packet-sizing controls remain
 unimplemented. Passing these cases does not establish general `-frames`

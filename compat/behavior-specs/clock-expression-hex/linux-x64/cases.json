@@ -1,0 +1,1643 @@
+{
+  "schema": "edge-ffmpeg/clock-expression-hex@1",
+  "scope": "av_expr_parse_and_eval of signed hexadecimal literals through av_strtod and the host C library strtod; the 324 samples of tests/differential/video-clock-hex-value.test.ts in test order",
+  "libc": {
+    "glibcVersionRuntime": "2.36"
+  },
+  "oracle": {
+    "source": "tools/differential-runner/video-output/value-oracle.c",
+    "sourceSha256": "a05fb808677ccb0ea8c6e0c801107ad260ddca9eb6534ecce06bc834cb3fceaa",
+    "binarySha256": "a2a151e1a38ada9df9df1e8e71dbb330e67525d13416d88d1064cd42d62d1432",
+    "compilerVersion": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "librarySha256": {
+      ".build/reference/libavfilter/libavfilter.a": "8f5821221423526d123767cb948c711f05e42b160917de4153dc9b860ba2417e",
+      ".build/reference/libavformat/libavformat.a": "0267653359746cc8e383c948447fb65f31edbecc98580d8b83ff0ec16b6d41cb",
+      ".build/reference/libavcodec/libavcodec.a": "aa5c00c8bef4da62c5bab961a2010de6c81148b3d15179598148abb8701e31b2",
+      ".build/reference/libswscale/libswscale.a": "9f3a02b8a0923dece9609b31c29a1f1e9da8e53c8ccc784dab3566b7a560c098",
+      ".build/reference/libswresample/libswresample.a": "acf824905b972dd7f0c64afdb896ecef59e8433babfdab245b2736879c580f3c",
+      ".build/reference/libavutil/libavutil.a": "b0f1b0085398cb212c387b983137812b6f7033f4228f7e50dad7292c4534b4c1"
+    }
+  },
+  "rows": [
+    {
+      "value": "--0x1p0",
+      "accepted": true,
+      "bits": "3ff0000000000000"
+    },
+    {
+      "value": "+-0x1p0",
+      "accepted": true,
+      "bits": "bff0000000000000"
+    },
+    {
+      "value": "-+0x1p0",
+      "accepted": true,
+      "bits": "bff0000000000000"
+    },
+    {
+      "value": "++0x1p0",
+      "accepted": true,
+      "bits": "3ff0000000000000"
+    },
+    {
+      "value": "--0x1p-1022",
+      "accepted": true,
+      "bits": "0010000000000000"
+    },
+    {
+      "value": "+-0x1p-1022",
+      "accepted": true,
+      "bits": "8010000000000000"
+    },
+    {
+      "value": "-+0x1p-1022",
+      "accepted": true,
+      "bits": "8010000000000000"
+    },
+    {
+      "value": "++0x1p-1022",
+      "accepted": true,
+      "bits": "0010000000000000"
+    },
+    {
+      "value": "--0x1p-1074",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "+-0x1p-1074",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "-+0x1p-1074",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "++0x1p-1074",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "--0x1p-1075",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x1p-1075",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x1p-1075",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x1p-1075",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x1p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x1p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x1p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x1p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x1p1023",
+      "accepted": true,
+      "bits": "7fe0000000000000"
+    },
+    {
+      "value": "+-0x1p1023",
+      "accepted": true,
+      "bits": "ffe0000000000000"
+    },
+    {
+      "value": "-+0x1p1023",
+      "accepted": true,
+      "bits": "ffe0000000000000"
+    },
+    {
+      "value": "++0x1p1023",
+      "accepted": true,
+      "bits": "7fe0000000000000"
+    },
+    {
+      "value": "--0x1p1024",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x1p1024",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x1p1024",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x1p1024",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x1p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x1p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x1p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x1p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x1p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x1p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x1p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x1p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x1.8p0",
+      "accepted": true,
+      "bits": "3ff8000000000000"
+    },
+    {
+      "value": "+-0x1.8p0",
+      "accepted": true,
+      "bits": "bff8000000000000"
+    },
+    {
+      "value": "-+0x1.8p0",
+      "accepted": true,
+      "bits": "bff8000000000000"
+    },
+    {
+      "value": "++0x1.8p0",
+      "accepted": true,
+      "bits": "3ff8000000000000"
+    },
+    {
+      "value": "--0x1.8p-1022",
+      "accepted": true,
+      "bits": "0018000000000000"
+    },
+    {
+      "value": "+-0x1.8p-1022",
+      "accepted": true,
+      "bits": "8018000000000000"
+    },
+    {
+      "value": "-+0x1.8p-1022",
+      "accepted": true,
+      "bits": "8018000000000000"
+    },
+    {
+      "value": "++0x1.8p-1022",
+      "accepted": true,
+      "bits": "0018000000000000"
+    },
+    {
+      "value": "--0x1.8p-1074",
+      "accepted": true,
+      "bits": "0000000000000002"
+    },
+    {
+      "value": "+-0x1.8p-1074",
+      "accepted": true,
+      "bits": "8000000000000002"
+    },
+    {
+      "value": "-+0x1.8p-1074",
+      "accepted": true,
+      "bits": "8000000000000002"
+    },
+    {
+      "value": "++0x1.8p-1074",
+      "accepted": true,
+      "bits": "0000000000000002"
+    },
+    {
+      "value": "--0x1.8p-1075",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "+-0x1.8p-1075",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "-+0x1.8p-1075",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "++0x1.8p-1075",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "--0x1.8p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x1.8p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x1.8p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x1.8p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x1.8p1023",
+      "accepted": true,
+      "bits": "7fe8000000000000"
+    },
+    {
+      "value": "+-0x1.8p1023",
+      "accepted": true,
+      "bits": "ffe8000000000000"
+    },
+    {
+      "value": "-+0x1.8p1023",
+      "accepted": true,
+      "bits": "ffe8000000000000"
+    },
+    {
+      "value": "++0x1.8p1023",
+      "accepted": true,
+      "bits": "7fe8000000000000"
+    },
+    {
+      "value": "--0x1.8p1024",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x1.8p1024",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x1.8p1024",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x1.8p1024",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x1.8p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x1.8p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x1.8p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x1.8p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x1.8p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x1.8p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x1.8p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x1.8p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x.8p0",
+      "accepted": true,
+      "bits": "3fe0000000000000"
+    },
+    {
+      "value": "+-0x.8p0",
+      "accepted": true,
+      "bits": "bfe0000000000000"
+    },
+    {
+      "value": "-+0x.8p0",
+      "accepted": true,
+      "bits": "bfe0000000000000"
+    },
+    {
+      "value": "++0x.8p0",
+      "accepted": true,
+      "bits": "3fe0000000000000"
+    },
+    {
+      "value": "--0x.8p-1022",
+      "accepted": true,
+      "bits": "0008000000000000"
+    },
+    {
+      "value": "+-0x.8p-1022",
+      "accepted": true,
+      "bits": "8008000000000000"
+    },
+    {
+      "value": "-+0x.8p-1022",
+      "accepted": true,
+      "bits": "8008000000000000"
+    },
+    {
+      "value": "++0x.8p-1022",
+      "accepted": true,
+      "bits": "0008000000000000"
+    },
+    {
+      "value": "--0x.8p-1074",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x.8p-1074",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x.8p-1074",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x.8p-1074",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x.8p-1075",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x.8p-1075",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x.8p-1075",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x.8p-1075",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x.8p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x.8p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x.8p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x.8p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x.8p1023",
+      "accepted": true,
+      "bits": "7fd0000000000000"
+    },
+    {
+      "value": "+-0x.8p1023",
+      "accepted": true,
+      "bits": "ffd0000000000000"
+    },
+    {
+      "value": "-+0x.8p1023",
+      "accepted": true,
+      "bits": "ffd0000000000000"
+    },
+    {
+      "value": "++0x.8p1023",
+      "accepted": true,
+      "bits": "7fd0000000000000"
+    },
+    {
+      "value": "--0x.8p1024",
+      "accepted": true,
+      "bits": "7fe0000000000000"
+    },
+    {
+      "value": "+-0x.8p1024",
+      "accepted": true,
+      "bits": "ffe0000000000000"
+    },
+    {
+      "value": "-+0x.8p1024",
+      "accepted": true,
+      "bits": "ffe0000000000000"
+    },
+    {
+      "value": "++0x.8p1024",
+      "accepted": true,
+      "bits": "7fe0000000000000"
+    },
+    {
+      "value": "--0x.8p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x.8p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x.8p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x.8p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x.8p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x.8p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x.8p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x.8p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0xfffffffffffffffffp0",
+      "accepted": true,
+      "bits": "4430000000000000"
+    },
+    {
+      "value": "+-0xfffffffffffffffffp0",
+      "accepted": true,
+      "bits": "c430000000000000"
+    },
+    {
+      "value": "-+0xfffffffffffffffffp0",
+      "accepted": true,
+      "bits": "c430000000000000"
+    },
+    {
+      "value": "++0xfffffffffffffffffp0",
+      "accepted": true,
+      "bits": "4430000000000000"
+    },
+    {
+      "value": "--0xfffffffffffffffffp-1022",
+      "accepted": true,
+      "bits": "0450000000000000"
+    },
+    {
+      "value": "+-0xfffffffffffffffffp-1022",
+      "accepted": true,
+      "bits": "8450000000000000"
+    },
+    {
+      "value": "-+0xfffffffffffffffffp-1022",
+      "accepted": true,
+      "bits": "8450000000000000"
+    },
+    {
+      "value": "++0xfffffffffffffffffp-1022",
+      "accepted": true,
+      "bits": "0450000000000000"
+    },
+    {
+      "value": "--0xfffffffffffffffffp-1074",
+      "accepted": true,
+      "bits": "0110000000000000"
+    },
+    {
+      "value": "+-0xfffffffffffffffffp-1074",
+      "accepted": true,
+      "bits": "8110000000000000"
+    },
+    {
+      "value": "-+0xfffffffffffffffffp-1074",
+      "accepted": true,
+      "bits": "8110000000000000"
+    },
+    {
+      "value": "++0xfffffffffffffffffp-1074",
+      "accepted": true,
+      "bits": "0110000000000000"
+    },
+    {
+      "value": "--0xfffffffffffffffffp-1075",
+      "accepted": true,
+      "bits": "0100000000000000"
+    },
+    {
+      "value": "+-0xfffffffffffffffffp-1075",
+      "accepted": true,
+      "bits": "8100000000000000"
+    },
+    {
+      "value": "-+0xfffffffffffffffffp-1075",
+      "accepted": true,
+      "bits": "8100000000000000"
+    },
+    {
+      "value": "++0xfffffffffffffffffp-1075",
+      "accepted": true,
+      "bits": "0100000000000000"
+    },
+    {
+      "value": "--0xfffffffffffffffffp-1076",
+      "accepted": true,
+      "bits": "00f0000000000000"
+    },
+    {
+      "value": "+-0xfffffffffffffffffp-1076",
+      "accepted": true,
+      "bits": "80f0000000000000"
+    },
+    {
+      "value": "-+0xfffffffffffffffffp-1076",
+      "accepted": true,
+      "bits": "80f0000000000000"
+    },
+    {
+      "value": "++0xfffffffffffffffffp-1076",
+      "accepted": true,
+      "bits": "00f0000000000000"
+    },
+    {
+      "value": "--0xfffffffffffffffffp1023",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0xfffffffffffffffffp1023",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0xfffffffffffffffffp1023",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0xfffffffffffffffffp1023",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0xfffffffffffffffffp1024",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0xfffffffffffffffffp1024",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0xfffffffffffffffffp1024",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0xfffffffffffffffffp1024",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0xfffffffffffffffffp-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0xfffffffffffffffffp-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0xfffffffffffffffffp-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0xfffffffffffffffffp-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0xfffffffffffffffffp99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0xfffffffffffffffffp99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0xfffffffffffffffffp99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0xfffffffffffffffffp99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x1.00000000000008p0",
+      "accepted": true,
+      "bits": "3ff0000000000000"
+    },
+    {
+      "value": "+-0x1.00000000000008p0",
+      "accepted": true,
+      "bits": "bff0000000000000"
+    },
+    {
+      "value": "-+0x1.00000000000008p0",
+      "accepted": true,
+      "bits": "bff0000000000000"
+    },
+    {
+      "value": "++0x1.00000000000008p0",
+      "accepted": true,
+      "bits": "3ff0000000000000"
+    },
+    {
+      "value": "--0x1.00000000000008p-1022",
+      "accepted": true,
+      "bits": "0010000000000000"
+    },
+    {
+      "value": "+-0x1.00000000000008p-1022",
+      "accepted": true,
+      "bits": "8010000000000000"
+    },
+    {
+      "value": "-+0x1.00000000000008p-1022",
+      "accepted": true,
+      "bits": "8010000000000000"
+    },
+    {
+      "value": "++0x1.00000000000008p-1022",
+      "accepted": true,
+      "bits": "0010000000000000"
+    },
+    {
+      "value": "--0x1.00000000000008p-1074",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "+-0x1.00000000000008p-1074",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "-+0x1.00000000000008p-1074",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "++0x1.00000000000008p-1074",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "--0x1.00000000000008p-1075",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x1.00000000000008p-1075",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x1.00000000000008p-1075",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x1.00000000000008p-1075",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x1.00000000000008p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x1.00000000000008p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x1.00000000000008p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x1.00000000000008p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x1.00000000000008p1023",
+      "accepted": true,
+      "bits": "7fe0000000000000"
+    },
+    {
+      "value": "+-0x1.00000000000008p1023",
+      "accepted": true,
+      "bits": "ffe0000000000000"
+    },
+    {
+      "value": "-+0x1.00000000000008p1023",
+      "accepted": true,
+      "bits": "ffe0000000000000"
+    },
+    {
+      "value": "++0x1.00000000000008p1023",
+      "accepted": true,
+      "bits": "7fe0000000000000"
+    },
+    {
+      "value": "--0x1.00000000000008p1024",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x1.00000000000008p1024",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x1.00000000000008p1024",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x1.00000000000008p1024",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x1.00000000000008p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x1.00000000000008p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x1.00000000000008p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x1.00000000000008p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x1.00000000000008p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x1.00000000000008p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x1.00000000000008p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x1.00000000000008p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x1.00000000000018p0",
+      "accepted": true,
+      "bits": "3ff0000000000002"
+    },
+    {
+      "value": "+-0x1.00000000000018p0",
+      "accepted": true,
+      "bits": "bff0000000000002"
+    },
+    {
+      "value": "-+0x1.00000000000018p0",
+      "accepted": true,
+      "bits": "bff0000000000002"
+    },
+    {
+      "value": "++0x1.00000000000018p0",
+      "accepted": true,
+      "bits": "3ff0000000000002"
+    },
+    {
+      "value": "--0x1.00000000000018p-1022",
+      "accepted": true,
+      "bits": "0010000000000002"
+    },
+    {
+      "value": "+-0x1.00000000000018p-1022",
+      "accepted": true,
+      "bits": "8010000000000002"
+    },
+    {
+      "value": "-+0x1.00000000000018p-1022",
+      "accepted": true,
+      "bits": "8010000000000002"
+    },
+    {
+      "value": "++0x1.00000000000018p-1022",
+      "accepted": true,
+      "bits": "0010000000000002"
+    },
+    {
+      "value": "--0x1.00000000000018p-1074",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "+-0x1.00000000000018p-1074",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "-+0x1.00000000000018p-1074",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "++0x1.00000000000018p-1074",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "--0x1.00000000000018p-1075",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "+-0x1.00000000000018p-1075",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "-+0x1.00000000000018p-1075",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "++0x1.00000000000018p-1075",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "--0x1.00000000000018p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x1.00000000000018p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x1.00000000000018p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x1.00000000000018p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x1.00000000000018p1023",
+      "accepted": true,
+      "bits": "7fe0000000000002"
+    },
+    {
+      "value": "+-0x1.00000000000018p1023",
+      "accepted": true,
+      "bits": "ffe0000000000002"
+    },
+    {
+      "value": "-+0x1.00000000000018p1023",
+      "accepted": true,
+      "bits": "ffe0000000000002"
+    },
+    {
+      "value": "++0x1.00000000000018p1023",
+      "accepted": true,
+      "bits": "7fe0000000000002"
+    },
+    {
+      "value": "--0x1.00000000000018p1024",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x1.00000000000018p1024",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x1.00000000000018p1024",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x1.00000000000018p1024",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x1.00000000000018p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x1.00000000000018p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x1.00000000000018p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x1.00000000000018p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x1.00000000000018p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x1.00000000000018p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x1.00000000000018p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x1.00000000000018p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x0.fffffffffffff8p0",
+      "accepted": true,
+      "bits": "3fefffffffffffff"
+    },
+    {
+      "value": "+-0x0.fffffffffffff8p0",
+      "accepted": true,
+      "bits": "bfefffffffffffff"
+    },
+    {
+      "value": "-+0x0.fffffffffffff8p0",
+      "accepted": true,
+      "bits": "bfefffffffffffff"
+    },
+    {
+      "value": "++0x0.fffffffffffff8p0",
+      "accepted": true,
+      "bits": "3fefffffffffffff"
+    },
+    {
+      "value": "--0x0.fffffffffffff8p-1022",
+      "accepted": true,
+      "bits": "0010000000000000"
+    },
+    {
+      "value": "+-0x0.fffffffffffff8p-1022",
+      "accepted": true,
+      "bits": "8010000000000000"
+    },
+    {
+      "value": "-+0x0.fffffffffffff8p-1022",
+      "accepted": true,
+      "bits": "8010000000000000"
+    },
+    {
+      "value": "++0x0.fffffffffffff8p-1022",
+      "accepted": true,
+      "bits": "0010000000000000"
+    },
+    {
+      "value": "--0x0.fffffffffffff8p-1074",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "+-0x0.fffffffffffff8p-1074",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "-+0x0.fffffffffffff8p-1074",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "++0x0.fffffffffffff8p-1074",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "--0x0.fffffffffffff8p-1075",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x0.fffffffffffff8p-1075",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x0.fffffffffffff8p-1075",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x0.fffffffffffff8p-1075",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x0.fffffffffffff8p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x0.fffffffffffff8p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x0.fffffffffffff8p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x0.fffffffffffff8p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x0.fffffffffffff8p1023",
+      "accepted": true,
+      "bits": "7fdfffffffffffff"
+    },
+    {
+      "value": "+-0x0.fffffffffffff8p1023",
+      "accepted": true,
+      "bits": "ffdfffffffffffff"
+    },
+    {
+      "value": "-+0x0.fffffffffffff8p1023",
+      "accepted": true,
+      "bits": "ffdfffffffffffff"
+    },
+    {
+      "value": "++0x0.fffffffffffff8p1023",
+      "accepted": true,
+      "bits": "7fdfffffffffffff"
+    },
+    {
+      "value": "--0x0.fffffffffffff8p1024",
+      "accepted": true,
+      "bits": "7fefffffffffffff"
+    },
+    {
+      "value": "+-0x0.fffffffffffff8p1024",
+      "accepted": true,
+      "bits": "ffefffffffffffff"
+    },
+    {
+      "value": "-+0x0.fffffffffffff8p1024",
+      "accepted": true,
+      "bits": "ffefffffffffffff"
+    },
+    {
+      "value": "++0x0.fffffffffffff8p1024",
+      "accepted": true,
+      "bits": "7fefffffffffffff"
+    },
+    {
+      "value": "--0x0.fffffffffffff8p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x0.fffffffffffff8p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x0.fffffffffffff8p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x0.fffffffffffff8p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x0.fffffffffffff8p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x0.fffffffffffff8p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x0.fffffffffffff8p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x0.fffffffffffff8p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x1.fffffffffffff8p0",
+      "accepted": true,
+      "bits": "4000000000000000"
+    },
+    {
+      "value": "+-0x1.fffffffffffff8p0",
+      "accepted": true,
+      "bits": "c000000000000000"
+    },
+    {
+      "value": "-+0x1.fffffffffffff8p0",
+      "accepted": true,
+      "bits": "c000000000000000"
+    },
+    {
+      "value": "++0x1.fffffffffffff8p0",
+      "accepted": true,
+      "bits": "4000000000000000"
+    },
+    {
+      "value": "--0x1.fffffffffffff8p-1022",
+      "accepted": true,
+      "bits": "0020000000000000"
+    },
+    {
+      "value": "+-0x1.fffffffffffff8p-1022",
+      "accepted": true,
+      "bits": "8020000000000000"
+    },
+    {
+      "value": "-+0x1.fffffffffffff8p-1022",
+      "accepted": true,
+      "bits": "8020000000000000"
+    },
+    {
+      "value": "++0x1.fffffffffffff8p-1022",
+      "accepted": true,
+      "bits": "0020000000000000"
+    },
+    {
+      "value": "--0x1.fffffffffffff8p-1074",
+      "accepted": true,
+      "bits": "0000000000000002"
+    },
+    {
+      "value": "+-0x1.fffffffffffff8p-1074",
+      "accepted": true,
+      "bits": "8000000000000002"
+    },
+    {
+      "value": "-+0x1.fffffffffffff8p-1074",
+      "accepted": true,
+      "bits": "8000000000000002"
+    },
+    {
+      "value": "++0x1.fffffffffffff8p-1074",
+      "accepted": true,
+      "bits": "0000000000000002"
+    },
+    {
+      "value": "--0x1.fffffffffffff8p-1075",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "+-0x1.fffffffffffff8p-1075",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "-+0x1.fffffffffffff8p-1075",
+      "accepted": true,
+      "bits": "8000000000000001"
+    },
+    {
+      "value": "++0x1.fffffffffffff8p-1075",
+      "accepted": true,
+      "bits": "0000000000000001"
+    },
+    {
+      "value": "--0x1.fffffffffffff8p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x1.fffffffffffff8p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x1.fffffffffffff8p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x1.fffffffffffff8p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x1.fffffffffffff8p1023",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x1.fffffffffffff8p1023",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x1.fffffffffffff8p1023",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x1.fffffffffffff8p1023",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x1.fffffffffffff8p1024",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x1.fffffffffffff8p1024",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x1.fffffffffffff8p1024",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x1.fffffffffffff8p1024",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x1.fffffffffffff8p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x1.fffffffffffff8p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x1.fffffffffffff8p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x1.fffffffffffff8p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x1.fffffffffffff8p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "+-0x1.fffffffffffff8p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "-+0x1.fffffffffffff8p99999",
+      "accepted": true,
+      "bits": "fff0000000000000"
+    },
+    {
+      "value": "++0x1.fffffffffffff8p99999",
+      "accepted": true,
+      "bits": "7ff0000000000000"
+    },
+    {
+      "value": "--0x0p0",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x0p0",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x0p0",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x0p0",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x0p-1022",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x0p-1022",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x0p-1022",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x0p-1022",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x0p-1074",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x0p-1074",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x0p-1074",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x0p-1074",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x0p-1075",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x0p-1075",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x0p-1075",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x0p-1075",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x0p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x0p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x0p-1076",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x0p-1076",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x0p1023",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x0p1023",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x0p1023",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x0p1023",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x0p1024",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x0p1024",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x0p1024",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x0p1024",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x0p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x0p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x0p-99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x0p-99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "--0x0p99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    },
+    {
+      "value": "+-0x0p99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "-+0x0p99999",
+      "accepted": true,
+      "bits": "8000000000000000"
+    },
+    {
+      "value": "++0x0p99999",
+      "accepted": true,
+      "bits": "0000000000000000"
+    }
+  ]
+}

@@ -7922,13 +7922,277 @@
     "scope": "One instance of a 96-case table: stereo packed flt interpolating 44100->48001, same handoff checks. No native claim."
   },
   {
+    "id": "checkpoint.resample-regression-8000-16000",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "keeps resampleAudio 8000->16000 output byte-identical to the pre-checkpoint implementation",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "darwin-arm64"
+    ],
+    "scope": "One of 11 recorded pairs: SHA-256 digests and frame counts recorded from the pre-refactor resampleAudio for s16/flt/dbl, packed/planar, mono/stereo and three PTS/budget/chunking variants. Library self-consistency only. darwin-arm64 only: the dbl inputs and coefficient banks take V8 Math.sin/Math.cos results, whose last bits differ on x64, so the combined digest reproduces only on arm64, where it was recorded. On every platform the s16/flt identity is checked by the split test (checkpoint.resample-regression-s16-flt); on x64 the dbl rows have regression pins instead (checkpoint.resample-dbl-x64-*). Skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-regression-16000-8000",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "keeps resampleAudio 16000->8000 output byte-identical to the pre-checkpoint implementation",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "darwin-arm64"
+    ],
+    "scope": "One of 11 recorded pairs: SHA-256 digests and frame counts recorded from the pre-refactor resampleAudio for s16/flt/dbl, packed/planar, mono/stereo and three PTS/budget/chunking variants. Library self-consistency only. darwin-arm64 only: the dbl inputs and coefficient banks take V8 Math.sin/Math.cos results, whose last bits differ on x64, so the combined digest reproduces only on arm64, where it was recorded. On every platform the s16/flt identity is checked by the split test (checkpoint.resample-regression-s16-flt); on x64 the dbl rows have regression pins instead (checkpoint.resample-dbl-x64-*). Skipped elsewhere and reported there as not applicable."
+  },
+  {
     "id": "checkpoint.resample-regression",
     "file": "tests/unit/resample-checkpoint.test.ts",
     "name": "keeps resampleAudio 44100->48000 output byte-identical to the pre-checkpoint implementation",
     "modes": [
       "semantic"
     ],
-    "scope": "One of 11 recorded pairs: SHA-256 digests and frame counts recorded from the pre-refactor resampleAudio for s16/flt/dbl, packed/planar, mono/stereo and three PTS/budget/chunking variants. Library self-consistency only."
+    "platforms": [
+      "darwin-arm64"
+    ],
+    "scope": "One of 11 recorded pairs: SHA-256 digests and frame counts recorded from the pre-refactor resampleAudio for s16/flt/dbl, packed/planar, mono/stereo and three PTS/budget/chunking variants. Library self-consistency only. darwin-arm64 only: the dbl inputs and coefficient banks take V8 Math.sin/Math.cos results, whose last bits differ on x64, so the combined digest reproduces only on arm64, where it was recorded. On every platform the s16/flt identity is checked by the split test (checkpoint.resample-regression-s16-flt); on x64 the dbl rows have regression pins instead (checkpoint.resample-dbl-x64-*). Skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-regression-48000-44100",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "keeps resampleAudio 48000->44100 output byte-identical to the pre-checkpoint implementation",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "darwin-arm64"
+    ],
+    "scope": "One of 11 recorded pairs: SHA-256 digests and frame counts recorded from the pre-refactor resampleAudio for s16/flt/dbl, packed/planar, mono/stereo and three PTS/budget/chunking variants. Library self-consistency only. darwin-arm64 only: the dbl inputs and coefficient banks take V8 Math.sin/Math.cos results, whose last bits differ on x64, so the combined digest reproduces only on arm64, where it was recorded. On every platform the s16/flt identity is checked by the split test (checkpoint.resample-regression-s16-flt); on x64 the dbl rows have regression pins instead (checkpoint.resample-dbl-x64-*). Skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-regression-8000-44100",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "keeps resampleAudio 8000->44100 output byte-identical to the pre-checkpoint implementation",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "darwin-arm64"
+    ],
+    "scope": "One of 11 recorded pairs: SHA-256 digests and frame counts recorded from the pre-refactor resampleAudio for s16/flt/dbl, packed/planar, mono/stereo and three PTS/budget/chunking variants. Library self-consistency only. darwin-arm64 only: the dbl inputs and coefficient banks take V8 Math.sin/Math.cos results, whose last bits differ on x64, so the combined digest reproduces only on arm64, where it was recorded. On every platform the s16/flt identity is checked by the split test (checkpoint.resample-regression-s16-flt); on x64 the dbl rows have regression pins instead (checkpoint.resample-dbl-x64-*). Skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-regression-48000-8000",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "keeps resampleAudio 48000->8000 output byte-identical to the pre-checkpoint implementation",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "darwin-arm64"
+    ],
+    "scope": "One of 11 recorded pairs: SHA-256 digests and frame counts recorded from the pre-refactor resampleAudio for s16/flt/dbl, packed/planar, mono/stereo and three PTS/budget/chunking variants. Library self-consistency only. darwin-arm64 only: the dbl inputs and coefficient banks take V8 Math.sin/Math.cos results, whose last bits differ on x64, so the combined digest reproduces only on arm64, where it was recorded. On every platform the s16/flt identity is checked by the split test (checkpoint.resample-regression-s16-flt); on x64 the dbl rows have regression pins instead (checkpoint.resample-dbl-x64-*). Skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-regression-44100-22050",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "keeps resampleAudio 44100->22050 output byte-identical to the pre-checkpoint implementation",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "darwin-arm64"
+    ],
+    "scope": "One of 11 recorded pairs: SHA-256 digests and frame counts recorded from the pre-refactor resampleAudio for s16/flt/dbl, packed/planar, mono/stereo and three PTS/budget/chunking variants. Library self-consistency only. darwin-arm64 only: the dbl inputs and coefficient banks take V8 Math.sin/Math.cos results, whose last bits differ on x64, so the combined digest reproduces only on arm64, where it was recorded. On every platform the s16/flt identity is checked by the split test (checkpoint.resample-regression-s16-flt); on x64 the dbl rows have regression pins instead (checkpoint.resample-dbl-x64-*). Skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-regression-44100-48001",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "keeps resampleAudio 44100->48001 output byte-identical to the pre-checkpoint implementation",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "darwin-arm64"
+    ],
+    "scope": "One of 11 recorded pairs: SHA-256 digests and frame counts recorded from the pre-refactor resampleAudio for s16/flt/dbl, packed/planar, mono/stereo and three PTS/budget/chunking variants. Library self-consistency only. darwin-arm64 only: the dbl inputs and coefficient banks take V8 Math.sin/Math.cos results, whose last bits differ on x64, so the combined digest reproduces only on arm64, where it was recorded. On every platform the s16/flt identity is checked by the split test (checkpoint.resample-regression-s16-flt); on x64 the dbl rows have regression pins instead (checkpoint.resample-dbl-x64-*). Skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-regression-48001-44100",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "keeps resampleAudio 48001->44100 output byte-identical to the pre-checkpoint implementation",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "darwin-arm64"
+    ],
+    "scope": "One of 11 recorded pairs: SHA-256 digests and frame counts recorded from the pre-refactor resampleAudio for s16/flt/dbl, packed/planar, mono/stereo and three PTS/budget/chunking variants. Library self-consistency only. darwin-arm64 only: the dbl inputs and coefficient banks take V8 Math.sin/Math.cos results, whose last bits differ on x64, so the combined digest reproduces only on arm64, where it was recorded. On every platform the s16/flt identity is checked by the split test (checkpoint.resample-regression-s16-flt); on x64 the dbl rows have regression pins instead (checkpoint.resample-dbl-x64-*). Skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-regression-8000-16001",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "keeps resampleAudio 8000->16001 output byte-identical to the pre-checkpoint implementation",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "darwin-arm64"
+    ],
+    "scope": "One of 11 recorded pairs: SHA-256 digests and frame counts recorded from the pre-refactor resampleAudio for s16/flt/dbl, packed/planar, mono/stereo and three PTS/budget/chunking variants. Library self-consistency only. darwin-arm64 only: the dbl inputs and coefficient banks take V8 Math.sin/Math.cos results, whose last bits differ on x64, so the combined digest reproduces only on arm64, where it was recorded. On every platform the s16/flt identity is checked by the split test (checkpoint.resample-regression-s16-flt); on x64 the dbl rows have regression pins instead (checkpoint.resample-dbl-x64-*). Skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-regression-16000-16000",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "keeps resampleAudio 16000->16000 output byte-identical to the pre-checkpoint implementation",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "darwin-arm64"
+    ],
+    "scope": "One of 11 recorded pairs: SHA-256 digests and frame counts recorded from the pre-refactor resampleAudio for s16/flt/dbl, packed/planar, mono/stereo and three PTS/budget/chunking variants. Library self-consistency only. darwin-arm64 only: the dbl inputs and coefficient banks take V8 Math.sin/Math.cos results, whose last bits differ on x64, so the combined digest reproduces only on arm64, where it was recorded. On every platform the s16/flt identity is checked by the split test (checkpoint.resample-regression-s16-flt); on x64 the dbl rows have regression pins instead (checkpoint.resample-dbl-x64-*). Skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-regression-s16-flt",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "keeps resampleAudio 44100->48000 s16 and flt output byte-identical to the pre-checkpoint implementation",
+    "modes": [
+      "semantic"
+    ],
+    "scope": "One of 11 recorded pairs: the s16 and flt rows of the checkpoint.resample-regression matrix hashed alone. Recorded on darwin-arm64 from the run that reproduces every combined pre-checkpoint digest, so they are the pre-checkpoint s16/flt output. Checked on every platform: int16 and float32 rounding absorbs the arm64/x64 Math.sin/Math.cos differences, and x64 V8 (Node 24.22.3) produces the same digests for all 11 pairs. Library self-consistency only."
+  },
+  {
+    "id": "checkpoint.resample-dbl-x64-8000-16000",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "pins resampleAudio 8000->16000 dbl output recorded from the current implementation on x64 V8",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "linux-x64"
+    ],
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-dbl-x64-16000-8000",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "pins resampleAudio 16000->8000 dbl output recorded from the current implementation on x64 V8",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "linux-x64"
+    ],
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-dbl-x64-44100-48000",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "pins resampleAudio 44100->48000 dbl output recorded from the current implementation on x64 V8",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "linux-x64"
+    ],
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-dbl-x64-48000-44100",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "pins resampleAudio 48000->44100 dbl output recorded from the current implementation on x64 V8",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "linux-x64"
+    ],
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-dbl-x64-8000-44100",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "pins resampleAudio 8000->44100 dbl output recorded from the current implementation on x64 V8",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "linux-x64"
+    ],
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-dbl-x64-48000-8000",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "pins resampleAudio 48000->8000 dbl output recorded from the current implementation on x64 V8",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "linux-x64"
+    ],
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-dbl-x64-44100-22050",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "pins resampleAudio 44100->22050 dbl output recorded from the current implementation on x64 V8",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "linux-x64"
+    ],
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-dbl-x64-44100-48001",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "pins resampleAudio 44100->48001 dbl output recorded from the current implementation on x64 V8",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "linux-x64"
+    ],
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-dbl-x64-48001-44100",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "pins resampleAudio 48001->44100 dbl output recorded from the current implementation on x64 V8",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "linux-x64"
+    ],
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-dbl-x64-8000-16001",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "pins resampleAudio 8000->16001 dbl output recorded from the current implementation on x64 V8",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "linux-x64"
+    ],
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
+  },
+  {
+    "id": "checkpoint.resample-dbl-x64-16000-16000",
+    "file": "tests/unit/resample-checkpoint.test.ts",
+    "name": "pins resampleAudio 16000->16000 dbl output recorded from the current implementation on x64 V8",
+    "modes": [
+      "semantic"
+    ],
+    "platforms": [
+      "linux-x64"
+    ],
+    "scope": "Regression pin, not pre-checkpoint evidence: SHA-256 digest and frame count of the dbl rows of the checkpoint.resample-regression matrix, recorded from the current implementation on x64 V8 (Node 24.22.3 in the pinned linux/amd64 image), whose combined s16/flt/dbl digests equal the eleven GitHub Actions run 45548679318 observed on x86_64; the pins passed on real x86_64 in Linux probe run 45592397699. Edge's dbl resampling output depends on the host CPU through V8 Math.sin; whether to make it host-independent is a separate decision. Library self-consistency only. linux-x64 only; skipped elsewhere and reported there as not applicable."
   },
   {
     "id": "checkpoint.resample-short-streams",

@@ -12,6 +12,8 @@ import {createBmpBackend} from './bmp-stream.js';
 import {wantsMp4Copy,executeMp4Copy,preflightMp4Copy} from './mp4-copy.js';
 import {executeComplexVideo} from './complex-video.js';
 import type {PixelArithmetic} from '@edge-ffmpeg/swscale';
+import type {ExpressionNumericProfile} from '@edge-ffmpeg/avutil';
+import {rejectNativeNumericOptions} from './native-numeric.js';
 import {executeRawVideo} from './raw-video.js';
 import {filteredPacketSchedule,slicePacketSchedule} from './packet-schedule.js';
 import {clipPacketSections,packetSectionSamplesForFrames} from './packet-sections.js';
@@ -38,18 +40,25 @@ function positiveInteger(value: string | null, name: string): number {
   if (value === null || !/^\d+$/.test(value) || !Number.isSafeInteger(Number(value)) || Number(value) < 1 || Number(value) > 2147483647) throw new ExecutionError('invalid-arguments', `Invalid ${name}`);
   return Number(value);
 }
-/** Finite audio and declared rawvideo backend. No native execution fallback. */
-export interface MediaBackendOptions {readonly remixArithmetic?:RemixArithmetic;readonly pixelArithmetic?:PixelArithmetic;readonly h264?:H264BackendConfiguration;readonly flac?:FlacBackendConfiguration}
+/**
+ * Finite audio and declared rawvideo backend. No native execution fallback. numericProfile names the reference whose
+ * CPU and C library native option values follow (frame counts rounding to 2^63, hexadecimal -enc_time_base literals);
+ * it defaults to linux-x64 with the x86_64 pixel profile and to darwin-arm64 otherwise.
+ */
+export interface MediaBackendOptions {readonly remixArithmetic?:RemixArithmetic;readonly pixelArithmetic?:PixelArithmetic;readonly numericProfile?:ExpressionNumericProfile;readonly h264?:H264BackendConfiguration;readonly flac?:FlacBackendConfiguration}
 export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBackend {
   const remixArithmetic=options.remixArithmetic??'separate',pixelArithmetic=options.pixelArithmetic??'aarch64';
   if(!['aarch64','scalar','x86_64'].includes(pixelArithmetic))throw new ExecutionError('unsupported-command','Invalid pixel arithmetic profile');
+  const numericProfile=options.numericProfile??(pixelArithmetic==='x86_64'?'linux-x64':'darwin-arm64');
+  if(numericProfile!=='darwin-arm64'&&numericProfile!=='linux-x64')throw new ExecutionError('unsupported-command','Invalid native numeric profile');
   const flac=options.flac?Object.freeze({...options.flac,remixArithmetic:options.flac.remixArithmetic??remixArithmetic}):null;
-  const h264=options.h264?createMp4H264Backend(options.h264,pixelArithmetic):null;
+  const h264=options.h264?createMp4H264Backend(options.h264,pixelArithmetic,numericProfile):null;
   if(remixArithmetic!=='separate'&&remixArithmetic!=='fused')throw new ExecutionError('unsupported-command','Invalid remix arithmetic profile');
   return {
     async execute(command, context) {
       // Provider callbacks must not change the request or VFS capabilities after probing.
       command={global:command.global.map(option=>({...option})),inputs:command.inputs.map(file=>({url:file.url,options:file.options.map(option=>({...option}))})),outputs:command.outputs.map(file=>({url:file.url,options:file.options.map(option=>({...option}))}))};
+      rejectNativeNumericOptions(command,numericProfile);
       const filesystem=context.filesystem;
       context={...context,budget:Object.freeze({...context.budget}),filesystem:Object.freeze({openRead:filesystem.openRead.bind(filesystem),openWrite:filesystem.openWrite.bind(filesystem),...(filesystem.outputExists?{outputExists:filesystem.outputExists.bind(filesystem)}:{})}),...(context.reportDiagnostic?{reportDiagnostic:context.reportDiagnostic.bind(context)}:{})};
       const unsupported = (message: string): never => { throw new ExecutionError('unsupported-command', message); };
@@ -78,8 +87,8 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
       }
       if(wantsMp4H264Decode(command)){if(!h264)unsupported('H264 codec module is not configured');return h264!.execute(command,context);}
       if(wantsMp4Copy(command))return executeMp4Copy(command,context);
-      if(command.global.some(option=>['-filter_complex','-lavfi'].includes(option.name)))return executeComplexVideo(command,context,pixelArithmetic);
-      if((command.inputs.length>1||command.outputs.length>1)&&command.inputs.every(input=>input.options.filter(option=>option.name==='-f').at(-1)?.value==='rawvideo'))return executeSimpleMultiVideo(command,context,pixelArithmetic);
+      if(command.global.some(option=>['-filter_complex','-lavfi'].includes(option.name)))return executeComplexVideo(command,context,pixelArithmetic,numericProfile);
+      if((command.inputs.length>1||command.outputs.length>1)&&command.inputs.every(input=>input.options.filter(option=>option.name==='-f').at(-1)?.value==='rawvideo'))return executeSimpleMultiVideo(command,context,pixelArithmetic,numericProfile);
       if (command.inputs.length !== 1 || command.outputs.length !== 1) unsupported('PCM backend currently requires one input and one output');
       const input = command.inputs[0]!, output = command.outputs[0]!;
       for (const file of [input, output]) if (!file.url.startsWith('/') || file.url === '/') unsupported('PCM backend requires absolute virtual file paths');
