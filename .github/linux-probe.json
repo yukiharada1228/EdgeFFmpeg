@@ -1,7 +1,7 @@
 {
-  "comment": "Integration timing probe: where one workers/mp4-stream-id iteration spends its time on real x86_64. Not for merging.",
+  "comment": "Integration timing probe: Worker dispatch time of one workers/mp4-stream-id row with Miniflare storage on the default /tmp and on tmpfs. Not for merging.",
   "tests": [
-    "tests/workers/zz-mp4-iteration-timing.test.ts"
+    "tests/workers/zz-mp4-dispatch-storage.test.ts"
   ],
   "shards": 1,
   "corpora": []
