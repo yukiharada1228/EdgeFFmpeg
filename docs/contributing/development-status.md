@@ -3480,9 +3480,12 @@ The merges had no textual conflicts. Two commits follow them:
 - `8f453a8` (integration): the seven Workers FLAC transform tests and
   `flac-max-public-cli` read the rows of the local pin through
   `flacNativeCorpus` instead of the darwin-arm64 files (below).
-- `40a90c7`: time budgets of four MP4 Workers tests. Its message records the
-  change as user-approved and relayed by the orchestrator; the integration work
-  did not author it (below).
+- `40a90c7` (integration): user-approved time budgets for four MP4 Workers
+  tests (below).
+
+This record was added in `af0e296` and corrected in the commit after it. Both
+commits change only this file and skip CI. Run 45623569626 validated their
+parent, `40a90c7`, on all three jobs.
 
 **Before.** CI run 45548679318 on `4c34f7f` failed 139 tests: 10 unit, 81
 integration, 23 differential and 25 workers. Another 26 files failed to load
@@ -3514,8 +3517,9 @@ Each run failed only on the other items' tests, with one exception. In W2's run,
   failed only on time: `workers/mp4-language` and `workers/mp4-negative-map` hit
   their 60 s budgets. Every other suite passed: unit 2,933 and 11
   not-applicable of 2,944, integration 2,081 of 2,081, differential 729 of 729,
-  workers 275 of 277. Another party cancelled the run's foundation and workers
-  jobs 36 s after they started, after `40a90c7` was pushed.
+  workers 275 of 277. `40a90c7` had already been pushed, so the integration
+  work cancelled this run's foundation and workers jobs once the reference
+  evidence was downloaded; they would only have repeated the two timeouts.
 - **45623569626 on `40a90c7`.** All three jobs passed.
   - In the reference job, the tagged build described as `n9.0.2`, and
     `bootstrap --check` matched ffmpeg `5e43da9a…`, ffprobe `0895f870…` and the
@@ -3620,17 +3624,29 @@ W2. On GitHub's x86_64 runners they failed only on time:
   assertion change (probe 45619989193): `mp4-stream-id` 29.8-31.2 s per row,
   `mp4-language` 76.6 s, `mp4-negative-map` 77.0 s, `mp4-copy-cli` 48.5 s.
 
-The integration work left these budgets unchanged, because the user had approved
-new budgets only for four other tests. `40a90c7` was committed and pushed by
-another party with the same numbers. Its approval claim was not verified here.
+**User-approved budget changes.** Only timeouts changed; no case list, matrix or
+assertion did.
+
+- The user approved this budget change, and the orchestrator relayed the decision
+  to the integration work: `mp4-stream-id` goes from 30 s to 120 s per case, and
+  `mp4-language`, `mp4-negative-map` and `mp4-copy-cli` go from 60 s to 180 s.
+  The integration work applied it in `40a90c7`, with the values the probe above
+  had already validated. The reasons are the Linux timings above: at the old
+  budgets, run 45599621557 timed out 5 of the 7 `mp4-stream-id` ID rows together
+  with `mp4-language` and `mp4-negative-map`, and run 45614856468 timed out the
+  last two. In run 45623569626 the same tests took 30.6-31.6 s, 77.6 s, 77.7 s
+  and 49.9 s.
+- This is the same kind of change as decision 6 of the plan, which the user
+  approved earlier. That decision raised `simple-video-cli`, `signed-video-time`,
+  `video-option-order` and `video-streamcopy` from 60 s to 180 s (`d257ed8`),
+  after they measured 46.6-54.4 s on CI. They measured 61.0 s, 54.0 s, 49.6 s
+  and 50.9 s in run 45614856468, and 59.1 s, 52.7 s, 48.3 s and 52.3 s in run
+  45623569626.
 
 **Open items.**
 
-- **The approval behind `40a90c7`.** The integration work did not author the
-  commit and could not confirm the approval its message states. If the four
-  budgets were not approved, reverting `40a90c7` brings back the two
-  `8f453a8` failures, and possibly the `mp4-stream-id` ones, which ran at
-  29.8-31.6 s against 30 s.
+- **Tight budgets.** Some budgets have little headroom on the runner, for example
+  `workers/timed-video-backend` at 37.8-38.1 s of 60 s.
 - **Darwin-only stored corpora.** 83 entries under `compat/behavior-specs`
   record only the darwin-arm64 pin and have no linux-x64 counterpart, for
   example flac-max-remux, flac-max-selection, flac-max-remix, mp4-demux, mp4-mux,
