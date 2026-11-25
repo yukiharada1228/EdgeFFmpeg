@@ -149,6 +149,27 @@ bytes, PTS, frame boundaries and each frame's own property names. An earlier
 one-off comparison over 9216 cases, which also checked error messages, is not part
 of the repository.
 
+The guard depends on the V8 build's architecture. The dbl inputs and coefficient
+banks take `Math.sin`/`Math.cos` results, whose last bits differ between arm64 and
+x64, so the combined digests reproduce only on arm64, where they were recorded.
+The tests are split three ways, and `compat/test-contracts.json` gates them:
+
+- the 11 combined s16/flt/dbl tests run on darwin-arm64 only and are reported as
+  not applicable elsewhere;
+- 11 tests hash the s16 and flt rows alone. Their digests were recorded on
+  darwin-arm64 from the run that reproduces every combined digest, so they are the
+  pre-checkpoint s16/flt output. int16 and float32 rounding absorbs the
+  architecture difference, and x64 V8 (Node 24.22.3) gives the same digests, so
+  they run on every platform;
+- 11 tests pin the dbl rows on x64 V8. These are regression pins recorded from the
+  current implementation in the pinned linux/amd64 image, not pre-checkpoint
+  evidence. The combined digests of that run equal the eleven GitHub Actions run
+  45548679318 observed on x86_64, and the pins passed on real x86_64 in Linux
+  probe run 45592397699. They run on linux-x64 only.
+
+Edge's own dbl resampling output therefore depends on the host CPU through
+`Math.sin`. Making the dbl coefficients host-independent is a separate decision.
+
 Differential tests (pinned native build, `-cpuflags 0`) use a 464-sample fixture
 split into 10 input frames. Each case is handed off at every input and EOF tail
 boundary and once fully chained:

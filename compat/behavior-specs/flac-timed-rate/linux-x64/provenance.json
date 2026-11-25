@@ -1,0 +1,60 @@
+{
+  "schema": "edge-ffmpeg/platform-corpus@1",
+  "referenceId": "linux-x64",
+  "pin": {
+    "file": "compat/reference-pins.json",
+    "ffmpeg": "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91",
+    "ffprobe": "0895f870196845f40002238980f908e2dfed7dcf8197a1074b98e4312431671b",
+    "source": "compat/behavior-specs/inverse-linux-x64.json",
+    "image": "docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496"
+  },
+  "reference": {
+    "artifacts": {
+      "ffmpeg": "5e43da9ad1ee070f7e27c171b2ed2a311100f3d484d86f97f182e46d8ba68c91",
+      "ffprobe": "0895f870196845f40002238980f908e2dfed7dcf8197a1074b98e4312431671b"
+    },
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "platform": "linux",
+    "arch": "x64",
+    "flags": [
+      "--disable-autodetect",
+      "--disable-doc",
+      "--disable-debug",
+      "--disable-x86asm"
+    ],
+    "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "version": "ffmpeg version n9.0.2 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 12 (Debian 12.2.0-14+deb12u1)\nconfiguration: --disable-autodetect --disable-doc --disable-debug --disable-x86asm\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0\n",
+    "targetPlatformMatches": true,
+    "reproducibleToolchainPinned": false
+  },
+  "generator": {
+    "path": "tools/differential-runner/flac-timed-rate/generate.mjs",
+    "sha256": "f3baa00656c8500c9a54f2363499725ed961ce88dd8bb7d8325c2ef713fd4b67"
+  },
+  "image": "docker.io/library/node@sha256:9d266751ca3d7fdbe651c878ffd5ad0a42fed49a18c283509267c97f025b7496",
+  "environment": {
+    "platform": "linux",
+    "arch": "x64",
+    "node": "v24.22.3",
+    "kernel": "7.0.0-1020-azure",
+    "kernelVersion": "#21-Ubuntu SMP PREEMPT Tue Oct 27 22:34:38 UTC 2026",
+    "cpuModel": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+    "emulated": false,
+    "emulation": null,
+    "uid": 1000,
+    "unprivileged": true
+  },
+  "ci": {
+    "provider": "github-actions",
+    "repository": "yukiharada1228/EdgeFFmpeg",
+    "workflow": "Linux probe",
+    "job": "corpora",
+    "runId": "45607125330",
+    "runAttempt": "1",
+    "sha": "18ab1fc9981d2c8dcb71c32c7a4d1c4260f6ebf3",
+    "ref": "refs/heads/linux-probe/corpora",
+    "runnerName": "GitHub Actions 1000029517"
+  },
+  "draft": false,
+  "generatedAt": "2026-11-25T11:50:57.276Z"
+}

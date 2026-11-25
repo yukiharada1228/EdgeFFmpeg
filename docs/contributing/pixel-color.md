@@ -41,8 +41,12 @@ The numeric YUV-to-RGB paths now read optional frame `metadata.colorSpace`.
 Supported numeric matrices0,1,2,4,5,6,7,9 use the pinned libswscale coefficient
 and fixed-point table setup. Unspecified metadata preserves the previous BT601
 profile. Unsupported matrices and full-range RGB conversion fail explicitly.
-Only default AArch64 and scalar profiles have the new host differential matrix;
-x86 profile matrix conformance still requires its own native host evidence.
+The differential matrix compares the reference build's default-cpuflags profile
+(`referencePixelArithmetic()`: AArch64 for the darwin-arm64 pin, x86_64 for the
+linux-x64 pin built with `--disable-x86asm`) and the scalar `-cpuflags 0` profile.
+AArch64 skips the 128 aligned NV12/NV21 table conversions, so it checks 2432 cases;
+x86_64 checks all 2560. The same 2560 x86_64 and scalar combinations, in both
+ranges, are tracked in `compat/behavior-specs/fullrange-linux.json`.
 
 Color-family changes copy metadata and update its matrix/range values. Borrowed
 metadata is not changed. Full-range YUV-to-gray bypasses the limited-to-full

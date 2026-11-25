@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "base": "compat/behavior-specs/flac-aformat-constraints",
+  "generate": "tools/differential-runner/flac-aformat-constraints/generate.mjs",
+  "unprivileged": false,
+  "outputs": ["cases.json"]
+}

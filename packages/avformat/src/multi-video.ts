@@ -7,6 +7,7 @@ import type {BackendContext} from '@edge-ffmpeg/core';
 import type {ParsedCommand} from '@edge-ffmpeg/cli';
 import type {MediaPacket,VideoFrameData,Rational} from '@edge-ffmpeg/avutil';
 import type {PixelArithmetic} from '@edge-ffmpeg/swscale';
+import type {ExpressionNumericProfile} from '@edge-ffmpeg/avutil';
 import {openRawVideo} from '@edge-ffmpeg/containers';
 import {decodeRawVideo,encodeRawVideo} from '@edge-ffmpeg/avcodec';
 import type {ReplayVideoSource} from '@edge-ffmpeg/avfilter';
@@ -22,8 +23,8 @@ import {videoPacketDuration} from './video-output/packet-duration.js';
 import {resolveDuration} from './time-range.js';
 import {openOutputGroup,OutputGroupError} from './output-group.js';
 import {ComplexVideoFailure} from './complex-video-failure.js';
-export async function executeMultiVideo(command:ParsedCommand,context:BackendContext,arithmetic:PixelArithmetic='aarch64'):Promise<readonly string[]>{
- const plan=planMultiCommand(command,context.budget,arithmetic),controller=new AbortController(),onAbort=()=>controller.abort(context.signal.reason);context.signal.addEventListener('abort',onAbort,{once:true});if(context.signal.aborted)onAbort();const signal=controller.signal;
+export async function executeMultiVideo(command:ParsedCommand,context:BackendContext,arithmetic:PixelArithmetic='aarch64',numericProfile:ExpressionNumericProfile=arithmetic==='x86_64'?'linux-x64':'darwin-arm64'):Promise<readonly string[]>{
+ const plan=planMultiCommand(command,context.budget,arithmetic,numericProfile),controller=new AbortController(),onAbort=()=>controller.abort(context.signal.reason);context.signal.addEventListener('abort',onAbort,{once:true});if(context.signal.aborted)onAbort();const signal=controller.signal;
  let group:Awaited<ReturnType<typeof openOutputGroup>>|undefined,replay:ReturnType<typeof createReplayVideoExecution>|undefined;const tasks:Promise<unknown>[]=[];
  try{
   const readFailures=new Map<number,InputReadError>();

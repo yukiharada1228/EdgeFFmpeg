@@ -8,13 +8,16 @@ import {createMediaBackend} from '@edge-ffmpeg/avformat';
 import {createNodeFileSystem} from '@edge-ffmpeg/runtime-node';
 import {openWav} from '@edge-ffmpeg/containers';
 import {memoryInput} from '../helpers/wav.js';
+import {selectNativeCorpus} from '../helpers/native-corpus.js';
+// Native rows recorded from this host's pinned reference: the darwin-arm64 corpus or compat/behavior-specs/wav-channel-layout/<pin id>/.
+const layoutCorpus=()=>selectNativeCorpus('compat/behavior-specs/wav-channel-layout','tools/differential-runner/wav-channel-layout/generate.mjs');
 it('matches Native WAV contradictory-mask fallback with default and disabled layout guessing',async()=>{
- const base='compat/behavior-specs/wav-channel-layout/',hash=(b:Uint8Array)=>createHash('sha256').update(b).digest('hex');
- const manifest=JSON.parse(await readFile(base+'manifest.json','utf8')) as {sha256:Record<string,string>};
+ const corpus=layoutCorpus(),base=corpus.dir+'/',hash=(b:Uint8Array)=>createHash('sha256').update(b).digest('hex');
+ const manifest=corpus.manifest;
  for(const [name,digest] of Object.entries(manifest.sha256))expect(hash(await readFile(base+name))).toBe(digest);
- const provenance=JSON.parse(await readFile(base+'provenance.json','utf8')) as {sources:Record<string,string>;reference:{artifacts:Record<string,string>}};
+ const provenance=corpus.record;
  for(const [name,digest] of Object.entries(provenance.sources))expect(hash(await readFile(name))).toBe(digest);
- for(const name of ['ffmpeg','ffprobe'])expect(hash(await readFile('.build/reference/'+name))).toBe(provenance.reference.artifacts[name]);
+ for(const name of ['ffmpeg','ffprobe'] as const)expect(hash(await readFile('.build/reference/'+name))).toBe(provenance.reference.artifacts[name]);
  const fixture=JSON.parse(await readFile(base+'cases.json','utf8')) as {rows:{channels:number;mask:number;samples:number;guess:boolean;input:string;output:string;sha256:string;exitCode:number}[]};
  expect(fixture.rows).toHaveLength(72);const root=await mkdtemp(join(tmpdir(),'wav-layout-'));
  try {for(const row of fixture.rows){
@@ -28,7 +31,7 @@ it('matches Native WAV contradictory-mask fallback with default and disabled lay
 });
 it('matches all 72 Native WAV layout fallback cases through independent Node launcher processes',async()=>{
  const {spawnSync}=await import('node:child_process');
- const fixture=JSON.parse(await readFile('compat/behavior-specs/wav-channel-layout/cases.json','utf8')) as {rows:{input:string;output:string;guess:boolean;exitCode:number}[]};
+ const fixture=JSON.parse(await readFile(layoutCorpus().dir+'/cases.json','utf8')) as {rows:{input:string;output:string;guess:boolean;exitCode:number}[]};
  expect(fixture.rows).toHaveLength(72);const root=await mkdtemp(join(tmpdir(),'wav-layout-cli-'));
  try{for(const row of fixture.rows){
   await writeFile(join(root,'input.wav'),Buffer.from(row.input,'base64'));

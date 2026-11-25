@@ -25,6 +25,7 @@ Explicit failures:
 
 - Native rejects these too: negative values, unparsable text, booleans its parser rejects (such as `2`), an extra positional value (`5S:1:1`), a positional value after a named one (`delays=5S:5S`) and unknown options. Native also fails to configure `inf` (exit 244 in a scratch probe), which EdgeFFmpeg refuses as an unsupported token.
 - Native accepts these, but they are unimplemented and fail with an `adelay` diagnostic before output is created: signs (`+5S`, `-0`), exponents, hexadecimal, `nan`, trailing text such as `5ms`, leading or inner whitespace (` 5S`, `5S| 6S`), escaping and other boolean spellings such as `yes`.
+- `nan` depends on the reference CPU: `delay * sample_rate / div` converts NaN to int64, which gives 0 on AArch64 (accepted) and INT64_MIN on x86-64, so the linux-x64 reference fails with `Delay must be non negative number`. The differential test takes the expectation from the pinned reference and also checks that message on linux-x64. EdgeFFmpeg fails explicitly on both.
 
 The differential refusal test asserts native status for the forms it lists. `inf` and whitespace are covered only by the unit parser test and scratch probes. Whitespace at the very end of the filter arguments is removed by the filter-chain parser and accepted, as in native. Scratch probes matched native output for this case, but no committed test covers it.
 

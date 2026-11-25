@@ -5,11 +5,14 @@ import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {loadH264Mp4Corpus} from '../helpers/h264-mp4-corpus.js';
 import {loadH264Module,h264Hash} from '../helpers/h264-corpus.js';
+import {referencePixelArithmetic} from '../helpers/reference-pixel-profile.js';
+// The fixture converts with the reference build's default pixel profile (x86_64 for the linux-x64 pin), resolved once.
+let pixelProfile:ReturnType<typeof referencePixelArithmetic>|undefined;const pixelArithmetic=()=>pixelProfile??=referencePixelArithmetic();
 interface Output {errorResource:string|null;effectStatuses:string[];exitCode:number;outputs:string[];bytes:number|null;sha256:string|null;reads:number;writes:number;opens:number;aborts:number;temporary:number;changed:boolean;multipartCreated:number;multipartParts:number;multipartCompleted:number;multipartAborted:number;multipartLive:number;diagnostics:{code:string;message:string}[]}
 it('matches Native MP4 H264 frames in R2 and preserves outputs across decode and resource failures',async()=>{
  const corpus=loadH264Mp4Corpus(),root=resolve('tests/workers'),bundle=await build({entryPoints:[root+'/h264-mp4-fixture.mjs'],bundle:true,metafile:true,write:false,format:'esm',platform:'browser',external:['./openh264.wasm']});expect(Object.keys(bundle.metafile.inputs).some(path=>path.startsWith('.build/'))).toBe(false);
  const mf=new Miniflare(convertV4MiniflareOptions({modules:[{type:'ESModule',path:root+'/h264-mp4-bundle.mjs',contents:bundle.outputFiles[0]!.text},{type:'CompiledWasm',path:root+'/openh264.wasm',contents:loadH264Module()}],modulesRoot:root,compatibilityDate:'2026-11-19',r2Buckets:['BUCKET']}));
- const execute=async(row:Record<string,unknown>,inputId:string)=>{const input=corpus.inputs.find(input=>input.id===inputId)!;const response=await mf.dispatchFetch('https://test/',{method:'POST',body:JSON.stringify({...row,input:input.data})});expect(response.status,inputId).toBe(200);return await response.json() as Output;};
+ const execute=async(row:Record<string,unknown>,inputId:string)=>{const input=corpus.inputs.find(input=>input.id===inputId)!;const response=await mf.dispatchFetch('https://test/',{method:'POST',body:JSON.stringify({...row,input:input.data,pixelArithmetic:pixelArithmetic()})});expect(response.status,inputId).toBe(200);return await response.json() as Output;};
  const evidence:{name:string;code:string|null;resource:string|null;effects:string[];staging:number;uploads:number}[]=[];
  try{await mf.ready;
   for(const row of corpus.cases){const actual=await execute({limit:row.limit,options:row.map},row.inputId);expect(actual.exitCode,row.id+JSON.stringify(actual.diagnostics)).toBe(0);expect(actual.bytes,row.id).toBe(row.expectedBytes);expect(actual.sha256,row.id).toBe(row.expectedSha256);expect(actual.outputs).toHaveLength(1);expect(actual.opens).toBe(1);expect(actual.aborts).toBe(0);expect([actual.temporary,actual.multipartLive]).toEqual([0,0]);}

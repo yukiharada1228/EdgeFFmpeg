@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "base": "compat/behavior-specs/wav-channel-mask",
+  "generate": "tools/differential-runner/wav-channel-mask/generate.mjs",
+  "unprivileged": false,
+  "outputs": ["cases.json", "sources.json"]
+}

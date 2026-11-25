@@ -6,11 +6,16 @@ import {join,resolve} from 'node:path';
 import {tmpdir} from 'node:os';
 import {FFmpeg} from '@edge-ffmpeg/core';
 import {createMediaBackend} from '@edge-ffmpeg/avformat';
-import corpus from '../../compat/behavior-specs/flac-aformat-rate/cases.json' with {type:'json'};
+import {flacNativeCorpus} from '../helpers/flac-native-corpus.js';
+import {assertCorpusReference,pinnedReference,referencePin,verifyPlatformCorpus} from '../helpers/reference-identity.js';
+const {corpus,darwin}=flacNativeCorpus('flac-aformat-rate');
 const wasm=readFileSync('.build/codecs/flac/edge-flac.wasm'),module=new WebAssembly.Module(wasm);
 const hash=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
 it('pins the independent FLAC aformat-rate oracle and decoder',()=>{
  expect(corpus.rows).toHaveLength(36);expect(corpus.rows.filter(row=>!doubleGap(row.args))).toHaveLength(32);expect(corpus.rows.filter(row=>doubleGap(row.args))).toHaveLength(4);expect(hash(wasm)).toBe(corpus.wasmSha256);expect(hash(readFileSync('.build/reference/ffmpeg'))).toBe(corpus.binarySha256);
+ // Rows come from this host's pinned reference; the darwin-arm64 rows stay labelled evidence with the same ids.
+ expect(corpus.binarySha256).toBe(pinnedReference().ffmpeg);expect(darwin.binarySha256).toBe(referencePin('darwin-arm64').artifacts.ffmpeg);expect(corpus.rows.map(row=>row.id)).toEqual(darwin.rows.map(row=>row.id));
+ if(pinnedReference().id!=='darwin-arm64')assertCorpusReference(verifyPlatformCorpus('compat/behavior-specs/flac-aformat-rate'));
 });
 const doubleGap=(args:readonly string[])=>args.some(arg=>arg==='aformat=sample_fmts=dblp');
 for(const row of corpus.rows.filter(row=>!doubleGap(row.args)))it(`public FLAC aformat rate matches Native: ${row.id}`,async()=>{

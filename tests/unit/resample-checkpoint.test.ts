@@ -40,6 +40,8 @@ it.each(cases)('restores $format $inputRate->$outputRate (channels=$channels pla
 });
 // Digest and frame count per rate pair over s16/flt/dbl x packed/planar x mono/stereo x three PTS/budget/chunking variants,
 // recorded from the resampleAudio implementation that preceded createAudioResampleState. They pin the refactor's byte, PTS and frame-shape identity.
+// The dbl inputs and coefficient banks take V8 Math.sin/Math.cos results, whose last bits differ between arm64 and x64 builds, so these
+// combined digests reproduce only on arm64, where they were recorded; compat/test-contracts.json gates them to darwin-arm64.
 const golden=[[8000,16000,'726a99eb213fab3b1d6c85fb8dca79de:646'],[16000,8000,'c24ee4e9f0ba5f5d26efedf07f662f3d:182'],[44100,48000,'3d367939583b6b7578ecd5fc6adcfb72:358'],[48000,44100,'f29ca6d6049c1ae7eca6756635e89bab:294'],[8000,44100,'b9cec6ef01580f61b7b38c1e66a10323:1734'],[48000,8000,'0f87a55568276beb455c15f912c09a9d:70'],[44100,22050,'c49d070cd3ed8a7c4169cb1418e6cae6:182'],[44100,48001,'38ef654e5105fe32ab90f6c385de4a2c:358'],[48001,44100,'02004291fd70c3052077e98d4f9180f0:294'],[8000,16001,'0e5551be1e4837a4d2a728ebb9902760:646'],[16000,16000,'97cf95c13426cadb898496f0475eb115:1356']] as const;
 function goldenInput(format:ResampleSampleFormat,planar:boolean,channels:number,rate:number,first:bigint|null,chunks:readonly number[]):AudioFrameData[]{
  const width=widths[format],result:AudioFrameData[]=[];let offset=0,index=0;
@@ -48,13 +50,30 @@ function goldenInput(format:ResampleSampleFormat,planar:boolean,channels:number,
   result.push({sampleRate:rate,channels,channelLayout:channels===1?'mono':'stereo',sampleFormat:format+(planar?'p':''),samples:count,planes,pts:first===null?null:{value:first+BigInt(offset),timeBase:{num:1n,den:BigInt(rate)}}});offset+=count;}
  return result;
 }
-it.each(golden)('keeps resampleAudio %i->%i output byte-identical to the pre-checkpoint implementation',async(inputRate,outputRate,expected)=>{
+async function goldenDigest(inputRate:number,outputRate:number,formats:readonly ResampleSampleFormat[]):Promise<string>{
  const hash=createHash('sha256');let count=0;
- for(const format of ['s16','flt','dbl'] as const)for(const planar of [false,true])for(const channels of [1,2])for(const [first,maxFrameBytes,chunks] of [[0n,512,[1,5,31]],[null,96,[1,3,6]],[-9007199254740993n,512,[7,31]]] as const){
+ for(const format of formats)for(const planar of [false,true])for(const channels of [1,2])for(const [first,maxFrameBytes,chunks] of [[0n,512,[1,5,31]],[null,96,[1,3,6]],[-9007199254740993n,512,[7,31]]] as const){
   async function* source(){yield* goldenInput(format,planar,channels,inputRate,first,chunks);}
   for await(const item of resampleAudio(source(),outputRate,{maxFrameBytes,maxStateBytes:4<<20})){count++;hash.update(JSON.stringify([item.sampleRate,item.channels,item.channelLayout,item.sampleFormat,item.samples,item.pts&&[String(item.pts.value),String(item.pts.timeBase.num),String(item.pts.timeBase.den)],Object.keys(item).sort()]));for(const plane of item.planes)hash.update(plane);}
  }
- expect(hash.digest('hex').slice(0,32)+':'+count).toBe(expected);
+ return hash.digest('hex').slice(0,32)+':'+count;
+}
+it.skipIf(process.arch!=='arm64').each(golden)('keeps resampleAudio %i->%i output byte-identical to the pre-checkpoint implementation',async(inputRate,outputRate,expected)=>{
+ expect(await goldenDigest(inputRate,outputRate,['s16','flt','dbl'])).toBe(expected);
+});
+// The s16 and flt rows of the same matrix, hashed alone. Recorded on darwin-arm64 from the run that reproduces every combined digest above,
+// so they are the pre-checkpoint s16/flt output; int16 and float32 rounding absorbs the arm64/x64 Math.sin/Math.cos differences, and
+// x64 V8 (Node 24.22.3) produces the same digests, so this identity is checked on every architecture.
+const goldenS16Flt=[[8000,16000,'b4d6ed955531f9fd9fc91c85b03e3132:284'],[16000,8000,'76f74e250a6215677e1f272a1aed9cb5:84'],[44100,48000,'f81e991f5c33b39b9f95f36a22c3423a:160'],[48000,44100,'6e9d030ea7c5ec64569c545a77ca5fbb:126'],[8000,44100,'640338f25be0f24d8a2fbb6113efea7d:750'],[48000,8000,'f7415c705366bb7e45d304c9217bed93:34'],[44100,22050,'f546d25e7904ec887c96568c4468e2b0:84'],[44100,48001,'2600fcc8815c1f169a26dbfa55e79bdf:160'],[48001,44100,'56bf6c6a98644d16ff2156db4dbc3320:126'],[8000,16001,'e73d58369dbce42a2d849b7952533f3d:284'],[16000,16000,'a9c21c88e8806f479dff34845025ecd0:904']] as const;
+it.each(goldenS16Flt)('keeps resampleAudio %i->%i s16 and flt output byte-identical to the pre-checkpoint implementation',async(inputRate,outputRate,expected)=>{
+ expect(await goldenDigest(inputRate,outputRate,['s16','flt'])).toBe(expected);
+});
+// Regression pins, not pre-checkpoint evidence: the dbl rows recorded from the current implementation on x64 V8 (Node 24.22.3, pinned
+// linux/amd64 image). The combined digests of that run equal the eleven CI observed on x86_64 in GitHub Actions run 45548679318, and the
+// pins passed on real x86_64 in Linux probe run 45592397699.
+const dblX64=[[8000,16000,'52ef47f467cd8742e0300888b1099c57:362'],[16000,8000,'ddcb95cbc2c0b213ee29212d9fa30302:98'],[44100,48000,'f057e5b86febe5993e7a25c3688bdf91:198'],[48000,44100,'25cb8508e777cded9930a4c746425381:168'],[8000,44100,'da8042fc75409071281a61554a50af76:984'],[48000,8000,'2f1b1b5ddf92463ea2ae02e41d11aedc:36'],[44100,22050,'c8b7da28e59b01933c3ba3224627208d:98'],[44100,48001,'b23b84bbaa2e89775e4c86a40d7409e9:198'],[48001,44100,'c75d6a7b6d42eec5fb76fe07b14caf2a:168'],[8000,16001,'c1cd10f4c77576002eed1700b76a7201:362'],[16000,16000,'a556bcb9d1d847dacab97209a8c592d6:452']] as const;
+it.skipIf(process.arch!=='x64').each(dblX64)('pins resampleAudio %i->%i dbl output recorded from the current implementation on x64 V8',async(inputRate,outputRate,expected)=>{
+ expect(await goldenDigest(inputRate,outputRate,['dbl'])).toBe(expected);
 });
 it.each([[8000,44100,'s16'],[44100,22050,'dbl'],[44100,48001,'flt']] as const)('restores startup and short-flush states of %i->%i %s streams around the first-output and filter-length thresholds at every boundary',async(inputRate,outputRate,format)=>{
  // One-sample input frames reach every pre-start count; lengths straddle the shortest stream with output and taps+1, so EOF hits empty, reflected short and full tails.

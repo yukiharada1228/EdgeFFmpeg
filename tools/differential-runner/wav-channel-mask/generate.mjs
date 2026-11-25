@@ -3,10 +3,19 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { DRAFT_ENV, corpusTarget, writePlatformCorpus } from '../platform-corpus.mjs';
+import { LEGACY_CORPUS_PLATFORM, localReferenceIdentity } from '../reference-identity.mjs';
+// darwin-arm64 rewrites its tracked corpus in compat/behavior-specs/wav-channel-mask; an explicit first argument writes the same
+// layout to that directory instead (independent repeats). Any other pin, and --draft, writes cases.json and sources.json
+// (the provenance record without `reference`) into compat/behavior-specs/wav-channel-mask/<pin id>/ through platform-corpus.mjs,
+// as tools/linux/generate-corpora.mjs runs it (committed only from the Linux probe corpora job).
 const hash = b => createHash('sha256').update(b).digest('hex');
 const reference = JSON.parse(fs.readFileSync('.build/reference/build-metadata.json'));
 const lock = JSON.parse(fs.readFileSync('compat/upstream.lock.json'));
 const generator = 'tools/differential-runner/wav-channel-mask/generate.mjs';
+const explicitOut = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : undefined;
+const identity = localReferenceIdentity(), draft = process.argv.includes('--draft') || process.env[DRAFT_ENV] === '1';
+const target = explicitOut || identity.id === LEGACY_CORPUS_PLATFORM && !draft ? null : corpusTarget('compat/behavior-specs/wav-channel-mask', generator);
 const sources = Object.fromEntries([generator, 'upstream/ffmpeg/libavformat/riffenc.c', 'upstream/ffmpeg/libavformat/wavenc.c'].map(p => [p, hash(fs.readFileSync(p))]));
 function verify() {
  if (reference.commit !== lock.commit) throw Error('Reference commit changed');
@@ -31,9 +40,14 @@ try {
   rows.push({mask,channels,samples,exitCode:result.status,fmtTag,outputMask:fmtTag===65534?output.readUInt32LE(40):null,input:input.toString('base64'),output:output.toString('base64'),sha256:hash(output),stderr:result.stderr});
  }
  verify();
- const out=process.argv[2]??'compat/behavior-specs/wav-channel-mask';fs.mkdirSync(out,{recursive:true});
- fs.writeFileSync(join(out,'cases.json'),JSON.stringify({reference,rows},null,2)+'\n');
- fs.writeFileSync(join(out,'provenance.json'),JSON.stringify({reference,sources,caseCount:rows.length,scope:'Finite PCM16 WAV stream copy, default compliance, explicit output bitexact; high channel masks serialize as zero. No strict-mode or arbitrary channel-layout certification.'},null,2)+'\n');
- fs.writeFileSync(join(out,'manifest.json'),JSON.stringify({sha256:Object.fromEntries(['cases.json','provenance.json'].map(n=>[n,hash(fs.readFileSync(join(out,n)))]))},null,2)+'\n');
- console.log(JSON.stringify({cases:rows.length,out}));
+ const out=explicitOut??'compat/behavior-specs/wav-channel-mask';
+ const record={sources,caseCount:rows.length,scope:'Finite PCM16 WAV stream copy, default compliance, explicit output bitexact; high channel masks serialize as zero. No strict-mode or arbitrary channel-layout certification.'};
+ if(target)writePlatformCorpus(target,{'cases.json':{reference,rows},'sources.json':record});
+ else{
+  fs.mkdirSync(out,{recursive:true});
+  fs.writeFileSync(join(out,'cases.json'),JSON.stringify({reference,rows},null,2)+'\n');
+  fs.writeFileSync(join(out,'provenance.json'),JSON.stringify({reference,...record},null,2)+'\n');
+  fs.writeFileSync(join(out,'manifest.json'),JSON.stringify({sha256:Object.fromEntries(['cases.json','provenance.json'].map(n=>[n,hash(fs.readFileSync(join(out,n)))]))},null,2)+'\n');
+ }
+ console.log(JSON.stringify({cases:rows.length,out:target?target.dir:out}));
 } finally {fs.rmSync(root,{recursive:true,force:true});}

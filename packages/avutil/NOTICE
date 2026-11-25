@@ -16,8 +16,10 @@ expression/glibc-hypot.ts adapts the non-FMA path of glibc 2.36
 sysdeps/ieee754/dbl-64/e_hypot.c, Copyright (C) 2021-2022 Free Software
 Foundation, Inc. glibc-log.ts, glibc-exp2.ts and glibc-tables.ts adapt e_log.c,
 e_exp2.c, e_log_data.c and e_exp_data.c from the same glibc version,
-Copyright (C) 2018-2022 Free Software Foundation, Inc. These adaptations
-retain LGPL-2.1-or-later. Reference source URLs and hashes are documented in
+Copyright (C) 2018-2022 Free Software Foundation, Inc. expression/hex-float.ts
+follows the hexadecimal rounding of glibc 2.36 stdlib/strtod_l.c
+(round_and_return), Copyright (C) 1997-2022 Free Software Foundation, Inc.
+These adaptations retain LGPL-2.1-or-later. Reference source URLs and hashes are documented in
 docs/contributing/expressions.md.
 
 Numeric profiles are scoped to the recorded reference environments. C errno,

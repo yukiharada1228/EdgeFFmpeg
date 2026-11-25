@@ -19,7 +19,7 @@
     "reproducibleToolchainPinned": false
   },
   "sources": {
-    "tools/differential-runner/reference-metadata/generate.mjs": "98ecc6ff0ade1956f17687ee01af2b1694372a0256cc81648fe1e19bb6c8ecf0",
+    "tools/differential-runner/reference-metadata/generate.mjs": "f32752415266cff8a8fe468e9cfa6059c4ac2d5ab3a5cb555f754a5200a9c07f",
     "upstream/ffmpeg/libavformat/version.h": "6e75a8cd7772f334958ffce859e3e23987963e3b406f12d9ec71650ca437fb92",
     "upstream/ffmpeg/libavformat/version_major.h": "436db6c1b56db87e83682639fd0285e8b0138acc4fb572868c70a690eda7bb5e",
     "upstream/ffmpeg/libavformat/mux.c": "94067d0406cc53eb1624277e296642fc3cd94ce48e9bb5645923ade3cb00853c",

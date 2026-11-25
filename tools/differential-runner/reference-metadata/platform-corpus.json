@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "base": "compat/behavior-specs/reference-metadata",
+  "generate": "tools/differential-runner/reference-metadata/generate.mjs",
+  "unprivileged": false,
+  "outputs": ["cases.json", "sources.json"]
+}

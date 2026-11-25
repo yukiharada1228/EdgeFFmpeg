@@ -3,10 +3,20 @@ import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {join,resolve} from 'node:path';
 import {tmpdir} from 'node:os';
+import {DRAFT_ENV,corpusTarget,writePlatformCorpus} from '../platform-corpus.mjs';
+import {LEGACY_CORPUS_PLATFORM,localReferenceIdentity} from '../reference-identity.mjs';
+// Records Native rows for the verified pinned reference of this host. darwin-arm64 keeps its tracked cases.json,
+// extended from verified cached rows (--verify executes nothing). Any other pin, and --draft, records every row afresh
+// into compat/behavior-specs/flac-timed-rate/<pin id>/ through platform-corpus.mjs, as tools/linux/generate-corpora.mjs runs it
+// (committed only from the Linux probe corpora job; --draft writes under .build/linux-green/drafts/).
 const sha=b=>createHash('sha256').update(b).digest('hex');
-const binary=resolve('.build/reference/ffmpeg'), binarySha256='1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92';
+const base='compat/behavior-specs/flac-timed-rate',generator='tools/differential-runner/flac-timed-rate/generate.mjs';
+const identity=localReferenceIdentity(),draft=process.argv.includes('--draft')||process.env[DRAFT_ENV]==='1';
+const target=identity.id===LEGACY_CORPUS_PLATFORM&&!draft?null:corpusTarget(base,generator);
+if(target&&process.argv.includes('--verify'))throw Error(`--verify validates the tracked ${LEGACY_CORPUS_PLATFORM} cache; ${identity.id} corpora are recorded afresh`);
+const binary=resolve('.build/reference/ffmpeg'), binarySha256=identity.ffmpeg;
 if(sha(readFileSync(binary))!==binarySha256)throw Error('Wrong reference binary');
-const path='compat/behavior-specs/flac-timed-rate/cases.json';
+const path=base+'/cases.json';
 const reference='946fcce07b6dcd0331c8cc609192aeff5e1924f8';
 const wasmSha256=sha(readFileSync('.build/codecs/flac/edge-flac.wasm'));
 const corpus=JSON.parse(readFileSync('compat/behavior-specs/flac-decode-cli/cases.json'));
@@ -28,7 +38,7 @@ const plans=[
  ['au-input-4000',['-t','0.025'],['-af','anull'],'au',4000],
  ['near-eof-48000',[],['-ss','0.030123','-t','0.008'],'s16le',48000],
 ];
-const previous=existsSync(path)?JSON.parse(readFileSync(path)):null;
+const previous=!target&&existsSync(path)?JSON.parse(readFileSync(path)):null;
 if(previous&&(previous.reference!==reference||previous.binarySha256!==binarySha256||previous.wasmSha256!==wasmSha256))throw Error('Cached evidence pins differ');
 const root=mkdtempSync(join(tmpdir(),'flac-timed-rate-')),rows=[];let actualNativeCalls=0;
 try{
@@ -59,8 +69,9 @@ try{
     if(run.status!==0||output===null)throw Error('Unexpected Native error: '+id+' '+run.stderr);
     if(input.length>524288||(output?.length??0)>524288)throw Error('Fixture byte limit exceeded');
     rows.push({id,input:input.toString('base64'),inputSha256:sha(input),args,exitCode:run.status,stdout:run.stdout.replaceAll(root,'<fixture>'),stderr:run.stderr.replaceAll(root,'<fixture>'),output:output?.toString('base64')??null,outputSha256:output?sha(output):null});
-    writeFileSync(path,JSON.stringify({reference,binarySha256,wasmSha256,rows},null,2)+'\n');
+    if(!target)writeFileSync(path,JSON.stringify({reference,binarySha256,wasmSha256,rows},null,2)+'\n');
   }
  }
- console.log(JSON.stringify({actualNativeCalls,rows:rows.length,successes:rows.filter(r=>r.exitCode===0).length,cached:actualNativeCalls===0}));
+ if(target)writePlatformCorpus(target,{'cases.json':{reference,binarySha256,wasmSha256,rows}});
+ console.log(JSON.stringify({actualNativeCalls,rows:rows.length,successes:rows.filter(r=>r.exitCode===0).length,cached:actualNativeCalls===0,...(target?{dir:target.dir}:{})}));
 }finally{rmSync(root,{recursive:true,force:true});}

@@ -1,21 +1,27 @@
 import {expect,it} from 'vitest';
-import {execFileSync} from 'node:child_process';
-import {mkdtempSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
+import {execFileSync,spawnSync} from 'node:child_process';
+import {existsSync,mkdtempSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,resolve} from 'node:path';
 import {FFmpeg} from '@edge-ffmpeg/core';
 import {createMediaBackend} from '@edge-ffmpeg/avformat';
 import {createNodeFileSystem} from '@edge-ffmpeg/runtime-node';
+import {nativeFrameCountOutcome,referenceNumericProfile} from '../helpers/reference-numeric-profile.js';
 it('matches native finite apad frame limits and positive sub-sample output durations',async()=>{
-  const root=mkdtempSync(join(tmpdir(),'edgeffmpeg-apad-trim-'));
+  const root=mkdtempSync(join(tmpdir(),'edgeffmpeg-apad-trim-')),numericProfile=referenceNumericProfile();let rejected=0;
   try{
-    const filesystem=await createNodeFileSystem({root,maxReadBytes:256,maxWriteBytes:256}),frontend=new FFmpeg({filesystem,backend:createMediaBackend(),budget:{maxResidentBytes:65536,maxBufferBytes:256,maxPendingPackets:2,maxCpuTimeMs:1000}});let index=0;
+    const filesystem=await createNodeFileSystem({root,maxReadBytes:256,maxWriteBytes:256}),frontend=new FFmpeg({filesystem,backend:createMediaBackend({numericProfile}),budget:{maxResidentBytes:65536,maxBufferBytes:256,maxPendingPackets:2,maxCpuTimeMs:1000}});let index=0;
     const profiles=[['-frames:a','0'],['-frames:a','1'],['-frames:a','2'],['-frames:a','3'],['-frames:a','-1'],['-frames:a','9223372036854775807'],['-ss','0.000125','-frames:a','2'],['-ss','0.00175','-frames:a','1'],['-ss','0.002625','-t','0.001','-frames:a','2'],['-t','0.000001'],['-ss','0.00175','-t','0.000001'],['-ss','0.002625','-t','0.000001','-frames:a','0'],['-ss','0.002625','-t','0.000001','-frames:a','2']];
     const chains=['apad=pad_len=20:packet_size=7','asetnsamples=5:p=0,apad=pad_len=20:packet_size=7','aformat=dblp,apad=pad_len=20:packet_size=7,asetnsamples=5:p=1','apad=pad_len=5:packet_size=3,apad=pad_len=15:packet_size=7'];
     for(const [raw,width]of [['s16le',2],['f64le',8]] as const)for(const channels of [1,2])for(const filter of chains)for(const time of profiles){
       const data=new Uint8Array(13*channels*width),view=new DataView(data.buffer);for(let i=0;i<13*channels;i++){if(width===2)view.setInt16(i*2,(i*3137)%65536-32768,true);else view.setFloat64(i*8,(i%17-8)/16,true);}writeFileSync(join(root,'input.raw'),data);
-      const before=['-cpuflags','0','-f',raw,'-ar','8000','-ac',String(channels)],after=['-af',filter,...time,'-bitexact','-f','framecrc'],expected=execFileSync(resolve('.build/reference/ffmpeg'),['-v','error',...before,'-i',join(root,'input.raw'),...after,'-']),out=`/${index++}.crc`,result=await frontend.exec([...before,'-i','/input.raw',...after,out]);expect(result.exitCode,JSON.stringify(result.diagnostics)).toBe(0);expect(readFileSync(join(root,out.slice(1))).equals(expected),`${raw}/${channels}/${filter}/${time.join(' ')}`).toBe(true);
+      const before=['-cpuflags','0','-f',raw,'-ar','8000','-ac',String(channels)],after=['-af',filter,...time,'-bitexact','-f','framecrc'],label=`${raw}/${channels}/${filter}/${time.join(' ')}`,at=time.indexOf('-frames:a');
+      // The reference CPU decides whether native accepts a count whose double is 2^63; Edge follows the same profile.
+      const outcome=at<0?{accepted:true} as const:nativeFrameCountOutcome(numericProfile,'frames:a',time[at+1]!),reference=spawnSync(resolve('.build/reference/ffmpeg'),['-v','error',...before,'-i',join(root,'input.raw'),...after,'-']),out=`/${index++}.crc`,result=await frontend.exec([...before,'-i','/input.raw',...after,out]);
+      if(outcome.accepted){expect(reference.status,`${label}: ${String(reference.stderr)}`).toBe(0);expect(result.exitCode,JSON.stringify(result.diagnostics)).toBe(0);expect(readFileSync(join(root,out.slice(1))).equals(reference.stdout),label).toBe(true);}
+      else{rejected++;expect(reference.status,label).toBe(outcome.status);expect(String(reference.stderr),label).toContain(outcome.message);expect(reference.stdout.length,label).toBe(0);expect(result.exitCode,label).toBe(outcome.status);expect(result.diagnostics.at(-1),label).toEqual({code:'invalid-arguments',message:outcome.message});expect(existsSync(join(root,out.slice(1))),label).toBe(false);}
     }
+    expect(rejected).toBe(numericProfile==='linux-x64'?16:0);
   }finally{rmSync(root,{recursive:true,force:true});}
 },60000);
 
