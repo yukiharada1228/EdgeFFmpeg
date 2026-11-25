@@ -6,7 +6,7 @@ import {join,resolve} from 'node:path';
 import {pixelLayout,videoStoragePixelFormat as storage} from '@edge-ffmpeg/avutil';
 import type {VideoFrameData} from '@edge-ffmpeg/avutil';
 import {decodeRawVideo} from '@edge-ffmpeg/avcodec';
-import {compileVideoFilterChain,compileVideoFilterGraph,createReplayVideoExecution,planTimedVideoGraph} from '@edge-ffmpeg/avfilter';
+import {compileVideoFilterChain,compileVideoFilterGraph,createReplayVideoExecution,planTimedVideoGraph,videoOperator} from '@edge-ffmpeg/avfilter';
 import type {TimedVideoOutputEvent} from '@edge-ffmpeg/avfilter';
 import {FFmpeg} from '@edge-ffmpeg/core';
 import type {ExecutionBackend} from '@edge-ffmpeg/core';
@@ -65,11 +65,14 @@ it('picks the format native picks, or refuses that exact format, for every accep
  const operators:readonly {readonly vf:string;readonly steps:readonly NegotiationStep[]}[]=[
   // EdgeFFmpeg operators with their own lists, and null with every format.
   ...['null','negate','transpose=1','epx'].map(vf=>({vf,steps:compileVideoFilterChain(vf).steps as readonly NegotiationStep[]})),
-  ...nativeLists.map(([vf,formats])=>({vf,steps:[formatStep(formats)]})),
+  // Registered operators negotiate through their own descriptors; rgbashift, not implemented, through a format step with its list.
+  ...nativeLists.map(([vf,formats])=>({vf,steps:videoOperator(vf)?compileVideoFilterChain(vf).steps as readonly NegotiationStep[]:[formatStep(formats)]})),
   ...[...formatLists,...random].map(formats=>({vf:`format=${formats.join('|')}`,steps:[formatStep(formats)]})),
  ];
  try{
   expect(negotiableFormats.length).toBe(251);expect(nativeLists.flatMap(([,formats])=>formats).every(format=>negotiableFormats.includes(format))).toBe(true);
+  // Each registered operator declares exactly the transcribed list; vf_neighbor.c's list is also dilation's, deflate's and inflate's.
+  for(const [vf,formats]of [...nativeLists,['dilation',neighbor],['deflate',neighbor],['inflate',neighbor]] as const){if(vf==='rgbashift'){expect(videoOperator(vf)).toBeUndefined();continue;}expect(videoOperator(vf)!.formats!(compileVideoFilterChain(vf).steps[0]! as never),vf).toEqual(formats);}
   for(const source of sources)writeFileSync(join(root,source+'.raw'),bytes(source,4,4,1,source.length));
   function* cases(){for(const source of sources)for(const operator of operators)for(const target of [undefined,'yuv420p','rgba'])yield {source,operator,target};}
   await runBoundedCases(cases(),4,signal,async({source,operator,target},caseSignal)=>{
