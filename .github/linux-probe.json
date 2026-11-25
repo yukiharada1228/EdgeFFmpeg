@@ -1,0 +1,11 @@
+{
+  "comment": "w1-fix probe: confirms contents: read alone, the commit-pinned cache and artifact actions, persist-credentials: false with the tag fetch, and bootstrap --check over all six pinned libraries on a cache miss.",
+  "tests": [
+    "tests/unit/reference-identity.test.ts",
+    "tests/unit/platform-provenance.test.ts",
+    "tests/integration/flac-decoder-native.test.ts",
+    "tests/integration/node-permissions.test.ts"
+  ],
+  "shards": 2,
+  "corpora": []
+}
