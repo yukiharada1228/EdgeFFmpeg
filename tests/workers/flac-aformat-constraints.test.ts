@@ -4,7 +4,9 @@ import {createHash} from 'node:crypto';
 import {expect,it} from 'vitest';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
-import corpus from '../../compat/behavior-specs/flac-aformat-constraints/cases.json' with {type:'json'};
+import {flacNativeCorpus} from '../helpers/flac-native-corpus.js';
+// Rows recorded from this host's pinned Native reference (darwin-arm64 or the linux-x64 corpora-job corpus).
+const {corpus}=flacNativeCorpus('flac-aformat-constraints');
 it('runs FLAC aformat identity constraints through actual R2/workerd without Node compatibility',async()=>{
  const root=resolve('tests/workers'),wasm=readFileSync('.build/codecs/flac/edge-flac.wasm');
  const hash=(data:Uint8Array)=>createHash('sha256').update(data).digest('hex');expect(hash(wasm)).toBe(corpus.wasmSha256);expect(corpus.rows).toHaveLength(16);
