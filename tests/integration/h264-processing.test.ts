@@ -7,6 +7,9 @@ import {readFileSync,writeFileSync,mkdtempSync,rmSync,readdirSync} from 'node:fs
 import {tmpdir} from 'node:os';
 import {join,resolve} from 'node:path';
 import {loadH264Mp4Corpus,verifyH264Reference} from '../helpers/h264-mp4-corpus.js';
+import {referencePixelArithmetic} from '../helpers/reference-pixel-profile.js';
+// Edge converts with the reference build's default pixel profile (x86_64 for the linux-x64 pin), resolved once.
+let edgeEnvironment:NodeJS.ProcessEnv|undefined;const edgeEnv=()=>edgeEnvironment??={...process.env,EDGEFFMPEG_PIXEL_ARITHMETIC:referencePixelArithmetic()};
 it('connects H264 decode to bounded spatial filters, scaling and pixel conversion through Node CLI',()=>{
  const corpus=loadH264Mp4Corpus(),directory=mkdtempSync(join(tmpdir(),'edge-h264-processing-')),module=resolve('.build/codecs/openh264/openh264.wasm');verifyH264Reference();
  const small=corpus.inputs.filter(row=>['manual','multi','cabac-0','moving-main-cavlc-spatial-none','moving-high-cabac-temporal-normal'].includes(row.id));
@@ -16,7 +19,7 @@ it('connects H264 decode to bounded spatial filters, scaling and pixel conversio
    const args=['-y',...cpu,'-f','mp4','-i','/input.mp4','-map','0:v:0','-an','-c:v','rawvideo','-fps_mode','passthrough','-frames:v','4',...transform,'-f','rawvideo','/actual.raw'];
    const nativeArgs=args.map(value=>value==='/input.mp4'?join(directory,'input.mp4'):value==='/actual.raw'?join(directory,'native.raw'):value);
    const native=spawnSync('.build/reference/ffmpeg',['-v','error',...nativeArgs],{encoding:'utf8',timeout:15000});expect(native.status,input.id+transform+native.stderr).toBe(0);
-   const actual=spawnSync(process.execPath,['tools/cli/run.mjs','--root',directory,'--h264-wasm',module,'--',...args],{encoding:'utf8',timeout:15000});expect(actual.status,input.id+transform+actual.stderr).toBe(0);
+   const actual=spawnSync(process.execPath,['tools/cli/run.mjs','--root',directory,'--h264-wasm',module,'--',...args],{encoding:'utf8',timeout:15000,env:edgeEnv()});expect(actual.status,input.id+transform+actual.stderr).toBe(0);
    const expected=readFileSync(join(directory,'native.raw')),bytes=readFileSync(join(directory,'actual.raw'));if(!bytes.equals(expected)){writeFileSync('.build/h264-processing-native.raw',expected);writeFileSync('.build/h264-processing-actual.raw',bytes);writeFileSync('.build/h264-processing-failure.mp4',Buffer.from(input.data,'base64'));}expect(bytes.equals(expected),input.id+' '+transform.join(' ')+' '+bytes.length+'/'+expected.length).toBe(true);checked++;
   }
  }expect(checked).toBe(128);}finally{rmSync(directory,{recursive:true,force:true});}verifyH264Reference();
@@ -44,7 +47,7 @@ it('retains H264 matrix metadata and matches native color conversion and spatial
   const probe=spawnSync('.build/reference/ffprobe',['-v','error','-show_entries','stream=color_space','-of','json',join(directory,'input.mp4')],{encoding:'utf8',timeout:15000});expect(probe.status,probe.stderr).toBe(0);expect(JSON.parse(probe.stdout).streams[0].color_space).toBe('bt709');
   for(const transform of [['-pix_fmt','rgb24'],['-vf','hflip']]){
    const args=['-y','-f','mp4','-i','/input.mp4','-an','-c:v','rawvideo','-fps_mode','passthrough','-frames:v','4',...transform,'-f','rawvideo','/actual.raw'];
-   const actual=spawnSync(process.execPath,['tools/cli/run.mjs','--root',directory,'--h264-wasm',module,'--',...args],{encoding:'utf8',timeout:15000});
+   const actual=spawnSync(process.execPath,['tools/cli/run.mjs','--root',directory,'--h264-wasm',module,'--',...args],{encoding:'utf8',timeout:15000,env:edgeEnv()});
    {expect(actual.status,actual.stderr).toBe(0);const native=spawnSync('.build/reference/ffmpeg',['-v','error',...args.map(value=>value==='/input.mp4'?join(directory,'input.mp4'):value==='/actual.raw'?join(directory,'native.raw'):value)],{encoding:'utf8',timeout:15000});expect(native.status,native.stderr).toBe(0);expect(readFileSync(join(directory,'actual.raw')).equals(readFileSync(join(directory,'native.raw')))).toBe(true);}
   }
  }finally{rmSync(directory,{recursive:true,force:true});}

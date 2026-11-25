@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "base": "compat/behavior-specs/clock-expression-hex",
+  "generate": "tools/differential-runner/clock-expression-hex/generate.mjs",
+  "oracle": "clock-expression-value",
+  "unprivileged": false,
+  "outputs": ["cases.json"]
+}

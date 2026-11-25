@@ -7,12 +7,15 @@ import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {loadH264Mp4Corpus,verifyH264Reference} from '../helpers/h264-mp4-corpus.js';
 import {loadH264Module,h264Hash} from '../helpers/h264-corpus.js';
+import {referencePixelArithmetic} from '../helpers/reference-pixel-profile.js';
+// The fixture converts with the reference build's default pixel profile (x86_64 for the linux-x64 pin), resolved once.
+let pixelProfile:ReturnType<typeof referencePixelArithmetic>|undefined;const pixelArithmetic=()=>pixelProfile??=referencePixelArithmetic();
 interface Result {exitCode:number;bytes:number;sha256:string;temporary:number;multipartLive:number;aborts:number;diagnostics:{code:string}[]}
 it('runs H264 spatial processing in workerd with R2 rollback on processing exhaustion and cancellation',async()=>{
  const corpus=loadH264Mp4Corpus(),root=resolve('tests/workers'),directory=mkdtempSync(join(tmpdir(),'edge-h264-processing-r2-')),bundle=await build({entryPoints:[root+'/h264-mp4-fixture.mjs'],bundle:true,metafile:true,write:false,format:'esm',platform:'browser',external:['./openh264.wasm']});
  expect(Object.keys(bundle.metafile.inputs).some(path=>path.startsWith('.build/'))).toBe(false);verifyH264Reference();
  const mf=new Miniflare(convertV4MiniflareOptions({modules:[{type:'ESModule',path:root+'/h264-processing-bundle.mjs',contents:bundle.outputFiles[0]!.text},{type:'CompiledWasm',path:root+'/openh264.wasm',contents:loadH264Module()}],modulesRoot:root,compatibilityDate:'2026-11-19',r2Buckets:['BUCKET']}));
- const execute=async(input:string,row:Record<string,unknown>)=>{const response=await mf.dispatchFetch('https://test/',{method:'POST',body:JSON.stringify({input,limit:4,...row})});expect(response.status).toBe(200);return await response.json() as Result;};let checked=0;
+ const execute=async(input:string,row:Record<string,unknown>)=>{const response=await mf.dispatchFetch('https://test/',{method:'POST',body:JSON.stringify({input,limit:4,...row,pixelArithmetic:pixelArithmetic()})});expect(response.status).toBe(200);return await response.json() as Result;};let checked=0;
  try{await mf.ready;
   for(const id of ['moving-main-cavlc-spatial-none','moving-high-cabac-temporal-normal','hd-main-cavlc-spatial-none','hd-high-cabac-temporal-normal']){
    const input=corpus.inputs.find(row=>row.id===id)!;writeFileSync(join(directory,'input.mp4'),Buffer.from(input.data,'base64'));

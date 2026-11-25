@@ -7,6 +7,7 @@ import {FFmpeg} from '@edge-ffmpeg/core';
 import {createMediaBackend} from '@edge-ffmpeg/avformat';
 import {createNodeFileSystem} from '@edge-ffmpeg/runtime-node';
 import {referenceRemixArithmetic} from '../helpers/remix-profile.js';
+import {referenceNumericProfile} from '../helpers/reference-numeric-profile.js';
 const native=resolve('.build/reference/ffmpeg'),formats=[['u8','pcm_u8',1],['s16le','pcm_s16le',2],['s32le','pcm_s32le',4],['f32le','pcm_f32le',4],['f64le','pcm_f64le',8]] as const;
 /** Deterministic PCM: integer formats use every byte pattern, floating formats stay finite in [-1,1] and include -0. */
 function pcm(width:number,floating:boolean,count:number):Uint8Array {
@@ -104,12 +105,14 @@ it('fails explicitly before output for native errors, unimplemented delay forms 
   const {root,frontend}=await harness('edgeffmpeg-adelay-errors-');
   try{
     writeFileSync(join(root,'input.raw'),pcm(2,false,64*2));writeFileSync(join(root,'float.raw'),pcm(4,true,64*2));let index=0;
-    const run=async(input:string,raw:string,args:string[])=>{const before=['-cpuflags','0','-f',raw,'-ar','8000','-ac','2'],out=`/${index++}.crc`,result=await frontend.exec([...before,'-i',`/${input}`,...args,'-f','framecrc',out]);return {result,out,nativeStatus:spawnSync(native,['-v','error',...before,'-i',join(root,input),...args,'-f','framecrc','-']).status};};
+    const run=async(input:string,raw:string,args:string[])=>{const before=['-cpuflags','0','-f',raw,'-ar','8000','-ac','2'],out=`/${index++}.crc`,result=await frontend.exec([...before,'-i',`/${input}`,...args,'-f','framecrc',out]),reference=spawnSync(native,['-v','error',...before,'-i',join(root,input),...args,'-f','framecrc','-']);return {result,out,nativeStatus:reference.status,nativeStderr:String(reference.stderr)};};
+    // af_adelay computes the int64 delay from nan: AArch64 FCVTZS gives 0 (accepted); x86-64 gives INT64_MIN, which fails "Delay must be non negative number".
+    const nanAccepted=referenceNumericProfile()==='darwin-arm64';
     // Native rejects these too.
     for(const delays of ['-5','abc','5S|-5','5S:all=2']){const {result,out,nativeStatus}=await run('input.raw','s16le',['-af',`adelay=${delays}`]);expect(nativeStatus,delays).not.toBe(0);expect(result.exitCode,delays).not.toBe(0);expect(existsSync(join(root,out.slice(1)))).toBe(false);}
     // Native accepts the eight forms marked true; they remain unimplemented and must not be approximated.
     // Native also rejects the extra positional value, the positional value after a named one and the unknown option.
-    for(const [delays,nativeAccepts] of [['5ms',true],['1e1',true],['+5S',true],['-0',true],['nan',true],['0x10',true],['5S:all=yes',true],['5S:1:1',false],['delays=5S:5S',false],['5S:foo=1',false],['5S\\|6S',true]] as const){const {result,out,nativeStatus}=await run('input.raw','s16le',['-af',`adelay=${delays}`]);expect(nativeStatus===0,delays).toBe(nativeAccepts);expect(result.exitCode,delays).not.toBe(0);expect(result.diagnostics.at(-1)?.message,delays).toMatch(/adelay/);expect(existsSync(join(root,out.slice(1)))).toBe(false);}
+    for(const [delays,nativeAccepts] of [['5ms',true],['1e1',true],['+5S',true],['-0',true],['nan',nanAccepted],['0x10',true],['5S:all=yes',true],['5S:1:1',false],['delays=5S:5S',false],['5S:foo=1',false],['5S\\|6S',true]] as const){const {result,out,nativeStatus,nativeStderr}=await run('input.raw','s16le',['-af',`adelay=${delays}`]);expect(nativeStatus===0,delays).toBe(nativeAccepts);if(delays==='nan'&&!nanAccepted)expect(nativeStderr,delays).toContain('Delay must be non negative number');expect(result.exitCode,delays).not.toBe(0);expect(result.diagnostics.at(-1)?.message,delays).toMatch(/adelay/);expect(existsSync(join(root,out.slice(1)))).toBe(false);}
     for(const [input,raw,args]of [['input.raw','s16le',['-af','adelay=5S','-ar','16000']],['float.raw','f32le',['-af','volume=0.5:precision=fixed,adelay=5S,aformat=s16']],['float.raw','f32le',['-af','adelay=5S,volume=0.5:precision=fixed,aformat=s32p']]] as const){
       const {result,out,nativeStatus}=await run(input,raw,[...args]);expect(nativeStatus).toBe(0);expect(result.exitCode,args.join(' ')).not.toBe(0);expect(result.diagnostics.at(-1)?.message).toMatch(/adelay/);expect(existsSync(join(root,out.slice(1)))).toBe(false);
     }
