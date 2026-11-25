@@ -7,6 +7,7 @@ import {expect,it} from 'vitest';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import type {MediaCheckpointStatus} from '@edge-ffmpeg/runtime-cloudflare/checkpoints';
+import {pinnedReference} from '../helpers/reference-identity.js';
 type Run={outcome:string;units:number;status:MediaCheckpointStatus|null};
 type Final={ok:boolean;existing?:boolean;bytes?:string;outputChunks?:number;opens:number;stages:number;uploads:number;live:number;error?:string;range?:boolean;conflict?:{expected:{bytes:string;sha256:string|null};actual:{bytes:string;sha256:string|null}}|null;uncertain?:boolean;recovered?:boolean;afterRecovery?:number};
 const sha=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
@@ -25,7 +26,7 @@ function input(spec:(typeof cases)[number],samples:number):Buffer{
  return bytes;
 }
 it('checkpoints an R2-backed FIFO into a WAV mux across fresh runtimes and publishes Native-identical WAV through header patches, no-clobber verification and commit races',async()=>{
- const directory=mkdtempSync(join(tmpdir(),'edge-wav-mux-checkpoint-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(sha(readFileSync(binary))).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ const directory=mkdtempSync(join(tmpdir(),'edge-wav-mux-checkpoint-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(sha(readFileSync(binary))).toBe(pinnedReference().ffmpeg);
  const bundle=await build({entryPoints:[root+'/wav-mux-checkpoint-fixture.ts'],bundle:true,write:false,format:'esm',platform:'browser',target:'es2022',external:['cloudflare:workers'],metafile:true});for(const path of Object.keys(bundle.metafile!.inputs))expect(path.startsWith('node:')).toBe(false);
  const start=()=>new Miniflare(convertV4MiniflareOptions({name:'wav-mux-checkpoint-test',modules:[{type:'ESModule',path:root+'/wav-mux-checkpoint-bundle.mjs',contents:bundle.outputFiles[0]!.text}],modulesRoot:root,compatibilityDate:'2026-11-18',compatibilityFlags:[],resourcePersistencePath:join(directory,'persist'),durableObjects:{CHECKPOINTS:{className:'MediaCheckpointCoordinator',useSQLite:true}},r2Buckets:['MEDIA_BUCKET']}));let mf=start();
  const restart=async()=>{await mf.dispose();mf=start();await mf.ready;return mf.getR2Bucket('MEDIA_BUCKET');};

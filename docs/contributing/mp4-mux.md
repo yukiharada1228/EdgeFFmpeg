@@ -42,7 +42,18 @@ fallback runs in the library.
 bytes/clocks/flags/Skip Samples and selected codec/stream/disposition fields.
 92 container API copies include seven duration-boundary cases.85 original files
 have identical decoded Native framecrc after rewriting. Container bytes are not
-claimed bitexact. Fixtures, reference source and binaries are hash-pinned.
+claimed bitexact. Fixtures and reference source are hash-pinned.
+
+Native comparisons use the pinned reference of the platform they run on
+(`pinnedReference()`, see [Linux reference](linux-reference.md)).
+`compat/behavior-specs/mp4-demux/provenance.json` and
+`compat/behavior-specs/mp4-mux/provenance.json` are darwin-arm64 records. Their
+`reference` must name the darwin-arm64 pin on every platform, and on darwin-arm64
+it must also equal the local binaries. The workerd container API test probes
+each of its92 inputs live with the local `ffprobe`. The stored
+`mp4-demux/results.json` and `mp4-mux/wide-results.json` are darwin-arm64 ffprobe
+records: on darwin-arm64 the live probe must equal them, and no other platform
+reads them as its expectation.
 
 Tests include slow sinks, cancellation after in-flight writes, source replacement,
 packet-plan mismatch, budget rejection, actual Node filesystem transactions,

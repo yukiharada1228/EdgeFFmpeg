@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "base": "compat/behavior-specs/bmp",
+  "generate": "tools/differential-runner/bmp-rle/generate.mjs",
+  "oracle": ["bmp-rle"],
+  "unprivileged": false,
+  "outputs": ["oracle-provenance.json", "rle-profiles.json"]
+}

@@ -10,7 +10,7 @@
     "upstream/ffmpeg/libavcodec/get_buffer.c": "83d8594171732675c131248b212b41d3efebc59f5f9bc388b5f792e8edce6782",
     "upstream/ffmpeg/libavcodec/utils.c": "8679acf63c09d658b385c5b52987b75fb4441b106f3352eaac1bd5f72031ea2a",
     "tools/differential-runner/bmp-rle/oracle.c": "f242041721e9cb213f9f304526e5bbd9d87174229a5c830f27e4d48bd682be89",
-    "tools/differential-runner/bmp-rle/generate.mjs": "3c23463f2052646373e221ff52d8d6c4f8e1979f8930dcc27e5d7bb3dab10d3c",
+    "tools/differential-runner/bmp-rle/generate.mjs": "e6696d00d517111d123b7f5edbe3e3034b77f5989af385fc681203b1301087e5",
     "upstream/ffmpeg/libavfilter/vf_hflip.c": "798a49e9fc32372d9bac8ce50e8b6c7de39cabc6a5dbdfa2eab98c84d38f18f0",
     "upstream/ffmpeg/libavfilter/vf_vflip.c": "189b045af43059b654eef2c8fd5c849ea07a3e72a78334dd654f7abfed0a2b69",
     "upstream/ffmpeg/libavfilter/vf_transpose.c": "c1d4c8213419c75063626e8474f45e1987408b5cb5b7db3a43c70427a65f622e",
@@ -31,7 +31,7 @@
     "tests/workers/bmp-cli.test.ts": "8113c029823e23db91489aec98b5667cb76d3bd23b8791f427ebc33f53f073f9",
     "tests/workers/bmp-codec-fixture.ts": "bbe70dfc6a579518e83fec0895f26d079807bee3e9bbb71c1b6f340ca14e7f1a",
     "tests/workers/bmp-cli-fixture.ts": "a365a85b2a8399eb2d80ab535bdf98cf198b326ecad98fc4d617993d4431e763",
-    "tests/differential/bmp-rle-profiles.test.ts": "d05ab318eb148cfa4822d6f5371cee6c3485945e43d610491fbdbe5e7d1f8e6e",
+    "tests/differential/bmp-rle-profiles.test.ts": "d8d8bcb7c3bcd958e023c40998369329b8837364f9509159722f07320e288908",
     "tests/differential/bmp-spatial.test.ts": "73864eff1b2517cbc26ee0633526911d1c6d7d8f7dd5cf959dc5de866c51c0c6"
   },
   "reference": {

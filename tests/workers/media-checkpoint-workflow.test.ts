@@ -7,10 +7,11 @@ import {expect,it} from 'vitest';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import type {MediaCheckpointClaim,MediaCheckpointStatus,MediaCheckpointWorkflowCancellation,MediaCheckpointWorkflowManifest,MediaCheckpointWorkflowSpec} from '@edge-ffmpeg/runtime-cloudflare/checkpoints';
+import {pinnedReference} from '../helpers/reference-identity.js';
 type Instance={status:string;output?:MediaCheckpointWorkflowManifest|null;error?:{name?:string;message:string}|null;__LOCAL_DEV_STEP_OUTPUTS?:unknown[]};
 type Created={id:string;spec:MediaCheckpointWorkflowSpec;foreign:MediaCheckpointClaim|null};
 it('schedules an R2-backed audio FIFO through actual Workflows to Native-identical bytes across a full runtime restart, with replay, busy, cancellation and conflict outcomes',async()=>{
- const directory=mkdtempSync(join(tmpdir(),'edge-media-checkpoint-workflow-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ const directory=mkdtempSync(join(tmpdir(),'edge-media-checkpoint-workflow-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe(pinnedReference().ffmpeg);
  const bundle=await build({entryPoints:[root+'/media-checkpoint-workflow-fixture.ts'],bundle:true,write:false,format:'esm',platform:'browser',target:'es2022',external:['cloudflare:workers'],metafile:true});for(const path of Object.keys(bundle.metafile!.inputs))expect(path.startsWith('node:')).toBe(false);
  const start=()=>new Miniflare(convertV4MiniflareOptions({name:'media-checkpoint-workflow-test',modules:[{type:'ESModule',path:root+'/media-checkpoint-workflow-bundle.mjs',contents:bundle.outputFiles[0]!.text}],modulesRoot:root,compatibilityDate:'2026-11-18',compatibilityFlags:[],resourcePersistencePath:join(directory,'persist'),durableObjects:{CHECKPOINTS:{className:'MediaCheckpointCoordinator',useSQLite:true}},r2Buckets:['MEDIA_BUCKET'],workflows:{CHECKPOINT_WORKFLOW:{name:'media-checkpoint-workflow-local',className:'FifoCheckpointWorkflow'}}}));let mf=start();
  // 23 stereo samples (not a multiple of the 5-sample unit or 3-sample frame), including int16 extremes.

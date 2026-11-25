@@ -8,6 +8,7 @@ import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import type {MediaCheckpointCollectionReport,MediaCheckpointDescriptor,MediaCheckpointLease,MediaCheckpointStatus,MediaCheckpointWorkflowManifest,MediaCheckpointWorkflowSpec} from '@edge-ffmpeg/runtime-cloudflare/checkpoints';
 import type {AudioCheckpointPipelineConfig,AudioCheckpointPipelineStage} from '@edge-ffmpeg/avformat';
+import {pinnedReference} from '../helpers/reference-identity.js';
 type Instance={status:string;output?:MediaCheckpointWorkflowManifest|null;error?:{message:string}|null;__LOCAL_DEV_STEP_OUTPUTS?:unknown[]};
 type Codec='pcm_s16le'|'pcm_f32le';
 type Case={readonly name:string;readonly inputRate:number;readonly outputRate:number;readonly channels:number;readonly input:Codec;readonly precision:'s16'|'flt';readonly codec:Codec;readonly stage:AudioCheckpointPipelineStage;readonly samples:number;readonly unitSamples:number;readonly bitexact:boolean};
@@ -33,7 +34,7 @@ function samples(c:Case):Buffer{
  return bytes;
 }
 it('runs a ranged WAV -> aresample -> asetnsamples/apad -> WAV mux pipeline through actual Workflows across a full runtime restart, a dropped commit acknowledgement and a stale owner, then collects orphans and still finalizes Native-identical WAV, and refuses tagged or over-budget inputs before any unit',async()=>{
- const directory=mkdtempSync(join(tmpdir(),'edge-audio-checkpoint-pipeline-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(sha(readFileSync(binary))).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ const directory=mkdtempSync(join(tmpdir(),'edge-audio-checkpoint-pipeline-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(sha(readFileSync(binary))).toBe(pinnedReference().ffmpeg);
  const bundle=await build({entryPoints:[root+'/audio-checkpoint-pipeline-fixture.ts'],bundle:true,write:false,format:'esm',platform:'browser',target:'es2022',external:['cloudflare:workers'],metafile:true});for(const path of Object.keys(bundle.metafile!.inputs))expect(path.startsWith('node:')).toBe(false);
  const start=()=>new Miniflare(convertV4MiniflareOptions({name:'audio-checkpoint-pipeline-test',modules:[{type:'ESModule',path:root+'/audio-checkpoint-pipeline-bundle.mjs',contents:bundle.outputFiles[0]!.text}],modulesRoot:root,compatibilityDate:'2026-11-18',compatibilityFlags:[],resourcePersistencePath:join(directory,'persist'),durableObjects:{CHECKPOINTS:{className:'PipelineCheckpointCoordinator',useSQLite:true}},r2Buckets:['MEDIA_BUCKET'],workflows:{CHECKPOINT_WORKFLOW:{name:'audio-checkpoint-pipeline-local',className:'AudioPipelineCheckpointWorkflow'}}}));let mf=start();
  const call=async<T>(path:string,body?:unknown,status=200):Promise<T>=>{const response=await mf.dispatchFetch('https://pipeline.test'+path,body===undefined?{}:{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}),value=await response.json() as T;expect(response.status,JSON.stringify(value)).toBe(status);return value;};

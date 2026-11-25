@@ -7,8 +7,9 @@ import {expect,it} from 'vitest';
 import {FFmpeg,planIndependentGraph,lowerComplexVideoCommand} from '@edge-ffmpeg/core';
 import {createMediaBackend} from '@edge-ffmpeg/avformat';
 import {complexCommandGraph,complexCommandBudget,complexCommandInput} from '../helpers/complex-command-graph.js';
+import {pinnedReference} from '../helpers/reference-identity.js';
 for(const mode of ['join','outputs'] as const)it(`lowers typed complex video ${mode} to Native-equivalent raw outputs`,async()=>{
- const binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ const binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe(pinnedReference().ffmpeg);
  const {graph,registry,bindings}=complexCommandGraph(mode),plan=planIndependentGraph(graph,registry,'node',complexCommandBudget);expect(plan.workUnits).toHaveLength(1);
  const command=lowerComplexVideoCommand(plan.workUnits[0]!,bindings,{globalArgs:['-cpuflags','0']}),outputs=new Map<string,Uint8Array[]>();
  const result=await new FFmpeg({backend:createMediaBackend(),budget:complexCommandBudget,filesystem:{async openRead(path){expect(path).toBe('/input/video.raw');return {size:BigInt(complexCommandInput.length),async readAt(offset,length){return complexCommandInput.subarray(Number(offset),Number(offset)+length);}};},async openWrite(path){const chunks:Uint8Array[]=[];outputs.set(path,chunks);return {async write(bytes){chunks.push(bytes.slice());},async commit(){},async abort(){chunks.length=0;}};}}}).exec(command.args);

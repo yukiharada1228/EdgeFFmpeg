@@ -7,8 +7,9 @@ import {expect,it} from 'vitest';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import type {MediaCheckpointLease,MediaCheckpointDescriptor,MediaCheckpointClaim,MediaCheckpointStatus} from '@edge-ffmpeg/runtime-cloudflare/checkpoints';
+import {pinnedReference} from '../helpers/reference-identity.js';
 it('atomically journals reframe state and output chunks across fresh Workers with fenced leases and exact Native recovery',async()=>{
- const directory=mkdtempSync(join(tmpdir(),'edge-media-checkpoint-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ const directory=mkdtempSync(join(tmpdir(),'edge-media-checkpoint-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe(pinnedReference().ffmpeg);
  const bundle=await build({entryPoints:[root+'/media-checkpoint-fixture.ts'],bundle:true,write:false,format:'esm',platform:'browser',target:'es2022',external:['cloudflare:workers'],metafile:true});for(const path of Object.keys(bundle.metafile!.inputs))expect(path.startsWith('node:')).toBe(false);
  const start=()=>new Miniflare(convertV4MiniflareOptions({name:'media-checkpoint-test',modules:[{type:'ESModule',path:root+'/media-checkpoint-bundle.mjs',contents:bundle.outputFiles[0]!.text}],modulesRoot:root,compatibilityDate:'2026-11-18',compatibilityFlags:[],resourcePersistencePath:join(directory,'persist'),durableObjects:{CHECKPOINTS:{className:'MediaCheckpointCoordinator',useSQLite:true}},r2Buckets:['MEDIA_BUCKET']}));let mf=start();
  const request=async(path:string,pad:number,id='main',body?:object)=>mf.dispatchFetch('https://checkpoint.test/'+path.split('&')[0]+'?pad='+pad+'&id='+id+(path.includes('&')?'&'+path.split('&').slice(1).join('&'):''),{method:body?'POST':'GET',...(body?{body:JSON.stringify(body)}:{})});

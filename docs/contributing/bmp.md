@@ -72,6 +72,36 @@ Recheck the cached corpus against1536 fresh Native runs with
 `--write` mode updates cached results and oracle provenance after the same source,
 recipe, target and library checks. Runtime packages never invoke this tool.
 
+## Native reference per platform
+
+Every BMP comparison runs against the pinned Native reference of the platform it
+runs on, resolved by `pinnedReference()` from `compat/reference-pins.json` (see
+[Linux reference](linux-reference.md)). `tests/helpers/bmp-corpus.ts` keeps the
+corpus manifest, source, recipe and commit checks of
+`compat/behavior-specs/bmp/provenance.json`. That file is the darwin-arm64 record:
+its `reference` must name the darwin-arm64 pin on every platform, and on
+darwin-arm64 it must also equal the local binaries.
+
+The cached RLE profiles are per platform:
+
+| Pin | Corpus | Written by |
+| --- | --- | --- |
+| `darwin-arm64` | `compat/behavior-specs/bmp/{rle-profiles,oracle-provenance}.json` | `generate.mjs --write` on macOS |
+| `linux-x64` | `compat/behavior-specs/bmp/linux-x64/{rle-profiles,oracle-provenance,manifest,provenance}.json` | `generate.mjs` without arguments, in the `corpora` job of the Linux probe workflow |
+
+`bmp-rle-profiles.test.ts` reads the corpus of the local pin through
+`readBmpRleProfiles()` and fails when it is missing; it never falls back to the
+darwin corpus. For a Linux corpus it also requires the provenance written by
+`tools/differential-runner/platform-corpus.mjs`, the tracked generator and oracle
+source, and an oracle record that names the linux-x64 pin and links exactly its
+pinned libraries. The platform corpus records checkout-relative oracle paths.
+
+`tools/differential-runner/bmp-rle/platform-corpus.json` is the descriptor for
+`tools/linux/generate-corpora.mjs`, which builds the `bmp-rle` oracle first. A
+local container run (`npm run linux:corpora -- --draft --only bmp-rle`) writes a
+draft under `.build/linux-green/drafts/` for comparison only. `--check` compares
+the committed corpus of the local pin with fresh results on any platform.
+
 Four additional Native spatial cases preserve palette storage through direct
 frame flips and positioned actor crop, and preserve packed monob vertical rows.
 Horizontal monob reflection/crop and paletted or bit-packed transpose require

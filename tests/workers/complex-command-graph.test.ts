@@ -9,8 +9,9 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {lowerComplexVideoCommand,planIndependentGraph} from '@edge-ffmpeg/core';
 import type {MediaWorkflowResult,MediaWorkflowManifest,MediaWorkflowSpec} from '@edge-ffmpeg/runtime-cloudflare/jobs';
 import {complexCommandGraph,complexCommandBudget,complexCommandInput} from '../helpers/complex-command-graph.js';
+import {pinnedReference} from '../helpers/reference-identity.js';
 it('runs automatically lowered split/join and multi-output video graphs through actual Workflows and R2',async()=>{
- const directory=mkdtempSync(join(tmpdir(),'edge-complex-graph-workflow-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe('1b86106f46cfa087eec387b83bc37ba95bdea5043e738259cac9b7c01c2eab92');
+ const directory=mkdtempSync(join(tmpdir(),'edge-complex-graph-workflow-')),root=resolve('tests/workers'),binary=resolve('.build/reference/ffmpeg');expect(createHash('sha256').update(readFileSync(binary)).digest('hex')).toBe(pinnedReference().ffmpeg);
  const bundle=await build({entryPoints:[root+'/media-workflow-fixture.ts'],bundle:true,write:false,format:'esm',platform:'browser',target:'es2022',external:['cloudflare:workers'],metafile:true});for(const path of Object.keys(bundle.metafile!.inputs))expect(path.startsWith('node:')).toBe(false);
  const mf=new Miniflare(convertV4MiniflareOptions({name:'complex-graph-workflow-test',modules:[{type:'ESModule',path:root+'/complex-command-graph-bundle.mjs',contents:bundle.outputFiles[0]!.text}],modulesRoot:root,compatibilityDate:'2026-11-18',compatibilityFlags:[],resourcePersistencePath:join(directory,'persist'),durableObjects:{JOBS:{className:'MediaJobCoordinator',useSQLite:true}},r2Buckets:['MEDIA_BUCKET'],queueProducers:{MEDIA_JOB_QUEUE:'complex-graph-jobs'},queueConsumers:{'complex-graph-jobs':{maxBatchSize:1,maxBatchTimeout:0,maxRetries:1,retryDelay:0}},workflows:{MEDIA_WORKFLOW:{name:'complex-graph-workflow-local',className:'MediaWorkflow'}}}));
  try{
