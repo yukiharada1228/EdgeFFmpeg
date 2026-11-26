@@ -1,0 +1,303 @@
+{
+ "capabilityId": "filter.sobel",
+ "coversCapabilities": [
+  "filter.sobel",
+  "filter.prewitt",
+  "filter.scharr",
+  "filter.roberts"
+ ],
+ "slug": "vf-sobel",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-sobel.ts",
+  "packages/avfilter/src/video-ops/sobel.ts",
+  "packages/avfilter/src/video-ops/prewitt.ts",
+  "packages/avfilter/src/video-ops/scharr.ts",
+  "packages/avfilter/src/video-ops/roberts.ts",
+  "packages/avfilter/src/video-ops/registry.ts (shared)",
+  "packages/avfilter/NOTICE-SOBEL",
+  "tests/unit/video-sobel.test.ts",
+  "tests/differential/video-sobel.test.ts",
+  "docs/contributing/sobel.md",
+  "docs/contributing/wave2/vf-sobel.json"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/video-ops/registry.ts: +4 import lines (sobel, prewitt, scharr, roberts) and +4 entry lines (`sobelOperator,`, `prewittOperator,`, `scharrOperator,`, `robertsOperator,`)"
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-sobel.test.ts",
+   "name": "parses the common class planes, scale and delta with native defaults, shorthand order, expressions, float storage and last-wins keys",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-sobel.test.ts",
+   "name": "declares the native pix_fmts in declared order, five paths and no runtime commands",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-sobel.test.ts",
+   "name": "computes each operator on a ramp with avpriv_mirror borders, truncation, clipping and owned tight planes",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-sobel.test.ts",
+   "name": "applies the planes mask per plane index and copies the others",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-sobel.test.ts",
+   "name": "rejects unsupported layouts, budgets, malformed storage, invalid settings and cancellation explicitly",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-sobel.test.ts",
+   "name": "plans every operator on every path, refuses picks without storage by name and refuses timelines and commands",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "checks the native reference build at test time",
+   "counts": {
+    "checks": 2
+   }
+  },
+  {
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "matches native sobel, prewitt and roberts through the linear, frame graph and replay APIs with integer-exact scales",
+   "counts": {
+    "nativeOutputs": 1728,
+    "matches": 5184,
+    "platforms": "all"
+   }
+  },
+  {
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "matches native scharr and the inexact 0.3 scales of every operator through the linear, frame graph and replay APIs (linux-x64)",
+   "counts": {
+    "nativeOutputs": 1800,
+    "matches": 5400,
+    "platforms": "linux-x64"
+   }
+  },
+  {
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "matches native sobel, prewitt and roberts rawvideo and framecrc bytes with and without -ss/-t on every flagged CLI path",
+   "counts": {
+    "cliRuns": 1080,
+    "platforms": "all"
+   }
+  },
+  {
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "matches native scharr and inexact scale rawvideo and framecrc bytes with and without -ss/-t on every flagged CLI path (linux-x64)",
+   "counts": {
+    "cliRuns": 720,
+    "platforms": "linux-x64"
+   }
+  },
+  {
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "agrees with native under default slice threads and -filter_threads 1, and matches it for integer-exact scales",
+   "counts": {
+    "nativeThreadPairs": 294,
+    "edgeMatches": 144,
+    "platforms": "all"
+   }
+  },
+  {
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "fails like native for out-of-range and unknown options, and refuses the timeline, before opening outputs on every path",
+   "counts": {
+    "nativeMatchedFailures": 35,
+    "timelineRefusals": 10,
+    "platforms": "all"
+   }
+  },
+  {
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "negotiates every accepted source as native does for sobel, prewitt and roberts and refuses the packed-alpha gbrap picks before output on every path",
+   "counts": {
+    "checks": 267,
+    "platforms": "all"
+   }
+  },
+  {
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "negotiates every accepted source as native does for scharr and refuses the packed-alpha gbrap picks before output on every path (linux-x64)",
+   "counts": {
+    "checks": 89,
+    "platforms": "linux-x64"
+   }
+  }
+ ],
+ "testTotals": {
+  "unit": 6,
+  "differential": 9,
+  "registry": "tests/unit/video-operator-registry.test.ts 8 passed"
+ },
+ "nativeComparisons": {
+  "apiOutputs": 3528,
+  "apiMatches": 10584,
+  "cliRuns": 1800,
+  "threadPairs": 294,
+  "threadEdgeMatches": 144,
+  "optionFailures": 35,
+  "negotiationChecks": 356,
+  "total": "3528 API outputs (10584 path matches) + 1800 CLI runs + 294 thread pairs + 35 failures + 356 negotiation checks"
+ },
+ "unsupported": [
+  "enable= timeline (native supports it)",
+  "runtime commands (native process_command)",
+  "generic filter options (threads, ...)",
+  "NaN scale or delta (native range check accepts NaN)",
+  "high-bit-depth formats and native formats without frame storage (yuva444p, yuva422p, yuv440p, yuv411p, yuv410p, yuvj440p, yuvj411p, gbrap); packed RGB with alpha negotiates gbrap and is refused by name",
+  "H.264/MP4 framecrc input has no dedicated comparison"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.sobel.api",
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "matches native sobel, prewitt and roberts through the linear, frame graph and replay APIs with integer-exact scales",
+   "modes": [
+    "linear",
+    "graph",
+    "stream"
+   ],
+   "scope": "sobel, prewitt and roberts kernels with integer-exact scales; 6 formats x 6 sizes x 2 patterns x 24 descriptions"
+  },
+  {
+   "id": "filter.scharr.api-float",
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "matches native scharr and the inexact 0.3 scales of every operator through the linear, frame graph and replay APIs (linux-x64)",
+   "modes": [
+    "linear",
+    "graph",
+    "stream"
+   ],
+   "scope": "scharr and inexact (0.3, 0.7) scales of all four operators, including float rounding-boundary cases",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.sobel.cli",
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "matches native sobel, prewitt and roberts rawvideo and framecrc bytes with and without -ss/-t on every flagged CLI path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "rawvideo and framecrc, with and without -ss/-t, on the five CLI paths"
+  },
+  {
+   "id": "filter.scharr.cli-float",
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "matches native scharr and inexact scale rawvideo and framecrc bytes with and without -ss/-t on every flagged CLI path (linux-x64)",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "scharr and inexact scales on the five CLI paths",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.sobel.threads",
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "agrees with native under default slice threads and -filter_threads 1, and matches it for integer-exact scales",
+   "modes": [
+    "linear"
+   ],
+   "scope": "native default slice threads vs -filter_threads 1 for all 49 descriptions; Edge match for the 24 portable ones"
+  },
+  {
+   "id": "filter.sobel.reject",
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "fails like native for out-of-range and unknown options, and refuses the timeline, before opening outputs on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "option errors matched with native and timeline refusals before output"
+  },
+  {
+   "id": "filter.sobel.negotiation",
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "negotiates every accepted source as native does for sobel, prewitt and roberts and refuses the packed-alpha gbrap picks before output on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "per-source negotiation for sobel, prewitt and roberts"
+  },
+  {
+   "id": "filter.scharr.negotiation",
+   "file": "tests/differential/video-sobel.test.ts",
+   "name": "negotiates every accepted source as native does for scharr and refuses the packed-alpha gbrap picks before output on every path (linux-x64)",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "per-source negotiation for scharr",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.sobel.unit",
+   "file": "tests/unit/video-sobel.test.ts",
+   "name": "*",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "parse, kernel, refusals, budgets, strides, AbortSignal, owned planes"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "setupDurations": {
+  "bootstrapSeconds": 232,
+  "baselineSeconds": 70,
+  "notes": "First bootstrap attempt failed with the sandbox Node v22.23.5 (Node 24+ required); rerun with /opt/node24 (v24.22.3). Reference built unpinned (--allow-unpinned-reference)."
+ },
+ "notes": [
+  "Gate: sobel/prewitt/roberts integer sums are below 2^12, so a*a+b*b is exact fused or not, and power-of-two scales make sqrt*scale exact, so a fused multiply-add with any delta rounds like the unfused pair; those cases run everywhere. Scharr and non-power-of-two scales run only on linux-x64.",
+  "No macOS arm64 run was made from this branch; the gate is a precaution. In the sandbox, a double-precision kernel mutation and a fused (exact sqrt*scale+delta) mutation each failed only the linux-x64 API test, via step-5 ramp rounding-boundary cases with scale=0.7, while the portable tests passed.",
+  "The reference has --disable-x86asm, so ff_sobel_init_x86 is not used.",
+  "Registry support-matrix rows for the four operators are left to the coordinator, as the registry doc says."
+ ]
+}

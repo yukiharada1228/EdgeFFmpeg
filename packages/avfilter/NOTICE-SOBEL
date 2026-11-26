@@ -1,0 +1,20 @@
+Scoped sobel, prewitt, scharr and roberts video filters
+
+The option table (common class: planes, scale, delta), the pix_fmts list, the
+plane geometry of param_init, the filter_sobel, filter_prewitt, filter_scharr
+and filter_roberts kernels, setup_3x3 with its avpriv_mirror borders and the
+copy of planes outside the mask in filter_slice, as used by
+src/video-sobel.ts and src/video-ops/{sobel,prewitt,scharr,roberts}.ts, follow
+libavfilter/vf_convolution.c (pix_fmts, filter_prewitt, filter_roberts,
+filter_scharr, filter_slice, param_init, filter_frame, common_options,
+common_class, ff_vf_sobel, ff_vf_prewitt, ff_vf_roberts, ff_vf_scharr) and
+libavfilter/convolution.h (setup_3x3, filter_sobel, ff_sobel_init), with
+avpriv_mirror from libavutil/internal.h and the AV_OPT_TYPE_INT and
+AV_OPT_TYPE_FLOAT handling of libavutil/opt.c (set_string_number, write_number).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2012-2013 Oka Motofumi;(c)2015 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation for eight-bit planar formats, not the
+complete filters: the float arithmetic follows the unfused x86-64 baseline,
+and the timeline, runtime commands and high-bit-depth formats are refused.
