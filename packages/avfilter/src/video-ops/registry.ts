@@ -47,6 +47,7 @@ import {chromanrOperator} from './chromanr.js';
 import {deblockOperator} from './deblock.js';
 import {medianOperator} from './median.js';
 import {edgedetectOperator} from './edgedetect.js';
+import {gradfunOperator} from './gradfun.js';
 // One import above and one entry below per operator, each entry ending with a comma, so parallel
 // additions never touch the same line. Order is irrelevant: lookups are by name.
 export const videoOperators=Object.freeze([
@@ -95,6 +96,7 @@ export const videoOperators=Object.freeze([
  deblockOperator,
  medianOperator,
  edgedetectOperator,
+ gradfunOperator,
 ] as const);
 type Operator=typeof videoOperators[number];
 type Steps=Operator extends infer O?O extends VideoOperatorDescriptor<infer S,infer T>?{readonly scoped:S;readonly timed:T}:never:never;
