@@ -1,0 +1,20 @@
+Scoped kirsch video filter
+
+The common option table (planes, scale, delta), the pix_fmts list,
+param_init's plane geometry and per-plane copy mask for kirsch, the
+avpriv_mirror border addressing of setup_3x3, the slice row loop of
+filter_slice and the eight-bit eight-direction compass sums of
+filter_kirsch, with av_clip_uint8(FFABS(max) * scale + delta), in
+src/video-ops/kirsch.ts follow libavfilter/vf_convolution.c and
+libavfilter/convolution.h (common_options, pix_fmts, param_init,
+setup_3x3, filter_slice, filter_kirsch, filter_frame, ff_vf_kirsch) and
+libavutil/internal.h (avpriv_mirror).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2012-2013 Oka Motofumi (chikuzen.mo at gmail dot com)
+Copyright (c) 2015 Paul B Mahol
+LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation for eight-bit planar formats, not the
+complete kirsch filter: timeline, runtime commands, generic filter options,
+scale and delta expressions and high-bit-depth formats are refused.

@@ -1,0 +1,75 @@
+{
+  "capabilityId": "filter.kirsch",
+  "slug": "vf-kirsch",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/kirsch.ts",
+    "packages/avfilter/NOTICE-KIRSCH",
+    "tests/unit/video-kirsch.test.ts",
+    "tests/differential/video-kirsch.test.ts",
+    "docs/contributing/kirsch.md",
+    "docs/contributing/wave2/vf-kirsch.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/avfilter/src/video-ops/registry.ts", "lines": ["import {kirschOperator} from './kirsch.js';", " kirschOperator,"]}
+  ],
+  "tests": [
+    {"file": "tests/unit/video-kirsch.test.ts", "title": "parses native defaults, shorthand order, ranges, integer plane expressions and float-stored scale and delta into frozen steps", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-kirsch.test.ts", "title": "matches an independent compass model with mirrored borders, plane masks, float scale and delta and copies into owned tight planes", "passed": 1, "failed": 0, "counts": {"planeComparisons": 833}},
+    {"file": "tests/unit/video-kirsch.test.ts", "title": "refuses unsupported layouts, budgets, malformed storage, settings and cancellation explicitly", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-kirsch.test.ts", "title": "budgets linear and graph plans, negotiates native formats and refuses timeline and runtime commands on every path", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-operator-registry.test.ts", "title": "(all 8 registration-driven tests, including the kirsch examples on all five paths)", "passed": 8, "failed": 0},
+    {"file": "tests/differential/video-kirsch.test.ts", "title": "runs against a reference built from commit 946fcce0 with --disable-x86asm", "passed": 1, "failed": 0},
+    {"file": "tests/differential/video-kirsch.test.ts", "title": "matches native kirsch with scale 1 and delta 0 through the linear, frame graph and replay APIs across formats, plane masks, sizes and patterns", "passed": 1, "failed": 0, "counts": {"matched": 432, "pathComparisons": 1296}},
+    {"file": "tests/differential/video-kirsch.test.ts", "title": "matches native kirsch float scale and delta through the linear, frame graph and replay APIs (linux-x64 unfused float)", "passed": 1, "failed": 0, "counts": {"matched": 918, "pathComparisons": 2754}},
+    {"file": "tests/differential/video-kirsch.test.ts", "title": "matches native kirsch rawvideo and framecrc bytes with scale 1 and delta 0 on every flagged CLI path with and without -ss and -t", "passed": 1, "failed": 0, "counts": {"matched": 1440}},
+    {"file": "tests/differential/video-kirsch.test.ts", "title": "matches native kirsch float rawvideo and framecrc bytes on every flagged CLI path with and without -ss and -t (linux-x64 unfused float)", "passed": 1, "failed": 0, "counts": {"matched": 1920}},
+    {"file": "tests/differential/video-kirsch.test.ts", "title": "agrees with native under default slice threads and -filter_threads 1 on frames tall enough for several slices", "passed": 1, "failed": 0, "counts": {"matched": 72}},
+    {"file": "tests/differential/video-kirsch.test.ts", "title": "fails like native for out-of-range values, unknown options and extra positional values before opening outputs on every path", "passed": 1, "failed": 0, "counts": {"failures": 40}},
+    {"file": "tests/differential/video-kirsch.test.ts", "title": "refuses enable=, float expressions and generic options that native accepts before opening outputs on every path", "passed": 1, "failed": 0, "counts": {"refused": 20}},
+    {"file": "tests/differential/video-kirsch.test.ts", "title": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path", "passed": 1, "failed": 0, "counts": {"checks": 89}}
+  ],
+  "nativeComparisons": {
+    "count": 4839,
+    "breakdown": [
+      {"count": 432, "compares": "native -vf rawvideo bytes vs compileVideoFilterChain, compileVideoFilterGraph and createReplayVideoExecution (1296 path comparisons); 6 formats x 9 sizes x 8 integer option sets, 3 frames (noise, ramps/edges/spikes, constant); every platform"},
+      {"count": 918, "compares": "the same API grid with 17 float scale/delta option sets (2754 path comparisons); linux-x64 only"},
+      {"count": 1440, "compares": "native rawvideo and framecrc bytes vs the CLI frontend on linear, graph, stream, actor (timed producer) and timed (timed pull), with and without -ss/-t; integer option sets; every platform"},
+      {"count": 1920, "compares": "the same CLI grid with 4 float option sets; linux-x64 only"},
+      {"count": 72, "compares": "native default threads vs -filter_threads 1 and -filter_complex_threads 1 (all equal) vs EdgeFFmpeg linear and timed CLI on 9x64, 17x40, 6x33"},
+      {"count": 40, "compares": "error parity: range, unknown-option and positional errors on all five paths; native status from os.constants.errno and diagnostic checked; no output opened here"},
+      {"count": 17, "compares": "per-source negotiation (nativeNegotiationOutcome): 17 native picks read from showinfo; 13 matched sources byte-exact on every path and 4 gbrap picks refused by name on every path and CLI backend (89 checks)"}
+    ],
+    "refusalsWithoutNative": 20,
+    "nativeFlags": ["-cpuflags", "0"]
+  },
+  "unsupported": [
+    "enable= timeline, runtime commands and generic filter options such as threads",
+    "scale and delta expressions or constants (decimal literals only)",
+    "high-bit-depth formats (filter16_kirsch) and yuva422p, yuva444p, yuv410p, yuv411p, yuv440p, yuvj440p, yuvj411p, gbrap (no frame storage); packed alpha sources pick gbrap and are refused by name",
+    "no dedicated H.264/MP4 framecrc comparison (size unchanged)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "filter.kirsch.api", "file": "tests/differential/video-kirsch.test.ts", "name": "matches native kirsch with scale 1 and delta 0 through the linear, frame graph and replay APIs across formats, plane masks, sizes and patterns", "modes": ["linear", "graph", "stream"], "scope": "integer scale/delta, every plane mask, six formats, 1- and 2-pixel planes; rawvideo bytes"},
+    {"id": "filter.kirsch.api-float", "file": "tests/differential/video-kirsch.test.ts", "name": "matches native kirsch float scale and delta through the linear, frame graph and replay APIs (linux-x64 unfused float)", "modes": ["linear", "graph", "stream"], "scope": "float scale and delta, unfused float", "platforms": ["linux-x64"]},
+    {"id": "filter.kirsch.cli", "file": "tests/differential/video-kirsch.test.ts", "name": "matches native kirsch rawvideo and framecrc bytes with scale 1 and delta 0 on every flagged CLI path with and without -ss and -t", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "rawvideo and framecrc with -ss/-t scopes, integer options"},
+    {"id": "filter.kirsch.cli-float", "file": "tests/differential/video-kirsch.test.ts", "name": "matches native kirsch float rawvideo and framecrc bytes on every flagged CLI path with and without -ss and -t (linux-x64 unfused float)", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "rawvideo and framecrc with -ss/-t scopes, float scale and delta", "platforms": ["linux-x64"]},
+    {"id": "filter.kirsch.threads", "file": "tests/differential/video-kirsch.test.ts", "name": "agrees with native under default slice threads and -filter_threads 1 on frames tall enough for several slices", "modes": ["linear", "timed"], "scope": "slice-thread independence"},
+    {"id": "filter.kirsch.refusals", "file": "tests/differential/video-kirsch.test.ts", "name": "fails like native for out-of-range values, unknown options and extra positional values before opening outputs on every path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "option errors"},
+    {"id": "filter.kirsch.scope", "file": "tests/differential/video-kirsch.test.ts", "name": "refuses enable=, float expressions and generic options that native accepts before opening outputs on every path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "explicit out-of-scope refusals"},
+    {"id": "filter.kirsch.negotiation", "file": "tests/differential/video-kirsch.test.ts", "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "per-source negotiation"},
+    {"id": "filter.kirsch.unit", "file": "tests/unit/video-kirsch.test.ts", "name": "refuses unsupported layouts, budgets, malformed storage, settings and cancellation explicitly", "modes": ["unit"], "scope": "frame limits, strides, AbortSignal"}
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "No shared edits beyond the two registry lines. planes reuses packages/avfilter/src/activation/integer-option.ts.",
+    "Linux-gated float cases: two tests (API and CLI float). No macOS run was measured; the gate is a precaution backed by emulation: a fused Math.fround(|sum|*scale+delta) fails the float API test (first at yuv444p 5x3 scale=0.7:delta=-0.1), so the float cases do separate fused from unfused arithmetic.",
+    "Borders: setup_3x3 uses avpriv_mirror (-1 -> 1, n -> n-2, single row/column -> 0), not replication; 1- and 2-pixel planes stay in bounds and are supported, matched natively at 1x1, 2x2, 1x8, 2x8 and 8x1.",
+    "The registry test file was not edited; the examples are on the descriptor.",
+    "Environment: sandbox Node was v22.23.5; bootstrap requires Node 24, so the official v24.22.3 linux-x64 tarball (sha256-checked against SHASUMS256.txt) was unpacked into the session scratchpad.",
+    "Setup durations: bootstrap 199 s (npm 9.4 s, submodule 7.0 s, reference build the rest); baseline typecheck, lint, boundaries and the registry test 63 s, all green (8/8). The differential file runs in about 40 s on 4 vCPUs."
+  ]
+}
