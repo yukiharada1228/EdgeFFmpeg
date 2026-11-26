@@ -267,9 +267,12 @@ it explicitly for single differential files.
 
 ## CI
 
-`.github/workflows/ci.yml` keeps its explicit, pinned build steps: the
-container image, OpenH264 and emsdk commits, Emscripten 7.0.0, and the libFLAC
-URL and SHA-256. Every job runs in the pinned image and runs npm and the tests as
+`.github/workflows/ci.yml` keeps its explicit build steps, built from the same pins
+as the bootstrap. The container image is written in the workflow. The OpenH264
+and emsdk commits, Emscripten 7.0.0, and the libFLAC URL and SHA-256 come from
+`tools/codecs` and `tools/bootstrap/lock.json`, through
+`node tools/ci/reference-cache.mjs pins`. The same step hashes them into the
+cache key ([CI and local validation](ci.md)). Every job runs in the pinned image and runs npm and the tests as
 the image's unprivileged `node` user. The reference job fetches the `n9.0.2` tag
 into the shallow submodule before `reference:build`, so FFmpeg embeds the same
 version string as the pinned builds. After the codec builds it runs

@@ -3754,3 +3754,66 @@ labelled as the other's. It checked the following:
   `.github/linux-probe.json` values it interpolates into shell steps.
 
 The approval of the `40a90c7` budgets remains unconfirmed (see the open items).
+
+### Sharded CI, the wave2 fast lane and local validate:fast (2026-11-26)
+
+Branch `ci-fast/pipeline` starts at `22fcb7a`. [CI and local validation](ci.md)
+describes the design, the rules and the measurements. The commits are:
+
+- `a477f37`: the shard planner and runner, `compat:report --from-shards`, the
+  cached reference, the fast lane and `npm run validate:fast`.
+- `e78d1eb`: the report job gives the restored build tree one timestamp, so the
+  FATE gate's `make` does not rebuild FFmpeg. `validate:fast` starts the shards
+  by the host's measured durations.
+- The commit after `e78d1eb` adds the documentation and skips CI.
+
+What is validated did not change, and neither did any test or contract.
+
+- CI run 45692212749 on `e78d1eb` is equivalent, test by test, to run
+  45623569626. `node tools/ci/compare.mjs` found the same developmentValidation
+  (passed), gates, suite counts, test files, full test names, statuses and
+  contract statuses. The only addition is the six tests of
+  `tests/unit/ci-shards.test.js`, all passed.
+- A second, one-off check outside the tree imports no repository code. It
+  downloaded both runs' artifacts with `gh run download` and compared each
+  suite's raw Vitest JSON in run 45623569626 with the union of the 16 shard
+  artifacts of run 45692212749. It keyed every test by file, full name and
+  Vitest status, and counted how often each key occurs. It also compared the
+  report assertions with their outcome, the per-file status counts, gates and
+  their commands, contracts, FATE and the not-applicable list, and it agreed.
+  - Unit had 2,944 tests (2,927 distinct names, 8 of them repeated), integration
+    2,081, differential 729 (725 distinct) and workers 277.
+  - Every test file Git has under `tests/<suite>/` at `e78d1eb` is planned in
+    exactly one shard and appears in its shard's Vitest JSON. These are the 696
+    files of `40a90c7` plus `ci-shards.test.js`.
+  - Each shard artifact is byte-identical to the aggregate's copy and matches the
+    hashes in its record. Each record names plan `5d59bf44`, exit 0, `e78d1eb`
+    and the aggregate's source and reference snapshots.
+  - The check reports a difference when one test is removed or duplicated in a
+    copy of the baseline JSON.
+- The `checks` job is skipped in the full lane by design
+  (`if: needs.plan.outputs.mode == 'fast'`). Its typecheck, lint and boundaries
+  run as gates of the report job's `compat:report`, with declarations,
+  worker-types, worker-bundle, reference-extract, both FATE gates and
+  fate-execution. Every one of these passed with the same command as in run
+  45623569626. The old `foundation` job (`npm run check`) and `workers` job
+  (`workers:types -- --check`, `test:workers`, `workers:bundle`) map onto these
+  gates and onto shards `unit-1` and `workers-1` to `-5`. `bootstrap --check`
+  passed in the reference job, in all 16 shard jobs and in the report job.
+- A local `validate:fast` on `e78d1eb` is equivalent in the same way to the
+  macOS report at `8f453a8`: differential 705 passed and 24 not-applicable, and
+  contracts 1,120 passed and 35 not-applicable.
+
+Wall times:
+
+- The full pipeline went from 3 h 9 min to 13 min 50 s with a cached reference,
+  and 20 min 28 s when the reference is built.
+- The fast lane of `wave2/ci-fast-probe` took 9 min 5 s.
+- Locally, `validate:fast` took 25 min 29 s against 70 to 81 min, on a machine
+  that other work was also loading.
+
+The open items of the previous section about CI duration and the
+`foundation`/`workers` job summaries no longer apply, because those jobs are
+gone. New open items are listed in [ci.md](ci.md#open-items). They include one
+native SIGBUS in `video-fillborders` seen only under local parallel load, and
+the local 20-minute target, which was not reached on the shared machine.

@@ -7,11 +7,23 @@ npm run reference:build
 npm run compat:report
 ```
 
-The command generates `compat/reports/current.md` and `current.json`, plus a fresh `.build/evidence/<run-id>/` directory. Reports/evidence are ignored by Git and uploaded as CI artifacts. The reference CI job runs the same command and attempts artifact upload even when validation fails.
+The command generates `compat/reports/current.md` and `current.json`, plus a fresh `.build/evidence/<run-id>/` directory. Reports/evidence are ignored by Git and uploaded as CI artifacts. CI's `report` job runs it as `compat:report -- --from-shards` (see [Sharded runs](#sharded-runs)) and uploads the `reference-evidence` artifact even when validation fails. Locally, `npm run validate:fast` produces the same report from parallel shards in about a third of the serial time.
 
-The runner validates reference source/lock/build commits, configure flags, tracked upstream modifications and both executable hashes before extracting capabilities. It refreshes explicit FATE inventory, executes the reviewed native/Edge FATE profiles with fresh provenance, and runs typecheck, portable declaration generation, lint, package boundaries, generated Worker type checks, dry-run bundling and all four test groups. Each command has a log, exit status, duration and content hash. Vitest JSON is checked against the expected test files and actual assertion counts; unexpectedly skipped, missing, failed, malformed or unmatched evidence cannot pass validation. A skip is expected only under the platform policy below.
+The runner validates reference source/lock/build commits, configure flags, tracked upstream modifications and both executable hashes before extracting capabilities. It refreshes explicit FATE inventory, executes the reviewed native/Edge FATE profiles with fresh provenance, and runs typecheck, portable declaration generation, lint, package boundaries, generated Worker type checks, dry-run bundling and all four test groups. With `--from-shards <dir>` it runs every one of these gates except the four test groups, which it takes from shard records. Each command has a log, exit status, duration and content hash. Vitest JSON is checked against the expected test files and actual assertion counts; unexpectedly skipped, missing, failed, malformed or unmatched evidence cannot pass validation. A skip is expected only under the platform policy below.
 
 Source snapshots include tracked and untracked nonignored repository files, their hashes, revision and upstream state. Tests and tools are part of that snapshot. The runner compares snapshots before/after validation and also checks both native binaries and build metadata for changes. A changed snapshot fails development validation. This is local provenance evidence, not a signed build attestation or proof that unobserved external state remained fixed.
+
+## Sharded runs
+
+`npm run compat:report -- --from-shards <dir>` is the same report with the four test groups taken from shards that ran elsewhere: CI's shard jobs or `npm run validate:fast`. [CI and local validation](ci.md) describes the plan, the shard runner and the pipeline. The report applies these rules:
+
+- It recomputes the shard plan from its own source snapshot, and the plan must place every test file the report expects in exactly one shard.
+- Every planned shard must be present exactly once and must name that plan. It must have run exactly its planned files on the same Node, platform and arch.
+- Its log and Vitest JSON must match the hashes recorded when it ran.
+- Its JSON must report exactly its files with consistent counts.
+- The merged results are summarized against the suite's full file list with the run's platform policy, exactly as a serial run's single JSON would be.
+
+A missing, empty, partial, duplicated, unexpected or altered shard makes its suite `invalid-evidence`, so validation fails. No shard is ever skipped. `tests-<suite>` passes only when every shard exited 0. Source and reference stability also require each shard's before and after snapshots to equal the report's. Shard logs, records and JSON are copied into `.build/evidence/<run-id>/shards/`, and the merged JSON is written to `<suite>.json` as before. The report records `execution` (`serial`, or `shards` with the plan hash and counts) and each suite's `shards`.
 
 ## Platform-gated tests
 
@@ -65,4 +77,4 @@ The 24 contracts for linux/x64-gated audio tests declare `"platforms": ["linux-x
 
 Failure reports also retain partial evidence. Every run uses a fresh directory, so old passing JSON cannot fill in missing results. If native reference validation fails, differential tests are recorded as not run; other suites can still provide debugging evidence.
 
-Native differential tests run serially with a 30-second default wall-clock test allowance because each comparison may launch many reference processes and await bounded filesystem operations. Explicit per-matrix timeouts still apply. These harness deadlines do not change numeric assertions, native options, I/O budgets or runtime CPU/resource limits, and are not performance-conformance evidence.
+Native differential tests run serially (in a sharded run, each differential shard is one serial Vitest process) with a 30-second default wall-clock test allowance because each comparison may launch many reference processes and await bounded filesystem operations. Explicit per-matrix timeouts still apply. These harness deadlines do not change numeric assertions, native options, I/O budgets or runtime CPU/resource limits, and are not performance-conformance evidence.

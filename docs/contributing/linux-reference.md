@@ -172,10 +172,15 @@ it with your local drafts, review it, and commit it.
   three outputs are added to the `worker-reference-and-codec` artifact. On
   failure, `reference-diagnostics` uploads `.build/reference/` and
   `.build/bootstrap/` for comparison with `.build/linux-x64/reference`.
-- `npm run compat:report` runs as `node` after the artifact upload.
-- `foundation` and `workers` need only that artifact. They run unless the run is
-  cancelled, so a failing `compat:report` does not skip them. Without the
-  artifact, their download step fails them explicitly.
+- The reference job restores the reference and both Wasm modules from the
+  Actions cache when every pinned input is unchanged. On a miss it takes another
+  run's `reference-build-<key>` artifact, or builds them as above. The FLAC
+  investigation step and `bootstrap --check` run after every restore and every
+  build.
+- The test suites run in shard jobs that need only the
+  `worker-reference-and-codec` artifact. The `report` job runs
+  `npm run compat:report -- --from-shards` as `node`. A `wave2/**` push runs the
+  fast lane instead. See [CI and local validation](ci.md).
 
 The linux-x64 FLAC investigation content pins in `tools/bootstrap/lock.json`
 come from the reference job of run 45580321573. So do the linux-x64
