@@ -1,0 +1,67 @@
+{
+  "capabilityId": "demuxer.rsd",
+  "slug": "fmt-rsd",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/rsd.ts",
+    "packages/containers/NOTICE-RSD",
+    "packages/containers/src/registry.ts",
+    "docs/contributing/rsd-support.md",
+    "docs/contributing/wave2/fmt-rsd.json",
+    "tests/unit/rsd.test.ts",
+    "tests/differential/rsd.test.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/containers/src/registry.ts", "line": "export {rsd} from './rsd.js';", "position": "alphabetical, before rso"}
+  ],
+  "tests": [
+    {"file": "tests/unit/rsd.test.ts", "tests": 6, "titles": [
+      "parses versions, tags and data starts with bounded header reads",
+      "takes packet spans of 512/channels and marks short final packets for copy refusal",
+      "refuses tags, channels, rates, starts and trailing bytes as native does or explicitly",
+      "checks the abort signal around every read",
+      "probes exactly the 20 bytes rsd_probe reads, only at its score-100 case, and registers a demux-only descriptor",
+      "demuxes through the PCM backend and refuses copy of a short tail, input seeks and rsd output before any output opens"
+    ]},
+    {"file": "tests/differential/rsd.test.ts", "tests": 3, "titles": [
+      "matches native RSD copy and decode framecrc, WAV and raw for versions 2 3 4 and 6, PCM and PCMB, 1 2 4 and 8 channels",
+      "matches native RSD output -ss and -t for copy and decode, short final packets on decode, and declared -f rsd",
+      "refuses inputs native rejects or that the module does not mirror before any output, with native statuses"
+    ]},
+    {"file": "tests/unit/container-registry*.test.ts", "tests": 17, "note": "3 files, unchanged, pass"}
+  ],
+  "nativeComparisons": {
+    "byteExact": 241,
+    "breakdown": {"versionTagChannelMatrix": 160, "outputSsT": 40, "shortTailDecode": 32, "declaredRate400000": 5, "declared512Channels": 2, "startAtEof": 2},
+    "nativeStatusChecks": 7,
+    "nativeShapeAssertions": ["short-tail copy ends F=0x3 (8 files)", "3-channel copy 1024-byte packets of 170 samples", "3-channel decode 1020-byte frames with Invalid PCM packet errors"],
+    "platform": "linux-x64 sandbox build only"
+  },
+  "unsupported": [
+    "RSD output (native has none)",
+    "ADPCM and XMA tags (VAG, GADP, WADP, RADP, XADP, XMA)",
+    "OGG tag (refused with native status 176)",
+    "channel counts that do not divide 512",
+    "negative sample rate",
+    "data start beyond EOF",
+    "partial trailing sample frame",
+    "input -ss > 0",
+    "-c copy of an input with a short final packet (copyRefusal)",
+    "undeclared files at native probe score 12"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "demuxer.rsd.matrix", "file": "tests/differential/rsd.test.ts", "name": "matches native RSD copy and decode framecrc, WAV and raw for versions 2 3 4 and 6, PCM and PCMB, 1 2 4 and 8 channels", "modes": ["copy", "decode"], "scope": "autodetected RSD PCM/PCMB demux to framecrc, wav and raw"},
+    {"id": "demuxer.rsd.timing", "file": "tests/differential/rsd.test.ts", "name": "matches native RSD output -ss and -t for copy and decode, short final packets on decode, and declared -f rsd", "modes": ["copy", "decode"], "scope": "output -ss/-t, short-tail decode, declared -f rsd (rate 400000, 512 channels, empty)"},
+    {"id": "demuxer.rsd.refusals", "file": "tests/differential/rsd.test.ts", "name": "refuses inputs native rejects or that the module does not mirror before any output, with native statuses", "modes": ["refusal"], "scope": "unknown/OGG tags with native statuses; 3 channels, VAG, start beyond EOF, score 12, input -ss refused before output"}
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Setup: npm run bootstrap failed immediately (Node.js 24+ required; sandbox Node v22.23.5, installing Node 24 was not permitted), so the documented fallback ran: git submodule update --init upstream/ffmpeg && npm ci (~7 s) && npm run reference:build (196 s).",
+    "Baseline before changes: typecheck, lint, boundaries and the 17 container-registry unit tests passed (89 s).",
+    "Native statuses tied to errno: the score-12 file is taken by bintext natively and fails with 256-EINVAL, computed from os.constants.errno on the host; EdgeFFmpeg refuses it at detection with exit 1.",
+    "No linux-gated cases: integer and byte-copy paths only.",
+    "Native comparisons ran only against the sandbox Linux x86_64 build, not the pinned macOS arm64 reference."
+  ]
+}
