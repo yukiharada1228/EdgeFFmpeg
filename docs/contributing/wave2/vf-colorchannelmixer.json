@@ -1,0 +1,282 @@
+{
+  "capabilityId": "filter.colorchannelmixer",
+  "slug": "vf-colorchannelmixer",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/colorchannelmixer.ts",
+    "packages/avfilter/NOTICE-COLORCHANNELMIXER",
+    "tests/unit/video-colorchannelmixer.test.ts",
+    "tests/differential/video-colorchannelmixer.test.ts",
+    "docs/contributing/colorchannelmixer.md",
+    "docs/contributing/wave2/vf-colorchannelmixer.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/video-ops/registry.ts",
+      "change": "+1 import line: import {colorchannelmixerOperator} from './colorchannelmixer.js'; +1 entry line: ' colorchannelmixerOperator,'"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "title": "runs against the reference build of commit 946fcce0 configured with --disable-x86asm",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "title": "matches native colorchannelmixer frames for every format, size and mix",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 378
+    },
+    {
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "title": "matches native colorchannelmixer tables for every 8-bit value of every input channel",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 84
+    },
+    {
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "title": "matches native colorchannelmixer CLI rawvideo and framecrc through -vf and -filter_complex",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 192
+    },
+    {
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "title": "matches native replayed colorchannelmixer branches and joins frame by frame",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 24
+    },
+    {
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "title": "matches native colorchannelmixer framecrc and rawvideo through the actor and timed schedulers",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 192
+    },
+    {
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "title": "refuses colorchannelmixer preserve modes, timelines and unimplemented values before opening CLI outputs",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 27
+    },
+    {
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "title": "negotiates every accepted source as native does and refuses picks without storage before output on every path",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 146
+    },
+    {
+      "file": "tests/unit/video-colorchannelmixer.test.ts",
+      "title": "parses defaults, the declared shorthand order, named gains, constants and pa into frozen steps",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorchannelmixer.test.ts",
+      "title": "refuses preserve modes, timelines, out-of-range and non-constant values, and unknown options before planning",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorchannelmixer.test.ts",
+      "title": "lists native query_formats in declared order and executes only the members with frame storage",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorchannelmixer.test.ts",
+      "title": "builds lrint tables with round-half-to-even products",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorchannelmixer.test.ts",
+      "title": "mixes packed and planar channels into owned tight planes from padded input without mutating it",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorchannelmixer.test.ts",
+      "title": "rejects unsupported formats, budgets, malformed strides and cancellation explicitly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorchannelmixer.test.ts",
+      "title": "plans colorchannelmixer through linear, graph and actor planners and refuses timelines and commands",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "registers each video operator once with frozen flags and examples, keeping the legacy flags",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects descriptors that flag a path without the members its role needs",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "runs every registered example on each flagged path with identical frames",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators on the linear path",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators on the frame graph and replay paths",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators in the timed planner and activation actors",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators in the timed graph executor",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "negotiates and validates negate from the one shared table in every negotiator",
+      "passed": 1,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 1043,
+    "compares": [
+      "378 kernel rawvideo matches: rgb24/bgr24/rgba/bgra/argb/abgr/gbrp x 1x1,2x2,5x3,7x5,8x6,17x9 x 9 mixes (identity, sepia, average, negative, alpha terms, .5 ties, range ends, channel swap, pc=none:pa=0.75), 3 frames of noise/ramps+edges/constant",
+      "84 table matches: 256x4 frames ramping each channel through 0..255 over constant 0/128/255, 4 gain sets, 7 formats",
+      "192 CLI matches: -vf and -filter_complex, 3 chains, rawvideo and framecrc, with and without -ss/-t (media backend, scalar, native -cpuflags 0)",
+      "24 createReplayVideoExecution matches (plain, split+hstack, transpose+nullsink)",
+      "192 timed backend matches: activation and producer (actor), pull (timed), rawvideo and framecrc, -frames:v 3 and 2",
+      "27 refusals: 24 native-accepted forms (pc=lum/pwr/max, rr=1/3, enable=) refused with no output opened; 3 out-of-range values refused natively and here",
+      "146 negotiation checks: 2 filters x 17 sources, native pick from showinfo, every pick matched byte-exact on the five paths (yuvj on linear)"
+    ],
+    "reference": ".build/reference/ffmpeg (run at test time; commit 946fcce0 and --disable-x86asm asserted from build-metadata.json)",
+    "cpuflags": "0 on CLI, stream and timed runs"
+  },
+  "unsupported": [
+    "pc other than none (lum, max, avg, sum, nrm, pwr; the float preserve path) and pa with it",
+    "non-constant option expressions (av_expr arithmetic, hex, SI suffixes, functions)",
+    "enable= timelines and runtime commands (native process_command)",
+    "formats without frame storage here: 0rgb/0bgr/rgb0/bgr0, rgb48/bgr48/rgba64/bgra64, gbrap, gbrp9..16, gbrap10..16, gbrpf32/gbrapf32 (no negotiation source picks them)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.colorchannelmixer.kernel",
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "name": "matches native colorchannelmixer frames for every format, size and mix",
+      "modes": [
+        "linear"
+      ],
+      "scope": "mixVideoChannels vs native rawvideo, 7 storage formats, 6 sizes, 9 mixes, 3 frames"
+    },
+    {
+      "id": "filter.colorchannelmixer.tables",
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "name": "matches native colorchannelmixer tables for every 8-bit value of every input channel",
+      "modes": [
+        "linear"
+      ],
+      "scope": "every lut[i][j][v] with lrint ties to even, 7 formats"
+    },
+    {
+      "id": "filter.colorchannelmixer.cli",
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "name": "matches native colorchannelmixer CLI rawvideo and framecrc through -vf and -filter_complex",
+      "modes": [
+        "linear",
+        "graph"
+      ],
+      "scope": "CLI -vf/-filter_complex, rawvideo and framecrc, -ss/-t"
+    },
+    {
+      "id": "filter.colorchannelmixer.stream",
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "name": "matches native replayed colorchannelmixer branches and joins frame by frame",
+      "modes": [
+        "graph",
+        "stream"
+      ],
+      "scope": "createReplayVideoExecution with split, hstack, transpose, nullsink"
+    },
+    {
+      "id": "filter.colorchannelmixer.timed",
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "name": "matches native colorchannelmixer framecrc and rawvideo through the actor and timed schedulers",
+      "modes": [
+        "actor",
+        "timed"
+      ],
+      "scope": "timed backend activation/producer/pull schedulers, rawvideo and framecrc"
+    },
+    {
+      "id": "filter.colorchannelmixer.refusals",
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "name": "refuses colorchannelmixer preserve modes, timelines and unimplemented values before opening CLI outputs",
+      "modes": [
+        "linear",
+        "graph",
+        "actor",
+        "timed"
+      ],
+      "scope": "pc!=none, expressions, enable=, out-of-range; no output opened"
+    },
+    {
+      "id": "filter.colorchannelmixer.negotiation",
+      "file": "tests/differential/video-colorchannelmixer.test.ts",
+      "name": "negotiates every accepted source as native does and refuses picks without storage before output on every path",
+      "modes": [
+        "linear",
+        "graph",
+        "stream",
+        "actor",
+        "timed"
+      ],
+      "scope": "17 negotiation sources, native picks rgb24/argb/gbrp/packed RGB all executable"
+    },
+    {
+      "id": "filter.colorchannelmixer.syntax",
+      "file": "tests/unit/video-colorchannelmixer.test.ts",
+      "name": "refuses preserve modes, timelines, out-of-range and non-constant values, and unknown options before planning",
+      "modes": [
+        "unit"
+      ],
+      "scope": "parser refusals and messages"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Setup: the sandbox had Node v22.23.5 and bootstrap requires Node 24+; installed Node v24.22.3 from nodejs.org (sha256 checked) in the scratchpad (~10s). Bootstrap npm,submodule,reference with --allow-unpinned-reference took 232s (submodule 7.5s, reference build most of the rest). Baseline typecheck+lint+boundaries+video-operator-registry test: 72s, green (8 tests).",
+    "The differential file runs in about 6s with --maxWorkers=1; the unit file in under 1s.",
+    "No case is linux-gated: the 8-bit path is one double multiply plus lrint per table entry, then integer sums and av_clip_uintp2.",
+    "A mutation replacing ties-to-even with Math.round fails 6 of the 8 differential tests.",
+    "pa is parsed and range-checked but has no effect with pc=none, matching native filter_slice[0].",
+    "Native negotiates every one of the 17 negotiation sources to a format with storage (gray/YUV -> rgb24, yuva420p -> argb), so registry examples need no format= prefix; two use one anyway to cover gbrp, rgba and rgb24."
+  ]
+}
