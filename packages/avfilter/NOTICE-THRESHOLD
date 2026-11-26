@@ -1,0 +1,16 @@
+Scoped threshold video filter
+
+The option table, pix_fmts list, four-pad layout, size check, framesync input
+settings (sync=1, before=EXT_STOP, after=EXT_STOP on all four inputs), eight-bit
+selection, plane mask and plane copy semantics in src/video-ops/threshold.ts
+follow libavfilter/vf_threshold.c (threshold_options, pix_fmts, filter_slice,
+process_frame, config_input, config_output, inputs) and
+libavfilter/vf_threshold_init.h (threshold8, ff_threshold_init).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+vf_threshold.c: Copyright (c) 2016 Paul B Mahol
+vf_threshold_init.h: Copyright (c) 2016 Paul B Mahol
+LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete threshold filter: only
+eight-bit formats, no timeline and no runtime commands.

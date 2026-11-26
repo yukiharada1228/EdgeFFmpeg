@@ -1,0 +1,194 @@
+{
+ "capabilityId": "filter.threshold",
+ "slug": "vf-threshold",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/threshold.ts",
+  "packages/avfilter/NOTICE-THRESHOLD",
+  "tests/unit/video-threshold.test.ts",
+  "tests/differential/video-threshold.test.ts",
+  "docs/contributing/threshold.md",
+  "docs/contributing/wave2/vf-threshold.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {thresholdOperator} from './threshold.js';",
+    " thresholdOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-threshold.test.ts",
+   "title": "parses planes with integer expressions and ranges and refuses shortest, enable= and every other option",
+   "count": 1
+  },
+  {
+   "file": "tests/unit/video-threshold.test.ts",
+   "title": "selects min where in <= threshold and max otherwise, with ties, into owned tight planes without mutating padded inputs",
+   "count": 1
+  },
+  {
+   "file": "tests/unit/video-threshold.test.ts",
+   "title": "refuses size and format mismatches, layouts, budgets, malformed storage, settings, timestamps and cancellation explicitly",
+   "count": 1
+  },
+  {
+   "file": "tests/unit/video-threshold.test.ts",
+   "title": "plans the join on graph and timed paths, refuses linear chains, size mismatches, option errors and runtime commands",
+   "count": 1
+  },
+  {
+   "file": "tests/differential/video-threshold.test.ts",
+   "title": "matches native split-from-one-source threshold on the graph path across every executable format, size, tie and plane mask",
+   "count": 216
+  },
+  {
+   "file": "tests/differential/video-threshold.test.ts",
+   "title": "matches native split-from-one-source threshold CLI rawvideo and framecrc on the media backend graph path, with and without -ss/-t",
+   "count": 216
+  },
+  {
+   "file": "tests/differential/video-threshold.test.ts",
+   "title": "matches native four-input threshold CLI rawvideo and framecrc on the stream path, ending with the shortest input, with and without -ss/-t",
+   "count": 240
+  },
+  {
+   "file": "tests/differential/video-threshold.test.ts",
+   "title": "matches native threshold through createReplayVideoExecution with four distinct sources of unequal lengths and split graphs",
+   "count": 40
+  },
+  {
+   "file": "tests/differential/video-threshold.test.ts",
+   "title": "matches native threshold through the timed backend on the actor and timed paths in rawvideo and framecrc, with unequal lengths",
+   "count": 120
+  },
+  {
+   "file": "tests/differential/video-threshold.test.ts",
+   "title": "agrees with native under default threads and -filter_threads 1",
+   "count": 12
+  },
+  {
+   "file": "tests/differential/video-threshold.test.ts",
+   "title": "refuses size mismatches and unsupported options that native refuses before opening any output on every path",
+   "count": 8
+  },
+  {
+   "file": "tests/differential/video-threshold.test.ts",
+   "title": "negotiates every accepted source as native does and refuses picks without frame storage by name before output on every join path",
+   "count": 68
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(registration-driven, unedited)",
+   "count": 8
+  }
+ ],
+ "nativeComparisons": 920,
+ "unsupported": [
+  "9- to 16-bit formats, yuv440p, yuv411p, yuv410p, yuvj*, yuva422p, yuva444p and gbrap (no frame storage; refused by name at negotiation)",
+  "packed RGB with alpha sources (native converts to gbrap; refused by name)",
+  "enable= timeline (refused)",
+  "runtime commands planes/enable (refused)",
+  "linear path (a join is never linear)",
+  "inputs with different frame rates: native keeps the first input's frame rate, the shared join clocks follow vf_stack; output diverges and cannot be refused from the descriptor (not claimed, not refused)",
+  "native exit status 234 (EINVAL) for size mismatches: EdgeFFmpeg refuses before output but exits 1"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.threshold.graph",
+   "file": "tests/differential/video-threshold.test.ts",
+   "name": "matches native split-from-one-source threshold on the graph path across every executable format, size, tie and plane mask",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "six eight-bit formats x sizes 1x1..17x9 x six split graphs (ties, planes 15/1/5/0/10), compileVideoFilterGraph, 216 comparisons. All platforms."
+  },
+  {
+   "id": "filter.threshold.graph-cli",
+   "file": "tests/differential/video-threshold.test.ts",
+   "name": "matches native split-from-one-source threshold CLI rawvideo and framecrc on the media backend graph path, with and without -ss/-t",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "media backend -filter_complex rawvideo and framecrc with and without -ss/-t, 216 comparisons. All platforms."
+  },
+  {
+   "id": "filter.threshold.stream-cli",
+   "file": "tests/differential/video-threshold.test.ts",
+   "name": "matches native four-input threshold CLI rawvideo and framecrc on the stream path, ending with the shortest input, with and without -ss/-t",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "four distinct inputs at equal rates, unequal lengths end with the shortest, rawvideo/framecrc, -ss/-t, 240 comparisons. All platforms."
+  },
+  {
+   "id": "filter.threshold.stream",
+   "file": "tests/differential/video-threshold.test.ts",
+   "name": "matches native threshold through createReplayVideoExecution with four distinct sources of unequal lengths and split graphs",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "replay streams with bytes and timestamps, 40 comparisons. All platforms."
+  },
+  {
+   "id": "filter.threshold.timed",
+   "file": "tests/differential/video-threshold.test.ts",
+   "name": "matches native threshold through the timed backend on the actor and timed paths in rawvideo and framecrc, with unequal lengths",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "timed backend producer (actor) and pull (timed) schedulers, 120 comparisons. All platforms."
+  },
+  {
+   "id": "filter.threshold.threads",
+   "file": "tests/differential/video-threshold.test.ts",
+   "name": "agrees with native under default threads and -filter_threads 1",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "native slice-thread invariance, 12 comparisons. All platforms."
+  },
+  {
+   "id": "filter.threshold.reject",
+   "file": "tests/differential/video-threshold.test.ts",
+   "name": "refuses size mismatches and unsupported options that native refuses before opening any output on every path",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "8 refusals on graph/stream/actor/timed/linear with no output opened; EdgeFFmpeg status 1 vs native 234 for sizes. All platforms."
+  },
+  {
+   "id": "filter.threshold.negotiation",
+   "file": "tests/differential/video-threshold.test.ts",
+   "name": "negotiates every accepted source as native does and refuses picks without frame storage by name before output on every join path",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "native picks from 14 storage sources on the four join paths, gbrap refused by name, 68 checks. All platforms."
+  }
+ ],
+ "sharedEditsNeeded": [
+  "Frame rate for joins: VideoShape inputs to geometry() (or a join frame-rate hook) so threshold can keep the first input's frame rate as native config_output does, or refuse differing rates before output.",
+  "Exit status: map avfilter plan-time geometry errors to ExecutionError with AVERROR(EINVAL) (exit 234) in the media and timed backends to match native for size mismatches."
+ ],
+ "notes": [
+  "tests/helpers/video-negotiation-cases.ts always drives the linear path, which a join never flags, so the per-source negotiation test reimplements the same check over graph/stream/actor/timed using negotiationSources from the helper (read-only).",
+  "Sandbox: Node 22.23.5 was installed; bootstrap requires Node 24, so Node 24.22.3 was downloaded (sha256-checked) and used for everything. Bootstrap (npm, submodule, reference) took 212 s; the reference link did not match the linux-x64 pin, as expected for an unpinned sandbox build.",
+  "Integer-only operator: no platform-gated cases.",
+  "createReplayVideoExecution binds sources to external pads in order of appearance, so the replay graphs reference [0:v]..[3:v] in index order."
+ ]
+}
