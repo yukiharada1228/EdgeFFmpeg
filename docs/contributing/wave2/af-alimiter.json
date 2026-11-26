@@ -1,0 +1,192 @@
+{
+ "capabilityId": "filter.alimiter",
+ "slug": "af-alimiter",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/audio/alimiter.ts",
+  "packages/avfilter/NOTICE-ALIMITER",
+  "tests/unit/alimiter.test.ts",
+  "tests/differential/alimiter.test.ts",
+  "docs/contributing/alimiter.md",
+  "docs/contributing/wave2/af-alimiter.json",
+  "packages/avfilter/src/audio/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/audio/registry.ts",
+   "change": "+1 line: export {alimiter} from './alimiter.js';"
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/alimiter.test.ts",
+   "title": "parses named and positional options with native defaults, names and ranges, and refuses everything else with exact messages",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/alimiter.test.ts",
+   "title": "sizes the lookahead as config_input does and refuses attacks too small for the rate and channel count",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/alimiter.test.ts",
+   "title": "pins dbl for every input format and plans an unchanged count with an exact state reservation",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/alimiter.test.ts",
+   "title": "matches a transcription of the C loop for every option family on 1-3 channels, independent of 1/7/29/50-sample splits, without touching its input",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/alimiter.test.ts",
+   "title": "refuses unstable formats, oversized state and frames, emits nothing for empty input and observes cancellation",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/alimiter.test.ts",
+   "title": "matches native PCM bytes for the option sweeps on 1-3 channels at 8000/44100/48000 Hz from every raw source format",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/alimiter.test.ts",
+   "title": "matches native framecrc across frame splits, chains, WAV input, output selection and frame limits; native output is independent of frame grouping",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/alimiter.test.ts",
+   "title": "refuses asc, latency, too small attacks, out-of-range values and enable before output, beside native status",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/audio-filter-registry.test.ts + audio-filter-registry-extension.test.ts + audio-filter-registry-contract.test.ts",
+   "title": "(unchanged registry suites)",
+   "passed": 26,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 1186,
+  "details": [
+   {
+    "count": 885,
+    "compares": "raw PCM bytes, -cpuflags 0: 15 option sweeps (plus attack=0.1 above 8000 Hz) x 8000/44100/48000 Hz x 1-3 channels x raw u8/s16/s32/f32/f64 input into f64le, plus s16le raw and s32 WAV for two sweeps",
+    "gate": "none"
+   },
+   {
+    "count": 276,
+    "compares": "framecrc (pcm_f64le, -bitexact) and raw f64/WAV s16 outputs: raw and WAV input (s16 stereo 44100, f64 mono 48000, f32 3ch 8000), 6 chains (asetnsamples=7, asetnsamples=n=7:p=0, volume before, apad after, two limiters) x 6 input/output -ss/-t/-frames:a profiles, raw/WAV outputs with -ss/-t and -frames:a, and asetnsamples=n=1/7/29/50:p=0 splits",
+    "gate": "none"
+   },
+   {
+    "count": 25,
+    "compares": "native exit status per refusal (0, 8, 256-EINVAL, 256-ERANGE from os.constants.errno) beside ours: non-zero exit, nothing written, exact message",
+    "gate": "none"
+   }
+  ],
+  "nativeOnlyProbes": "12 native md5 checks: asetnsamples=n=1/7/29/50:p=0 before alimiter equals ungrouped native output"
+ },
+ "unsupported": [
+  "FLAC input (refused before decoding: FLAC input to alimiter requires additional Native evidence)",
+  "asc=1 (auto-release; pow() coefficient)",
+  "latency=1 (leading-sample trim and padded tail frames)",
+  "enable / timeline",
+  "runtime commands",
+  "expressions, SI suffixes and other non-literal numeric values (native accepts)",
+  "quoted or escaped option values",
+  "automatic sample-rate conversion next to alimiter",
+  "attacks too small for the rate and channel count (native fails too)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.alimiter.parse",
+   "file": "tests/unit/alimiter.test.ts",
+   "name": "parses named and positional options with native defaults, names and ranges, and refuses everything else with exact messages",
+   "modes": [
+    "unit"
+   ],
+   "scope": "option syntax, native defaults/ranges and exact refusal messages"
+  },
+  {
+   "id": "filter.alimiter.config",
+   "file": "tests/unit/alimiter.test.ts",
+   "name": "sizes the lookahead as config_input does and refuses attacks too small for the rate and channel count",
+   "modes": [
+    "unit"
+   ],
+   "scope": "config_input buffer sizes and the attack-too-small constraint"
+  },
+  {
+   "id": "filter.alimiter.planning",
+   "file": "tests/unit/alimiter.test.ts",
+   "name": "pins dbl for every input format and plans an unchanged count with an exact state reservation",
+   "modes": [
+    "unit"
+   ],
+   "scope": "dbl negotiation, scalar rounding, counts, packet sections and reservations"
+  },
+  {
+   "id": "filter.alimiter.transcription",
+   "file": "tests/unit/alimiter.test.ts",
+   "name": "matches a transcription of the C loop for every option family on 1-3 channels, independent of 1/7/29/50-sample splits, without touching its input",
+   "modes": [
+    "unit"
+   ],
+   "scope": "output against a C-loop transcription on 1-3 channels under 1/7/29/50-sample splits, ownership"
+  },
+  {
+   "id": "filter.alimiter.limits",
+   "file": "tests/unit/alimiter.test.ts",
+   "name": "refuses unstable formats, oversized state and frames, emits nothing for empty input and observes cancellation",
+   "modes": [
+    "unit"
+   ],
+   "scope": "stream refusals, state and frame allocation limits, empty input and cancellation"
+  },
+  {
+   "id": "filter.alimiter.native-pcm",
+   "file": "tests/differential/alimiter.test.ts",
+   "name": "matches native PCM bytes for the option sweeps on 1-3 channels at 8000/44100/48000 Hz from every raw source format",
+   "modes": [
+    "differential"
+   ],
+   "scope": "raw PCM bytes vs native across option sweeps, rates, 1-3 channels, sources and outputs"
+  },
+  {
+   "id": "filter.alimiter.native-framecrc",
+   "file": "tests/differential/alimiter.test.ts",
+   "name": "matches native framecrc across frame splits, chains, WAV input, output selection and frame limits; native output is independent of frame grouping",
+   "modes": [
+    "differential"
+   ],
+   "scope": "framecrc/raw/WAV vs native across chains, WAV input, time selection, frame limits and frame splits, plus native frame-grouping independence"
+  },
+  {
+   "id": "filter.alimiter.native-refusals",
+   "file": "tests/differential/alimiter.test.ts",
+   "name": "refuses asc, latency, too small attacks, out-of-range values and enable before output, beside native status",
+   "modes": [
+    "differential"
+   ],
+   "scope": "explicit refusals before output beside native exit status"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "asc=0 path has no libm call besides fabs and no contractible a*b+c, so no case is gated; all comparisons ran on linux/x64 only (no macOS run available in the sandbox).",
+  "The sandbox Node was 22.23.5 and bootstrap requires Node 24; Node 24.22.3 was installed from nodejs.org (about 10s).",
+  "Setup durations: first bootstrap attempt failed immediately (Node 22); bootstrap with Node 24 took 235s (npm 9.5s, submodule 7s, reference build about 218s); baseline typecheck+lint+boundaries 71s; baseline registry unit tests 4s (26 passed).",
+  "Differential file runs in about 25s with --maxWorkers=1; unit file about 4s.",
+  "No shared edit beyond the registry line was needed."
+ ]
+}
