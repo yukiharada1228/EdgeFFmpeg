@@ -181,7 +181,8 @@ jobs:
           runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --only flac-investigation
           runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --check
       # A built tree is recorded here, after bootstrap --check has matched it to the pins; a restored one is verified
-      # again, so nothing since its restore changed it. The hash names the cache entry and the artifact below.
+      # again, so nothing since its restore changed it. The hash names the cache entry and the artifact below. The step
+      # output file is root-owned, so the tool runs without GITHUB_OUTPUT and root appends the line it prints.
       - id: tree
         name: Record or re-verify the whole-tree manifest
         env:
@@ -191,11 +192,11 @@ jobs:
           SHARED_TREE: ${{ steps.shared.outputs.tree-sha256 }}
         run: |
           if [ "$BUILT" = true ]; then
-            runuser -u node -- env HOME=/home/node node tools/ci/reference-tree.mjs record > .build/ci-tree-output.txt
+            runuser -u node -- env HOME=/home/node GITHUB_OUTPUT= node tools/ci/reference-tree.mjs record > .build/ci-tree-output.txt
           elif [ -n "$MATCHED" ]; then
-            runuser -u node -- env HOME=/home/node node tools/ci/reference-tree.mjs verify --cache-key "$KEY" --matched-key "$MATCHED" > .build/ci-tree-output.txt
+            runuser -u node -- env HOME=/home/node GITHUB_OUTPUT= node tools/ci/reference-tree.mjs verify --cache-key "$KEY" --matched-key "$MATCHED" > .build/ci-tree-output.txt
           else
-            runuser -u node -- env HOME=/home/node node tools/ci/reference-tree.mjs verify --sha256 "$SHARED_TREE" > .build/ci-tree-output.txt
+            runuser -u node -- env HOME=/home/node GITHUB_OUTPUT= node tools/ci/reference-tree.mjs verify --sha256 "$SHARED_TREE" > .build/ci-tree-output.txt
           fi
           cat .build/ci-tree-output.txt
           grep '^sha256=' .build/ci-tree-output.txt >> "$GITHUB_OUTPUT"

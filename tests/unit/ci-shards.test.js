@@ -9,6 +9,8 @@ import { readShardDirectory, collectSuite, checkShardSet, restoreOutputs, shardC
 import { summarizeSuite } from '../../tools/compatibility-report/summarize.mjs';
 import { globMatcher, affectedTests, branchPoint } from '../../tools/ci/affected.mjs';
 import { treeManifest, verifyTree, recordedHash } from '../../tools/ci/reference-tree.mjs';
+import { requiredTests } from '../../tools/ci/replay-fast.mjs';
+import { compareEvidence } from '../../tools/ci/compare-evidence.mjs';
 
 const sha = value => createHash('sha256').update(value).digest('hex');
 const SOURCE = sha('source'), EDITED = sha('edited');
@@ -226,6 +228,13 @@ it('selects every test that reaches a change: through hubs and barrels, relative
     expect((await run(['tests/unit/corpus.test.ts'])).reasons['tests/unit/corpus.test.ts']).toContain('changed');
     expect((await run(['package-lock.json'])).all).toBe(true);
     expect((await run(['packages/x/src/leaf.ts'])).missingImports).toEqual([{ from: 'tests/workers/x-fixture.ts', path: './missing.wasm' }]);
+    // The replay's independent oracle (TypeScript module resolution and the tests' own path literals) is inside the selection.
+    for (const change of [['packages/x/src/leaf.ts'], ['packages/x/src/types.ts'], ['tests/fixtures/sample.json'], ['compat/behavior-specs/x/cases.json']]) {
+      const required = [...requiredTests(root, tracked, change).required.keys()];
+      expect(required.length, change[0]).toBeGreaterThan(0);
+      expect(await tests(change), change[0]).toEqual(expect.arrayContaining(required));
+    }
+    expect([...requiredTests(root, tracked, ['packages/x/src/types.ts']).required.keys()]).toEqual(['tests/unit/type-only.test.ts']);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 it('takes the branch point from an upstream base, never from an integration branch or a branch that already holds the commit', () => {
@@ -246,5 +255,23 @@ it('takes the branch point from an upstream base, never from an integration bran
     expect(branchPoint(root, ['**/integration*', 'wave2/prep'], { current: 'wave2/feature' })).toMatchObject({ base: 'wave2/prep', distance: 2 });
     expect(fastPlan(['tests/unit/a.test.ts', 'tests/unit/b.test.ts'], { base: 'wave2/prep', mergeBase: base, all: false, changed: ['x'], tests: ['tests/unit/a.test.ts'], reasons: { 'tests/unit/a.test.ts': ['changed'] }, chains: {} },
       { config: { profile: 'linux-x64', shards: { unit: 1, integration: 1, differential: 1, workers: 1 }, fastLane: { shardSeconds: 360 } }, durations: { profiles: {} } }).suites.unit).toEqual([['tests/unit/a.test.ts']]);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+it('finds every baseline evidence file a run no longer uploads, across run directories and zip listings', () => {
+  const root = mkdtempSync(join(tmpdir(), 'edgeffmpeg-evidence-'));
+  try {
+    const write = (file, text = 'x') => { mkdirSync(join(root, file, '..'), { recursive: true }); writeFileSync(join(root, file), text); };
+    for (const file of ['compat/reports/current.json', 'compat/reports/inverse-instability.json', '.build/bootstrap/last-run.json', '.build/evidence/run-a/report.json', '.build/fate-execution/a/report.json']) write(`baseline/reference-evidence/${file}`);
+    for (const file of ['compat/reports/current.json', '.build/evidence/run-b/report.json', '.build/evidence/run-b/shards/unit-1.json', '.build/fate-execution/b/report.json']) write(`candidate/reference-evidence/${file}`);
+    const listing = names => `Archive:  a.zip\n  Length      Date    Time    Name\n---------  ---------- -----   ----\n${names.map(name => `       43  11-25-2026 20:09   ${name}`).join('\n')}\n---------                     -------\n       86                     2 files\n`;
+    write('baseline/worker-reference-and-codec.list', listing(['reference/ffmpeg', 'reference/src/.git', 'reference/doc/']));
+    write('candidate/worker-reference-and-codec.list', listing(['reference/ffmpeg', 'reference/src/.git', 'reference-tree.json']));
+    const result = compareEvidence(join(root, 'baseline'), join(root, 'candidate'));
+    expect(result.equivalent).toBe(false);
+    expect(result.artifacts['reference-evidence'].missing).toEqual(['.build/bootstrap/last-run.json', 'compat/reports/inverse-instability.json']);
+    expect(result.artifacts['reference-evidence'].addedCount).toBe(1);
+    expect(result.artifacts['worker-reference-and-codec']).toMatchObject({ baselineFiles: 2, missing: [], addedCount: 1 });
+    write('candidate/reference-evidence/compat/reports/inverse-instability.json'); write('candidate/reference-evidence/.build/bootstrap/last-run.json');
+    expect(compareEvidence(join(root, 'baseline'), join(root, 'candidate')).equivalent).toBe(true);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
