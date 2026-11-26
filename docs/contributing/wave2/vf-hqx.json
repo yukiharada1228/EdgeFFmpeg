@@ -1,0 +1,224 @@
+{
+ "capabilityId": "filter.hqx",
+ "slug": "vf-hqx",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/hqx.ts",
+  "packages/avfilter/src/video-hqx.ts",
+  "packages/avfilter/NOTICE-HQX",
+  "tests/unit/video-hqx.test.ts",
+  "tests/differential/video-hqx.test.ts",
+  "docs/contributing/hqx.md",
+  "docs/contributing/wave2/vf-hqx.json",
+  "packages/avfilter/src/video-ops/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {hqxOperator} from './hqx.js';",
+    " hqxOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-hqx.test.ts",
+   "title": "parses n=2|3|4 with the native default and shorthand, and refuses other values, enable= and unknown options",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-hqx.test.ts",
+   "title": "computes the per-pixel YUV key exactly as the 2^24-entry rgbtoyuv table of init",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-hqx.test.ts",
+   "title": "interpolates whole 32-bit words, alpha included, with edge replication into owned tight planes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-hqx.test.ts",
+   "title": "refuses formats, budgets, malformed strides, bad time bases and cancellation explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-hqx.test.ts",
+   "title": "plans n-times geometry on every path, converts other sources to bgra, keeps the timed sample aspect ratio and bounds the scaled output",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-hqx.test.ts",
+   "title": "runs against the sandbox-built native reference at 946fcce0 configured with --disable-x86asm",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-hqx.test.ts",
+   "title": "matches native hq2x, hq3x and hq4x pixels on bgra across sizes, structured patterns and noise with default and single filter threads",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-hqx.test.ts",
+   "title": "matches native linear and graph hqx plans with scalar conversions from rgba, rgb24 and other packed and gray sources",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-hqx.test.ts",
+   "title": "matches native replayed hqx streams with branches and joins frame by frame",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-hqx.test.ts",
+   "title": "matches native hqx CLI rawvideo and framecrc with and without -ss/-t on the linear, graph, actor and timed paths",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-hqx.test.ts",
+   "title": "negotiates every accepted source to bgra as native does, byte-exact on every path",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-hqx.test.ts",
+   "title": "refuses hqx output above maxFrameBytes and options native rejects or scopes out before any output is opened",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(whole file, registration-driven, unedited)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 826,
+  "details": [
+   {
+    "count": 270,
+    "compares": "kernel output bytes per frame vs native -vf hqx=n=N on bgra (36 native runs)"
+   },
+   {
+    "count": 18,
+    "compares": "native default filter threads vs -filter_threads 1 outputs (all equal)"
+   },
+   {
+    "count": 192,
+    "compares": "rawvideo bytes, native -cpuflags 0 -vf vs compileVideoFilterChain and compileVideoFilterGraph (96 cases x 2 planners)"
+   },
+   {
+    "count": 12,
+    "compares": "rawvideo bytes and pts, native -filter_complex vs createReplayVideoExecution"
+   },
+   {
+    "count": 252,
+    "compares": "complete rawvideo and framecrc CLI outputs, with and without -ss/-t, on media -vf/-filter_complex and timed producer/activation/pull"
+   },
+   {
+    "count": 73,
+    "compares": "per-source negotiation: native showinfo pick and rawvideo bytes on every path for 17 sources"
+   },
+   {
+    "count": 9,
+    "compares": "native option acceptance/rejection, with our refusal before output"
+   }
+  ]
+ },
+ "unsupported": [
+  "expression-valued or non-decimal n (n=2+1, n=0x2, n=4.0; native accepts them)",
+  "enable= (native has no timeline either), generic filter-context options such as threads",
+  "runtime commands",
+  "big-endian hosts (RGB32 is argb there); refused in hqxGeometry",
+  "H.264/MP4 framecrc input was not compared (uniform scale, linear path shared)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.hqx.kernel",
+   "file": "tests/differential/video-hqx.test.ts",
+   "name": "matches native hq2x, hq3x and hq4x pixels on bgra across sizes, structured patterns and noise with default and single filter threads",
+   "modes": [
+    "linear"
+   ],
+   "scope": "kernel against native -vf hqx: n 2..4 x sizes 1x1,2x2,5x3,7x5,8x6,17x9 x 15 structured/gradient/alpha/noise bgra frames; native default threads equal -filter_threads 1"
+  },
+  {
+   "id": "filter.hqx.linear-graph",
+   "file": "tests/differential/video-hqx.test.ts",
+   "name": "matches native linear and graph hqx plans with scalar conversions from rgba, rgb24 and other packed and gray sources",
+   "modes": [
+    "linear",
+    "graph"
+   ],
+   "scope": "sources rgba,rgb24,bgr24,argb,abgr,gray x {5x3,8x6} x 4 chains x {native,rgb24} targets, -cpuflags 0 vs scalar, rawvideo bytes on compileVideoFilterChain and compileVideoFilterGraph"
+  },
+  {
+   "id": "filter.hqx.stream",
+   "file": "tests/differential/video-hqx.test.ts",
+   "name": "matches native replayed hqx streams with branches and joins frame by frame",
+   "modes": [
+    "stream"
+   ],
+   "scope": "bgra,rgba,rgb24 x 4 replay graphs (single node, hflip, split/hstack, transpose+nullsink), 3 frames, bytes and pts"
+  },
+  {
+   "id": "filter.hqx.cli",
+   "file": "tests/differential/video-hqx.test.ts",
+   "name": "matches native hqx CLI rawvideo and framecrc with and without -ss/-t on the linear, graph, actor and timed paths",
+   "modes": [
+    "linear",
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "bgra,rgba,rgb24 x 3 chains x rawvideo/framecrc x {none, input -ss/output -t, output -ss -frames:v 1}, media -vf/-filter_complex and timed producer/activation/pull"
+  },
+  {
+   "id": "filter.hqx.negotiation",
+   "file": "tests/differential/video-hqx.test.ts",
+   "name": "negotiates every accepted source to bgra as native does, byte-exact on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "tests/helpers/video-negotiation-cases.ts over all 17 negotiationSources: native showinfo pick bgra for each, rawvideo bytes on every path (yuvj on linear)"
+  },
+  {
+   "id": "filter.hqx.refusals",
+   "file": "tests/differential/video-hqx.test.ts",
+   "name": "refuses hqx output above maxFrameBytes and options native rejects or scopes out before any output is opened",
+   "modes": [
+    "linear",
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "maxFrameBytes on the scaled output; 6 natively rejected and 3 natively accepted but scoped option forms refused on media -vf/-filter_complex, producer and pull with no output opened"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "No shared edit beyond the two registry lines was needed.",
+  "All cases are integer and run on every platform; no linux-x64 gate.",
+  "The 2^24-entry rgbtoyuv table is replaced by hqxRgbToYuv, checked against a replay of the native init walk over all 16,777,216 colours in the unit test.",
+  "Mutation check: removing 'actor' (or 'timed') from the descriptor paths makes the CLI test fail on the producer (or pull) scheduler.",
+  "Kernel errors are VideoHqxError, parse errors VideoFilterParseError; packages/avfilter/src/index.ts was not edited, so the kernel functions are reachable from the module but not the public barrel.",
+  "Environment: sandbox Node was v22.23.5 (bootstrap needs 24); used the preinstalled /opt/node24 (v24.22.3). Native hqx init costs about 0.3 s per run (64 MiB table), which bounds the differential case counts.",
+  "Setup durations: bootstrap (npm 10.0 s, submodule 7.2 s, reference build about 200 s) 217 s total; baseline typecheck+lint+boundaries 59 s; baseline video-operator-registry unit 2 s (8 passed).",
+  "Differential file runtime about 100 s with --maxWorkers=1 on 4 vCPUs."
+ ]
+}
