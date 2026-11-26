@@ -8,10 +8,10 @@ async function* input(...frames:AudioFrameData[]){yield*frames;}
 async function collect(frames:AsyncIterable<AudioFrameData>|(()=>AsyncIterable<AudioFrameData>)){if(typeof frames==='function')frames=frames();const result:AudioFrameData[]=[];for await(const value of frames)result.push(value);return result;}
 const step=(text:string)=>stereotools.parse(text);
 const FFMIN=(a:number,b:number)=>a>b?b:a,FFMAX=(a:number,b:number)=>a>b?a:b;
-/** Direct transcription of af_stereotools.c config_input + filter_frame with softclip=0 and phase=0 (cos 1, sin 0). */
+/** Direct transcription of af_stereotools.c config_input + filter_frame with softclip=0 and phase=±0 (cos 1, sin ±0: Math.sin and libm sin keep the sign of zero). */
 function reference(s:AudioStereoToolsStep,rate:number,src:Float64Array):Float64Array {
   const length=Math.ceil(Math.floor((rate+9)/10)/2)*2,buffer=new Float64Array(length),dst=new Float64Array(src.length);
-  const sb=s.base<0?s.base*0.5:s.base,sbal=1+s.sbal,mpan=1+s.mpan,phase_cos_coef=Math.cos(0/180*Math.PI),phase_sin_coef=Math.sin(0/180*Math.PI);
+  const sb=s.base<0?s.base*0.5:s.base,sbal=1+s.sbal,mpan=1+s.mpan,phase_cos_coef=Math.cos(s.phase/180*Math.PI),phase_sin_coef=Math.sin(s.phase/180*Math.PI);
   const mute_l=+s.muteL,mute_r=+s.muteR,phase_l=+s.phaseL,phase_r=+s.phaseR;
   let nbuf=Math.trunc(rate*(Math.abs(s.delay)/1000.)),pos=0;
   nbuf-=nbuf%2;
@@ -63,6 +63,8 @@ it('parses named and positional options with native defaults, constants and rang
   expect(step('stereotools=mutel=YES:muter=off:phasel=On:phaser=1:softclip=0')).toMatchObject({muteL:true,muteR:false,phaseL:true,phaseR:true,softclip:false});
   expect(step('stereotools=0.5:2:-0.25:1:0:1:0:0:1:lr>rl:3:0.1:0.2:-0.3:0.4:-5:50:0:power:amplitude')).toEqual({name:'stereotools',levelIn:0.5,levelOut:2,balanceIn:-0.25,balanceOut:1,softclip:false,muteL:true,muteR:false,phaseL:false,phaseR:true,mode:6,slev:3,sbal:0.1,mlev:0.2,mpan:-0.3,base:0.4,delay:-5,scLevel:50,phase:0,bmodeIn:2,bmodeOut:1});
   expect(step('stereotools=2:slev=.5:delay=-2e1:sclevel=100:phase=0.0:mode=-0')).toMatchObject({levelIn:2,slev:0.5,delay:-20,scLevel:100,phase:0,mode:0});
+  // phase=-0 is in range natively and keeps its sign: sin(-0) is -0.
+  expect(Object.is(step('stereotools=phase=-0').phase,-0)).toBe(true);expect(Object.is(step('stereotools=phase=0').phase,0)).toBe(true);
   expect(Object.is(step('stereotools=mode=-0:bmode_in=-0').mode,0)).toBe(true);
   expect(step('stereotools=level_in=0.015625:level_out=64:base=-1:delay=20:sbal=1:mpan=-1')).toMatchObject({levelIn:0.015625,levelOut:64,base:-1,delay:20,sbal:1,mpan:-1});
   const refused:[string,string][]=[
@@ -116,7 +118,7 @@ it('matches a transcription of the C loop for every mode and option family, iden
   const tokens=[...modes.map(mode=>`stereotools=mode=${mode}`),...modes.map(mode=>`stereotools=mode=${mode}:slev=3:sbal=-0.4:mlev=0.25:mpan=0.7:base=0.3`),
     ...['balance','amplitude','power'].flatMap(b=>[-1,-0.4,0,0.4,1].map(v=>`stereotools=bmode_in=${b}:balance_in=${v}:bmode_out=${b}:balance_out=${-v}`)),
     'stereotools=mutel=1','stereotools=muter=1:phasel=1','stereotools=phaser=1:phasel=1','stereotools=base=-1','stereotools=base=1','stereotools=sbal=1:mpan=-1:slev=64:mlev=0.015625',
-    ...[-20,-3,-0.01,0.01,3,20].map(d=>`stereotools=delay=${d}`),'stereotools=delay=-7:base=-0.5:mode=ms>rl','stereotools=level_in=3:level_out=0.25:sclevel=7',...stereotools.examples];
+    ...[-20,-3,-0.01,0.01,3,20].map(d=>`stereotools=delay=${d}`),'stereotools=delay=-7:base=-0.5:mode=ms>rl','stereotools=level_in=3:level_out=0.25:sclevel=7','stereotools=phase=-0:mutel=1','stereotools=phase=-0:muter=1:phasel=1:delay=3',...stereotools.examples];
   let compared=0;
   for(const rate of [100,8000,44100])for(const token of tokens){
     const expected=reference(step(token),rate,source),chain=compileAudioFilterChain(token);

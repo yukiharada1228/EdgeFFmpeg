@@ -8,7 +8,9 @@ export interface AudioStereoToolsStep {
   readonly softclip:false;readonly muteL:boolean;readonly muteR:boolean;readonly phaseL:boolean;readonly phaseR:boolean;
   /** 0 lr>lr, 1 lr>ms, 2 ms>lr, 3 lr>ll, 4 lr>rr, 5 lr>l+r, 6 lr>rl, 7 ms>ll, 8 ms>rr, 9 ms>rl, 10 lr>l-r. */
   readonly mode:number;
-  readonly slev:number;readonly sbal:number;readonly mlev:number;readonly mpan:number;readonly base:number;readonly delay:number;readonly scLevel:number;readonly phase:0;
+  readonly slev:number;readonly sbal:number;readonly mlev:number;readonly mpan:number;readonly base:number;readonly delay:number;readonly scLevel:number;
+  /** 0 or -0: phase=-0 passes the [0, 360] range check, and config_input's sin(-0/180*M_PI) is -0, not 0. */
+  readonly phase:0;
   /** 0 balance, 1 amplitude, 2 power. */
   readonly bmodeIn:number;readonly bmodeOut:number;
 }
@@ -63,10 +65,10 @@ function gains(balance:number,mode:number):[number,number] {
 }
 /** FFMIN(a,b) is (a>b?b:a) and FFMAX(a,b) is (a>b?a:b); every operand here is finite. */
 const min=(a:number,b:number)=>a>b?b:a;
-/** filter_frame on packed stereo doubles in place, with ring and pos carried across frames; phase=0 makes the rotation `L*1 - R*0`, `L*0 + R*1`. */
+/** filter_frame on packed stereo doubles in place, with ring and pos carried across frames; phase=±0 makes the rotation `L*1 - R*sin`, `L*sin + R*1` with sin(±0)=±0 (IEEE 754 and C Annex F). */
 export function stereoToolsSamples(step:AudioStereoToolsStep,data:Float64Array,ring:Float64Array,state:{pos:number},nbuf:number,signal?:AbortSignal):void {
   const sb=step.base<0?step.base*0.5:step.base,sbal=1+step.sbal,mpan=1+step.mpan,{slev,mlev,levelIn,levelOut,delay,mode}=step,length=ring.length;
-  const muteL=step.muteL?1:0,muteR=step.muteR?1:0,phaseL=step.phaseL?1:0,phaseR=step.phaseR?1:0,cos=1,sin=0;
+  const muteL=step.muteL?1:0,muteR=step.muteR?1:0,phaseL=step.phaseL?1:0,phaseR=step.phaseR?1:0,cos=1,sin=Object.is(step.phase,-0)?-0:0;
   const [gli,gri]=gains(step.balanceIn,step.bmodeIn),[glo,gro]=gains(step.balanceOut,step.bmodeOut);
   let pos=state.pos;
   for(let n=0;n+1<data.length;n+=2){
@@ -124,8 +126,8 @@ export const stereotools=defineAudioFilter<AudioStereoToolsStep>({
       step[key]=value(name,kind,low,high,equals<0?option:option.slice(equals+1));
     }
     if(step.softclip)throw new AudioFilterError('stereotools softclip requires unimplemented libm arithmetic');
+    // -0 === 0: phase=-0 is kept, because its sin(-0) = -0 changes the sign of some zero outputs.
     if(step.phase!==0)throw new AudioFilterError('stereotools phase requires unimplemented libm arithmetic');
-    step.phase=0;
     return Object.freeze(step) as unknown as AudioStereoToolsStep;
   },
   capabilities:()=>({generatesOutput:false,reframes:true,allocatesFrames:true,formatConstraint:false,rateConversion:false,timeSelection:false}),
