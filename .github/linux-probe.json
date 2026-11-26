@@ -1,0 +1,25 @@
+{
+  "comment": "audit-af: adversarial native comparisons on real x86_64 for the batch 2-4 audio branches apulsator, stereotools (with the phase=-0 fix), alimiter, aphaser, flanger and biquad, plus each branch's own unit and differential files, whose float-sensitive cases are linux-x64 only.",
+  "tests": [
+    "tests/differential/audit-af-apulsator.test.ts",
+    "tests/differential/audit-af-stereotools.test.ts",
+    "tests/differential/audit-af-alimiter.test.ts",
+    "tests/differential/audit-af-aphaser.test.ts",
+    "tests/differential/audit-af-flanger.test.ts",
+    "tests/differential/audit-af-biquad.test.ts",
+    "tests/differential/apulsator.test.ts",
+    "tests/differential/stereotools.test.ts",
+    "tests/differential/alimiter.test.ts",
+    "tests/differential/aphaser.test.ts",
+    "tests/differential/flanger.test.ts",
+    "tests/differential/biquad.test.ts",
+    "tests/unit/apulsator.test.ts",
+    "tests/unit/stereotools.test.ts",
+    "tests/unit/alimiter.test.ts",
+    "tests/unit/aphaser.test.ts",
+    "tests/unit/flanger.test.ts",
+    "tests/unit/biquad.test.ts"
+  ],
+  "shards": 6,
+  "corpora": []
+}
