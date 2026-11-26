@@ -1,0 +1,203 @@
+{
+ "capabilityId": "filter.avgblur",
+ "slug": "vf-avgblur",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/avgblur.ts",
+  "packages/avfilter/NOTICE-AVGBLUR",
+  "packages/avfilter/src/video-ops/registry.ts",
+  "tests/unit/video-avgblur.test.ts",
+  "tests/differential/video-avgblur.test.ts",
+  "docs/contributing/avgblur.md",
+  "docs/contributing/wave2/vf-avgblur.json"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {avgblurOperator} from './avgblur.js';",
+    " avgblurOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-avgblur.test.ts",
+   "tests": 5,
+   "passed": 5
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "tests": 8,
+   "passed": 8,
+   "note": "unchanged; runs the 3 avgblur examples on all five paths"
+  },
+  {
+   "file": "tests/differential/video-avgblur.test.ts",
+   "title": "matches native avgblur bytes across formats sizes radii planes and patterns",
+   "checks": 810,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-avgblur.test.ts",
+   "title": "matches native avgblur with default filter threads and with -filter_threads 1",
+   "checks": 72,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-avgblur.test.ts",
+   "title": "matches native linear avgblur chains with negotiated conversion and scalar arithmetic",
+   "checks": 270,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-avgblur.test.ts",
+   "title": "matches native avgblur CLI -vf and -filter_complex rawvideo and framecrc outputs across timing and size scopes",
+   "checks": 336,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-avgblur.test.ts",
+   "title": "matches native replayed avgblur branches and joins frame by frame",
+   "checks": 20,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-avgblur.test.ts",
+   "title": "matches native avgblur framecrc and rawvideo through the timed executor and activation actors",
+   "checks": 432,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-avgblur.test.ts",
+   "title": "refuses avgblur enable= timelines on every CLI path before opening outputs while native accepts them",
+   "checks": 10,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-avgblur.test.ts",
+   "title": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+   "checks": 89,
+   "passed": true
+  }
+ ],
+ "nativeComparisons": {
+  "kernelRawvideo": 810,
+  "threads": 72,
+  "linearChains": 270,
+  "cliVf": 288,
+  "cliFilterComplex": 48,
+  "replayStream": 20,
+  "timedBackend": {
+   "nativeRuns": 144,
+   "comparisons": 432
+  },
+  "enableRefusals": {
+   "refusals": 10,
+   "nativeAcceptRuns": 2
+  },
+  "negotiation": {
+   "sources": 17,
+   "checks": 89
+  }
+ },
+ "unsupported": [
+  "High-bit-depth formats and yuva422p/yuva444p/yuv440p/yuv411p/yuv410p/gbrap/yuvj440p/yuvj411p (no frame storage; refused by name when negotiated)",
+  "Packed RGB with alpha sources (rgba/bgra/argb/abgr) negotiate gbrap natively; refused before output",
+  "enable= timelines",
+  "runtime sizeX/planes/sizeY commands (ENOSYS)",
+  "Mid-stream size changes: native keeps the radii clipped at the first config_input; this module clips per frame (untested)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.avgblur.kernel",
+   "file": "tests/differential/video-avgblur.test.ts",
+   "name": "matches native avgblur bytes across formats sizes radii planes and patterns",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "avgblurVideoFrame vs native rawvideo: gray/yuv420p/yuv422p/yuv444p/yuva420p/gbrp x 9 sizes (1x1..17x9, 40x2) x 15 sizeX/planes/sizeY sets x noise/ramp-peaks/checkerboard/constant frames"
+  },
+  {
+   "id": "filter.avgblur.threads",
+   "file": "tests/differential/video-avgblur.test.ts",
+   "name": "matches native avgblur with default filter threads and with -filter_threads 1",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "native default threads and -filter_threads 1 agree with each other and with avgblurVideoFrame"
+  },
+  {
+   "id": "filter.avgblur.linear",
+   "file": "tests/differential/video-avgblur.test.ts",
+   "name": "matches native linear avgblur chains with negotiated conversion and scalar arithmetic",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "compileVideoFilterChain vs native -vf -cpuflags 0 rawvideo with negotiated conversion (nv12/nv21/rgb24, targets nv12/rgba)"
+  },
+  {
+   "id": "filter.avgblur.cli",
+   "file": "tests/differential/video-avgblur.test.ts",
+   "name": "matches native avgblur CLI -vf and -filter_complex rawvideo and framecrc outputs across timing and size scopes",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "media backend -vf and two-output -filter_complex, rawvideo and framecrc, with and without -ss/-t"
+  },
+  {
+   "id": "filter.avgblur.stream",
+   "file": "tests/differential/video-avgblur.test.ts",
+   "name": "matches native replayed avgblur branches and joins frame by frame",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "createReplayVideoExecution branches, hstack joins and nullsink"
+  },
+  {
+   "id": "filter.avgblur.timed",
+   "file": "tests/differential/video-avgblur.test.ts",
+   "name": "matches native avgblur framecrc and rawvideo through the timed executor and activation actors",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "timed backend pull (DAG executor), activation and producer (actors)"
+  },
+  {
+   "id": "filter.avgblur.refusals",
+   "file": "tests/differential/video-avgblur.test.ts",
+   "name": "refuses avgblur enable= timelines on every CLI path before opening outputs while native accepts them",
+   "modes": [
+    "semantic"
+   ],
+   "scope": "enable= refused on media -vf/-filter_complex and timed schedulers with no output opened"
+  },
+  {
+   "id": "filter.avgblur.negotiation",
+   "file": "tests/differential/video-avgblur.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "tests/helpers/video-negotiation-cases.ts over 17 sources on the five paths"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Node v24.22.3 (/opt/node24); the sandbox default Node 22 was refused by the bootstrap.",
+  "Setup: bootstrap 169.3s (npm 7.9s, submodule 10.9s, reference 150.4s); baseline typecheck+lint+boundaries 50.1s; registry unit test 1.8s; differential file 65.6s with --maxWorkers=1.",
+  "Baseline before changes: typecheck, lint, boundaries and tests/unit/video-operator-registry.test.ts (8 tests) passed.",
+  "The upstream vf_avgblur.c is MIT-licensed; NOTICE-AVGBLUR reproduces its permission notice.",
+  "LUT_DIV and SLOW_DIV are both floor(sum/area) for 8-bit sums, so one truncating division is used.",
+  "No platform-gated cases: integer only."
+ ]
+}
