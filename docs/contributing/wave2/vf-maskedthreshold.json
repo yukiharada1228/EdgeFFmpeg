@@ -1,0 +1,201 @@
+{
+ "capabilityId": "filter.maskedthreshold",
+ "slug": "vf-maskedthreshold",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/maskedthreshold.ts",
+  "packages/avfilter/NOTICE-MASKEDTHRESHOLD",
+  "packages/avfilter/src/video-ops/registry.ts",
+  "tests/unit/video-maskedthreshold.test.ts",
+  "tests/differential/video-maskedthreshold.test.ts",
+  "docs/contributing/maskedthreshold.md",
+  "docs/contributing/wave2/vf-maskedthreshold.json"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/video-ops/registry.ts: +1 import line (import {maskedthresholdOperator} from './maskedthreshold.js';) and +1 entry line ( maskedthresholdOperator,)"
+ ],
+ "tests": [
+  {
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "title": "runs against the pinned-commit sandbox reference built without x86 assembly",
+   "counts": {
+    "checks": 1
+   }
+  },
+  {
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "title": "matches native maskedthreshold for every mode, threshold 0/1/255 and plane mask over every format and size on the graph path",
+   "counts": {
+    "comparisons": 1728,
+    "nativeRuns": 72
+   }
+  },
+  {
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "title": "matches native two-input maskedthreshold rawvideo and framecrc with unequal lengths and -ss/-t on the stream, actor and timed CLIs",
+   "counts": {
+    "comparisons": 972
+   }
+  },
+  {
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "title": "matches native split-from-one-source maskedthreshold graphs, with implicit conversions, on the graph, stream, actor and timed paths",
+   "counts": {
+    "comparisons": 160
+   }
+  },
+  {
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "title": "matches native maskedthreshold through replay execution, frame actors and the timed executor APIs with distinct inputs",
+   "counts": {
+    "comparisons": 18
+   }
+  },
+  {
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "title": "refuses size mismatches, framesync options, enable= and out-of-range options like native before opening any output on every path",
+   "counts": {
+    "refusals": 35
+   }
+  },
+  {
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "title": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every join path",
+   "counts": {
+    "checks": 72,
+    "sources": 14,
+    "matched": 10,
+    "refused": 4
+   }
+  },
+  {
+   "file": "tests/unit/video-maskedthreshold.test.ts",
+   "title": "parses declared defaults, shorthand, named modes, integer expressions and ranges, refusing every other option",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-maskedthreshold.test.ts",
+   "title": "picks threshold8_abs and threshold8_diff per pixel, copies unselected planes from the reference and keeps source properties",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-maskedthreshold.test.ts",
+   "title": "refuses mismatched inputs, unsupported layouts, budgets, malformed storage, settings and cancellation explicitly",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-maskedthreshold.test.ts",
+   "title": "plans maskedthreshold as a two-input join only, refuses size mismatches at plan time and refuses runtime commands",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(all, unedited)",
+   "counts": {
+    "tests": 8,
+    "passed": 8
+   }
+  }
+ ],
+ "nativeComparisons": {
+  "byteExact": 2878,
+  "refusalParity": 35,
+  "negotiationChecks": 72,
+  "breakdown": "graph matrix 1728 + CLI stream/actor/timed 972 + split graphs 160 + APIs 18; rawvideo and framecrc"
+ },
+ "unsupported": [
+  "high-bit-depth formats (threshold16_abs/threshold16_diff) and yuv440p, yuv411p, yuv410p, yuvj440p, yuvj411p, yuva422p, yuva444p, gbrap: no frame storage, refused by name when negotiated",
+  "packed RGB with alpha sources (argb, rgba, abgr, bgra) negotiate gbrap natively: refused before output",
+  "enable= timeline (native supports it internally): refused",
+  "runtime commands threshold/planes: refused",
+  "linear path: joins are never linear"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.maskedthreshold.graph",
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "name": "matches native maskedthreshold for every mode, threshold 0/1/255 and plane mask over every format and size on the graph path",
+   "modes": [
+    "graph"
+   ],
+   "scope": "threshold8_abs/threshold8_diff, thresholds 0/1/255, plane masks 15/1/10/0, six eight-bit formats, sizes 1x1..17x9, two distinct inputs"
+  },
+  {
+   "id": "filter.maskedthreshold.cli",
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "name": "matches native two-input maskedthreshold rawvideo and framecrc with unequal lengths and -ss/-t on the stream, actor and timed CLIs",
+   "modes": [
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "JOIN-SYNC two-input CLI with unequal lengths, -ss/-t, rawvideo and framecrc"
+  },
+  {
+   "id": "filter.maskedthreshold.split",
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "name": "matches native split-from-one-source maskedthreshold graphs, with implicit conversions, on the graph, stream, actor and timed paths",
+   "modes": [
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "split-from-one-source graphs with implicit conversions (-cpuflags 0, scalar)"
+  },
+  {
+   "id": "filter.maskedthreshold.api",
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "name": "matches native maskedthreshold through replay execution, frame actors and the timed executor APIs with distinct inputs",
+   "modes": [
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "createReplayVideoExecution, createFrameActors and executeTimedGraph with distinct inputs of unequal length"
+  },
+  {
+   "id": "filter.maskedthreshold.reject",
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "name": "refuses size mismatches, framesync options, enable= and out-of-range options like native before opening any output on every path",
+   "modes": [
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "size mismatch, framesync options, enable= and out-of-range options refused before output"
+  },
+  {
+   "id": "filter.maskedthreshold.negotiation",
+   "file": "tests/differential/video-maskedthreshold.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every join path",
+   "modes": [
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "native picks from 14 non-legacy sources; gbrap refused by name on every path and CLI"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Unselected planes are copied from the REFERENCE input, not the source as the scope line says: threshold_slice calls av_image_copy_plane(dst, ..., ref, ...). Implemented and tested as native does (a source-copy mutation fails the matrix test).",
+  "[FS-OPTS] says accept shortest, but vf_maskedthreshold declares no framesync options: native refuses shortest, eof_action, repeatlast and ts_sync_mode with 'Option not found' (probed). They are refused here too; the step's shortest is always false. Sync semantics are vf_stack's (sync=1, EXT_STOP before, EXT_INFINITY after), matched with unequal lengths.",
+  "tests/helpers/video-negotiation-cases.ts always runs a linear chain, which a join cannot have, so the per-source negotiation test mirrors its graph/stream/actor/timed and CLI checks inside the differential file (helper used read-only for negotiationSources). A join-aware option in the helper would let later joins reuse it; not required for this branch.",
+  "Native creates (empty) output files before failing graph configuration; the refusal test asserts native output is empty and that EdgeFFmpeg opens no output.",
+  "Setup: Node 24 could not be installed (npm-based Node download was denied by the sandbox policy), so bootstrap (which requires Node 24) was replaced by the documented fallback: git submodule update --init upstream/ffmpeg (47 s), npm ci (8 s), npm run reference:build (2 min 41 s). All tests ran on Node v22.23.5. Baseline typecheck+lint+boundaries+registry test: green, 1 min 11 s.",
+  "Differential file runs in about 16 s with --maxWorkers=1. No linux-gated cases: integer kernels only."
+ ]
+}

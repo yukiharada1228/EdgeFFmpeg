@@ -1,0 +1,15 @@
+Scoped maskedthreshold video filter
+
+The option table, the eight-bit pix_fmts subset, threshold8_abs and
+threshold8_diff, the plane mask with its reference-plane copy, the size check
+of config_output, the framesync input configuration and the output properties
+of process_frame in src/video-ops/maskedthreshold.ts follow
+libavfilter/vf_maskedthreshold.c (maskedthreshold_options, pix_fmts,
+threshold8_abs, threshold8_diff, config_input, threshold_slice, process_frame,
+config_output).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2020 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete maskedthreshold
+filter: only eight-bit formats, no timeline and no runtime commands.
