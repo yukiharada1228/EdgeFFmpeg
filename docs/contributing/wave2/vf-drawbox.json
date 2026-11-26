@@ -1,0 +1,221 @@
+{
+  "capabilityId": "filter.drawbox",
+  "slug": "vf-drawbox",
+  "status": "partial",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/drawbox.ts",
+    "packages/avfilter/src/video-ops/drawgrid.ts",
+    "packages/avfilter/src/video-drawbox.ts",
+    "packages/avfilter/NOTICE-DRAWBOX",
+    "tests/unit/video-drawbox.test.ts",
+    "tests/differential/video-drawbox.test.ts",
+    "docs/contributing/drawbox.md",
+    "docs/contributing/wave2/vf-drawbox.json",
+    "packages/avfilter/src/video-ops/registry.ts (shared)"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/video-ops/registry.ts",
+      "lines": [
+        "import {drawboxOperator} from './drawbox.js';",
+        "import {drawgridOperator} from './drawgrid.js';",
+        " drawboxOperator,",
+        " drawgridOperator,"
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/video-drawbox.test.ts",
+      "title": "parses declared defaults, shorthand, aliases, booleans and colours into frozen settings",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-drawbox.test.ts",
+      "title": "prepares CCIR colours and resolves config_input geometry with the native iteration",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-drawbox.test.ts",
+      "title": "draws boxes and grids into owned tight planes from padded input without mutating it",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-drawbox.test.ts",
+      "title": "rejects unsupported layouts, budgets, malformed storage, time bases and cancellation explicitly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-drawbox.test.ts",
+      "title": "plans drawbox and drawgrid on every flagged path and refuses size-dependent geometry before output",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "(all 8 registry tests, unedited)",
+      "passed": 8,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-drawbox.test.ts",
+      "title": "runs against the reference build of the pinned commit without x86 assembly",
+      "passed": 1,
+      "failed": 0,
+      "cases": 1
+    },
+    {
+      "file": "tests/differential/video-drawbox.test.ts",
+      "title": "matches native linear drawbox and drawgrid bytes for integer colours across formats, sizes, crossing and outside boxes and patterns",
+      "passed": 1,
+      "failed": 0,
+      "cases": 1560
+    },
+    {
+      "file": "tests/differential/video-drawbox.test.ts",
+      "title": "matches native translucent drawbox and drawgrid blending on linear chains and the CLI paths (linux-x64 unfused double and float)",
+      "passed": 1,
+      "failed": 0,
+      "cases": 1000,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-drawbox.test.ts",
+      "title": "matches native drawbox and drawgrid rawvideo and framecrc through linear, graph, actor and timed CLI execution with and without -ss/-t",
+      "passed": 1,
+      "failed": 0,
+      "cases": 1920
+    },
+    {
+      "file": "tests/differential/video-drawbox.test.ts",
+      "title": "matches native replayed drawbox and drawgrid branches and joins frame by frame",
+      "passed": 1,
+      "failed": 0,
+      "cases": 40
+    },
+    {
+      "file": "tests/differential/video-drawbox.test.ts",
+      "title": "refuses native errors with native status and the scoped-out forms native runs, before opening outputs on every path",
+      "passed": 1,
+      "failed": 0,
+      "cases": 85
+    },
+    {
+      "file": "tests/differential/video-drawbox.test.ts",
+      "title": "negotiates every accepted source as native does for drawbox and drawgrid and runs each pick on every path",
+      "passed": 1,
+      "failed": 0,
+      "cases": 146
+    }
+  ],
+  "nativeComparisons": {
+    "count": 4683,
+    "details": [
+      "1560 linear rawvideo byte comparisons (3 frames each): 10 stored formats x 6 sizes (1x1 2x2 5x3 7x5 8x6 17x9) x 26 integer-colour drawbox/drawgrid filters",
+      "1000 linux-x64-gated translucent comparisons: 360 linear (10 formats x 6 sizes x 6 filters) and 640 CLI (10 formats x 7x5 x 4 filters x rawvideo/framecrc x 2 time scopes x 4 executions)",
+      "1920 CLI byte comparisons: 10 formats x 7x5/17x9 x 6 filters x rawvideo/framecrc x without/with -ss 0.04 -t 0.05 x media -vf, media -filter_complex, timed activation actors, timed pull executor; native default threads equal -filter_threads 1 in every case",
+      "40 createReplayVideoExecution comparisons with split/hstack/nullsink/hflip/vflip",
+      "17 native status checks (7 native EINVAL errors at 256-EINVAL, 10 forms native runs) with 17 linear and 68 CLI refusals before output",
+      "146 per-source negotiation checks (2 filters x 73): all 17 sources pick stored formats (gray and gbrp -> rgb24) and run byte-exact on five paths"
+    ]
+  },
+  "unsupported": [
+    "box_source (any value)",
+    "expressions reading sar or dar (frames carry no sample aspect ratio on every path)",
+    "expression calls to sin cos tan asin acos atan atan2 sinh cosh tanh exp pow gauss squish random randomi time print lerp while taylor root",
+    "expression results outside int or NaN in the final pass (NaN fails as natively), drawbox x+w / y+h and drawgrid offset int overflow",
+    "reads of fill after an undefined (int) conversion of x or y in the same pass (platform-dependent natively), e.g. y=ih-h:h=fill-1",
+    "random/bikeshed colours and NaN or platform-dependent alphas",
+    "enable= timeline and runtime commands",
+    "yuv411p yuv410p yuv440p yuvj440p yuva422p yuva444p 0rgb 0bgr rgb0 bgr0 (no frame storage; negotiators refuse by name, but no accepted source picks them)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.drawbox.linear",
+      "file": "tests/differential/video-drawbox.test.ts",
+      "name": "matches native linear drawbox and drawgrid bytes for integer colours across formats, sizes, crossing and outside boxes and patterns",
+      "modes": [
+        "linear"
+      ],
+      "scope": "linear rawvideo, opaque/alpha-0/invert/replace colours, 10 stored formats, 6 sizes, boxes inside/crossing/outside, t=fill, grids with offsets"
+    },
+    {
+      "id": "filter.drawbox.translucent",
+      "file": "tests/differential/video-drawbox.test.ts",
+      "name": "matches native translucent drawbox and drawgrid blending on linear chains and the CLI paths (linux-x64 unfused double and float)",
+      "modes": [
+        "linear",
+        "graph",
+        "actor",
+        "timed"
+      ],
+      "scope": "translucent double (YUV) and float (packed RGB) blends on linear chains and CLI -vf/-filter_complex/actor/timed",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.drawbox.cli",
+      "file": "tests/differential/video-drawbox.test.ts",
+      "name": "matches native drawbox and drawgrid rawvideo and framecrc through linear, graph, actor and timed CLI execution with and without -ss/-t",
+      "modes": [
+        "linear",
+        "graph",
+        "actor",
+        "timed"
+      ],
+      "scope": "CLI rawvideo and framecrc with and without -ss/-t, native threads agreement"
+    },
+    {
+      "id": "filter.drawbox.stream",
+      "file": "tests/differential/video-drawbox.test.ts",
+      "name": "matches native replayed drawbox and drawgrid branches and joins frame by frame",
+      "modes": [
+        "stream"
+      ],
+      "scope": "createReplayVideoExecution with split/hstack/nullsink branches"
+    },
+    {
+      "id": "filter.drawbox.refusals",
+      "file": "tests/differential/video-drawbox.test.ts",
+      "name": "refuses native errors with native status and the scoped-out forms native runs, before opening outputs on every path",
+      "modes": [
+        "linear",
+        "graph",
+        "actor",
+        "timed"
+      ],
+      "scope": "native EINVAL errors and scoped-out forms refused before output"
+    },
+    {
+      "id": "filter.drawbox.negotiation",
+      "file": "tests/differential/video-drawbox.test.ts",
+      "name": "negotiates every accepted source as native does for drawbox and drawgrid and runs each pick on every path",
+      "modes": [
+        "linear",
+        "graph",
+        "stream",
+        "actor",
+        "timed"
+      ],
+      "scope": "per-source negotiation from 17 sources"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Status partial: sar and dar expression variables (in the specified scope) are refused because VideoFrameData carries no sample aspect ratio and descriptor geometry() does not receive one on every path; supporting them needs a shared frame or descriptor change (not requested, not made). Everything else in scope is implemented and native-compared.",
+    "Expressions are evaluated under both linux-x64 and darwin-arm64 expression profiles and refused if the integer geometry differs, so no profile is selected inside the operator.",
+    "EdgeFFmpeg exits 1 for the native EINVAL configuration errors (native 234 on Linux); the CLI exit-status mapping is outside the owned files, so only refusal and no output are asserted.",
+    "The translucent gate is a precaution taken from the determinism notes; no macOS run was possible in this sandbox.",
+    "Setup durations: Node 24.22.3 tarball install ~10s (sandbox had Node 22.23.5, bootstrap requires 24+), bootstrap (npm 9.3s, submodule 6.2s, reference build) 200s, baseline typecheck+lint+boundaries+registry test 60s. Differential file runs in ~35s with --maxWorkers=1 on 4 vCPUs.",
+    "Environment: bootstrap reports the sandbox reference differs from the pinned linux-x64 binary sha (expected for an unpinned sandbox build)."
+  ]
+}
