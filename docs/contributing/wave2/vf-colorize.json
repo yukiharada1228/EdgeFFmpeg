@@ -1,0 +1,249 @@
+{
+ "capabilityId": "filter.colorize",
+ "slug": "vf-colorize",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/colorize.ts",
+  "packages/avfilter/NOTICE-COLORIZE",
+  "tests/unit/video-colorize.test.ts",
+  "tests/differential/video-colorize.test.ts",
+  "docs/contributing/colorize.md",
+  "docs/contributing/wave2/vf-colorize.json",
+  "packages/avfilter/src/video-ops/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/video-ops/registry.ts: +1 import line (import {colorizeOperator} from './colorize.js';) and +1 entry line ( colorizeOperator,)"
+ ],
+ "paths": [
+  "linear",
+  "graph",
+  "stream",
+  "actor",
+  "timed"
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-colorize.test.ts",
+   "name": "(5 tests: parsing/refusals, c[] worked examples, lerp/fill/alpha ownership, malformed input and budgets, planner and command refusals)",
+   "tests": 5,
+   "platforms": "all"
+  },
+  {
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "uses a native reference built from 946fcce0 with --disable-x86asm",
+   "cases": 1,
+   "platforms": "all"
+  },
+  {
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native linear colorize rawvideo for black overlays, which no multiply-add contraction can change",
+   "cases": 168,
+   "platforms": "all"
+  },
+  {
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native linear colorize rawvideo across formats, sizes, options and noise, ramp, edge and constant inputs (Linux x64 unfused float)",
+   "cases": 840,
+   "platforms": "linux-x64"
+  },
+  {
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native colorize c[] over a hue, saturation and lightness grid on constant 1x1 frames (Linux x64 unfused float)",
+   "cases": 446,
+   "platforms": "linux-x64"
+  },
+  {
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native colorize -vf and -filter_complex CLI rawvideo and framecrc with time selection and implicit conversions (Linux x64 unfused float)",
+   "cases": 720,
+   "platforms": "linux-x64"
+  },
+  {
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native colorize frame graphs and replayed streams with split and stack branches (Linux x64 unfused float)",
+   "cases": 64,
+   "platforms": "linux-x64"
+  },
+  {
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native colorize through activation actors and the timed backend in rawvideo and framecrc (Linux x64 unfused float)",
+   "cases": 168,
+   "platforms": "linux-x64"
+  },
+  {
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native colorize with default slice threads and -filter_threads 1 (Linux x64 unfused float)",
+   "cases": 16,
+   "platforms": "linux-x64"
+  },
+  {
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "refuses colorize packed-alpha picks, out-of-range and unimplemented options and enable= before output where native accepts or fails them",
+   "cases": 36,
+   "platforms": "all"
+  },
+  {
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the picks without storage before output",
+   "cases": 93,
+   "platforms": "all"
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "name": "(registry test, unchanged)",
+   "tests": 8,
+   "platforms": "all"
+  }
+ ],
+ "nativeComparisons": {
+  "total": 2551,
+  "everywhere": 297,
+  "linuxX64Only": 2254,
+  "byTest": {
+   "matches native linear colorize rawvideo for black overlays, which no multiply-add contraction can change": 168,
+   "matches native linear colorize rawvideo across formats, sizes, options and noise, ramp, edge and constant inputs (Linux x64 unfused float)": 840,
+   "matches native colorize c[] over a hue, saturation and lightness grid on constant 1x1 frames (Linux x64 unfused float)": 446,
+   "matches native colorize -vf and -filter_complex CLI rawvideo and framecrc with time selection and implicit conversions (Linux x64 unfused float)": 720,
+   "matches native colorize frame graphs and replayed streams with split and stack branches (Linux x64 unfused float)": 64,
+   "matches native colorize through activation actors and the timed backend in rawvideo and framecrc (Linux x64 unfused float)": 168,
+   "matches native colorize with default slice threads and -filter_threads 1 (Linux x64 unfused float)": 16,
+   "refuses colorize packed-alpha picks, out-of-range and unimplemented options and enable= before output where native accepts or fails them": 36,
+   "negotiates every accepted source as native does and refuses the picks without storage before output": 93
+  },
+  "notes": "Byte-exact rawvideo/framecrc comparisons, native statuses for refusals and 93 negotiation checks, all against .build/reference/ffmpeg run at test time."
+ },
+ "unsupported": [
+  "high-bit-depth formats (colorizey_slice16/colorize_slice16)",
+  "yuv440p, yuv411p, yuv410p, yuvj440p, yuvj411p, yuva444p, yuva422p (no frame storage; negotiated picks such as gray->yuvj444p and packed RGBA->yuva444p refused by name before output)",
+  "enable= and runtime commands",
+  "expression-valued options, constants and SI suffixes"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "nodeVersion": "v24.22.3",
+ "proposedContracts": [
+  {
+   "id": "filter.colorize.native-reference",
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "uses a native reference built from 946fcce0 with --disable-x86asm",
+   "modes": [
+    "semantic"
+   ],
+   "scope": "Wave 2 branch wave2/vf-colorize. build-metadata commit 946fcce0 and --disable-x86asm."
+  },
+  {
+   "id": "filter.colorize.black-overlay",
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native linear colorize rawvideo for black overlays, which no multiply-add contraction can change",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "Wave 2 branch wave2/vf-colorize. lightness=0 overlays (contraction-independent), 7 formats incl. yuvj on linear, sizes 1x1..17x9, linear path."
+  },
+  {
+   "id": "filter.colorize.linear-bytes",
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native linear colorize rawvideo across formats, sizes, options and noise, ramp, edge and constant inputs (Linux x64 unfused float)",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "Wave 2 branch wave2/vf-colorize. linux/x64; 7 formats x 6 sizes x 20 option sets, noise/ramp/edge/constant frames, linear path. Linux x86_64 only as a precaution: macOS arm64 contracts the float/double multiply-adds of hue2rgb, lerpf and rgb2yuv; no macOS difference was measured (no macOS host in the sandbox).",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.colorize.color-ramp",
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native colorize c[] over a hue, saturation and lightness grid on constant 1x1 frames (Linux x64 unfused float)",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "Wave 2 branch wave2/vf-colorize. linux/x64; HSL grid with sector edges plus float-sensitive lightness=1 points. Linux x86_64 only as a precaution: macOS arm64 contracts the float/double multiply-adds of hue2rgb, lerpf and rgb2yuv; no macOS difference was measured (no macOS host in the sandbox).",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.colorize.cli",
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native colorize -vf and -filter_complex CLI rawvideo and framecrc with time selection and implicit conversions (Linux x64 unfused float)",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "Wave 2 branch wave2/vf-colorize. linux/x64; media -vf/-filter_complex, rawvideo/framecrc, -ss/-t/-frames:v, implicit conversions with -cpuflags 0. Linux x86_64 only as a precaution: macOS arm64 contracts the float/double multiply-adds of hue2rgb, lerpf and rgb2yuv; no macOS difference was measured (no macOS host in the sandbox).",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.colorize.graph-stream",
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native colorize frame graphs and replayed streams with split and stack branches (Linux x64 unfused float)",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "Wave 2 branch wave2/vf-colorize. linux/x64; frame graph and replay stream paths with split/stack/nullsink. Linux x86_64 only as a precaution: macOS arm64 contracts the float/double multiply-adds of hue2rgb, lerpf and rgb2yuv; no macOS difference was measured (no macOS host in the sandbox).",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.colorize.actor-timed",
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native colorize through activation actors and the timed backend in rawvideo and framecrc (Linux x64 unfused float)",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "Wave 2 branch wave2/vf-colorize. linux/x64; activation actors and timed backend CLI. Linux x86_64 only as a precaution: macOS arm64 contracts the float/double multiply-adds of hue2rgb, lerpf and rgb2yuv; no macOS difference was measured (no macOS host in the sandbox).",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.colorize.threads",
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "matches native colorize with default slice threads and -filter_threads 1 (Linux x64 unfused float)",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "Wave 2 branch wave2/vf-colorize. linux/x64; native default threads equal -filter_threads 1 and EdgeFFmpeg. Linux x86_64 only as a precaution: macOS arm64 contracts the float/double multiply-adds of hue2rgb, lerpf and rgb2yuv; no macOS difference was measured (no macOS host in the sandbox).",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.colorize.refusals",
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "refuses colorize packed-alpha picks, out-of-range and unimplemented options and enable= before output where native accepts or fails them",
+   "modes": [
+    "semantic"
+   ],
+   "scope": "Wave 2 branch wave2/vf-colorize. refusals before output on media and timed backends, native status recorded."
+  },
+  {
+   "id": "filter.colorize.negotiation",
+   "file": "tests/differential/video-colorize.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the picks without storage before output",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "Wave 2 branch wave2/vf-colorize. per-source negotiation (tests/helpers/video-negotiation-cases.ts) on the five paths with a contraction-independent black overlay."
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "The sandbox reference is an unpinned bootstrap build (--allow-unpinned-reference); build-metadata asserts commit 946fcce0 and --disable-x86asm.",
+  "Float-sensitive tests are gated to linux-x64 as a precaution; no macOS arm64 run was available, so no macOS difference is measured.",
+  "Mutation checks: double luma lerp fails 4 gated tests; double HSL fails the colour-ramp test.",
+  "Setup: sandbox default Node v22 failed the bootstrap Node 24 check; used preinstalled /opt/node24 (v24.22.3). Bootstrap (npm, submodule, reference) 199 s; baseline typecheck+lint+boundaries+registry test 67 s."
+ ]
+}
