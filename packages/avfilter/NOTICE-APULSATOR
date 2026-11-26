@@ -1,0 +1,22 @@
+apulsator audio filter (src/audio/apulsator.ts)
+
+src/audio/apulsator.ts adapts FFmpeg libavfilter/af_apulsator.c: the
+level_in, level_out, mode, amount, offset_l, offset_r, width, timing, bpm, ms
+and hz option table with its ranges, defaults and named constants, the packed
+double stereo format and layout list (query_formats), the LFO frequency for
+the bpm, ms and hz timings (config_input), the SimpleLFO phase advance and the
+triangle, square, sawup and sawdown waveforms (lfo_advance, lfo_get_value),
+and the per-sample gain loop with both LFO phases carried across frames
+(filter_frame).
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2001-2010 Krzysztof Foltman, Markus Schmidt, Thor Harald Johansen and others
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation keeps the double arithmetic of the plain C formula
+in native order (no fused multiply-add), as the Linux x86-64 reference
+evaluates it, using only +, -, *, /, fabs and fmod. It refuses mode=sine (the
+default, which needs libm sin()), timeline enable, runtime commands, option
+expressions, fractional values for integer options, non-stereo or masked
+layouts that native would convert implicitly, non-finite input samples and NaN
+output, instead of approximating them. It adds no FFmpeg runtime code. The
+original source and full notices remain in the pinned upstream submodule.
