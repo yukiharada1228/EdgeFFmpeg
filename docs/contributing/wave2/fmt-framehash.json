@@ -1,0 +1,151 @@
+{
+ "capabilityId": "muxer.framemd5",
+ "coversCapabilities": [
+  "muxer.framemd5",
+  "muxer.framehash"
+ ],
+ "slug": "fmt-framehash",
+ "status": "complete",
+ "filesChanged": [
+  "packages/containers/src/hash/frame-hash-mux.ts",
+  "packages/containers/NOTICE-FRAMEHASH",
+  "docs/contributing/frame-hash-muxers.md",
+  "tests/unit/frame-hash-mux.test.ts",
+  "tests/differential/frame-hash-muxers.test.ts",
+  "docs/contributing/wave2/fmt-framehash.json",
+  "packages/containers/src/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  "packages/containers/src/registry.ts: +1 line `export {framehash} from './hash/frame-hash-mux.js';` after framecrc",
+  "packages/containers/src/registry.ts: +1 line `export {framemd5} from './hash/frame-hash-mux.js';` after framehash"
+ ],
+ "tests": [
+  {
+   "file": "tests/differential/frame-hash-muxers.test.ts",
+   "title": "matches native framemd5 and framehash text for wav and raw inputs at every channel count rate and PCM codec and stream copy",
+   "comparisons": 756
+  },
+  {
+   "file": "tests/differential/frame-hash-muxers.test.ts",
+   "title": "matches native frame hash text with bitexact flags, regrouping filter chains, output time and frame limits and copy",
+   "comparisons": 52
+  },
+  {
+   "file": "tests/differential/frame-hash-muxers.test.ts",
+   "title": "matches native guessed, unguessed and named container layouts and refuses an unnamed container mask before any output exists",
+   "comparisons": 26,
+   "refusals": 6
+  },
+  {
+   "file": "tests/differential/frame-hash-muxers.test.ts",
+   "title": "refuses -hash, -format_version and atrim chains before any output exists while native accepts them",
+   "refusals": 10
+  },
+  {
+   "file": "tests/unit/frame-hash-mux.test.ts",
+   "title": "framemd5 and framehash muxers > registers output-only descriptors with the pcm_s16le default, any PCM codec and no input metadata"
+  },
+  {
+   "file": "tests/unit/frame-hash-mux.test.ts",
+   "title": "framemd5 and framehash muxers > writes the frame checksums header with the reference software line unless bitexact"
+  },
+  {
+   "file": "tests/unit/frame-hash-mux.test.ts",
+   "title": "framemd5 and framehash muxers > formats rows without a flags column and hashes regrouped packets independently of chunk boundaries and write budget"
+  },
+  {
+   "file": "tests/unit/frame-hash-mux.test.ts",
+   "title": "framemd5 and framehash muxers > regroups with packet sections and cumulative packet schedules"
+  },
+  {
+   "file": "tests/unit/frame-hash-mux.test.ts",
+   "title": "framemd5 and framehash muxers > refuses options, empty layouts and invalid parameters, framing and packets, and aborts without committing"
+  },
+  {
+   "file": "tests/unit/frame-hash-mux.test.ts",
+   "title": "framemd5 and framehash muxers > honors cancellation, failed writes and failed aborts"
+  }
+ ],
+ "testCounts": {
+  "unit": {
+   "files": 1,
+   "tests": 6,
+   "passed": 6
+  },
+  "differential": {
+   "files": 1,
+   "tests": 4,
+   "passed": 4,
+   "durationSeconds": 7
+  },
+  "registryUnit": {
+   "files": "tests/unit/container-registry*.test.ts, tests/unit/hash-digests.test.ts, tests/unit/framecrc.test.ts",
+   "tests": 32,
+   "passed": 32
+  }
+ },
+ "nativeComparisons": {
+  "byteExactText": 834,
+  "refusalsWithNativeAccepting": 16,
+  "total": 850,
+  "nativeInvocations": "batched: one native call per input/profile writing both muxers (and all 21 codecs in the matrix)"
+ },
+ "unsupported": [
+  "-hash and -format_version values (CLI parser refuses both; validate refuses any format option)",
+  "unnamed container channel masks (channelLayout '' as framecrc): refused, exit 1, native prints 'N channels (A+B)'",
+  "atrim chains (no EdgeFFmpeg atrim filter; unsupported-filter)",
+  "video, FLAC input, multiple streams, extradata and packet side data"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "muxer.framehash-family.pcm",
+   "file": "tests/differential/frame-hash-muxers.test.ts",
+   "name": "matches native framemd5 and framehash text for wav and raw inputs at every channel count rate and PCM codec and stream copy",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "framemd5/framehash default algorithms over raw s16le and bitexact WAV inputs, 1/2/6 channels, 8000/44100/48000 Hz, 2500 samples, 20 PCM codecs and -c copy; byte-identical text with the non-bitexact header."
+  },
+  {
+   "id": "muxer.framehash-family.profiles",
+   "file": "tests/differential/frame-hash-muxers.test.ts",
+   "name": "matches native frame hash text with bitexact flags, regrouping filter chains, output time and frame limits and copy",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "-bitexact, -fflags +bitexact, asetnsamples/apad chains, output -ss/-t/-frames:a, input -ss, raw and WAV -c copy (six codecs), WAV decode; byte-identical text."
+  },
+  {
+   "id": "muxer.framehash-family.layouts",
+   "file": "tests/differential/frame-hash-muxers.test.ts",
+   "name": "matches native guessed, unguessed and named container layouts and refuses an unnamed container mask before any output exists",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "Guessed and -guess_layout_max 0 layouts at 3/4/5/7/8 channels and named WAVE_FORMAT_EXTENSIBLE masks match; unnamed masks are refused with no output."
+  },
+  {
+   "id": "muxer.framehash-family.option-refusal",
+   "file": "tests/differential/frame-hash-muxers.test.ts",
+   "name": "refuses -hash, -format_version and atrim chains before any output exists while native accepts them",
+   "modes": [
+    "semantic"
+   ],
+   "scope": "-hash sha256/crc32, -format_version 1 and atrim chains: native accepts, EdgeFFmpeg refuses before any output exists."
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Rows come from planPcmFraming/framePcmPackets (PREP-FRAMING); framecrc.ts and pcm-framing.ts are untouched.",
+  "No mux.options declared: the CLI parser refuses -hash and -format_version before routing, so declaring them would not change behaviour; supporting them needs a packages/cli edit (not requested).",
+  "Unknown layout refusal applies only to an unnamed container mask; inputs without a mask under -guess_layout_max 0 print 'N channels' and match native.",
+  "Setup: sandbox Node v22.23.5 failed the bootstrap Node 24 check; Node v24.22.3 was downloaded (checksum-verified) into the scratchpad in 4 s. Bootstrap (npm, submodule, reference with --allow-unpinned-reference) took 261 s; the linked binary differs from the linux-x64 pin, as expected for a sandbox build.",
+  "Baseline before changes: typecheck, lint, boundaries pass; registry unit tests 5 files / 32 tests pass (84 s total).",
+  "Output listing side effect: 'WAV, AIFF, AU, W64, framecrc, crc, framehash, framemd5, hash, IRCAM, md5, RSO, SoX, streamhash'."
+ ]
+}
