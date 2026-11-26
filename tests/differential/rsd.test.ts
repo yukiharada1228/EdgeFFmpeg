@@ -107,3 +107,23 @@ it('refuses inputs native rejects or that the module does not mirror before any 
     const mux=await ffmpeg.exec(['-f','s16le','-i','/seek.bin','-f','rsd','/out.rsd']);expect(mux.exitCode).not.toBe(0);expect(existsSync(join(root,'out.rsd'))).toBe(false);
   }finally{rmSync(root,{recursive:true,force:true});}
 },120000);
+it('refuses declared RSD sample rates above 1073741823, where native decode timestamps leave the sample clock, and matches native at 1073741823',async()=>{
+  checkReference();const root=mkdtempSync(join(tmpdir(),'edgeffmpeg-rsd-rate-'));let compared=0,refused=0;
+  try{
+    const filesystem=await createNodeFileSystem({root,maxReadBytes:4096,maxWriteBytes:4096}),ffmpeg=new FFmpeg({filesystem,backend:createMediaBackend(),budget});
+    // rsd_probe scores these rates 12, so they open only with -f rsd. From 2^30 Hz fftools' audio_samplerate_update finds 1 >= INT_MAX/rate and
+    // rescales decoded pts through 1/28224000: the second 256-sample packet of a stereo file is not at pts 256. Copy and raw are refused with the rate.
+    for(const [rate,tag] of [[1073741823,'PCM '],[1073741824,'PCMB'],[2147483647,'PCM ']] as const){
+      const name=`rate-${rate}.bin`;writeFileSync(join(root,name),dump(3,tag,2,rate,32,3*1024,rate%991));
+      const outputs:Output[]=[['decode.crc',['-c:a','pcm_s16le','-bitexact','-f','framecrc']],['copy.crc',['-c:a','copy','-bitexact','-f','framecrc']],['decode.raw',['-f','s16le']]];
+      execFileSync(native,['-v','error','-y','-f','rsd','-i',join(root,name),...outputs.flatMap(([suffix,args])=>[...args,join(root,`native.${name}.${suffix}`)])],{timeout:60000});
+      const rows=readFileSync(join(root,`native.${name}.decode.crc`),'latin1').split('\n').filter(line=>/^0,/.test(line));expect(rows.length,name).toBe(3);expect(rows[1]!.split(',')[1]!.trim()==='256',name).toBe(rate<=1073741823);
+      if(rate<=1073741823){compared+=await compare(ffmpeg,root,name,['-f','rsd'],outputs);continue;}
+      for(const [suffix,args] of outputs){
+        const out=`/${name}.${suffix}`,result=await ffmpeg.exec(['-f','rsd','-i',`/${name}`,...args,out]);
+        expect([result.exitCode,result.diagnostics.at(-1)?.message],out).toEqual([1,'RSD sample rates above 1073741823 are not implemented']);expect(existsSync(join(root,out.slice(1))),out).toBe(false);refused++;
+      }
+    }
+    expect([compared,refused]).toEqual([3,6]);
+  }finally{rmSync(root,{recursive:true,force:true});}
+},120000);

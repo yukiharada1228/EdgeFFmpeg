@@ -11,6 +11,9 @@ export interface RsdInput extends Omit<RawPcmInput,'info'> {readonly info:RsdInf
 export interface RsdOptions {readonly maxReadBytes:number;readonly signal?:AbortSignal}
 /** "RSD" + version digit, tag, channels, bit depth, rate, unknown, then the RL32 data start (absent for version 4, which starts at 0x800). */
 const headerBytes=28,probeBytes=20,packetBytes=1024,version4Start=0x800,invalidData=183,patchWelcome=176,intMax=2147483647;
+/** INT_MAX/2: from 2^30 Hz the CLI's audio_samplerate_update (fftools/ffmpeg_dec.c) finds 1 >= INT_MAX/rate and moves decoded
+ * timestamps to a 1/28224000 time base, so decoded pts leave the sample clock; these rates (reachable with -f rsd) are refused. */
+const maxExactRate=1073741823;
 /** rsd_tags: the PCM tags are ported; the ADPCM and XMA tags are native codecs left unported. rsd_unsupported_tags: OGG (AVERROR_PATCHWELCOME). */
 const tags:Readonly<Record<string,RsdCodec|null>>={'PCM ':'pcm_s16le','PCMB':'pcm_s16be','VAG ':null,'GADP':null,'WADP':null,'RADP':null,'XADP':null,'XMA ':null};
 const fourcc=(bytes:Uint8Array)=>String.fromCharCode(...bytes);
@@ -48,6 +51,7 @@ export async function openRsd(input:ReadHandle,options:RsdOptions):Promise<RsdIn
   let start=version4Start;
   if(version!==4){if(input.size<BigInt(headerBytes))throw new RsdError('invalid-data','Truncated RSD header');start=new DataView((await readExact(input,24n,4,maxReadBytes,signal)).buffer).getInt32(0,true);}
   if(start<0)throw containerRefusal(`Invalid RSD data start: ${start}`,invalidData);
+  if(sampleRate>maxExactRate)throw new RsdError('unsupported',`RSD sample rates above ${maxExactRate} are not implemented`);
   // avio_skip(pb, start - avio_tell(pb)) seeks to the absolute start, which may lie inside the header.
   const offset=BigInt(start);
   if(offset>input.size)throw new RsdError('unsupported','RSD data start beyond the end of the input is not implemented');

@@ -51,6 +51,10 @@ it('refuses tags, channels, rates, starts and trailing bytes as native does or e
   await refusal(dump('3','PCM ',2,0,32,1024),'Invalid RSD sample rate: 0',183);
   await refusal(dump('3','PCM ',2,-8000,32,1024),'RSD sample rate -8000 is not implemented');
   await refusal(dump('3','PCM ',2,8000,-4,1024,-4).subarray(0,1052),'Invalid RSD data start: -4',183);
+  // From 2^30 Hz native decode timestamps leave the sample clock (audio_samplerate_update); refused after the native-status start check.
+  for(const rate of [1073741824,2147483647])await refusal(dump('3','PCM ',2,rate,32,1024),'RSD sample rates above 1073741823 are not implemented');
+  await refusal(dump('3','PCM ',2,1073741824,-4,1024,-4).subarray(0,1052),'Invalid RSD data start: -4',183);
+  expect((await open(dump('3','PCM ',2,1073741823,32,1024))).info.sampleRate).toBe(1073741823);
   await refusal(dump('3','PCM ',2,8000,32,1024).subarray(0,1050),'RSD partial trailing sample frame is not implemented');
   const beyond=dump('3','PCM ',2,8000,32,1024);new DataView(beyond.buffer).setInt32(24,2000,true);await refusal(beyond,'RSD data start beyond the end of the input is not implemented');
   await refusal(dump('4','PCM ',2,8000,64,1024),'RSD data start beyond the end of the input is not implemented');
