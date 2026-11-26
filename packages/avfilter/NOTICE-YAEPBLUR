@@ -1,0 +1,17 @@
+Scoped yaepblur edge-preserving blur filter
+
+The summed-area window sums (pre_calculate_row, pre_calculate_col), the
+clipped window, the integer mean/variance blend
+(sigma*mean + var*src)/(sigma+var) of filter_slice, the radius clipping of
+config_input, the unselected-plane copy of filter_frame, the pix_fmts list and
+the radius/r, planes/p and sigma/s options in src/video-ops/yaepblur.ts follow
+libavfilter/vf_yaepblur.c, with the AV_OPT_TYPE_INT expression, range and
+rounding semantics of libavutil/opt.c (set_string_number, write_number).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (C) 2019 Leo Zhang <leozhang@qiyi.com>. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation for eight-bit planar layouts: the
+summed-area tables are read as running column sums, so each window sum equals
+the native uint64 value exactly; slice threading, enable= and runtime commands
+are not implemented.
