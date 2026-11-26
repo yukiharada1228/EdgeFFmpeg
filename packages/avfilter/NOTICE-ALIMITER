@@ -1,0 +1,21 @@
+Lookahead limiter (src/audio/alimiter.ts)
+
+src/audio/alimiter.ts adapts FFmpeg libavfilter/af_alimiter.c: the AVOption
+table (names, defaults and ranges of level_in, level_out, limit, attack,
+release, asc, asc_level, level and latency), init (attack and release in
+seconds, att = 1), config_input (obuffer_size for buffer, nextdelta and
+nextpos, nextpos initialised to -1, buffer_size rounded down to a multiple of
+the channel count and the "Attack is too small" refusal), the single packed
+dbl format and the per-sample lookahead loop of filter_frame with its att,
+delta, nextiter and nextlen state and clamps.
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (C) 2001-2010 Krzysztof Foltman, Markus Schmidt, Thor Harald Johansen and others
+Copyright (c) 2015 Paul B Mahol
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation implements only asc=0 and latency=0: asc=1 (the
+auto-release path and its pow() coefficient) and latency=1 (leading-sample
+trimming and padded tail frames) are refused before output. asc_level is
+accepted without effect. It accepts only constant decimal values and the
+boolean names or 0/1, refuses enable= and has no runtime commands. The
+original source and full notices remain in the pinned upstream submodule.

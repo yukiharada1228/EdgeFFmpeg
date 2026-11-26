@@ -26,3 +26,4 @@ export {stereowiden} from './stereowiden.js';
 export {aecho} from './aecho.js';
 export {apulsator} from './apulsator.js';
 export {stereotools} from './stereotools.js';
+export {alimiter} from './alimiter.js';
