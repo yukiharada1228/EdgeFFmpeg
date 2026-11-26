@@ -1,0 +1,13 @@
+Scoped FMOD Sample Bank (FSB) demuxer
+
+The fsb_probe magic and sample-count check, the version 3 header fields
+(data offset RL32@8 + 0x18, duration RL32@56, format RL32@72, rate RL32@76,
+channels RL16@86), the format-flag order (0x100 pcm_s16le before the IMA,
+PSX and THP ADPCM flags), the absolute data seek and the
+4096*channels-byte av_get_packet block in src/fsb.ts follow
+libavformat/fsb.c (fsb_probe, fsb_read_header, fsb_read_packet).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2015 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete fsb demuxer.
