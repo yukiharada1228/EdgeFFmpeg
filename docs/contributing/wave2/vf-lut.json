@@ -1,0 +1,262 @@
+{
+  "capabilityId": "filter.lut",
+  "slug": "vf-lut",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-lut.ts",
+    "packages/avfilter/src/video-ops/lut.ts",
+    "packages/avfilter/src/video-ops/lutrgb.ts",
+    "packages/avfilter/src/video-ops/lutyuv.ts",
+    "packages/avfilter/NOTICE-LUT",
+    "tests/unit/video-lut.test.ts",
+    "tests/differential/video-lut.test.ts",
+    "docs/contributing/lut.md",
+    "docs/contributing/wave2/vf-lut.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/video-ops/registry.ts",
+      "change": "+3 import lines (lutOperator, lutrgbOperator, lutyuvOperator from './lut.js', './lutrgb.js', './lutyuv.js'); +3 entry lines ' lutOperator,', ' lutrgbOperator,', ' lutyuvOperator,'"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/differential/video-lut.test.ts",
+      "title": "runs against the reference build of commit 946fcce0 configured with --disable-x86asm",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-lut.test.ts",
+      "title": "matches native lut, lutrgb and lutyuv frames for every storage format, size and expression",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 1584
+    },
+    {
+      "file": "tests/differential/video-lut.test.ts",
+      "title": "matches native lut tables for every 8-bit value of every component",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 180
+    },
+    {
+      "file": "tests/differential/video-lut.test.ts",
+      "title": "matches native lut CLI rawvideo and framecrc through -vf and -filter_complex, with and without -ss/-t",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 144
+    },
+    {
+      "file": "tests/differential/video-lut.test.ts",
+      "title": "matches native replayed lut branches, joins and the multi-input CLI frame by frame",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 29
+    },
+    {
+      "file": "tests/differential/video-lut.test.ts",
+      "title": "matches native lut framecrc and rawvideo through the actor and timed schedulers",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 216
+    },
+    {
+      "file": "tests/differential/video-lut.test.ts",
+      "title": "fails like native on unparsable and NaN expressions and refuses gammaval, unported functions, int overflow and timelines before any output",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 17,
+      "refusalChecks": 68
+    },
+    {
+      "file": "tests/differential/video-lut.test.ts",
+      "title": "negotiates every accepted source as native does and refuses picks without storage before output on every path",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 239
+    },
+    {
+      "file": "tests/unit/video-lut.test.ts",
+      "title": "parses defaults, the eleven-entry shorthand order and aliases with the later option winning into frozen steps",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-lut.test.ts",
+      "title": "refuses enable=, unknown options, gammaval, unported functions and ^ with named messages",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-lut.test.ts",
+      "title": "builds limited YUV and full-range RGB, gray and legacy yuvj tables with truncation and the final 0..255 clip",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-lut.test.ts",
+      "title": "refuses NaN anywhere in the 65536 entries, out-of-int values in the used entries and profile-dependent results",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-lut.test.ts",
+      "title": "refuses in geometry on the negotiated input and leaves formats without storage to the negotiators",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-lut.test.ts",
+      "title": "maps packed components through ff_fill_rgba_map and gbrp planes through their components",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-lut.test.ts",
+      "title": "uses the full range for a legacy yuvj link tagged with the JPEG range",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-lut.test.ts",
+      "title": "reads padded strides, does not mutate the input, returns owned tight planes and keeps pts and metadata",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-lut.test.ts",
+      "title": "refuses oversized frames, malformed strides and storage, bad time bases, bad settings and aborted signals",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-lut.test.ts",
+      "title": "declare the native lists in order on every path and refuse runtime commands",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "(whole file, unedited; runs the 13 lut/lutrgb/lutyuv examples on every path)",
+      "passed": 8,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "total": 2409,
+    "refusalChecks": 68,
+    "byTest": {
+      "matches native lut, lutrgb and lutyuv frames for every storage format, size and expression": 1584,
+      "matches native lut tables for every 8-bit value of every component": 180,
+      "matches native lut CLI rawvideo and framecrc through -vf and -filter_complex, with and without -ss/-t": 144,
+      "matches native replayed lut branches, joins and the multi-input CLI frame by frame": 29,
+      "matches native lut framecrc and rawvideo through the actor and timed schedulers": 216,
+      "fails like native on unparsable and NaN expressions and refuses gammaval, unported functions, int overflow and timelines before any output": 17,
+      "negotiates every accepted source as native does and refuses picks without storage before output on every path": 239
+    }
+  },
+  "unsupported": [
+    "gammaval() and gammaval709() (need PREP-EXPR; refused in parse by name)",
+    "unported builtins sin, cos, tan, asin, acos, atan, atan2, sinh, cosh, tanh, exp, pow, gauss, squish, plus root, time and the ^ operator (refused in parse)",
+    "used table entries outside the int range (x86 INT_MIN vs AArch64 saturation; refused)",
+    "tables whose used entries differ between the linux-x64 and darwin-arm64 expression profiles (today hypot; refused)",
+    "9..16-bit, rgb48le/rgba64le, gbrap, yuv411p/410p/440p, yuva422p/444p, yuvj440p: no frame storage (negotiator refusal by name; lutyuv picks yuvj444p from gray and yuva444p from packed alpha)",
+    "enable= timelines and runtime commands"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.lut.kernel",
+      "file": "tests/differential/video-lut.test.ts",
+      "name": "matches native lut, lutrgb and lutyuv frames for every storage format, size and expression",
+      "modes": [
+        "linear"
+      ],
+      "scope": "lutVideoFrame against native rawvideo: 29 format/filter pairs (yuvj included), sizes 1x1..17x9, 12 option strings, 3 frames"
+    },
+    {
+      "id": "filter.lut.tables",
+      "file": "tests/differential/video-lut.test.ts",
+      "name": "matches native lut tables for every 8-bit value of every component",
+      "modes": [
+        "linear"
+      ],
+      "scope": "every 8-bit table entry of every component for the 15 lut storage formats"
+    },
+    {
+      "id": "filter.lut.cli",
+      "file": "tests/differential/video-lut.test.ts",
+      "name": "matches native lut CLI rawvideo and framecrc through -vf and -filter_complex, with and without -ss/-t",
+      "modes": [
+        "linear",
+        "graph"
+      ],
+      "scope": "-vf and -filter_complex rawvideo and framecrc with and without -ss/-t"
+    },
+    {
+      "id": "filter.lut.stream",
+      "file": "tests/differential/video-lut.test.ts",
+      "name": "matches native replayed lut branches, joins and the multi-input CLI frame by frame",
+      "modes": [
+        "graph",
+        "stream"
+      ],
+      "scope": "createReplayVideoExecution graphs and the multi-input CLI"
+    },
+    {
+      "id": "filter.lut.timed",
+      "file": "tests/differential/video-lut.test.ts",
+      "name": "matches native lut framecrc and rawvideo through the actor and timed schedulers",
+      "modes": [
+        "actor",
+        "timed"
+      ],
+      "scope": "timed backend activation, producer and pull schedulers"
+    },
+    {
+      "id": "filter.lut.refusals",
+      "file": "tests/differential/video-lut.test.ts",
+      "name": "fails like native on unparsable and NaN expressions and refuses gammaval, unported functions, int overflow and timelines before any output",
+      "modes": [
+        "linear",
+        "graph",
+        "actor",
+        "timed"
+      ],
+      "scope": "native status asserted; named refusals before any output"
+    },
+    {
+      "id": "filter.lut.negotiation",
+      "file": "tests/differential/video-lut.test.ts",
+      "name": "negotiates every accepted source as native does and refuses picks without storage before output on every path",
+      "modes": [
+        "linear",
+        "graph",
+        "stream",
+        "actor",
+        "timed"
+      ],
+      "scope": "per-source negotiation of lut, lutrgb and lutyuv on tests/helpers/video-negotiation-cases.ts"
+    },
+    {
+      "id": "filter.lut.syntax",
+      "file": "tests/unit/video-lut.test.ts",
+      "name": "refuses enable=, unknown options, gammaval, unported functions and ^ with named messages",
+      "modes": [
+        "unit"
+      ],
+      "scope": "parse refusals"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Sandbox Node v22.23.5 was too old for bootstrap; Node v24.22.3 was installed from nodejs.org (checksum verified). Bootstrap npm+submodule+reference took 3m18s; baseline typecheck+lint+boundaries+registry test took 59s.",
+    "Tables are built under both expression profiles and must agree, because geometry() has no run profile; this is stricter than using the run's profile and is documented in docs/contributing/lut.md.",
+    "Expression syntax is checked per component present in the negotiated format (in geometry), as native config_props parses only those; gammaval/unported refusals are made in parse for all components.",
+    "Legacy yuvj links reach the operator as yuv storage with metadata colorRange 2; the kernel maps that to the yuvj format to use config_props' full-range default case. Matched native on all three yuvj negotiation sources.",
+    "No case is linux-gated; no macOS run was made in this sandbox."
+  ]
+}
