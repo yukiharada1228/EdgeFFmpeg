@@ -1,0 +1,209 @@
+{
+ "capabilityId": "filter.removegrain",
+ "slug": "vf-removegrain",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/removegrain.ts",
+  "packages/avfilter/src/video-removegrain.ts",
+  "packages/avfilter/NOTICE-REMOVEGRAIN",
+  "packages/avfilter/src/video-ops/registry.ts",
+  "tests/unit/video-removegrain.test.ts",
+  "tests/differential/video-removegrain.test.ts",
+  "docs/contributing/removegrain.md",
+  "docs/contributing/wave2/vf-removegrain.json"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {removegrainOperator} from './removegrain.js';",
+    " removegrainOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-removegrain.test.ts",
+   "tests": 5,
+   "passed": 5
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "tests": 8,
+   "passed": 8,
+   "note": "unchanged; runs the 5 removegrain examples on all five paths"
+  },
+  {
+   "file": "tests/differential/video-removegrain.test.ts",
+   "title": "matches native removegrain bytes for every mode on every plane slot across formats sizes and patterns",
+   "checks": 9240,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-removegrain.test.ts",
+   "title": "matches native removegrain with default filter threads and with -filter_threads 1",
+   "checks": 144,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-removegrain.test.ts",
+   "title": "matches native linear removegrain chains with negotiated conversion and scalar arithmetic",
+   "checks": 270,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-removegrain.test.ts",
+   "title": "matches native removegrain CLI -vf and -filter_complex rawvideo and framecrc outputs across timing and size scopes",
+   "checks": 336,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-removegrain.test.ts",
+   "title": "matches native replayed removegrain branches and joins frame by frame",
+   "checks": 20,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-removegrain.test.ts",
+   "title": "matches native removegrain framecrc and rawvideo through the timed executor and activation actors",
+   "checks": 432,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-removegrain.test.ts",
+   "title": "refuses removegrain enable= timelines on every CLI path before opening outputs while native accepts them",
+   "checks": 10,
+   "passed": true
+  },
+  {
+   "file": "tests/differential/video-removegrain.test.ts",
+   "title": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+   "checks": 89,
+   "passed": true
+  }
+ ],
+ "nativeComparisons": {
+  "kernelRawvideo": {
+   "outputs": 9240,
+   "nativeRuns": 264,
+   "framesPerOutput": 6
+  },
+  "threads": 144,
+  "linearChains": 270,
+  "cliVf": 288,
+  "cliFilterComplex": 48,
+  "replayStream": 20,
+  "timedBackend": {
+   "nativeRuns": 144,
+   "comparisons": 432
+  },
+  "enableRefusals": {
+   "refusals": 10,
+   "nativeAcceptRuns": 2
+  },
+  "negotiation": {
+   "sources": 17,
+   "checks": 89
+  }
+ },
+ "unsupported": [
+  "yuva422p/yuva444p/yuv440p/yuv411p/yuv410p/yuvj411p/yuvj440p/gbrap have no frame storage; refused by name when negotiated",
+  "Packed RGB with alpha sources (rgba/bgra/argb/abgr) negotiate gbrap natively; refused before output",
+  "enable= timelines",
+  "runtime commands (ENOSYS; native has no process_command either)",
+  "Mid-stream format changes: native never clears skip_odd/skip_even across config_input; this module derives them per frame (untested)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.removegrain.kernel",
+   "file": "tests/differential/video-removegrain.test.ts",
+   "name": "matches native removegrain bytes for every mode on every plane slot across formats sizes and patterns",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "removeGrainVideoFrame vs native rawvideo: gray/yuv420p/yuv422p/yuv444p/yuva420p/gbrp x 11 sizes (1x1..17x9, 1x3, 3x1, 3x2) x 140 option sets (every mode 0..24 alone on each plane slot, every mode on all slots, 14 skip-row mixes) x noise/impulse/ramp-peaks/checkerboard/constant/three-level frames"
+  },
+  {
+   "id": "filter.removegrain.threads",
+   "file": "tests/differential/video-removegrain.test.ts",
+   "name": "matches native removegrain with default filter threads and with -filter_threads 1",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "native default threads and -filter_threads 1 agree with each other and with removeGrainVideoFrame (17x9, 64x33)"
+  },
+  {
+   "id": "filter.removegrain.linear",
+   "file": "tests/differential/video-removegrain.test.ts",
+   "name": "matches native linear removegrain chains with negotiated conversion and scalar arithmetic",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "compileVideoFilterChain vs native -vf -cpuflags 0 rawvideo with negotiated conversion (nv12/nv21/rgb24 sources, nv12/rgba targets)"
+  },
+  {
+   "id": "filter.removegrain.cli",
+   "file": "tests/differential/video-removegrain.test.ts",
+   "name": "matches native removegrain CLI -vf and -filter_complex rawvideo and framecrc outputs across timing and size scopes",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "media backend -vf (288) and two-output -filter_complex (48), rawvideo and framecrc, with and without -ss/-t"
+  },
+  {
+   "id": "filter.removegrain.stream",
+   "file": "tests/differential/video-removegrain.test.ts",
+   "name": "matches native replayed removegrain branches and joins frame by frame",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "createReplayVideoExecution branches, hstack joins and nullsink"
+  },
+  {
+   "id": "filter.removegrain.timed",
+   "file": "tests/differential/video-removegrain.test.ts",
+   "name": "matches native removegrain framecrc and rawvideo through the timed executor and activation actors",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "timed backend pull (DAG executor), activation and producer (actors); 1x1, 2x3, 5x3"
+  },
+  {
+   "id": "filter.removegrain.refusals",
+   "file": "tests/differential/video-removegrain.test.ts",
+   "name": "refuses removegrain enable= timelines on every CLI path before opening outputs while native accepts them",
+   "modes": [
+    "semantic"
+   ],
+   "scope": "enable= refused on media -vf/-filter_complex and timed schedulers with no output opened"
+  },
+  {
+   "id": "filter.removegrain.negotiation",
+   "file": "tests/differential/video-removegrain.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "tests/helpers/video-negotiation-cases.ts over 17 sources on the five paths"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Node v22.23.5 (sandbox default). The bootstrap script refuses Node < 24 and installing Node 24 was not permitted in this sandbox, so setup used the documented fallback: git submodule update --init upstream/ffmpeg (49s), npm ci (9s), npm run reference:build (224s).",
+  "Baseline before changes: typecheck+lint+boundaries passed (89s); tests/unit/video-operator-registry.test.ts 8 tests passed (3s).",
+  "Differential file: about 27s with --maxWorkers=1.",
+  "skip_odd/skip_even are filter-wide in config_input and only set from planes the format has; both rules are mirrored and covered by the kernel matrix and unit tests.",
+  "Width-1 interior rows natively write dst[1]=src[1] into output padding; the visible output is a copy, so the case is supported (no visible byte depends on padding).",
+  "Mutation checks: per-slot skip flags, dropping skip_even, mode10 a7/a8 tie order, mode05/06-08/13-14 axis order and the mode11 rounding constant each fail the kernel test.",
+  "The pinned build has no --enable-gpl and uses --disable-x86asm, so native runs the C kernels. No platform-gated cases: integer only."
+ ]
+}

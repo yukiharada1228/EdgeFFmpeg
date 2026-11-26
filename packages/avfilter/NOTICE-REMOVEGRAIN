@@ -1,0 +1,16 @@
+Scoped removegrain video filter
+
+The option table, pixel-format list, mode kernels (mode01 to mode24, with
+mode1112, mode1314 and mode1516 shared), the frame-wide skip_odd/skip_even rows,
+the border row and column copies and the mode-0 plane copy in
+src/video-removegrain.ts and src/video-ops/removegrain.ts follow
+libavfilter/vf_removegrain.c (removegrain_options, pix_fmts,
+REMOVE_GRAIN_SORT_AXIS, cmp_int, mode01..mode24, config_input, filter_slice,
+filter_frame).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2012 Laurent de Soras; (c) 2013 Fredrik Mellbin; (c) 2015 Paul B
+Mahol; (c) 2015 James Darnley. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation of the eight-bit C kernels; the GPL x86
+assembly (x86/vf_removegrain.asm, ff_removegrain_init_x86) is not included.
