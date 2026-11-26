@@ -1,0 +1,91 @@
+{
+ "capabilityId": "filter.colorcorrect",
+ "slug": "vf-colorcorrect",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/colorcorrect.ts",
+  "packages/avfilter/NOTICE-COLORCORRECT",
+  "tests/unit/video-colorcorrect.test.ts",
+  "tests/differential/video-colorcorrect.test.ts",
+  "docs/contributing/colorcorrect.md",
+  "docs/contributing/wave2/vf-colorcorrect.json",
+  "packages/avfilter/src/video-ops/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {colorcorrectOperator} from './colorcorrect.js';",
+    " colorcorrectOperator,"
+   ]
+  }
+ ],
+ "paths": ["linear","graph","stream","actor","timed"],
+ "tests": [
+  {"file":"tests/differential/video-colorcorrect.test.ts","name":"runs against the reference build of commit 946fcce0 configured with --disable-x86asm","passed":1,"failed":0},
+  {"file":"tests/differential/video-colorcorrect.test.ts","name":"matches native colorcorrect frames for every format, size and option case, with default and single filter threads","passed":1,"failed":0,"platforms":["linux-x64"]},
+  {"file":"tests/differential/video-colorcorrect.test.ts","name":"matches native colorcorrect CLI rawvideo and framecrc through -vf and -filter_complex","passed":1,"failed":0,"platforms":["linux-x64"]},
+  {"file":"tests/differential/video-colorcorrect.test.ts","name":"matches native replayed colorcorrect branches and joins frame by frame","passed":1,"failed":0,"platforms":["linux-x64"]},
+  {"file":"tests/differential/video-colorcorrect.test.ts","name":"matches native colorcorrect framecrc and rawvideo through the actor and timed schedulers","passed":1,"failed":0,"platforms":["linux-x64"]},
+  {"file":"tests/differential/video-colorcorrect.test.ts","name":"refuses colorcorrect average, multi-slice minmax, timelines and unimplemented values before opening CLI outputs","passed":1,"failed":0},
+  {"file":"tests/differential/video-colorcorrect.test.ts","name":"negotiates every accepted colorcorrect source as native does and refuses picks without storage before output on every path","passed":1,"failed":0,"platforms":["linux-x64"]},
+  {"file":"tests/differential/video-colorcorrect.test.ts","name":"plans colorcorrect through compileVideoFilterChain with negotiated conversions as native does","passed":1,"failed":0,"platforms":["linux-x64"]},
+  {"file":"tests/unit/video-colorcorrect.test.ts","name":"parses declared defaults, shorthand, named options, constants, float storage, ranges and refusals","passed":1,"failed":0},
+  {"file":"tests/unit/video-colorcorrect.test.ts","name":"scales chroma in unfused single precision, copies luma and alpha, and keeps padded input unchanged","passed":1,"failed":0},
+  {"file":"tests/unit/video-colorcorrect.test.ts","name":"analyzes medians over the whole chroma plane and minmax over one-row chroma planes","passed":1,"failed":0},
+  {"file":"tests/unit/video-colorcorrect.test.ts","name":"rejects unsupported layouts, budgets, malformed storage, settings and cancellation explicitly","passed":1,"failed":0},
+  {"file":"tests/unit/video-colorcorrect.test.ts","name":"plans colorcorrect on every path, refuses picks without storage and multi-row minmax before frames, and refuses runtime commands","passed":1,"failed":0},
+  {"file":"tests/unit/video-operator-registry.test.ts","name":"(whole file, unchanged)","passed":8,"failed":0}
+ ],
+ "nativeComparisons": {
+  "count": 1564,
+  "details": [
+   {"test":"matches native colorcorrect frames for every format, size and option case, with default and single filter threads","count":1028,"compares":"colorcorrectVideoFrame bytes vs native -vf rawvideo: 4 formats x 6 sizes x 20 option cases (480), one-row minmax (18), every-value ramps (16) = 514 byte matches; plus 514 native default-thread vs -filter_threads 1 agreements"},
+   {"test":"matches native colorcorrect CLI rawvideo and framecrc through -vf and -filter_complex","count":150,"compares":"media CLI -vf and -filter_complex rawvideo and framecrc bytes, 6 source/option pairs, 3 chains, with and without -ss/-t (144); one-row minmax and nv12 conversion (6)"},
+   {"test":"matches native replayed colorcorrect branches and joins frame by frame","count":18,"compares":"createReplayVideoExecution rawvideo vs native -filter_complex, 6 pairs x 3 graphs"},
+   {"test":"matches native colorcorrect framecrc and rawvideo through the actor and timed schedulers","count":144,"compares":"createTimedVideoBackend pull (timed), activation and producer (actor) schedulers, rawvideo and framecrc, 3 and 2 frames"},
+   {"test":"refuses colorcorrect average, multi-slice minmax, timelines and unimplemented values before opening CLI outputs","count":34,"compares":"28 forms native accepts refused here with no output opened (media and timed, -vf and -filter_complex); 6 out-of-range values failing on both sides with no output opened"},
+   {"test":"negotiates every accepted colorcorrect source as native does and refuses picks without storage before output on every path","count":186,"compares":"2 filters x 17 sources, native pick from showinfo: 12 byte-exact on every path (yuvj on linear only), gray (yuvj444p) and packed RGBA (yuva444p) refused by name on every path and CLI backend; 93 checks per filter"},
+   {"test":"plans colorcorrect through compileVideoFilterChain with negotiated conversions as native does","count":4,"compares":"compileVideoFilterChain colorcorrect,hflip from yuv420p, yuva420p, nv12, yuv444p vs native -vf"}
+  ]
+ },
+ "unsupported": [
+  "analyze=average (and its numeric forms): per-slice float sums averaged over slices depend on the native thread count (measured: default threads and -filter_threads 1 differ); refused while parsing",
+  "analyze=minmax on chroma planes with more than one row: per-slice extremes averaged over FFMIN(chroma rows, threads) slices depend on the thread count (measured); refused in geometry() on every planner and repeated in frame(). One-row chroma planes (one native slice) are implemented",
+  "Every pixel format other than yuv420p, yuv422p, yuv444p and yuva420p (yuvj420p/422p/444p on linear chains): no frame storage; the shared negotiators refuse the pick by name. Native picks yuvj444p from gray and yuva444p from argb/rgba/abgr/bgra",
+  "enable= timeline (refused: 'Colorcorrect timeline expressions are not implemented')",
+  "Runtime commands rl/bl/rh/bh/saturation/analyze/enable (refused with the unsupported code)",
+  "Option expressions such as 1/3 or 0x1 (refused: 'Only constant decimal colorcorrect <option> values are implemented')"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "nodeVersion": "v24.22.3 (/opt/node24 in the sandbox; the sandbox default was v22.23.5)",
+ "proposedContracts": [
+  {"id":"filter.colorcorrect.frames","file":"tests/differential/video-colorcorrect.test.ts","name":"matches native colorcorrect frames for every format, size and option case, with default and single filter threads","modes":["linear"],"scope":"4 formats, 6 sizes, every option at both ends and typical values, median, one-row minmax, every-value ramps, thread-count independence","platforms":["linux-x64"]},
+  {"id":"filter.colorcorrect.cli","file":"tests/differential/video-colorcorrect.test.ts","name":"matches native colorcorrect CLI rawvideo and framecrc through -vf and -filter_complex","modes":["linear","graph"],"scope":"-vf and -filter_complex rawvideo and framecrc, -ss/-t, nv12 conversion","platforms":["linux-x64"]},
+  {"id":"filter.colorcorrect.stream","file":"tests/differential/video-colorcorrect.test.ts","name":"matches native replayed colorcorrect branches and joins frame by frame","modes":["stream"],"scope":"replay streams with split, hstack and nullsink","platforms":["linux-x64"]},
+  {"id":"filter.colorcorrect.timed","file":"tests/differential/video-colorcorrect.test.ts","name":"matches native colorcorrect framecrc and rawvideo through the actor and timed schedulers","modes":["actor","timed"],"scope":"timed backend pull, activation and producer schedulers, rawvideo and framecrc","platforms":["linux-x64"]},
+  {"id":"filter.colorcorrect.reject","file":"tests/differential/video-colorcorrect.test.ts","name":"refuses colorcorrect average, multi-slice minmax, timelines and unimplemented values before opening CLI outputs","modes":["linear","graph","timed"],"scope":"scope refusals and out-of-range parity with native, no output opened"},
+  {"id":"filter.colorcorrect.negotiation","file":"tests/differential/video-colorcorrect.test.ts","name":"negotiates every accepted colorcorrect source as native does and refuses picks without storage before output on every path","modes":["linear","graph","stream","actor","timed"],"scope":"native picks from 17 sources; yuvj444p and yuva444p refused by name","platforms":["linux-x64"]},
+  {"id":"filter.colorcorrect.chain","file":"tests/differential/video-colorcorrect.test.ts","name":"plans colorcorrect through compileVideoFilterChain with negotiated conversions as native does","modes":["linear"],"scope":"linear plans with conversions","platforms":["linux-x64"]}
+ ],
+ "setupDurationsSeconds": {
+  "node24Install": 4,
+  "bootstrapTotal": 224,
+  "npm": 9.8,
+  "submodule": 7.1,
+  "referenceBuild": 206.6,
+  "baselineChecks": 69,
+  "baselineRegistryUnit": 3
+ },
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Scope deviation from the spec: the spec lists analyze=minmax as implemented, but minmax_slice8 results are averaged over FFMIN(chroma rows, threads) slices, so native default threads and -filter_threads 1 differ (measured on 32x16 yuv420p). Only one-row chroma planes, where native always uses one slice, are implemented; larger ones are refused in geometry() before output.",
+  "The defaults are not an identity (c - 1 for chroma 1..47) and a fused multiply-subtract changes 15 default outputs, so every native byte comparison, defaults included, is gated to linux-x64 with it.skipIf and constant titles. The gate is a precaution from the arithmetic profile: no macOS run was available.",
+  "Native default threads and -filter_threads 1 agree on all 514 frame cases (manual, median and one-row minmax).",
+  "The sandbox reference is an unpinned build (--allow-unpinned-reference): sha256 ac302e4d... differs from the linux-x64 pin; commit 946fcce0 and --disable-x86asm are asserted at test time.",
+  "Mutations caught: fused u (6 tests failed), rounding instead of truncation (6), ceil half_size (1), reassociated (u + y*bd) + bl (2).",
+  "Differential file runtime: about 12 s on 4 vCPUs with --maxWorkers=1.",
+  "Full npm test / npm run check not run, per the wave rules (they need edge-flac.wasm)."
+ ]
+}

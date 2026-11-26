@@ -1,0 +1,16 @@
+Scoped colorcorrect video filter
+
+The option table (rl, bl, rh, bh, saturation, analyze and its constants),
+pixel_fmts, config_input's depth-8 constants (max, imax, chroma steps and plane
+sizes), the minmax_slice8 and median_8 analyses and their combination in
+filter_frame, and the per-pixel colorcorrect_slice8 arithmetic (PROCESS and the
+av_clip_uint8 store) in src/video-ops/colorcorrect.ts follow
+libavfilter/vf_colorcorrect.c (colorcorrect_options, pixel_fmts, config_input,
+filter_frame, minmax_slice8, median_8, colorcorrect_slice8).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2021 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete colorcorrect filter:
+only the eight-bit formats with frame storage here, no analyze=average, minmax
+only on one-row chroma planes, no timeline and no runtime commands.
