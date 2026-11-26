@@ -1,0 +1,281 @@
+{
+  "capabilityId": "filter.chromakey",
+  "slug": "vf-chromakey",
+  "status": "partial",
+  "filesChanged": [
+    "packages/avfilter/src/video-chromakey.ts",
+    "packages/avfilter/src/video-ops/chromakey.ts",
+    "packages/avfilter/src/video-ops/chromahold.ts",
+    "packages/avfilter/NOTICE-CHROMAKEY",
+    "tests/unit/video-chromakey.test.ts",
+    "tests/differential/video-chromakey.test.ts",
+    "docs/contributing/chromakey.md",
+    "docs/contributing/wave2/vf-chromakey.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/video-ops/registry.ts",
+      "change": "+2 import lines (chromakeyOperator, chromaholdOperator) and +2 array entries (` chromakeyOperator,`, ` chromaholdOperator,`)"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/video-chromakey.test.ts",
+      "title": "parses defaults, shorthand order, colors, float ranges, booleans and threads=1 into frozen steps",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-chromakey.test.ts",
+      "title": "converts the key with the native integer RGB_TO_U/RGB_TO_V macros or takes it as YUV",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-chromakey.test.ts",
+      "title": "refuses invalid and unsupported colors, out-of-range and expression floats, timeline, threads and unknown options explicitly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-chromakey.test.ts",
+      "title": "declares the native pix_fmts in declared order and refuses picks without storage and tall default-thread chromakey before output",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-chromakey.test.ts",
+      "title": "keys alpha over the 3x3 luma-coordinate neighbourhood with stale out-of-frame window slots",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-chromakey.test.ts",
+      "title": "moves held chroma toward 128 over (w>>hsub) x (h>>vsub) samples and keeps the trailing odd column",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-chromakey.test.ts",
+      "title": "rejects unsupported layouts, budgets, malformed storage, bad settings and cancellation explicitly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-chromakey.test.ts",
+      "title": "matches native chromakey alpha across keys, similarity, blend, yuv colours, sizes and noise and structured frames",
+      "passed": 1,
+      "failed": 0,
+      "cases": 113
+    },
+    {
+      "file": "tests/differential/video-chromakey.test.ts",
+      "title": "matches native integer chromahold across formats, keys, similarity, yuv colours, odd chroma edges and noise and structured frames",
+      "passed": 1,
+      "failed": 0,
+      "cases": 192
+    },
+    {
+      "file": "tests/differential/video-chromakey.test.ts",
+      "title": "matches native chromahold blend ramps on linux-x64",
+      "passed": 1,
+      "failed": 0,
+      "cases": 120,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-chromakey.test.ts",
+      "title": "matches native chromakey and chromahold rawvideo and framecrc CLI outputs with and without -ss/-t on the linear, graph, stream, actor and timed paths",
+      "passed": 1,
+      "failed": 0,
+      "cases": 200
+    },
+    {
+      "file": "tests/differential/video-chromakey.test.ts",
+      "title": "matches native replayed chromakey and chromahold branches frame by frame through createReplayVideoExecution",
+      "passed": 1,
+      "failed": 0,
+      "cases": 10
+    },
+    {
+      "file": "tests/differential/video-chromakey.test.ts",
+      "title": "agrees with native at the default filter thread count and -filter_threads 1 wherever it runs, and refuses tall default-thread chromakey",
+      "passed": 1,
+      "failed": 0,
+      "cases": 624
+    },
+    {
+      "file": "tests/differential/video-chromakey.test.ts",
+      "title": "matches native option acceptance and refuses invalid colors, out-of-range floats, expressions and other threads before output",
+      "passed": 1,
+      "failed": 0,
+      "cases": 74
+    },
+    {
+      "file": "tests/differential/video-chromakey.test.ts",
+      "title": "refuses tall default-thread chromakey and the yuva444p pick of packed alpha sources on every CLI backend before output",
+      "passed": 1,
+      "failed": 0,
+      "cases": 8
+    },
+    {
+      "file": "tests/differential/video-chromakey.test.ts",
+      "title": "negotiates every accepted source as native does and refuses picks without storage before output on every path",
+      "passed": 1,
+      "failed": 0,
+      "cases": 202
+    }
+  ],
+  "nativeComparisons": {
+    "count": 1543,
+    "compares": [
+      "113 chromakey rawvideo runs, each on linear and graph planners (13 keys/similarity/blend/yuv sets with threads=1 x 6 sizes, 7 sets without threads at 5 one-row sizes)",
+      "192 integer chromahold rawvideo runs (4 formats x 6 sizes x 8 sets), linear and graph",
+      "120 chromahold blend-ramp rawvideo runs, linux-x64 only",
+      "200 CLI rawvideo/framecrc outputs on the five paths, with and without -ss 0.04 -t 0.08",
+      "10 replay-stream graphs",
+      "624 native default-thread vs -filter_threads 1 pairs: 546 agree where EdgeFFmpeg accepts; 78 tall default-thread chromakey cases refused here (native disagrees on some at 4 vCPUs)",
+      "74 option strings: 34 accepted byte-exact, 24 refused by both with native statuses (234 EINVAL, 222 ERANGE, 8 option not found), 16 scoped refusals",
+      "8 CLI refusals before output",
+      "202 per-source negotiation checks (113 chromakey, 89 chromahold)"
+    ],
+    "reference": ".build/reference/ffmpeg (sandbox build, run at test time; commit and --disable-x86asm asserted from build-metadata.json)",
+    "cpuflags": "0"
+  },
+  "unsupported": [
+    "chromakey frames taller than one row without threads=1: native alpha depends on the filter thread count (slice-start window reset)",
+    "threads values other than 1",
+    "high-bit-depth formats and yuva422p/yuva444p (no frame storage; native picks of them refused by name, e.g. chromakey from rgb24/yuv444p/gray/rgba, chromahold from packed RGBA)",
+    "expression-valued similarity/blend (only decimal literals)",
+    "random/bikeshed colours and NaN or platform-dependent colour alphas",
+    "enable= timeline and runtime commands",
+    "native exit statuses for parse refusals on the CLI (EdgeFFmpeg exits 1)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.chromakey.parse",
+      "file": "tests/unit/video-chromakey.test.ts",
+      "name": "parses defaults, shorthand order, colors, float ranges, booleans and threads=1 into frozen steps",
+      "modes": [
+        "unit"
+      ],
+      "scope": "option syntax and defaults"
+    },
+    {
+      "id": "filter.chromakey.refusals",
+      "file": "tests/unit/video-chromakey.test.ts",
+      "name": "refuses invalid and unsupported colors, out-of-range and expression floats, timeline, threads and unknown options explicitly",
+      "modes": [
+        "unit"
+      ],
+      "scope": "parser refusals"
+    },
+    {
+      "id": "filter.chromakey.limits",
+      "file": "tests/unit/video-chromakey.test.ts",
+      "name": "rejects unsupported layouts, budgets, malformed storage, bad settings and cancellation explicitly",
+      "modes": [
+        "unit"
+      ],
+      "scope": "maxFrameBytes, strides, AbortSignal, settings"
+    },
+    {
+      "id": "filter.chromakey.alpha",
+      "file": "tests/differential/video-chromakey.test.ts",
+      "name": "matches native chromakey alpha across keys, similarity, blend, yuv colours, sizes and noise and structured frames",
+      "modes": [
+        "differential"
+      ],
+      "scope": "chromakey yuva420p, 13 option sets with threads=1 at 1x1..17x9 and 7 without at one-row sizes, linear and graph planners, padded strides"
+    },
+    {
+      "id": "filter.chromakey.hold",
+      "file": "tests/differential/video-chromakey.test.ts",
+      "name": "matches native integer chromahold across formats, keys, similarity, yuv colours, odd chroma edges and noise and structured frames",
+      "modes": [
+        "differential"
+      ],
+      "scope": "chromahold yuv420p/422p/444p/yuva420p, blend 0 or 0.0001, 6 sizes including odd subsampled chroma edges"
+    },
+    {
+      "id": "filter.chromakey.hold-blend",
+      "file": "tests/differential/video-chromakey.test.ts",
+      "name": "matches native chromahold blend ramps on linux-x64",
+      "modes": [
+        "differential"
+      ],
+      "scope": "chromahold blend ramps (multiply-add)",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.chromakey.cli",
+      "file": "tests/differential/video-chromakey.test.ts",
+      "name": "matches native chromakey and chromahold rawvideo and framecrc CLI outputs with and without -ss/-t on the linear, graph, stream, actor and timed paths",
+      "modes": [
+        "differential"
+      ],
+      "scope": "five paths via the CLI, rawvideo and framecrc, with and without -ss/-t"
+    },
+    {
+      "id": "filter.chromakey.stream",
+      "file": "tests/differential/video-chromakey.test.ts",
+      "name": "matches native replayed chromakey and chromahold branches frame by frame through createReplayVideoExecution",
+      "modes": [
+        "differential"
+      ],
+      "scope": "createReplayVideoExecution single and split/stack graphs"
+    },
+    {
+      "id": "filter.chromakey.threads",
+      "file": "tests/differential/video-chromakey.test.ts",
+      "name": "agrees with native at the default filter thread count and -filter_threads 1 wherever it runs, and refuses tall default-thread chromakey",
+      "modes": [
+        "differential"
+      ],
+      "scope": "native default threads vs -filter_threads 1 agreement wherever accepted; refusal of tall default-thread chromakey"
+    },
+    {
+      "id": "filter.chromakey.options",
+      "file": "tests/differential/video-chromakey.test.ts",
+      "name": "matches native option acceptance and refuses invalid colors, out-of-range floats, expressions and other threads before output",
+      "modes": [
+        "differential"
+      ],
+      "scope": "option acceptance against native, refusal statuses with host errno"
+    },
+    {
+      "id": "filter.chromakey.cli-refusals",
+      "file": "tests/differential/video-chromakey.test.ts",
+      "name": "refuses tall default-thread chromakey and the yuva444p pick of packed alpha sources on every CLI backend before output",
+      "modes": [
+        "differential"
+      ],
+      "scope": "tall default-thread chromakey and packed-alpha yuva444p pick refused before output on media and timed backends"
+    },
+    {
+      "id": "filter.chromakey.negotiation",
+      "file": "tests/differential/video-chromakey.test.ts",
+      "name": "negotiates every accepted source as native does and refuses picks without storage before output on every path",
+      "modes": [
+        "differential"
+      ],
+      "scope": "per-source negotiation from 17 sources on five paths and CLI"
+    }
+  ],
+  "sharedEditsNeeded": [
+    "The avformat backends map every filter parse error to exit status 1. Native exits 256-EINVAL (234 on Linux) for invalid colours and booleans and 256-ERANGE (222) for out-of-range floats. Reporting them needs a shared way for a VideoFilterParseError (or a subclass) to carry an exit status that the media and timed backends turn into ExecutionError.exitCode; @edge-ffmpeg/avfilter cannot import ExecutionError from @edge-ffmpeg/core. Until then the tests assert native's status and EdgeFFmpeg's refusal before output with status 1."
+  ],
+  "notes": [
+    "Status partial: the [THREADS] rule cannot hold for native chromakey at the default thread count. do_chromakey_slice resets its u/v windows to the key at each slice start, so native output for frames taller than one row depends on the host CPU count (measured: default vs -filter_threads 1 differ at 4 vCPUs on 17x9, 7x5 and 5x3 yuva420p). The module implements the one-slice result and accepts it only where native is thread-independent: one-row frames, or the generic filter option threads=1, which pins native to one slice (measured equal at default, 1 and 3 filter threads). Taller chromakey without threads=1 is refused in geometry() on every path and again in frame(). chromahold is thread-independent and complete.",
+    "chromahold blend ramps (128 + (u - 128) * f, a multiply-add) are gated to linux-x64 as a precaution; no macOS difference has been measured. chromakey has no multiply-add and runs on every platform.",
+    "Everything ran only on the sandbox Linux x86_64 build; no macOS run.",
+    "Setup: Node 24.22.3 installed from nodejs.org in the scratchpad (sandbox Node was 22.23.5 and bootstrap requires 24); bootstrap 195 s; baseline typecheck+lint+boundaries+registry test 61 s, green."
+  ]
+}
