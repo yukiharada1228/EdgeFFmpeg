@@ -1,0 +1,16 @@
+Scoped lut, lutrgb and lutyuv expression lookup tables
+
+The option table (c0..c3, y, u, v, r, g, b, a), the pixel-format lists, the
+per-component table construction with its variables and ranges, the (int)
+conversion and final clip, and the planar and packed 8-bit application in
+src/video-lut.ts and src/video-ops/lut.ts, lutrgb.ts and lutyuv.ts follow
+libavfilter/vf_lut.c (options, query_formats, config_props, lut_planar_8bits,
+lut_packed_8bits, filter_frame, lutyuv_init, lutrgb_init), with the
+ff_fill_rgba_map component order of libavfilter/drawutils.c and the
+shorthand rule of process_options in libavfilter/avfilter.c.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2011 Stefano Sabatini. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete lut filters: gammaval,
+gammaval709, the 9..16-bit formats, timelines and commands are not adapted.

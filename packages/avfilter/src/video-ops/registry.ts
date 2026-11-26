@@ -52,6 +52,9 @@ import {removegrainOperator} from './removegrain.js';
 import {hqxOperator} from './hqx.js';
 import {xstackOperator} from './xstack.js';
 import {swaprectOperator} from './swaprect.js';
+import {lutOperator} from './lut.js';
+import {lutrgbOperator} from './lutrgb.js';
+import {lutyuvOperator} from './lutyuv.js';
 // One import above and one entry below per operator, each entry ending with a comma, so parallel
 // additions never touch the same line. Order is irrelevant: lookups are by name.
 export const videoOperators=Object.freeze([
@@ -105,6 +108,9 @@ export const videoOperators=Object.freeze([
  hqxOperator,
  xstackOperator,
  swaprectOperator,
+ lutOperator,
+ lutrgbOperator,
+ lutyuvOperator,
 ] as const);
 type Operator=typeof videoOperators[number];
 type Steps=Operator extends infer O?O extends VideoOperatorDescriptor<infer S,infer T>?{readonly scoped:S;readonly timed:T}:never:never;
