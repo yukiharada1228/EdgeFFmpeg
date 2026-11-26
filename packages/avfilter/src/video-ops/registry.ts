@@ -39,6 +39,7 @@ import {maskfunOperator} from './maskfun.js';
 import {rgbashiftOperator} from './rgbashift.js';
 import {lumakeyOperator} from './lumakey.js';
 import {avgblurOperator} from './avgblur.js';
+import {floodfillOperator} from './floodfill.js';
 // One import above and one entry below per operator, each entry ending with a comma, so parallel
 // additions never touch the same line. Order is irrelevant: lookups are by name.
 export const videoOperators=Object.freeze([
@@ -79,6 +80,7 @@ export const videoOperators=Object.freeze([
  rgbashiftOperator,
  lumakeyOperator,
  avgblurOperator,
+ floodfillOperator,
 ] as const);
 type Operator=typeof videoOperators[number];
 type Steps=Operator extends infer O?O extends VideoOperatorDescriptor<infer S,infer T>?{readonly scoped:S;readonly timed:T}:never:never;

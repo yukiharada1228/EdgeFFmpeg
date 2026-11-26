@@ -1,0 +1,252 @@
+{
+ "capabilityId": "filter.floodfill",
+ "slug": "vf-floodfill",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/floodfill.ts",
+  "packages/avfilter/NOTICE-FLOODFILL",
+  "tests/unit/video-floodfill.test.ts",
+  "tests/differential/video-floodfill.test.ts",
+  "docs/contributing/floodfill.md",
+  "docs/contributing/wave2/vf-floodfill.json",
+  "packages/avfilter/src/video-ops/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {floodfillOperator} from './floodfill.js';",
+    " floodfillOperator,"
+   ]
+  }
+ ],
+ "paths": [
+  "linear",
+  "graph",
+  "stream",
+  "actor",
+  "timed"
+ ],
+ "tests": [
+  {
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "matches native linear floodfill seeds, regions and pass-through cases across every executable format, size and pattern",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 1296
+  },
+  {
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "matches native floodfill CLI rawvideo and framecrc on the linear path with seeking, including implicit conversions",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 126
+  },
+  {
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "matches native floodfill filter_complex branches on the graph path in rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 16
+  },
+  {
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "matches native floodfill on the stream path through replay execution and the multi-input CLI",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 8
+  },
+  {
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "matches native floodfill through the timed backend on the actor and timed paths in rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 24
+  },
+  {
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "fails like native for out-of-range floodfill options before opening any output on every path",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 6
+  },
+  {
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the yuva444p and gbrap picks before output on every path",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 93
+  },
+  {
+   "file": "tests/unit/video-floodfill.test.ts",
+   "name": "parses declared defaults, shorthand order, integer expressions, constants and native ranges",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-floodfill.test.ts",
+   "name": "fills the 4-connected seed region into owned tight planes without mutating padded input",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-floodfill.test.ts",
+   "name": "refuses the never-terminating truncated destination, unsupported layouts, budgets, malformed storage, settings and cancellation",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-floodfill.test.ts",
+   "name": "plans floodfill on linear, graph and actor paths, refuses out-of-range options before frames and refuses runtime commands",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "name": "(registration-driven, unedited)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 1569,
+  "details": [
+   {
+    "test": "matches native linear floodfill seeds, regions and pass-through cases across every executable format, size and pattern",
+    "count": 1296,
+    "compares": "compileVideoFilterChain three-frame rawvideo bytes vs native -vf rawvideo: {gray,yuv444p,gbrp} x {1x1,2x2,5x3,7x5,8x6,17x9} x 6 patterns x 12 option sets; 1261 byte matches, 35 never-terminating fills where native crashes or spins (SIGKILL after 2 s) and EdgeFFmpeg refuses"
+   },
+   {
+    "test": "matches native floodfill CLI rawvideo and framecrc on the linear path with seeking, including implicit conversions",
+    "count": 126,
+    "compares": "CLI -vf rawvideo and framecrc bytes with and without -ss/-t; gray, yuv444p, gbrp plus rgb24, bgr24, yuv420p, nv12 implicit conversion with -cpuflags 0 and scalar arithmetic"
+   },
+   {
+    "test": "matches native floodfill filter_complex branches on the graph path in rawvideo and framecrc",
+    "count": 16,
+    "compares": "CLI -filter_complex two-output rawvideo and framecrc files (32 files)"
+   },
+   {
+    "test": "matches native floodfill on the stream path through replay execution and the multi-input CLI",
+    "count": 8,
+    "compares": "createReplayVideoExecution rawvideo (6) and multi-input CLI rawvideo/framecrc (2)"
+   },
+   {
+    "test": "matches native floodfill through the timed backend on the actor and timed paths in rawvideo and framecrc",
+    "count": 24,
+    "compares": "createTimedVideoBackend producer (actor) and pull (timed) schedulers, rawvideo and framecrc bytes"
+   },
+   {
+    "test": "fails like native for out-of-range floodfill options before opening any output on every path",
+    "count": 6,
+    "compares": "out-of-range option native failure with no output file vs EdgeFFmpeg non-zero exit with zero outputs opened on linear, graph, stream, actor, timed"
+   },
+   {
+    "test": "negotiates every accepted source as native does and refuses the yuva444p and gbrap picks before output on every path",
+    "count": 93,
+    "compares": "tests/helpers/video-negotiation-cases.ts from 17 sources: 12 byte-exact on five paths, yuva420p->yuva444p and argb/rgba/abgr/bgra->gbrap refused by name on five paths and four CLI backends"
+   }
+  ]
+ },
+ "unsupported": [
+  "yuva420p and packed RGB with alpha (rgba, bgra, argb, abgr): native negotiates yuva444p / gbrap, which have no frame storage; refused by name at plan time on every path",
+  "high-bit-depth formats (9-16 bit), yuva444p and gbrap frames",
+  "enable= timelines",
+  "runtime commands",
+  "frames where the destination stored modulo 256 still matches the source on a region of two or more pixels: native never terminates (crash or spin); refused per frame",
+  "fills whose point stack would exceed maxFrameBytes",
+  "frames wider or taller than 65536 (refused at plan time; native refuses per frame with EINVAL)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "nodeVersion": "v24.22.3",
+ "proposedContracts": [
+  {
+   "id": "filter.floodfill.linear",
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "matches native linear floodfill seeds, regions and pass-through cases across every executable format, size and pattern",
+   "modes": [
+    "linear"
+   ],
+   "scope": "the three eight-bit formats, six sizes, six patterns (blocks with diagonal-only contact, rings with holes, constant, two-value noise, noise, ramps), seeds inside regions, on edges and outside the frame, picked and fixed sources, non-matching seeds, truncated destinations and the never-terminating refusal"
+  },
+  {
+   "id": "filter.floodfill.cli",
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "matches native floodfill CLI rawvideo and framecrc on the linear path with seeking, including implicit conversions",
+   "modes": [
+    "linear"
+   ],
+   "scope": "-vf rawvideo and framecrc with and without -ss/-t, including rgb24, bgr24, yuv420p and nv12 conversions"
+  },
+  {
+   "id": "filter.floodfill.graph",
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "matches native floodfill filter_complex branches on the graph path in rawvideo and framecrc",
+   "modes": [
+    "graph"
+   ],
+   "scope": "-filter_complex with two outputs"
+  },
+  {
+   "id": "filter.floodfill.stream",
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "matches native floodfill on the stream path through replay execution and the multi-input CLI",
+   "modes": [
+    "stream"
+   ],
+   "scope": "replay streams and the multi-input CLI"
+  },
+  {
+   "id": "filter.floodfill.timed",
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "matches native floodfill through the timed backend on the actor and timed paths in rawvideo and framecrc",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "the timed backend producer and pull schedulers"
+  },
+  {
+   "id": "filter.floodfill.reject",
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "fails like native for out-of-range floodfill options before opening any output on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "option range refusal parity with no output opened"
+  },
+  {
+   "id": "filter.floodfill.negotiation",
+   "file": "tests/differential/video-floodfill.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the yuva444p and gbrap picks before output on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "native picks from 17 sources; yuva444p and gbrap refused by name on every path"
+  }
+ ],
+ "setupDurationsSeconds": {
+  "node24": 5,
+  "bootstrap": 164,
+  "baseline": 57
+ },
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Reference built locally with --allow-unpinned-reference: sha256 differs from the linux-x64 pin (compiler cc 13.3.0 vs the pin's 12.2.0). Tests assert commit 946fcce0 and --disable-x86asm from build-metadata.json and pin no binary digest.",
+  "Sandbox Node was v22.23.5; Node 24.22.3 was run from the npm 'node@24' package placed first on PATH.",
+  "Baseline before changes: typecheck, lint, boundaries clean; tests/unit/video-operator-registry.test.ts 8/8.",
+  "Point stack: native pop order; pushes of non-matching neighbours are skipped, which leaves the set_pixel sequence unchanged because a non-matching pixel never matches later. Indices are 4 bytes; capacity bounded by maxFrameBytes.",
+  "Never-terminating fill: native segfaults (exit 139) or spins and ignores SIGTERM; the differential test uses SIGKILL after 2 s and pins only the accepted/refused split (1261/35), not how native fails.",
+  "No float paths; no Linux-gated cases. The differential file takes about 13 s with --maxWorkers=1.",
+  "Mutations caught by the differential file: dropping the left-neighbour push (5/7 failed), matching only plane 0 (5/7 failed)."
+ ]
+}
