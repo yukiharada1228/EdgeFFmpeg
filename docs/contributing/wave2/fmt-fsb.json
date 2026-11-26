@@ -1,0 +1,111 @@
+{
+ "capabilityId": "demuxer.fsb",
+ "slug": "fmt-fsb",
+ "status": "complete",
+ "filesChanged": [
+  "packages/containers/src/fsb.ts",
+  "packages/containers/NOTICE-FSB",
+  "docs/contributing/fsb-support.md",
+  "tests/unit/fsb.test.ts",
+  "tests/differential/fsb.test.ts",
+  "docs/contributing/wave2/fmt-fsb.json",
+  "packages/containers/src/registry.ts"
+ ],
+ "sharedEdits": [
+  "packages/containers/src/registry.ts: +1 line `export {fsb} from './fsb.js';` after framecrc (alphabetical, merge=union)"
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/fsb.test.ts",
+   "titles": [
+    "reads the version 3 fields at their fsb_read_header offsets with bounded reads inside the 88-byte header",
+    "seeks backwards into the header for a data offset below 88, as avio_skip does",
+    "flags a short final packet with copyRefusal and keeps whole-packet inputs copyable",
+    "refuses versions, formats, rates, channels, truncation, offsets and partial samples with native statuses where native fails",
+    "checks the abort signal around every header read and packet read",
+    "probes the eight bytes fsb_probe reads and registers a demux-only descriptor",
+    "demuxes through the PCM backend and refuses copy of short tails, fsb output, seeks and bad inputs before any output opens"
+   ],
+   "count": 7,
+   "passed": 7
+  },
+  {
+   "file": "tests/differential/fsb.test.ts",
+   "titles": [
+    "matches native FSB3 copy and decode framecrc, wav and raw outputs for 1/2/4 channels, three rates, data offsets and short tails",
+    "matches native FSB3 output -ss, -t and -frames selections for copy and decode",
+    "mirrors native FSB version, format, rate and channel statuses and refuses FSB4, ADPCM, partial samples, truncation and input seeks before any output"
+   ],
+   "count": 3,
+   "passed": 3,
+   "nativeComparisons": 351
+  },
+  {
+   "file": "tests/unit/container-registry.test.ts + tests/unit/container-registry-extension.test.ts + tests/unit/container-registry-copy-refusal.test.ts",
+   "count": 17,
+   "passed": 17
+  }
+ ],
+ "nativeComparisons": {
+  "total": 351,
+  "byteExactOutputs": 189,
+  "copyRefusalsCheckedAgainstNativeF0x3": 27,
+  "timeSelections": 108,
+  "statusChecks": 18,
+  "nativeAcceptanceOfRefusedInputs": 9,
+  "statusDetail": "176 (PATCHWELCOME) for FSB1, FSB5, a non-digit version under -f fsb and two unknown FSB3 formats; 183 (INVALIDDATA) for rate 0, negative rate, zero channels and a 60-byte header; each under decode and copy"
+ },
+ "unsupported": [
+  "FSB4 (XMA2, THP): native demuxes, refused",
+  "FSB3 adpcm_ima_wav / adpcm_psx / adpcm_thp formats: native decodes or copies, refused",
+  "partial trailing sample frame: native emits a partial final packet, refused",
+  "-c copy of a payload that is not whole 4096*channels-byte packets: native flags the final packet F=0x3, refused via copyRefusal (decode supported)",
+  "more than 512 channels: native decode fails with EINVAL but copy works, refused",
+  "data offset beyond EOF: native yields an empty stream, refused",
+  "87-byte header with a non-zero low channel byte: native opens it, refused as truncated",
+  "input -ss > 0: refused (not probed)",
+  "no fsb muxer (native has none)",
+  "undeclared .fsb inputs that fail fsb_probe: no extension fallback (native extension score is 1 next to read_probe)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "demuxer.fsb",
+   "file": "tests/differential/fsb.test.ts",
+   "name": "matches native FSB3 copy and decode framecrc, wav and raw outputs for 1/2/4 channels, three rates, data offsets and short tails",
+   "modes": [
+    "demux",
+    "copy",
+    "decode"
+   ],
+   "scope": "FSB3 pcm_s16le, 1/2/4 channels, 22050/24000/44100 Hz, whole packets, short tails (copy refused, decode compared), data at 88 and backward offset 0x40; framecrc copy (with/without -f fsb) and decode, wav, raw copy and decode"
+  },
+  {
+   "id": "demuxer.fsb",
+   "file": "tests/differential/fsb.test.ts",
+   "name": "matches native FSB3 output -ss, -t and -frames selections for copy and decode",
+   "modes": [
+    "time-selection"
+   ],
+   "scope": "output -ss, -t, -ss+-t, -frames:a and -ss past end; copy and decode on whole packets, decode on short tails"
+  },
+  {
+   "id": "demuxer.fsb",
+   "file": "tests/differential/fsb.test.ts",
+   "name": "mirrors native FSB version, format, rate and channel statuses and refuses FSB4, ADPCM, partial samples, truncation and input seeks before any output",
+   "modes": [
+    "refusal"
+   ],
+   "scope": "native 176/183 statuses mirrored for versions, formats, rate, channels and truncation; explicit refusals of FSB4, ADPCM flags, partial samples, >512 channels, offset past EOF, 87-byte header and input seeks"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Node 24.22.3 from /opt/node24 was used; the bootstrap (npm, submodule, reference) took 260 s (npm 10.9 s, submodule 9.8 s, reference build about 239 s).",
+  "Baseline before registering the module: typecheck, lint, boundaries and the three container registry tests (17) passed in 83 s.",
+  "PATCHWELCOME (176) and INVALIDDATA (183) are FFERRTAG statuses, not errno values, so they are host-independent; no errno-dependent status is mirrored.",
+  "Native fsb_read_header refuses FSB4 formats outside XMA2/THP with 176 too; the port refuses every FSB4 input with exit 1 because it does not parse the FSB4 header.",
+  "All cases are integer/copy; no linux-gated tests."
+ ]
+}
