@@ -1,0 +1,13 @@
+Scoped Creative Voice File (VOC)
+
+The magic, codec tag table, probe, header check, block parser, rate
+formulas and packet sizing in src/voc.ts follow libavformat/voc.c
+(ff_voc_magic, ff_voc_codec_tags), voc.h, vocdec.c (voc_probe,
+voc_read_header) and voc_packet.c (ff_voc_get_packet). The header,
+block and terminator writer follows libavformat/vocenc.c
+(voc_write_header, voc_write_packet, voc_write_trailer).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2006 Aurelien Jacobs. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete voc demuxer or muxer.

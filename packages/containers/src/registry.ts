@@ -29,6 +29,7 @@ export {sdx} from './sdx.js';
 export {smjpeg} from './smjpeg.js';
 export {sox} from './sox.js';
 export {streamhash} from './hash/hash-mux.js';
+export {voc} from './voc.js';
 export {w64} from './formats/w64.js';
 export {wav} from './formats/wav.js';
 export {wve} from './wve.js';
