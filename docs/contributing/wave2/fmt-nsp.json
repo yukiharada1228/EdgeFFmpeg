@@ -1,0 +1,59 @@
+{
+  "capabilityId": "demuxer.nsp",
+  "slug": "fmt-nsp",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/nsp.ts",
+    "packages/containers/NOTICE-NSP",
+    "docs/contributing/nsp-support.md",
+    "tests/unit/nsp.test.ts",
+    "tests/differential/nsp.test.ts",
+    "docs/contributing/wave2/fmt-nsp.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/containers/src/registry.ts", "line": "export {nsp} from './nsp.js';", "position": "after export {nistsphere}"}
+  ],
+  "tests": [
+    {"file": "tests/unit/nsp.test.ts", "tests": 7, "passed": 7},
+    {"file": "tests/differential/nsp.test.ts", "tests": 2, "passed": 2, "titles": [
+      "matches native framecrc, WAV, AIFF, AU, W64 and raw output with output -ss/-t for mono and stereo HEDR/HDR8 files, NOTE, unknown and SD_2 chunks",
+      "refuses -c copy (native copy timestamps use 1/90000) and input -ss before any output, and matches native refusal statuses"
+    ]},
+    {"file": "tests/unit/container-registry*.test.ts", "files": 3, "tests": 17, "passed": 17}
+  ],
+  "nativeComparisons": {
+    "byteForByteOutputs": 504,
+    "nativeInputFiles": 72,
+    "metadataRefusals": 72,
+    "nativeTagChecks": 24,
+    "sd2WarningChecks": 18,
+    "copyRefusals": 3,
+    "nativeCopyTimebaseChecks": 1,
+    "zeroSampleChecks": 1,
+    "statusComparisons": 14
+  },
+  "unsupported": [
+    "-c copy (native copy timestamps use 1/90000; refused through info.copyRefusal)",
+    "input -ss > 0",
+    "zero-sample audio data (native framecrc header prints 1/90000)",
+    "trailing partial sample frame",
+    "audio chunk id with a truncated size field",
+    "NOTE size above INT_MAX",
+    "NOTE inputs to wav/aiff/au outputs (shared metadata policy; native au writes no Comment)",
+    "workers, R2 and FLAC paths not exercised"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "demuxer.nsp.decode", "file": "tests/differential/nsp.test.ts", "name": "matches native framecrc, WAV, AIFF, AU, W64 and raw output with output -ss/-t for mono and stereo HEDR/HDR8 files, NOTE, unknown and SD_2 chunks", "modes": ["differential"], "scope": "nsp decode to framecrc/s16le/w64/wav/aiff/au with output -ss/-t; HEDR/HDR8, SDA_/SD_A/SD_2/SDAB, unknown-chunk and NOTE quirks; metadata refusal for wav/aiff/au"},
+    {"id": "demuxer.nsp.refusals", "file": "tests/differential/nsp.test.ts", "name": "refuses -c copy (native copy timestamps use 1/90000) and input -ss before any output, and matches native refusal statuses", "modes": ["differential"], "scope": "copy, input seek and zero-sample refusals; native EINVAL (host) / 234 and INVALIDDATA 183 statuses; partial-frame refusal"}
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Probe precedence 24: the FORM head overlaps aiff (30) and iff (26); confirm reads 8 bytes and is false for AIFF/AIFC, MAUD, short inputs and a bare 4-byte FORM.",
+    "Native EINVAL statuses are asserted as 256 - os.constants.errno.EINVAL on the host; EdgeFFmpeg uses the Linux value 234.",
+    "Setup: Node 22.23.5 was the sandbox default and bootstrap requires 24+; used preinstalled /opt/node24 (v24.22.3). Bootstrap (npm, submodule, reference) took 4m23s; baseline typecheck/lint/boundaries/registry tests about 1m30s, all passing.",
+    "Differential file runs in about 5 s with --maxWorkers=1."
+  ]
+}
