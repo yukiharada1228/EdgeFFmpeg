@@ -1,0 +1,12 @@
+Scoped GENeric Header (GENH) demuxer
+
+The GENH magic and channel probe, the 60-byte header walk with its int casts
+and refusal order, the codec switch, the start_offset and header_size rules
+and the block_align packets in src/genh.ts follow libavformat/genh.c
+(genh_probe, genh_read_header, genh_read_packet); the short final packet
+semantics follow libavformat/utils.c (av_get_packet).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2015 Paul B Mahol;(c)2000,2001,2002 Fabrice Bellard. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete genh demuxer.

@@ -8,6 +8,7 @@ export {avr} from './avr.js';
 export {crc} from './hash/hash-mux.js';
 export {epaf} from './epaf.js';
 export {framecrc} from './formats/framecrc.js';
+export {genh} from './genh.js';
 export {hash} from './hash/hash-mux.js';
 export {ircam} from './ircam.js';
 export {md5} from './hash/hash-mux.js';

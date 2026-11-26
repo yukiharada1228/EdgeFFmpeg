@@ -1,0 +1,74 @@
+{
+  "capabilityId": "demuxer.genh",
+  "slug": "fmt-genh",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/genh.ts",
+    "packages/containers/NOTICE-GENH",
+    "docs/contributing/genh-support.md",
+    "tests/unit/genh.test.ts",
+    "tests/differential/genh.test.ts",
+    "docs/contributing/wave2/fmt-genh.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    "packages/containers/src/registry.ts: +1 line `export {genh} from './genh.js';` between framecrc and hash (merge=union)"
+  ],
+  "tests": [
+    {"file": "tests/unit/genh.test.ts", "tests": 6, "passed": 6, "titles": [
+      "parses the 60-byte GENH header with bounded reads and serves pcm_u8 from start_offset",
+      "applies the start_offset and header_size rules: absolute start, 0x800 for header_size 0, and a start inside the header",
+      "refuses GENH headers in native order with native exit statuses and unported codecs explicitly",
+      "marks a short final packet for the copy refusal and keeps whole-packet inputs copyable",
+      "aborts GENH opens, probes and packet reads on the signal",
+      "registers a demux-only genh descriptor detected by GENH and a channel count in 1..0xFFFF"
+    ]},
+    {"file": "tests/differential/genh.test.ts", "tests": 6, "passed": 6, "durationSeconds": 9, "titles": [
+      "uses the sandbox reference built from FFmpeg 946fcce0 without x86 assembly",
+      "matches native GENH pcm_u8 copy and decode framecrc, WAV and raw u8 for channels interleaves rates and start rules",
+      "matches native GENH output -ss, -t and -frames selections for copy and decode",
+      "decodes a short final GENH packet as native does and refuses its stream copy before any output",
+      "refuses invalid GENH headers with native exit statuses before any output",
+      "refuses GENH inputs native accepts but the port does not mirror before any output"
+    ]},
+    {"file": "tests/unit/container-registry.test.ts", "passed": "all, unchanged"},
+    {"file": "tests/unit/container-registry-extension.test.ts", "passed": "all, unchanged"},
+    {"file": "tests/unit/container-registry-copy-refusal.test.ts", "passed": "all, unchanged"}
+  ],
+  "nativeComparisons": {
+    "byteExact": 178,
+    "breakdown": {
+      "copyDecodeWavRaw": 126,
+      "timeSelections": 40,
+      "shortTailDecode": 12
+    },
+    "exitStatusParity": 50,
+    "nativeAcceptsEdgeRefuses": 14,
+    "shortTailCopyRefusals": 12
+  },
+  "unsupported": [
+    "GENH codecs other than 13 (pcm_u8): 0, 1, 2, 6, 7, 10, 11, 12, 17 (ADPCM/DPCM) and 3, 4, 5 (always planar since block_align>0; pcm_*_planar is not in PcmCodec)",
+    "partial trailing sample frames",
+    "stream copy of an input whose final packet is short (native flags it KEY|CORRUPT, F=0x3); decoding it is supported",
+    "start_offset at or past EOF (native's avio_skip fails silently and demuxes from byte 60)",
+    "more than 65535 channels",
+    "input -ss > 0",
+    "GENH output (native has none)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "demuxer.genh.copy-decode", "file": "tests/differential/genh.test.ts", "name": "matches native GENH pcm_u8 copy and decode framecrc, WAV and raw u8 for channels interleaves rates and start rules", "modes": ["semantic", "bit-exact-pcm"], "scope": "GENH codec 13 demux: 1/2/5 channels, interleave 1/100/4096, 8000/11025 Hz, four start_offset/header_size rules; copy and decode framecrc (autodetected and -f genh), WAV, u8 and s16le framecrc. Wave 2 branch wave2/fmt-genh."},
+    {"id": "demuxer.genh.time", "file": "tests/differential/genh.test.ts", "name": "matches native GENH output -ss, -t and -frames selections for copy and decode", "modes": ["semantic", "bit-exact-pcm"], "scope": "GENH output -ss/-t/-frames:a selections, copy and pcm_s16le framecrc, four layouts. Wave 2 branch wave2/fmt-genh."},
+    {"id": "demuxer.genh.short-tail", "file": "tests/differential/genh.test.ts", "name": "decodes a short final GENH packet as native does and refuses its stream copy before any output", "modes": ["semantic", "bit-exact-pcm"], "scope": "GENH short final packet: decode parity; copy refused before output (native F=0x3). Wave 2 branch wave2/fmt-genh."},
+    {"id": "demuxer.genh.refusals", "file": "tests/differential/genh.test.ts", "name": "refuses invalid GENH headers with native exit statuses before any output", "modes": ["semantic"], "scope": "GENH header refusals with native 183/176/EINVAL statuses, decode and copy, autodetected and -f genh. Wave 2 branch wave2/fmt-genh."}
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Setup: sandbox Node was v22.23.5 and bootstrap requires Node 24+, so Node v24.22.3 was installed from nodejs.org (sha256-checked) into /opt/node24. Bootstrap (npm, submodule, reference) took 4m26s; the baseline typecheck, lint, boundaries and registry tests took 1m27s and passed (17 registry tests).",
+    "Rate 0: native accepts the header and then fails to open the pcm_u8 decoder and stream copy with AVERROR(EINVAL). The port refuses it in open() with the Linux value 234, and the test expects native's host value (256 - os.constants.errno.EINVAL) & 255.",
+    "Native probes in the sandbox: 5 channels (unspecified layout) show '5.0' in framecrc for copy and for decode, and the port matches. A start inside the header (for example 16) makes header bytes into samples (avio_skip seeks back), and the port mirrors it. A header_size-0 start of 0x800 past EOF makes native demux from byte 60, which the port refuses.",
+    "Codec 0 (ADPCM PSX): native stream copy succeeds, but its decode fails with 183 ('Decoder requires channel layout to be set'). Codec 4 with interleave 100: native decodes and copies as pcm_s16le_planar (status 0). Both are refused here.",
+    "No linux-gated cases. macOS arm64 parity was not run in this sandbox."
+  ]
+}
