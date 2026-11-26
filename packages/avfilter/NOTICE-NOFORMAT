@@ -1,0 +1,13 @@
+Scoped noformat negotiation exclusion list
+
+The option parsing and the format list of src/video-ops/noformat.ts follow the
+noformat filter of libavfilter/vf_format.c (init, parse_pixel_format,
+invert_formats, query_formats and the shared (no)format options).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2007 Bobby Bingham. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete noformat filter: only
+pix_fmts names that parseFilterPixelFormat declares are accepted, duplicates are
+refused, and the color_spaces, color_ranges and alpha_modes lists, enable= and
+runtime commands are refused before output.
