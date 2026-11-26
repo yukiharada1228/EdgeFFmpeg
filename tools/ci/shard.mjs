@@ -7,14 +7,17 @@
 // --prepare first runs `npm run reference:extract`, which rewrites the tracked compat/capabilities.json, so the tests see
 // the same tree as in a serial compat:report run; validate:fast runs it once before starting its shards instead.
 // The shard records source and reference snapshots before and after the run; the aggregate requires both to equal its
-// own. Outputs in <dir>: <suite>-<i>.json (Vitest JSON), <suite>-<i>.log and <suite>-<i>.shard.json (this record).
+// own. Files the tests create or rewrite under OUTPUT_ROOTS (compat/reports, .build/evidence, .build/fate-execution),
+// which a serial compat:report run would leave for its evidence upload, are copied to <suite>-<i>.outputs/<path> and
+// listed with their hashes; the aggregate verifies them and writes them back into its checkout. Outputs in <dir>:
+// <suite>-<i>.json (Vitest JSON), <suite>-<i>.log, <suite>-<i>.prepare.log (with --prepare), <suite>-<i>.outputs/
+// and <suite>-<i>.shard.json (this record).
 import {spawn,spawnSync} from 'node:child_process';
-import {createWriteStream,existsSync,mkdirSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
-import {resolve,relative} from 'node:path';
+import {copyFileSync,createWriteStream,existsSync,lstatSync,mkdirSync,readFileSync,readdirSync,rmSync,writeFileSync} from 'node:fs';
+import {dirname,resolve,relative} from 'node:path';
 import {snapshotSource,snapshotReference,sha256} from '../compatibility-report/source.mjs';
 import {runPlatform} from '../compatibility-report/summarize.mjs';
-import {suiteOptions} from '../linux/probe.mjs';
-import {SHARD_KIND} from '../compatibility-report/shards.mjs';
+import {SHARD_KIND,OUTPUT_ROOTS,shardCommand} from '../compatibility-report/shards.mjs';
 import {SUITES,fullPlan,validatePlan} from './plan.mjs';
 
 const root=resolve(import.meta.dirname,'../..');
@@ -31,6 +34,26 @@ export function shardPlan({planFile=null,planJson=process.env.EDGEFFMPEG_CI_PLAN
  if(given.mode==='full'&&given.sha256!==local.sha256)throw new Error(`The given full plan ${given.sha256.slice(0,12)} differs from this checkout's ${local.sha256.slice(0,12)}`);
  return given;
 }
+/** Size and modification time of every file under OUTPUT_ROOTS. */
+function outputState(){
+ const state=new Map(),walk=path=>{
+  let stat;try{stat=lstatSync(resolve(root,path));}catch{return;}
+  if(stat.isDirectory()){for(const name of readdirSync(resolve(root,path)).sort())walk(`${path}/${name}`);}
+  else if(stat.isFile())state.set(path,`${stat.size}:${stat.mtimeMs}`);
+ };
+ for(const path of OUTPUT_ROOTS)walk(path);
+ return state;
+}
+/** Files created or rewritten during the run, copied to <out>/<id>.outputs/<path>. */
+function keepOutputs(before,out,id){
+ const kept=[];
+ for(const [path,stamp]of outputState()){
+  if(before.get(path)===stamp)continue;
+  const bytes=readFileSync(resolve(root,path)),target=resolve(out,`${id}.outputs`,path);
+  mkdirSync(dirname(target),{recursive:true});copyFileSync(resolve(root,path),target);kept.push({path,size:bytes.length,sha256:sha256(bytes)});
+ }
+ return kept.sort((a,b)=>a.path<b.path?-1:1);
+}
 function tee(command,args,logPath){
  return new Promise(done=>{
   const log=createWriteStream(logPath),child=spawn(command,args,{cwd:root,stdio:['ignore','pipe','pipe']});
@@ -43,7 +66,7 @@ function tee(command,args,logPath){
 export async function runShard({suite,index,out,planFile=null,prepare=false}){
  if(!SUITES.includes(suite)||!Number.isInteger(index)||index<1)throw new Error(`Invalid shard ${suite} ${index}`);
  const id=`${suite}-${index}`,report=resolve(out,`${id}.json`),logPath=resolve(out,`${id}.log`),record=resolve(out,`${id}.shard.json`);
- mkdirSync(out,{recursive:true});for(const path of [report,logPath,record,resolve(out,`${id}.prepare.log`)])rmSync(path,{force:true});
+ mkdirSync(out,{recursive:true});for(const path of [report,logPath,record,resolve(out,`${id}.prepare.log`),resolve(out,`${id}.outputs`)])rmSync(path,{recursive:true,force:true});
  let preparation=null;
  if(prepare){
   const started=Date.now(),result=spawnSync(process.platform==='win32'?'npm.cmd':'npm',['run','reference:extract'],{cwd:root,encoding:'utf8',maxBuffer:32*1024*1024});
@@ -54,15 +77,16 @@ export async function runShard({suite,index,out,planFile=null,prepare=false}){
  const before=snapshotSource(root),referenceBefore=referenceState();
  const plan=shardPlan({planFile,files:before.files.map(entry=>entry.file)}),shards=plan.suites[suite]??[],files=shards[index-1];
  if(!files?.length)throw new Error(`Plan ${plan.sha256.slice(0,12)} has no shard ${id} (it has ${shards.length} ${suite} shards)`);
- const args=['vitest','run',...files,...suiteOptions(suite),'--reporter=default','--reporter=json',`--outputFile=${report}`];
- console.log(`[shard ${id}] ${files.length} files of plan ${plan.mode} ${plan.sha256.slice(0,12)}: npx vitest run <files> ${suiteOptions(suite).join(' ')}`);
- const startedAt=new Date().toISOString(),started=Date.now(),result=await tee(process.platform==='win32'?'npx.cmd':'npx',args,logPath),durationMs=Date.now()-started;
- const after=snapshotSource(root),referenceAfter=referenceState(),log=readFileSync(logPath);
+ const command=shardCommand(suite,files,id),args=[...command.slice(1,-1),`--outputFile=${report}`];
+ console.log(`[shard ${id}] ${files.length} files of plan ${plan.mode} ${plan.sha256.slice(0,12)}: ${command.slice(0,3).join(' ')} <files> ${command.slice(3+files.length).join(' ')}`);
+ const outputsBefore=outputState(),startedAt=new Date().toISOString(),started=Date.now(),result=await tee(process.platform==='win32'?'npx.cmd':'npx',args,logPath),durationMs=Date.now()-started;
+ const outputs=keepOutputs(outputsBefore,out,id),after=snapshotSource(root),referenceAfter=referenceState(),log=readFileSync(logPath);
+ if(outputs.length)console.log(`[shard ${id}] test outputs kept: ${outputs.map(output=>output.path).join(', ')}`);
  const meta={schemaVersion:1,kind:SHARD_KIND,id,suite,index,count:shards.length,planMode:plan.mode,planSha256:plan.sha256,files,
-  command:['npx',...args.slice(0,-1),`--outputFile=${id}.json`],exitCode:result.exitCode,signal:result.signal,startedAt,finishedAt:new Date().toISOString(),durationMs,
+  command,exitCode:result.exitCode,signal:result.signal,startedAt,finishedAt:new Date().toISOString(),durationMs,
   log:`${id}.log`,logSha256:sha256(log),report:existsSync(report)?`${id}.json`:null,reportSha256:existsSync(report)?sha256(readFileSync(report)):null,
   root,revision:before.revision,sourceBefore:before.sha256,sourceAfter:after.sha256,referenceBefore:referenceBefore.snapshot,referenceAfter:referenceAfter.snapshot,
-  platform:runPlatform(process,referenceBefore.metadata),environment:{node:process.version,platform:process.platform,arch:process.arch},preparation,
+  platform:runPlatform(process,referenceBefore.metadata),environment:{node:process.version,platform:process.platform,arch:process.arch},preparation,outputs,
   ci:process.env.GITHUB_ACTIONS==='true'?{runId:process.env.GITHUB_RUN_ID??null,runAttempt:process.env.GITHUB_RUN_ATTEMPT??null,job:process.env.GITHUB_JOB??null,sha:process.env.GITHUB_SHA??null,ref:process.env.GITHUB_REF??null}:null};
  writeFileSync(record,JSON.stringify(meta,null,1)+'\n');
  const stable=before.sha256===after.sha256&&JSON.stringify(referenceBefore.snapshot)===JSON.stringify(referenceAfter.snapshot);

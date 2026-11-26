@@ -67,6 +67,21 @@ export function validatePlan(plan){
  }
  return plan;
 }
+/**
+ * The fast-lane plan of a selection (tools/ci/affected.mjs): the selected files, with ceil(estimated seconds /
+ * fastLane.shardSeconds) shards per suite, at most the suite's full-pipeline count. The selection reasons and the
+ * dependency chain of each selected test are kept in the plan.
+ */
+export function fastPlan(files,selection,{config=readConfig(),durations=readDurations()}={}){
+ const measured=durations.profiles[config.profile]?.files??{},chosen=new Set(selection.tests),counts={};
+ for(const suite of SUITES){
+  const all=suiteFiles(files,suite),list=all.filter(file=>chosen.has(file)),known=all.filter(file=>Object.hasOwn(measured,file));
+  const mean=known.length?known.reduce((sum,file)=>sum+measured[file],0)/known.length:1,seconds=list.reduce((sum,file)=>sum+(measured[file]??mean),0);
+  counts[suite]=Math.min(config.shards[suite],Math.max(1,Math.ceil(seconds/config.fastLane.shardSeconds)));
+ }
+ return planShards(files.filter(file=>chosen.has(file)),{counts,durations,profile:config.profile,mode:'fast',selection:{base:selection.base,mergeBase:selection.mergeBase,distance:selection.distance??null,rejectedBases:selection.rejectedBases??[],all:selection.all,changed:selection.changed,
+  reasons:Object.fromEntries(Object.entries(selection.reasons).map(([test,list])=>[test,list[0]])),chains:selection.chains??{},graphFailures:selection.graphFailures??[],missingImports:selection.missingImports??[]}});
+}
 /** One matrix entry per shard, longest estimate first so the slowest shards start first. */
 export function shardMatrix(plan){
  const entries=SUITES.flatMap(suite=>plan.suites[suite].map((_,position)=>({id:`${suite}-${position+1}`,suite,index:position+1,count:plan.suites[suite].length,estimate:plan.estimatedSeconds?.[suite]?.[position]??0})));
@@ -86,15 +101,8 @@ if(import.meta.url===`file://${process.argv[1]}`){
  let plan;
  if(mode==='full')plan=fullPlan(files);
  else{
-  const {affectedTests}=await import('./affected.mjs'),config=readConfig(),durations=readDurations();
-  const selection=await affectedTests({root,base:option('--base')??config.fastLane.bases,files,config});
-  const measured=durations.profiles[config.profile]?.files??{},chosen=new Set(selection.tests),counts={};
-  for(const suite of SUITES){
-   const list=suiteFiles(files,suite).filter(file=>chosen.has(file)),all=suiteFiles(files,suite),known=all.filter(file=>Object.hasOwn(measured,file));
-   const mean=known.length?known.reduce((sum,file)=>sum+measured[file],0)/known.length:1,seconds=list.reduce((sum,file)=>sum+(measured[file]??mean),0);
-   counts[suite]=Math.min(config.shards[suite],Math.max(1,Math.ceil(seconds/config.fastLane.shardSeconds)));
-  }
-  plan=planShards(files.filter(file=>chosen.has(file)),{counts,durations,profile:config.profile,mode:'fast',selection:{base:selection.base,mergeBase:selection.mergeBase,all:selection.all,changed:selection.changed,reasons:Object.fromEntries(Object.entries(selection.reasons).map(([test,list])=>[test,list[0]]))}});
+  const {affectedTests}=await import('./affected.mjs'),config=readConfig();
+  plan=fastPlan(files,await affectedTests({root,base:option('--base')??config.fastLane.bases,files,config}),{config,durations:readDurations()});
  }
  validatePlan(plan);
  const out=resolve(root,option('--out')??'.build/ci/plan.json');mkdirSync(resolve(out,'..'),{recursive:true});writeFileSync(out,JSON.stringify(plan,null,1)+'\n');

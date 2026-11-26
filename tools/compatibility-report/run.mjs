@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { snapshotSource, snapshotReference, sha256 } from './source.mjs';
 import { renderMarkdown } from './render.mjs';
 import { summarizeSuite, summarizeCapabilities, summarizeContracts, validationStatus, summarizeFateExecution, runPlatform, platformPolicy } from './summarize.mjs';
-import { readShardDirectory, collectSuite } from './shards.mjs';
+import { readShardDirectory, collectSuite, checkShardSet, restoreOutputs } from './shards.mjs';
 import { suiteFiles, fullPlan } from '../ci/plan.mjs';
 const root = resolve(import.meta.dirname, '../..');
 // --from-shards <dir>: take the four test suites from shard records (tools/ci/shard.mjs) instead of running them here.
@@ -51,10 +51,14 @@ try {
   command('worker-types', ['run', 'workers:types', '--', '--check']); command('worker-bundle', ['run', 'workers:bundle']);
   const scripts = { unit: 'test', integration: 'test:integration', differential: 'test:differential', workers: 'test:workers' };
   let shards = null, plan = null, shardsStable = true, shardReferencesStable = true, shardFailure = null;
+  const testOutputs = new Map();
   if (shardDirectory) {
     plan = fullPlan(before.files.map(entry => entry.file));
     writeFileSync(resolve(directory, 'plan.json'), JSON.stringify(plan, null, 1) + '\n');
     try { shards = readShardDirectory(shardDirectory); } catch (error) { shardFailure = String(error); shards = new Map(); }
+    // Records that disagree with each other (revision, CI run, preparation) invalidate every suite.
+    const setProblems = shardFailure ? [] : checkShardSet(shards, { revision: before.revision });
+    if (setProblems.length) shardFailure = `Inconsistent shard records: ${setProblems.join('; ')}`;
     execution = { mode: 'shards', directory: relative(root, shardDirectory) || '.', plan: { sha256: plan.sha256, counts: plan.counts, files: plan.files, estimatedSeconds: plan.estimatedSeconds, file: relative(root, resolve(directory, 'plan.json')) }, records: shards.size, failure: shardFailure };
   }
   for (const [name, script] of Object.entries(scripts)) {
@@ -62,7 +66,7 @@ try {
     const expected = suiteFiles(before.files.map(entry => entry.file), name);
     if (shards) {
       console.log(`Collecting tests-${name} from ${plan.suites[name].length} shards`);
-      const collected = collectSuite(name, shards, { root, directory: shardDirectory, evidence: directory, plan, expected, policy, before, referenceBefore, platform });
+      const collected = collectSuite(name, shards, { root, directory: shardDirectory, evidence: directory, plan, expected, policy, before, referenceBefore, platform, outputs: testOutputs });
       gates.push(collected.gate); console.log(`tests-${name}: ${collected.gate.status}`);
       suites[name] = shardFailure ? { ...collected.suite, status: 'invalid-evidence', reason: shardFailure } : collected.suite;
       shardsStable &&= collected.sourceStable; shardReferencesStable &&= collected.referenceStable;
@@ -74,6 +78,14 @@ try {
       const evidence = summarizeSuite(json(file), expected, root, policy);
       suites[name] = { ...evidence, status: gate.status === 'passed' ? evidence.status : 'failed', report: relative(root, file), reportSha256: sha256(readFileSync(file)) };
     } catch (error) { suites[name] = { status: 'invalid-evidence', reason: String(error), files: [], assertions: [] }; }
+  }
+  // Files the shards' tests wrote (compat/reports/inverse-instability.json) go back where a serial run leaves them, before
+  // the gates that follow the tests in a serial run, so the evidence upload carries them.
+  if (shardDirectory) {
+    let restored = [], failure = null;
+    try { restored = restoreOutputs(testOutputs, { root }); } catch (error) { failure = String(error); shardFailure ??= failure; }
+    execution = { ...execution, testOutputs: restored, ...(failure ? { testOutputsFailure: failure } : {}) };
+    if (failure) for (const name of Object.keys(suites)) suites[name] = { ...suites[name], status: 'invalid-evidence', reason: failure };
   }
   const fateGate = extraction.status === 'passed' && inventory.status === 'passed' ? command('fate-execution', ['run', 'fate:run']) : null;
   // From shards, stability also requires every shard to have run on the aggregate's source and reference snapshots.

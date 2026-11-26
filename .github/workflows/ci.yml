@@ -62,6 +62,9 @@ jobs:
     permissions:
       contents: read
       actions: read
+    # The whole-tree manifest hash of the reference this run uses; every job that downloads it verifies it against this.
+    outputs:
+      tree-sha256: ${{ steps.tree.outputs.sha256 }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -83,55 +86,73 @@ jobs:
       # The cache key hashes every pinned input; the build steps below take their pins from the same outputs.
       - id: pins
         run: node tools/ci/reference-cache.mjs pins
-      # A restored entry is only a cache: bootstrap --check below re-verifies it, on a hit and before a miss is saved,
-      # against compat/reference-pins.json (ffmpeg, ffprobe and every pinned library the oracles link) and the codec
-      # locks, so a wrong entry fails explicitly instead of being used.
+      # Entries are saved as <key>-tree-<sha256 of the whole-tree manifest> by the job that built and verified the tree
+      # (tools/ci/reference-tree.mjs), so the prefix restores the newest one. A restored entry is only a cache: every
+      # file is checked against the hash in its key below, and bootstrap --check re-verifies ffmpeg, ffprobe, every
+      # pinned library the oracles link and the codecs against compat/reference-pins.json and the codec locks, so a
+      # wrong or incomplete entry fails explicitly instead of being used.
       - id: cache
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           key: ${{ steps.pins.outputs.key }}
+          restore-keys: ${{ steps.pins.outputs.key }}-tree-
           path: |
             .build/reference
             .build/codecs/openh264/openh264.wasm
             .build/codecs/flac/edge-flac.wasm
+            .build/reference-tree.json
       # A cache entry is visible only to its branch and the default branch, so a first push of a branch looks for the
-      # same key's build uploaded by another run of this repository. It is verified exactly like a cache hit.
+      # same key's build uploaded by another run of this repository (reference-build-<key>-tree-<sha256>). It is
+      # verified exactly like a cache entry.
       - id: shared
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-matched-key == ''
         env:
           GH_TOKEN: ${{ github.token }}
           KEY: ${{ steps.pins.outputs.key }}
         run: node tools/ci/reference-cache.mjs find "$KEY"
-      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id != ''
+      - if: steps.cache.outputs.cache-matched-key == '' && steps.shared.outputs.run-id != ''
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          name: reference-build-${{ steps.pins.outputs.key }}
+          name: ${{ steps.shared.outputs.artifact }}
           run-id: ${{ steps.shared.outputs.run-id }}
           github-token: ${{ github.token }}
           path: .build
+      # Every file of a restored tree must match the manifest hash its cache key or artifact name records.
+      - name: Verify the whole restored tree against its recorded manifest hash
+        if: steps.cache.outputs.cache-matched-key != '' || steps.shared.outputs.run-id != ''
+        env:
+          KEY: ${{ steps.pins.outputs.key }}
+          MATCHED: ${{ steps.cache.outputs.cache-matched-key }}
+          SHARED_TREE: ${{ steps.shared.outputs.tree-sha256 }}
+        run: |
+          if [ -n "$MATCHED" ]; then
+            node tools/ci/reference-tree.mjs verify --cache-key "$KEY" --matched-key "$MATCHED"
+          else
+            node tools/ci/reference-tree.mjs verify --sha256 "$SHARED_TREE"
+          fi
       - run: npm ci
-      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id == ''
+      - if: steps.cache.outputs.cache-matched-key == '' && steps.shared.outputs.run-id == ''
         name: Install codec build prerequisites
         run: |
           apt-get update
           apt-get install -y --no-install-recommends cmake python3 xz-utils
-      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id == ''
+      - if: steps.cache.outputs.cache-matched-key == '' && steps.shared.outputs.run-id == ''
         run: npm run reference:build
-      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id == ''
+      - if: steps.cache.outputs.cache-matched-key == '' && steps.shared.outputs.run-id == ''
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: cisco/openh264
           ref: ${{ steps.pins.outputs.openh264-commit }}
           path: .build/vendor/openh264
           persist-credentials: false
-      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id == ''
+      - if: steps.cache.outputs.cache-matched-key == '' && steps.shared.outputs.run-id == ''
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: emscripten-core/emsdk
           ref: ${{ steps.pins.outputs.emsdk-commit }}
           path: .build/toolchains/emsdk
           persist-credentials: false
-      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id == ''
+      - if: steps.cache.outputs.cache-matched-key == '' && steps.shared.outputs.run-id == ''
         name: Build the Wasm codecs from their locked inputs
         env:
           EMSDK_VERSION: ${{ steps.pins.outputs.emsdk-version }}
@@ -159,43 +180,69 @@ jobs:
         run: |
           runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --only flac-investigation
           runuser -u node -- env HOME=/home/node node tools/bootstrap/bootstrap.mjs --check
+      # A built tree is recorded here, after bootstrap --check has matched it to the pins; a restored one is verified
+      # again, so nothing since its restore changed it. The hash names the cache entry and the artifact below.
+      - id: tree
+        name: Record or re-verify the whole-tree manifest
+        env:
+          BUILT: ${{ steps.cache.outputs.cache-matched-key == '' && steps.shared.outputs.run-id == '' }}
+          KEY: ${{ steps.pins.outputs.key }}
+          MATCHED: ${{ steps.cache.outputs.cache-matched-key }}
+          SHARED_TREE: ${{ steps.shared.outputs.tree-sha256 }}
+        run: |
+          if [ "$BUILT" = true ]; then
+            runuser -u node -- env HOME=/home/node node tools/ci/reference-tree.mjs record > .build/ci-tree-output.txt
+          elif [ -n "$MATCHED" ]; then
+            runuser -u node -- env HOME=/home/node node tools/ci/reference-tree.mjs verify --cache-key "$KEY" --matched-key "$MATCHED" > .build/ci-tree-output.txt
+          else
+            runuser -u node -- env HOME=/home/node node tools/ci/reference-tree.mjs verify --sha256 "$SHARED_TREE" > .build/ci-tree-output.txt
+          fi
+          cat .build/ci-tree-output.txt
+          grep '^sha256=' .build/ci-tree-output.txt >> "$GITHUB_OUTPUT"
       - name: Record where the reference came from
         env:
-          CACHE_HIT: ${{ steps.cache.outputs.cache-hit }}
+          MATCHED: ${{ steps.cache.outputs.cache-matched-key }}
           SHARED_RUN: ${{ steps.shared.outputs.run-id }}
+          TREE: ${{ steps.tree.outputs.sha256 }}
         run: |
-          if [ "$CACHE_HIT" = true ]; then source=cache; elif [ -n "$SHARED_RUN" ]; then source="artifact of run $SHARED_RUN"; else source=built; fi
-          echo "reference and codecs: $source" | tee .build/bootstrap/reference-source.txt
-      - if: steps.cache.outputs.cache-hit != 'true'
+          if [ -n "$MATCHED" ]; then source="cache $MATCHED"; elif [ -n "$SHARED_RUN" ]; then source="artifact of run $SHARED_RUN"; else source=built; fi
+          echo "reference and codecs: $source; whole-tree manifest sha256 $TREE" | tee .build/bootstrap/reference-source.txt
+      - if: steps.cache.outputs.cache-matched-key == ''
         uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
-          key: ${{ steps.pins.outputs.key }}
+          key: ${{ steps.pins.outputs.key }}-tree-${{ steps.tree.outputs.sha256 }}
           path: |
             .build/reference
             .build/codecs/openh264/openh264.wasm
             .build/codecs/flac/edge-flac.wasm
-      - if: steps.cache.outputs.cache-hit != 'true' && steps.shared.outputs.run-id == ''
+            .build/reference-tree.json
+      - if: steps.cache.outputs.cache-matched-key == '' && steps.shared.outputs.run-id == ''
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: reference-build-${{ steps.pins.outputs.key }}
+          name: reference-build-${{ steps.pins.outputs.key }}-tree-${{ steps.tree.outputs.sha256 }}
           include-hidden-files: true
           if-no-files-found: error
           path: |
             .build/reference/
             .build/codecs/openh264/openh264.wasm
             .build/codecs/flac/edge-flac.wasm
+            .build/reference-tree.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: worker-reference-and-codec
           include-hidden-files: true
           if-no-files-found: error
+          # last-run.json is this job's bootstrap record, which the report job's reference-evidence carries as the
+          # old workflow's did.
           path: |
             .build/reference/
             .build/codecs/openh264/openh264.wasm
             .build/codecs/flac/edge-flac.wasm
+            .build/reference-tree.json
             .build/flac-investigation/native-cases.json
             .build/flac-investigation/native-error-cases.json
             .build/flac-investigation/malformed-prototype-result.json
+            .build/bootstrap/last-run.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
@@ -203,6 +250,7 @@ jobs:
           include-hidden-files: true
           path: |
             .build/reference/build-metadata.json
+            .build/reference-tree.json
             .build/bootstrap/
       # Diagnostics when the reference or the bootstrap fails before the artifact above is uploaded.
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -260,6 +308,10 @@ jobs:
         with:
           name: worker-reference-and-codec
           path: .build
+      - name: Verify every file of the reference against the reference job's manifest hash
+        env:
+          TREE: ${{ needs.reference.outputs.tree-sha256 }}
+        run: node tools/ci/reference-tree.mjs verify --sha256 "$TREE"
       - run: chmod +x .build/reference/ffmpeg .build/reference/ffprobe
       - run: chown -R node:node "$GITHUB_WORKSPACE"
       - run: runuser -u node -- env HOME=/home/node npm ci
@@ -293,6 +345,10 @@ jobs:
         with:
           name: worker-reference-and-codec
           path: .build
+      - name: Verify every file of the reference against the reference job's manifest hash
+        env:
+          TREE: ${{ needs.reference.outputs.tree-sha256 }}
+        run: node tools/ci/reference-tree.mjs verify --sha256 "$TREE"
       # A shard that uploaded nothing is reported as missing by compat:report, never skipped.
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         continue-on-error: true
@@ -303,8 +359,8 @@ jobs:
       # The FATE gate runs make in .build/reference. An artifact does not keep the build tree's timestamps, and this
       # checkout's sources are newer than any restored object, so make would rebuild FFmpeg (and time out). One
       # timestamp, newer than the checkout, for every file of the restored tree makes make treat it as built, as it was
-      # in the job that built it. bootstrap --check verifies the programs and libraries, and the report's
-      # referenceStable fails if make relinks either program.
+      # in the job that built it. reference-tree.mjs has verified every file's content above and bootstrap --check
+      # verifies the programs and libraries; the report's referenceStable fails if make relinks either program.
       - name: Give the restored build tree one timestamp newer than the checkout
         run: find .build/reference -exec touch -h -d "@$(date +%s)" {} +
       - run: chmod +x .build/reference/ffmpeg .build/reference/ffprobe

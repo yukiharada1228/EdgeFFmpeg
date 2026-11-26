@@ -7,7 +7,7 @@
 import {mkdirSync,readFileSync,writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {execFileSync} from 'node:child_process';
-import {readShardDirectory,collectSuite} from '../compatibility-report/shards.mjs';
+import {readShardDirectory,collectSuite,checkShardSet,restoreOutputs} from '../compatibility-report/shards.mjs';
 import {passing,platformPolicy} from '../compatibility-report/summarize.mjs';
 import {SUITES,validatePlan} from './plan.mjs';
 
@@ -19,15 +19,18 @@ const shards=readShardDirectory(directory),records=[...shards.values()],problems
 const revision=execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),host=`${process.platform}-${process.arch}`;
 const first=records[0];
 if(records.length&&first.platform?.host!==host)problems.push(`shards ran on ${first.platform?.host}, not ${host}`);
+problems.push(...checkShardSet(shards,{revision}).map(problem=>`inconsistent shard records: ${problem}`));
+const outputs=new Map();
 const policy=first?platformPolicy(JSON.parse(readFileSync(resolve(root,'compat/test-contracts.json'),'utf8')),first.platform):undefined;
 for(const suite of SUITES){
  if(!plan.suites[suite].length)continue;
- const collected=collectSuite(suite,shards,{root,directory,evidence:out,plan,expected:plan.suites[suite].flat(),policy,before:{sha256:first?.sourceBefore,revision},referenceBefore:first?.referenceBefore??null,platform:{host}});
+ const collected=collectSuite(suite,shards,{root,directory,evidence:out,plan,expected:plan.suites[suite].flat(),policy,before:{sha256:first?.sourceBefore,revision},referenceBefore:first?.referenceBefore??null,platform:{host},outputs});
  results[suite]={gate:collected.gate.status,status:collected.suite.status,total:collected.suite.total??0,passed:collected.suite.passed??0,failed:collected.suite.failed??0,notApplicable:collected.suite.notApplicable??0,unexpectedSkips:collected.suite.unexpectedSkips??0,reason:collected.suite.reason??null};
  if(collected.gate.status!=='passed'||!passing(collected.suite.status))problems.push(`${suite}: ${collected.suite.status}${collected.suite.reason?` (${collected.suite.reason})`:''}`);
  if(!collected.sourceStable||!collected.referenceStable)problems.push(`${suite}: the shards ran on different source or reference snapshots of ${revision.slice(0,12)}`);
 }
-const summary={plan:{mode:plan.mode,sha256:plan.sha256,counts:plan.counts,files:plan.files,selection:plan.selection},revision,platform:first?.platform??null,results,problems,passed:problems.length===0};
+let testOutputs=[];try{testOutputs=restoreOutputs(outputs,{root});}catch(error){problems.push(String(error));}
+const summary={testOutputs,plan:{mode:plan.mode,sha256:plan.sha256,counts:plan.counts,files:plan.files,selection:plan.selection},revision,platform:first?.platform??null,results,problems,passed:problems.length===0};
 writeFileSync(resolve(out,'fast-lane.json'),JSON.stringify(summary,null,1)+'\n');
 for(const [suite,result]of Object.entries(results))console.log(`${suite}: ${result.status} (${result.passed} passed, ${result.failed} failed, ${result.notApplicable} not applicable, ${result.unexpectedSkips} unexpected skips of ${result.total})`);
 if(!Object.keys(results).length)console.log('No test file was selected.');
