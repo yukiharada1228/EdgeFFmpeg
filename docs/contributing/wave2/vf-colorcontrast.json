@@ -1,0 +1,353 @@
+{
+  "capabilityId": "filter.colorcontrast",
+  "slug": "vf-colorcontrast",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/colorcontrast.ts",
+    "packages/avfilter/NOTICE-COLORCONTRAST",
+    "tests/unit/video-colorcontrast.test.ts",
+    "tests/differential/video-colorcontrast.test.ts",
+    "docs/contributing/colorcontrast.md",
+    "docs/contributing/wave2/vf-colorcontrast.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/video-ops/registry.ts",
+      "change": "+1 import line: import {colorcontrastOperator} from './colorcontrast.js'; +1 entry line: ' colorcontrastOperator,'"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "title": "runs against the reference build of commit 946fcce0 configured with --disable-x86asm",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "title": "matches native colorcontrast identity settings for every format and size on the kernel and the CLI",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 280
+    },
+    {
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "title": "matches native colorcontrast float frames for every format, size and setting on linux-x64",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 420,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "title": "matches native colorcontrast over structured colour ramps on linux-x64",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 70,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "title": "matches native colorcontrast with default threads and -filter_threads 1 on linux-x64",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 18,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "title": "matches native colorcontrast CLI rawvideo and framecrc through -vf and -filter_complex on linux-x64",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 192,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "title": "matches native replayed colorcontrast branches and joins frame by frame on linux-x64",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 24,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "title": "matches native colorcontrast framecrc and rawvideo through the actor and timed schedulers on linux-x64",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 192,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "title": "refuses colorcontrast timelines, unparsable and out-of-range values before opening CLI outputs on every backend",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 36
+    },
+    {
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "title": "negotiates every accepted source as native does and refuses picks without storage before output on every path",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 146
+    },
+    {
+      "file": "tests/unit/video-colorcontrast.test.ts",
+      "title": "parses defaults, the AVOption shorthand order, named options, constants and expressions into frozen float steps",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorcontrast.test.ts",
+      "title": "refuses out-of-range, NaN and malformed values, timelines and unknown options before planning",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorcontrast.test.ts",
+      "title": "lists native pixel_fmts in declared order and executes only the members with frame storage",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorcontrast.test.ts",
+      "title": "keeps frames whose weight sum is at most FLT_EPSILON unchanged and computes PROCESS in single precision otherwise",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorcontrast.test.ts",
+      "title": "processes packed and planar channels into owned tight planes from padded input without mutating it, copying alpha",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorcontrast.test.ts",
+      "title": "rejects unsupported formats, budgets, malformed strides, settings and cancellation explicitly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorcontrast.test.ts",
+      "title": "plans colorcontrast through linear, graph and actor planners and refuses timelines and runtime commands",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "registers each video operator once with frozen flags and examples, keeping the legacy flags",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects descriptors that flag a path without the members its role needs",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "runs every registered example on each flagged path with identical frames",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators on the linear path",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators on the frame graph and replay paths",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators in the timed planner and activation actors",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators in the timed graph executor",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "negotiates and validates negate from the one shared table in every negotiator",
+      "passed": 1,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 1378,
+    "linuxGated": 916,
+    "everywhere": 462,
+    "compares": [
+      "280 identity matches: 7 formats x 6 sizes x 5 identity settings (native output equals the input and the kernel), plus 70 -vf rawvideo/framecrc CLI matches",
+      "420 kernel rawvideo matches (linux-x64): rgb24/bgr24/rgba/bgra/argb/abgr/gbrp x 1x1,2x2,5x3,7x5,8x6,17x9 x 10 float settings, 3 frames of noise/ramps+edges/constant",
+      "70 structured ramp matches (linux-x64): 64x64 frames, 16^3 grid, per-channel ramps, grey walks, 7 formats x 10 settings",
+      "18 thread matches (linux-x64): native default, -filter_threads 4 and 1 agree with each other and the kernel",
+      "192 CLI matches (linux-x64): -vf and -filter_complex, 3 chains, rawvideo and framecrc, with and without -ss/-t (media backend, scalar, native -cpuflags 0)",
+      "24 createReplayVideoExecution matches (linux-x64): plain, split+hstack, transpose+nullsink",
+      "192 timed backend matches (linux-x64): activation and producer (actor), pull (timed), rawvideo and framecrc, -frames:v 3 and 2",
+      "36 refusals: 16 native-accepted enable= forms refused with no output opened; 20 out-of-range or unparsable values refused natively and here",
+      "146 negotiation checks: 2 identity filters x 17 sources, native pick from showinfo, every pick matched byte-exact on the five paths (yuvj on linear)"
+    ],
+    "reference": ".build/reference/ffmpeg (run at test time; commit 946fcce0 and --disable-x86asm asserted from build-metadata.json)",
+    "cpuflags": "0 on CLI, stream and timed runs"
+  },
+  "unsupported": [
+    "high-depth formats (gbrp9..16, gbrap10..16, rgb48, bgr48, rgba64, bgra64: colorcontrast_slice16/_slice16p), gbrap and 0rgb/0bgr/rgb0/bgr0: no frame storage here; no negotiation source picks them and the shared negotiators refuse them by name",
+    "enable= timelines (native AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC)",
+    "runtime commands (native process_command on every option)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.colorcontrast.identity",
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "name": "matches native colorcontrast identity settings for every format and size on the kernel and the CLI",
+      "modes": [
+        "linear"
+      ],
+      "scope": "defaults and weight sums <= FLT_EPSILON: native output equals input and the kernel, 7 formats x 6 sizes x 5 settings, plus -vf rawvideo/framecrc"
+    },
+    {
+      "id": "filter.colorcontrast.kernel",
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "name": "matches native colorcontrast float frames for every format, size and setting on linux-x64",
+      "modes": [
+        "linear"
+      ],
+      "scope": "colorcontrastVideoFrame vs native rawvideo, 7 storage formats, 6 sizes, 10 float settings, 3 frames",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.colorcontrast.ramps",
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "name": "matches native colorcontrast over structured colour ramps on linux-x64",
+      "modes": [
+        "linear"
+      ],
+      "scope": "64x64 structured colour ramps (16^3 grid, per-channel ramps, grey walks), 7 formats x 10 settings",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.colorcontrast.threads",
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "name": "matches native colorcontrast with default threads and -filter_threads 1 on linux-x64",
+      "modes": [
+        "linear"
+      ],
+      "scope": "native default, 4 and 1 filter threads agree with each other and the kernel",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.colorcontrast.cli",
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "name": "matches native colorcontrast CLI rawvideo and framecrc through -vf and -filter_complex on linux-x64",
+      "modes": [
+        "linear",
+        "graph"
+      ],
+      "scope": "CLI -vf/-filter_complex, 3 chains, rawvideo and framecrc, with and without -ss/-t",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.colorcontrast.stream",
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "name": "matches native replayed colorcontrast branches and joins frame by frame on linux-x64",
+      "modes": [
+        "graph",
+        "stream"
+      ],
+      "scope": "createReplayVideoExecution with split, hstack, transpose, nullsink",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.colorcontrast.timed",
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "name": "matches native colorcontrast framecrc and rawvideo through the actor and timed schedulers on linux-x64",
+      "modes": [
+        "actor",
+        "timed"
+      ],
+      "scope": "timed backend activation/producer/pull schedulers, rawvideo and framecrc, -frames:v 3 and 2",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.colorcontrast.refusals",
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "name": "refuses colorcontrast timelines, unparsable and out-of-range values before opening CLI outputs on every backend",
+      "modes": [
+        "linear",
+        "graph",
+        "actor",
+        "timed"
+      ],
+      "scope": "enable= refused with no output opened; out-of-range and unparsable (NaN) values refused like native"
+    },
+    {
+      "id": "filter.colorcontrast.negotiation",
+      "file": "tests/differential/video-colorcontrast.test.ts",
+      "name": "negotiates every accepted source as native does and refuses picks without storage before output on every path",
+      "modes": [
+        "linear",
+        "graph",
+        "stream",
+        "actor",
+        "timed"
+      ],
+      "scope": "17 negotiation sources with identity settings; native picks rgb24/argb/gbrp/packed RGB, all executable"
+    },
+    {
+      "id": "filter.colorcontrast.syntax",
+      "file": "tests/unit/video-colorcontrast.test.ts",
+      "name": "refuses out-of-range, NaN and malformed values, timelines and unknown options before planning",
+      "modes": [
+        "unit"
+      ],
+      "scope": "parser refusals and messages"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Setup: the sandbox had Node v22.23.5 and bootstrap requires Node 24+; installed Node v24.11.1 from nodejs.org into the scratchpad (~3s). Bootstrap npm,submodule,reference with --allow-unpinned-reference took 179s (npm 10.7s, submodule 7.0s, reference 161.6s). Baseline typecheck+lint+boundaries+video-operator-registry test: 53s, green (8 tests).",
+    "The differential file runs in about 12s with --maxWorkers=1; the unit file in under 1s.",
+    "Float-sensitive cases (any weight sum above FLT_EPSILON) are gated to linux-x64 with it.skipIf and constant titles ending 'on linux-x64'. The gate is a precaution taken from the determinism notes (macOS arm64 fuses multiply-adds): no macOS difference was measured here (no macOS host). Identity, refusal and negotiation cases run everywhere; no case is dropped inside a test per platform.",
+    "Two mutations, computing in double (no Math.fround) and rounding instead of truncating in av_clip_uint8, each fail all six linux-gated differential tests.",
+    "Option values accept full av_expr expressions through compileExpression with the linux-x64 numeric profile, as the shared integer-option helper does; NaN results are refused like native (av_expr_parse_and_eval fails on NaN).",
+    "Native negotiates every one of the 17 negotiation sources to a format with storage (gray/YUV -> rgb24, yuva420p -> argb), so registry examples need no format= prefix; three use one anyway to reach the gbrp, rgba and rgb24 kernels."
+  ]
+}
