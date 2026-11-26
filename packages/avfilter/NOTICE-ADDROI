@@ -1,0 +1,16 @@
+Scoped addroi video filter
+
+The addroi descriptor in src/video-ops/addroi.ts follows libavfilter/vf_addroi.c
+(addroi_options, addroi_init, addroi_config_input and the ff_vf_addroi
+registration with AVFILTER_FLAG_METADATA_ONLY and no query_formats) and the
+AV_OPT_TYPE_RATIONAL and AV_OPT_TYPE_BOOL paths of libavutil/opt.c
+(set_string_number, write_number, double_to_rational, set_string_bool).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+vf_addroi.c carries no individual copyright line; it is part of FFmpeg,
+copyright (c) the FFmpeg developers. opt.c: Copyright (c) 2005 Michael Niedermayer.
+LGPL-2.1-or-later. See ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete addroi filter: the
+regions-of-interest side data is not represented (no encoder of the pinned build
+reads it), region expressions are limited to a subset proven free of NaN at parse
+time, and enable=, the generic threads option and runtime commands are refused.

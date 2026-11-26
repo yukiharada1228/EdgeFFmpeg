@@ -1,0 +1,301 @@
+{
+ "capabilityId": "filter.addroi",
+ "slug": "vf-addroi",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/addroi.ts",
+  "packages/avfilter/NOTICE-ADDROI",
+  "tests/unit/video-addroi.test.ts",
+  "tests/differential/video-addroi.test.ts",
+  "docs/contributing/addroi.md",
+  "docs/contributing/wave2/vf-addroi.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {addroiOperator} from './addroi.js';",
+    " addroiOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-addroi.test.ts",
+   "title": "parses addroi options in native shorthand order with the declared defaults as a frozen identity step on every path",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-addroi.test.ts",
+   "title": "parses qoffset as opt.c does: the integer ratio first, then the option expression, with write_number range checks",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-addroi.test.ts",
+   "title": "bounds region expressions over every link size and refuses those that could evaluate to NaN or leave the subset",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-addroi.test.ts",
+   "title": "computes config_input regions with zero and maximum clamps and truncation, as native does",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-addroi.test.ts",
+   "title": "refuses malformed, out-of-range and unimplemented addroi options with VideoFilterParseError before planning on every path",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-addroi.test.ts",
+   "title": "forwards the frame unchanged on the linear, graph and replay paths within budgets, strides and signals",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-addroi.test.ts",
+   "title": "forwards the frame unchanged through activation actors and the timed executor and refuses runtime commands",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-addroi.test.ts",
+   "title": "matches native -vf addroi chains across all 14 formats, six sizes and timing scopes as rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-addroi.test.ts",
+   "title": "matches native -filter_complex split and addroi branches across all 14 formats as rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-addroi.test.ts",
+   "title": "matches native replayed addroi graphs frame by frame across all 14 formats and six sizes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-addroi.test.ts",
+   "title": "matches native addroi through activation actors and the timed backend producer and pull schedulers as rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-addroi.test.ts",
+   "title": "refuses addroi options before opening any output with native statuses, and refuses the natively accepted unproven forms",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-addroi.test.ts",
+   "title": "negotiates every accepted source as native does with addroi on every path",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(whole file, unedited)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 4857,
+  "details": [
+   {
+    "test": "matches native -vf addroi chains across all 14 formats, six sizes and timing scopes as rawvideo and framecrc",
+    "count": 3024,
+    "compares": "exact rawvideo/framecrc bytes of the media backend CLI vs native; plus 420 checks that native rawvideo equals the input"
+   },
+   {
+    "test": "matches native -filter_complex split and addroi branches across all 14 formats as rawvideo and framecrc",
+    "count": 336,
+    "compares": "exact bytes of both outputs (672 files)"
+   },
+   {
+    "test": "matches native replayed addroi graphs frame by frame across all 14 formats and six sizes",
+    "count": 252,
+    "compares": "tight replay planes vs native rawvideo, pts 0,1,2"
+   },
+   {
+    "test": "matches native addroi through activation actors and the timed backend producer and pull schedulers as rawvideo and framecrc",
+    "count": 1134,
+    "compares": "126 actor outputs vs native rawvideo; 1008 timed-backend rawvideo/framecrc outputs vs native"
+   },
+   {
+    "test": "refuses addroi options before opening any output with native statuses, and refuses the natively accepted unproven forms",
+    "count": 38,
+    "compares": "native exit status and output files; 114 EdgeFFmpeg refusals with no output opened"
+   },
+   {
+    "test": "negotiates every accepted source as native does with addroi on every path",
+    "count": 73,
+    "compares": "17 showinfo picks (every source kept) and 73 byte-exact path checks"
+   }
+  ]
+ },
+ "unsupported": [
+  "the AV_FRAME_DATA_REGIONS_OF_INTEREST side data itself: not represented, since no encoder of the pinned build reads it (output bytes equal native)",
+  "region expressions outside the NaN-free subset (decimal numbers, iw, ih, unary signs, + - * /, parentheses, divisors bounded away from zero): every function, named constants, ^, ;, hex/inf/nan/SI literals; native accepts them",
+  "qoffset expressions outside that subset, and integer ratio terms outside int",
+  "enable= (native also refuses), the generic threads option (native accepts) and runtime commands (native codes reproduced)",
+  "native's errno-derived CLI exit statuses: EdgeFFmpeg refuses with its own non-zero status"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.addroi.unit.parse",
+   "file": "tests/unit/video-addroi.test.ts",
+   "name": "parses addroi options in native shorthand order with the declared defaults as a frozen identity step on every path",
+   "modes": [
+    "linear",
+    "graph"
+   ],
+   "scope": "descriptor shape, shorthand, defaults, repeats, booleans, no conversion stage for any of the 14 table formats"
+  },
+  {
+   "id": "filter.addroi.unit.qoffset",
+   "file": "tests/unit/video-addroi.test.ts",
+   "name": "parses qoffset as opt.c does: the integer ratio first, then the option expression, with write_number range checks",
+   "modes": [
+    "linear"
+   ],
+   "scope": "sscanf ratio then expression, write_number ranges, NaN EINVAL, av_d2q storage checked against native av_d2q"
+  },
+  {
+   "id": "filter.addroi.unit.subset",
+   "file": "tests/unit/video-addroi.test.ts",
+   "name": "bounds region expressions over every link size and refuses those that could evaluate to NaN or leave the subset",
+   "modes": [
+    "linear"
+   ],
+   "scope": "NaN-free interval subset over iw,ih in [1,2147483647]; 1800 sampled evaluations inside the bounds"
+  },
+  {
+   "id": "filter.addroi.unit.region",
+   "file": "tests/unit/video-addroi.test.ts",
+   "name": "computes config_input regions with zero and maximum clamps and truncation, as native does",
+   "modes": [
+    "linear"
+   ],
+   "scope": "addroi_config_input clamp and truncation values"
+  },
+  {
+   "id": "filter.addroi.unit.refusal",
+   "file": "tests/unit/video-addroi.test.ts",
+   "name": "refuses malformed, out-of-range and unimplemented addroi options with VideoFilterParseError before planning on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "every refusal before planning on all five parsers"
+  },
+  {
+   "id": "filter.addroi.unit.scoped-forward",
+   "file": "tests/unit/video-addroi.test.ts",
+   "name": "forwards the frame unchanged on the linear, graph and replay paths within budgets, strides and signals",
+   "modes": [
+    "linear",
+    "graph",
+    "stream"
+   ],
+   "scope": "identity forwarding, maxFrameBytes, AbortSignal, shape mismatch, padded and malformed strides, owned planes after hflip, unmutated input"
+  },
+  {
+   "id": "filter.addroi.unit.timed-forward",
+   "file": "tests/unit/video-addroi.test.ts",
+   "name": "forwards the frame unchanged through activation actors and the timed executor and refuses runtime commands",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "identity forwarding and native runtime command codes (PATCHWELCOME, ENOSYS)"
+  },
+  {
+   "id": "filter.addroi.differential.linear",
+   "file": "tests/differential/video-addroi.test.ts",
+   "name": "matches native -vf addroi chains across all 14 formats, six sizes and timing scopes as rawvideo and framecrc",
+   "modes": [
+    "linear"
+   ],
+   "scope": "6 spec chains over 14 formats, 1x1/2x2/5x3/7x5/8x6/17x9, 3 frames, three -ss/-t scopes, rawvideo and framecrc"
+  },
+  {
+   "id": "filter.addroi.differential.graph",
+   "file": "tests/differential/video-addroi.test.ts",
+   "name": "matches native -filter_complex split and addroi branches across all 14 formats as rawvideo and framecrc",
+   "modes": [
+    "graph"
+   ],
+   "scope": "three split/addroi graphs with two outputs, 14 formats, 5x3 and 17x9, rawvideo and framecrc, with and without -ss/-frames:v"
+  },
+  {
+   "id": "filter.addroi.differential.stream",
+   "file": "tests/differential/video-addroi.test.ts",
+   "name": "matches native replayed addroi graphs frame by frame across all 14 formats and six sizes",
+   "modes": [
+    "stream"
+   ],
+   "scope": "createReplayVideoExecution over three graphs, 14 formats, six sizes"
+  },
+  {
+   "id": "filter.addroi.differential.timed",
+   "file": "tests/differential/video-addroi.test.ts",
+   "name": "matches native addroi through activation actors and the timed backend producer and pull schedulers as rawvideo and framecrc",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "createFrameActors and the timed backend producer/pull schedulers, 14 formats, 1x1/5x3/17x9, three chains, two muxers, two scopes"
+  },
+  {
+   "id": "filter.addroi.differential.refusal",
+   "file": "tests/differential/video-addroi.test.ts",
+   "name": "refuses addroi options before opening any output with native statuses, and refuses the natively accepted unproven forms",
+   "modes": [
+    "linear",
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "19 forms via -vf and -filter_complex: native ERANGE/EINVAL/PATCHWELCOME/OPTION_NOT_FOUND statuses (host errno) or 0 for six scoped refusals; media, timed producer and pull backends refuse with no output opened"
+  },
+  {
+   "id": "filter.addroi.differential.negotiation",
+   "file": "tests/differential/video-addroi.test.ts",
+   "name": "negotiates every accepted source as native does with addroi on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "per-source negotiation from 17 sources via tests/helpers/video-negotiation-cases.ts"
+  }
+ ],
+ "sharedEditsNeeded": [
+  "To lift the region-expression subset: a size hook for the identity role (geometry or a per-link validation called by registry.ts validation and the three negotiators), so x/y/w/h can be evaluated per link as addroi_config_input does and only actual NaN results refused. Not made; the subset refusal is explicit instead."
+ ],
+ "notes": [
+  "Role identity with no formats(), no frame and no geometry: native has no query_formats and is AVFILTER_FLAG_METADATA_ONLY. All five paths flagged; actor and timed differential tests pass.",
+  "NaN refusal: the identity role has no size hook, so parse proves NaN-freeness for every iw,ih in [1,2147483647] by interval bounds; addroiRegion reproduces config_input values for the unit tests but no path calls it.",
+  "qoffset follows opt.c exactly as probed: 1/-2 and -1/-2 fail the sscanf range check and are accepted as expressions; 0/0 and nan are EINVAL; 1/0 and 2 are ERANGE. Stored rationals checked against native av_d2q built from the sandbox libavutil.a.",
+  "Registry examples: addroi=0:0:iw/2:ih/2:-1/5, addroi=x=iw/4:w=iw*2:qoffset=1,hflip, addroi=clear=1,addroi=1:2:3:4:qoffset=0, format=nv12,addroi,vflip.",
+  "No float-sensitive cases, so no linux-gated tests; every test runs on every platform.",
+  "Mutations: dropping the qoffset range check failed 2 unit tests and the differential refusal test; dropping the zero-divisor check failed 1 unit test and the differential refusal test.",
+  "Environment: sandbox Node was v22.23.5; Node 24.22.3 installed from nodejs.org (sha256-checked) for bootstrap and tests.",
+  "Setup durations: Node 24 install ~10s; bootstrap (npm 8.0s, submodule 8.1s, reference build) 207.6s; baseline typecheck+lint+boundaries 55s, registry unit test 2s; final differential file 17.4s with --maxWorkers=1; final typecheck+lint+boundaries 54s."
+ ]
+}
