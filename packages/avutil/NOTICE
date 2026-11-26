@@ -7,6 +7,14 @@ See LICENSES/LGPL-2.1-or-later.txt and the pinned upstream source. The adaptatio
 emulates LP64 strtol saturation and signed32 narrowing without native processes.
 This notice does not assign a license to the whole project.
 
+parse-color.ts adapts av_parse_color and its 140-entry color_table from FFmpeg
+libavutil/parseutils.c at commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8, as
+AV_OPT_TYPE_COLOR calls it (libavutil/opt.c set_string_color), licensed
+LGPL-2.1-or-later. It emulates LP64 strtoul and the C library's strtod for the
+color and alpha fields, and refuses the random colors (av_get_random_seed) and
+NaN alphas, whose native values are random or undefined. Native differential
+evidence: tests/differential/parse-color.test.ts.
+
 expression/parser.ts adapts expression grammar, operators, state and builtin
 function semantics from pinned FFmpeg libavutil/eval.c (Copyright (c) 2002-2006
 Michael Niedermayer; Copyright (c) 2006 Oded Shimon). expression/sfc64.ts adapts

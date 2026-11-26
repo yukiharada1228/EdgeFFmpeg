@@ -28,6 +28,7 @@ export type {VideoPixelFormat,PixelPlaneLayout,PixelLayout} from './pixel-layout
 export {videoFrameRate,parseVideoFrameRate,VideoRateError} from './video-rate.js';
 
 export {parseVideoSize,VideoSizeError} from './video-size.js';
+export {parseColor,ColorParseError} from './parse-color.js';
 
 export {compileExpression,evaluateExpression} from './expression/index.js';
 export {hexFloatLiteral} from './expression/hex-float.js';
