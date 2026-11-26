@@ -1,0 +1,223 @@
+{
+  "capabilityId": "filter.perms",
+  "slug": "vf-perms",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/perms.ts",
+    "packages/avfilter/NOTICE-PERMS",
+    "tests/unit/video-perms.test.ts",
+    "tests/differential/video-perms.test.ts",
+    "docs/contributing/perms.md",
+    "docs/contributing/wave2/vf-perms.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/video-ops/registry.ts",
+      "change": "+1 import line (import {permsOperator} from './perms.js';) and +1 entry line ( permsOperator,)"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/video-perms.test.ts",
+      "title": "parses mode then seed positionally or by name with last-wins repeats as an identity operator over the whole table on every path",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-perms.test.ts",
+      "title": "refuses bogus modes, malformed seeds, unseeded random, enable= and extra positional options with exact messages before planning on every path",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-perms.test.ts",
+      "title": "forwards every frame unchanged for every mode on the linear, graph and replay paths within budgets, strides and signals",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-perms.test.ts",
+      "title": "forwards every frame unchanged through activation actors and the timed executor and refuses runtime commands",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-perms.test.ts",
+      "title": "runs the unpinned reference built from FFmpeg 946fcce0 with --disable-x86asm",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 0
+    },
+    {
+      "file": "tests/differential/video-perms.test.ts",
+      "title": "matches native -vf perms modes alone and chained with hflip and negate across all 14 formats, sizes and timing scopes as rawvideo and framecrc",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 7560
+    },
+    {
+      "file": "tests/differential/video-perms.test.ts",
+      "title": "matches native -filter_complex split and perms branches across all 14 formats as rawvideo and framecrc",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 3024
+    },
+    {
+      "file": "tests/differential/video-perms.test.ts",
+      "title": "matches native perms frame by frame through replay streams and activation actors across all 14 formats and sizes",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 4536
+    },
+    {
+      "file": "tests/differential/video-perms.test.ts",
+      "title": "matches native perms through the timed backend as rawvideo and framecrc with and without -ss and -frames",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 3024
+    },
+    {
+      "file": "tests/differential/video-perms.test.ts",
+      "title": "refuses perms forms outside scope before opening any output and asserts the native exit status of each",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 16
+    },
+    {
+      "file": "tests/differential/video-perms.test.ts",
+      "title": "negotiates every accepted source unchanged as native does on every path",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 73
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts (unchanged)",
+      "title": "registry suite (runs the perms examples on all five paths)",
+      "passed": 8,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 18144,
+    "nativeRuns": 13608,
+    "identityChecks": 504,
+    "exitStatus": 16,
+    "negotiationChecks": 73,
+    "details": "14 formats x sizes 1x1/2x2/5x3/7x5/8x6/17x9 x forms perms, perms=ro, perms=rw, perms=toggle, perms=random:7, perms=mode=toggle:seed=0, alone and chained with hflip, negate (linear/graph/stream) or vflip (actor/timed), 3 frames of structured planes plus LCG noise. linear 7560 (rawvideo+framecrc, -ss/-t scopes), graph 3024 outputs from 1512 runs, stream 3024 + actor 1512 from 1512 runs, timed backend 3024 (rawvideo+framecrc, -ss 0.04 -frames:v 1). 504 checks that native perms output equals the input bytes. 16 refusals with native exit status asserted (EINVAL/ERANGE from os.constants.errno, 8 for option-not-found, 0 where native accepts), each refused on media and timed backends before any output (32). Per-source negotiation: 17 sources, 73 checks, all matched unchanged."
+  },
+  "unsupported": [
+    "mode=random without an explicit seed or with seed=-1 (native succeeds via av_get_random_seed; intentional refusal)",
+    "numeric or expression mode values such as mode=1 (native accepts)",
+    "non-canonical seeds such as 07 or 0x7 (native accepts)",
+    "generic timeline option enable= (native accepts: AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC)",
+    "generic threads= option (native accepts)",
+    "runtime commands (native process_command for mode; refused with ENOSYS, enable with AVERROR_PATCHWELCOME)",
+    "frame writability itself (frames carry no permission flag)",
+    "hwaccel formats and formats outside the 14-entry negotiation table"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.perms.linear",
+      "file": "tests/differential/video-perms.test.ts",
+      "name": "matches native -vf perms modes alone and chained with hflip and negate across all 14 formats, sizes and timing scopes as rawvideo and framecrc",
+      "modes": [
+        "none",
+        "ro",
+        "rw",
+        "toggle",
+        "random"
+      ],
+      "scope": "rawvideo CLI -vf, rawvideo and framecrc, 14 formats, 6 sizes, -ss/-t scopes"
+    },
+    {
+      "id": "filter.perms.graph",
+      "file": "tests/differential/video-perms.test.ts",
+      "name": "matches native -filter_complex split and perms branches across all 14 formats as rawvideo and framecrc",
+      "modes": [
+        "none",
+        "ro",
+        "rw",
+        "toggle",
+        "random"
+      ],
+      "scope": "rawvideo CLI -filter_complex split branches, rawvideo and framecrc"
+    },
+    {
+      "id": "filter.perms.stream-actor",
+      "file": "tests/differential/video-perms.test.ts",
+      "name": "matches native perms frame by frame through replay streams and activation actors across all 14 formats and sizes",
+      "modes": [
+        "none",
+        "ro",
+        "rw",
+        "toggle",
+        "random"
+      ],
+      "scope": "createReplayVideoExecution and createFrameActors, rawvideo bytes and pts"
+    },
+    {
+      "id": "filter.perms.timed",
+      "file": "tests/differential/video-perms.test.ts",
+      "name": "matches native perms through the timed backend as rawvideo and framecrc with and without -ss and -frames",
+      "modes": [
+        "none",
+        "ro",
+        "rw",
+        "toggle",
+        "random"
+      ],
+      "scope": "createTimedVideoBackend CLI, rawvideo and framecrc"
+    },
+    {
+      "id": "filter.perms.refusals",
+      "file": "tests/differential/video-perms.test.ts",
+      "name": "refuses perms forms outside scope before opening any output and asserts the native exit status of each",
+      "modes": [
+        "none",
+        "ro",
+        "rw",
+        "toggle",
+        "random"
+      ],
+      "scope": "explicit refusal before output with native exit status asserted"
+    },
+    {
+      "id": "filter.perms.negotiation",
+      "file": "tests/differential/video-perms.test.ts",
+      "name": "negotiates every accepted source unchanged as native does on every path",
+      "modes": [
+        "none",
+        "ro",
+        "rw",
+        "toggle",
+        "random"
+      ],
+      "scope": "per-source negotiation on every path and the CLI"
+    },
+    {
+      "id": "filter.perms.identity",
+      "file": "tests/unit/video-perms.test.ts",
+      "name": "forwards every frame unchanged for every mode on the linear, graph and replay paths within budgets, strides and signals",
+      "modes": [
+        "none",
+        "ro",
+        "rw",
+        "toggle",
+        "random"
+      ],
+      "scope": "linear/graph/replay identity, maxFrameBytes, strides, AbortSignal, input not mutated"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "No shared edit beyond the two registry lines was needed.",
+    "Setup durations: Node 24.11.1 installed from nodejs.org tarball into the scratchpad (sandbox had Node 22.23.5; bootstrap requires 24+), ~10s; bootstrap --only npm,submodule,reference --allow-unpinned-reference 218s (npm 8s, submodule 7.7s, reference 202s); baseline typecheck+lint+boundaries+video-operator-registry 71s (all green, 8 registry tests).",
+    "Differential file: 90.5s on 4 vCPUs with --maxWorkers=1; unit file under 1s.",
+    "Sandbox reference binary differs from the linux-x64 pin (accepted by --allow-unpinned-reference); tests read build-metadata.json and assert commit 946fcce0 and --disable-x86asm, and never pin a sha.",
+    "No float-sensitive or linux-gated cases: perms does no pixel arithmetic; negate's implicit conversions run with -cpuflags 0 natively and scalar arithmetic here.",
+    "Like copy, the descriptor is role identity with no formats(): native f_perms.c has no query_formats, and every source format negotiates unchanged (no storage-less picks)."
+  ]
+}
