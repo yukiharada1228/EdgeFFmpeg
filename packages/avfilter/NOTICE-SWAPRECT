@@ -1,0 +1,19 @@
+Scoped swaprect rectangle swap filter
+
+The option table, per-frame expression variables, double-to-int conversion,
+coordinate clamping, AV_CEIL_RSHIFT subsampling rounding, the per-plane
+pw==aw/ph==ah swap condition, the in-place row swap (memcpy to a temporary,
+memmove, memcpy back) and the pixel-step and plane-count derivation in
+src/video-ops/swaprect.ts follow libavfilter/vf_swaprect.c (swaprect_options,
+var_names, query_formats, filter_frame, config_input), and the format list
+follows ff_formats_pixdesc_filter in libavfilter/formats.c with the
+AV_PIX_FMT_FLAG_PAL, AV_PIX_FMT_FLAG_HWACCEL and AV_PIX_FMT_FLAG_BITSTREAM
+rejections of query_formats.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2015 Paul B. Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete swaprect filter: only
+the eight-bit layouts of the negotiation table, no n, sar or dar variables, t
+only on the actor and timed paths, no unported libm functions, no timeline and
+no runtime commands.

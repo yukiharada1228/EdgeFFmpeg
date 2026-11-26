@@ -1,0 +1,206 @@
+{
+ "capabilityId": "filter.swaprect",
+ "slug": "vf-swaprect",
+ "status": "partial",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/swaprect.ts",
+  "packages/avfilter/NOTICE-SWAPRECT",
+  "packages/avfilter/src/video-ops/registry.ts",
+  "tests/unit/video-swaprect.test.ts",
+  "tests/differential/video-swaprect.test.ts",
+  "docs/contributing/swaprect.md",
+  "docs/contributing/wave2/vf-swaprect.json"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/video-ops/registry.ts: +1 import line (import {swaprectOperator} from './swaprect.js';) and +1 entry line ( swaprectOperator,)"
+ ],
+ "tests": [
+  {
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "runs against a reference built from commit 946fcce0 with --disable-x86asm",
+   "counts": {
+    "assertions": "commit and --disable-x86asm from build-metadata.json"
+   }
+  },
+  {
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "matches native swaprect on every executable format and size, frame by frame on the linear and graph planners",
+   "counts": {
+    "nativeRuns": 1260,
+    "frames": 3780,
+    "paths": [
+     "linear",
+     "graph"
+    ]
+   }
+  },
+  {
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "matches native swaprect rawvideo and framecrc CLI outputs on the linear, graph, stream, actor and timed paths, with and without -ss and -t",
+   "counts": {
+    "comparisons": 840
+   }
+  },
+  {
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "matches native t-dependent swaprect expressions on the actor and timed paths at every size, with and without -ss and -t",
+   "counts": {
+    "comparisons": 648
+   }
+  },
+  {
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "matches native replayed swaprect branches frame by frame through createReplayVideoExecution",
+   "counts": {
+    "comparisons": 28
+   }
+  },
+  {
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "matches native option acceptance and outputs, refusing n, t on scoped paths, sar, dar, unported functions, timelines and native faults explicitly",
+   "counts": {
+    "cases": 38,
+    "accepted": 17,
+    "rejectedByBoth": 7,
+    "nativeFaultsRefused": 4,
+    "scopedRefusals": 10
+   }
+  },
+  {
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "refuses t on the scoped CLI paths and time-independent native faults on every path before any output is committed",
+   "counts": {
+    "refusals": 8
+   }
+  },
+  {
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "negotiates every accepted source as native does on every path",
+   "counts": {
+    "sources": 17,
+    "checks": 73
+   }
+  },
+  {
+   "file": "tests/unit/video-swaprect.test.ts",
+   "name": "6 tests: parsing, refusals, evaluation/clamping/rounding, in-place swap order, formats and per-path plan refusals, frame validation",
+   "counts": {
+    "tests": 6
+   }
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "name": "registry test (unchanged), 3 swaprect examples on all five paths",
+   "counts": {
+    "tests": 8
+   }
+  }
+ ],
+ "nativeComparisons": {
+  "total": 2887,
+  "breakdown": {
+   "planners": 1260,
+   "cliPaths": 840,
+   "time": 648,
+   "replay": 28,
+   "options": 38,
+   "negotiationChecks": 73
+  },
+  "reference": ".build/reference/ffmpeg built in the sandbox (commit 946fcce0, --disable-x86asm), linux-x64",
+  "durationSeconds": 41,
+  "maxWorkers": 1
+ },
+ "unsupported": [
+  "expressions reading n (no frame counter on any path)",
+  "expressions reading sar or dar (no sample aspect ratio in linear/frame-graph shapes; the timed executor runs the unnegotiated step)",
+  "expressions reading t on the linear, graph and stream paths (CLI timestamps differ from native under -ss), refused at plan time",
+  "sin, cos, tan, asin, acos, atan, atan2, sinh, cosh, tanh, exp, pow, gauss, squish, the ^ operator and time()",
+  "enable= timeline, threads and runtime commands",
+  "NaN, infinite and out-of-int values, INT_MIN sizes and negative widths with positive heights that swap (native undefined behaviour or faults)",
+  "native formats without frame storage here (refused by name by the shared negotiators)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.swaprect.planners",
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "matches native swaprect on every executable format and size, frame by frame on the linear and graph planners",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "14 executable formats x 6 sizes {1x1,2x2,5x3,7x5,8x6,17x9} x 15 option strings (defaults, overlaps, edges, clamping, zero/negative sizes, comparisons, a, fractions), noise/ramp-edge/constant-plane frames, padded strides, rawvideo bytes on compileVideoFilterChain and compileVideoFilterGraph"
+  },
+  {
+   "id": "filter.swaprect.cli-paths",
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "matches native swaprect rawvideo and framecrc CLI outputs on the linear, graph, stream, actor and timed paths, with and without -ss and -t",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "14 formats x {7x5,8x6} x linear/graph/stream/actor/timed CLI x rawvideo/framecrc x {none, input -ss 0.04 with -t 0.05, output -ss 0.04 -frames:v 1}; t on actor and timed"
+  },
+  {
+   "id": "filter.swaprect.time",
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "matches native t-dependent swaprect expressions on the actor and timed paths at every size, with and without -ss and -t",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "6 formats x 6 sizes x 3 t-dependent graphs on producer/activation/pull schedulers x rawvideo/framecrc x the three time variants"
+  },
+  {
+   "id": "filter.swaprect.stream",
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "matches native replayed swaprect branches frame by frame through createReplayVideoExecution",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "14 formats x 2 replay graphs (single and split/vstack) through createReplayVideoExecution"
+  },
+  {
+   "id": "filter.swaprect.options",
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "matches native option acceptance and outputs, refusing n, t on scoped paths, sar, dar, unported functions, timelines and native faults explicitly",
+   "modes": [
+    "semantic"
+   ],
+   "scope": "38 option strings on yuv420p 9x7: 17 identical, 7 rejected by both, 4 native faults refused, 10 scoped refusals"
+  },
+  {
+   "id": "filter.swaprect.refusals",
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "refuses t on the scoped CLI paths and time-independent native faults on every path before any output is committed",
+   "modes": [
+    "semantic"
+   ],
+   "scope": "t on media -vf/-filter_complex and time-independent faults on media and timed producer/pull backends, no output committed"
+  },
+  {
+   "id": "filter.swaprect.negotiation",
+   "file": "tests/differential/video-swaprect.test.ts",
+   "name": "negotiates every accepted source as native does on every path",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "swaprect=3:2:1:1:4:3 from the 17 negotiation sources on the five paths, 73 checks"
+  }
+ ],
+ "sharedEditsNeeded": [
+  "Media -vf (linear) CLI with output -ss: filters receive timestamps already shifted by the seek; native filters see the original timestamps. Needed for t on the linear path.",
+  "Media -filter_complex (graph) CLI with input -ss: the graph receives timestamps without the input seek offset native applies before filtering. Needed for t on the graph and stream paths.",
+  "Linear and frame-graph negotiators pass VideoShape without sampleAspectRatio to geometry(), and packages/avformat/src/actor-video/execute.ts runs graph.nodes[].configuration instead of the step returned by timedGeometry. Needed for sar and dar."
+ ],
+ "notes": [
+  "Status partial: the scope lists sar, dar and t on every path; sar/dar are refused at parse time and t at plan time on linear/graph/stream for the shared reasons above. Everything accepted is byte-exact against native in the tests listed.",
+  "Variable use is detected by re-parsing each expression with that name removed from the constant table; unported functions and ^ are detected lexically after whitespace removal.",
+  "Time-independent expressions are evaluated at plan time with the negotiated geometry so their refusals surface before output on every path; t-dependent refusals can only surface at the offending frame.",
+  "No macOS run; no platform-gated case. No H.264/MP4 framecrc comparison (size-preserving).",
+  "Setup: Node 24.22.3 installed from nodejs.org (sandbox had 22.23.5); bootstrap 3m50s; baseline typecheck+lint+boundaries 1m04s and registry test 2.4s, all clean before changes."
+ ]
+}
