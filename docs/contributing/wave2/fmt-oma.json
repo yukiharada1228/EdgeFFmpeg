@@ -1,0 +1,98 @@
+{
+  "capabilityId": "demuxer.oma",
+  "slug": "fmt-oma",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/oma.ts",
+    "packages/containers/NOTICE-OMA",
+    "docs/contributing/oma-support.md",
+    "tests/unit/oma.test.ts",
+    "tests/differential/oma.test.ts",
+    "docs/contributing/wave2/fmt-oma.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    "packages/containers/src/registry.ts: +1 line `export {oma} from './oma.js';` after nistsphere (alphabetical, merge=union)"
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/oma.test.ts",
+      "titles": [
+        "parses the 96-byte EA3 header with bounded reads and serves stereo 44100 Hz s16be from offset 96",
+        "refuses OMA headers in native order with native statuses and unported codecs, tags and partial frames explicitly",
+        "ports oma_read_probe and ff_id3v2_match over the bytes native inspects",
+        "aborts OMA opens and packet reads on the signal",
+        "registers a demux-only oma descriptor detected by EA3 with a six-byte confirm, 256-sample packets and an input-seek refusal"
+      ],
+      "count": 5,
+      "passed": 5
+    },
+    {
+      "file": "tests/differential/oma.test.ts",
+      "titles": [
+        "matches native OMA LPCM copy and decode framecrc, wav, raw s16be and aiff outputs for whole-packet payloads and refuses copy of a short final packet",
+        "matches native OMA output -ss, -t and -frames selections for copy and decode",
+        "mirrors native OMA statuses for truncated, non-EA3, encrypted and unknown-codec headers and refuses ATRAC3, ea3 tags and input seeks before any output"
+      ],
+      "count": 3,
+      "passed": 3,
+      "nativeComparisons": 166
+    },
+    {
+      "file": "tests/unit/container-registry.test.ts + tests/unit/container-registry-extension.test.ts + tests/unit/container-registry-copy-refusal.test.ts",
+      "count": 17,
+      "passed": 17
+    }
+  ],
+  "nativeComparisons": {
+    "total": 166,
+    "byteExactOutputs": 100,
+    "copyShortTailRefusals": "12 native -c copy runs of short tails (native framecrc ends in F=0x3), refused by EdgeFFmpeg with no output",
+    "timeSelections": 38,
+    "statusChecks": "12: truncated header 255, bad EA3 under -f oma 183, eid 0x0001 and 0xFF7F 255, codec ids 5 and 99 host ENOSYS vs Linux 218, each for decode and copy",
+    "nativeAcceptance": "4: ATRAC3 codec id 0 (framecrc header atrac3), ea3-tagged file (pcm_s16be), input -ss; all refused by EdgeFFmpeg before output"
+  },
+  "unsupported": [
+    "codec ids 0 ATRAC3, 1 ATRAC3+, 2 AAC, 3 MP3, 33 ATRAC3+ AL, 34 ATRAC3 AL: native demuxes, refused",
+    "leading ID3v2 ea3 tag: native skips it and exports metadata and chapters, refused",
+    "encrypted files: mirrored only for untagged files (native 255 without a GEOB tag)",
+    "partial trailing sample frame: refused",
+    "-c copy of a payload that is not whole 1024-byte packets (native flags the short final packet CORRUPT): refused through info.copyRefusal; decoding matches native",
+    "input -ss > 0: refused",
+    "muxer.oma: excluded (native writes ATRAC only)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "demuxer.oma",
+      "file": "tests/differential/oma.test.ts",
+      "name": "matches native OMA LPCM copy and decode framecrc, wav, raw s16be and aiff outputs for whole-packet payloads and refuses copy of a short final packet",
+      "modes": ["demux", "copy", "decode"],
+      "scope": "codec id 4 LPCM, payloads of 0, 1, 2, 7 and 40 whole 1024-byte packets and three short tails, with and without -f oma; framecrc copy and s16le/s16be decode, wav, raw s16be copy and decode, aiff; short-tail copy refused"
+    },
+    {
+      "id": "demuxer.oma",
+      "file": "tests/differential/oma.test.ts",
+      "name": "matches native OMA output -ss, -t and -frames selections for copy and decode",
+      "modes": ["time-selection"],
+      "scope": "output -ss, -t, -ss+-t, -frames:a and -ss past end, copy (whole packets) and decode (whole packets and a short tail), with and without -f oma, plus a raw decode range"
+    },
+    {
+      "id": "demuxer.oma",
+      "file": "tests/differential/oma.test.ts",
+      "name": "mirrors native OMA statuses for truncated, non-EA3, encrypted and unknown-codec headers and refuses ATRAC3, ea3 tags and input seeks before any output",
+      "modes": ["refusal"],
+      "scope": "native statuses 255 (truncated, encrypted eid), 183 (bad EA3) and ENOSYS (Linux 218) for codec ids 5 and 99; explicit refusals of ATRAC3, ea3 tags and input seeks"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Node 24.22.3 was installed with `npx n 24` (about 7 s); the sandbox default was Node v22.23.5, which npm run bootstrap refuses.",
+    "Setup: npm run bootstrap -- --only npm,submodule,reference --allow-unpinned-reference took 4 min 40 s (npm 11.7 s, submodule 8.9 s, reference build about 4 min 20 s on 4 vCPUs).",
+    "Baseline before changes: typecheck, lint, boundaries and the container registry unit tests passed (about 1 min 33 s).",
+    "Native probes in the sandbox confirmed 256-sample, 1024-byte rows with no flag column for whole packets and F=0x3 on the short final packet under -c copy, and 'No encryption header found' with status 255 for an encrypted eid without a tag.",
+    "The truncated-header and encrypted statuses are a literal -1 (255) and the bad EA3 header is AVERROR_INVALIDDATA (183), all host-independent; only ENOSYS depends on the host errno.",
+    "The differential file runs in about 4 s on the sandbox (4 vCPUs)."
+  ]
+}
