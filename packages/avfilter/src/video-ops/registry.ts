@@ -51,6 +51,7 @@ import {gradfunOperator} from './gradfun.js';
 import {removegrainOperator} from './removegrain.js';
 import {hqxOperator} from './hqx.js';
 import {xstackOperator} from './xstack.js';
+import {swaprectOperator} from './swaprect.js';
 // One import above and one entry below per operator, each entry ending with a comma, so parallel
 // additions never touch the same line. Order is irrelevant: lookups are by name.
 export const videoOperators=Object.freeze([
@@ -103,6 +104,7 @@ export const videoOperators=Object.freeze([
  removegrainOperator,
  hqxOperator,
  xstackOperator,
+ swaprectOperator,
 ] as const);
 type Operator=typeof videoOperators[number];
 type Steps=Operator extends infer O?O extends VideoOperatorDescriptor<infer S,infer T>?{readonly scoped:S;readonly timed:T}:never:never;
