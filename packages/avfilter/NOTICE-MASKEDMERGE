@@ -1,0 +1,14 @@
+Scoped maskedmerge video filter
+
+The option table, pix_fmts list, three-pad framesync configuration (sync=1,
+EXT_STOP before, EXT_INFINITY after on base, overlay and mask), size check,
+eight-bit merge arithmetic, plane mask and plane copy semantics in
+src/video-ops/maskedmerge.ts follow libavfilter/vf_maskedmerge.c
+(maskedmerge_options, pix_fmts, MASKEDMERGE(8), config_input, config_output,
+filter_slice, process_frame) and libavfilter/maskedmerge.h.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2015 Paul B Mahol
+LGPL-2.1-or-later. See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete maskedmerge filter:
+only eight-bit formats, no timeline and no runtime commands.

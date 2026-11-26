@@ -1,0 +1,77 @@
+{
+  "capabilityId": "filter.maskedmerge",
+  "slug": "vf-maskedmerge",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/maskedmerge.ts",
+    "packages/avfilter/NOTICE-MASKEDMERGE",
+    "packages/avfilter/src/video-ops/registry.ts",
+    "tests/unit/video-maskedmerge.test.ts",
+    "tests/differential/video-maskedmerge.test.ts",
+    "docs/contributing/maskedmerge.md",
+    "docs/contributing/wave2/vf-maskedmerge.json"
+  ],
+  "sharedEdits": [
+    {"file": "packages/avfilter/src/video-ops/registry.ts", "change": "+1 import line (import {maskedmergeOperator} from './maskedmerge.js';) and +1 entry line ( maskedmergeOperator,)"}
+  ],
+  "tests": [
+    {"file": "tests/unit/video-maskedmerge.test.ts", "titles": [
+      "parses planes with integer expressions and ranges and refuses enable=, framesync options and unknown options",
+      "refuses differing sizes, differing formats and other input counts in geometry",
+      "merges selected planes with (b*(255-m)+m*o+127)/255, copies the rest from base, into owned tight planes without mutating padded inputs",
+      "rejects unsupported layouts, budgets, malformed storage, unsynchronized timestamps, settings and cancellation explicitly",
+      "refuses the linear path, plans the graph paths, refuses size mismatches before frames and refuses runtime commands"
+    ], "pass": 5, "fail": 0},
+    {"file": "tests/differential/video-maskedmerge.test.ts", "titles": [
+      "runs against the sandbox reference built from commit 946fcce0 with --disable-x86asm",
+      "matches native maskedmerge rawvideo across formats, sizes, masks and planes 1, 7 and 15 on the graph path",
+      "matches native maskedmerge CLI rawvideo and framecrc on the graph and stream paths, with -ss, -t and unequal lengths",
+      "matches native maskedmerge on the stream path through replay execution with three distinct sources of unequal length",
+      "matches native maskedmerge through the timed backend on the actor and timed paths in rawvideo and framecrc",
+      "agrees with native maskedmerge under default threads and -filter_threads 1",
+      "fails like native for maskedmerge size mismatches and refused options before opening any output on every path",
+      "negotiates every source as native does on the join paths and refuses picks without storage by name before output"
+    ], "pass": 8, "fail": 0, "note": "about 7 s with --maxWorkers=1 on the sandbox"},
+    {"file": "tests/unit/video-operator-registry.test.ts", "pass": 8, "fail": 0, "note": "unchanged; runs the four maskedmerge examples on graph, stream, actor and timed and checks the linear rejection"}
+  ],
+  "nativeComparisons": {
+    "count": 878,
+    "details": [
+      "648 three-frame rawvideo matches on the graph path: 6 formats x 6 sizes x 6 masks (0, 128, 255, ramp, edges, noise) x planes {1,7,15}, three distinct inputs",
+      "60 CLI rawvideo/framecrc matches on graph (split=3) and stream (three inputs), with input -ss, output -t and input lengths 3/2/4",
+      "27 replay-stream matches with unequal lengths and timestamps",
+      "48 timed-backend matches (producer = actor, pull = timed), rawvideo and framecrc",
+      "6 native default-threads vs -filter_threads 1 agreements",
+      "21 refusal checks: 7 native refusals (exit 234, 8, 222) x 3 backends, no output opened",
+      "68 per-source negotiation checks on graph, stream, actor, timed and 3 CLI backends"
+    ]
+  },
+  "unsupported": [
+    "formats deeper than 8 bits, float formats, and 8-bit formats without frame storage (yuv440p, yuv411p, yuv410p, yuvj440p, yuvj411p, yuva422p, yuva444p, gbrap): refused by name at negotiation, including packed RGB with alpha, which native negotiates to gbrap",
+    "enable= timeline (native TIMELINE_INTERNAL) and runtime commands",
+    "linear path (join role)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "filter.maskedmerge.kernel", "file": "tests/differential/video-maskedmerge.test.ts", "name": "matches native maskedmerge rawvideo across formats, sizes, masks and planes 1, 7 and 15 on the graph path", "modes": ["rawvideo"], "scope": "6 eight-bit formats, 6 sizes, 6 masks, planes 1/7/15"},
+    {"id": "filter.maskedmerge.cli", "file": "tests/differential/video-maskedmerge.test.ts", "name": "matches native maskedmerge CLI rawvideo and framecrc on the graph and stream paths, with -ss, -t and unequal lengths", "modes": ["rawvideo", "framecrc"], "scope": "graph and stream CLI, split=3 and three inputs"},
+    {"id": "filter.maskedmerge.stream", "file": "tests/differential/video-maskedmerge.test.ts", "name": "matches native maskedmerge on the stream path through replay execution with three distinct sources of unequal length", "modes": ["rawvideo"], "scope": "replay stream synchronization"},
+    {"id": "filter.maskedmerge.timed", "file": "tests/differential/video-maskedmerge.test.ts", "name": "matches native maskedmerge through the timed backend on the actor and timed paths in rawvideo and framecrc", "modes": ["rawvideo", "framecrc"], "scope": "actor (producer) and timed (pull)"},
+    {"id": "filter.maskedmerge.threads", "file": "tests/differential/video-maskedmerge.test.ts", "name": "agrees with native maskedmerge under default threads and -filter_threads 1", "modes": ["rawvideo"], "scope": "native thread independence"},
+    {"id": "filter.maskedmerge.refusals", "file": "tests/differential/video-maskedmerge.test.ts", "name": "fails like native for maskedmerge size mismatches and refused options before opening any output on every path", "modes": ["exit-status"], "scope": "size mismatch, framesync options, planes range"},
+    {"id": "filter.maskedmerge.negotiation", "file": "tests/differential/video-maskedmerge.test.ts", "name": "negotiates every source as native does on the join paths and refuses picks without storage by name before output", "modes": ["rawvideo", "exit-status"], "scope": "14 sources on graph, stream, actor, timed"},
+    {"id": "filter.maskedmerge.unit", "file": "tests/unit/video-maskedmerge.test.ts", "name": "rejects unsupported layouts, budgets, malformed storage, unsynchronized timestamps, settings and cancellation explicitly", "modes": ["unit"], "scope": "refusals and limits"}
+  ],
+  "sharedEditsNeeded": [
+    "tests/helpers/video-negotiation-cases.ts: nativeNegotiationOutcome always runs a linear chain, which a join operator cannot; a join-aware mode (graph/stream/actor/timed only) would let joins share it. This branch keeps its own join form in its differential file instead."
+  ],
+  "notes": [
+    "Native maskedmerge declares no framesync options (AVFILTER_DEFINE_CLASS): shortest, eof_action, repeatlast and ts_sync_mode are unknown options natively (exit 8). They are refused here, so [FS-OPTS] 'accept shortest' does not apply; the join step's shortest is always false.",
+    "The 8-bit arithmetic is the pinned template (b*(255-m)+m*o+127)/255, not the (…+128)>>8 written in the spec; a +128 mutation fails 5 of 8 differential tests.",
+    "Every pad uses sync=1, EXT_STOP before and EXT_INFINITY after, the vf_stack semantics of the shared join engines.",
+    "The sandbox Node was 22.23.5 and bootstrap requires Node 24, so Node 24.22.3 was installed from nodejs.org (sha256 verified) and used for everything.",
+    "Reference: an unpinned sandbox build (--allow-unpinned-reference). Its ffmpeg sha256 differs from the linux-x64 pin; the tests check only the commit and --disable-x86asm.",
+    "Setup durations: bootstrap 4m07s (npm 9.5s, submodule 6.6s, reference build and relinks the rest); baseline typecheck + lint + boundaries + registry test 1m21s, all green before the change."
+  ]
+}
