@@ -1,0 +1,253 @@
+{
+ "capabilityId": "filter.colorkey",
+ "slug": "vf-colorkey",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/colorkey.ts",
+  "packages/avfilter/src/video-ops/colorhold.ts",
+  "packages/avfilter/src/video-colorkey.ts",
+  "packages/avfilter/NOTICE-COLORKEY",
+  "tests/unit/video-colorkey.test.ts",
+  "tests/differential/video-colorkey.test.ts",
+  "docs/contributing/colorkey.md",
+  "docs/contributing/wave2/vf-colorkey.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {colorkeyOperator} from './colorkey.js';",
+    "import {colorholdOperator} from './colorhold.js';",
+    " colorkeyOperator,",
+    " colorholdOperator,"
+   ]
+  }
+ ],
+ "paths": {
+  "colorkey": [
+   "linear",
+   "graph",
+   "stream",
+   "actor",
+   "timed"
+  ],
+  "colorhold": [
+   "linear",
+   "graph",
+   "stream",
+   "actor",
+   "timed"
+  ]
+ },
+ "tests": [
+  {
+   "file": "tests/unit/video-colorkey.test.ts",
+   "name": "parses defaults, shorthand, colours, float ranges and refuses enable=, unknown options and unsupported colours",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-colorkey.test.ts",
+   "name": "keys alpha and holds colour per packed order with native rounding into owned tight planes without mutating padded input",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-colorkey.test.ts",
+   "name": "rejects unsupported layouts, budgets, malformed storage, settings and cancellation explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-colorkey.test.ts",
+   "name": "plans colorkey and colorhold on linear, graph and actor paths, refuses parse errors before frames and refuses runtime commands",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "matches native colorkey and colorhold hard keys across packed RGBA orders, sizes and patterns",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 912
+  },
+  {
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "matches native colorkey and colorhold soft blends across packed RGBA orders and every path on linux-x64",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 994,
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "matches native colorkey and colorhold CLI rawvideo and framecrc on the linear, actor and timed paths, including implicit conversions",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 336
+  },
+  {
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "matches native colorkey and colorhold filter_complex branches on the graph path in rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 32
+  },
+  {
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "matches native colorkey and colorhold on the stream path through replay execution and the multi-input CLI",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 8
+  },
+  {
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "fails like native for invalid colours and out-of-range floats, and refuses enable= and random colours, before opening any output on every path",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 8
+  },
+  {
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "negotiates every accepted source as native does for colorkey and colorhold and runs byte-exact on every path",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 146
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "name": "(whole file, unchanged; runs the colorkey and colorhold examples on all five paths)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 2434,
+  "countWithoutLinuxGated": 1440,
+  "details": [
+   "912 hard-key kernel cases (3 frames, rawvideo bytes and timestamps) vs native -vf: 4 packed orders x 6 sizes x 38 descriptions",
+   "994 linux-x64-gated soft-blend cases: 864 kernel, 72 CLI (linear/actor/timed), 8 graph (16 files), 2 replay streams, 48 float-reciprocal boundary cases",
+   "336 CLI outputs (rawvideo and framecrc, with and without -ss/-t) via the media backend and the timed producer and pull schedulers, including yuv420p/rgb24/gray conversions with -cpuflags 0",
+   "32 filter_complex graph cases with two outputs each (64 files)",
+   "8 stream cases: 6 replay executions and 2 multi-input CLI joins",
+   "6 native refusals compared by status (256 - host errno), message and absence of output; plus 2 EdgeFFmpeg-only refusals (enable=, random)",
+   "146 per-source negotiation checks (2 descriptions x 73)"
+  ]
+ },
+ "unsupported": [
+  "rgba64le and bgra64le frames (no storage; no accepted source negotiates them)",
+  "expression-valued, suffixed or constant similarity and blend values",
+  "random and platform-undefined colours (parseColor code unsupported)",
+  "enable= timelines (native supports the generic timeline) and runtime commands",
+  "native EINVAL (234) and ERANGE (222) exit statuses: EdgeFFmpeg filter parse failures exit 1",
+  "H.264/MP4 framecrc output (not compared)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.colorkey.hard",
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "matches native colorkey and colorhold hard keys across packed RGBA orders, sizes and patterns",
+   "modes": [
+    "linear"
+   ],
+   "scope": "kernel bytes on the linear path, blend 0, rgba/bgra/argb/abgr, sizes 1x1 2x2 5x3 7x5 8x6 17x9, keys black/green/0x336699@0.5, similarity 0.00001..1"
+  },
+  {
+   "id": "filter.colorkey.soft",
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "matches native colorkey and colorhold soft blends across packed RGBA orders and every path on linux-x64",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "blend > 0 (0.00005, 0.2, 0.5, 1 and float-reciprocal boundaries at 0.7 and 0.9) on the kernel, CLI, graph and stream paths",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.colorkey.cli",
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "matches native colorkey and colorhold CLI rawvideo and framecrc on the linear, actor and timed paths, including implicit conversions",
+   "modes": [
+    "linear",
+    "actor",
+    "timed"
+   ],
+   "scope": "-vf rawvideo and framecrc with and without -ss/-t on the media backend and timed producer/pull schedulers; yuv420p, rgb24 and gray converted to argb with -cpuflags 0"
+  },
+  {
+   "id": "filter.colorkey.graph",
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "matches native colorkey and colorhold filter_complex branches on the graph path in rawvideo and framecrc",
+   "modes": [
+    "graph"
+   ],
+   "scope": "-filter_complex split branches with two outputs, with and without -ss"
+  },
+  {
+   "id": "filter.colorkey.stream",
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "matches native colorkey and colorhold on the stream path through replay execution and the multi-input CLI",
+   "modes": [
+    "stream"
+   ],
+   "scope": "createReplayVideoExecution branches/joins and multi-input vstack CLI"
+  },
+  {
+   "id": "filter.colorkey.reject",
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "fails like native for invalid colours and out-of-range floats, and refuses enable= and random colours, before opening any output on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "invalid colour and out-of-range float refusals with native messages, enable= and random refused, no output opened"
+  },
+  {
+   "id": "filter.colorkey.negotiation",
+   "file": "tests/differential/video-colorkey.test.ts",
+   "name": "negotiates every accepted source as native does for colorkey and colorhold and runs byte-exact on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "native picks (argb from every non-packed source) from the 17 negotiation sources, byte-exact on the five paths"
+  }
+ ],
+ "setupDurationsSeconds": {
+  "node24Install": null,
+  "bootstrapTotal": 172,
+  "npm": 7.9,
+  "submodule": 6.3,
+  "reference": 157.8,
+  "baselineTypecheckLintBoundaries": 48,
+  "baselineRegistryTest": 2,
+  "differentialFile": 11
+ },
+ "sharedEditsNeeded": [
+  "Exit-status channel for filter parse errors: the CLI frontends wrap every video filter parse failure as an exit-1 ExecutionError, so native AVERROR(EINVAL) (256-EINVAL, 234 on Linux) for invalid colours and AVERROR(ERANGE) (222) for out-of-range AV_OPT_TYPE_FLOAT values cannot be reproduced from an owned file. The refusals happen before any output with native messages; the reject test pins the native statuses and EdgeFFmpeg exit 1."
+ ],
+ "notes": [
+  "No shared edit beyond the four registry lines was made.",
+  "Reference built in the sandbox with --allow-unpinned-reference (differs from the linux-x64 pin; build-metadata asserts commit 946fcce0 and --disable-x86asm).",
+  "Node 24.22.3 installed from the nodejs.org tarball (sha256 checked; install time not recorded). The sandbox had Node 22.23.5 and bootstrap requires 24+.",
+  "Linux gate is a precaution: at depth 8 every double product and sum is an exact integer, so fused and unfused evaluation agree; no macOS difference measured.",
+  "Mutations caught: hold rounding +128 (6 tests), round instead of trunc (1), >= hard key (1), double instead of float 1.f/blend (1, via boundary cases), rgba map for bgra (3).",
+  "Native picks argb from every non-packed negotiation source, including yuvj420p/422p/444p; registry examples include a bare form (gray source picks argb) and explicit format= stages."
+ ]
+}
