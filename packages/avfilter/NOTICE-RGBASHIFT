@@ -1,0 +1,12 @@
+Scoped rgbashift integer RGB plane shift
+
+The option table, the rgb_pix_fmts negotiation list and the smear and wrap
+G, B and R plane index semantics in src/video-ops/rgbashift.ts follow
+libavfilter/vf_chromashift.c (rgbasmear_slice8, rgbawrap_slice8, filter_frame,
+config_input, rgbashift_options, rgb_pix_fmts).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2018 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete rgbashift filter: it runs
+gbrp only, and the separate chromashift module is unchanged.

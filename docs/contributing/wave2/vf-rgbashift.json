@@ -1,0 +1,160 @@
+{
+ "capabilityId": "filter.rgbashift",
+ "slug": "vf-rgbashift",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/rgbashift.ts",
+  "packages/avfilter/NOTICE-RGBASHIFT",
+  "packages/avfilter/src/video-ops/registry.ts",
+  "tests/unit/video-rgbashift.test.ts",
+  "tests/differential/video-rgbashift.test.ts",
+  "docs/contributing/rgbashift.md",
+  "docs/contributing/wave2/vf-rgbashift.json"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/video-ops/registry.ts: +1 import line (import {rgbashiftOperator} from './rgbashift.js';) and +1 entry line (rgbashiftOperator,)"
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-rgbashift.test.ts",
+   "title": "parses declared defaults, shorthand order, edge constants and duplicate keys into frozen steps",
+   "count": 1
+  },
+  {
+   "file": "tests/unit/video-rgbashift.test.ts",
+   "title": "shifts the G, B and R planes with smear clamping and C-remainder wrap into owned tight planes",
+   "count": 1
+  },
+  {
+   "file": "tests/unit/video-rgbashift.test.ts",
+   "title": "rejects unsupported layouts, budgets, malformed storage, settings and cancellation explicitly",
+   "count": 1
+  },
+  {
+   "file": "tests/unit/video-rgbashift.test.ts",
+   "title": "negotiates gbrp and refuses the gbrap pick without storage on the linear, graph and timed planners before output",
+   "count": 1
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(registration-driven, unedited)",
+   "count": 8
+  },
+  {
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "title": "runs against the pinned-commit native reference built without x86 assembly",
+   "count": 1
+  },
+  {
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "title": "matches native linear rgbashift gbrp rawvideo across channel shifts, edges, sizes and noise, ramp and edge patterns",
+   "count": 624
+  },
+  {
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "title": "matches native rgbashift -vf and -filter_complex CLI rawvideo and framecrc with timing and rgb24 and gray conversions",
+   "count": 900
+  },
+  {
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "title": "matches native rgbashift frame graphs and replayed streams with split and stack branches",
+   "count": 24
+  },
+  {
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "title": "matches native rgbashift through activation actors and the timed backend in rawvideo and framecrc",
+   "count": 60
+  },
+  {
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "title": "refuses rgbashift gbrap picks, out-of-range options, timelines and unknown options before output where native accepts or fails them",
+   "count": 32
+  },
+  {
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "title": "negotiates every accepted source as native does and refuses the packed-alpha and yuva gbrap picks before output on every path",
+   "count": 93
+  }
+ ],
+ "nativeComparisons": {
+  "total": 1734,
+  "byteExact": 1608,
+  "refusalChecks": 32,
+  "negotiationChecks": 93,
+  "metadataChecks": 1,
+  "reference": ".build/reference/ffmpeg built in the sandbox at 946fcce0 with --disable-x86asm"
+ },
+ "unsupported": [
+  "gbrap and gbrp9/10/12/14/16 and gbrap10/12/16: no frame storage; gbrap picks (argb, rgba, abgr, bgra, yuva420p sources) refused by name before output",
+  "enable= (timeline) and runtime commands",
+  "expression-valued options (1+1, 0x1, 1.5, empty)",
+  "native wrap alpha row (x - av) % h is not reproduced because four-plane formats are refused"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.rgbashift.linear",
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "name": "matches native linear rgbashift gbrp rawvideo across channel shifts, edges, sizes and noise, ramp and edge patterns",
+   "modes": [
+    "differential"
+   ],
+   "scope": "gbrp linear chains: sizes 1x1..17x9, zero, every channel h/v at +/-1, beyond the frame and +/-255, combined sets, smear and wrap, noise/ramp/edge+constant frames"
+  },
+  {
+   "id": "filter.rgbashift.cli",
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "name": "matches native rgbashift -vf and -filter_complex CLI rawvideo and framecrc with timing and rgb24 and gray conversions",
+   "modes": [
+    "differential"
+   ],
+   "scope": "media backend -vf and -filter_complex, rawvideo and framecrc, with and without -ss/-t/-frames:v, gbrp/rgb24/gray/bgr24 sources and rgb24/gray targets with -cpuflags 0"
+  },
+  {
+   "id": "filter.rgbashift.graph-stream",
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "name": "matches native rgbashift frame graphs and replayed streams with split and stack branches",
+   "modes": [
+    "differential"
+   ],
+   "scope": "frame graphs and replay streams with split, hstack, vstack and nullsink"
+  },
+  {
+   "id": "filter.rgbashift.actor-timed",
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "name": "matches native rgbashift through activation actors and the timed backend in rawvideo and framecrc",
+   "modes": [
+    "differential"
+   ],
+   "scope": "activation actors and the timed backend CLI, rawvideo and framecrc"
+  },
+  {
+   "id": "filter.rgbashift.refusals",
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "name": "refuses rgbashift gbrap picks, out-of-range options, timelines and unknown options before output where native accepts or fails them",
+   "modes": [
+    "differential"
+   ],
+   "scope": "gbrap picks (rgba, yuva420p), out-of-range values, edge=2, unknown options, expressions and enable= refused before output on media and timed backends"
+  },
+  {
+   "id": "filter.rgbashift.negotiation",
+   "file": "tests/differential/video-rgbashift.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the packed-alpha and yuva gbrap picks before output on every path",
+   "modes": [
+    "differential"
+   ],
+   "scope": "per-source negotiation over tests/helpers/video-negotiation-cases.ts: 12 sources to gbrp byte-exact on five paths, 5 refused as gbrap"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Node: sandbox default was v22.23.5, which the bootstrap refuses (Node 24+ required); used preinstalled /opt/node24 v24.22.3.",
+  "Setup durations: bootstrap (npm, submodule, reference) 4m11s; baseline typecheck+lint+boundaries 75s; baseline registry test 2s (8 passed).",
+  "The differential file runs in about 15 s with --maxWorkers=1.",
+  "No platform gating: integer index copy only.",
+  "A mutation swapping the R and G planes fails 5 of 7 differential tests.",
+  "[THREADS] was not in this item's strategy and was not run."
+ ]
+}
