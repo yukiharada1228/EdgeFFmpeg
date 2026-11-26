@@ -1,0 +1,353 @@
+{
+  "capabilityId": "filter.colorbalance",
+  "slug": "vf-colorbalance",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/colorbalance.ts",
+    "packages/avfilter/NOTICE-COLORBALANCE",
+    "tests/unit/video-colorbalance.test.ts",
+    "tests/differential/video-colorbalance.test.ts",
+    "docs/contributing/colorbalance.md",
+    "docs/contributing/wave2/vf-colorbalance.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/video-ops/registry.ts",
+      "change": "+1 import line: import {colorbalanceOperator} from './colorbalance.js'; +1 entry line: ' colorbalanceOperator,'"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "title": "runs against the reference build of commit 946fcce0 configured with --disable-x86asm",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "title": "matches native colorbalance defaults as the identity for every format and size",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 168
+    },
+    {
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "title": "matches native colorbalance frames for every format, size and balance (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 546,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "title": "matches native colorbalance over a structured colour cube for every balance at its extremes (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 112,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "title": "matches native colorbalance with default slice threads and -filter_threads 1 (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 9,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "title": "matches native colorbalance CLI rawvideo and framecrc through -vf and -filter_complex (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 192,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "title": "matches native replayed colorbalance branches and joins frame by frame (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 24,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "title": "matches native colorbalance framecrc and rawvideo through the actor and timed schedulers (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 192,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "title": "refuses colorbalance timelines and unimplemented values before opening CLI outputs",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 28
+    },
+    {
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "title": "negotiates every accepted source as native does and refuses picks without storage before output on every path",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 146
+    },
+    {
+      "file": "tests/unit/video-colorbalance.test.ts",
+      "title": "parses defaults, the declared shorthand order, named balances, constants and pl into frozen single-precision steps",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorbalance.test.ts",
+      "title": "refuses timelines, out-of-range and non-constant values, and unknown options before planning",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorbalance.test.ts",
+      "title": "lists native query_formats in declared order and executes only the members with frame storage",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorbalance.test.ts",
+      "title": "keeps every byte with the defaults and follows get_component and preservel in single precision",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorbalance.test.ts",
+      "title": "balances packed and planar pixels into owned tight planes from padded input without mutating it",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorbalance.test.ts",
+      "title": "rejects unsupported formats, budgets, malformed strides, settings and cancellation explicitly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-colorbalance.test.ts",
+      "title": "plans colorbalance through linear, graph and actor planners and refuses timelines and commands",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "registers each video operator once with frozen flags and examples, keeping the legacy flags",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects descriptors that flag a path without the members its role needs",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "runs every registered example on each flagged path with identical frames",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators on the linear path",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators on the frame graph and replay paths",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators in the timed planner and activation actors",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators in the timed graph executor",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "negotiates and validates negate from the one shared table in every negotiator",
+      "passed": 1,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 1417,
+    "compares": [
+      "168 default-identity matches (all platforms): rgb24/bgr24/rgba/bgra/abgr/argb/gbrp x 1x1,2x2,5x3,7x5,8x6,17x9 x 4 default spellings; native output equals input and the kernel equals native",
+      "546 kernel rawvideo matches (linux-x64): 7 formats x 6 sizes x 13 balances (extremes, typical, shorthand, all/max/min, 0.333, pl with black/white NaN saturation), 3 frames noise/ramps+edges/constant",
+      "112 colour-cube matches (linux-x64): 54^3 colours as rgb24 and gbrp x 56 settings (each balance alone at -1, 0.37, 1 and all nine, pl off/on)",
+      "9 thread cases (linux-x64): native default slice threads == native -filter_threads 1 == kernel, 17x64 frames, 3 formats x 3 balances (18 native runs)",
+      "192 CLI matches (linux-x64): -vf and -filter_complex, 3 chains, rawvideo and framecrc, with and without -ss/-t (media backend, scalar, native -cpuflags 0)",
+      "24 createReplayVideoExecution matches (linux-x64): plain, split+hstack, transpose+nullsink",
+      "192 timed backend matches (linux-x64): activation and producer (actor), pull (timed), rawvideo and framecrc, -frames:v 3 and 2",
+      "28 refusals (all platforms): 24 native-accepted forms (rs=1/3, gm=0x1, bh=sin(0), enable=, threads=1) refused with no output opened; 4 out-of-range values refused natively and here",
+      "146 negotiation checks (all platforms): 2 default filters x 17 sources, native pick from showinfo, every pick matched byte-exact on the five paths (yuvj on linear)"
+    ],
+    "reference": ".build/reference/ffmpeg (run at test time; commit 946fcce0 and --disable-x86asm asserted from build-metadata.json)",
+    "cpuflags": "0 on CLI, stream and timed runs"
+  },
+  "unsupported": [
+    "formats without frame storage here: 0bgr/0rgb/rgb0/bgr0, rgb48/bgr48/rgba64/bgra64, gbrap, gbrp9..16, gbrap10..16 (color_balance16 and color_balance16_p not ported; no negotiation source picks them)",
+    "non-constant option expressions (av_expr arithmetic, hex, SI suffixes, functions)",
+    "enable= timelines and runtime commands (native ff_filter_process_command)",
+    "generic filter options such as threads"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.colorbalance.defaults",
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "name": "matches native colorbalance defaults as the identity for every format and size",
+      "modes": [
+        "linear"
+      ],
+      "scope": "default-identity kernel vs native, 7 storage formats, 6 sizes, 4 default spellings"
+    },
+    {
+      "id": "filter.colorbalance.kernel",
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "name": "matches native colorbalance frames for every format, size and balance (linux-x64 float)",
+      "modes": [
+        "linear"
+      ],
+      "scope": "balanceVideoColors vs native rawvideo, 7 formats, 6 sizes, 13 balances, 3 frames",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.colorbalance.cube",
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "name": "matches native colorbalance over a structured colour cube for every balance at its extremes (linux-x64 float)",
+      "modes": [
+        "linear"
+      ],
+      "scope": "54^3 colour cube, each balance at its extremes with pl off/on, rgb24 and gbrp",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.colorbalance.threads",
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "name": "matches native colorbalance with default slice threads and -filter_threads 1 (linux-x64 float)",
+      "modes": [
+        "linear"
+      ],
+      "scope": "native default slice threads vs -filter_threads 1 vs kernel",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.colorbalance.cli",
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "name": "matches native colorbalance CLI rawvideo and framecrc through -vf and -filter_complex (linux-x64 float)",
+      "modes": [
+        "linear",
+        "graph"
+      ],
+      "scope": "CLI -vf/-filter_complex, rawvideo and framecrc, -ss/-t",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.colorbalance.stream",
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "name": "matches native replayed colorbalance branches and joins frame by frame (linux-x64 float)",
+      "modes": [
+        "graph",
+        "stream"
+      ],
+      "scope": "createReplayVideoExecution with split, hstack, transpose, nullsink",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.colorbalance.timed",
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "name": "matches native colorbalance framecrc and rawvideo through the actor and timed schedulers (linux-x64 float)",
+      "modes": [
+        "actor",
+        "timed"
+      ],
+      "scope": "timed backend activation/producer/pull schedulers, rawvideo and framecrc",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.colorbalance.refusals",
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "name": "refuses colorbalance timelines and unimplemented values before opening CLI outputs",
+      "modes": [
+        "linear",
+        "graph",
+        "actor",
+        "timed"
+      ],
+      "scope": "expressions, enable=, threads, out-of-range; no output opened"
+    },
+    {
+      "id": "filter.colorbalance.negotiation",
+      "file": "tests/differential/video-colorbalance.test.ts",
+      "name": "negotiates every accepted source as native does and refuses picks without storage before output on every path",
+      "modes": [
+        "linear",
+        "graph",
+        "stream",
+        "actor",
+        "timed"
+      ],
+      "scope": "17 negotiation sources, native picks rgb24/argb/gbrp/packed RGB all executable"
+    },
+    {
+      "id": "filter.colorbalance.syntax",
+      "file": "tests/unit/video-colorbalance.test.ts",
+      "name": "refuses timelines, out-of-range and non-constant values, and unknown options before planning",
+      "modes": [
+        "unit"
+      ],
+      "scope": "parser refusals and messages"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Setup: the sandbox Node was v22.23.5 and bootstrap requires Node 24+; used the preinstalled /opt/node24 (v24.22.3). Bootstrap npm,submodule,reference with --allow-unpinned-reference took 221s (npm 10.9s, submodule 7.6s, reference build the rest). Baseline typecheck+lint+boundaries+video-operator-registry test before any change: 70s, green (8 tests).",
+    "The differential file runs in about 17s with --maxWorkers=1 on this sandbox; the unit file in under 1s.",
+    "Float cases (any non-zero balance or pl) are gated to linux-x64 with constant titles; the gate is a precaution: no macOS arm64 difference was measured. Defaults, refusals and negotiation run everywhere.",
+    "Mutations: dropping Math.fround (double arithmetic) or rounding lrintf ties up each fail all six linux-gated tests.",
+    "preservel divides by zero for black and white inputs (1 - |2l - 1| = 0); IEEE inf/NaN propagate as in C and av_clipf (FFMIN(FFMAX)) maps NaN to 0, so these pixels become 0 natively and here; covered by the kernel and cube tests.",
+    "threads=1 is a generic option native accepts; it is refused here as an unsupported option.",
+    "Native negotiates every one of the 17 negotiation sources to a format with storage (gray/YUV -> rgb24, yuva420p -> argb), so registry examples need no format= prefix; three use one to cover gbrp, rgba and rgb24."
+  ]
+}
