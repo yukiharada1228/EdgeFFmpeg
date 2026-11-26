@@ -1,0 +1,230 @@
+{
+ "capabilityId": "filter.chromanr",
+ "slug": "vf-chromanr",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/chromanr.ts",
+  "packages/avfilter/NOTICE-CHROMANR",
+  "packages/avfilter/src/video-ops/registry.ts",
+  "tests/unit/video-chromanr.test.ts",
+  "tests/differential/video-chromanr.test.ts",
+  "docs/contributing/chromanr.md",
+  "docs/contributing/wave2/vf-chromanr.json"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/video-ops/registry.ts: +1 import line (import {chromanrOperator} from './chromanr.js';) and +1 entry line ( chromanrOperator,)"
+ ],
+ "tests": [
+  {
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "runs against the sandbox reference build of the fixed commit without x86 assembly",
+   "counts": {
+    "assertions": 3
+   }
+  },
+  {
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "matches native chromanr across formats, distances, window sizes, steps, thresholds and edge sizes on the linear and graph planners, with default and single filter threads",
+   "counts": {
+    "cases": 408,
+    "nativeRuns": 816
+   }
+  },
+  {
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "matches native chromanr on frames tall enough for several native slices, with default and single filter threads",
+   "counts": {
+    "cases": 24,
+    "nativeRuns": 72
+   }
+  },
+  {
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "matches native chromanr rawvideo and framecrc CLI outputs on the linear, graph, stream, actor and timed paths, with and without output -ss/-t",
+   "counts": {
+    "cases": 160,
+    "nativeRuns": 160
+   }
+  },
+  {
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "matches native replayed chromanr branches frame by frame through createReplayVideoExecution",
+   "counts": {
+    "cases": 8,
+    "nativeRuns": 8
+   }
+  },
+  {
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "matches native chromanr option acceptance and outputs, refusing expressions, named constants and timeline options explicitly",
+   "counts": {
+    "cases": 32,
+    "accepted": 17,
+    "rejected": 10,
+    "scoped": 5,
+    "nativeRuns": 32
+   }
+  },
+  {
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "refuses chromanr enable= and runtime commands before any output is opened, which native accepts",
+   "counts": {
+    "cases": 9,
+    "nativeRuns": 1
+   }
+  },
+  {
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "negotiates every accepted source as native does and refuses picks without frame storage before output on every path",
+   "counts": {
+    "sources": 17,
+    "checks": 93
+   }
+  },
+  {
+   "file": "tests/unit/video-chromanr.test.ts",
+   "name": "parses defaults, shorthand order, float thresholds stored as float, integers and distances into frozen steps",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-chromanr.test.ts",
+   "name": "refuses out-of-range, non-decimal, expression, named, timeline and unknown options explicitly",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-chromanr.test.ts",
+   "name": "copies luma and alpha, averages accepted chroma with native rounding (center counted twice) and applies the per-component thresholds",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-chromanr.test.ts",
+   "name": "declares the native pix_fmts in declared order, plans one format-preserving stage and refuses picks without storage",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-chromanr.test.ts",
+   "name": "rejects unsupported layouts, budgets, malformed storage, bad settings and cancellation explicitly",
+   "counts": {
+    "tests": 1
+   }
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "name": "(registration-driven, unedited)",
+   "counts": {
+    "tests": 8,
+    "passed": 8,
+    "chromanrExamples": 3
+   }
+  }
+ ],
+ "nativeComparisons": {
+  "total": 1089,
+  "planners": 816,
+  "threads": 72,
+  "cliPaths": 160,
+  "replay": 8,
+  "options": 32,
+  "refusalsNativeAcceptance": 1,
+  "negotiationSources": 17,
+  "negotiationChecks": 93,
+  "notes": "Planner native runs include the -filter_threads 1 rerun per case; negotiation native runs are made inside tests/helpers/video-negotiation-cases.ts and counted as sources (not in total)."
+ },
+ "unsupported": [
+  "enable= timeline (native supports generic timeline)",
+  "runtime commands (native ff_filter_process_command)",
+  "expression values, named constants (min, max, default, none, all) and SI suffixes in options",
+  "native picks without frame storage: yuvj444p (from gray), yuva444p (from packed RGB with alpha), and every 9-16 bit, yuv440p, yuv411p, yuvj440p, yuvj411p, yuva422p and yuva444p member of the list; refused by name before output",
+  "H.264/MP4 framecrc not compared (size-preserving, aspect unaffected)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.chromanr.planners",
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "matches native chromanr across formats, distances, window sizes, steps, thresholds and edge sizes on the linear and graph planners, with default and single filter threads",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "4 formats {yuv420p,yuv422p,yuv444p,yuva420p} x sizes {1x1,2x2,5x3,7x5,8x6,17x9} x 17 option sets x 4 patterned frames (noise, tiles, low-amplitude ramps, constant planes with an edge), padded strides; linear and graph planners byte-exact; native default threads and -filter_threads 1 agree."
+  },
+  {
+   "id": "filter.chromanr.threads",
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "matches native chromanr on frames tall enough for several native slices, with default and single filter threads",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "4 formats x {64x48,33x41} x 3 option sets; native -filter_threads 4, 1 and default agree and match the linear plan."
+  },
+  {
+   "id": "filter.chromanr.cli-paths",
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "matches native chromanr rawvideo and framecrc CLI outputs on the linear, graph, stream, actor and timed paths, with and without output -ss/-t",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "4 formats x {5x3,17x9} x 5 paths (media -vf, -filter_complex, two-input hstack, timed producer, timed pull) x rawvideo/framecrc x with/without -ss 0.04 -t 0.05."
+  },
+  {
+   "id": "filter.chromanr.replay",
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "matches native replayed chromanr branches frame by frame through createReplayVideoExecution",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "4 formats x 2 replay graphs (single node, split/vstack branches), rawvideo bytes and pts."
+  },
+  {
+   "id": "filter.chromanr.options",
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "matches native chromanr option acceptance and outputs, refusing expressions, named constants and timeline options explicitly",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "32 option strings: 17 accepted with identical output, 10 rejected by both, 5 accepted natively but refused here."
+  },
+  {
+   "id": "filter.chromanr.refusals",
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "refuses chromanr enable= and runtime commands before any output is opened, which native accepts",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "enable=1, enable=gte(t,0) and a sendcmd graph through media, timed producer and timed pull CLIs: 9 refusals, no output opened; native accepts enable=."
+  },
+  {
+   "id": "filter.chromanr.negotiation",
+   "file": "tests/differential/video-chromanr.test.ts",
+   "name": "negotiates every accepted source as native does and refuses picks without frame storage before output on every path",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "17 sources via tests/helpers/video-negotiation-cases.ts: 12 byte-exact on the five paths (yuvj on linear), gray->yuvj444p and packed alpha->yuva444p refused by name on five paths and four CLI backends; 93 checks."
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "No platform gating: integer arithmetic plus sqrtf of an exact integer below 2^24, correctly rounded on every IEEE platform; measured on Linux x86_64 only, no macOS run.",
+  "In 9.0.2 filter_frame (not config_input) computes the truncated thresholds; behaviour is identical.",
+  "Setup: the sandbox default Node v22.23.5 failed the bootstrap's Node 24 check (0.3s); reran with preinstalled /opt/node24 (v24.22.3). Bootstrap npm,submodule,reference --allow-unpinned-reference took 184s (npm 7.8s, submodule 7.0s, reference build the rest); the link gave ac302e4d39cb, not the linux-x64 pin, as allowed. Baseline typecheck+lint+boundaries+registry test: 64s, clean, 8/8.",
+  "Differential file runs in about 7s with --maxWorkers=1.",
+  "Four kernel mutations (no rounding term, <= distance, dropped threy check, stepw for rows) each fail the planner test."
+ ]
+}

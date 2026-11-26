@@ -1,0 +1,17 @@
+Scoped chromanr chroma noise reduction filter
+
+The option table, float threshold storage and truncation, the choice between the
+plain and the per-component (_e) slice functions, the clipped and stepped
+neighbourhood window, the Manhattan and Euclidean (sqrtf) distances, the rounded
+chroma mean and the luma and alpha copies in src/video-ops/chromanr.ts follow
+libavfilter/vf_chromanr.c (chromanr_options, pix_fmts, config_input,
+filter_frame, FILTER_FUNC manhattan_slice8, euclidean_slice8, manhattan_e_slice8,
+euclidean_e_slice8), and the integer, float and constant option parsing follows
+libavutil/opt.c (set_string_number, write_number).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2020 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete chromanr filter: only the
+eight-bit layouts with frame storage, decimal option values, no timeline and no
+runtime commands.
