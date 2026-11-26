@@ -1,0 +1,234 @@
+{
+ "capabilityId": "filter.maskedmin",
+ "slug": "vf-maskedminmax",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-maskedminmax.ts",
+  "packages/avfilter/src/video-ops/maskedmin.ts",
+  "packages/avfilter/src/video-ops/maskedmax.ts",
+  "packages/avfilter/NOTICE-MASKEDMINMAX",
+  "tests/unit/video-maskedminmax.test.ts",
+  "tests/differential/video-maskedminmax.test.ts",
+  "docs/contributing/maskedminmax.md",
+  "docs/contributing/wave2/vf-maskedminmax.json",
+  "packages/avfilter/src/video-ops/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {maskedminOperator} from './maskedmin.js';",
+    "import {maskedmaxOperator} from './maskedmax.js';",
+    " maskedminOperator,",
+    " maskedmaxOperator,"
+   ]
+  }
+ ],
+ "paths": [
+  "graph",
+  "stream",
+  "actor",
+  "timed"
+ ],
+ "tests": [
+  {
+   "file": "tests/differential/video-maskedminmax.test.ts",
+   "name": "matches native maskedmin and maskedmax on three distinct inputs across formats, sizes, plane masks and ties",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 432
+  },
+  {
+   "file": "tests/differential/video-maskedminmax.test.ts",
+   "name": "matches native maskedmin and maskedmax split=3 graphs on the graph path, with implicit conversions, -ss/-t and both thread settings",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 108
+  },
+  {
+   "file": "tests/differential/video-maskedminmax.test.ts",
+   "name": "matches native maskedmin and maskedmax on the stream path through replay execution and unequal-length multi-input CLI runs",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 36
+  },
+  {
+   "file": "tests/differential/video-maskedminmax.test.ts",
+   "name": "matches native maskedmin and maskedmax through the timed backend on the actor and timed paths in rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 96
+  },
+  {
+   "file": "tests/differential/video-maskedminmax.test.ts",
+   "name": "refuses maskedmin and maskedmax size mismatches, framesync options, out-of-range planes and enable= before opening any output on every path",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 30
+  },
+  {
+   "file": "tests/differential/video-maskedminmax.test.ts",
+   "name": "negotiates every executable source as native does and refuses the packed-alpha gbrap picks before output on every join path",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 56
+  },
+  {
+   "file": "tests/unit/video-maskedminmax.test.ts",
+   "name": "parses the planes mask, shorthand, expressions and later occurrences into three-input join pads",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-maskedminmax.test.ts",
+   "name": "picks the closer filter per sample with ties keeping filter1 and copies unselected planes from the source into owned tight planes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-maskedminmax.test.ts",
+   "name": "refuses mismatched geometry, unsupported layouts, budgets, malformed storage, unsynchronized frames and cancellation explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-maskedminmax.test.ts",
+   "name": "plans maskedmin and maskedmax only as three-input joins, refuses linear chains, enable= and runtime commands, and negotiates one shared format",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "name": "(whole file, unchanged)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 758,
+  "details": [
+   {
+    "test": "matches native maskedmin and maskedmax on three distinct inputs across formats, sizes, plane masks and ties",
+    "count": 432,
+    "compares": "multi-input CLI (stream) rawvideo or framecrc bytes: 6 formats x 6 sizes x (2 filters x 5 plane masks on mixed ramp/noise/extreme/tie patterns + 2 filters on constant planes), 3 frames"
+   },
+   {
+    "test": "matches native maskedmin and maskedmax split=3 graphs on the graph path, with implicit conversions, -ss/-t and both thread settings",
+    "count": 108,
+    "compares": "single-input -filter_complex split=3 graphs: 9 sources (6 formats + nv12/rgb24/nv21 conversions, -cpuflags 0) x 3 graphs x {none,-ss/-t} x {rawvideo,framecrc}; each also equals native -filter_threads 1"
+   },
+   {
+    "test": "matches native maskedmin and maskedmax on the stream path through replay execution and unequal-length multi-input CLI runs",
+    "count": 36,
+    "compares": "4 formats x (3 createReplayVideoExecution graphs + 3 unequal-length triples x {rawvideo,framecrc} multi-input CLI)"
+   },
+   {
+    "test": "matches native maskedmin and maskedmax through the timed backend on the actor and timed paths in rawvideo and framecrc",
+    "count": 96,
+    "compares": "4 formats x {producer,pull} x {rawvideo,framecrc} x (2 split graphs x {none,-ss/-t} + 2 three-input unequal-length runs)"
+   },
+   {
+    "test": "refuses maskedmin and maskedmax size mismatches, framesync options, out-of-range planes and enable= before opening any output on every path",
+    "count": 30,
+    "compares": "10 refusal cases x 3 backends (media, timed producer, timed pull): native status EINVAL/8/ERANGE/0 recorded; EdgeFFmpeg non-zero exit, zero outputs opened, named message"
+   },
+   {
+    "test": "negotiates every executable source as native does and refuses the packed-alpha gbrap picks before output on every join path",
+    "count": 56,
+    "compares": "native showinfo pick from 14 sources: 10 byte-exact on graph/stream/actor/timed, 4 packed-alpha sources refused naming gbrap on the four paths"
+   }
+  ]
+ },
+ "unsupported": [
+  "High-bit-depth (9-16 bit) and float formats, yuv440p, yuv411p, yuv410p, yuvj*, yuva422p, yuva444p, gbrap: no frame storage here; negotiations that pick them are refused by name (packed RGB with alpha inputs negotiate gbrap natively and are refused before output)",
+  "enable= timeline (refused explicitly; native supports it)",
+  "Runtime commands planes/enable (answered with the unsupported code; native accepts them)",
+  "Linear chains: joins never run on the linear path",
+  "CLI exit statuses: EdgeFFmpeg exits 1 where native exits EINVAL (size mismatch), ERANGE (planes range) or 8 (Option not found)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "nodeVersion": "24.22.3 (/opt/node24; the sandbox default was 22.23.5, which bootstrap refuses)",
+ "proposedContracts": [
+  {
+   "id": "filter.maskedmin.inputs",
+   "file": "tests/differential/video-maskedminmax.test.ts",
+   "name": "matches native maskedmin and maskedmax on three distinct inputs across formats, sizes, plane masks and ties",
+   "modes": [
+    "stream"
+   ],
+   "scope": "six eight-bit formats, six sizes, plane masks {default,0,1,6,15}, exact ties and constant planes, three distinct inputs"
+  },
+  {
+   "id": "filter.maskedmin.graph",
+   "file": "tests/differential/video-maskedminmax.test.ts",
+   "name": "matches native maskedmin and maskedmax split=3 graphs on the graph path, with implicit conversions, -ss/-t and both thread settings",
+   "modes": [
+    "graph"
+   ],
+   "scope": "split=3 graphs with flips and plane masks, nv12/nv21/rgb24 implicit conversions, -ss/-t, rawvideo and framecrc, default vs -filter_threads 1"
+  },
+  {
+   "id": "filter.maskedmin.stream",
+   "file": "tests/differential/video-maskedminmax.test.ts",
+   "name": "matches native maskedmin and maskedmax on the stream path through replay execution and unequal-length multi-input CLI runs",
+   "modes": [
+    "stream"
+   ],
+   "scope": "createReplayVideoExecution with one and three sources; unequal-length multi-input CLI (EXT_INFINITY repeat)"
+  },
+  {
+   "id": "filter.maskedmin.timed",
+   "file": "tests/differential/video-maskedminmax.test.ts",
+   "name": "matches native maskedmin and maskedmax through the timed backend on the actor and timed paths in rawvideo and framecrc",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "timed backend producer and pull schedulers, split=3 and three-input unequal-length graphs, -ss/-t"
+  },
+  {
+   "id": "filter.maskedmin.reject",
+   "file": "tests/differential/video-maskedminmax.test.ts",
+   "name": "refuses maskedmin and maskedmax size mismatches, framesync options, out-of-range planes and enable= before opening any output on every path",
+   "modes": [
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "size mismatches, framesync options, planes out of range and enable= refused before output on every join path"
+  },
+  {
+   "id": "filter.maskedmin.negotiation",
+   "file": "tests/differential/video-maskedminmax.test.ts",
+   "name": "negotiates every executable source as native does and refuses the packed-alpha gbrap picks before output on every join path",
+   "modes": [
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "native negotiated format from 14 sources on every join path; gbrap refused by name"
+  }
+ ],
+ "setupDurationsSeconds": {
+  "npmCi": 9.0,
+  "submoduleUpdate": 10.2,
+  "referenceBuild": 199.4,
+  "bootstrapTotal": 218.5,
+  "baselineChecks": 71,
+  "baselineRegistryUnit": 2
+ },
+ "sharedEditsNeeded": [],
+ "notes": [
+  "The capability covers both descriptors, maskedmin and maskedmax, from one kernel module (video-maskedminmax.ts).",
+  "[FS-OPTS]: vf_maskedminmax.c defines no framesync options (its AVClass holds only planes), so native rejects shortest, eof_action, repeatlast and ts_sync_mode with Option not found (status 8). They are refused here as unknown options instead of accepting shortest; the join step always carries shortest:false, which gives native's sync=1/EXT_STOP/EXT_INFINITY semantics on every input.",
+  "tests/helpers/video-negotiation-cases.ts always runs the linear path, which a join cannot take, so the per-source negotiation test is implemented inside the differential file on the four join paths following the helper's method; the helper was not edited.",
+  "Native opens its output file before config_output fails on size mismatches; EdgeFFmpeg refuses in geometry() before opening any output.",
+  "Mutation checks: <=/>= tie handling failed 4 differential tests, ignoring the plane mask failed 4, swapping min and max failed 5.",
+  "The sandbox reference (ac302e4d...) differs from the linux-x64 pin in compat/reference-pins.json (5e43da9ad1ee, built with Debian gcc 12.2.0); it was accepted with --allow-unpinned-reference and checked only for commit 946fcce0 and --disable-x86asm.",
+  "Integer-only kernel: no platform gating; the differential file runs in about 10 s on this sandbox.",
+  "Registry test examples: split=3[a][b][c];[a][b][c]maskedmin, a flipped planes=1 variant, split=3[a][b][c];[a][b][c]maskedmax and a transposed planes=0 variant; all pass on graph, stream, actor and timed from the 8x8 gray source."
+ ]
+}

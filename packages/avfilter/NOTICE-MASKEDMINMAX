@@ -1,0 +1,16 @@
+Scoped maskedmin and maskedmax video filters
+
+The option table, three-input pads, pix_fmts list, size check, plane mask,
+maskedmin8/maskedmax8 selection (filter2 when its absolute difference from the
+source is strictly smaller, respectively larger, than filter1's; filter1 on
+ties), unselected-plane copy from the source and output timestamp in
+src/video-maskedminmax.ts, src/video-ops/maskedmin.ts and
+src/video-ops/maskedmax.ts follow libavfilter/vf_maskedminmax.c
+(maskedminmax_options, maskedmin_init, pix_fmts, MASKED, config_input,
+maskedminmax_slice, process_frame, config_output, maskedminmax_inputs).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2019 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete filters: only
+eight-bit formats with frame storage here, no timeline and no runtime commands.
