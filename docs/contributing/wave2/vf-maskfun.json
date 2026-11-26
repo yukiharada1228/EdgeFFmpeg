@@ -1,0 +1,211 @@
+{
+ "capabilityId": "filter.maskfun",
+ "slug": "vf-maskfun",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/maskfun.ts",
+  "packages/avfilter/NOTICE-MASKFUN",
+  "tests/unit/video-maskfun.test.ts",
+  "tests/differential/video-maskfun.test.ts",
+  "docs/contributing/maskfun.md",
+  "docs/contributing/wave2/vf-maskfun.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {maskfunOperator} from './maskfun.js';",
+    " maskfunOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-maskfun.test.ts",
+   "title": "parses declared defaults, shorthand, integer expressions and ranges with no cross-option check",
+   "count": 1
+  },
+  {
+   "file": "tests/unit/video-maskfun.test.ts",
+   "title": "binarises masked planes into owned tight planes without mutating padded input",
+   "count": 1
+  },
+  {
+   "file": "tests/unit/video-maskfun.test.ts",
+   "title": "outputs the empty frame filled with min(fill, 255) when the selected-plane sum reaches sum * plane area",
+   "count": 1
+  },
+  {
+   "file": "tests/unit/video-maskfun.test.ts",
+   "title": "rejects unsupported layouts, budgets, malformed storage, settings and cancellation explicitly",
+   "count": 1
+  },
+  {
+   "file": "tests/unit/video-maskfun.test.ts",
+   "title": "plans maskfun on linear, graph and actor paths, refuses bad options before frames and refuses runtime commands",
+   "count": 1
+  },
+  {
+   "file": "tests/differential/video-maskfun.test.ts",
+   "title": "matches native linear maskfun thresholds, plane masks and empty frames across every executable format and size",
+   "count": 288
+  },
+  {
+   "file": "tests/differential/video-maskfun.test.ts",
+   "title": "matches native maskfun CLI rawvideo and framecrc on the linear path with and without -ss/-t, including implicit conversions",
+   "count": 192
+  },
+  {
+   "file": "tests/differential/video-maskfun.test.ts",
+   "title": "matches native maskfun with default threads and with -filter_threads 1",
+   "count": 36
+  },
+  {
+   "file": "tests/differential/video-maskfun.test.ts",
+   "title": "matches native maskfun filter_complex branches on the graph path in rawvideo and framecrc",
+   "count": 16
+  },
+  {
+   "file": "tests/differential/video-maskfun.test.ts",
+   "title": "matches native maskfun on the stream path through replay execution and the multi-input CLI",
+   "count": 8
+  },
+  {
+   "file": "tests/differential/video-maskfun.test.ts",
+   "title": "matches native maskfun through the timed backend on the actor and timed paths in rawvideo and framecrc",
+   "count": 36
+  },
+  {
+   "file": "tests/differential/video-maskfun.test.ts",
+   "title": "fails like native for out-of-range maskfun options before opening any output on every path",
+   "count": 6
+  },
+  {
+   "file": "tests/differential/video-maskfun.test.ts",
+   "title": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+   "count": 89
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(registration-driven, unedited: 8 tests pass with maskfun registered)",
+   "count": 8
+  }
+ ],
+ "nativeComparisons": {
+  "total": 671,
+  "byTest": {
+   "matches native linear maskfun thresholds, plane masks and empty frames across every executable format and size": 288,
+   "matches native maskfun CLI rawvideo and framecrc on the linear path with and without -ss/-t, including implicit conversions": 192,
+   "matches native maskfun with default threads and with -filter_threads 1": 36,
+   "matches native maskfun filter_complex branches on the graph path in rawvideo and framecrc": 16,
+   "matches native maskfun on the stream path through replay execution and the multi-input CLI": 8,
+   "matches native maskfun through the timed backend on the actor and timed paths in rawvideo and framecrc": 36,
+   "fails like native for out-of-range maskfun options before opening any output on every path": 6,
+   "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path": 89
+  },
+  "mutationsCaught": {
+   "<= low changed to < low": 6,
+   "sum >= max_sum changed to >": 6,
+   "fill not clamped to 255": 2
+  }
+ },
+ "unsupported": [
+  "High-bit-depth formats (9-16 bit; maskfun16/getsum16) and yuv440p, yuv411p, yuv410p, yuvj440p, yuvj411p, yuva422p, yuva444p, gbrap: no frame storage, refused by name at negotiation",
+  "Packed RGB with alpha (rgba, bgra, argb, abgr) negotiates gbrap natively: refused before output on every path",
+  "enable= timeline: refused at parse",
+  "Runtime commands (low, high, planes, fill, sum, enable): refused by the activation actors"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.maskfun.linear",
+   "file": "tests/differential/video-maskfun.test.ts",
+   "name": "matches native linear maskfun thresholds, plane masks and empty frames across every executable format and size",
+   "modes": [
+    "linear"
+   ],
+   "scope": "gray, yuv420p, yuv422p, yuv444p, yuva420p, gbrp x 1x1/2x2/5x3/7x5/8x6/17x9 x 8 option sets (defaults, low=0:high=255, low=100:high=50, planes=1, planes=5, fill=77:sum=0, sum=255, fill=300:sum=0:planes=2), 3 frames each; 643 empty and 221 binarised frames"
+  },
+  {
+   "id": "filter.maskfun.cli",
+   "file": "tests/differential/video-maskfun.test.ts",
+   "name": "matches native maskfun CLI rawvideo and framecrc on the linear path with and without -ss/-t, including implicit conversions",
+   "modes": [
+    "linear"
+   ],
+   "scope": "-vf rawvideo and framecrc, with and without -ss 0.04 -t 0.04, eight sources including nv12/rgb24 conversions under -cpuflags 0"
+  },
+  {
+   "id": "filter.maskfun.threads",
+   "file": "tests/differential/video-maskfun.test.ts",
+   "name": "matches native maskfun with default threads and with -filter_threads 1",
+   "modes": [
+    "linear"
+   ],
+   "scope": "native default threads equals -filter_threads 1 equals EdgeFFmpeg"
+  },
+  {
+   "id": "filter.maskfun.graph",
+   "file": "tests/differential/video-maskfun.test.ts",
+   "name": "matches native maskfun filter_complex branches on the graph path in rawvideo and framecrc",
+   "modes": [
+    "graph"
+   ],
+   "scope": "-filter_complex split branches with two outputs, rawvideo and framecrc"
+  },
+  {
+   "id": "filter.maskfun.stream",
+   "file": "tests/differential/video-maskfun.test.ts",
+   "name": "matches native maskfun on the stream path through replay execution and the multi-input CLI",
+   "modes": [
+    "stream"
+   ],
+   "scope": "createReplayVideoExecution and the multi-input CLI"
+  },
+  {
+   "id": "filter.maskfun.timed",
+   "file": "tests/differential/video-maskfun.test.ts",
+   "name": "matches native maskfun through the timed backend on the actor and timed paths in rawvideo and framecrc",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "timed backend producer (actor) and pull (timed) schedulers, rawvideo and framecrc"
+  },
+  {
+   "id": "filter.maskfun.reject",
+   "file": "tests/differential/video-maskfun.test.ts",
+   "name": "fails like native for out-of-range maskfun options before opening any output on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "out-of-range low/high/planes/fill/sum refused like native with no output opened"
+  },
+  {
+   "id": "filter.maskfun.negotiation",
+   "file": "tests/differential/video-maskfun.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "native picks from 17 sources; packed-alpha gbrap picks refused by name on every path"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Integer-only; no linux-x64 gated cases. Differential file runs in about 5 s on the sandbox.",
+  "The empty frame carries the input pts and the input metadata (native allocates it from the input link, so SAR and colour properties are the link's).",
+  "Setup: Node 24 could not be installed in the sandbox (install not permitted), so npm run bootstrap refused (Node.js 24+ is required); the documented fallback was used: git submodule update --init upstream/ffmpeg (41 s), npm ci (8 s), npm run reference:build (3 m 13 s). Baseline typecheck, lint, boundaries and registry test (8 passed) took 1 m 26 s. Node v22.23.5.",
+  "The sandbox reference is a linux x64 build of 946fcce0 with --disable-x86asm; no binary sha is pinned in tests."
+ ]
+}
