@@ -33,6 +33,7 @@ import {inflateOperator} from './inflate.js';
 import {fillbordersOperator} from './fillborders.js';
 import {pixdesctestOperator} from './pixdesctest.js';
 import {permsOperator} from './perms.js';
+import {noformatOperator} from './noformat.js';
 // One import above and one entry below per operator, each entry ending with a comma, so parallel
 // additions never touch the same line. Order is irrelevant: lookups are by name.
 export const videoOperators=Object.freeze([
@@ -67,6 +68,7 @@ export const videoOperators=Object.freeze([
  fillbordersOperator,
  pixdesctestOperator,
  permsOperator,
+ noformatOperator,
 ] as const);
 type Operator=typeof videoOperators[number];
 type Steps=Operator extends infer O?O extends VideoOperatorDescriptor<infer S,infer T>?{readonly scoped:S;readonly timed:T}:never:never;

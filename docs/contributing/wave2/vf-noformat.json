@@ -1,0 +1,167 @@
+{
+ "capabilityId": "filter.noformat",
+ "slug": "vf-noformat",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/noformat.ts",
+  "packages/avfilter/NOTICE-NOFORMAT",
+  "tests/unit/video-noformat.test.ts",
+  "tests/differential/video-noformat.test.ts",
+  "docs/contributing/noformat.md",
+  "docs/contributing/wave2/vf-noformat.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {noformatOperator} from './noformat.js';",
+    " noformatOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-noformat.test.ts",
+   "title": "(5 tests)",
+   "counts": {
+    "tests": 5,
+    "passed": 5
+   }
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(unchanged, 8 tests)",
+   "counts": {
+    "tests": 8,
+    "passed": 8
+   }
+  },
+  {
+   "file": "tests/differential/video-noformat.test.ts",
+   "title": "runs against the reference build of commit 946fcce0 configured with --disable-x86asm",
+   "counts": {
+    "checks": 2
+   }
+  },
+  {
+   "file": "tests/differential/video-noformat.test.ts",
+   "title": "matches native -vf noformat rawvideo and framecrc, or refuses native's storage-less pick by name, across formats sizes and time scopes",
+   "counts": {
+    "runs": 1680,
+    "byteExact": 1296,
+    "namedRefusals": 384
+   }
+  },
+  {
+   "file": "tests/differential/video-noformat.test.ts",
+   "title": "matches native -filter_complex noformat branches through the media graph and the timed producer and pull schedulers",
+   "counts": {
+    "runs": 5040,
+    "byteExact": 3336,
+    "refusals": 1704
+   }
+  },
+  {
+   "file": "tests/differential/video-noformat.test.ts",
+   "title": "matches native noformat frame by frame through replay streams and activation actors, or refuses the pick by name",
+   "counts": {
+    "runs": 420,
+    "byteExact": 291,
+    "refusals": 129
+   }
+  },
+  {
+   "file": "tests/differential/video-noformat.test.ts",
+   "title": "negotiates every accepted source as native does for noformat lists and refuses picks without storage by name on every path",
+   "counts": {
+    "checks": 414
+   }
+  },
+  {
+   "file": "tests/differential/video-noformat.test.ts",
+   "title": "refuses noformat forms outside the scope before opening outputs on every backend, where native accepts or rejects them",
+   "counts": {
+    "checks": 48,
+    "nativeStatusChecks": 8
+   }
+  }
+ ],
+ "nativeComparisons": {
+  "cliRuns": 1680,
+  "complexGraphNativeRuns": 840,
+  "complexComparisons": 5040,
+  "streamActorComparisons": 420,
+  "negotiationChecks": 414,
+  "refusalChecks": 48,
+  "total": 7602
+ },
+ "unsupported": [
+  "color_spaces, color_ranges and alpha_modes lists (native accepts; refused before output)",
+  "duplicated pixel formats (native accepts; refused as format refuses them)",
+  "pixel formats parseFilterPixelFormat does not declare, yuvj formats and high-bit-depth formats included",
+  "enable= and runtime commands",
+  "native picks without frame storage (yuvj420p, yuyv422, yuvj444p, pal8, yuva422p, ...) and conversions into legacy yuvj formats: refused by name before output by the shared negotiators",
+  "negate chains on the actor and timed paths (negate is not flagged there)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.noformat.cli",
+   "file": "tests/differential/video-noformat.test.ts",
+   "name": "matches native -vf noformat rawvideo and framecrc, or refuses native's storage-less pick by name, across formats sizes and time scopes",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "14 storage sources at 1x1/2x2/5x3/7x5/8x6/17x9; noformat=<source>, noformat=pix_fmts=<source>|<other>, noformat=yuv420p,negate, format=rgb24,noformat=rgb24, noformat=gray|yuv420p,hflip; rawvideo/framecrc; -ss/-t; -cpuflags 0 and scalar; storage-less picks refused by name."
+  },
+  {
+   "id": "filter.noformat.graph",
+   "file": "tests/differential/video-noformat.test.ts",
+   "name": "matches native -filter_complex noformat branches through the media graph and the timed producer and pull schedulers",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "split graphs at 1x1/5x3/17x9 through the media, timed producer and timed pull backends, rawvideo/framecrc, -ss/-frames:v."
+  },
+  {
+   "id": "filter.noformat.stream",
+   "file": "tests/differential/video-noformat.test.ts",
+   "name": "matches native noformat frame by frame through replay streams and activation actors, or refuses the pick by name",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "createReplayVideoExecution and createFrameActors frame by frame at 1x1/5x3/17x9."
+  },
+  {
+   "id": "filter.noformat.negotiation",
+   "file": "tests/differential/video-noformat.test.ts",
+   "name": "negotiates every accepted source as native does for noformat lists and refuses picks without storage by name on every path",
+   "modes": [
+    "semantic"
+   ],
+   "scope": "tests/helpers/video-negotiation-cases.ts over 17 sources for four lists plus each source excluding itself; outcomes pinned."
+  },
+  {
+   "id": "filter.noformat.refusals",
+   "file": "tests/differential/video-noformat.test.ts",
+   "name": "refuses noformat forms outside the scope before opening outputs on every backend, where native accepts or rejects them",
+   "modes": [
+    "semantic"
+   ],
+   "scope": "duplicates, color lists, undeclared names, enable= and unknown names refused before output on the media, producer and pull backends."
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Sandbox Node 22.23.5 was too old for bootstrap (Node 24+ required); Node 24.22.3 was installed from the npm 'node' package into the scratchpad and put first on PATH.",
+  "Setup durations: bootstrap npm 9.9 s, submodule 9.7 s, reference build about 4 min (bootstrap total 4m26s); baseline typecheck+lint+boundaries+registry test 1m25s, all green (registry test 8/8).",
+  "Native's pick depends on the whole graph: input -ss adds trim and changes nv12/nv21 with noformat=yuv420p,negate from the source format to yuvj420p. The tests read showinfo from the same native command that produces the compared bytes; EdgeFFmpeg matches both picks.",
+  "No linux-gated cases: noformat does no arithmetic and the conversions it causes are integer swscale under -cpuflags 0/scalar.",
+  "Differential file runs in about 26 s with --maxWorkers=1 on 4 vCPUs."
+ ]
+}
