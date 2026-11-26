@@ -1,0 +1,65 @@
+{
+  "capabilityId": "muxer.caf",
+  "slug": "fmt-caf",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/caf.ts",
+    "packages/containers/NOTICE-CAF",
+    "docs/contributing/caf-support.md",
+    "tests/unit/caf.test.ts",
+    "tests/differential/caf.test.ts",
+    "docs/contributing/wave2/fmt-caf.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    "packages/containers/src/registry.ts: +1 line `export {caf} from './caf.js';` between avr and crc"
+  ],
+  "tests": [
+    {"file": "tests/unit/caf.test.ts", "tests": 7, "titles": [
+      "writes the caff v1 header and the 32-byte desc chunk for every supported codec",
+      "ports mov_channel_layout in table order and falls back to the channel bitmap",
+      "writes the 12-byte chan chunk only for a native-order layout and the encoder info chunk unless bitexact",
+      "sizes the data chunk from the exact sample count and refuses invalid outputs before writing",
+      "writes in chunks of at most maxWriteBytes",
+      "aborts CAF output exactly once and honors cancellation",
+      "registers the mux-only CAF descriptor with the native name, extension, default codec and refusal status"
+    ]},
+    {"file": "tests/differential/caf.test.ts", "tests": 4, "titles": [
+      {"name": "matches native CAF bytes for 13 codecs x 1-8 guessed channels x 3 rates, with and without -bitexact", "comparisons": 624},
+      {"name": "matches native CAF stream copy for 13 raw codecs x 1, 2, 3, 6 and 8 channels x 3 rates, and unknown layouts without a chan chunk", "comparisons": 325},
+      {"name": "matches native CAF chan chunks for WAV channel masks: the 12 PCM-path layouts, other mov_channel_layout rows and the bitmap fallback, and guessed layouts up to 24 channels", "comparisons": 117},
+      {"name": "refuses unsigned PCM codecs for CAF with native status 183 before any output exists", "comparisons": 5}
+    ]},
+    {"file": "tests/unit/container-registry.test.ts", "tests": 9, "note": "unchanged, passes"},
+    {"file": "tests/unit/container-registry-extension.test.ts", "tests": 7, "note": "unchanged, passes"}
+  ],
+  "nativeComparisons": {"wholeFileByteExact": 1066, "exitStatus": 5, "total": 1071, "platform": "linux-x64 sandbox build"},
+  "unsupported": [
+    "CAF demux (demuxer.caf follow-up)",
+    "Non-PCM codecs (ADPCM, AAC, ALAC, Opus, MP3, ...): no pakt/kuki chunks",
+    "Unsigned PCM codecs: refused with native status 183",
+    "Input metadata and -metadata tags (dropsMetadata false; the PCM path refuses tagged inputs), so FATE lavf-caf is not reproduced",
+    "Layout masks whose bit count differs from the channel count",
+    "FLAC input to the caf muxer (the FLAC output dispatcher does not route registered muxers)",
+    "Unknown-length or pipe output"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "muxer.caf.encode", "file": "tests/differential/caf.test.ts", "name": "matches native CAF bytes for 13 codecs x 1-8 guessed channels x 3 rates, with and without -bitexact", "modes": ["cli"], "scope": "caf mux by re-encode: desc per codec, guessed chan, info chunk"},
+    {"id": "muxer.caf.copy", "file": "tests/differential/caf.test.ts", "name": "matches native CAF stream copy for 13 raw codecs x 1, 2, 3, 6 and 8 channels x 3 rates, and unknown layouts without a chan chunk", "modes": ["cli"], "scope": "caf mux by stream copy; unknown layouts"},
+    {"id": "muxer.caf.layouts", "file": "tests/differential/caf.test.ts", "name": "matches native CAF chan chunks for WAV channel masks: the 12 PCM-path layouts, other mov_channel_layout rows and the bitmap fallback, and guessed layouts up to 24 channels", "modes": ["cli"], "scope": "chan layout tags, bitmap fallback and truncation"},
+    {"id": "muxer.caf.refusals", "file": "tests/differential/caf.test.ts", "name": "refuses unsigned PCM codecs for CAF with native status 183 before any output exists", "modes": ["cli"], "scope": "unsigned codec refusal status"}
+  ],
+  "sharedEditsNeeded": [
+    "packages/containers/src/wav.ts, aiff.ts and au.ts: set info.metadata for inputs whose native demuxer exports tags (WAV LIST/INFO, AIFF NAME/ANNO, AU annotation). Probed: native writes them in the CAF info chunk, EdgeFFmpeg accepts the tagged input and writes none (the same inputs into the wav, aiff and au muxers already differ). Not fixable inside caf.ts."
+  ],
+  "notes": [
+    "Sandbox Node was v22.23.5; bootstrap requires Node 24, so /opt/node24 (v24.22.3) was used for every command.",
+    "Setup durations: bootstrap (npm, submodule, reference) 4m20s after a first attempt failed in 0.6s on Node 22; baseline typecheck+lint+boundaries+registry tests 1m24s. Differential file runs in about 9 s.",
+    "The sandbox ffmpeg sha differs from the linux-x64 pin (bootstrap --allow-unpinned-reference); tests assert only commit 946fcce0 and --disable-x86asm from build-metadata.json.",
+    "INVALIDDATA (183) is not errno-based, so no host errno mapping is needed.",
+    "Native leaves an empty output file on the 183 refusal; EdgeFFmpeg creates none.",
+    "Audit (audit-fmt-b): the claim that tagged inputs never reach the info chunk holds only for inputs flagged with info.metadata; tagged WAV, AIFF and AU inputs are not flagged by the pre-registry demuxers and diverge silently (see sharedEditsNeeded; probed on macOS arm64 against the darwin reference, sha256 1b86106f…ab92). Every other probe of this audit (guessed, unknown and single-speaker layouts, 3-6 channel AU/WAV/AIFF/SoX inputs, -guess_layout_max, rates 1 to 2^31-1, empty inputs, time selection) matched native."
+  ]
+}

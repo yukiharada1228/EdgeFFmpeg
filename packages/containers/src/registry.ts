@@ -5,6 +5,7 @@
 export {aiff} from './formats/aiff.js';
 export {au} from './formats/au.js';
 export {avr} from './avr.js';
+export {caf} from './caf.js';
 export {crc} from './hash/hash-mux.js';
 export {epaf} from './epaf.js';
 export {framecrc} from './formats/framecrc.js';
