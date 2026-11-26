@@ -1,0 +1,16 @@
+Scoped colorchannelmixer video filter
+
+The option table (rr..aa, pc, pa), pix_fmts, the 8-bit lookup tables of
+config_output (lut[i][j][v] = lrint(v * gain)), the rgba_map byte offsets and
+the pc=none paths of filter_slice_rgba_packed_8 and filter_slice_rgba_planar_8
+(four table entries summed and clipped with av_clip_uintp2) in
+src/video-ops/colorchannelmixer.ts follow libavfilter/vf_colorchannelmixer.c
+(colorchannelmixer_options, pix_fmts, config_output, filter_frame,
+process_command) and libavfilter/colorchannelmixer_template.c.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2013 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete colorchannelmixer
+filter: only the eight-bit formats with frame storage here, pc=none (no float
+color preservation), no timeline and no runtime commands.
