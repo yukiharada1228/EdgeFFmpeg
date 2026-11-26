@@ -67,6 +67,7 @@ import {prewittOperator} from './prewitt.js';
 import {scharrOperator} from './scharr.js';
 import {robertsOperator} from './roberts.js';
 import {casOperator} from './cas.js';
+import {despillOperator} from './despill.js';
 // One import above and one entry below per operator, each entry ending with a comma, so parallel
 // additions never touch the same line. Order is irrelevant: lookups are by name.
 export const videoOperators=Object.freeze([
@@ -135,6 +136,7 @@ export const videoOperators=Object.freeze([
  scharrOperator,
  robertsOperator,
  casOperator,
+ despillOperator,
 ] as const);
 type Operator=typeof videoOperators[number];
 type Steps=Operator extends infer O?O extends VideoOperatorDescriptor<infer S,infer T>?{readonly scoped:S;readonly timed:T}:never:never;
