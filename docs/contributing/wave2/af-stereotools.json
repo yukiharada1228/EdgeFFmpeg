@@ -1,0 +1,196 @@
+{
+ "capabilityId": "filter.stereotools",
+ "slug": "af-stereotools",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/audio/stereotools.ts",
+  "packages/avfilter/NOTICE-STEREOTOOLS",
+  "tests/unit/stereotools.test.ts",
+  "tests/differential/stereotools.test.ts",
+  "docs/contributing/stereotools.md",
+  "docs/contributing/wave2/af-stereotools.json",
+  "packages/avfilter/src/audio/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/audio/registry.ts",
+   "change": "+1 line: export {stereotools} from './stereotools.js';"
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/stereotools.test.ts",
+   "title": "parses named and positional options with native defaults, constants and ranges, and refuses everything else with exact messages",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/stereotools.test.ts",
+   "title": "sizes the ring as config_input does and truncates nbuf to an even sample count",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/stereotools.test.ts",
+   "title": "pins dbl for every input format, refuses non-stereo layouts and plans an unchanged count with the ring reservation",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/stereotools.test.ts",
+   "title": "matches a transcription of the C loop for every mode and option family, identical for 1/7/29/50-sample splits, without touching its input",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 810
+  },
+  {
+   "file": "tests/unit/stereotools.test.ts",
+   "title": "refuses non-stereo frames, rate changes, non-finite samples, oversized rings and frames, emits nothing for empty input and observes cancellation",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/stereotools.test.ts",
+   "title": "matches native PCM bytes for every mode at default levels, mute, phase inversion and delay at 8000/44100 Hz from every source format",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 364
+  },
+  {
+   "file": "tests/differential/stereotools.test.ts",
+   "title": "matches native PCM bytes for non-default levels, side and middle balance, base, balance modes and delay with base (linux/x64)",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 532,
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "file": "tests/differential/stereotools.test.ts",
+   "title": "matches native WAV, raw and framecrc for copy-like options across frame splits, volume, apad, WAV input and output selection",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 302
+  },
+  {
+   "file": "tests/differential/stereotools.test.ts",
+   "title": "matches native WAV, raw and framecrc for float-sensitive options across frame splits, volume, apad, WAV input and output selection (linux/x64)",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 151,
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "file": "tests/differential/stereotools.test.ts",
+   "title": "refuses softclip, phase, mono, out-of-range, unimplemented and enable= forms before output, beside native status",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 31
+  },
+  {
+   "file": "tests/unit/audio-filter-registry.test.ts + audio-filter-registry-extension.test.ts + audio-filter-registry-contract.test.ts",
+   "title": "all (unchanged)",
+   "passed": 26,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "total": 1380,
+  "rawBytes": 896,
+  "wavRawFramecrc": 441,
+  "nativeGroupingProbes": 12,
+  "refusals": 31,
+  "linuxOnly": 683,
+  "allPlatforms": 697
+ },
+ "unsupported": [
+  "softclip=1 (atan)",
+  "phase other than 0 (cos/sin)",
+  "FLAC input",
+  "expressions, SI suffixes and non-literal values",
+  "fractional mode/bmode values",
+  "quoting and escaping",
+  "enable= (timeline)",
+  "runtime commands",
+  "automatic sample-rate conversion",
+  "non-stereo input (mono, 3+ channels, non-default WAV/W64 masks)",
+  "non-finite input samples and NaN results"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.stereotools.native-raw",
+   "file": "tests/differential/stereotools.test.ts",
+   "name": "matches native PCM bytes for every mode at default levels, mute, phase inversion and delay at 8000/44100 Hz from every source format",
+   "modes": [
+    "differential"
+   ],
+   "scope": "raw PCM bytes vs native for copy-like options (default levels in all 11 modes, mute, phase inversion, delay) from u8/s16/s32/f32/f64 at 8000/44100 Hz"
+  },
+  {
+   "id": "filter.stereotools.native-raw-float",
+   "file": "tests/differential/stereotools.test.ts",
+   "name": "matches native PCM bytes for non-default levels, side and middle balance, base, balance modes and delay with base (linux/x64)",
+   "modes": [
+    "differential"
+   ],
+   "scope": "raw PCM bytes vs native for float-sensitive options (linux/x64)",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.stereotools.native-outputs",
+   "file": "tests/differential/stereotools.test.ts",
+   "name": "matches native WAV, raw and framecrc for copy-like options across frame splits, volume, apad, WAV input and output selection",
+   "modes": [
+    "differential"
+   ],
+   "scope": "WAV/raw/framecrc vs native across asetnsamples splits, volume, apad, WAV input and output -ss/-t/-frames:a"
+  },
+  {
+   "id": "filter.stereotools.native-outputs-float",
+   "file": "tests/differential/stereotools.test.ts",
+   "name": "matches native WAV, raw and framecrc for float-sensitive options across frame splits, volume, apad, WAV input and output selection (linux/x64)",
+   "modes": [
+    "differential"
+   ],
+   "scope": "the same with float-sensitive options (linux/x64)",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.stereotools.native-refusals",
+   "file": "tests/differential/stereotools.test.ts",
+   "name": "refuses softclip, phase, mono, out-of-range, unimplemented and enable= forms before output, beside native status",
+   "modes": [
+    "differential"
+   ],
+   "scope": "explicit refusals before output beside native exit status"
+  },
+  {
+   "id": "filter.stereotools.unit",
+   "file": "tests/unit/stereotools.test.ts",
+   "name": "matches a transcription of the C loop for every mode and option family, identical for 1/7/29/50-sample splits, without touching its input",
+   "modes": [
+    "unit"
+   ],
+   "scope": "C-loop transcription, frame-split independence, input ownership"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Ring of FFALIGN((sr+9)/10,2) doubles with pos persists across frames; nbuf=(int)(sr*(fabs(delay)/1000.)) rounded down to even; reserve() is one frame plus the ring as stateBytes.",
+  "Delay with default levels runs on all platforms: base=0 makes every base product exactly 0 and default levels make every mix product by 1, so FMA contraction cannot change results. Linux gating of non-default levels/base/balance is a precaution; no macOS difference was measured in this sandbox.",
+  "Native-only probe: native output at asetnsamples=n=1/7/29/50:p=0 equals the ungrouped output (12 probes).",
+  "Non-finite input samples and NaN results are refused at run time because the generated NaN sign is host-dependent; integer inputs cannot reach either.",
+  "Sandbox Node: preinstalled Node 24 (/opt/node24, v24.22.3); the default sandbox Node was v22 and bootstrap requires 24.",
+  "Setup durations: bootstrap total 169s (npm 8.5s, submodule 7.0s, reference build 152.3s, unpinned sandbox build); baseline typecheck+lint+boundaries+registry unit tests 52s. Differential file runs in about 22s, unit file in about 4s.",
+  "No shared edit beyond the registry line was needed."
+ ]
+}
