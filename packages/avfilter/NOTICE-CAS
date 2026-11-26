@@ -1,0 +1,19 @@
+Scoped cas (contrast adaptive sharpen) video filter
+
+The option table (strength, planes), the pixel_fmts list, the plane geometry of
+config_input, lerpf and the single-precision cas_slice8 kernel (clamped 3x3
+neighbourhood, min/max sums, sqrtf amplitude, weighted mean converted to int
+and clipped by av_clip_uint8, unselected planes copied) in
+src/video-ops/cas.ts follow libavfilter/vf_cas.c (cas_options, pixel_fmts,
+config_input, lerpf, cas_slice8, filter_frame). The AV_OPT_TYPE_FLOAT range
+check and float store and the AV_OPT_TYPE_FLAGS +/- term folding follow
+libavutil/opt.c (set_string_number, write_number).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+libavfilter/vf_cas.c carries no individual copyright line ("This file is part
+of FFmpeg"); libavutil/opt.c: Copyright (c) 2005 Michael Niedermayer.
+LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete cas filter: only the
+eight-bit planar formats with frame storage here (cas_slice16 is not ported),
+decimal strength values only, no timeline and no runtime commands.
