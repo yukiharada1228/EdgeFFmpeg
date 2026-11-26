@@ -1,0 +1,102 @@
+{
+  "capabilityId": "demuxer.sol",
+  "slug": "fmt-sol",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/sol.ts",
+    "packages/containers/NOTICE-SOL",
+    "docs/contributing/sol-support.md",
+    "tests/unit/sol.test.ts",
+    "tests/differential/sol.test.ts",
+    "docs/contributing/wave2/fmt-sol.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    "packages/containers/src/registry.ts: +1 line `export {sol} from './sol.js';` after sds (alphabetical, merge=union)"
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/sol.test.ts",
+      "titles": [
+        "ports sol_codec_id and sol_channels for the three magics and every type bit",
+        "parses old and new headers with bounded reads and serves PCM from offset 13 or 14",
+        "refuses DPCM, rate 0, a bad tag, truncation and partial trailing samples explicitly",
+        "checks the abort signal around every header read and packet read",
+        "probes the six bytes sol_probe reads and registers a demux-only descriptor",
+        "demuxes through the PCM backend and refuses sol output, seeks and bad inputs before any output opens"
+      ],
+      "count": 6,
+      "passed": 6
+    },
+    {
+      "file": "tests/differential/sol.test.ts",
+      "titles": [
+        "matches native SOL copy and decode framecrc, wav, raw and au outputs for three magics, codecs, channels, rates and 4096-byte boundaries",
+        "matches native SOL output -ss, -t and -frames selections for copy and decode",
+        "mirrors native SOL bad-tag and zero-rate statuses and refuses DPCM, partial samples, truncation and input seeks before any output"
+      ],
+      "count": 3,
+      "passed": 3,
+      "nativeComparisons": 720
+    },
+    {
+      "file": "tests/unit/container-registry.test.ts + tests/unit/container-registry-extension.test.ts",
+      "count": 16,
+      "passed": 16
+    }
+  ],
+  "nativeComparisons": {
+    "total": 720,
+    "byteExactOutputs": 432,
+    "timeSelections": 288,
+    "statusChecks": "rate 0 (2 inputs x decode/copy, host EINVAL vs Linux 234), bad tag under -f sol (255, decode/copy), native acceptance of 6 refused-but-accepted inputs"
+  },
+  "unsupported": [
+    "sol_dpcm (type bit 1): native decodes, refused",
+    "partial trailing sample frame: native emits a partial final packet, refused",
+    "header truncated before the data offset with a tag that still reads SOL\\0: native opens an empty stream, refused",
+    "input -ss > 0: native seeks via ff_pcm_read_seek, refused (not probed)",
+    "no sol muxer (native has none)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "demuxer.sol",
+      "file": "tests/differential/sol.test.ts",
+      "name": "matches native SOL copy and decode framecrc, wav, raw and au outputs for three magics, codecs, channels, rates and 4096-byte boundaries",
+      "modes": [
+        "demux",
+        "copy",
+        "decode"
+      ],
+      "scope": "old/new magics, u8 mono/stereo, s16le mono/stereo, 8000/11025/22050 Hz, 4096-byte packet boundaries; framecrc copy (with/without -f sol) and decode, wav, raw copy, au"
+    },
+    {
+      "id": "demuxer.sol",
+      "file": "tests/differential/sol.test.ts",
+      "name": "matches native SOL output -ss, -t and -frames selections for copy and decode",
+      "modes": [
+        "time-selection"
+      ],
+      "scope": "output -ss, -t, -ss+-t, -frames:a and -ss past end, copy and decode, with/without -f sol"
+    },
+    {
+      "id": "demuxer.sol",
+      "file": "tests/differential/sol.test.ts",
+      "name": "mirrors native SOL bad-tag and zero-rate statuses and refuses DPCM, partial samples, truncation and input seeks before any output",
+      "modes": [
+        "refusal"
+      ],
+      "scope": "native status 255 for a bad tag and EINVAL (Linux 234) for rate 0; explicit refusals of DPCM, partial samples, truncated headers and input seeks"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Node 24 could not be installed (the install was blocked in the sandbox); ran on Node v22.23.5. npm run bootstrap refuses Node < 24, so setup used the documented fallback: git submodule update --init upstream/ffmpeg (39 s), npm ci (7 s), npm run reference:build (3 min 3 s).",
+    "sol_probe in the pinned commit returns AVPROBE_SCORE_MAX; the descriptor uses precedence 100 as the registry recipe requires for exact magics.",
+    "The bad-tag status is 255 (literal -1 from sol_read_header), not an errno value, so it is host-independent.",
+    "Native accepts input -ss on SOL (probed: copy framecrc starts at the first packet with a shortened second packet); the refusal is kept per the spec until mirrored.",
+    "Baseline before changes: typecheck, lint, boundaries and the two container registry tests (16) passed."
+  ]
+}

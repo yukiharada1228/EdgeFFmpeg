@@ -1,0 +1,12 @@
+Scoped Sierra SOL demuxer
+
+The sol_probe magic and tag check, the old (0x0B8D) and new (0x0C0D, 0x0C8D)
+header layouts with their 13- or 14-byte data offset, the sol_codec_id and
+sol_channels type-bit mapping and the 4096-byte packet span in src/sol.ts
+follow libavformat/sol.c (sol_probe, sol_codec_id, sol_channels,
+sol_read_header, sol_read_packet) and pcm.c (ff_pcm_read_seek).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) Konstantin Shishkov. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete sol demuxer.
