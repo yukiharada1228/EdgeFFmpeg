@@ -1,0 +1,246 @@
+{
+  "capabilityId": "filter.despill",
+  "slug": "vf-despill",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/despill.ts",
+    "packages/avfilter/NOTICE-DESPILL",
+    "tests/unit/video-despill.test.ts",
+    "tests/differential/video-despill.test.ts",
+    "docs/contributing/despill.md",
+    "docs/contributing/wave2/vf-despill.json",
+    "packages/avfilter/src/video-ops/registry.ts (shared)"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/video-ops/registry.ts",
+      "change": "+1 import line: import {despillOperator} from './despill.js'; +1 entry line: despillOperator,"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/video-despill.test.ts",
+      "title": "parses AVOption defaults, shorthand order, type constants, float storage, booleans and ranges",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-despill.test.ts",
+      "title": "despills rgba pixels to native values into an owned tight plane without mutating padded input",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-despill.test.ts",
+      "title": "maps R, G, B and A through every packed component order",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-despill.test.ts",
+      "title": "rejects unsupported layouts, budgets, malformed storage, settings and cancellation explicitly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-despill.test.ts",
+      "title": "plans despill on linear, graph and actor paths after negotiation and refuses enable= and runtime commands",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-despill.test.ts",
+      "title": "checks the native reference build at test time",
+      "comparisons": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-despill.test.ts",
+      "title": "matches native despill pixels on every packed order, size and pattern with contraction-free options",
+      "comparisons": 792,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-despill.test.ts",
+      "title": "matches native despill pixels at typical and extreme float option values on every packed order and size (linux/x64)",
+      "comparisons": 648,
+      "passed": 1,
+      "failed": 0,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-despill.test.ts",
+      "title": "agrees with native slice threading: default threads and -filter_threads 1 give the same bytes as the kernel",
+      "comparisons": 16,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-despill.test.ts",
+      "title": "matches native despill linear and graph plans with scalar conversions around the packed stage",
+      "comparisons": 400,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-despill.test.ts",
+      "title": "matches native replayed despill streams and activation actors with branches and joins frame by frame",
+      "comparisons": 28,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-despill.test.ts",
+      "title": "matches native despill CLI rawvideo and framecrc with and without -ss/-t on the linear, graph, actor and timed paths",
+      "comparisons": 304,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-despill.test.ts",
+      "title": "refuses despill options before any output is opened where native rejects or would evaluate them",
+      "comparisons": 72,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-despill.test.ts",
+      "title": "negotiates every accepted source as native does with contraction-free defaults",
+      "comparisons": 73,
+      "passed": 1,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 2333,
+    "everywhere": 1685,
+    "linuxX64Only": 648,
+    "details": [
+      "792 kernel frame byte matches: 4 packed orders x 6 sizes (1x1,2x2,5x3,7x5,8x6,17x9) x 11 contraction-free option sets x 3 frames (noise, colour ramps, edges/constant planes); 726 frames changed",
+      "648 kernel frame byte matches with typical and extreme float options, gated to linux-x64; 615 changed",
+      "16 thread-invariance cases (default, -filter_threads 1, -filter_threads 8 native outputs equal and equal to the kernel)",
+      "400 linear and graph plan matches with conversions (-cpuflags 0, scalar)",
+      "16 replay streams and 12 activation actor runs",
+      "304 CLI rawvideo/framecrc matches with and without -ss/-t on media -vf/-filter_complex and timed producer, activation and pull",
+      "72 refusals before output (18 forms x 4 backends; native status pinned: 13 fail natively, 5 accepted natively)",
+      "73 negotiation checks over 17 sources"
+    ]
+  },
+  "unsupported": [
+    "expression-valued and SI-suffixed float option values (native evaluates them)",
+    "enable= timeline and runtime commands (native supports both)",
+    "fused-arithmetic parity for inexact float options on platforms other than linux-x64"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.despill.build",
+      "file": "tests/differential/video-despill.test.ts",
+      "name": "checks the native reference build at test time",
+      "modes": [
+        "linear"
+      ],
+      "scope": "reference commit and --disable-x86asm"
+    },
+    {
+      "id": "filter.despill.kernel",
+      "file": "tests/differential/video-despill.test.ts",
+      "name": "matches native despill pixels on every packed order, size and pattern with contraction-free options",
+      "modes": [
+        "kernel"
+      ],
+      "scope": "defaults and exact-product options on 4 packed orders and 6 sizes"
+    },
+    {
+      "id": "filter.despill.float",
+      "file": "tests/differential/video-despill.test.ts",
+      "name": "matches native despill pixels at typical and extreme float option values on every packed order and size (linux/x64)",
+      "modes": [
+        "kernel"
+      ],
+      "scope": "typical values and range extremes (inexact float products)",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.despill.threads",
+      "file": "tests/differential/video-despill.test.ts",
+      "name": "agrees with native slice threading: default threads and -filter_threads 1 give the same bytes as the kernel",
+      "modes": [
+        "kernel",
+        "linear"
+      ],
+      "scope": "slice-thread invariance"
+    },
+    {
+      "id": "filter.despill.linear",
+      "file": "tests/differential/video-despill.test.ts",
+      "name": "matches native despill linear and graph plans with scalar conversions around the packed stage",
+      "modes": [
+        "linear",
+        "graph"
+      ],
+      "scope": "linear and graph plans with scalar conversions"
+    },
+    {
+      "id": "filter.despill.stream",
+      "file": "tests/differential/video-despill.test.ts",
+      "name": "matches native replayed despill streams and activation actors with branches and joins frame by frame",
+      "modes": [
+        "stream",
+        "actor"
+      ],
+      "scope": "stream and actor paths"
+    },
+    {
+      "id": "filter.despill.cli",
+      "file": "tests/differential/video-despill.test.ts",
+      "name": "matches native despill CLI rawvideo and framecrc with and without -ss/-t on the linear, graph, actor and timed paths",
+      "modes": [
+        "linear",
+        "graph",
+        "actor",
+        "timed"
+      ],
+      "scope": "CLI rawvideo and framecrc with and without -ss/-t on media, producer, activation and pull"
+    },
+    {
+      "id": "filter.despill.reject",
+      "file": "tests/differential/video-despill.test.ts",
+      "name": "refuses despill options before any output is opened where native rejects or would evaluate them",
+      "modes": [
+        "linear",
+        "graph",
+        "actor",
+        "timed"
+      ],
+      "scope": "refusal parity before output"
+    },
+    {
+      "id": "filter.despill.negotiation",
+      "file": "tests/differential/video-despill.test.ts",
+      "name": "negotiates every accepted source as native does with contraction-free defaults",
+      "modes": [
+        "linear",
+        "graph",
+        "stream",
+        "actor",
+        "timed"
+      ],
+      "scope": "native picks from 17 sources on the five paths"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Node 24.22.3 from /opt/node24 (sandbox default was Node 22). Bootstrap npm,submodule,reference took 177 s; baseline typecheck, lint, boundaries and the video registry test took 56 s and passed.",
+    "The linux-x64 gate is a precaution: no macOS run was made. A JS simulation of contracted multiply-adds over a 256x256x86 RGB grid changed 0 pixels for every portable option set and 317 to 54024 pixels for 6 of the 9 gated sets.",
+    "Two kernel mutations (unrounded spill-map sum; rounding instead of truncation) were each caught by the differential file (7 and 6 failing tests).",
+    "Formats returns native pixel_fmts in declared order; all four have storage, so no negotiated pick is refused. Non-packed-alpha sources negotiate argb as natively."
+  ]
+}

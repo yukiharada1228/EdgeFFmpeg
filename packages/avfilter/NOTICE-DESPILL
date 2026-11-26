@@ -1,0 +1,14 @@
+Scoped despill green/blue spill removal
+
+The type, mix, expand, red, green, blue, brightness and alpha options (AVOption order, defaults and ranges), the packed
+argb/rgba/abgr/bgra pixel-format list, the component offsets of config_output and the single-precision spill-map
+arithmetic of do_despill_slice in src/video-ops/despill.ts follow libavfilter/vf_despill.c (despill_options,
+do_despill_slice, filter_frame, config_output, pixel_fmts). The AV_OPT_TYPE_FLOAT range check and float storage and the
+AV_OPT_TYPE_BOOL names follow libavutil/opt.c (write_number, set_string_bool).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+vf_despill.c: Copyright (c) 2017 Paul B Mahol. LGPL-2.1-or-later.
+libavutil/opt.c: Copyright (c) the FFmpeg developers. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete despill filter: slice threading, expression-valued and
+suffixed option values, timeline support and runtime commands are not included.
