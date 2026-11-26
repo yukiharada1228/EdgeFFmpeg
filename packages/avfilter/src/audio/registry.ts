@@ -29,3 +29,4 @@ export {stereotools} from './stereotools.js';
 export {alimiter} from './alimiter.js';
 export {aphaser} from './aphaser.js';
 export {flanger} from './flanger.js';
+export {biquad} from './biquad.js';
