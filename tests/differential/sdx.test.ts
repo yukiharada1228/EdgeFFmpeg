@@ -125,3 +125,32 @@ it('matches native -f sdx on free text that native detection would hand to the m
     expect(readFileSync(join(root,'free.crc')).equals(expected.stdout)).toBe(true);
   }finally{rmSync(root,{recursive:true,force:true});}
 });
+it('leaves SDX heads that native hands to the mov probe undetected and refuses empty sample data that native decodes with a 1/90000 framecrc time base',async()=>{
+  checkReference();const {root,ffmpeg}=await setup('edgeffmpeg-sdx-mov-');let compared=0,refused=0;
+  try{
+    // mov_probe reads the atom type at byte 4 ('SDX:' is too large an atom size to reach another): these tags outscore or tie sdx_probe's 50 and native fails.
+    for(const tag of ['moov','mdat','pnot','udta','ftyp','ediw','wide','free','junk','pict','skip','uuid','prfl']){
+      const name=`mov-${tag}`;writeFileSync(join(root,`${name}.sdx`),sdxFile({depth:16,rate:22050,name:2,samples:3000,text:tag}));
+      const undeclared=run(['-i',join(root,`${name}.sdx`),'-f','framecrc','-']);expect(undeclared.status,name).not.toBe(0);
+      const result=await ffmpeg.exec(['-i',`/${name}.sdx`,'-f','framecrc',`/${name}.crc`]);expect(result.exitCode,name).not.toBe(0);expect(result.diagnostics.at(-1)?.message,name).toBe('Unsupported audio container signature');expect(existsSync(join(root,`${name}.crc`)),name).toBe(false);refused++;
+      const forced=run(['-f','sdx','-i',join(root,`${name}.sdx`),'-bitexact','-f','framecrc','-']);expect(forced.status,forced.stderr).toBe(0);
+      const declared=await ffmpeg.exec(['-f','sdx','-i',`/${name}.sdx`,'-bitexact','-f','framecrc',`/${name}-forced.crc`]);expect(declared.exitCode,JSON.stringify(declared.diagnostics)).toBe(0);
+      expect(readFileSync(join(root,`${name}-forced.crc`)).equals(forced.stdout),name).toBe(true);compared++;
+    }
+    // ftyp with a jp2 or jxl brand scores 5, the 0x82827f7d tag 45, and other text nothing: native and EdgeFFmpeg both detect sdx.
+    for(const tag of ['ftypjp2 ','ftypjxl ','\x82\x82\x7f\x7d','Free','text']){
+      const name=`sdx-${Buffer.from(tag,'latin1').toString('hex')}`;writeFileSync(join(root,`${name}.sdx`),sdxFile({depth:8,rate:8000,name:1,samples:2000,text:tag}));
+      const expected=run(['-i',join(root,`${name}.sdx`),'-bitexact','-f','framecrc','-']);expect(expected.status,`${name} ${expected.stderr}`).toBe(0);
+      const result=await ffmpeg.exec(['-i',`/${name}.sdx`,'-bitexact','-f','framecrc',`/${name}.crc`]);expect(result.exitCode,JSON.stringify(result.diagnostics)).toBe(0);
+      expect(readFileSync(join(root,`${name}.crc`)).equals(expected.stdout),name).toBe(true);compared++;
+    }
+    // No packet reaches the decoder, so native's decoded framecrc header prints the stream's 1/90000 time base; EdgeFFmpeg refuses every output.
+    writeFileSync(join(root,'empty.sdx'),sdxFile({depth:16,rate:8000,name:3,samples:0}));
+    const empty=run(['-i',join(root,'empty.sdx'),'-bitexact','-f','framecrc','-']);expect(empty.status,empty.stderr).toBe(0);expect(empty.stdout.toString()).toContain('#tb 0: 1/90000\n');
+    for(const [suffix,tail] of outputs){
+      const result=await ffmpeg.exec(['-cpuflags','0','-i','/empty.sdx',...tail,`/empty.${suffix}`]);expect(result.exitCode,suffix).not.toBe(0);
+      expect(result.diagnostics.at(-1)?.message,suffix).toBe('Empty SDX sample data is not implemented');expect(existsSync(join(root,`empty.${suffix}`)),suffix).toBe(false);refused++;
+    }
+    expect([compared,refused]).toEqual([13+5,13+4]);
+  }finally{rmSync(root,{recursive:true,force:true});}
+},120000);

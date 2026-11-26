@@ -34,14 +34,15 @@
     },
     {
       "file": "tests/differential/sdx.test.ts",
-      "tests": 5,
-      "passed": 5,
+      "tests": 6,
+      "passed": 6,
       "titles": [
         "matches native SDX decode framecrc WAV raw and AU for four depths three rates name lengths 0 to 255 and three lengths",
         "matches native SDX decode with output -ss -t and -frames:a through framecrc and WAV",
         "refuses SDX -c copy before any output exists while native copies with a 1/90000 time base",
         "matches native SDX statuses for depth 12 a missing 0x1a and other invalid headers, and refuses unmirrored inputs before output",
-        "matches native -f sdx on free text that native detection would hand to the mov probe"
+        "matches native -f sdx on free text that native detection would hand to the mov probe",
+        "leaves SDX heads that native hands to the mov probe undetected and refuses empty sample data that native decodes with a 1/90000 framecrc time base"
       ],
       "runtimeSeconds": 6,
       "maxWorkers": 1
@@ -54,15 +55,16 @@
     }
   ],
   "nativeComparisons": {
-    "byteExact": 241,
+    "byteExact": 259,
     "nativeCalls": 90,
-    "statusComparisons": 10,
-    "explicitRefusalsWhereNativeSucceeds": 3,
+    "statusComparisons": 23,
+    "explicitRefusalsWhereNativeSucceeds": 7,
     "copyRefusalsAgainstNativeCopy": 8,
     "breakdown": {
       "decodeMatrix": 192,
       "timeSelection": 48,
-      "forcedFormat": 1
+      "forcedFormat": 1,
+      "movHeadsAndEmpty": 18
     }
   },
   "unsupported": [
@@ -72,7 +74,8 @@
     "rate 0 or above INT_MAX (native decoder EINVAL; refused with 234)",
     "header truncated after the depth byte",
     "trailing partial sample",
-    "native score-based detection where a higher-scoring probe (e.g. mov on 'free' at byte 4) claims an SDX: file; undeclared EdgeFFmpeg picks sdx",
+    "empty sample data (native's decoded framecrc header keeps the 1/90000 stream time base)",
+    "native score-based detection where a payload-scanning probe (mp3, ac3 and similar) would outscore sdx_probe's 50; mov's atom-type claims at byte 4 are mirrored by leaving those heads undetected",
     "FLAC path and Workers runtime evidence"
   ],
   "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
@@ -125,6 +128,17 @@
         "bit-exact-pcm"
       ],
       "scope": "Native undeclared status 183 (mov probe) asserted; -f sdx framecrc byte-exact. Wave 2 branch wave2/fmt-sdx."
+    },
+    {
+      "id": "sdx.mov-empty",
+      "file": "tests/differential/sdx.test.ts",
+      "name": "leaves SDX heads that native hands to the mov probe undetected and refuses empty sample data that native decodes with a 1/90000 framecrc time base",
+      "modes": [
+        "semantic",
+        "bit-exact-pcm",
+        "diagnostic"
+      ],
+      "scope": "Undeclared SDX: heads with the 13 mov atom types at byte 4 refused (native mov probe outscores or ties sdx and fails) and byte-exact with -f sdx; jp2/jxl ftyp, 0x82827f7d, Free and text heads detected by both and byte-exact; empty sample data refused for framecrc, WAV, raw and AU where native decodes with a 1/90000 framecrc header. Wave 2 branch wave2/fmt-sdx."
     },
     {
       "id": "sdx.depths",
@@ -187,6 +201,7 @@
     "Setup durations: bootstrap 281.7 s total (npm 10.5 s, submodule 8.4 s, reference build ~263 s on 4 vCPUs); baseline typecheck+lint+boundaries+registry tests ~86 s.",
     "Baseline before changes: typecheck, lint, boundaries and tests/unit/container-registry*.test.ts (3 files, 17 tests) passed; all still pass after.",
     "No linux-gated cases: integer and byte-copy paths only.",
-    "Probe: native mov_probe outscores sdx_probe (50) when bytes 4..7 are an mp4 atom type such as 'free'; this divergence is tested and documented, not mirrored."
+    "Superseded by the audit note below (mov-claimed heads are now left undetected): Probe: native mov_probe outscores sdx_probe (50) when bytes 4..7 are an mp4 atom type such as 'free'; this divergence is tested and documented, not mirrored.",
+    "Audit (audit-fmt-b): undeclared SDX: heads whose byte-4 atom type mov_probe scores at 50 or more (13 tags) were detected as sdx while native fails; confirmSdx now leaves them undetected. Empty sample data was accepted while native's decoded framecrc prints #tb 0: 1/90000 (the decoder never opens); it is now refused before any output. The audit test ran on macOS arm64 against the pinned darwin reference (sha256 1b86106f…ab92), not on the sandbox linux-x64 build."
   ]
 }

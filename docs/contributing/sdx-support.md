@@ -11,7 +11,7 @@ ffmpeg -f sdx -i in.bin ...
 
 ## Detection and header
 
-- **Probe** (precedence 100, exact magic, no `confirm`): `head` tests `SDX:`, as `sdx_probe` compares `AV_RB32(buf)` with `AV_RB32("SDX:")` and returns `AVPROBE_SCORE_EXTENSION` (50). No other registered head overlaps it. Native ranks probes by score, so a file whose bytes 4..7 also satisfy a higher-scoring probe goes to that demuxer instead. The differential test shows this for `free` at byte 4: native's mov probe wins and fails with 183, while EdgeFFmpeg detects sdx. Only `-f sdx` is compared for such files.
+- **Probe** (precedence 100, exact magic plus a `confirm`): `head` tests `SDX:`, as `sdx_probe` compares `AV_RB32(buf)` with `AV_RB32("SDX:")` and returns `AVPROBE_SCORE_EXTENSION` (50). No other registered head overlaps it. Native ranks probes by score, so a file whose bytes also satisfy a higher-scoring probe goes to that demuxer instead. The one such probe that always reads these bytes is `mov_probe`: `SDX:` is a 1.4 GB atom size, so it reads only the atom type at byte 4. `moov`, `mdat`, `pnot`, `udta` and `ftyp` score 100, `ediw`, `wide`, `free`, `junk` and `pict` 95, and `skip`, `uuid` and `prfl` 50, which ties sdx and detects nothing. Native then fails (183, or 234 once mov opens a `moov` head). `confirmSdx` reads at most 12 bytes in bounded reads and resolves false for those 13 tags, except `ftyp` with a `jp2 ` or `jxl ` brand (score 5). Files shorter than 8 bytes, where `mov_probe` reads no tag, stay sdx. `-f sdx` reads every such file as native does (tested). Data-dependent probes that scan the payload (mp3, ac3 and similar) are not mirrored.
 - **Header** (`openSdx`), field by field as in `sdx_read_header`:
   1. It skips the four magic bytes. They are not checked when the input is declared `-f sdx`.
   2. It scans bytes for `0x1a` (`scanSdxMarker`). The scan reads windows of at most `min(maxReadBytes, 64)` bytes, so no single read exceeds the budget, and it can run as far as EOF. Reaching EOF fails with `INVALIDDATA` (exit 183), because `avio_r8` then returns 0.
@@ -42,6 +42,8 @@ Packets come from the shared `openRawPcm` reader: bounded reads, re-chunked to t
 | rate 0 or above INT_MAX (RL32 into an `int`) | opens, decoder fails with `AVERROR(EINVAL)`: exit `(256-EINVAL)&255` on the host (234 on Linux and macOS) | 234: `SDX sample rate <n> is not implemented` |
 | header cut after the depth byte (partial rate or skip) | exit 0, no packets | `Truncated SDX header is not implemented` |
 | trailing partial sample | drops it, exit 0 | `Partial trailing SDX sample is not implemented` |
+| no sample data after the header | exit 0; the decoder never opens, so decoded framecrc prints `#tb 0: 1/90000` | `Empty SDX sample data is not implemented` (every output) |
+| undeclared `SDX:` head with a mov atom type at byte 4 (see Probe) | mov claims it and fails (183 or 234) | `Unsupported audio container signature` |
 | `-f sdx` output | no muxer | `Output requires ...` (no `mux`) |
 
 ## Determinism and arithmetic profile
@@ -58,12 +60,13 @@ Sandbox Linux x86_64 reference built by `npm run bootstrap -- --only npm,submodu
 
 The differential tests read `.build/reference/build-metadata.json` and assert commit `946fcce0` and `--disable-x86asm`. They never pin a binary sha or commit native digests. The file runs in about 6 s with `--maxWorkers=1`.
 
-- `tests/differential/sdx.test.ts` (5 tests):
+- `tests/differential/sdx.test.ts` (6 tests):
   - **Decode matrix.** 48 synthesized inputs: depths {8,16,24,32} × rates {8000,22050,44100} × name lengths {0,1,17,255}. Lengths cycle through 1, span−1 and 2·span+3 samples. The free text before the marker is empty, one byte or 99 bytes with NUL and 0xFF, and half the files use a `.dat` extension. One native call per input writes four outputs (framecrc, WAV, s32le raw, AU, `-bitexact`), so there are 192 byte-exact comparisons.
   - **Output time selection.** 4 inputs × 6 profiles (`-ss 0.0125`, `-t 0.07`, `-ss 0.03 -t 0.1`, `-ss 0.2`, `-t 1`, `-frames:a 2`), each as framecrc and WAV: 48 byte-exact comparisons from 24 native calls.
   - **Copy refusal.** Native `-c copy` succeeds for 4 depths with `#tb 0: 1/90000`, 3 packets, a first packet of `span·depth/8` bytes and a duration of `round(span·90000/rate)`. EdgeFFmpeg refuses framecrc and raw copy with exit 1, and no output file exists (8 refusals).
   - **Statuses.** Native and EdgeFFmpeg statuses match for 9 inputs: depth 12, 0 and 64, a missing `0x1a`, a magic-only file, version 2 and a cut before the depth (183), and rate 0 and 2^31 (host EINVAL for native, 234 for EdgeFFmpeg). Three inputs that native accepts with exit 0 (trailing partial sample, a cut after the depth, input `-ss`) are refused explicitly. No output exists in any of these cases.
   - **Forced format.** For `free` at byte 4, native's undeclared status (183, mov) is asserted, and native `-f sdx` framecrc is compared byte-exact (1 comparison).
+  - **mov heads and empty data** (added by the wave-2 audit and run on macOS arm64 against the darwin reference build `1b86106f…ab92`; its linux-x64 run is CI's). For the 13 mov atom types at byte 4, native's undeclared failure is asserted, EdgeFFmpeg refuses with no output, and `-f sdx` framecrc is byte-exact (13 comparisons, 13 refusals). For `ftyp` with `jp2 `/`jxl ` brands, the 0x82827f7d tag, `Free` and `text`, both detect sdx and framecrc is byte-exact (5). An empty data section decodes natively with a `1/90000` framecrc header; EdgeFFmpeg refuses all four outputs with none created (4 refusals).
 - `tests/unit/sdx.test.ts` (6 tests):
   - the depth table and its refusals;
   - header parsing for 4 depths × read budgets {1,2,3,4,64} (those at least one sample frame) × names {0,1,255}, with request sizes bounded and the name, skipped and payload bytes never read on open at budget 1;
@@ -71,7 +74,7 @@ The differential tests read `.build/reference/build-metadata.json` and assert co
   - the first-`0x1a` rule;
   - every refusal with its exit status;
   - abort before, during and after open;
-  - the frozen demux-only descriptor and 4-byte detection;
+  - the frozen demux-only descriptor, detection within 12 bytes and the mov-tag confirm with its bounded reads;
   - backend decode, copy, input seek, bad-input and sdx-output refusals with no output opened.
 - Registry: `tests/unit/container-registry*.test.ts` (3 files, 17 tests) pass unchanged, along with `npm run typecheck`, `npm run lint` and `npm run boundaries`.
 
@@ -84,6 +87,7 @@ The differential tests read `.build/reference/build-metadata.json` and assert co
 | `sdx.copy-refusal` | `tests/differential/sdx.test.ts` | `refuses SDX -c copy before any output exists while native copies with a 1/90000 time base` | diagnostic | native 1/90000 copy asserted, Edge refusal before output; all platforms |
 | `sdx.statuses` | `tests/differential/sdx.test.ts` | `matches native SDX statuses for depth 12 a missing 0x1a and other invalid headers, and refuses unmirrored inputs before output` | diagnostic | 9 native statuses (errno mapped) plus 3 explicit refusals; all platforms |
 | `sdx.forced` | `tests/differential/sdx.test.ts` | `matches native -f sdx on free text that native detection would hand to the mov probe` | semantic, bit-exact-pcm | -f sdx byte-exact and native's undeclared mov status; all platforms |
+| `sdx.mov-empty` | `tests/differential/sdx.test.ts` | `leaves SDX heads that native hands to the mov probe undetected and refuses empty sample data that native decodes with a 1/90000 framecrc time base` | semantic, bit-exact-pcm, diagnostic | 13 mov heads refused undeclared and byte-exact with -f sdx, 5 heads detected by both, empty data refused for 4 outputs; all platforms |
 | `sdx.header` | `tests/unit/sdx.test.ts` | `scans for 0x1a in bounded reads and parses the header without reading the payload` | semantic | bounded header parse; no native run |
 | `sdx.refusals` | `tests/unit/sdx.test.ts` | `fails like read_header with INVALIDDATA and refuses the unmirrored forms` | diagnostic | refusal statuses; no native run |
 | `sdx.backend` | `tests/unit/sdx.test.ts` | `decodes through the PCM backend and refuses copy, input seeks, sdx output and bad inputs before any output opens` | api | backend routing; no native run |
@@ -96,5 +100,6 @@ The differential tests read `.build/reference/build-metadata.json` and assert co
 - rate 0 or above INT_MAX;
 - headers truncated after the depth byte;
 - trailing partial samples;
-- native's score-based detection, where a higher-scoring probe claims a file that starts with `SDX:` (undeclared, EdgeFFmpeg picks sdx);
+- empty sample data;
+- native's score-based detection where a payload-scanning probe (mp3, ac3 and similar) would outscore sdx on an `SDX:` file; mov's atom-type claims at byte 4 are mirrored by leaving those heads undetected;
 - FLAC-path and Workers-runtime evidence (no workers test).

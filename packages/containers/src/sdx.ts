@@ -30,6 +30,19 @@ export async function scanSdxMarker(input:ReadHandle,maxReadBytes:number,signal?
   }
   return null;
 }
+/** mov_probe reads an atom type at byte 4 of every file (the 'SDX:' size field runs past the probe buffer): these score 50 or more, so native's mov probe
+ * outscores sdx_probe's 50 (or ties it at 50, which detects nothing) and the file is not sdx; ftyp with a jp2/jxl brand scores 5 and stays sdx. */
+const movTags=new Set(['moov','mdat','pnot','udta','ftyp','ediw','wide','free','junk','pict','skip','uuid','prfl']),confirmBytes=12;
+/** Undeclared detection: false where native's mov probe claims the head (bytes past EOF read as native's zero probe padding). */
+export async function confirmSdx(input:ReadHandle,maxReadBytes:number,signal?:AbortSignal):Promise<boolean>{
+  signal?.throwIfAborted();
+  if(!Number.isSafeInteger(maxReadBytes)||maxReadBytes<1)throw new SdxError('resource-limit','Invalid SDX read budget');
+  // mov_probe stops before reading a tag when fewer than 8 bytes exist.
+  if(input.size<8n)return true;
+  const bytes=new Uint8Array(confirmBytes);bytes.set(await readExact(input,0n,input.size<BigInt(confirmBytes)?Number(input.size):confirmBytes,maxReadBytes,signal));
+  const tag=String.fromCharCode(...bytes.subarray(4,8)),brand=String.fromCharCode(...bytes.subarray(8,12));
+  return !movTags.has(tag)||tag==='ftyp'&&(brand==='jp2 '||brand==='jxl ');
+}
 /** Finite range-backed SDX: 'SDX:', bytes up to 0x1a, version 1, name length and name, 4 skipped, depth, RL32 rate, 16 skipped, then unsigned PCM to EOF. */
 export async function openSdx(input:ReadHandle,options:SdxOptions):Promise<SdxInput>{
   const {maxReadBytes,signal}=options;signal?.throwIfAborted();
@@ -48,6 +61,8 @@ export async function openSdx(input:ReadHandle,options:SdxOptions):Promise<SdxIn
   // codecpar->sample_rate is an int: RL32 values above INT_MAX turn negative. Native opens such files and its decoder then fails with EINVAL (exit 234); copy is not mirrored.
   if(sampleRate<1||sampleRate>intMax)throw containerRefusal(`SDX sample rate ${sampleRate} is not implemented`,234);
   const blockAlign=bitDepth/8,dataBytes=input.size-dataOffset;
+  // With no packet the decoder never opens, so native's decoded framecrc keeps the stream's 1/90000 time base in its header.
+  if(dataBytes===0n)throw new SdxError('unsupported','Empty SDX sample data is not implemented');
   if(dataBytes%BigInt(blockAlign)!==0n)throw new SdxError('unsupported','Partial trailing SDX sample is not implemented');
   const raw=await openRawPcm({size:dataBytes,readAt:(position,length,abort)=>input.readAt(dataOffset+position,length,abort)},{codec:codec!,channels:1,sampleRate,channelMask:null,maxReadBytes,...(signal?{signal}:{})});
   return Object.freeze({info:Object.freeze({...raw.info,codec:codec!,dataOffset,container:'sdx' as const,bitDepth,nameBytes,
@@ -57,8 +72,8 @@ export async function openSdx(input:ReadHandle,options:SdxOptions):Promise<SdxIn
 /** Registered by `export {sdx} from './sdx.js';` in registry.ts. Demux only, as native has no sdx muxer. */
 export const sdx=defineContainer({
   name:'sdx',
-  // Exact head 'SDX:' (sdx_probe's AV_RB32(buf) == AV_RB32("SDX:"), score 50); no other format claims it.
-  demux:{probe:{precedence:100,head:bytes=>bytes[0]===0x53&&bytes[1]===0x44&&bytes[2]===0x58&&bytes[3]===0x3a},headerBytes,
+  // Exact head 'SDX:' (sdx_probe's AV_RB32(buf) == AV_RB32("SDX:"), score 50); no other registered format claims it. The confirm leaves the heads native's mov probe claims.
+  demux:{probe:{precedence:100,head:bytes=>bytes[0]===0x53&&bytes[1]===0x44&&bytes[2]===0x58&&bytes[3]===0x3a,confirm:confirmSdx},headerBytes,
     // Native input -ss seeks through ff_pcm_read_seek in 1/90000 units; it is not mirrored.
     async open(source,{maxReadBytes,signal,seek}){if(seek>0n)throw containerRefusal('SDX input seeking is not implemented');return openSdx(source,{maxReadBytes,signal});}}
 });

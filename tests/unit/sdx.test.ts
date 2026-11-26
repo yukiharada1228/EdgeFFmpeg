@@ -4,7 +4,7 @@ import type {ReadHandle,WriteHandle} from '@edge-ffmpeg/core';
 import type {MediaPacket} from '@edge-ffmpeg/avutil';
 import {createMediaBackend} from '@edge-ffmpeg/avformat';
 import {containerFormat,containerProbes,detectAudioContainer} from '@edge-ffmpeg/containers';
-import {openSdx,scanSdxMarker,sdx,sdxCodec} from '../../packages/containers/src/sdx.js';
+import {confirmSdx,openSdx,scanSdxMarker,sdx,sdxCodec} from '../../packages/containers/src/sdx.js';
 import {memoryInput} from '../helpers/wav.js';
 /** Independent of the module: 'SDX:', free text, 0x1a, version, name length, name, 4 bytes, depth, RL32 rate, 16 bytes, then PCM. */
 function sdxFile(o:{depth?:number;rate?:number;name?:number;text?:string;version?:number;samples?:number;extra?:number}={}):Uint8Array{
@@ -41,8 +41,9 @@ it('scans for 0x1a in bounded reads and parses the header without reading the pa
   const early=sdxFile({text:'ab\x1a'});expect(await scanSdxMarker(memoryInput(early),64)).toBe(6n);
   const magic=sdxFile();magic[2]=0x1a;expect(await scanSdxMarker(memoryInput(magic),1)).toBe(4n);
   expect(await scanSdxMarker(memoryInput(Uint8Array.from([0x53,0x44,0x58,0x3a,1,2,3])),2)).toBeNull();
-  // A zero-sample file opens with no packets.
-  const empty=await openSdx(memoryInput(sdxFile({samples:0})),{maxReadBytes:64});expect(empty.info.durationSamples).toBe(0n);expect(await collect(empty)).toEqual([]);
+  // A zero-sample file is refused: native never opens the decoder, so its decoded framecrc header keeps the 1/90000 stream time base. One sample opens.
+  await expect(openSdx(memoryInput(sdxFile({samples:0})),{maxReadBytes:64})).rejects.toThrow('Empty SDX sample data is not implemented');
+  const one=await openSdx(memoryInput(sdxFile({samples:1})),{maxReadBytes:64});expect(one.info.durationSamples).toBe(1n);expect(await collect(one)).toHaveLength(1);
   for(const rate of [1,8000,2147483647])expect((await openSdx(memoryInput(sdxFile({rate})),{maxReadBytes:64})).info.sampleRate).toBe(rate);
 });
 it('fails like read_header with INVALIDDATA and refuses the unmirrored forms',async()=>{
@@ -57,7 +58,7 @@ it('fails like read_header with INVALIDDATA and refuses the unmirrored forms',as
   const full=sdxFile({name:5,samples:0}),depthAt=4+3+5+4;
   for(const cut of [5,6,8,depthAt])await expect(open(full.subarray(0,cut))).rejects.toMatchObject({exitCode:183});
   for(const cut of [depthAt+1,depthAt+4,depthAt+5,full.length-1])await expect(open(full.subarray(0,cut))).rejects.toThrow('Truncated SDX header is not implemented');
-  await expect(open(full)).resolves.toBeDefined();
+  await expect(open(full)).rejects.toThrow('Empty SDX sample data is not implemented');await expect(open(sdxFile({name:5,samples:1}))).resolves.toBeDefined();
   for(const rate of [0,2147483648,4294967295])await expect(open(sdxFile({rate}))).rejects.toEqual(refusal(234,`SDX sample rate ${rate} is not implemented`));
   for(const [depth,extra] of [[16,1],[24,1],[24,2],[32,3]] as const)await expect(open(sdxFile({depth,extra}))).rejects.toThrow('Partial trailing SDX sample is not implemented');
   await expect(open(sdxFile(),0)).rejects.toThrow('budget');await expect(open(sdxFile(),1.5)).rejects.toThrow('budget');
@@ -77,11 +78,16 @@ it('checks the abort signal around every read',async()=>{
 });
 it('probes the exact SDX: head and registers a demux-only descriptor',async()=>{
   const bytes=sdxFile(),requests:Array<{offset:bigint;length:number}>=[];
-  expect(await detectAudioContainer(memoryInput(bytes,requests),2)).toBe('sdx');expect(requests.every(request=>request.length<=2&&request.offset+BigInt(request.length)<=4n)).toBe(true);
+  expect(await detectAudioContainer(memoryInput(bytes,requests),2)).toBe('sdx');expect(requests.every(request=>request.length<=2&&request.offset+BigInt(request.length)<=12n)).toBe(true);
   for(const head of ['SDX;','sdx:','SDX ','XSDX','SDS:']){const changed=bytes.slice();changed.set([...head].map(c=>c.charCodeAt(0)));expect(sdx.demux.probe.head(changed)).toBe(false);await expect(detectAudioContainer(memoryInput(changed),64)).rejects.toThrow('signature');}
   expect(containerFormat('sdx')).toBe(sdx);expect(containerProbes).toContain(sdx);
-  expect(sdx).toMatchObject({name:'sdx',demux:{probe:{precedence:100},headerBytes:128}});expect('mux' in sdx).toBe(false);expect('extensions' in sdx.demux).toBe(false);expect('packetSpan' in sdx.demux).toBe(false);expect('confirm' in sdx.demux.probe).toBe(false);
+  expect(sdx).toMatchObject({name:'sdx',demux:{probe:{precedence:100},headerBytes:128}});expect('mux' in sdx).toBe(false);expect('extensions' in sdx.demux).toBe(false);expect('packetSpan' in sdx.demux).toBe(false);expect(sdx.demux.probe.confirm).toBe(confirmSdx);
   expect(Object.isFrozen(sdx.demux)&&Object.isFrozen(sdx.demux.probe)).toBe(true);
+  // mov_probe's atom type at byte 4 outscores (or ties) sdx_probe's 50: the confirm reads at most 12 bytes in bounded reads and leaves those heads undetected.
+  const head=(tag:string)=>sdxFile({text:tag});
+  for(const tag of ['moov','mdat','pnot','udta','ftyp','ftypisom','ediw','wide','free','junk','pict','skip','uuid','prfl']){const reads:Array<{offset:bigint;length:number}>=[];expect(await confirmSdx(memoryInput(head(tag),reads),5),tag).toBe(false);expect(reads).toEqual([{offset:0n,length:5},{offset:5n,length:5},{offset:10n,length:2}]);await expect(detectAudioContainer(memoryInput(head(tag)),64)).rejects.toThrow('signature');}
+  for(const tag of ['ftypjp2 ','ftypjxl ','Free','text','\x82\x82\x7f\x7d',''])expect(await confirmSdx(memoryInput(head(tag)),64),JSON.stringify(tag)).toBe(true);
+  expect(await confirmSdx(memoryInput(Uint8Array.from([...'SDX:ftyp'].map(c=>c.charCodeAt(0)))),64)).toBe(false);expect(await confirmSdx(memoryInput(Uint8Array.from([...'SDX:fre'].map(c=>c.charCodeAt(0)))),64)).toBe(true);
   await expect(sdx.demux.open(memoryInput(bytes),{maxReadBytes:64,signal:new AbortController().signal,declared:{sampleRate:44100,channels:1,guessLayout:true},seek:1n})).rejects.toEqual(refusal(1,'SDX input seeking is not implemented'));
 });
 it('decodes through the PCM backend and refuses copy, input seeks, sdx output and bad inputs before any output opens',async()=>{
