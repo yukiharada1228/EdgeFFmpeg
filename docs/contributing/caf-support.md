@@ -30,7 +30,7 @@ Layouts: the PCM path's `layoutMask` is the input's container mask, or else the 
 
 - **Written:** `pcm_s8`, `pcm_s16le/be`, `pcm_s24le/be`, `pcm_s32le/be`, `pcm_f32le/be`, `pcm_f64le/be`, `pcm_alaw`, `pcm_mulaw`, by re-encoding or `-c copy`, 1 to 65535 channels, integer rates 1 to 2^31-1.
 - **Refused with native's status:** `pcm_u8`, `pcm_u16*`, `pcm_u24*` and `pcm_u32*` have no `ff_codec_caf_tags` entry. `caf_write_init` fails with `AVERROR_INVALIDDATA` (exit 183, not errno-based); EdgeFFmpeg throws `containerRefusal('CAF muxer does not support <codec>', 183)` before any output exists. Native leaves an empty output file.
-- **Refused as unimplemented:** inputs whose demuxer exports metadata (`info.metadata`; `dropsMetadata` is not set, since `caf_write_header` writes `s->metadata`), so `-metadata` tags and tagged inputs never reach the `info` chunk; a layout mask whose bit count differs from the channel count; a data size beyond 2^63-1.
+- **Refused as unimplemented:** inputs whose demuxer exports metadata (`info.metadata`; `dropsMetadata` is not set, since `caf_write_header` writes `s->metadata`), so `-metadata` tags and inputs flagged with `info.metadata` never reach the `info` chunk (the WAV `LIST`/`INFO`, AIFF `NAME`/`ANNO` and AU annotation tags of the pre-registry demuxers are not flagged: see Known divergence); a layout mask whose bit count differs from the channel count; a data size beyond 2^63-1.
 - **Not reachable:** non-PCM codecs (ADPCM, AAC, ALAC, Opus, …, which would need `pakt`/`kuki`), FLAC input (the FLAC output dispatcher does not route registered muxers), unknown-length or pipe output (native writes `data` size -1 there), and CAF input.
 
 ## Determinism and arithmetic profile
@@ -49,6 +49,10 @@ Sandbox Linux x86_64 oracle `.build/reference/ffmpeg`, built from the pinned com
 - **Refusals.** `pcm_u8`, `pcm_u16le`, `pcm_u24le`, `pcm_u32be` and a `pcm_u8` stream copy: native and EdgeFFmpeg both exit 183, and no EdgeFFmpeg output exists.
 
 `tests/unit/caf.test.ts` (7 tests): desc fields per codec at three rates, the layout table and bitmap fallback (including a mask above 32 bits), chunk order and sizes for chan and info, data size limits and parameter refusals, chunked writes at budgets 1, 5, 13 and 4096, abort-once and cancellation, and the descriptor fields. The registry tests `tests/unit/container-registry.test.ts` and `container-registry-extension.test.ts` pass unchanged.
+
+### Known divergence (audit, shared)
+
+The pre-registry `wav`, `aiff` and `au` demuxers do not set `info.metadata` for their tags. Native exports them as global metadata and `caf_write_header` writes them in the `info` chunk, so a tagged WAV, AIFF or AU input into `-f caf` exits 0 without native's tags (probed on macOS arm64 against the darwin reference build `1b86106f…ab92`, copy and re-encode). The same inputs into the existing `wav`, `aiff` and `au` muxers already differ in the same way. Once those demuxers flag their tags (a shared edit), the PCM path refuses such inputs for CAF with no change here.
 
 FATE `lavf-caf` is not reproduced: it passes `-metadata title=lavftest`, which this scope refuses.
 
