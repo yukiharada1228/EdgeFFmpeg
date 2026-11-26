@@ -1,0 +1,293 @@
+{
+  "capabilityId": "filter.vibrance",
+  "slug": "vf-vibrance",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/vibrance.ts",
+    "packages/avfilter/NOTICE-VIBRANCE",
+    "tests/unit/video-vibrance.test.ts",
+    "tests/differential/video-vibrance.test.ts",
+    "docs/contributing/vibrance.md",
+    "docs/contributing/wave2/vf-vibrance.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/video-ops/registry.ts",
+      "change": "+1 import line: import {vibranceOperator} from './vibrance.js'; +1 entry line: ' vibranceOperator,'"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/differential/video-vibrance.test.ts",
+      "title": "runs against the reference build of commit 946fcce0 configured with --disable-x86asm",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-vibrance.test.ts",
+      "title": "matches native vibrance frames for every format, size and setting (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 756,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-vibrance.test.ts",
+      "title": "matches native vibrance on every 8-bit RGB triple (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 8,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-vibrance.test.ts",
+      "title": "matches native vibrance CLI rawvideo and framecrc through -vf and -filter_complex (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 192,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-vibrance.test.ts",
+      "title": "matches native replayed vibrance branches and joins frame by frame (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 24,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-vibrance.test.ts",
+      "title": "matches native vibrance framecrc and rawvideo through the actor and timed schedulers (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 192,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-vibrance.test.ts",
+      "title": "matches native vibrance with default and single filter threads (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 168,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-vibrance.test.ts",
+      "title": "refuses vibrance timelines and unimplemented values before opening CLI outputs",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 28
+    },
+    {
+      "file": "tests/differential/video-vibrance.test.ts",
+      "title": "negotiates every accepted source as native does and refuses picks without storage before output on every path (linux-x64 float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 146,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/unit/video-vibrance.test.ts",
+      "title": "parses defaults, the declared shorthand order, named values and booleans into frozen float steps",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-vibrance.test.ts",
+      "title": "refuses timelines, out-of-range and non-constant values, and unknown options before planning",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-vibrance.test.ts",
+      "title": "lists native query_formats in declared order and executes only the members with frame storage",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-vibrance.test.ts",
+      "title": "applies the single-precision kernel per pixel, copies alpha and follows every packed order and the gbrp plane order",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-vibrance.test.ts",
+      "title": "rejects unsupported formats, budgets, malformed strides, settings and cancellation explicitly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-vibrance.test.ts",
+      "title": "plans vibrance through linear, graph and actor planners and refuses timelines and commands",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "(whole file, unedited)",
+      "passed": 8,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "total": 1514,
+    "byTest": {
+      "matches native vibrance frames for every format, size and setting (linux-x64 float)": 756,
+      "matches native vibrance on every 8-bit RGB triple (linux-x64 float)": 8,
+      "matches native vibrance CLI rawvideo and framecrc through -vf and -filter_complex (linux-x64 float)": 192,
+      "matches native replayed vibrance branches and joins frame by frame (linux-x64 float)": 24,
+      "matches native vibrance framecrc and rawvideo through the actor and timed schedulers (linux-x64 float)": 192,
+      "matches native vibrance with default and single filter threads (linux-x64 float)": 168,
+      "refuses vibrance timelines and unimplemented values before opening CLI outputs": 28,
+      "negotiates every accepted source as native does and refuses picks without storage before output on every path (linux-x64 float)": 146
+    }
+  },
+  "unsupported": [
+    "9..16-bit planar gbrp9..gbrp16 and gbrap10..gbrap16, gbrap, 16-bit packed rgb48/bgr48/rgba64/bgra64 and the 0rgb/rgb0 family: no frame storage here (vibrance_slice16/16p not ported); listed in formats() and refused by the shared negotiators by name if picked",
+    "non-constant option expressions (av_expr)",
+    "enable= timelines",
+    "runtime commands (process_command)",
+    "native's thread-count-dependent output for non-writable input with more than one slice job (gbrp source rows offset by the output linesize; rgb24/bgr24 alpha store racing across slices); the sequential result, equal to native with one filter thread, is produced"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.vibrance.kernel",
+      "file": "tests/differential/video-vibrance.test.ts",
+      "name": "matches native vibrance frames for every format, size and setting (linux-x64 float)",
+      "modes": [
+        "linear"
+      ],
+      "scope": "7 formats x 6 sizes x 18 settings, 3 frames",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.vibrance.cube",
+      "file": "tests/differential/video-vibrance.test.ts",
+      "name": "matches native vibrance on every 8-bit RGB triple (linux-x64 float)",
+      "modes": [
+        "linear"
+      ],
+      "scope": "full 256^3 RGB cube in rgb24, gbrp, bgra under 8 settings",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.vibrance.cli",
+      "file": "tests/differential/video-vibrance.test.ts",
+      "name": "matches native vibrance CLI rawvideo and framecrc through -vf and -filter_complex (linux-x64 float)",
+      "modes": [
+        "linear",
+        "graph"
+      ],
+      "scope": "-vf/-filter_complex, rawvideo/framecrc, with and without -ss/-t",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.vibrance.stream",
+      "file": "tests/differential/video-vibrance.test.ts",
+      "name": "matches native replayed vibrance branches and joins frame by frame (linux-x64 float)",
+      "modes": [
+        "graph",
+        "stream"
+      ],
+      "scope": "replayed plain, split+hstack, transpose+nullsink graphs",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.vibrance.timed",
+      "file": "tests/differential/video-vibrance.test.ts",
+      "name": "matches native vibrance framecrc and rawvideo through the actor and timed schedulers (linux-x64 float)",
+      "modes": [
+        "actor",
+        "timed"
+      ],
+      "scope": "pull, activation and producer schedulers",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.vibrance.threads",
+      "file": "tests/differential/video-vibrance.test.ts",
+      "name": "matches native vibrance with default and single filter threads (linux-x64 float)",
+      "modes": [
+        "linear",
+        "graph"
+      ],
+      "scope": "native default threads vs -filter_threads 1 on writable input; non-writable split vs -filter_complex_threads 1",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.vibrance.refusals",
+      "file": "tests/differential/video-vibrance.test.ts",
+      "name": "refuses vibrance timelines and unimplemented values before opening CLI outputs",
+      "modes": [
+        "linear",
+        "graph",
+        "actor",
+        "timed"
+      ],
+      "scope": "expressions, enable=, out-of-range, auto, too many args; no output opened"
+    },
+    {
+      "id": "filter.vibrance.negotiation",
+      "file": "tests/differential/video-vibrance.test.ts",
+      "name": "negotiates every accepted source as native does and refuses picks without storage before output on every path (linux-x64 float)",
+      "modes": [
+        "linear",
+        "graph",
+        "stream",
+        "actor",
+        "timed"
+      ],
+      "scope": "17 negotiation sources; native picks rgb24/argb/gbrp/packed RGB, all executable",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.vibrance.syntax",
+      "file": "tests/unit/video-vibrance.test.ts",
+      "name": "refuses timelines, out-of-range and non-constant values, and unknown options before planning",
+      "modes": [
+        "unit"
+      ],
+      "scope": "parser refusals and messages"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Setup: the sandbox Node was v22.23.5 and bootstrap requires Node 24+; used the preinstalled /opt/node24 (v24.22.3). The first bootstrap attempt with Node 22 failed immediately. Bootstrap npm,submodule,reference with --allow-unpinned-reference took 177s (npm 8.6s, submodule 7.1s, reference build the rest). Baseline typecheck+lint+boundaries+video-operator-registry test: 59s, green (8 tests).",
+    "The differential file runs in about 19s with --maxWorkers=1 on 4 vCPUs; the unit file in under 1s.",
+    "Every pixel-comparing differential test is gated to linux-x64 with it.skipIf under a constant title: the kernel is single-precision float and macOS arm64 contracts multiply-adds. The defaults are not an identity natively (measured on the full 256^3 cube), so the default case is float-sensitive too. No macOS difference was measured here; the gate is a precaution.",
+    "Mutations dropping Math.fround (double throughout) or reordering the luma sum fail both the kernel and the cube tests.",
+    "Native defect: with non-writable input (split outputs) and more than one slice job, vibrance_slice8 offsets gbrp source rows by the output linesize and vibrance_slice8p's alpha store for rgb24/bgr24 (aoffset 3) races with the next slice when the output linesize equals 3*width; native output then changes with thread count and between runs. Not mirrored; tests compare those graphs against -filter_complex_threads 1. Note -filter_threads does not govern -filter_complex graphs; -filter_complex_threads does.",
+    "Native negotiates every one of the 17 negotiation sources to a format with storage (gray/YUV -> rgb24, yuva420p -> argb), so registry examples need no format= prefix; three use one anyway to cover gbrp, rgba and bgr24."
+  ]
+}

@@ -1,0 +1,17 @@
+Scoped vibrance video filter
+
+The option table (intensity, rbal, gbal, bbal, rlum, glum, blum, alternate:
+AVOption order, ranges, defaults and the float storage of AV_OPT_TYPE_FLOAT),
+pixel_fmts, the ff_fill_rgba_map byte offsets and the single-precision pixel
+arithmetic of vibrance_slice8 and vibrance_slice8p (scale 1/255, FFMAX3/FFMIN3
+saturation, the luma sum, the FFSIGN-signed per-channel factors, lerpf and the
+av_clip_uint8 store of the truncated product) in src/video-ops/vibrance.ts
+follow libavfilter/vf_vibrance.c (vibrance_options, pixel_fmts, config_input,
+filter_frame, vibrance_slice8, vibrance_slice8p).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2018 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete vibrance filter: only
+the eight-bit formats with frame storage here (no 9..16-bit vibrance_slice16
+paths), constant option values, no timeline and no runtime commands.
