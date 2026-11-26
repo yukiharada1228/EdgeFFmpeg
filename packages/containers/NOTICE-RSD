@@ -1,0 +1,10 @@
+Scoped GameCube RSD demuxer
+
+The probe, header fields, codec tag table, data start and fixed 1024-byte
+packet layout in src/rsd.ts follow libavformat/rsd.c (rsd_probe,
+rsd_read_header, rsd_read_packet), for the PCM and PCMB tags only.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2013 James Almer. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete rsd demuxer.

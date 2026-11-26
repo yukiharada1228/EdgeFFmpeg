@@ -15,6 +15,7 @@ export {md5} from './hash/hash-mux.js';
 export {nistsphere} from './nistsphere.js';
 export {pvf} from './pvf.js';
 export * from './formats/raw-pcm.js';
+export {rsd} from './rsd.js';
 export {rso} from './rso.js';
 export {sds} from './sds.js';
 export {sln} from './sln.js';
