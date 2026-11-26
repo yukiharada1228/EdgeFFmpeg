@@ -1,0 +1,16 @@
+Scoped deblock video filter
+
+The option table (deblock_options: filter weak/strong, block, alpha, beta,
+gamma, delta, planes), the pixel_fmts list, the threshold conversion and plane
+geometry of config_output, the deblockh8/deblockv8 weak and strong kernels and
+the block loop of filter_frame in src/video-ops/deblock.ts follow
+libavfilter/vf_deblock.c (pixel_fmts, WEAK_HFILTER, WEAK_VFILTER,
+STRONG_HFILTER, STRONG_VFILTER, config_output, filter_frame, deblock_options).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2018 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation for eight-bit planar formats, not the
+complete deblock filter: timeline, runtime commands, expression-valued float
+thresholds and edges whose native kernels read past the right plane border are
+refused.

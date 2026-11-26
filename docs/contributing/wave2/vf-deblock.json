@@ -1,0 +1,68 @@
+{
+  "capabilityId": "filter.deblock",
+  "slug": "vf-deblock",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/deblock.ts",
+    "packages/avfilter/NOTICE-DEBLOCK",
+    "tests/unit/video-deblock.test.ts",
+    "tests/differential/video-deblock.test.ts",
+    "docs/contributing/deblock.md",
+    "docs/contributing/wave2/vf-deblock.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/avfilter/src/video-ops/registry.ts", "lines": ["import {deblockOperator} from './deblock.js';", " deblockOperator,"]}
+  ],
+  "tests": [
+    {"file": "tests/unit/video-deblock.test.ts", "title": "parses deblock_options with native defaults, shorthand order, filter constants, integer expressions and last-wins keys", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-deblock.test.ts", "title": "declares the native pix_fmts in declared order and refuses edges within the kernel reach of the right plane border", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-deblock.test.ts", "title": "ports the weak and strong kernels, the block loop with its border skips and the vertical stop at a skipped row", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-deblock.test.ts", "title": "rejects unsupported layouts, budgets, malformed storage, invalid settings and cancellation explicitly", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-deblock.test.ts", "title": "plans deblock on every path with edge-reach refusals and refuses enable= and runtime commands", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-operator-registry.test.ts", "title": "(all 8 registry tests, unedited)", "passed": 8, "failed": 0},
+    {"file": "tests/differential/video-deblock.test.ts", "title": "runs against the sandbox reference build of commit 946fcce0 configured with --disable-x86asm", "passed": 1, "failed": 0},
+    {"file": "tests/differential/video-deblock.test.ts", "title": "matches native deblock through the linear, frame graph and replay APIs across formats, sizes, patterns and options", "passed": 1, "failed": 0, "counts": {"matched": 1446, "refused": 570, "changedByFilter": 245}},
+    {"file": "tests/differential/video-deblock.test.ts", "title": "matches native deblock rawvideo and framecrc bytes on every flagged CLI path with and without -ss/-t", "passed": 1, "failed": 0, "counts": {"matched": 1980, "refused": 1020}},
+    {"file": "tests/differential/video-deblock.test.ts", "title": "stops each vertical edge at its first skipped row like native on every CLI path", "passed": 1, "failed": 0, "counts": {"matched": 10}},
+    {"file": "tests/differential/video-deblock.test.ts", "title": "agrees with native under default filter threads and -filter_threads 1", "passed": 1, "failed": 0, "counts": {"cases": 9}},
+    {"file": "tests/differential/video-deblock.test.ts", "title": "fails like native for out-of-range and unknown deblock options before opening outputs on every path", "passed": 1, "failed": 0, "counts": {"refusals": 45}},
+    {"file": "tests/differential/video-deblock.test.ts", "title": "negotiates every accepted source as native does and refuses picks without storage before output on every path", "passed": 1, "failed": 0, "counts": {"checks": 89, "matchedSources": 13, "refusedSources": 4}}
+  ],
+  "nativeComparisons": {
+    "count": 3579,
+    "details": [
+      "1446 native rawvideo outputs matched byte for byte by compileVideoFilterChain, compileVideoFilterGraph and createReplayVideoExecution (4338 path comparisons): 6 formats x 8 sizes x 3 patterns x 14 option sets, 3 frames; 570 edge-reach cases refused on all three APIs",
+      "1980 CLI rawvideo/framecrc outputs matched on linear, graph, stream, actor (timed producer) and timed (pull), with and without input -ss 0.04 / output -t 0.05; 1020 edge-reach refusals with no output opened",
+      "10 vertical-stop quirk comparisons (weak/strong x 5 CLI paths)",
+      "9 thread cases: native default threads == -filter_threads 1 == linear plan",
+      "45 option-error refusals (9 errors x 5 paths) with native diagnostics checked",
+      "89 per-source negotiation checks over 17 sources (tests/helpers/video-negotiation-cases.ts)"
+    ]
+  },
+  "unsupported": [
+    "enable= timeline, runtime commands (native process_command) and generic filter options",
+    "expression-valued and hexadecimal float thresholds (alpha/beta/gamma/delta accept decimal literals only)",
+    "edges within kernel reach of a selected plane's right border: width > block with width % block == 1 (weak) or in 1..2 (strong); native reads and writes past the row",
+    "high-bit-depth formats and native formats without storage here (yuva444p, yuva422p, yuv440p, yuv411p, yuv410p, yuvj440p, yuvj411p, gbrap): refused by name when negotiated",
+    "no dedicated H.264/MP4 framecrc comparison (size unchanged)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "filter.deblock.api", "file": "tests/differential/video-deblock.test.ts", "name": "matches native deblock through the linear, frame graph and replay APIs across formats, sizes, patterns and options", "modes": ["linear", "graph", "stream"], "scope": "gray/yuv420p/yuv422p/yuv444p/yuva420p/gbrp, 8 sizes incl. 16x16 and 33x17, noise/blocky/ramp, weak/strong, block 4..512, thresholds 0..1, plane masks, rawvideo, edge-reach refusals"},
+    {"id": "filter.deblock.cli", "file": "tests/differential/video-deblock.test.ts", "name": "matches native deblock rawvideo and framecrc bytes on every flagged CLI path with and without -ss/-t", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "CLI rawvideo and framecrc, with and without -ss/-t, edge-reach refusals before output"},
+    {"id": "filter.deblock.vertical-stop", "file": "tests/differential/video-deblock.test.ts", "name": "stops each vertical edge at its first skipped row like native on every CLI path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "native deblockv continue-skips-advance behaviour"},
+    {"id": "filter.deblock.threads", "file": "tests/differential/video-deblock.test.ts", "name": "agrees with native under default filter threads and -filter_threads 1", "modes": ["linear"], "scope": "native thread-count independence"},
+    {"id": "filter.deblock.refusals", "file": "tests/differential/video-deblock.test.ts", "name": "fails like native for out-of-range and unknown deblock options before opening outputs on every path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "option range, name and arity errors with no output opened"},
+    {"id": "filter.deblock.negotiation", "file": "tests/differential/video-deblock.test.ts", "name": "negotiates every accepted source as native does and refuses picks without storage before output on every path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "per-source negotiation over the 17 shared sources; gbrap picks refused by name"}
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Native quirk ported exactly: deblockv*_weak/strong advance dst at the end of the loop body, which the skip branch's continue jumps over, so each vertical edge segment stops at its first skipped row. Found by a C replica of the native loop that matched native byte for byte.",
+    "Threshold conversion: ath..dth = trunc(fround(fround(value) * 255)), done once at parse time; default alpha 0.098 gives 24.",
+    "No linux-gated cases: every case is integer after the one IEEE single-precision threshold conversion.",
+    "Setup: bootstrap script refused Node 22 ('Node.js 24+ is required') and installing Node 24 was not permitted in the sandbox, so the spec fallback was used with Node v22.23.5: git submodule update 105s, npm ci 9s, npm run reference:build 202s. Baseline typecheck+lint+boundaries plus registry unit test: 77s (all passed, 8 registry tests).",
+    "Final checks: unit 5/5 and registry 8/8 passed; differential 7/7 passed in about 31s with --maxWorkers=1; typecheck, lint and boundaries clean."
+  ]
+}
