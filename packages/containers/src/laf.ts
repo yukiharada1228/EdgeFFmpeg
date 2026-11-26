@@ -57,8 +57,9 @@ export async function openLaf(input:ReadHandle,options:{readonly maxReadBytes:nu
     const offset=BigInt(headerBytes)+block*blockBytes,mask=(await readExact(input,offset,1,maxReadBytes,signal))[0]!;
     if(!(mask&1))throw new LafError('invalid-data',`Invalid LAF stored bitmask at ${offset}`);
   }
+  // Every position is a native-order single-channel layout (FC is AV_CHANNEL_LAYOUT_MONO), so -guess_layout_max never drops it: report the mask, never null.
   const channelMask=lafChannelMask(vertical,horizontal,lfe);
-  const info:LafInfo=Object.freeze({container:'laf' as const,codec,channels:1,sampleRate,channelMask:channelMask===FC?null:channelMask,bitsPerSample:bpp*8,blockAlign,dataOffset:BigInt(headerBytes),dataBytes:blocks*samples,durationSamples:blocks*BigInt(sampleRate),quality,mode,vertical,horizontal,lfe,blocks,blockBytes,droppedBytes});
+  const info:LafInfo=Object.freeze({container:'laf' as const,codec,channels:1,sampleRate,channelMask,bitsPerSample:bpp*8,blockAlign,dataOffset:BigInt(headerBytes),dataBytes:blocks*samples,durationSamples:blocks*BigInt(sampleRate),quality,mode,vertical,horizontal,lfe,blocks,blockBytes,droppedBytes});
   const timeBase=Object.freeze({num:1n,den:BigInt(sampleRate)}),span=BigInt(sampleRate);
   return Object.freeze({info,
     async *packets(startSample=0n,maxPacketBytes=maxReadBytes):AsyncIterable<MediaPacket>{

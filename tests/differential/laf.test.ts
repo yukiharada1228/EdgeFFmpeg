@@ -147,3 +147,17 @@ it('refuses malformed, multi-stream and seeking LAF before any output and record
     expect(Object.keys(statuses)).toHaveLength(15);
   }finally{rmSync(root,{recursive:true,force:true});}
 },120000);
+it('matches native LAF mono layouts under -guess_layout_max, which never drops a native-order FC stream',async()=>{
+  checkReference();const root=mkdtempSync(join(tmpdir(),'edgeffmpeg-laf-guess-'));
+  try{
+    const filesystem=await createNodeFileSystem({root,maxReadBytes:4096,maxWriteBytes:4096}),ffmpeg=new FFmpeg({filesystem,backend:createMediaBackend(),budget});
+    let compared=0;
+    // laf_read_header sets AV_CHANNEL_LAYOUT_MONO (FC, native order) for the centre and every unmatched position, so framecrc prints mono at any threshold.
+    for(const [name,shape] of [['fc',{}],['fc-neg0',{vertical:-0,horizontal:-0}],['other',{horizontal:12.5}],['nan',{vertical:Number.NaN}]] as Array<[string,Shape]>){
+      writeFileSync(join(root,`${name}.laf`),laf({...shape,blocks:2,tail:3,seed:name.length+11}));
+      for(const guess of ['0','1'])compared+=await compare(root,ffmpeg,name,[[`${guess}.copy.crc`,['-guess_layout_max',guess],['-c:a','copy','-bitexact','-f','framecrc']],[`${guess}.decode.crc`,['-guess_layout_max',guess],['-c:a','pcm_s16le','-bitexact','-f','framecrc']],[`${guess}.wav`,['-guess_layout_max',guess],['-bitexact','-f','wav']],[`${guess}.aiff`,['-guess_layout_max',guess],['-bitexact','-f','aiff']]]);
+      const header=execFileSync(native,['-v','error','-guess_layout_max','0','-i',join(root,`${name}.laf`),'-c:a','copy','-f','framecrc','-'],{encoding:'utf8'});expect(header,name).toContain('#channel_layout_name 0: mono\n');
+    }
+    expect(compared).toBe(4*2*4);
+  }finally{rmSync(root,{recursive:true,force:true});}
+},120000);

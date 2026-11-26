@@ -19,13 +19,13 @@ const payload=(bytes:Uint8Array,rate:number,bpp:number,blocks:number)=>Array.fro
 it('maps quality to codec and the stream position to a single-channel mask as laf_read_header does',async()=>{
   for(const [quality,codec,bpp] of [[0,'pcm_u8',1],[1,'pcm_s16le',2],[2,'pcm_f32le',4],[3,'pcm_s24le',3]] as const){
     const opened=await openLaf(memoryInput(file({quality,rate:7,blocks:3})),{maxReadBytes:64});
-    expect(opened.info).toMatchObject({container:'laf',codec,channels:1,sampleRate:7,channelMask:null,bitsPerSample:bpp*8,blockAlign:bpp,dataOffset:40n,dataBytes:BigInt(21*bpp),durationSamples:21n,quality,blocks:3n,blockBytes:BigInt(1+7*bpp),droppedBytes:0n});
+    expect(opened.info).toMatchObject({container:'laf',codec,channels:1,sampleRate:7,channelMask:4,bitsPerSample:bpp*8,blockAlign:bpp,dataOffset:40n,dataBytes:BigInt(21*bpp),durationSamples:21n,quality,blocks:3n,blockBytes:BigInt(1+7*bpp),droppedBytes:0n});
     expect(laf.demux.packetSpan(opened.info)).toBe(7n);
   }
   // Float == compares: -0.0 equals 0, NaN and near misses fall through to mono; any nonzero lfe byte wins.
   expect([[0,0,0],[-0,-0,0],[0,-30,0],[-0,30,0],[0,-110,0],[0,110,0],[0,0,1],[5,-30,255],[0,12.5,0],[1,30,0],[Number.NaN,0,0],[0,Number.NaN,0],[0,Math.fround(-30.000002),0],[0,Number.POSITIVE_INFINITY,0]].map(([v,h,l])=>lafChannelMask(v!,h!,l!)))
     .toEqual([4,4,1,2,0x200,0x400,8,8,4,4,4,4,4,4]);
-  for(const [shape,mask] of [[{horizontal:-30},1],[{horizontal:30},2],[{vertical:-0,horizontal:-110},0x200],[{horizontal:110},0x400],[{lfe:3},8],[{vertical:-0,horizontal:-0},null],[{horizontal:7},null]] as const){
+  for(const [shape,mask] of [[{horizontal:-30},1],[{horizontal:30},2],[{vertical:-0,horizontal:-110},0x200],[{horizontal:110},0x400],[{lfe:3},8],[{vertical:-0,horizontal:-0},4],[{horizontal:7},4]] as const){
     const opened=await openLaf(memoryInput(file(shape)),{maxReadBytes:64});expect(opened.info.channelMask,JSON.stringify(shape)).toBe(mask);
   }
   // mode 0 and 1 are both accepted; the header duration is ignored.
