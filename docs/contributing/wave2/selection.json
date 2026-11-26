@@ -2349,7 +2349,7 @@
     "af-aphaser",
     "af-flanger"
    ],
-   "base": "wave2/prep head (22fcb7a + PREP-COPY, PREP-FRAMING, PREP-COLOR)",
+   "base": "wave2/prep head (wave2/base 14ebf02 + PREP-COPY, PREP-FRAMING, PREP-COLOR)",
    "requiresPrep": [
     "PREP-COPY",
     "PREP-FRAMING"
@@ -2384,7 +2384,7 @@
     "fmt-caf",
     "fmt-voc"
    ],
-   "base": "wave2/prep head (22fcb7a + PREP-COPY, PREP-FRAMING, PREP-COLOR)",
+   "base": "wave2/prep head (wave2/base 14ebf02 + PREP-COPY, PREP-FRAMING, PREP-COLOR)",
    "requiresPrep": [
     "PREP-COPY",
     "PREP-FRAMING"
@@ -2417,7 +2417,7 @@
     "vf-colorbalance",
     "vf-colorcorrect"
    ],
-   "base": "wave2/prep head (22fcb7a + PREP-COPY, PREP-FRAMING, PREP-COLOR)",
+   "base": "wave2/prep head (wave2/base 14ebf02 + PREP-COPY, PREP-FRAMING, PREP-COLOR)",
    "requiresPrep": [
     "PREP-COLOR"
    ],
@@ -2444,7 +2444,8 @@
     "fmt-nsp"
    ],
    "why": "msf, fsb, rsd, genh, siff and oma: av_get_packet leaves AV_PKT_FLAG_CORRUPT on a short final packet, which -c copy framecrc prints as F=0x3 (verified for msf). sdx and nsp set no pts info, so native copy timestamps are 1/90000.",
-   "ifItFails": "The six short-tail formats refuse short-tail inputs outright (the scouts' fallback); sdx and nsp move to wave 3."
+   "ifItFails": "The six short-tail formats refuse short-tail inputs outright (the scouts' fallback); sdx and nsp move to wave 3.",
+   "landed": "abdc384 on wave2/prep: optional ContainerStreamInfo.copyRefusal?: string; the PCM path throws containerRefusal(copyRefusal) for -c copy as the last check of pipeline step 6, before any output exists, and decoding is unaffected. No registered format sets it. Test: tests/unit/container-registry-copy-refusal.test.ts. Recipe line and step 6: docs/contributing/container-registry.md."
   },
   {
    "id": "PREP-FRAMING",
@@ -2458,7 +2459,8 @@
     "fmt-voc"
    ],
    "why": "framemd5/framehash rows, smjpeg sndD chunks and voc blocks follow native packet boundaries (voc verified: asetnsamples=700 changes the bytes).",
-   "ifItFails": "Each consumer ports the loop privately (the scouts' fallback) and must not edit framecrc.ts."
+   "ifItFails": "Each consumer ports the loop privately (the scouts' fallback) and must not edit framecrc.ts.",
+   "landed": "5566a52 on wave2/prep: packages/containers/src/pcm-framing.ts exports planPcmFraming(framing, label, fail?), muxFrameCrc's validation, run before anything is written, and the async generator framePcmPackets(plan, packets, signal?), its regrouping loop. The generator yields {pts, duration, bytes, end} pieces rather than whole {pts, duration, bytes} packets: pts and duration are the native packet's and known at its first piece, bytes is a view of one input chunk and end marks the packet's last piece, so no whole packet is buffered, as framecrc never buffered one. muxFrameCrc uses it with unchanged error classes and messages; every framecrc test passes unchanged; tests/unit/pcm-framing.test.ts. A local old/new harness (.build/wave2-prep, not committed) matched 6000 randomized cases."
   },
   {
    "id": "PREP-COLOR",
@@ -2477,14 +2479,16 @@
     "vf-shear"
    ],
    "why": "One parser instead of six private ports; the three wave-2 consumers are medium risk and the three later ones are deferred.",
-   "ifItFails": "Move chromakey, colorkey and drawbox to wave 3 rather than let branches port av_parse_color."
+   "ifItFails": "Move chromakey, colorkey and drawbox to wave 3 rather than let branches port av_parse_color.",
+   "landed": "416c363 on wave2/prep: parseColor(text) returns a frozen [r, g, b, a] byte tuple, and ColorParseError carries code 'invalid' (native AVERROR(EINVAL), with native's log line as the message) or 'unsupported' (random and bikeshed, NaN alphas, and hexadecimal subnormal alphas whose acceptance differs between the macOS libc and glibc 2.36); exported from @edge-ffmpeg/avutil, with a NOTICE paragraph. Tests: tests/unit/parse-color.test.ts and tests/differential/parse-color.test.ts (native at test time)."
   },
   {
    "id": "wave2/prep",
    "size": "branch only",
    "owner": "coordinator",
    "change": "Push wave2/prep = 22fcb7a + the three prep commits, after typecheck, lint, boundaries and the unit suites pass on it. .gitattributes needs nothing new: the three registry files already merge with merge=union, and wave 2 adds no new registry file.",
-   "consumers": "batches 2-4"
+   "consumers": "batches 2-4",
+   "landed": "wave2/prep = wave2/base 14ebf02 (22fcb7a + ci-fast/pipeline a477f37 and e78d1eb + the wave-2 docs) + PREP-COPY abdc384 + PREP-FRAMING 5566a52 + PREP-COLOR 416c363 + the batch 2-4 specs. No prep grew beyond its described size, so no consumer was deferred."
   },
   {
    "id": "wave-3 prep (not blocking wave 2)",
