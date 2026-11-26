@@ -1,0 +1,12 @@
+Scoped Sample Dump eXchange (SDX) demuxer
+
+The 'SDX:' probe, the 0x1a header scan, the version, name-length, bit-depth
+and sample-rate fields, the depth-to-codec table and the block alignment in
+src/sdx.ts follow libavformat/sdxdec.c (sdx_probe, sdx_read_header). Packets
+follow libavformat/pcm.c (ff_pcm_read_packet, ff_pcm_default_packet_size)
+through the shared raw PCM reader.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2017 Paul B Mahol;(c)2003 Fabrice Bellard. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete sdx demuxer.
