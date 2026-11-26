@@ -1,0 +1,63 @@
+{
+  "capabilityId": "muxer.smjpeg",
+  "slug": "fmt-smjpeg",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/smjpeg.ts",
+    "packages/containers/NOTICE-SMJPEG",
+    "docs/contributing/smjpeg-support.md",
+    "tests/unit/smjpeg.test.ts",
+    "tests/differential/smjpeg.test.ts",
+    "docs/contributing/wave2/fmt-smjpeg.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    "packages/containers/src/registry.ts: +1 line `export {smjpeg} from './smjpeg.js';` between sds and sox (merge=union)"
+  ],
+  "tests": [
+    {"file": "tests/unit/smjpeg.test.ts", "title": "writes the native SMJPEG header with and without the encoder text chunk", "count": 1},
+    {"file": "tests/unit/smjpeg.test.ts", "title": "rescales sample timestamps to milliseconds with av_rescale_rnd NEAR_INF on half-way cases", "count": 1, "cases": 22},
+    {"file": "tests/unit/smjpeg.test.ts", "title": "regroups arbitrary input chunks to native packet boundaries with ms timestamps and the max(pts + duration) trailer", "count": 1},
+    {"file": "tests/unit/smjpeg.test.ts", "title": "writes in chunks of at most maxWriteBytes with identical bytes", "count": 1},
+    {"file": "tests/unit/smjpeg.test.ts", "title": "refuses unsupported codecs, layouts, framing and budgets before writing, and aborts once on failure", "count": 1},
+    {"file": "tests/unit/smjpeg.test.ts", "title": "registers a mux-only SMJPEG descriptor without an output extension", "count": 1},
+    {"file": "tests/differential/smjpeg.test.ts", "title": "runs against the pinned reference commit built without x86 assembly", "count": 1},
+    {"file": "tests/differential/smjpeg.test.ts", "title": "matches native SMJPEG bytes for 3 layouts x 6 rates x 3 lengths x copy/encode x bitexact", "count": 1, "nativeComparisons": 324},
+    {"file": "tests/differential/smjpeg.test.ts", "title": "matches native SMJPEG packet regrouping through asetnsamples and apad chains and output -ss, -t and -frames:a", "count": 1, "nativeComparisons": 72},
+    {"file": "tests/differential/smjpeg.test.ts", "title": "refuses SMJPEG codecs other than pcm_s16le with the native status and tagged inputs before any output exists", "count": 1, "nativeComparisons": 7}
+  ],
+  "nativeComparisons": {
+    "byteExactOutputs": 396,
+    "refusalStatuses": 5,
+    "metadataRefusal": 1,
+    "extensionRefusal": 1,
+    "total": 403
+  },
+  "unsupported": [
+    "smjpeg demuxer (excluded from scope)",
+    "video streams (_VID/vidD, MJPEG) and ADPCM IMA SMJPEG audio",
+    "codecs other than pcm_s16le: containerRefusal 'SMJPEG muxer does not support <codec>', exit 234 (native EINVAL)",
+    "inputs with global metadata (info.metadata): refused by the PCM path, native writes them as _TXT chunks",
+    "more than 255 channels (native avio_w8 truncation unprobed)",
+    "output extension selection (native has none; -f smjpeg required)",
+    "FLAC input (flac-output.ts does not iterate the registry)",
+    "non-seekable native output (duration 0) is not mirrored; EdgeFFmpeg always writes the seekable-output duration"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "muxer.smjpeg.bytes", "file": "tests/differential/smjpeg.test.ts", "name": "matches native SMJPEG bytes for 3 layouts x 6 rates x 3 lengths x copy/encode x bitexact", "modes": ["copy", "encode"], "scope": "pcm_s16le header (_TXT encoder, _SND with 16-bit rate, HEND), sndD chunks, DONE and the duration field; 1/2/6 channels at 8000-96000 Hz including 65536 and 96000"},
+    {"id": "muxer.smjpeg.framing", "file": "tests/differential/smjpeg.test.ts", "name": "matches native SMJPEG packet regrouping through asetnsamples and apad chains and output -ss, -t and -frames:a", "modes": ["copy", "encode"], "scope": "native packet boundaries via pcm-framing, ms pts rounding and max(pts+duration) trailer through filters and output time selection"},
+    {"id": "muxer.smjpeg.refusals", "file": "tests/differential/smjpeg.test.ts", "name": "refuses SMJPEG codecs other than pcm_s16le with the native status and tagged inputs before any output exists", "modes": ["copy", "encode"], "scope": "EINVAL (234 Linux) codec refusals for encode and copy, metadata input refusal, no extension selection; no output created"}
+  ],
+  "sharedEditsNeeded": [
+    "packages/containers/src/wav.ts (and likely aiff.ts/au.ts): set info.metadata for inputs whose native demuxer exports tags (WAV LIST/INFO). Probed: native copies a WAV title tag into an SMJPEG _TXT chunk, while EdgeFFmpeg accepts the tagged WAV and writes no _TXT, so tagged WAV input to -f smjpeg differs from native. Not fixable inside smjpeg.ts; documented in smjpeg-support.md."
+  ],
+  "notes": [
+    "Sandbox Node was v22.23.5; bootstrap requires Node 24, so Node v24.22.3 was downloaded to the scratchpad and used for all steps.",
+    "Setup durations: npm+submodule+reference bootstrap 4m20s (reference build relinked several times because the sandbox link differs from the linux-x64 pin, expected with --allow-unpinned-reference); baseline typecheck+lint+boundaries+container registry tests 1m24s, all passing (16 registry tests).",
+    "The muxer computes the trailer duration up front (sequential output, no seek) by running framePcmPackets over a synthetic zero stream with the same framing, so the shared PREP-FRAMING API is the only regrouping code; pcm-framing.ts and framecrc.ts are untouched.",
+    "Differential file runs in about 10 s with --maxWorkers=1; the timing test uses a 64 KiB buffer budget because apad=whole_len reframing exceeds the 4 KiB budget.",
+    "No linux-gated cases: integer arithmetic and byte copies only."
+  ]
+}
