@@ -1,0 +1,51 @@
+{
+ "capabilityId": "filter.gradfun",
+ "slug": "vf-gradfun",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/gradfun.ts",
+  "packages/avfilter/NOTICE-GRADFUN",
+  "packages/avfilter/src/video-ops/registry.ts",
+  "tests/unit/video-gradfun.test.ts",
+  "tests/differential/video-gradfun.test.ts",
+  "docs/contributing/gradfun.md",
+  "docs/contributing/wave2/vf-gradfun.json"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/video-ops/registry.ts: +1 import line (import {gradfunOperator} from './gradfun.js';) and +1 entry line (gradfunOperator,)"
+ ],
+ "tests": [
+  {"file": "tests/unit/video-gradfun.test.ts", "title": "parses strength as a range-checked float32 and radius with init rounding, shorthand order and last-wins keys", "counts": "16 refused option strings plus value checks"},
+  {"file": "tests/unit/video-gradfun.test.ts", "title": "declares the native pix_fmts in declared order, keeps geometry and refuses 2*radius+1-row filtered planes", "counts": "5 tiny accepted sizes, 6 refused geometries, 4 unsupported formats"},
+  {"file": "tests/unit/video-gradfun.test.ts", "title": "debands ramps with the ordered dither, copies small planes and writes owned tight planes without mutating the input", "counts": "5 kernel cases"},
+  {"file": "tests/unit/video-gradfun.test.ts", "title": "rejects unsupported layouts, budgets, malformed storage, invalid settings and cancellation explicitly", "counts": "5 formats, 6 invalid settings, budgets, strides, abort"},
+  {"file": "tests/unit/video-gradfun.test.ts", "title": "plans gradfun on every path with the 2*radius+1 refusal and runtime commands refused", "counts": "linear, graph, timed planners and actors"},
+  {"file": "tests/unit/video-operator-registry.test.ts", "title": "(registration-driven, unchanged)", "counts": "8 tests pass with 3 gradfun examples on 5 paths"},
+  {"file": "tests/differential/video-gradfun.test.ts", "title": "reads the sandbox reference build metadata", "counts": "1"},
+  {"file": "tests/differential/video-gradfun.test.ts", "title": "matches native gradfun through the linear, frame graph and replay APIs across formats, strengths, radii, sizes and patterns", "counts": "1656 matched (x3 APIs), 224 of them changed by native, 104 refused"},
+  {"file": "tests/differential/video-gradfun.test.ts", "title": "matches native gradfun rawvideo and framecrc bytes on every flagged CLI path", "counts": "3960 matched, 440 refused"},
+  {"file": "tests/differential/video-gradfun.test.ts", "title": "matches native gradfun with -ss and -t on every flagged CLI path", "counts": "240 matched"},
+  {"file": "tests/differential/video-gradfun.test.ts", "title": "shows native filtering 2*radius+1-row planes from stale state and refuses them before opening outputs on every path", "counts": "1 native stale-state proof, 20 refused"},
+  {"file": "tests/differential/video-gradfun.test.ts", "title": "fails like native for out-of-range options, unknown options and extra positional values before opening outputs on every path", "counts": "30"},
+  {"file": "tests/differential/video-gradfun.test.ts", "title": "negotiates every accepted source as native does and matches every pick on every path, all of them with storage here", "counts": "17 sources matched, 0 refused, 73 checks"}
+ ],
+ "nativeComparisons": 5930,
+ "unsupported": [
+  "enable= timeline, runtime commands and generic filter options",
+  "strength expressions, constants and SI suffixes (constant decimals only)",
+  "filtered planes exactly 2*radius+1 rows tall: native filters them from stale ring/dc state of an earlier plane or frame",
+  "yuv410p, yuv411p, yuv440p (no frame storage; no negotiation source picks them)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {"id": "filter.gradfun.api", "file": "tests/differential/video-gradfun.test.ts", "name": "matches native gradfun through the linear, frame graph and replay APIs across formats, strengths, radii, sizes and patterns", "modes": ["linear", "graph", "stream"], "scope": "API byte equality across gray/yuv420p/yuv422p/yuv444p/gbrp, 11 sizes, 4 patterns, 8 option sets; 2r+1 refusals"},
+  {"id": "filter.gradfun.cli", "file": "tests/differential/video-gradfun.test.ts", "name": "matches native gradfun rawvideo and framecrc bytes on every flagged CLI path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "CLI rawvideo and framecrc bytes"},
+  {"id": "filter.gradfun.time", "file": "tests/differential/video-gradfun.test.ts", "name": "matches native gradfun with -ss and -t on every flagged CLI path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "-ss and -t output trimming"},
+  {"id": "filter.gradfun.stale", "file": "tests/differential/video-gradfun.test.ts", "name": "shows native filtering 2*radius+1-row planes from stale state and refuses them before opening outputs on every path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "stale-state refusal before output"},
+  {"id": "filter.gradfun.reject", "file": "tests/differential/video-gradfun.test.ts", "name": "fails like native for out-of-range options, unknown options and extra positional values before opening outputs on every path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "option refusals with native diagnostics"},
+  {"id": "filter.gradfun.negotiation", "file": "tests/differential/video-gradfun.test.ts", "name": "negotiates every accepted source as native does and matches every pick on every path, all of them with storage here", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "per-source negotiation from the 17 negotiation sources"}
+ ],
+ "sharedEditsNeeded": [],
+ "notes": "All five paths flagged; every case is integer (thresh is one float32 division, correctly rounded on every platform), so nothing is linux-gated. Native accepts and copies tiny frames (min(w,h) <= 2r), so no tiny-frame error exists to assert; the only size refusal is the 2r+1-row plane, where native's output depends on earlier frames (proved in the differential test). nativeComparisons counts native runs compared: 1656 + 3960 + 240 + 1 + 30 + 17 negotiation sources (73 checks); the API test compares each native run against 3 APIs. Sandbox: Node 22.23.5 was preinstalled; the bootstrap needs Node 24, so Node v24.22.3 was downloaded (sha256 checked) into the session scratchpad. Durations: bootstrap 3m44s (npm 9.5s, submodule 8.7s, reference build and relink about 3m26s); baseline typecheck+lint+boundaries+registry test 1m05s, all green; differential file 3m04s with --maxWorkers=1."
+}

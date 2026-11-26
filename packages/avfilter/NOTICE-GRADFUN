@@ -1,0 +1,17 @@
+Scoped gradfun debanding filter
+
+The option table, init() threshold and radius rounding, config_input chroma
+radius, the per-plane min(w,h) > 2r filter condition, filter() with its ring of
+cumulative 2x2 half-row sums and sliding horizontal box, ff_gradfun_blur_line_c,
+ff_gradfun_filter_line_c and the fixed 8x8 ordered dither table in
+src/video-ops/gradfun.ts follow libavfilter/vf_gradfun.c (gradfun_options,
+pix_fmts, init, config_input, filter_frame, filter, dither,
+ff_gradfun_filter_line_c, ff_gradfun_blur_line_c) and libavfilter/gradfun.h.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2010 Nolan Lum. Copyright (c)2009 Loren Merritt. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete gradfun filter: only the
+eight-bit layouts with frame storage, constant decimal strength values, no
+filtered plane exactly 2*radius+1 rows tall, no timeline and no runtime
+commands.
