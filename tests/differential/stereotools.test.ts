@@ -96,6 +96,27 @@ it('matches native WAV, raw and framecrc for copy-like options across frame spli
 it.skipIf(!linux)('matches native WAV, raw and framecrc for float-sensitive options across frame splits, volume, apad, WAV input and output selection (linux/x64)',async()=>{
   expect(await crcSweep('edgeffmpeg-stereotools-crc-float-',['stereotools=delay=-20:base=0.5:mode=ms>lr:slev=2:mpan=0.3:balance_in=0.4:bmode_in=power:balance_out=-0.6:bmode_out=amplitude'])).toBe(3*7*(3+4)+4);
 },600000);
+it('keeps the signed zeros of phase=-0, whose sin(-0) is -0, as native does',async()=>{
+  // phase=-0 passes native's [0, 360] check; config_input's sin(-0/180*M_PI) is -0, so `L*1 - R*sin` turns a muted -0 into +0 where phase=0 keeps -0.
+  // Default levels keep every product exact, so this runs on every platform.
+  const {root,frontend}=await harness('edgeffmpeg-stereotools-negzero-');
+  let compared=0,differing=0,index=0;
+  try{
+    const zeros=new Float64Array(3000*2);for(let i=0;i<zeros.length;i++)zeros[i]=i%3===0?-0:i%3===1?0:(i%7-3)*0.25;
+    writeFileSync(join(root,'zeros.raw'),new Uint8Array(zeros.buffer));writeFileSync(join(root,'f64le.raw'),pcm(8,true,3000*2));writeFileSync(join(root,'s16le.raw'),pcm(2,false,3000*2));
+    for(const [raw,file]of [['f64le','zeros.raw'],['f64le','f64le.raw'],['s16le','s16le.raw']] as const)for(const option of ['mutel=1','muter=1:phasel=1','mutel=1:muter=1:mode=lr>rl','phasel=1:delay=3']){
+      const outputs:Buffer[]=[];
+      for(const phase of ['phase=-0','phase=0']){
+        const {ours,theirs}=await compare(root,frontend,['-cpuflags','0','-f',raw,'-ar','8000','-ac','2','-i',`/${file}`],['-af',`stereotools=${phase}:${option}`,'-c:a','pcm_f64le','-f','f64le'],`${index++}.f64le`);
+        expect(ours.equals(theirs),`${file}/${phase}:${option}`).toBe(true);compared++;outputs.push(theirs);
+      }
+      if(!outputs[0]!.equals(outputs[1]!))differing++;
+    }
+    expect(compared).toBe(3*4*2);
+    // The sign really changes in native's output for the muted cases, so the comparison is not vacuous.
+    expect(differing).toBeGreaterThan(0);
+  }finally{rmSync(root,{recursive:true,force:true});}
+},120000);
 it('refuses softclip, phase, mono, out-of-range, unimplemented and enable= forms before output, beside native status',async()=>{
   const {root,frontend}=await harness('edgeffmpeg-stereotools-refuse-');
   try{
