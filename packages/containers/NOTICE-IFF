@@ -1,0 +1,14 @@
+Scoped IFF (Interchange File Format) MAUD demuxer
+
+The FORM...MAUD probe, the chunk walk to EOF with odd-size padding, the
+MHDR fields (bits, rate numerator/denominator, channels, compression),
+the MDAT body range, the CHAN layout override, the metadata chunk ids,
+the MAUD codec table and the min(body_end - pos, 1024 * block_align)
+packet size in src/iff.ts follow libavformat/iff.c (iff_probe,
+iff_read_header, iff_read_packet audio-only branch).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2008 Jaikrishnan Menon;(c)2010 Peter Ross;(c)2010 Sebastian
+Vater. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete iff demuxer.
