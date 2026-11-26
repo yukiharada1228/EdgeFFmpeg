@@ -1,0 +1,162 @@
+{
+ "label": "batch1-integrate",
+ "branch": "wave2/integration",
+ "base": "origin/wave2/base 14ebf02",
+ "accepted": [
+  {
+   "slug": "vf-pixdesctest",
+   "commit": "c556913",
+   "reportStatus": "complete",
+   "fastLaneRun": 45726639534
+  },
+  {
+   "slug": "vf-perms",
+   "commit": "d6f1c66",
+   "reportStatus": "complete",
+   "fastLaneRun": 45727045207
+  },
+  {
+   "slug": "fmt-sln",
+   "commit": "92dbd22",
+   "reportStatus": "complete",
+   "fastLaneRun": 45726511293
+  },
+  {
+   "slug": "vf-noformat",
+   "commit": "84792c9",
+   "reportStatus": "complete",
+   "fastLaneRun": 45727172136
+  },
+  {
+   "slug": "vf-addroi",
+   "commit": "6539f8f",
+   "reportStatus": "complete",
+   "fastLaneRun": 45727298302
+  },
+  {
+   "slug": "fmt-sol",
+   "commit": "17a99b2",
+   "reportStatus": "complete",
+   "fastLaneRun": 45726802127
+  },
+  {
+   "slug": "vf-maskfun",
+   "commit": "836553f",
+   "reportStatus": "complete",
+   "fastLaneRun": 45726932091
+  },
+  {
+   "slug": "vf-rgbashift",
+   "commit": "feb116e",
+   "reportStatus": "complete",
+   "fastLaneRun": 45726700123
+  },
+  {
+   "slug": "vf-lumakey",
+   "commit": "ac9c1f8",
+   "reportStatus": "complete",
+   "fastLaneRun": 45726941352
+  },
+  {
+   "slug": "vf-avgblur",
+   "commit": "10fb084",
+   "reportStatus": "complete",
+   "fastLaneRun": 45727163303
+  },
+  {
+   "slug": "vf-floodfill",
+   "commit": "2982643",
+   "reportStatus": "complete",
+   "fastLaneRun": 45728724730
+  },
+  {
+   "slug": "vf-colorchannelmixer",
+   "commit": "0c9f564",
+   "reportStatus": "complete",
+   "fastLaneRun": 45727162335
+  },
+  {
+   "slug": "vf-unsharp",
+   "commit": "70d29f3",
+   "reportStatus": "complete",
+   "fastLaneRun": 45727714757
+  }
+ ],
+ "deferred": [
+  {
+   "slug": "vf-maskedmerge",
+   "commit": "fd51006",
+   "reportStatus": "complete",
+   "fastLaneRun": 45727487838,
+   "reason": "Native sets the output frame rate to the base (first) input's (ol->frame_rate = il->frame_rate in config_output), but the shared join role follows vf_stack (the common rate, or 1/0 when rates differ), and descriptors cannot see input rates. With unequal input rates (25/10 and 10/25 fps, gray 8x6, stream path) EdgeFFmpeg exits 0 and its framecrc output differs from native in both orders, and its rawvideo output differs when the base input is the slower one. Nothing refuses these inputs, which the wave rules require. The control hstack matched native in all 4 cases. Needs a coordinator prep: a join output-rate hook or a plan-time refusal of unequal rates. maskedclamp (status partial) and threshold declared the gap; maskedmerge, maskedminmax and maskedthreshold reported complete without testing unequal rates."
+  },
+  {
+   "slug": "vf-maskedminmax",
+   "commit": "589c993",
+   "reportStatus": "complete",
+   "fastLaneRun": 45727512900,
+   "reason": "Native sets the output frame rate to the base (first) input's (ol->frame_rate = il->frame_rate in config_output), but the shared join role follows vf_stack (the common rate, or 1/0 when rates differ), and descriptors cannot see input rates. With unequal input rates (25/10 and 10/25 fps, gray 8x6, stream path) EdgeFFmpeg exits 0 and its framecrc output differs from native in both orders, and its rawvideo output differs when the base input is the slower one. Nothing refuses these inputs, which the wave rules require. The control hstack matched native in all 4 cases. Needs a coordinator prep: a join output-rate hook or a plan-time refusal of unequal rates. maskedclamp (status partial) and threshold declared the gap; maskedmerge, maskedminmax and maskedthreshold reported complete without testing unequal rates."
+  },
+  {
+   "slug": "vf-maskedclamp",
+   "commit": "9bc2451",
+   "reportStatus": "partial",
+   "fastLaneRun": 45727483488,
+   "reason": "Native sets the output frame rate to the base (first) input's (ol->frame_rate = il->frame_rate in config_output), but the shared join role follows vf_stack (the common rate, or 1/0 when rates differ), and descriptors cannot see input rates. With unequal input rates (25/10 and 10/25 fps, gray 8x6, stream path) EdgeFFmpeg exits 0 and its framecrc output differs from native in both orders, and its rawvideo output differs when the base input is the slower one. Nothing refuses these inputs, which the wave rules require. The control hstack matched native in all 4 cases. Needs a coordinator prep: a join output-rate hook or a plan-time refusal of unequal rates. maskedclamp (status partial) and threshold declared the gap; maskedmerge, maskedminmax and maskedthreshold reported complete without testing unequal rates."
+  },
+  {
+   "slug": "vf-maskedthreshold",
+   "commit": "e11ca83",
+   "reportStatus": "complete",
+   "fastLaneRun": 45727583217,
+   "reason": "Native sets the output frame rate to the base (first) input's (ol->frame_rate = il->frame_rate in config_output), but the shared join role follows vf_stack (the common rate, or 1/0 when rates differ), and descriptors cannot see input rates. With unequal input rates (25/10 and 10/25 fps, gray 8x6, stream path) EdgeFFmpeg exits 0 and its framecrc output differs from native in both orders, and its rawvideo output differs when the base input is the slower one. Nothing refuses these inputs, which the wave rules require. The control hstack matched native in all 4 cases. Needs a coordinator prep: a join output-rate hook or a plan-time refusal of unequal rates. maskedclamp (status partial) and threshold declared the gap; maskedmerge, maskedminmax and maskedthreshold reported complete without testing unequal rates."
+  },
+  {
+   "slug": "vf-threshold",
+   "commit": "f7a69a5",
+   "reportStatus": "complete",
+   "fastLaneRun": 45727340523,
+   "reason": "Native sets the output frame rate to the base (first) input's (ol->frame_rate = il->frame_rate in config_output), but the shared join role follows vf_stack (the common rate, or 1/0 when rates differ), and descriptors cannot see input rates. With unequal input rates (25/10 and 10/25 fps, gray 8x6, stream path) EdgeFFmpeg exits 0 and its framecrc output differs from native in both orders, and its rawvideo output differs when the base input is the slower one. Nothing refuses these inputs, which the wave rules require. The control hstack matched native in all 4 cases. Needs a coordinator prep: a join output-rate hook or a plan-time refusal of unequal rates. maskedclamp (status partial) and threshold declared the gap; maskedmerge, maskedminmax and maskedthreshold reported complete without testing unequal rates."
+  }
+ ],
+ "missing": [],
+ "mechanicalChecks": "All 18 branches have one commit whose parent is wave2/base, touch only their ownedFiles plus their declared registry lines (added lines only), carry a report that parses, and have a successful fast-lane run on their tip. Their registry lines merged without duplicates.",
+ "integrationFixes": [
+  {
+   "commit": "4d286f1",
+   "file": "tests/differential/video-negotiation.test.ts",
+   "reason": "The negotiation test required rgbashift to be unregistered and failed in differential-3 of full run 45729959368 once wave2/vf-rgbashift registered it. rgbashift now negotiates through its own descriptor and must declare the transcribed list. The rgbashift fast-lane run 45726700123 did not select this test."
+  }
+ ],
+ "darwinEvidence": {
+  "platform": "darwin arm64, pinned macOS reference",
+  "typecheck": "pass",
+  "lint": "pass",
+  "boundaries": "pass",
+  "registryUnitTests": "5 files, 47 tests passed",
+  "branchUnitTests": "13 files, 66 tests passed",
+  "branchDifferentialTests": "13 files, 82 tests passed (--maxWorkers=1)",
+  "negotiationTestAfterFix": "3 tests passed",
+  "linuxGatedCases": "none in the accepted branches"
+ },
+ "ci": [
+  {
+   "run": 45729959368,
+   "head": "5878f80",
+   "lane": "full",
+   "conclusion": "failure",
+   "cause": "test differential-3: video-negotiation.test.ts expected rgbashift unregistered"
+  },
+  {
+   "run": 45731876963,
+   "head": "4d286f1",
+   "lane": "full",
+   "conclusion": "success",
+   "jobs": "plan, reference, 7 differential, 3 integration, 5 workers, 1 unit and report succeeded; checks and fast were skipped (fast-lane jobs)"
+  }
+ ],
+ "notes": [
+  "The deferred branches were dropped before the first push, so the integration history has no reverts. wave2/integration runs the full lane: tools/ci/plan.mjs laneFor gives full for a wave2 path segment that starts with integration, and the concurrency group of ci.yml excludes /integration from the fast-lane group.",
+  "Not yet run: linux-probe/wave2-batch-1 and the macOS compat:report. The accepted branches have no linux-gated cases."
+ ]
+}
