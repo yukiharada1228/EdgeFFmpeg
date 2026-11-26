@@ -1,0 +1,199 @@
+{
+ "capabilityId": "filter.edgedetect",
+ "slug": "vf-edgedetect",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/edgedetect.ts",
+  "packages/avfilter/src/video-edgedetect.ts",
+  "packages/avfilter/NOTICE-EDGEDETECT",
+  "tests/unit/video-edgedetect.test.ts",
+  "tests/differential/video-edgedetect.test.ts",
+  "docs/contributing/edgedetect.md",
+  "docs/contributing/wave2/vf-edgedetect.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/video-ops/registry.ts: +1 import line (edgedetectOperator from './edgedetect.js') and +1 entry line (edgedetectOperator,)"
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-edgedetect.test.ts",
+   "tests": 5,
+   "passed": 5
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "tests": 8,
+   "passed": 8,
+   "note": "unchanged; runs the 4 edgedetect examples on all five paths"
+  },
+  {
+   "file": "tests/differential/video-edgedetect.test.ts",
+   "tests": 9,
+   "passed": 9,
+   "cases": [
+    {
+     "title": "runs against a reference built from commit 946fcce0 with --disable-x86asm",
+     "count": 1
+    },
+    {
+     "title": "matches native edgedetect through the linear, frame graph and replay APIs across modes, formats, thresholds, planes, sizes and patterns",
+     "count": 828,
+     "pathComparisons": 2484
+    },
+    {
+     "title": "matches native edgedetect rawvideo and framecrc bytes on every flagged CLI path with and without -ss/-t",
+     "count": 2760
+    },
+    {
+     "title": "accepts the native option forms it implements with native bytes: unit names, relative and wide plane flags, constants and arithmetic",
+     "count": 12
+    },
+    {
+     "title": "produces the same native output with default filter threads and with -filter_threads 1",
+     "count": 46
+    },
+    {
+     "title": "fails like native for out-of-range options, unknown options and extra positional values before opening outputs on every path",
+     "count": 35
+    },
+    {
+     "title": "negotiates every accepted source as native does for edgedetect",
+     "count": 73
+    },
+    {
+     "title": "negotiates every accepted source as native does for edgedetect=mode=colormix:high=0.3",
+     "count": 73
+    },
+    {
+     "title": "negotiates every accepted source as native does for edgedetect=mode=canny:low=0.05:planes=y+u",
+     "count": 73
+    }
+   ],
+   "durationSeconds": 33
+  }
+ ],
+ "nativeComparisons": {
+  "apiOutputs": 828,
+  "apiPathComparisons": 2484,
+  "cliOutputs": 2760,
+  "optionForms": 12,
+  "threadPairs": 46,
+  "refusals": 35,
+  "negotiationChecks": 219,
+  "total": 3900
+ },
+ "unsupported": [
+  "enable= timeline, runtime commands and generic filter options (threads, ...)",
+  "high/low expressions with functions, ^, or constants other than default/min/max/none/all (native accepts them)",
+  "planes terms that are expressions rather than y/u/v/r/g/b or decimal/hex integers",
+  "H.264/MP4 framecrc input: no dedicated comparison"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.edgedetect.api",
+   "file": "tests/differential/video-edgedetect.test.ts",
+   "name": "matches native edgedetect through the linear, frame graph and replay APIs across modes, formats, thresholds, planes, sizes and patterns",
+   "modes": [
+    "linear",
+    "graph",
+    "stream"
+   ],
+   "scope": "46 mode/format/option pairs x 6 sizes x 3 patterns, 3 frames, rawvideo bytes"
+  },
+  {
+   "id": "filter.edgedetect.cli",
+   "file": "tests/differential/video-edgedetect.test.ts",
+   "name": "matches native edgedetect rawvideo and framecrc bytes on every flagged CLI path with and without -ss/-t",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "46 pairs x 6 size/pattern/scope cases x rawvideo and framecrc"
+  },
+  {
+   "id": "filter.edgedetect.options",
+   "file": "tests/differential/video-edgedetect.test.ts",
+   "name": "accepts the native option forms it implements with native bytes: unit names, relative and wide plane flags, constants and arithmetic",
+   "modes": [
+    "linear"
+   ],
+   "scope": "12 accepted option forms"
+  },
+  {
+   "id": "filter.edgedetect.threads",
+   "file": "tests/differential/video-edgedetect.test.ts",
+   "name": "produces the same native output with default filter threads and with -filter_threads 1",
+   "modes": [
+    "native"
+   ],
+   "scope": "46 pairs"
+  },
+  {
+   "id": "filter.edgedetect.refusals",
+   "file": "tests/differential/video-edgedetect.test.ts",
+   "name": "fails like native for out-of-range options, unknown options and extra positional values before opening outputs on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "7 option errors, no output opened"
+  },
+  {
+   "id": "filter.edgedetect.negotiation.wires",
+   "file": "tests/differential/video-edgedetect.test.ts",
+   "name": "negotiates every accepted source as native does for edgedetect",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "17 sources, 73 checks"
+  },
+  {
+   "id": "filter.edgedetect.negotiation.colormix",
+   "file": "tests/differential/video-edgedetect.test.ts",
+   "name": "negotiates every accepted source as native does for edgedetect=mode=colormix:high=0.3",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "17 sources, 73 checks"
+  },
+  {
+   "id": "filter.edgedetect.negotiation.canny",
+   "file": "tests/differential/video-edgedetect.test.ts",
+   "name": "negotiates every accepted source as native does for edgedetect=mode=canny:low=0.05:planes=y+u",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "17 sources, 73 checks"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Setup: npm run bootstrap failed immediately (Node.js 24+ is required; sandbox has Node v22.23.5). Installing Node 24 from the npm registry worked, but running that binary was blocked by the sandbox permission policy, so the spec's fallback was used: git submodule update --init upstream/ffmpeg && npm ci && npm run reference:build (3m30s). Baseline typecheck+lint+boundaries+registry test: 1m07s, clean.",
+  "The reference binary is a sandbox build (not the pinned binary); the differential file only asserts commit 946fcce0 and --disable-x86asm from build-metadata.json.",
+  "Every native pick of every mode has frame storage here, so no negotiation refusal exists; jpegSiblings is not set because native lists no yuvj formats.",
+  "The upstream blur handles 1- and 2-sample planes without out-of-bounds access (FFMIN(n,2) heads), and border gradients come from a calloc'd buffer never written, so no size is refused.",
+  "planes follows AV_OPT_TYPE_FLAGS: the declared 1..7 range is not enforced natively; planes=0 and wide values are accepted and matched against native.",
+  "Integer kernel; no linux-gated cases. Not yet run on macOS or the pinned linux-x64 image."
+ ]
+}

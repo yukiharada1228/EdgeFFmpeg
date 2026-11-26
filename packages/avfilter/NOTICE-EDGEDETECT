@@ -1,0 +1,18 @@
+Scoped edgedetect video filter
+
+The option table (edgedetect_options: high, low, mode with the wires/colormix/
+canny constants, planes with the y/u/v/r/g/b flags unit), init's low_u8/high_u8
+rounding, the per-mode query_formats lists, config_props plane geometry, and
+filter_frame with color_mix in src/video-ops/edgedetect.ts and
+src/video-edgedetect.ts follow libavfilter/vf_edgedetect.c. The kernels
+gaussian_blur and sobel (DEPTH 8) follow libavfilter/edge_template.c, and
+get_rounded_direction, ff_non_maximum_suppression and ff_double_threshold follow
+libavfilter/edge_common.c. The AV_OPT_TYPE_FLAGS +/- term folding follows
+libavutil/opt.c set_string_number and write_number.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2012-2014 Clément Bœsch;(c)2022 Thilo Borgmann. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation for the eight-bit formats of the native
+lists, not the complete edgedetect filter: timeline, runtime commands and
+threshold expressions with functions, ^ or other constants are refused.
