@@ -1,0 +1,15 @@
+Scoped floodfill video filter
+
+The option table, eight-bit is_same/set_pixel/pick_pixel semantics, seed
+pick, S == d pass-through, frame size refusal, point stack order and
+pixel_fmts list in src/video-ops/floodfill.ts follow
+libavfilter/vf_floodfill.c (floodfill_options, pixel_fmts, is_inside,
+is_same1/3, set_pixel1/3, pick_pixel1/3, config_input, filter_frame).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2017 Paul B Mahol
+LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete floodfill filter: only
+the eight-bit gray, yuv444p and gbrp layouts, no timeline, no runtime
+commands, and an explicit refusal where native never terminates.
