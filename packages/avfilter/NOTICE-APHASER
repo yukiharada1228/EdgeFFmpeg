@@ -1,0 +1,28 @@
+aphaser triangular-modulated phaser (src/audio/aphaser.ts)
+
+src/audio/aphaser.ts adapts FFmpeg libavfilter/af_aphaser.c: the in_gain,
+out_gain, delay, decay, speed and type options with their defaults and ranges,
+init()'s "out_gain may cause clipping" condition, config_output()'s
+delay_buffer_length ((int)(delay * 0.001 * sample_rate + 0.5)) with its
+"delay is too small" refusal and modulation_buffer_length
+((int)(sample_rate / speed + 0.5)), the PHASER and PHASER_PLANAR kernels (MOD
+ring indexing, double accumulation, C conversion to the sample type) and the
+FILTER_SAMPLEFMTS list (dbl, dblp, flt, fltp, s32, s32p, s16, s16p). It also
+adapts the WAVE_TRI branch of libavfilter/generate_wave_table.c
+(ff_generate_wave_table for AV_SAMPLE_FMT_S32 with min 1, max
+delay_buffer_length and phase M_PI / 2.0: phase offset, triangle, scaling,
++-0.5 rounding and int32 truncation).
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2013 Paul B Mahol (af_aphaser.c; generate_wave_table.c carries no copyright line)
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation computes each triangle-table entry on demand in the
+same double operations instead of holding the table, runs packed and planar
+input through one per-channel loop (native's two kernels compute identically),
+accepts only plain decimal option values and type=t|triangular|1, refuses
+type=sinusoidal (its libm sin() is not reproduced), timeline enable, and gains
+past native's out_gain clipping condition (where C's double-to-integer
+conversion is undefined), always writes a new owned output frame, declares the
+per-channel delay rings in reserve(), enforces explicit allocation limits and
+AbortSignal, and adds no FFmpeg runtime code. The original source and full
+notices remain in the pinned upstream submodule.
