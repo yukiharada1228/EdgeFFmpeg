@@ -1,0 +1,183 @@
+{
+  "capabilityId": "filter.maskedclamp",
+  "slug": "vf-maskedclamp",
+  "status": "partial",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/maskedclamp.ts",
+    "packages/avfilter/NOTICE-MASKEDCLAMP",
+    "tests/unit/video-maskedclamp.test.ts",
+    "tests/differential/video-maskedclamp.test.ts",
+    "docs/contributing/maskedclamp.md",
+    "docs/contributing/wave2/vf-maskedclamp.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/video-ops/registry.ts",
+      "change": "+1 import line: import {maskedclampOperator} from './maskedclamp.js'; +1 entry line: maskedclampOperator,"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/video-maskedclamp.test.ts",
+      "title": "parses declared defaults, shorthand, integer expressions and ranges and refuses framesync, timeline and generic options",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-maskedclamp.test.ts",
+      "title": "keeps the base size and refuses differing sizes, formats and input counts in geometry",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-maskedclamp.test.ts",
+      "title": "clamps base between dark-undershoot and bright+overshoot with bright winning crossed bounds, into owned tight planes without mutating padded input",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-maskedclamp.test.ts",
+      "title": "rejects unsupported layouts, budgets, malformed storage, settings and cancellation explicitly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-maskedclamp.test.ts",
+      "title": "plans maskedclamp on graph paths, refuses linear chains, size mismatches before frames and runtime commands",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-maskedclamp.test.ts",
+      "title": "matches native maskedclamp on three distinct inputs across formats, sizes, bounds, inversions and plane masks",
+      "passed": 1,
+      "failed": 0,
+      "comparisons": 576
+    },
+    {
+      "file": "tests/differential/video-maskedclamp.test.ts",
+      "title": "matches native maskedclamp rawvideo and framecrc on the graph, stream, actor and timed paths with and without -ss/-t",
+      "passed": 1,
+      "failed": 0,
+      "comparisons": 288
+    },
+    {
+      "file": "tests/differential/video-maskedclamp.test.ts",
+      "title": "refuses size mismatches, framesync and out-of-range options and enable= before opening any output on every path",
+      "passed": 1,
+      "failed": 0,
+      "comparisons": 39
+    },
+    {
+      "file": "tests/differential/video-maskedclamp.test.ts",
+      "title": "negotiates every accepted source as native does on the four join paths and refuses picks without storage by name",
+      "passed": 1,
+      "failed": 0,
+      "comparisons": 84
+    },
+    {
+      "file": "tests/differential/video-maskedclamp.test.ts",
+      "title": "agrees with native under default slice threads and -filter_threads 1",
+      "passed": 1,
+      "failed": 0,
+      "comparisons": 3
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "(whole file, unedited)",
+      "passed": 8,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 990,
+    "compares": [
+      "576 stream-path rawvideo byte matches: gray/yuv420p/yuv422p/yuv444p/yuva420p/gbrp x 1x1,2x2,5x3,7x5,8x6,17x9 x {three distinct noise+ramp inputs of 3/2/4 frames, ramp base between constant dark 200 > bright 50} x 8 option sets (defaults, 5:5, 255:255, 5/255, planes 1/6/0, 300:65535:9)",
+      "288 rawvideo/framecrc byte matches on graph (split graph), stream (3 inputs, 4/3/5 frames), actor (producer, 1 and 3 inputs) and timed (pull, 1 and 3 inputs) with none, -ss 0.04, -t 0.08 and both",
+      "39 refusals: size mismatches (native 256-EINVAL), shortest/eof_action/repeatlast/ts_sync_mode (native option not found, exit 8), planes/undershoot/overshoot out of range (native 256-ERANGE), enable= and threads= (native accepts, refused here); EdgeFFmpeg exit 1 with no output opened, on media, producer and pull backends",
+      "84 per-source negotiation checks over 14 sources on graph/stream/actor/timed: 10 byte-exact, argb/rgba/abgr/bgra refused naming gbrap",
+      "3 thread-invariance checks: native default threads == -filter_threads 1 == EdgeFFmpeg"
+    ],
+    "reference": ".build/reference/ffmpeg (run at test time; build-metadata commit 946fcce0 and --disable-x86asm asserted)",
+    "cpuflags": "0"
+  },
+  "unsupported": [
+    "unequal input frame rates: native takes the base frame rate; the shared join role uses the common rate or 1/0, so framecrc (and CFR rawvideo when base has the lower rate) differ. Not refused: the descriptor cannot see rates (see sharedEditsNeeded)",
+    "enable= timelines (native accepts) and runtime commands undershoot/overshoot/planes/enable (native accepts)",
+    "the generic threads= filter option (native accepts)",
+    "formats without frame storage here: 9-16 bit, yuv440p, yuv411p, yuv410p, yuvj*, yuva422p, yuva444p, gbrap (refused by name at negotiation)",
+    "linear chains (join role)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.maskedclamp.unit",
+      "file": "tests/unit/video-maskedclamp.test.ts",
+      "name": "clamps base between dark-undershoot and bright+overshoot with bright winning crossed bounds, into owned tight planes without mutating padded input",
+      "modes": [
+        "unit"
+      ],
+      "scope": "clamp order with crossed bounds, shoots, plane masks, owned tight output, no input mutation"
+    },
+    {
+      "id": "filter.maskedclamp.kernel",
+      "file": "tests/differential/video-maskedclamp.test.ts",
+      "name": "matches native maskedclamp on three distinct inputs across formats, sizes, bounds, inversions and plane masks",
+      "modes": [
+        "differential"
+      ],
+      "scope": "six 8-bit formats, six sizes, shoots 0/5/255/>255, crossed bounds, plane masks, unequal lengths, equal rates"
+    },
+    {
+      "id": "filter.maskedclamp.paths",
+      "file": "tests/differential/video-maskedclamp.test.ts",
+      "name": "matches native maskedclamp rawvideo and framecrc on the graph, stream, actor and timed paths with and without -ss/-t",
+      "modes": [
+        "differential"
+      ],
+      "scope": "graph, stream, actor and timed; split and three-input graphs; -ss/-t; rawvideo and framecrc; equal rates"
+    },
+    {
+      "id": "filter.maskedclamp.reject",
+      "file": "tests/differential/video-maskedclamp.test.ts",
+      "name": "refuses size mismatches, framesync and out-of-range options and enable= before opening any output on every path",
+      "modes": [
+        "differential"
+      ],
+      "scope": "size mismatch and option refusals with native status parity, no output opened"
+    },
+    {
+      "id": "filter.maskedclamp.negotiation",
+      "file": "tests/differential/video-maskedclamp.test.ts",
+      "name": "negotiates every accepted source as native does on the four join paths and refuses picks without storage by name",
+      "modes": [
+        "differential"
+      ],
+      "scope": "native picks from 14 sources on the four join paths; gbrap refused by name"
+    },
+    {
+      "id": "filter.maskedclamp.threads",
+      "file": "tests/differential/video-maskedclamp.test.ts",
+      "name": "agrees with native under default slice threads and -filter_threads 1",
+      "modes": [
+        "differential"
+      ],
+      "scope": "native slice-thread invariance"
+    }
+  ],
+  "sharedEditsNeeded": [
+    "A join output frame-rate hook on the descriptor (for example outputFrameRate(step, inputRates)) read by activation/plan.ts, activation/actors.ts and the frame-graph/stream clocks (videoGraphClocks), so maskedclamp can use the base input rate as native config_output does (ol->frame_rate = il->frame_rate) instead of the vf_stack equal-or-1/0 rule; alternatively a hook to refuse unequal input rates at plan time. Without it unequal-rate inputs diverge silently.",
+    "tests/helpers/video-negotiation-cases.ts: nativeNegotiationOutcome always runs the linear path, so it cannot serve join operators; a paths filter (or a join-aware variant) would let joins reuse it. This branch mirrors it inline for graph/stream/actor/timed."
+  ],
+  "notes": [
+    "Status partial only because unequal input frame rates diverge without an explicit refusal; equal-rate inputs are byte-exact on all four join paths.",
+    "Spec [FS-OPTS] says accept shortest, but native maskedclamp uses AVFILTER_DEFINE_CLASS (no framesync options): shortest, eof_action, repeatlast and ts_sync_mode fail natively with Option not found (exit 8). They are refused here to match native; the step always carries shortest:false.",
+    "EdgeFFmpeg CLI failures exit 1; native statuses are pinned from os.constants.errno on the host.",
+    "Native creates its output file before failing on a size mismatch; EdgeFFmpeg opens none.",
+    "Setup: npm run bootstrap failed in 0.4s (Node.js 24+ is required; installing Node 24 via npx n was denied by the sandbox permission policy), so the documented fallback ran: git submodule update + npm ci + npm run reference:build took 4m08s in total. Baseline typecheck+lint+boundaries 1m28s (all passing); baseline registry test passed. Differential file ~6s; unit+registry ~2s.",
+    "Node version used: v22.23.5.",
+    "Mutation check: applying the bright bound before the dark bound fails the kernel test on the crossed-bounds set."
+  ]
+}

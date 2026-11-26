@@ -1,0 +1,13 @@
+Scoped maskedclamp video filter
+
+The option table, eight-bit pix_fmts subset, three-input size check, clamp
+order, plane mask and plane copy semantics in src/video-ops/maskedclamp.ts
+follow libavfilter/vf_maskedclamp.c (maskedclamp_options, pix_fmts,
+maskedclamp8, maskedclamp_slice, process_frame, config_input, config_output).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2016 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete maskedclamp filter:
+only eight-bit formats, equal input frame rates, no timeline and no runtime
+commands.
