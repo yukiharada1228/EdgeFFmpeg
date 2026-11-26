@@ -58,6 +58,7 @@
     "Setup durations: npm+submodule+reference bootstrap 4m20s (reference build relinked several times because the sandbox link differs from the linux-x64 pin, expected with --allow-unpinned-reference); baseline typecheck+lint+boundaries+container registry tests 1m24s, all passing (16 registry tests).",
     "The muxer computes the trailer duration up front (sequential output, no seek) by running framePcmPackets over a synthetic zero stream with the same framing, so the shared PREP-FRAMING API is the only regrouping code; pcm-framing.ts and framecrc.ts are untouched.",
     "Differential file runs in about 10 s with --maxWorkers=1; the timing test uses a 64 KiB buffer budget because apad=whole_len reframing exceeds the 4 KiB budget.",
-    "No linux-gated cases: integer arithmetic and byte copies only."
+    "No linux-gated cases: integer arithmetic and byte copies only.",
+    "Audit (audit-fmt-b): the build-metadata assertion (commit 946fcce0, --disable-x86asm) ran only in its own test, so a contract run filtered to one title compared against an unchecked reference; harness() now asserts it before every comparison. Also confirmed on macOS arm64 against the darwin reference (sha256 1b86106f…ab92): tagged WAV, AIFF and AU inputs into -f smjpeg differ from native (no _TXT), exactly as the same inputs into the existing wav, aiff and au muxers already do; that needs the shared demuxer metadata flags recorded in sharedEditsNeeded, after which smjpeg refuses them with no change here."
   ]
 }

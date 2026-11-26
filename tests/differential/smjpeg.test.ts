@@ -12,6 +12,8 @@ const metadata=JSON.parse(readFileSync(resolve('.build/reference/build-metadata.
 /** AVERROR(EINVAL) exits with (-EINVAL) & 255 on the reference host; EdgeFFmpeg always uses the Linux value (234). */
 const hostEinval=(256-constants.errno.EINVAL)&255,linuxEinval=234,linuxStatus=(status:number|null)=>status===hostEinval?linuxEinval:status;
 async function harness(prefix:string,maxBufferBytes=4096){
+  // Every comparison asserts the reference build first, so a contract run filtered to one title still checks it.
+  expect(metadata.commit.startsWith('946fcce0')).toBe(true);expect(metadata.flags).toContain('--disable-x86asm');
   const root=mkdtempSync(join(tmpdir(),prefix)),filesystem=await createNodeFileSystem({root,maxReadBytes:maxBufferBytes,maxWriteBytes:maxBufferBytes});
   const ffmpeg=new FFmpeg({filesystem,backend:createMediaBackend(),budget:{maxResidentBytes:1<<22,maxBufferBytes,maxPendingPackets:2,maxCpuTimeMs:20000}});
   return {root,ffmpeg};
