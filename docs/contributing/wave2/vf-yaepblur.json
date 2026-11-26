@@ -1,0 +1,262 @@
+{
+ "capabilityId": "filter.yaepblur",
+ "slug": "vf-yaepblur",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/yaepblur.ts",
+  "packages/avfilter/NOTICE-YAEPBLUR",
+  "tests/unit/video-yaepblur.test.ts",
+  "tests/differential/video-yaepblur.test.ts",
+  "docs/contributing/yaepblur.md",
+  "docs/contributing/wave2/vf-yaepblur.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {yaepblurOperator} from './yaepblur.js';",
+    " yaepblurOperator,"
+   ]
+  }
+ ],
+ "paths": [
+  "linear",
+  "graph",
+  "stream",
+  "actor",
+  "timed"
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-yaepblur.test.ts",
+   "title": "parses radius/r, planes/p and sigma/s with native defaults, shorthand order, aliases, integer expressions and last-wins keys",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-yaepblur.test.ts",
+   "title": "declares the native pix_fmts in declared order, all five paths and keeps geometry",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-yaepblur.test.ts",
+   "title": "blends the clipped window mean and variance exactly like the native summed-area tables",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-yaepblur.test.ts",
+   "title": "matches a literal BigInt summed-area port over random planes, clipped radii and the BigInt variance range",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-yaepblur.test.ts",
+   "title": "rejects unsupported layouts, budgets, malformed storage, invalid settings and cancellation explicitly",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-yaepblur.test.ts",
+   "title": "plans yaepblur on every path with packed-alpha and oversized refusals and runtime commands refused",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(all 8 registration-driven tests, unedited)",
+   "pass": 8,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "title": "runs the locally built native reference at the pinned commit without x86 assembly",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "title": "matches native yaepblur kernels across formats, sizes, radii, sigmas, planes, patterns and native thread counts",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "title": "matches native yaepblur CLI rawvideo and framecrc outputs across conversions and timing",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "title": "matches native complex yaepblur graphs on the frame-graph path",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "title": "matches native replayed yaepblur streams frame by frame",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "title": "matches native yaepblur through the timed backend actor and pull schedulers",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "title": "fails like native for unknown and out-of-range yaepblur options and refuses enable= and runtime commands before opening outputs",
+   "pass": 1,
+   "fail": 0
+  },
+  {
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "title": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+   "pass": 1,
+   "fail": 0
+  }
+ ],
+ "nativeComparisons": {
+  "kernel": {
+   "cases": 504,
+   "threadAgreementChecks": 504,
+   "formats": [
+    "yuv420p",
+    "yuv422p",
+    "yuv444p",
+    "gray",
+    "yuva420p",
+    "gbrp"
+   ],
+   "sizes": [
+    "1x1",
+    "2x2",
+    "5x3",
+    "7x5",
+    "8x6",
+    "17x9",
+    "64x48"
+   ],
+   "optionSets": 12
+  },
+  "cli": {
+   "outputs": 112
+  },
+  "graph": {
+   "cases": 24,
+   "outputs": 48
+  },
+  "stream": {
+   "cases": 18
+  },
+  "timed": {
+   "runs": 48,
+   "schedulers": [
+    "producer",
+    "activation",
+    "pull"
+   ]
+  },
+  "rejections": {
+   "forms": 12,
+   "nativeStatusChecks": 12,
+   "edgePathsPerForm": 4
+  },
+  "negotiation": {
+   "sources": 17,
+   "checks": 89,
+   "matched": 13,
+   "refused": 4
+  }
+ },
+ "unsupported": [
+  "Negotiated formats without frame storage here (every >8-bit member, yuv440p, yuvj440p, yuv411p, yuvj411p, yuv410p, yuva444p, yuva422p, gbrap); native picks gbrap from argb/rgba/abgr/bgra and those are refused by name before output",
+  "enable= timeline expressions and the generic threads/thread_type/extra_hw_frames options (native accepts them)",
+  "Runtime commands radius/planes/sigma (native AV_OPT_FLAG_RUNTIME_PARAM); refused with ENOSYS on the actor path",
+  "Planes with 255*w*h >= 2^32 (gray 4096x4113 and up), where native's uint64 sum*sum could wrap"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "nodeVersion": "v24.22.3",
+ "proposedContracts": [
+  {
+   "id": "filter.yaepblur.kernel",
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "name": "matches native yaepblur kernels across formats, sizes, radii, sigmas, planes, patterns and native thread counts",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "8-bit planar gray/yuv420p/yuv422p/yuv444p/yuva420p/gbrp at 1x1..17x9 and 64x48; radius/planes/sigma incl. native radius clipping, r=0 and p=0 copies, s=1 and s=2^31-1; native default threads equal -filter_threads 1. Wave 2 branch wave2/vf-yaepblur."
+  },
+  {
+   "id": "filter.yaepblur.cli",
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "name": "matches native yaepblur CLI rawvideo and framecrc outputs across conversions and timing",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "-vf linear chains with implicit conversions (-cpuflags 0), rawvideo and framecrc, with and without -ss/-t. Wave 2 branch wave2/vf-yaepblur."
+  },
+  {
+   "id": "filter.yaepblur.graph",
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "name": "matches native complex yaepblur graphs on the frame-graph path",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "-filter_complex graphs with split, hflip, transpose and chained yaepblur, two outputs. Wave 2 branch wave2/vf-yaepblur."
+  },
+  {
+   "id": "filter.yaepblur.stream",
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "name": "matches native replayed yaepblur streams frame by frame",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "createReplayVideoExecution frame by frame incl. hstack joins. Wave 2 branch wave2/vf-yaepblur."
+  },
+  {
+   "id": "filter.yaepblur.timed",
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "name": "matches native yaepblur through the timed backend actor and pull schedulers",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "Timed backend producer, activation and pull schedulers, rawvideo and framecrc. Wave 2 branch wave2/vf-yaepblur."
+  },
+  {
+   "id": "filter.yaepblur.reject",
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "name": "fails like native for unknown and out-of-range yaepblur options and refuses enable= and runtime commands before opening outputs",
+   "modes": [
+    "semantic"
+   ],
+   "scope": "Unknown, out-of-range and non-numeric options with native status and wording (host ERANGE text for native); enable= and generic options refused; no output opened on media -vf, -filter_complex and timed producer/pull. Wave 2 branch wave2/vf-yaepblur."
+  },
+  {
+   "id": "filter.yaepblur.negotiation",
+   "file": "tests/differential/video-yaepblur.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+   "modes": [
+    "semantic",
+    "bit-exact"
+   ],
+   "scope": "17 sources: 13 byte-exact on every path (yuvj on linear chains), argb/rgba/abgr/bgra refused as gbrap before output. Wave 2 branch wave2/vf-yaepblur."
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Integer only; no linux-gated cases. The native summed-area tables are read as running column sums (sat[higher_y]-sat[lower_y] per row), O(width) scratch; every window sum equals native's uint64 value exactly. A unit test compares against a literal BigInt port of the full native tables, including a plane that takes the BigInt sum*sum branch (on that data the double branch would also agree).",
+  "Native filters in place when the frame is writable; each output pixel reads only its own source sample, so the result is identical.",
+  "Setup durations: bootstrap (npm, submodule, reference) 4m22s with Node 24.22.3 from /opt/node24 (the sandbox default Node 22.23.5 is refused by the bootstrap); baseline typecheck+lint+boundaries+registry test 1m21s, all green.",
+  "Differential file runs in about 12 s with --maxWorkers=1."
+ ]
+}
