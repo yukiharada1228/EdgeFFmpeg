@@ -94,6 +94,7 @@ export function validateVideoOperator(op:VideoOperatorDescriptor):void{
  if((op.geometry||op.timedGeometry)&&!sized.includes(op.role))invalid(`role ${op.role} keeps its input geometry`);
  for(const member of frameMembers)if(op[member]&&op.role!=='frame')invalid(`${member} needs role frame`);
  if(op.combine&&op.role!=='join')invalid('combine needs role join');
+ if(op.join!==undefined&&(op.role!=='join'||op.join.rate!=='common'&&op.join.rate!=='base'||op.join.props!==undefined&&op.join.props!=='none'&&op.join.props!=='base'||op.join.props==='base'&&op.join.rate!=='base'||op.join.after!==undefined&&typeof op.join.after!=='function'))invalid('join rule needs role join, rate common or base, props none or base (base only with rate base), and an after function');
  if(!Array.isArray(op.examples)||!op.examples.length||op.examples.some(example=>typeof example!=='string'||!example))invalid('examples');
 }
 const table=new Map<string,VideoOperatorDescriptor>();

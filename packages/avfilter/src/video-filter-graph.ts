@@ -1,5 +1,6 @@
 import {pixelLayout,rescale} from '@edge-ffmpeg/avutil';
 import {synchronizationTimeBase} from './frame-sync.js';
+import {videoJoinPlan} from './video-join.js';
 import type {VideoFrameData} from '@edge-ffmpeg/avutil';
 import {resizeVideoFrame,pixelResizeStateBytes} from '@edge-ffmpeg/swscale';
 import type {PixelArithmetic} from '@edge-ffmpeg/swscale';
@@ -36,7 +37,8 @@ export function compileMultiFrameGraph(description:string){
   for(const index of order){const node=graph.nodes[index]!,op=operators[index]!,step=node.configuration,plan=negotiated.nodes[index]!,input=plan.inputs[0]!,output=plan.outputs[0];
    for(const [pad,geometry]of plan.inputs.entries()){const edge=incoming[index]![pad];account(edge?negotiated.nodes[edge.node]!.outputs[edge.pad]!:sources[sourceFor(index,pad)]!,geometry);}
    // Joins and frame operators materialize owned frames; resizes add converter state.
-   if(op.role==='join')account(input,output!,true);
+   // Callers synchronize join batches; the declared rule is still resolved so every path refuses the same joins.
+   if(op.role==='join'){videoJoinPlan(op,step,node.inputs);account(input,output!,true);}
    else if(op.role==='frame'){op.validate?.(input.format,step);if(!op.bypass?.(step,input.width,input.height))account(input,output!,true);}
    else if(op.role==='resize')account(input,output!);
    else if(op.role!=='identity'&&op.role!=='fanout'&&op.role!=='sink')throw new Error(`Video filter ${step.name} has no frame graph role`);

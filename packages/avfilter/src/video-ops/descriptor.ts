@@ -15,6 +15,24 @@ export type VideoOperatorRole='identity'|'fanout'|'sink'|'resize'|'frame'|'join'
 export interface VideoStep {readonly name:string}
 /** Role contracts: join steps carry shortest; retime steps carry a setpts expression. */
 export interface VideoJoinStep extends VideoStep {readonly shortest:boolean}
+/** framesync in[i].after: EXT_STOP ends the output when this input ends; EXT_INFINITY repeats its last frame. */
+export type VideoJoinExtension='stop'|'infinity';
+/** A join's native clock and synchronization rule: ff_framesync_configure over the filter's config_output and
+ * process_frame. Every input has sync=1 and before=EXT_STOP, and the output time base is the av_gcd_q of the input
+ * time bases. rate 'common' is vf_stack: the output frame rate is the inputs' shared declared rate, or 1/0 when any
+ * differs. rate 'base' is a filter whose config_output sets ol->frame_rate = il->frame_rate: the output frame rate is
+ * input 0's. */
+export interface VideoJoinRule<S extends VideoStep=VideoStep> {
+ readonly rate:'common'|'base';
+ /** Output frame properties. 'none' (absent) is an output from ff_get_video_buffer (vf_stack, xmedian, mix): no
+  * duration and no decoder time base. 'base' is av_frame_copy_props from input 0's synchronized frame (maskedmerge,
+  * threshold, ...): its duration value unrescaled, its interlacing and its decoder time base (-enc_time_base demux).
+  * 'base' needs rate 'base'. */
+ readonly props?:'none'|'base';
+ /** in[i].after per input pad; absent is EXT_STOP on every pad under step.shortest and EXT_INFINITY otherwise.
+  * Every path refuses mixed modes at plan time. */
+ after?(step:S,inputs:number):readonly VideoJoinExtension[];
+}
 export interface VideoRetimeStep extends VideoStep {readonly expression:string;readonly stripFps:boolean}
 export interface VideoShape {readonly format:string;readonly width:number;readonly height:number;readonly sampleAspectRatio?:Rational}
 export interface VideoSize {readonly width:number;readonly height:number}
@@ -40,6 +58,8 @@ export interface VideoOperatorDescriptor<S extends VideoStep=VideoStep,T extends
   * gives the only output. tests/unit/video-operator-registry.test.ts runs each one on every flagged path
   * from an 8x8 gray source and expects the explicit rejection on every other path. */
  readonly examples:readonly string[];
+ /** Join clock and synchronization rule; absent on a join is {rate:'common'}, the vf_stack rule. */
+ readonly join?:VideoJoinRule<S|T>;
  /** Scoped option parser shared by linear chains, frame graphs and replay streams. */
  parse?(token:FilterToken):FilterPads<S>;
  /** Activation option parser; falls back to parse. */

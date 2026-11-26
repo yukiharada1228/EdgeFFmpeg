@@ -16,7 +16,7 @@ function stackPads<N extends 'hstack'|'vstack'>(name:N,token:FilterToken):Filter
 }
 /** hstack and vstack differ only by direction. */
 export function stackOperator<N extends 'hstack'|'vstack'>(name:N,direction:VideoStackDirection):VideoOperatorDescriptor<StackStep<N>>{
- return defineVideoOperator<StackStep<N>>({name,role:'join',paths:['graph','stream','actor','timed'],examples:[`split,${name}`,`split=3[a][b][c];[a][b][c]${name}=inputs=3:shortest=1`],
+ return defineVideoOperator<StackStep<N>>({name,role:'join',paths:['graph','stream','actor','timed'],examples:[`split,${name}`,`split=3[a][b][c];[a][b][c]${name}=inputs=3:shortest=1`],join:{rate:'common'},
   parse:token=>stackPads(name,token),geometry:(_step,inputs)=>stackGeometry(inputs,direction),
   combine:(frames,_step,options)=>stackVideoFrames(frames,direction,options),stateful:()=>true});
 }

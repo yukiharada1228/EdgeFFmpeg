@@ -1,6 +1,5 @@
 import type {Rational} from '@edge-ffmpeg/avutil';
-import {compileMultiInputVideoFilterGraph,filterTopologyOrder,synchronizationTimeBase,videoOperator} from '@edge-ffmpeg/avfilter';
-import {stackFrameRate} from './output-clock.js';
+import {compileMultiInputVideoFilterGraph,filterTopologyOrder,synchronizationTimeBase,videoOperator,videoJoinPlan,videoJoinFrameRate} from '@edge-ffmpeg/avfilter';
 export interface SourceClock {readonly frameRate:Rational;readonly timeBase:Rational}
 export interface LinkClock extends SourceClock {readonly durationSource:number|null}
 /** Inputs are in canonical external-pad order, independent of CLI file order. */
@@ -11,8 +10,9 @@ export function videoGraphClocks(description:string,sources:readonly SourceClock
  const links=new Map<number,LinkClock>();
  for(const index of filterTopologyOrder(graph)){
   const node=graph.nodes[index]!,inputs=incoming[index]!.map((edge,pad)=>edge?links.get(edge.node)!:sourceClocks[bindings.get(`${index}:${pad}`)!]!);if(inputs.some(input=>!input))throw new Error('Unbound timing input');
-  const joined=videoOperator(node.configuration.name)?.role==='join';
-  const clock=joined?Object.freeze({frameRate:stackFrameRate(inputs.map(input=>input.frameRate)),timeBase:synchronizationTimeBase(inputs.map(input=>input.timeBase)),durationSource:null}):inputs[0]!;
+  const op=videoOperator(node.configuration.name),rule=op?.role==='join'?videoJoinPlan(op,node.configuration,inputs.length):null;
+  // A join that copies input 0's frame properties keeps that input's duration and decoder time base.
+  const clock=rule?Object.freeze({frameRate:videoJoinFrameRate(rule.rate,inputs.map(input=>input.frameRate)),timeBase:synchronizationTimeBase(inputs.map(input=>input.timeBase)),durationSource:rule.props==='base'?inputs[0]!.durationSource:null}):inputs[0]!;
   links.set(index,clock);
  }
  return Object.freeze({inputs:Object.freeze(sourceClocks),nodes:Object.freeze(graph.nodes.map((_,index)=>links.get(index)!)),outputs:Object.freeze(graph.outputs.map(pad=>links.get(pad.node)!))});
