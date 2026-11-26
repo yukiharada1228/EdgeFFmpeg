@@ -53,9 +53,9 @@ Per frame, exactly as `filter_frame` does:
 
 1. Each expression is evaluated in double and converted to `int` by truncation. NaN
    (native's evaluator itself fails with EINVAL), infinities and values outside `int`
-   are refused (`outside int`): the native conversion is undefined behaviour, and the
-   reference binary faults on them. `w` or `h` equal to `INT_MIN` is refused because
-   `AV_CEIL_RSHIFT` negates it.
+   are refused (`outside int`): the native conversion is undefined behaviour; the
+   x86-64 reference faults on them and the arm64 reference saturates. `w` or `h` equal
+   to `INT_MIN` is refused because `AV_CEIL_RSHIFT` negates it.
 2. `x1`, `y1`, `x2`, `y2` are clipped to `[0, w-1]` and `[0, h-1]`.
 3. The unclamped plane sizes `aw`, `ah` are computed with `AV_CEIL_RSHIFT` (chroma
    planes 1 and 2 by `log2_chroma_w/h`), then `w = min(w, W-x1, W-x2)` and
@@ -133,9 +133,11 @@ from `build-metadata.json`; it never pins the digest.
     `activation` and `pull` schedulers x rawvideo/framecrc x the three time variants).
   - *matches native replayed swaprect branches frame by frame through createReplayVideoExecution*: 28 replay comparisons (14 formats x 2 graphs including split/vstack).
   - *matches native option acceptance and outputs, refusing n, t on scoped paths, sar, dar, unported functions, timelines and native faults explicitly*:
-    38 option strings: 17 accepted with identical output, 7 rejected by both, 4 on which
-    native faults with a signal (`w=1/0`, `w=3e9`, negative widths with positive heights)
-    and which are refused here, 10 accepted natively but refused here as out of scope
+    38 option strings: 17 accepted with identical output, 7 rejected by both, 2 on which
+    native faults with a signal on every platform (negative widths with positive heights),
+    2 that native converts to `int` with undefined behaviour (`w=1/0`, `w=3e9`: a signal on
+    x86-64, a saturated value and exit 0 on arm64), all four refused here, and 10 accepted
+    natively but refused here as out of scope
     (`enable`, `threads`, `n`, `t` on linear, `sin`, `^`, `exp`, `time`, `sar`, `dar`).
   - *refuses t on the scoped CLI paths and time-independent native faults on every path before any output is committed*: 8 CLI refusals on the media and timed backends.
   - *negotiates every accepted source as native does on every path*: `swaprect=3:2:1:1:4:3` from 17 sources; every source keeps its own format, byte-exact on the five paths (yuvj on linear chains): 73 checks.
@@ -146,8 +148,11 @@ from `build-metadata.json`; it never pins the digest.
 - `tests/unit/video-operator-registry.test.ts` runs the three descriptor examples on all
   five paths and checks they agree.
 
-No macOS run was made. No H.264/MP4 framecrc comparison was made; the operator keeps
-the frame size.
+The branch author made no macOS run. The pre-integration audit ran the unit and
+differential files on darwin-arm64 against a reference built from 946fcce0 with
+`--disable-x86asm`: the option test then classified `w=1/0` and `w=3e9` by the host's
+conversion, which this file now does explicitly; every test passes there. No H.264/MP4
+framecrc comparison was made; the operator keeps the frame size.
 
 ## Proposed contracts
 

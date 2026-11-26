@@ -123,19 +123,23 @@ it('matches native replayed swaprect branches frame by frame through createRepla
  }finally{rmSync(root,{recursive:true,force:true});}
 },300000);
 it('matches native option acceptance and outputs, refusing n, t on scoped paths, sar, dar, unported functions, timelines and native faults explicitly',()=>{
- const root=mkdtempSync(join(tmpdir(),'edge-swaprect-options-'));let accepted=0,rejected=0,faulted=0,scoped=0;
+ const root=mkdtempSync(join(tmpdir(),'edge-swaprect-options-'));let accepted=0,rejected=0,faulted=0,scoped=0,undefinedRefused=0;
  try{
+  // Native converts these doubles to int with undefined behaviour: x86-64 yields INT_MIN and faults with a signal (linux-x64),
+  // arm64 saturates to INT_MAX and exits 0 (darwin-arm64). Both are refused here on every platform.
+  const undefinedConversions=new Set(['w=1/0','w=3e9']);
   const format='yuv420p',width=9,height=7,input=clip(format,width,height,1),file=join(root,'in.raw');writeFileSync(file,input);
   const cases=['','4','4:3','4:3:1:2:5:4','w=2:h=2:x1=0:y1=0:x2=7:y2=5','w=w:h=h','x1=1e9:y1=-1e9','w=1e9:h=1e9','w=0x3:h=2','w=2k/1000:h=2','w=max(2\\,3):h=min(4\\,1)','w=if(gt(w\\,8)\\,3\\,1):h=2','w=trunc(w/2.5):h=floor(h/3)','w=abs(-3):h=sqrt(9)','w=st(0\\,2)*ld(0):h=2','w=3:h=2:x1=PI:y1=E',
    'w=','w=foo','w=1+','w=(2','x1=2:x1=3','h=2:w=3:2','foo=1','enable=1','threads=1',
    'w=n+1','x1=t*25','w=sin(1)+2','w=2^2','w=exp(1)','x1=time(0)','w=sar*2','w=dar','w=nan','w=1/0','w=3e9','w=-3:h=2','w=-1:h=1:x1=0'];
   for(const options of cases){
    const description=options?`swaprect=${options}`:'swaprect',native=spawnSync(ffmpeg,['-v','error','-cpuflags','0','-f','rawvideo','-pixel_format',format,'-s',`${width}x${height}`,'-framerate','25','-i',file,'-vf',description,'-pix_fmt',format,'-f','rawvideo','-'],{timeout:10000});
-   let actual:Buffer|null=null;try{actual=Buffer.from(compileVideoFilterChain(description).plan(format,width,height,{arithmetic:'scalar'}).apply(padded(format,width,height,input,0,3),{maxFrameBytes:1<<16,maxStateBytes:0}).planes.flatMap(plane=>[...plane]));}catch(error){expect(error,description).toBeInstanceOf(Error);}
-   if(native.status===null){expect(native.signal,description).toMatch(/^SIG(?:SEGV|BUS|ABRT)$/);expect(actual,description).toBeNull();faulted++;}else if(native.status!==0){expect(actual,description).toBeNull();rejected++;}else if(actual===null)scoped++;else{expect(actual,description).toEqual(native.stdout);accepted++;}
+   let actual:Buffer|null=null,failure='';try{actual=Buffer.from(compileVideoFilterChain(description).plan(format,width,height,{arithmetic:'scalar'}).apply(padded(format,width,height,input,0,3),{maxFrameBytes:1<<16,maxStateBytes:0}).planes.flatMap(plane=>[...plane]));}catch(error){expect(error,description).toBeInstanceOf(Error);failure=(error as Error).message;}
+   if(undefinedConversions.has(options)){expect(actual,description).toBeNull();expect(failure,description).toContain('outside int');if(process.arch==='x64'){expect(native.status,description).toBeNull();expect(native.signal,description).toMatch(/^SIG(?:SEGV|BUS|ABRT)$/);}else expect([native.status,native.signal],description).toEqual([0,null]);undefinedRefused++;}
+   else if(native.status===null){expect(native.signal,description).toMatch(/^SIG(?:SEGV|BUS|ABRT)$/);expect(actual,description).toBeNull();faulted++;}else if(native.status!==0){expect(actual,description).toBeNull();rejected++;}else if(actual===null)scoped++;else{expect(actual,description).toEqual(native.stdout);accepted++;}
   }
-  // Native faults (a signal, no exit status) on infinite, out-of-int and negative widths with positive heights; each is refused here.
-  expect([accepted,rejected,faulted,scoped]).toEqual([17,7,4,10]);
+  // Native faults (a signal, no exit status) on negative widths with positive heights on every platform; each is refused here.
+  expect([accepted,rejected,faulted,scoped,undefinedRefused]).toEqual([17,7,2,10,2]);
  }finally{rmSync(root,{recursive:true,force:true});}
 },120000);
 it('refuses t on the scoped CLI paths and time-independent native faults on every path before any output is committed',async()=>{

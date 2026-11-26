@@ -62,7 +62,8 @@
     "cases": 38,
     "accepted": 17,
     "rejectedByBoth": 7,
-    "nativeFaultsRefused": 4,
+    "nativeFaultsRefused": 2,
+    "undefinedConversionsRefused": 2,
     "scopedRefusals": 10
    }
   },
@@ -169,7 +170,7 @@
    "modes": [
     "semantic"
    ],
-   "scope": "38 option strings on yuv420p 9x7: 17 identical, 7 rejected by both, 4 native faults refused, 10 scoped refusals"
+   "scope": "38 option strings on yuv420p 9x7: 17 identical, 7 rejected by both, 2 native faults refused, 2 undefined double-to-int conversions refused (x86-64 faults, arm64 saturates), 10 scoped refusals"
   },
   {
    "id": "filter.swaprect.refusals",
@@ -201,6 +202,7 @@
   "Variable use is detected by re-parsing each expression with that name removed from the constant table; unported functions and ^ are detected lexically after whitespace removal.",
   "Time-independent expressions are evaluated at plan time with the negotiated geometry so their refusals surface before output on every path; t-dependent refusals can only surface at the offending frame.",
   "No macOS run; no platform-gated case. No H.264/MP4 framecrc comparison (size-preserving).",
-  "Setup: Node 24.22.3 installed from nodejs.org (sandbox had 22.23.5); bootstrap 3m50s; baseline typecheck+lint+boundaries 1m04s and registry test 2.4s, all clean before changes."
+  "Setup: Node 24.22.3 installed from nodejs.org (sandbox had 22.23.5); bootstrap 3m50s; baseline typecheck+lint+boundaries 1m04s and registry test 2.4s, all clean before changes.",
+  "Audit (pre-integration): on darwin-arm64 the option test failed ([17,7,2,12] for [17,7,4,10]) because native converts w=1/0 and w=3e9 to int with undefined behaviour, faulting on x86-64 but saturating and exiting 0 on arm64. The test now classifies those two cases explicitly: refused here on every platform, a signal asserted natively on x64 and exit 0 on arm64. With that change all 8 differential and 6 unit tests pass on darwin-arm64; the linux-x64 assertions are unchanged."
  ]
 }
