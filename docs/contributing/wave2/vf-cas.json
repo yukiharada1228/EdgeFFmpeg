@@ -1,0 +1,309 @@
+{
+  "capabilityId": "filter.cas",
+  "slug": "vf-cas",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/cas.ts",
+    "packages/avfilter/NOTICE-CAS",
+    "tests/unit/video-cas.test.ts",
+    "tests/differential/video-cas.test.ts",
+    "docs/contributing/cas.md",
+    "docs/contributing/wave2/vf-cas.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/video-ops/registry.ts",
+      "change": "+1 import line: import {casOperator} from './cas.js'; +1 entry line: ' casOperator,'"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/differential/video-cas.test.ts",
+      "title": "runs against the reference build of commit 946fcce0 configured with --disable-x86asm",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/video-cas.test.ts",
+      "title": "matches native cas through the kernel, linear, frame graph and replay APIs across formats, sizes, strengths and planes (Linux x64 unfused float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 396,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-cas.test.ts",
+      "title": "matches native cas=planes=0 copies through the kernel, linear, frame graph and replay APIs on every platform",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 72
+    },
+    {
+      "file": "tests/differential/video-cas.test.ts",
+      "title": "matches native cas rawvideo and framecrc bytes on every flagged CLI path (Linux x64 unfused float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 1080,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/video-cas.test.ts",
+      "title": "matches native cas=planes=0 copies on every flagged CLI path on every platform",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 240
+    },
+    {
+      "file": "tests/differential/video-cas.test.ts",
+      "title": "refuses cas timelines, expressions and out-of-range or unknown options before opening outputs on every path",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 55
+    },
+    {
+      "file": "tests/differential/video-cas.test.ts",
+      "title": "negotiates every accepted cas=planes=0 source as native does and refuses the packed-alpha gbrap picks before output on every path",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 89
+    },
+    {
+      "file": "tests/differential/video-cas.test.ts",
+      "title": "negotiates every accepted sharpening cas source as native does and refuses the packed-alpha gbrap picks before output on every path (Linux x64 unfused float)",
+      "passed": 1,
+      "failed": 0,
+      "nativeComparisons": 89,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/unit/video-cas.test.ts",
+      "title": "parses strength and planes in AVOption order with native defaults, float storage and flag arithmetic",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-cas.test.ts",
+      "title": "declares the native pixel_fmts in declared order and keeps geometry for every size",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-cas.test.ts",
+      "title": "computes cas_slice8 in single precision with truncation, clipping and the all-zero neighbourhood",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-cas.test.ts",
+      "title": "sharpens selected planes with clamped borders and copies the others into owned tight planes",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-cas.test.ts",
+      "title": "rejects unsupported layouts, budgets, malformed storage, invalid settings and cancellation explicitly",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-cas.test.ts",
+      "title": "plans cas on every path and refuses timelines and runtime commands",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "registers each video operator once with frozen flags and examples, keeping the legacy flags",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects descriptors that flag a path without the members its role needs",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "runs every registered example on each flagged path with identical frames",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators on the linear path",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators on the frame graph and replay paths",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators in the timed planner and activation actors",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "rejects unregistered and unflagged operators in the timed graph executor",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/video-operator-registry.test.ts",
+      "title": "negotiates and validates negate from the one shared table in every negotiator",
+      "passed": 1,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 2021,
+    "linuxX64Only": 1565,
+    "compares": [
+      "396 API cases (linux-x64): gray/yuv420p/yuv422p/yuv444p/yuva420p/gbrp x 1x1,2x2,5x3,7x5,8x6,17x9 x 11 option sets, 3 frames (noise, ramps with 0/255 edges, zero half + constant half); kernel, linear, graph and createReplayVideoExecution each byte-exact with native rawvideo; native default threads equal to -filter_threads 1",
+      "72 planes=0 copy API cases (every platform)",
+      "1080 CLI cases (linux-x64): 6 formats x 3 sizes x 3 option sets x rawvideo/framecrc x with/without -ss 0.04 -t 0.08 x linear(-vf)/graph/stream(+nullsink input)/actor(producer)/timed(pull)",
+      "240 planes=0 copy CLI cases on the five paths (every platform)",
+      "55 refusals: 6 native-accepted forms (enable=, threads=, strength expressions/constants) and 5 native-refused forms (out of range, unknown option, extra shorthand, fractional flags) on five paths, no output opened",
+      "89 negotiation checks with cas=planes=0 (every platform) and 89 with cas=0.7:planes=0xf (linux-x64) over 17 sources; packed-alpha sources pick gbrap and are refused by name"
+    ],
+    "reference": ".build/reference/ffmpeg (run at test time; commit 946fcce0 and --disable-x86asm asserted from build-metadata.json)",
+    "cpuflags": "0 on every native run"
+  },
+  "unsupported": [
+    "9..16-bit formats (cas_slice16) and the list members without frame storage here: gray9..16, yuv410p/411p/440p, yuvj440p/yuvj411p, yuv*p9..16, gbrp9..16, yuva422p/yuva444p and their high-depth forms, gbrap/gbrap10..16 (only packed-alpha negotiation sources pick one, gbrap, refused by name)",
+    "strength expressions and constants (av_expr, default/min/max)",
+    "enable= timelines and runtime commands (ff_filter_process_command)",
+    "the generic threads option"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.cas.api",
+      "file": "tests/differential/video-cas.test.ts",
+      "name": "matches native cas through the kernel, linear, frame graph and replay APIs across formats, sizes, strengths and planes (Linux x64 unfused float)",
+      "modes": [
+        "linear",
+        "graph",
+        "stream"
+      ],
+      "scope": "kernel, compileVideoFilterChain, compileVideoFilterGraph and createReplayVideoExecution vs native rawvideo; 6 formats, 6 sizes, 11 option sets, 3 frames; THREADS",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.cas.copy-api",
+      "file": "tests/differential/video-cas.test.ts",
+      "name": "matches native cas=planes=0 copies through the kernel, linear, frame graph and replay APIs on every platform",
+      "modes": [
+        "linear",
+        "graph",
+        "stream"
+      ],
+      "scope": "planes=0 and planes=0x10 copies on the API paths, 6 formats, 6 sizes"
+    },
+    {
+      "id": "filter.cas.cli",
+      "file": "tests/differential/video-cas.test.ts",
+      "name": "matches native cas rawvideo and framecrc bytes on every flagged CLI path (Linux x64 unfused float)",
+      "modes": [
+        "linear",
+        "graph",
+        "stream",
+        "actor",
+        "timed"
+      ],
+      "scope": "CLI rawvideo and framecrc with and without -ss/-t on every flagged path",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.cas.copy-cli",
+      "file": "tests/differential/video-cas.test.ts",
+      "name": "matches native cas=planes=0 copies on every flagged CLI path on every platform",
+      "modes": [
+        "linear",
+        "graph",
+        "stream",
+        "actor",
+        "timed"
+      ],
+      "scope": "planes=0 CLI rawvideo and framecrc with and without -ss/-t on every flagged path"
+    },
+    {
+      "id": "filter.cas.refusals",
+      "file": "tests/differential/video-cas.test.ts",
+      "name": "refuses cas timelines, expressions and out-of-range or unknown options before opening outputs on every path",
+      "modes": [
+        "linear",
+        "graph",
+        "stream",
+        "actor",
+        "timed"
+      ],
+      "scope": "enable=, threads=, expressions, out-of-range and unknown options refused before output"
+    },
+    {
+      "id": "filter.cas.negotiation-copy",
+      "file": "tests/differential/video-cas.test.ts",
+      "name": "negotiates every accepted cas=planes=0 source as native does and refuses the packed-alpha gbrap picks before output on every path",
+      "modes": [
+        "linear",
+        "graph",
+        "stream",
+        "actor",
+        "timed"
+      ],
+      "scope": "17 negotiation sources with planes=0; gbrap picks refused by name"
+    },
+    {
+      "id": "filter.cas.negotiation",
+      "file": "tests/differential/video-cas.test.ts",
+      "name": "negotiates every accepted sharpening cas source as native does and refuses the packed-alpha gbrap picks before output on every path (Linux x64 unfused float)",
+      "modes": [
+        "linear",
+        "graph",
+        "stream",
+        "actor",
+        "timed"
+      ],
+      "scope": "17 negotiation sources with sharpening on every plane; gbrap picks refused by name",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.cas.syntax",
+      "file": "tests/unit/video-cas.test.ts",
+      "name": "parses strength and planes in AVOption order with native defaults, float storage and flag arithmetic",
+      "modes": [
+        "unit"
+      ],
+      "scope": "parser defaults, float storage, flag folding and refusals"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Setup: the sandbox had Node v22.23.5 and bootstrap requires Node 24+; installed Node v24.22.3 from nodejs.org (sha256 checked) in the scratchpad (~10s). Bootstrap npm,submodule,reference with --allow-unpinned-reference took 221s (npm 9s, submodule 8s, reference build 204s). Baseline typecheck+lint+boundaries+video-operator-registry test before changes: 67s, green (8 tests).",
+    "The differential file runs in about 18s with --maxWorkers=1 on 4 vCPUs; the unit file in under 1s.",
+    "cas_slice8 calls no lrintf: the weighted mean is passed to av_clip_uint8(int), so C truncates it toward zero. The spec note about lrintf half-even rounding does not apply to this kernel; truncation is what matches native (a unit case pins 25.70 -> 25, and a Math.round mutation fails 3 differential tests).",
+    "Mutations that drop the Math.fround of weight, of the denominator 1+4*weight, or of the lerpf strength each fail 2 differential tests (the linux-gated API and CLI tests). Reordering the clip for the all-zero NaN case is not observable: the output there is 0 either way.",
+    "The linux-x64 gate is a precaution: no macOS run was possible here, so no macOS difference was measured. The planes=0 copy cases, refusals and copy negotiation run on every platform.",
+    "AV_OPT_TYPE_FLAGS values are not range-checked by write_number, so planes above 15 are accepted as natively (planes=0xff is tested).",
+    "The native list (58 formats) is returned by formats() in declared order; registry examples run from gray, which is in the list, and one starts with format=yuv420p."
+  ]
+}
