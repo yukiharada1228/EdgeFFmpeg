@@ -13,6 +13,7 @@ export {hash} from './hash/hash-mux.js';
 export {ircam} from './ircam.js';
 export {md5} from './hash/hash-mux.js';
 export {nistsphere} from './nistsphere.js';
+export {oma} from './oma.js';
 export {pvf} from './pvf.js';
 export * from './formats/raw-pcm.js';
 export {rsd} from './rsd.js';
