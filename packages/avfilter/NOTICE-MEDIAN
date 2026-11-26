@@ -1,0 +1,13 @@
+Scoped median video filter
+
+The option table, pixel-format list, radius clipping (check_params), the percentile
+threshold, the per-plane mask and the eight-bit column-histogram median in
+src/video-median.ts and src/video-ops/median.ts follow libavfilter/vf_median.c
+(options, pix_fmts, check_params, config_input, filter_slice, filter_frame) and
+libavfilter/median_template.c (filter_plane, DEPTH 8) with libavfilter/median.h.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2019 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation of the eight-bit kernel run as one slice job;
+the 9- to 16-bit kernels, the timeline and runtime commands are not included.
