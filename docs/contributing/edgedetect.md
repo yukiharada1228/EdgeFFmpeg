@@ -135,7 +135,9 @@ All for `filter.edgedetect`, on every platform (no gating):
 | `filter.edgedetect.options` | `tests/differential/video-edgedetect.test.ts` | `accepts the native option forms it implements with native bytes: unit names, relative and wide plane flags, constants and arithmetic` | option forms |
 | `filter.edgedetect.threads` | `tests/differential/video-edgedetect.test.ts` | `produces the same native output with default filter threads and with -filter_threads 1` | native thread invariance |
 | `filter.edgedetect.refusals` | `tests/differential/video-edgedetect.test.ts` | `fails like native for out-of-range options, unknown options and extra positional values before opening outputs on every path` | option errors on five paths |
-| `filter.edgedetect.negotiation` | `tests/differential/video-edgedetect.test.ts` | `negotiates every accepted source as native does for edgedetect`, `... for edgedetect=mode=colormix:high=0.3`, `... for edgedetect=mode=canny:low=0.05:planes=y+u` | per-source negotiation |
+| `filter.edgedetect.negotiation.wires` | `tests/differential/video-edgedetect.test.ts` | `negotiates every accepted source as native does for edgedetect` | per-source negotiation, 17 sources, 73 checks |
+| `filter.edgedetect.negotiation.colormix` | `tests/differential/video-edgedetect.test.ts` | `negotiates every accepted source as native does for edgedetect=mode=colormix:high=0.3` | per-source negotiation, 17 sources, 73 checks |
+| `filter.edgedetect.negotiation.canny` | `tests/differential/video-edgedetect.test.ts` | `negotiates every accepted source as native does for edgedetect=mode=canny:low=0.05:planes=y+u` | per-source negotiation, 17 sources, 73 checks |
 
 ## Unsupported
 
