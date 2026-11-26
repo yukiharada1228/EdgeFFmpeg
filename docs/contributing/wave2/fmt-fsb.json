@@ -34,11 +34,12 @@
    "titles": [
     "matches native FSB3 copy and decode framecrc, wav and raw outputs for 1/2/4 channels, three rates, data offsets and short tails",
     "matches native FSB3 output -ss, -t and -frames selections for copy and decode",
-    "mirrors native FSB version, format, rate and channel statuses and refuses FSB4, ADPCM, partial samples, truncation and input seeks before any output"
+    "mirrors native FSB version, format, rate and channel statuses and refuses FSB4, ADPCM, partial samples, truncation and input seeks before any output",
+    "refuses FSB3 sample rates above 1073741823, where native decode timestamps leave the sample clock, and matches native at 1073741823"
    ],
-   "count": 3,
-   "passed": 3,
-   "nativeComparisons": 351
+   "count": 4,
+   "passed": 4,
+   "nativeComparisons": 360
   },
   {
    "file": "tests/unit/container-registry.test.ts + tests/unit/container-registry-extension.test.ts + tests/unit/container-registry-copy-refusal.test.ts",
@@ -47,13 +48,15 @@
   }
  ],
  "nativeComparisons": {
-  "total": 351,
-  "byteExactOutputs": 189,
+  "total": 360,
+  "byteExactOutputs": 192,
   "copyRefusalsCheckedAgainstNativeF0x3": 27,
   "timeSelections": 108,
   "statusChecks": 18,
   "nativeAcceptanceOfRefusedInputs": 9,
-  "statusDetail": "176 (PATCHWELCOME) for FSB1, FSB5, a non-digit version under -f fsb and two unknown FSB3 formats; 183 (INVALIDDATA) for rate 0, negative rate, zero channels and a 60-byte header; each under decode and copy"
+  "statusDetail": "176 (PATCHWELCOME) for FSB1, FSB5, a non-digit version under -f fsb and two unknown FSB3 formats; 183 (INVALIDDATA) for rate 0, negative rate, zero channels and a 60-byte header; each under decode and copy",
+  "highRateRefusalsWithNativeAcceptance": 6,
+  "highRateNativeDecodePtsChecks": 3
  },
  "unsupported": [
   "FSB4 (XMA2, THP): native demuxes, refused",
@@ -61,11 +64,13 @@
   "partial trailing sample frame: native emits a partial final packet, refused",
   "-c copy of a payload that is not whole 4096*channels-byte packets: native flags the final packet F=0x3, refused via copyRefusal (decode supported)",
   "more than 512 channels: native decode fails with EINVAL but copy works, refused",
+  "sample rates above 1073741823 (INT_MAX/2): native decode pts leave the sample clock (fftools audio_samplerate_update falls back to 1/28224000), refused for every output",
   "data offset beyond EOF: native yields an empty stream, refused",
   "87-byte header with a non-zero low channel byte: native opens it, refused as truncated",
   "input -ss > 0: refused (not probed)",
   "no fsb muxer (native has none)",
-  "undeclared .fsb inputs that fail fsb_probe: no extension fallback (native extension score is 1 next to read_probe)"
+  "undeclared .fsb inputs that fail fsb_probe: no extension fallback (native extension score is 1 next to read_probe)",
+  "not refused, shared PCM path: AIFF output of guessed 3+ channel layouts lacks native's CHAN chunk; sample-format conversion above 64 channels succeeds where native aresample fails with EINVAL (same on raw PCM input)"
  ],
  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
@@ -98,14 +103,29 @@
     "refusal"
    ],
    "scope": "native 176/183 statuses mirrored for versions, formats, rate, channels and truncation; explicit refusals of FSB4, ADPCM flags, partial samples, >512 channels, offset past EOF, 87-byte header and input seeks"
+  },
+  {
+   "id": "demuxer.fsb",
+   "file": "tests/differential/fsb.test.ts",
+   "name": "refuses FSB3 sample rates above 1073741823, where native decode timestamps leave the sample clock, and matches native at 1073741823",
+   "modes": [
+    "refusal",
+    "decode",
+    "copy"
+   ],
+   "scope": "rates 1073741823 (byte-exact decode, copy and raw), 1073741824 and 2147483647 (native decode pts off the 2048-sample clock; refused before output)"
   }
  ],
- "sharedEditsNeeded": [],
+ "sharedEditsNeeded": [
+  "PCM path: AIFF CHAN chunk for guessed 3+ channel layouts (as epaf-support.md)",
+  "PCM path: refuse sample-format conversion above 64 channels (native SWR_CH_MAX, EINVAL)"
+ ],
  "notes": [
   "Node 24.22.3 from /opt/node24 was used; the bootstrap (npm, submodule, reference) took 260 s (npm 10.9 s, submodule 9.8 s, reference build about 239 s).",
   "Baseline before registering the module: typecheck, lint, boundaries and the three container registry tests (17) passed in 83 s.",
   "PATCHWELCOME (176) and INVALIDDATA (183) are FFERRTAG statuses, not errno values, so they are host-independent; no errno-dependent status is mirrored.",
   "Native fsb_read_header refuses FSB4 formats outside XMA2/THP with 176 too; the port refuses every FSB4 input with exit 1 because it does not parse the FSB4 header.",
-  "All cases are integer/copy; no linux-gated tests."
+  "All cases are integer/copy; no linux-gated tests.",
+  "Audit follow-up (audit-fmt-a, macOS arm64 reference 946fcce0): rates from 2^30 Hz diverged in decoded framecrc pts (native 2054 vs 2048 at 2^30); now refused, with a differential regression test. Unit 7/7 and differential 4/4 pass on macOS arm64."
  ]
 }

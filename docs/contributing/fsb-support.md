@@ -28,10 +28,16 @@ Refused although native accepts (`FsbError` or `unsupported-command`, exit 1):
 - FSB3 `adpcm_ima_wav` (`0x00400000`), `adpcm_psx` (`0x00800000`) and `adpcm_thp` (`0x02000000`) flags without `0x100`: no ADPCM decoder is ported;
 - a payload that is not a whole number of sample frames (native emits a partial final packet);
 - more than 512 channels (native fails decoder open with EINVAL but copies);
+- sample rates above 1073741823 (`INT_MAX / 2`): from 2^30 Hz the CLI's `audio_samplerate_update` (`fftools/ffmpeg_dec.c`) finds `1 >= INT_MAX / rate` and rescales decoded timestamps through `1/28224000`, so native's decoded pts leave the 2048-sample clock (the second packet is at 2054 for 2^30 Hz); refused for every output, copy included;
 - a data offset beyond the end of the file (native yields an empty stream; not mirrored);
 - an 87-byte header whose low channel byte is set (native opens it; not mirrored);
 - input `-ss` above zero (native seeks generically; not probed in this wave);
 - `-c copy` of a short-tail payload (see above).
+
+Shared-path gaps, not refused here because a demuxer cannot see the output (the same gaps apply to raw PCM input on the integrated base):
+
+- AIFF output of a guessed layout with 3 or more channels: native writes a `CHAN` chunk, the shared PCM path does not (as recorded in `epaf-support.md`);
+- a sample-format conversion with more than 64 channels (for example `-c:a pcm_s32le` from 65 to 512 channels): native's auto-inserted `aresample` fails with `AVERROR(EINVAL)` (`SWR_CH_MAX` is 64), the shared PCM path converts.
 
 ## Determinism and arithmetic profile
 
@@ -41,11 +47,12 @@ Byte copies and integer header arithmetic only; decoding and encoding use the ex
 
 Sandbox reference: `.build/reference/ffmpeg` built from 946fcce0 with `--disable-autodetect --disable-doc --disable-debug --disable-x86asm` on linux-x64, sha256 `ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c`, `cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0`. The differential tests read `build-metadata.json` and assert the commit and `--disable-x86asm`; no binary hash or native digest is committed. Node v24.22.3.
 
-- `tests/unit/fsb.test.ts` (7 tests): field offsets for 1, 2, 4 and 6 channels with reads of at most 16 bytes inside the 88-byte header; the duration word ignored; backward data offsets (0x18, 0x40, 86) and the empty stream; `copyRefusal` exactly for short tails; every refusal with its status, read budget and short-read errors; abort before, during and after opening; 8-byte probing and the frozen demux-only descriptor; the PCM backend path (wav decode equal to raw input, copy bytes, framecrc rows 2048/2048 and 2048/2048/1, copy refusal with no output opened).
-- `tests/differential/fsb.test.ts` (3 tests, 351 native comparisons, about 5 s on the sandbox):
+- `tests/unit/fsb.test.ts` (7 tests): field offsets for 1, 2, 4 and 6 channels with reads of at most 16 bytes inside the 88-byte header; the duration word ignored; backward data offsets (0x18, 0x40, 86) and the empty stream; `copyRefusal` exactly for short tails; every refusal with its status, read budget and short-read errors; the rate refusal above 1073741823 after every native-status check; abort before, during and after opening; 8-byte probing and the frozen demux-only descriptor; the PCM backend path (wav decode equal to raw input, copy bytes, framecrc rows 2048/2048 and 2048/2048/1, copy refusal with no output opened).
+- `tests/differential/fsb.test.ts` (4 tests, 360 native runs, about 5 s on the sandbox):
   - 189 byte-exact comparisons and 27 checked copy refusals: 1, 2 and 4 channels at 22050, 24000 and 44100 Hz, with whole packets at offset 0x100, a short tail at 0x100, data at exactly 88 (format `0x00400100`, PCM flag first) and a backward offset 0x40; outputs `-c copy` framecrc with and without `-f fsb`, s16le-decode framecrc, wav, raw `-c copy` and raw decode. Native copy rows are asserted to be 2048 samples, with `F=0x3` on the last row exactly for short tails, where EdgeFFmpeg refuses copy with no output;
   - 108 comparisons of output `-ss`, `-t`, `-ss -t`, `-frames:a` and `-ss` past the end (copy and decode on whole packets, decode on short tails);
   - native statuses for 9 inputs under decode and copy (FSB1, FSB5, a non-digit version, two unknown formats, rate 0, a negative rate, zero channels, a 60-byte header), and native copy acceptance of 9 refused inputs (FSB4 XMA2, IMA, PSX, THP, partial sample, 513 channels, offset past EOF, 87-byte header, input seek).
+  - sample rates 1073741823, 1073741824 and 2147483647 (audit follow-up): native decode framecrc keeps the 2048-sample pts only at 1073741823, where decode framecrc, `-f fsb` copy framecrc and raw decode are compared byte for byte (3); at the two higher rates native exits 0 and EdgeFFmpeg refuses all three outputs with no output file (6).
 
 ## Proposed contracts
 
@@ -54,3 +61,4 @@ Sandbox reference: `.build/reference/ffmpeg` built from 946fcce0 with `--disable
 | `demuxer.fsb` | `tests/differential/fsb.test.ts` | matches native FSB3 copy and decode framecrc, wav and raw outputs for 1/2/4 channels, three rates, data offsets and short tails | demux, copy, decode | all |
 | `demuxer.fsb` | `tests/differential/fsb.test.ts` | matches native FSB3 output -ss, -t and -frames selections for copy and decode | time selection | all |
 | `demuxer.fsb` | `tests/differential/fsb.test.ts` | mirrors native FSB version, format, rate and channel statuses and refuses FSB4, ADPCM, partial samples, truncation and input seeks before any output | refusal | all |
+| `demuxer.fsb` | `tests/differential/fsb.test.ts` | refuses FSB3 sample rates above 1073741823, where native decode timestamps leave the sample clock, and matches native at 1073741823 | refusal, decode, copy | all |

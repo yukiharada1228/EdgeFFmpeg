@@ -66,6 +66,10 @@ it('refuses versions, formats, rates, channels, truncation, offsets and partial 
   for(const length of [0,3,8,60,79,86])expect((await open(file({},64).subarray(0,length)))?.slice(0,2)).toEqual(['unsupported-command',length<4?176:183]);
   const cut=file({channels:1}).subarray(0,87);expect(await open(cut)).toEqual(['unsupported',undefined,'Truncated FSB header is not implemented']);
   expect(await open(file({channels:513},1026))).toEqual(['unsupported',undefined,'FSB channel count above 512 is not implemented']);
+  // From 2^30 Hz native decode timestamps leave the sample clock (audio_samplerate_update); refused after every native-status check.
+  for(const rate of [1073741824,2147483647])expect(await open(file({rate},64))).toEqual(['unsupported',undefined,'FSB sample rates above 1073741823 are not implemented']);
+  expect(await open(file({rate:1073741824,channels:0},64))).toEqual(['unsupported-command',183,'Invalid FSB channel count']);
+  expect(await open(file({rate:1073741823},64))).toBeNull();
   expect(await open(file({dataOffset:0x10000}).subarray(0,200))).toEqual(['unsupported',undefined,'FSB data offset beyond the end of the file is not implemented']);
   expect(await open(file({channels:2,dataOffset:88},6))).toEqual(['unsupported',undefined,'FSB partial trailing sample frame is not implemented']);
   expect(await open(file({channels:1,dataOffset:87},4))).toEqual(['unsupported',undefined,'FSB partial trailing sample frame is not implemented']);

@@ -13,7 +13,10 @@ export interface FsbInfo extends RawPcmInfo {readonly container:'fsb';readonly c
 export interface FsbInput extends Omit<RawPcmInput,'info'> {readonly info:FsbInfo}
 export interface FsbOptions {readonly maxReadBytes:number;readonly signal?:AbortSignal}
 /** fsb_read_header (version 3) reads through the u16 channel count at 86; fsb_probe inspects bytes 0..7. */
-const headerBytes=88,probeBytes=8,packetSamples=2048,maxChannels=512,pcmFlag=0x100,adpcmFlags:ReadonlyArray<readonly [number,string]>=[[0x00400000,'adpcm_ima_wav'],[0x00800000,'adpcm_psx'],[0x02000000,'adpcm_thp']];
+const headerBytes=88,probeBytes=8,packetSamples=2048,maxChannels=512,pcmFlag=0x100,
+  /** INT_MAX/2: from 2^30 Hz the CLI's audio_samplerate_update (fftools/ffmpeg_dec.c) finds 1 >= INT_MAX/rate and moves decoded
+   * timestamps to a 1/28224000 time base, so decoded pts leave the sample clock; these rates are refused for every output. */
+  maxExactRate=1073741823,adpcmFlags:ReadonlyArray<readonly [number,string]>=[[0x00400000,'adpcm_ima_wav'],[0x00800000,'adpcm_psx'],[0x02000000,'adpcm_thp']];
 /** AVERROR_PATCHWELCOME and AVERROR_INVALIDDATA are FFERRTAG values, so the CLI status is the same on every host. */
 const patchWelcome=176,invalid=183;
 /** fsb_probe over the zero-padded probe buffer: "FSB", a version digit 1..5, then RL32@4 == 1. */
@@ -54,6 +57,7 @@ export async function openFsb(input:ReadHandle,options:FsbOptions):Promise<FsbIn
   }
   if(input.size<BigInt(headerBytes))throw new FsbError('unsupported','Truncated FSB header is not implemented');
   if(channels>maxChannels)throw new FsbError('unsupported',`FSB channel count above ${maxChannels} is not implemented`);
+  if(sampleRate>maxExactRate)throw new FsbError('unsupported',`FSB sample rates above ${maxExactRate} are not implemented`);
   // avio_skip seeks to the absolute offset, backwards into the header when it is below 88.
   if(offset>input.size)throw new FsbError('unsupported','FSB data offset beyond the end of the file is not implemented');
   const dataBytes=input.size-offset,blockAlign=2*channels;

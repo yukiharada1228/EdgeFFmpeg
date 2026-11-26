@@ -100,3 +100,22 @@ it('mirrors native FSB version, format, rate and channel statuses and refuses FS
     }
   }finally{rmSync(root,{recursive:true,force:true});}
 },120000);
+it('refuses FSB3 sample rates above 1073741823, where native decode timestamps leave the sample clock, and matches native at 1073741823',async()=>{
+  checkReference();const {root,ffmpeg}=await setup('edgeffmpeg-fsb-rate-');let compared=0,refused=0;
+  try{
+    // From 2^30 Hz fftools' audio_samplerate_update finds 1 >= INT_MAX/rate and rescales decoded pts through 1/28224000, so the
+    // second 2048-sample packet is not at pts 2048; copy and raw outputs are unaffected natively but refused here with the rate.
+    for(const rate of [1073741823,1073741824,2147483647]){
+      const name=`rate-${rate}`,path=join(root,`${name}.fsb`);writeFileSync(path,fsb({rate,channels:2},3*2048*4,rate%997));
+      const cases:Array<[string,string[],string[]]>=[['decode',[],['-c:a','pcm_s16le','-bitexact','-f','framecrc']],['copy',['-f','fsb'],['-c:a','copy','-bitexact','-f','framecrc']],['raw',[],['-f','s16le']]];
+      for(const [kind,declared,tail] of cases){
+        const nativeOut=join(root,`${name}-${kind}.native`),expected=run([...declared,'-i',path,...tail,nativeOut]);expect(expected.status,`${name}/${kind}`).toBe(0);
+        if(kind==='decode'){const rows=readFileSync(nativeOut,'latin1').split('\n').filter(line=>/^0,/.test(line));expect(rows.length,name).toBe(3);expect(rows[1]!.split(',')[1]!.trim()==='2048',name).toBe(rate<=1073741823);}
+        const out=`/${name}-${kind}.out`,result=await ffmpeg.exec([...declared,'-i',`/${name}.fsb`,...tail,out]);
+        if(rate>1073741823){expect([result.exitCode,result.diagnostics.at(-1)?.message],`${name}/${kind}`).toEqual([1,'FSB sample rates above 1073741823 are not implemented']);expect(existsSync(join(root,out.slice(1)))).toBe(false);refused++;continue;}
+        expect(result.exitCode,`${name}/${kind} ${JSON.stringify(result.diagnostics)}`).toBe(0);expect(readFileSync(join(root,out.slice(1))).equals(readFileSync(nativeOut)),`${name}/${kind}`).toBe(true);compared++;
+      }
+    }
+    expect([compared,refused]).toEqual([3,6]);
+  }finally{rmSync(root,{recursive:true,force:true});}
+},120000);
