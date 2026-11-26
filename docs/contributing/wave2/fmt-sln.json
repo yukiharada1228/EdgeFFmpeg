@@ -1,0 +1,121 @@
+{
+  "capabilityId": "demuxer.sln",
+  "slug": "fmt-sln",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/sln.ts",
+    "packages/containers/NOTICE-SLN",
+    "docs/contributing/sln-support.md",
+    "tests/unit/sln.test.ts",
+    "tests/differential/sln.test.ts",
+    "docs/contributing/wave2/fmt-sln.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/containers/src/registry.ts",
+      "change": "+1 line: export {sln} from './sln.js'; (between sds and sox)"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/differential/sln.test.ts",
+      "name": "matches native SLN demux for -f sln and undeclared .sln inputs of six lengths through framecrc copy and decode WAV raw AIFF and output -ss -t -frames:a",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/sln.test.ts",
+      "name": "refuses SLN inputs that native accepts: -ar -ac input -ss partial trailing samples and undeclared inputs under four bytes with no output created",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/sln.test.ts",
+      "name": "opens the whole input as pcm_s16le 8000 Hz mono with no header read and bounded packet reads",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/sln.test.ts",
+      "name": "refuses partial trailing samples input seeks invalid budgets and aborted opens",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/sln.test.ts",
+      "name": "registers SLN as a demux-only extension-only format with no header bytes and the default packet span",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/sln.test.ts",
+      "name": "copies SLN to raw s16le and refuses -ar -ac -sample_rate -ch_layout input -ss partial samples and SLN output before opening an output",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry.test.ts",
+      "name": "(whole file, unchanged)",
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry-extension.test.ts",
+      "name": "(whole file, unchanged)",
+      "passed": 7,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 263,
+    "details": [
+      "250 byte-exact outputs: lengths 0/1/511/512/513/3000 samples x -f sln (.dat) and undeclared .sln (lengths >= 2 samples) x 5 time profiles (none, output -ss 0.02, -t 0.05, -frames:a 2, -ss 0.0125 -t 0.2) x framecrc copy, framecrc pcm_s16le, WAV, raw s16le, AIFF; 50 batched native calls",
+      "100 native framecrc headers asserted as 1/8000 pcm_s16le 8000 Hz mono (detection parity), plus 3000-sample copy rows 512x5+440",
+      "1 native -f sln -ar 16000 probe: 16000 Hz, 1024-sample packets (reason input -ar is refused)",
+      "10 native-accepted inputs Edge refuses with no output: -ar 16000, -ac 2, undeclared -ar 8000, input -ss (declared and undeclared), odd byte count, undeclared 2-byte and empty .sln, -sample_rate 16000, -ch_layout stereo",
+      "1 -f sln output refused on both sides"
+    ]
+  },
+  "unsupported": [
+    "input -ar/-ac (native honours them; descriptor is not headerless so the PCM path refuses)",
+    "-sample_rate/-ch_layout demuxer options (CLI refuses unknown options)",
+    "input -ss > 0 (refused in open until native timestamps are probed and mirrored)",
+    "partial trailing sample (native drops it with a decode error and exits 0)",
+    "undeclared .sln shorter than 4 bytes (detection needs 4 bytes; native accepts)",
+    "mime_type overrides (network only)",
+    "SLN output (no native muxer)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "sln.demux",
+      "file": "tests/differential/sln.test.ts",
+      "name": "matches native SLN demux for -f sln and undeclared .sln inputs of six lengths through framecrc copy and decode WAV raw AIFF and output -ss -t -frames:a",
+      "modes": [
+        "bit-exact",
+        "bit-exact-pcm"
+      ],
+      "scope": "pcm_s16le 8000 Hz mono SLN demux, -f sln and undeclared .sln, 0-3000 samples, framecrc copy/decode, WAV, raw s16le, AIFF, output -ss/-t/-frames:a; 512-sample packets."
+    },
+    {
+      "id": "sln.refusals",
+      "file": "tests/differential/sln.test.ts",
+      "name": "refuses SLN inputs that native accepts: -ar -ac input -ss partial trailing samples and undeclared inputs under four bytes with no output created",
+      "modes": [
+        "semantic"
+      ],
+      "scope": "Native-accepted -ar/-ac, -sample_rate/-ch_layout, input -ss, odd byte counts, undeclared inputs under 4 bytes and SLN output refused before Edge output creation."
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Native has no read_probe; demux.extensions ['.sln'] is used. Every undeclared native framecrc header was checked before comparing.",
+    "Not headerless by design: input -ar/-ac stay refused by the existing PCM-path check.",
+    "Sandbox Node was v22.23.5; /opt/node24 (v24.22.3) was used for bootstrap and all checks.",
+    "Setup durations: bootstrap (npm 9.2s, submodule 11.6s, reference build) 3m51s total; baseline typecheck+lint+boundaries+registry tests 1m16s.",
+    "Differential file runs in about 3 s on 4 vCPUs; no linux-gated cases.",
+    "No shared edits beyond the registry line were needed."
+  ]
+}

@@ -1,0 +1,12 @@
+Scoped Asterisk raw signed linear (SLN) demuxer semantics
+
+The fixed pcm_s16le 8000 Hz mono stream parameters (sln_options defaults and
+raw_codec_id), the extension-only detection and the read-to-EOF payload in
+src/sln.ts follow libavformat/pcmdec.c (ff_sln_demuxer, sln_options,
+pcm_read_header) and pcm.c (ff_pcm_read_packet, ff_pcm_default_packet_size,
+ff_pcm_read_seek).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2002 Fabrice Bellard;(c)2003 Fabrice Bellard. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete sln demuxer.
