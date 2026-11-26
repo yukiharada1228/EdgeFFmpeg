@@ -59,6 +59,8 @@ import {chromakeyOperator} from './chromakey.js';
 import {chromaholdOperator} from './chromahold.js';
 import {colorkeyOperator} from './colorkey.js';
 import {colorholdOperator} from './colorhold.js';
+import {drawboxOperator} from './drawbox.js';
+import {drawgridOperator} from './drawgrid.js';
 // One import above and one entry below per operator, each entry ending with a comma, so parallel
 // additions never touch the same line. Order is irrelevant: lookups are by name.
 export const videoOperators=Object.freeze([
@@ -119,6 +121,8 @@ export const videoOperators=Object.freeze([
  chromaholdOperator,
  colorkeyOperator,
  colorholdOperator,
+ drawboxOperator,
+ drawgridOperator,
 ] as const);
 type Operator=typeof videoOperators[number];
 type Steps=Operator extends infer O?O extends VideoOperatorDescriptor<infer S,infer T>?{readonly scoped:S;readonly timed:T}:never:never;

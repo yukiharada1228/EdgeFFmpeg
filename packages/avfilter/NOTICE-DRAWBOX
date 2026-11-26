@@ -1,0 +1,23 @@
+Scoped drawbox and drawgrid video filters
+
+The option tables, init's colour preparation ("invert", av_parse_color and the
+CCIR YUV colour), config_input's iterative expression evaluation of x, y, w, h
+and t over var_names (dar, hsub, vsub, in_h, ih, in_w, iw, sar, x, y, h, w, t,
+fill), the draw_region and draw_region_rgb_packed loops with their double and
+float blends, pixel_belongs_to_box, pixel_belongs_to_grid, filter_frame,
+drawgrid_filter_frame and pix_fmts in src/video-drawbox.ts,
+src/video-ops/drawbox.ts and src/video-ops/drawgrid.ts follow
+libavfilter/vf_drawbox.c, libavutil/colorspace.h (RGB_TO_Y_CCIR,
+RGB_TO_U_CCIR, RGB_TO_V_CCIR) and libavfilter/drawutils.c (ff_fill_rgba_map).
+Colours are parsed by the shared parseColor (libavutil/parseutils.c
+av_parse_color) and expressions by the shared expression API
+(libavutil/eval.c); neither is ported again here.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2008 Affine Systems, Inc (Michael Sullivan, Bobby Impollonia);
+(c)2013 Andrey Utkin;(c)2001,2002,2003 Fabrice Bellard;(c)2011 Stefano
+Sabatini;(c)2012 Nicolas George. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation of the eight-bit paths with frame
+storage here, not the complete drawbox and drawgrid filters (box_source,
+sar/dar expressions, timeline and runtime commands are refused).
