@@ -1,0 +1,29 @@
+biquad explicit-coefficient filter (src/audio/biquad.ts, src/audio/biquad-kernels.ts)
+
+src/audio/biquad.ts and src/audio/biquad-kernels.ts adapt FFmpeg
+libavfilter/af_biquads.c for the biquad filter type: the biquad_options table
+(a0..b2 in the INT32 range, mix, channels, normalize, transform, precision,
+blocksize, with their shorthand order), query_formats() (s16p, s32p, fltp,
+dblp for precision auto, otherwise the one pinned planar format),
+config_filter()'s coefficient preparation (division by a0, the normalize
+factor when |b0 + b1 + b2| > 1e-6, convert_dir2latt, convert_dir2svf,
+convert_dir2zdf reading the raw oa/ob values, and the copy to a_float/b_float),
+and the BIQUAD_DII, BIQUAD_TDI, BIQUAD_TDII, BIQUAD_LATT, BIQUAD_SVF and
+BIQUAD_ZDF kernels (float for s16p and fltp, double for s32p and dblp, mix and
+dry in the kernel type, integer clipping with truncation, and the per-channel
+4-value cache carried across frames as filter_channel() does without
+blocksize).
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2013 Paul B Mahol
+Copyright (c) 2006-2008 Rob Sykes <robs@users.sourceforge.net>
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation rounds to float32 after every operation of the
+float kernels, refuses the direct form I transform (di, the default), blocksize,
+channel subsets, a0=0, coefficient sets outside the second-order stability
+triangle (and, for zdf, an unstable state matrix), coefficients beyond the
+float range, non-finite input or output, timeline enable, expressions and
+runtime commands instead of approximating them, always writes a new owned
+output frame, declares the per-channel cache in reserve(), enforces explicit
+allocation limits and AbortSignal, and adds no FFmpeg runtime code.
+The original source and full notices remain in the pinned upstream submodule.
