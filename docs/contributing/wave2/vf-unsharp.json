@@ -1,0 +1,73 @@
+{
+  "capabilityId": "filter.unsharp",
+  "slug": "vf-unsharp",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/unsharp.ts",
+    "packages/avfilter/NOTICE-UNSHARP",
+    "tests/unit/video-unsharp.test.ts",
+    "tests/differential/video-unsharp.test.ts",
+    "docs/contributing/unsharp.md",
+    "docs/contributing/wave2/vf-unsharp.json",
+    "packages/avfilter/src/video-ops/registry.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/avfilter/src/video-ops/registry.ts", "lines": ["import {unsharpOperator} from './unsharp.js';", " unsharpOperator,"]}
+  ],
+  "tests": [
+    {"file": "tests/unit/video-unsharp.test.ts", "title": "parses the AVOption names, aliases and positional order with native defaults, integer expressions and truncated float amounts", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-unsharp.test.ts", "title": "refuses unsupported syntax, out-of-range values and native init and config failures at parse time", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-unsharp.test.ts", "title": "declares the native pix_fmts in declared order and refuses short frames and the alpha FSM path in geometry and validate", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-unsharp.test.ts", "title": "matches an independent binomial model with edge replication, clipping and copies into owned tight planes", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-unsharp.test.ts", "title": "rejects unsupported layouts, budgets, malformed storage, invalid settings and cancellation explicitly", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-unsharp.test.ts", "title": "plans unsharp on every path with its refusals before output and runtime commands refused", "passed": 1, "failed": 0},
+    {"file": "tests/unit/video-operator-registry.test.ts", "title": "(all 8 registration-driven tests, including the unsharp examples on all five paths)", "passed": 8, "failed": 0},
+    {"file": "tests/differential/video-unsharp.test.ts", "title": "runs against a reference built from commit 946fcce0 with --disable-x86asm", "passed": 1, "failed": 0},
+    {"file": "tests/differential/video-unsharp.test.ts", "title": "matches native unsharp through the linear, frame graph and replay APIs across formats, matrices, amounts, sizes and patterns", "passed": 1, "failed": 0, "counts": {"matched": 332, "refused": 240}},
+    {"file": "tests/differential/video-unsharp.test.ts", "title": "matches native unsharp rawvideo and framecrc bytes on every flagged CLI path with and without -ss and -t", "passed": 1, "failed": 0, "counts": {"matched": 3820, "refused": 4500}},
+    {"file": "tests/differential/video-unsharp.test.ts", "title": "agrees with native under default slice threads, -filter_threads 1 and 4 on frames tall enough for several slices", "passed": 1, "failed": 0, "counts": {"matched": 96}},
+    {"file": "tests/differential/video-unsharp.test.ts", "title": "fails like native for oversized and even matrices, out-of-range values and unknown options before opening outputs on every path", "passed": 1, "failed": 0, "counts": {"failures": 60}},
+    {"file": "tests/differential/video-unsharp.test.ts", "title": "refuses unwritten short frames and the unallocated yuva420p alpha path before opening outputs on every path", "passed": 1, "failed": 0, "counts": {"refused": 25}},
+    {"file": "tests/differential/video-unsharp.test.ts", "title": "negotiates every accepted source as native does and refuses picks without storage before output on every path", "passed": 1, "failed": 0, "counts": {"checks": 93}}
+  ],
+  "nativeComparisons": {
+    "count": 4337,
+    "breakdown": [
+      {"count": 332, "compares": "native -vf rawvideo bytes vs compileVideoFilterChain, compileVideoFilterGraph and createReplayVideoExecution (996 path comparisons); 4 formats x 11 sizes x 13 option sets, 3 frames (noise, ramps/edges, constant)"},
+      {"count": 3820, "compares": "native rawvideo and framecrc bytes vs the CLI frontend on linear, graph, stream, actor (timed producer) and timed (timed pull), with and without -ss/-t"},
+      {"count": 96, "compares": "native default threads vs -filter_threads 1 and 4 (all equal) vs EdgeFFmpeg linear and timed CLI on 9x64, 17x40, 6x33"},
+      {"count": 60, "compares": "error parity: scalebits, even-size, range, unknown-option and positional errors on all five paths; native status from os.constants.errno and diagnostic checked; no output opened here"},
+      {"count": 29, "compares": "per-source negotiation (nativeNegotiationOutcome): 17 native picks read from showinfo; 12 matched sources byte-exact on every path (48 checks) and 5 refused picks refused by name on every path and CLI backend (45 checks)"}
+    ],
+    "refusalsWithoutNative": 4765,
+    "nativeFlags": ["-cpuflags", "0"]
+  },
+  "unsupported": [
+    "enable= timeline, runtime commands and generic filter options such as threads",
+    "amount expressions (decimal literals only)",
+    "heights below 4*(luma_msize_y/2): native runs no slice job and returns an unwritten buffer (probed)",
+    "nonzero alpha amounts on yuva420p: native alpha FSM storage is never allocated and it crashes (probed SIGSEGV)",
+    "high-bit-depth formats and yuva422p, yuva444p, yuv410p, yuv411p, yuv440p, yuvj440p (no frame storage); gray picks yuvj444p and packed alpha picks yuva444p, both refused by name",
+    "no dedicated H.264/MP4 framecrc comparison (size unchanged)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "filter.unsharp.api", "file": "tests/differential/video-unsharp.test.ts", "name": "matches native unsharp through the linear, frame graph and replay APIs across formats, matrices, amounts, sizes and patterns", "modes": ["linear", "graph", "stream"], "scope": "13 option sets on yuv420p, yuv422p, yuv444p and yuva420p; rawvideo bytes"},
+    {"id": "filter.unsharp.cli", "file": "tests/differential/video-unsharp.test.ts", "name": "matches native unsharp rawvideo and framecrc bytes on every flagged CLI path with and without -ss and -t", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "rawvideo and framecrc with -ss/-t scopes on the four eight-bit formats"},
+    {"id": "filter.unsharp.threads", "file": "tests/differential/video-unsharp.test.ts", "name": "agrees with native under default slice threads, -filter_threads 1 and 4 on frames tall enough for several slices", "modes": ["linear", "timed"], "scope": "slice-thread independence"},
+    {"id": "filter.unsharp.refusals", "file": "tests/differential/video-unsharp.test.ts", "name": "fails like native for oversized and even matrices, out-of-range values and unknown options before opening outputs on every path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "option, scalebits and even-size errors"},
+    {"id": "filter.unsharp.unwritten", "file": "tests/differential/video-unsharp.test.ts", "name": "refuses unwritten short frames and the unallocated yuva420p alpha path before opening outputs on every path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "refusals where native output is unwritten or native crashes"},
+    {"id": "filter.unsharp.negotiation", "file": "tests/differential/video-unsharp.test.ts", "name": "negotiates every accepted source as native does and refuses picks without storage before output on every path", "modes": ["linear", "graph", "stream", "actor", "timed"], "scope": "per-source negotiation"},
+    {"id": "filter.unsharp.unit", "file": "tests/unit/video-unsharp.test.ts", "name": "rejects unsupported layouts, budgets, malformed storage, invalid settings and cancellation explicitly", "modes": ["unit"], "scope": "frame limits, strides, AbortSignal"}
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "No shared edits beyond the two registry lines. Sizes reuse packages/avfilter/src/activation/integer-option.ts.",
+    "Linux-gated float cases: none. The amount float is converted to an integer once at parse time; the kernel is integer and exact in JavaScript numbers.",
+    "The spec's '23x23 with tiny planes' is refused natively (scalebits 44 > 25), so it is covered as an error-parity case; 23x3 and 3x23 (scalebits 24) run on tiny planes instead.",
+    "Two refusals have no native output to compare: short frames (h < 4*(ly/2), native leaves the output unwritten) and nonzero alpha amounts on yuva420p (native SIGSEGV). Both were probed against the sandbox reference.",
+    "Environment: sandbox Node was v22; bootstrap requires Node 24, so /opt/node24 (v24.22.3) was used.",
+    "Setup durations: bootstrap (npm 10 s, submodule 8 s, reference build) 225 s total; baseline typecheck, lint, boundaries and the registry test 62 s, all green. The differential file runs in about 40 s on 4 vCPUs."
+  ]
+}

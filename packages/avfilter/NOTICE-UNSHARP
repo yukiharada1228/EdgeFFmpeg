@@ -1,0 +1,21 @@
+Scoped unsharp video filter
+
+The option table (luma/chroma/alpha msize_x, msize_y and amount with their
+lx/ly/la, cx/cy/ca and ax/ay/aa aliases), the pix_fmts list, set_filter_param
+(amount*65536.0, steps, scalebits, halfscale and the MAX_SCALEBITS check),
+the odd-size check of init_filter_param, the nb_threads computation of
+config_input, apply_unsharp's plane geometry and the eight-bit row and column
+finite-state-machine accumulation with edge replication of unsharp_slice_8 in
+src/video-ops/unsharp.ts follow libavfilter/vf_unsharp.c (unsharp_options,
+pix_fmts, set_filter_param, init, init_filter_param, config_input,
+apply_unsharp, DEF_UNSHARP_SLICE_FUNC, filter_frame).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Original copyright (c) 2002 Remi Guyomarch; port copyright (c) 2010 Daniel G.
+Taylor. Relicensed to the LGPL with permission from Remi Guyomarch.
+LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation for eight-bit planar formats, not the
+complete unsharp filter: timeline, runtime commands, amount expressions,
+frames too short for one native slice job and nonzero alpha amounts on
+formats with alpha are refused.
