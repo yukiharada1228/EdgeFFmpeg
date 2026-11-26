@@ -1,0 +1,15 @@
+Scoped framemd5 and framehash per-packet hash muxers
+
+The header and packet rows in src/hash/frame-hash-mux.ts follow
+libavformat/hashenc.c (framehash_init, framehash_write_header,
+framehash_write_packet, the framehash and framemd5 HASH_OPT and
+FORMAT_VERSION_OPT defaults) and libavformat/framehash.c
+(ff_framehash_write_header). Digests reuse src/hash/digests.ts (see
+NOTICE-HASH); packet regrouping reuses src/pcm-framing.ts.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2009 Reimar Döffinger, based on crcenc (c)2002 Fabrice Bellard (hashenc.c, framehash.c).
+LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation for one PCM audio stream: no extradata,
+no side data, no -hash or -format_version values other than the defaults.
