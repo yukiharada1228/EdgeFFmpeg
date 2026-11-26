@@ -1,0 +1,16 @@
+Scoped colorbalance video filter
+
+The option table (rs, gs, bs, rm, gm, bm, rh, gh, bh, pl), pix_fmts,
+get_component, hfun, preservel, the rgba_map byte offsets and the 8-bit slice
+functions color_balance8 and color_balance8_p (single-precision float per
+pixel, lrintf and av_clip_uint8) in src/video-ops/colorbalance.ts follow
+libavfilter/vf_colorbalance.c (colorbalance_options, pix_fmts, get_component,
+hfun, preservel, color_balance8, color_balance8_p, config_output,
+filter_frame).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2013 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete colorbalance filter:
+only the eight-bit formats with frame storage here, constant option values,
+no timeline and no runtime commands.
