@@ -1,0 +1,63 @@
+{
+  "capabilityId": "demuxer.msf",
+  "slug": "fmt-msf",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/msf.ts",
+    "packages/containers/NOTICE-MSF",
+    "docs/contributing/msf-support.md",
+    "tests/unit/msf.test.ts",
+    "tests/differential/msf.test.ts",
+    "docs/contributing/wave2/fmt-msf.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/containers/src/registry.ts", "line": "export {msf} from './msf.js';", "position": "between md5 and nistsphere (alphabetical)"}
+  ],
+  "tests": [
+    {"file": "tests/unit/msf.test.ts", "tests": 6, "titles": [
+      "parses the header with bounded reads and never reads the payload while opening",
+      "marks copy refusal exactly when the payload is not a whole number of 1024*channels-byte packets",
+      "refuses header values in native order with native statuses, and partial frames, short files and input seeks",
+      "checks the abort signal around every header read and during packets",
+      "probes exactly the 20 bytes msf_probe reads and registers a demux-only descriptor",
+      "demuxes through the PCM backend, refuses copy of a short tail and msf output before any output opens"
+    ], "passed": 6},
+    {"file": "tests/differential/msf.test.ts", "tests": 4, "passed": 4, "durationSeconds": 8, "titles": [
+      {"name": "matches native MSF decode framecrc, copy framecrc and raw, WAV, raw and AIFF for both codecs four layouts three rates and whole or short final packets", "inputs": 96, "compared": 432, "copyRefusals": 96},
+      {"name": "matches native MSF output -ss, -t and -frames:a timing with copy and decode, and declared -f msf", "compared": 504},
+      {"name": "matches native MSF unlabelled 3 and 6 channel layouts under -guess_layout_max 0 and 2, including AIFF where nothing is guessed", "compared": 24},
+      {"name": "refuses unsupported MSF codecs, invalid headers, partial frames and input seeks before any output and records native statuses", "refusals": 10, "nativeStatusesAsserted": 9, "extraChecks": 2}
+    ]},
+    {"file": "tests/unit/container-registry*.test.ts", "files": 3, "tests": 17, "passed": 17}
+  ],
+  "nativeComparisons": {"byteForByte": 960, "copyRefusalsWithNativeCorruptFlagChecked": 96, "refusalStatuses": 11, "total": 1067},
+  "unsupported": [
+    "codecs 3 (adpcm_psx), 4-6 (atrac3), 7 (mp3): refused, exit 1",
+    "other codec ids: refused with native AVERROR_PATCHWELCOME status 176",
+    "-c copy of a payload that is not whole 1024*channels-byte packets (native flags the last packet KEY|CORRUPT, F=0x3): refused via info.copyRefusal; decoding works",
+    "partial trailing sample frame: refused (native decodes with an error, exit 0)",
+    "input -ss > 0: refused",
+    "files shorter than 64 bytes: refused",
+    "more than 65535 channels: refused (shared raw PCM limit)",
+    "undetected inputs failing msf_probe (zero channels/rate): 'Unsupported audio container signature' (native 183 via .msf extension)",
+    "AIFF output of a guessed 3+ channel layout: native writes CHAN, shared PCM path does not (not refusable from a demuxer; not claimed, not compared)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "demuxer.msf.decode-copy", "file": "tests/differential/msf.test.ts", "name": "matches native MSF decode framecrc, copy framecrc and raw, WAV, raw and AIFF for both codecs four layouts three rates and whole or short final packets", "modes": ["decode", "copy"], "scope": "codecs 0/1, 1/2/3/6 channels, 32000/44100/48000 Hz, whole packets; short-tail copy refused with native F=0x3 checked"},
+    {"id": "demuxer.msf.timing", "file": "tests/differential/msf.test.ts", "name": "matches native MSF output -ss, -t and -frames:a timing with copy and decode, and declared -f msf", "modes": ["decode", "copy"], "scope": "output -ss/-t/-frames:a, detected and declared input"},
+    {"id": "demuxer.msf.layout", "file": "tests/differential/msf.test.ts", "name": "matches native MSF unlabelled 3 and 6 channel layouts under -guess_layout_max 0 and 2, including AIFF where nothing is guessed", "modes": ["decode", "copy"], "scope": "unlabelled channel layouts under -guess_layout_max"},
+    {"id": "demuxer.msf.refusals", "file": "tests/differential/msf.test.ts", "name": "refuses unsupported MSF codecs, invalid headers, partial frames and input seeks before any output and records native statuses", "modes": ["refusal"], "scope": "codecs 3/5/7/99, invalid channels and rate, partial frame, input seek, msf output"}
+  ],
+  "sharedEditsNeeded": [
+    "AIFF CHAN for guessed 3+ channel layouts of unlabelled inputs: a guessed mask for AIFF in packages/avformat/src/index.ts and a layout tag table in packages/containers/src/aiff.ts (same gap as epaf-support.md)"
+  ],
+  "notes": [
+    "Sandbox Node was 22.23.5; bootstrap requires Node 24, so Node v24.22.3 was installed from nodejs.org into /opt/node24 (about 15 s) and used for everything.",
+    "Setup durations: bootstrap (npm, submodule, reference) 4m03s; baseline typecheck+lint+boundaries 1m19s; baseline registry unit tests 4s (17/17).",
+    "The reference is a sandbox build (Ubuntu gcc 13.3.0), not the linux-x64 pin; tests assert commit 946fcce0 and --disable-x86asm from build-metadata.json and pin no digest.",
+    "No linux-gated cases: integer header arithmetic and byte copies only."
+  ]
+}

@@ -11,6 +11,7 @@ export {framecrc} from './formats/framecrc.js';
 export {hash} from './hash/hash-mux.js';
 export {ircam} from './ircam.js';
 export {md5} from './hash/hash-mux.js';
+export {msf} from './msf.js';
 export {nistsphere} from './nistsphere.js';
 export {pvf} from './pvf.js';
 export * from './formats/raw-pcm.js';

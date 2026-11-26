@@ -1,0 +1,10 @@
+Scoped Sony PS3 MSF header reader
+
+The probe, header fields, their checks and order, the codec ids, the 0x40 data
+offset and the 1024*channels-byte packet size in src/msf.ts follow
+libavformat/msf.c (msf_probe, msf_read_header, msf_read_packet).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2015 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete msf demuxer.
