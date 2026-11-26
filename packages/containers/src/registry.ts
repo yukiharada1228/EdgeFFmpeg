@@ -25,6 +25,7 @@ export {sds} from './sds.js';
 export {sln} from './sln.js';
 export {sol} from './sol.js';
 export {sdx} from './sdx.js';
+export {smjpeg} from './smjpeg.js';
 export {sox} from './sox.js';
 export {streamhash} from './hash/hash-mux.js';
 export {w64} from './formats/w64.js';

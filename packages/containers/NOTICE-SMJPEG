@@ -1,0 +1,16 @@
+Scoped Loki SDL MJPEG (SMJPEG) muxer, audio only
+
+The magic, chunk tags, header layout (_TXT, _SND, HEND), per-packet sndD
+chunks, trailer (DONE) and duration field in src/smjpeg.ts follow
+libavformat/smjpegenc.c (smjpeg_write_header, smjpeg_write_packet,
+smjpeg_write_trailer), smjpeg.h (SMJPEG_MAGIC and chunk tags) and
+smjpeg.c (ff_codec_smjpeg_audio_tags). The millisecond timestamps follow
+libavutil/mathematics.c (av_rescale_rnd, AV_ROUND_NEAR_INF).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2012 Paul B Mahol (smjpegenc.c);(c)2011-2012 Paul B Mahol
+(smjpeg.c, smjpeg.h);(c)2005-2012 Michael Niedermayer (mathematics.c).
+LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete smjpeg muxer: no
+video stream, no ADPCM audio and no demuxer.
