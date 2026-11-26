@@ -1,0 +1,84 @@
+{
+  "capabilityId": "filter.xstack",
+  "slug": "vf-xstack",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/video-ops/xstack.ts",
+    "packages/avfilter/src/video-xstack.ts",
+    "packages/avfilter/NOTICE-XSTACK",
+    "packages/avfilter/src/video-ops/registry.ts",
+    "tests/unit/video-xstack.test.ts",
+    "tests/differential/video-xstack.test.ts",
+    "docs/contributing/xstack.md",
+    "docs/contributing/wave2/vf-xstack.json"
+  ],
+  "sharedEdits": [
+    {"file": "packages/avfilter/src/video-ops/registry.ts", "change": "+1 import line (import {xstackOperator} from './xstack.js';) and +1 entry line ( xstackOperator,)"}
+  ],
+  "tests": [
+    {"file": "tests/unit/video-xstack.test.ts", "titles": [
+      "parses inputs, layout, grid, shortest and fill in shorthand order and refuses every unimplemented form",
+      "computes grid and layout geometry with native w<i>/h<i> sums and refuses mismatched rows, gaps, overlaps and out-of-plane chroma",
+      "copies each input into its own region, into owned tight planes without mutating padded inputs",
+      "refuses budgets, malformed storage, strides, timestamps and aborted signals",
+      "plans branch joins on the graph path with mixed sizes that tile exactly"
+    ], "pass": 5, "fail": 0},
+    {"file": "tests/differential/video-xstack.test.ts", "titles": [
+      "runs against the sandbox reference built from commit 946fcce0 with --disable-x86asm",
+      "matches native xstack rawvideo across formats, sizes, grids and layouts with distinct inputs on the graph path",
+      "matches native xstack CLI rawvideo and framecrc on the graph and stream paths, with mixed sizes, -ss, -t, unequal lengths and shortest",
+      "matches native xstack on the stream path through replay execution with distinct sources of unequal length and shortest",
+      "matches native xstack through the timed backend on the actor and timed paths in rawvideo and framecrc",
+      "agrees with native xstack under default threads and single-threaded filtergraphs for every accepted layout",
+      "refuses fill colours, layout with grid, gaps, overlaps, out-of-plane chroma and native EINVAL layouts before opening any output on every path",
+      "negotiates every source as native does on the join paths"
+    ], "pass": 8, "fail": 0, "note": "about 9 s with --maxWorkers=1 on the sandbox"},
+    {"file": "tests/unit/video-operator-registry.test.ts", "pass": 8, "fail": 0, "note": "unchanged; runs the five xstack examples on graph, stream, actor and timed and checks the linear rejection"},
+    {"file": "tests/unit/video-stack.test.ts", "pass": 9, "fail": 0, "note": "unchanged hstack/vstack kernel tests, still green"}
+  ],
+  "nativeComparisons": {
+    "count": 1262,
+    "details": [
+      "662 three-frame rawvideo matches on the graph path: 14 formats x 6 sizes x 12 equal-size layouts (default grid, 2x2/3x1/1x3 grids, w<i>/h<i>/+ layouts, reordered placements) with distinct inputs; the other 346 combinations are refused by our geometry (2 overlap layouts always, gaps and out-of-plane chroma for odd sizes) and not compared",
+      "168 CLI rawvideo/framecrc matches on the media backend (graph and stream): split grids, mixed sizes that tile exactly, unequal lengths 3/2/4, shortest=1, input -ss, output -t; 12 formats",
+      "36 replay-stream matches with unequal lengths and shortest 0/1, timestamps checked",
+      "60 timed-backend matches (producer = actor, pull = timed), rawvideo and framecrc, including mixed sizes and shortest",
+      "232 native default-threads vs -filter_threads 1 -filter_complex_threads 1 agreements over every accepted layout",
+      "48 refusal checks: 16 graphs x 3 backends, exit non-zero, no output opened; native statuses recorded",
+      "56 per-source negotiation checks on graph, stream, actor and timed"
+    ]
+  },
+  "unsupported": [
+    "fill other than none (native fills with ff_draw when the colour parses, otherwise silently ignores it)",
+    "overlapping layouts: native process_slice copies inputs on parallel slice jobs, so overlapping bytes are racy (measured 7 distinct outputs in 12 default-thread runs, 1 with -filter_complex_threads 1)",
+    "layouts leaving bytes uncovered (native output is uninitialised pool memory)",
+    "placements whose rounded-up chroma passes a plane's width or height (odd sizes with subsampled chroma; native writes into padding or past the plane)",
+    "more than 32 inputs, grid abbreviations or non-'x' separators, and the lenient layout forms native accepts (extra or empty items, extra _ parts, whitespace, trailing text)",
+    "enable= (native has no timeline support), runtime commands, and the linear path (join role)",
+    "negotiated formats without frame storage here (refused by name by the shared negotiators; no 8x8 source picks one)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "filter.xstack.kernel", "file": "tests/differential/video-xstack.test.ts", "name": "matches native xstack rawvideo across formats, sizes, grids and layouts with distinct inputs on the graph path", "modes": ["rawvideo"], "scope": "14 formats, 6 sizes, 12 equal-size layouts, exact tilings"},
+    {"id": "filter.xstack.cli", "file": "tests/differential/video-xstack.test.ts", "name": "matches native xstack CLI rawvideo and framecrc on the graph and stream paths, with mixed sizes, -ss, -t, unequal lengths and shortest", "modes": ["rawvideo", "framecrc"], "scope": "CLI graph and stream, split and multi-input, mixed sizes"},
+    {"id": "filter.xstack.stream", "file": "tests/differential/video-xstack.test.ts", "name": "matches native xstack on the stream path through replay execution with distinct sources of unequal length and shortest", "modes": ["rawvideo"], "scope": "replay stream synchronization"},
+    {"id": "filter.xstack.timed", "file": "tests/differential/video-xstack.test.ts", "name": "matches native xstack through the timed backend on the actor and timed paths in rawvideo and framecrc", "modes": ["rawvideo", "framecrc"], "scope": "actor (producer) and timed (pull)"},
+    {"id": "filter.xstack.threads", "file": "tests/differential/video-xstack.test.ts", "name": "agrees with native xstack under default threads and single-threaded filtergraphs for every accepted layout", "modes": ["rawvideo"], "scope": "native thread independence of accepted layouts"},
+    {"id": "filter.xstack.refusals", "file": "tests/differential/video-xstack.test.ts", "name": "refuses fill colours, layout with grid, gaps, overlaps, out-of-plane chroma and native EINVAL layouts before opening any output on every path", "modes": ["exit-status"], "scope": "fill, layout+grid, gaps, overlaps, chroma bounds, grid mismatches, references, framesync options, enable"},
+    {"id": "filter.xstack.negotiation", "file": "tests/differential/video-xstack.test.ts", "name": "negotiates every source as native does on the join paths", "modes": ["rawvideo"], "scope": "14 sources on graph, stream, actor and timed"},
+    {"id": "filter.xstack.unit", "file": "tests/unit/video-xstack.test.ts", "name": "refuses budgets, malformed storage, strides, timestamps and aborted signals", "modes": ["unit"], "scope": "limits and refusals"}
+  ],
+  "sharedEditsNeeded": [
+    "tests/helpers/video-negotiation-cases.ts: it always runs a linear chain, which a join cannot; a join-aware mode would let joins share it. This branch keeps its own join form in its differential file, as maskedmerge does."
+  ],
+  "notes": [
+    "Spec deviation: the scope says overlaps are kept with later inputs overwriting earlier ones. That matches native only single-threaded (622/622 cases including three overlap layouts with -filter_complex_threads 1); with default threads native overlap output is nondeterministic, so overlaps are refused and [THREADS] holds for every accepted case.",
+    "Out-of-plane chroma placements are refused rather than clipped (hstack/vstack clip them): whether native's write lands in invisible padding or in the next row depends on the frame pool's line alignment.",
+    "-filter_threads only affects simple filtergraphs; the threads test also passes -filter_complex_threads 1, which is the option that governs -filter_complex.",
+    "Native exit statuses: EINVAL cases use 256-os.constants.errno.EINVAL; enable= exits 176 (AVERROR_PATCHWELCOME) and unknown framesync options exit 8 (AVERROR_OPTION_NOT_FOUND), which are not errno values. fill=red, fill=bogus, gaps, overlaps and out-of-plane chroma exit 0 natively and are refused here only.",
+    "The sandbox Node was 22.23.5 and bootstrap requires Node 24; the preinstalled /opt/node24 (v24.22.3) was used for everything.",
+    "Reference: an unpinned sandbox build (--allow-unpinned-reference); its ffmpeg sha256 differs from the linux-x64 pin; the tests check only the commit and --disable-x86asm.",
+    "Setup durations: bootstrap 2m49s (npm 8.0s, submodule 5.5s, reference build 154s); baseline typecheck + lint + boundaries + registry test 51s, all green. The baseline ran while the new kernel file already existed untracked, before the registry line was added."
+  ]
+}

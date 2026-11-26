@@ -1,0 +1,19 @@
+Scoped xstack video filter
+
+The option table (inputs, layout, grid, shortest, fill), the init checks
+(layout with grid, the inputs=2 default grid, grid input count), the
+query_formats list without fill, the grid and layout placement of
+config_output (w<i>/h<i>/decimal sums, av_image_fill_linesizes x offsets,
+AV_CEIL_RSHIFT y offsets, bounding-box output size), the framesync
+configuration (sync=1, EXT_STOP before, EXT_INFINITY or EXT_STOP after) and
+the plane copies of process_frame/process_slice in src/video-xstack.ts and
+src/video-ops/xstack.ts follow libavfilter/vf_stack.c (xstack_options, init,
+query_formats, config_output, process_frame, process_slice).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2015 Paul B. Mahol
+LGPL-2.1-or-later. See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete xstack filter:
+fill=none only, a strict layout grammar, exact tilings only (no gaps, no
+overlaps, no chroma written outside a plane), at most 32 inputs, no timeline
+and no runtime commands.
