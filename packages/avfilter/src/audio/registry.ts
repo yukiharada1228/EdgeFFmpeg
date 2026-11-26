@@ -24,3 +24,4 @@ export {haas} from './haas.js';
 export {extrastereo} from './extrastereo.js';
 export {stereowiden} from './stereowiden.js';
 export {aecho} from './aecho.js';
+export {apulsator} from './apulsator.js';

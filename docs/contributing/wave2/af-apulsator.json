@@ -1,0 +1,182 @@
+{
+  "capabilityId": "filter.apulsator",
+  "slug": "af-apulsator",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/audio/apulsator.ts",
+    "packages/avfilter/NOTICE-APULSATOR",
+    "tests/unit/apulsator.test.ts",
+    "tests/differential/apulsator.test.ts",
+    "docs/contributing/apulsator.md",
+    "docs/contributing/wave2/af-apulsator.json",
+    "packages/avfilter/src/audio/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/audio/registry.ts",
+      "change": "+1 line: export {apulsator} from './apulsator.js';"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/apulsator.test.ts",
+      "title": "parses named, shorthand and constant options with native ranges and refuses everything else with exact messages",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/apulsator.test.ts",
+      "title": "negotiates packed double for every input format, keeps counts and declares the two LFO phases as state",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/apulsator.test.ts",
+      "title": "refuses mono, multichannel and masked layouts and requires a configured format for empty input",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/apulsator.test.ts",
+      "title": "matches a direct C transcription across modes, timings and options, with identical output for 1/7/29/50-sample splits and untouched inputs",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/apulsator.test.ts",
+      "title": "converts integer and planar input to packed double and enforces allocation, format, finiteness and cancellation limits",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/apulsator.test.ts",
+      "title": "runs against the 946fcce0 reference built with --disable-x86asm",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/apulsator.test.ts",
+      "title": "matches native bytes for every non-sine mode, bpm/ms/hz timing, offsets and widths with amount 0 and 1 and level edges",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/apulsator.test.ts",
+      "title": "matches native bytes for every non-sine mode and timing with amount 0.6 on linux-x64",
+      "passed": 1,
+      "failed": 0,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/apulsator.test.ts",
+      "title": "matches native bytes in composed chains, WAV output and output time selection, independent of asetnsamples grouping",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/apulsator.test.ts",
+      "title": "fails explicitly before output for sine, non-stereo input, native option errors and unimplemented forms",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/audio-filter-registry.test.ts + tests/unit/audio-filter-registry-extension.test.ts + tests/unit/audio-filter-registry-contract.test.ts",
+      "title": "(all, unchanged)",
+      "passed": 26,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 3578,
+    "refusalStatuses": 28,
+    "details": [
+      "2220 byte comparisons on every platform: 4 modes x 6 timings (bpm 30/137.5, ms 10/777, hz 0.01/100) x 3 offset pairs x 3 widths x 5 raw sources (u8 8000, s16le 44100, s32le 48000, f32le 8000, f64le 44100) for amount 0 and 1, plus 60 power-of-two level_in/level_out edge cases; outputs rotate over raw f64le, raw s16le, s16 framecrc and f64 framecrc; -cpuflags 0",
+      "1128 byte comparisons on linux-x64 only: the same 1080-case sweep with amount 0.6, plus 4 chains with amount 0.6 or non-power-of-two levels x 3 sources x 4 outputs",
+      "230 byte comparisons on every platform: 8 chains (alone, shorthand, asetnsamples=n=7:p=0 before/after/around, volume=0.5 and apad=pad_len=9 on both sides, two apulsators) x 4 sources (s16le, f32le, u8, WAV) x 7 outputs (4 plain, -ss/-t, -ss, -frames:a 2), 4 whole WAV files (s16 and f64), and asetnsamples n=7/n=8 groupings (native gives identical bytes for both)",
+      "28 native exit statuses: sine in 4 forms, mono and 3-channel input (native 0, remixed), 15 out-of-range values (256-ERANGE from os.constants.errno), enable (176, AVERROR_PATCHWELCOME), unknown option (8), positional after named, unknown mode and too many values (256-EINVAL), fractional ms and an expression (native 0)"
+    ]
+  },
+  "unsupported": [
+    "mode=sine (the default; libm sin()), so bare apulsator is refused",
+    "timeline enable and runtime commands",
+    "option expressions, suffixes, quoting and fractional values for the integer options ms, mode and timing",
+    "mono, multichannel and non-default WAV/W64 masks (native remixes implicitly)",
+    "FLAC input (flacInput not declared; refused before decoding)",
+    "non-finite input samples and NaN output from overflow",
+    "automatic sample-rate conversion inside the chain",
+    "byte-exact claims off linux-x64 for amount strictly between 0 and 1"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.apulsator.syntax",
+      "file": "tests/unit/apulsator.test.ts",
+      "name": "parses named, shorthand and constant options with native ranges and refuses everything else with exact messages",
+      "modes": [
+        "unit"
+      ],
+      "scope": "option parsing, native ranges, named constants and exact refusal messages"
+    },
+    {
+      "id": "filter.apulsator.unit",
+      "file": "tests/unit/apulsator.test.ts",
+      "name": "matches a direct C transcription across modes, timings and options, with identical output for 1/7/29/50-sample splits and untouched inputs",
+      "modes": [
+        "unit"
+      ],
+      "scope": "stream arithmetic against the C loop, persistent LFO phases across 1/7/29/50-sample splits, ownership"
+    },
+    {
+      "id": "filter.apulsator.native",
+      "file": "tests/differential/apulsator.test.ts",
+      "name": "matches native bytes for every non-sine mode, bpm/ms/hz timing, offsets and widths with amount 0 and 1 and level edges",
+      "modes": [
+        "differential"
+      ],
+      "scope": "byte equality for every non-sine mode and timing with exact products (amount 0 and 1, power-of-two levels)"
+    },
+    {
+      "id": "filter.apulsator.native-float",
+      "file": "tests/differential/apulsator.test.ts",
+      "name": "matches native bytes for every non-sine mode and timing with amount 0.6 on linux-x64",
+      "modes": [
+        "differential"
+      ],
+      "scope": "byte equality with inexact products (amount 0.6)",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.apulsator.chains",
+      "file": "tests/differential/apulsator.test.ts",
+      "name": "matches native bytes in composed chains, WAV output and output time selection, independent of asetnsamples grouping",
+      "modes": [
+        "differential"
+      ],
+      "scope": "composed chains, WAV output, output -ss/-t/-frames:a and asetnsamples grouping"
+    },
+    {
+      "id": "filter.apulsator.refusals",
+      "file": "tests/differential/apulsator.test.ts",
+      "name": "fails explicitly before output for sine, non-stereo input, native option errors and unimplemented forms",
+      "modes": [
+        "differential"
+      ],
+      "scope": "explicit refusals before output with native exit statuses"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Setup durations: Node 24 fetched via npx node@24 (24.22.3; sandbox Node was 22.23.5 and bootstrap requires 24+), ~10 s; bootstrap --only npm,submodule,reference --allow-unpinned-reference 210 s (npm 7.5 s, submodule 6.7 s, reference build ~196 s); baseline typecheck+lint+boundaries+registry tests 69 s, all passing.",
+    "The sandbox-built reference sha256 matches the pinned linux-x64 artifact recorded in wave 1 (ac302e4d...), though the tests never pin it.",
+    "Capabilities declare allocatesFrames=true and every other flag false as specified; the chain derives reframes=true for the stream step (asserted in the unit test).",
+    "Gating deviation (precaution, no measured macOS difference): the spec lists square-mode cases as platform-independent, but with amount in (0,1) the final procL + inL*(1-amount) still adds two inexact products, so every amount=0.6 case (square included) is linux-x64 only. amount 0 and 1 cases of every mode run on both platforms.",
+    "Differential file runs in about 45 s on this sandbox with --maxWorkers=1; unit file about 6 s.",
+    "volume=0.5 before apulsator negotiates flt for volume and dbl for apulsator, matching native bytes.",
+    "No shared edits beyond the registry line were needed."
+  ]
+}
