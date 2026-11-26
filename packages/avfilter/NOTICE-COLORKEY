@@ -1,0 +1,18 @@
+Scoped colorkey and colorhold video filters
+
+The option tables, the shared pixel_fmts list, the eight-bit key distance and
+soft blend arithmetic, the alpha write and the gray hold rounding in
+src/video-colorkey.ts, src/video-ops/colorkey.ts and src/video-ops/colorhold.ts
+follow libavfilter/vf_colorkey.c (colorkey_options, colorhold_options,
+pixel_fmts, do_colorkey_pixel, COLORKEY_SLICE, COLORHOLD_SLICE, config_output,
+filter_frame). The color option is parsed by the shared av_parse_color port
+(@edge-ffmpeg/avutil parseColor).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2015 Timo Rothenpieler <timo@rothenpieler.org>
+LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete colorkey and
+colorhold filters: only the four packed eight-bit RGBA orders run here
+(rgba64 and bgra64 are refused), decimal similarity and blend values only,
+no timeline and no runtime commands.
