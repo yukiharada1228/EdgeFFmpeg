@@ -1,0 +1,17 @@
+Scoped chromakey and chromahold YUV colour keying
+
+The option tables, the chromakey_fmts and hold_pixel_fmts negotiation lists, the
+RGB_TO_U/RGB_TO_V key conversion, the one-slice 3x3 chroma neighbourhood alpha and the
+chroma hold in src/video-chromakey.ts, src/video-ops/chromakey.ts and
+src/video-ops/chromahold.ts follow libavfilter/vf_chromakey.c (do_chromakey_pixel,
+get_pixel_uv, do_chromakey_slice, do_chromahold_slice, filter_frame, config_output,
+config_input, chromakey_options, chromahold_options, chromakey_fmts, hold_pixel_fmts),
+with the AV_OPT_TYPE_FLOAT and AV_OPT_TYPE_BOOL range checks of libavutil/opt.c and the
+generic threads option of libavfilter/avfilter.c (ff_filter_get_nb_threads).
+Colours are parsed by parseColor in @edge-ffmpeg/avutil (av_parse_color).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2015 Timo Rothenpieler <timo@rothenpieler.org>. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation of the eight-bit paths, not the complete
+chromakey or chromahold filter.
