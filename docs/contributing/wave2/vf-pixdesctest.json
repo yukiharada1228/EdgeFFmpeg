@@ -1,0 +1,236 @@
+{
+ "capabilityId": "filter.pixdesctest",
+ "slug": "vf-pixdesctest",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/pixdesctest.ts",
+  "packages/avfilter/NOTICE-PIXDESCTEST",
+  "tests/unit/video-pixdesctest.test.ts",
+  "tests/differential/video-pixdesctest.test.ts",
+  "docs/contributing/pixdesctest.md",
+  "docs/contributing/wave2/vf-pixdesctest.json",
+  "packages/avfilter/src/video-ops/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {pixdesctestOperator} from './pixdesctest.js';",
+    " pixdesctestOperator,"
+   ]
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-pixdesctest.test.ts",
+   "title": "parses pixdesctest as an option-free identity operator over the whole negotiation table on every path",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-pixdesctest.test.ts",
+   "title": "refuses every pixdesctest option and enable= with VideoFilterParseError before planning on every path",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-pixdesctest.test.ts",
+   "title": "forwards the frame unchanged on the linear, graph and replay paths within budgets and signals",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-pixdesctest.test.ts",
+   "title": "forwards the frame unchanged through activation actors and the timed executor and refuses runtime commands",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-pixdesctest.test.ts",
+   "title": "matches native -vf pixdesctest chains across all 14 formats, sizes and timing scopes as rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-pixdesctest.test.ts",
+   "title": "matches native -filter_complex pixdesctest split branches through the media and timed backends as rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-pixdesctest.test.ts",
+   "title": "matches native pixdesctest frame by frame through replay streams and activation actors across all 14 formats and sizes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-pixdesctest.test.ts",
+   "title": "negotiates every source as native does, keeping its own format through pixdesctest on every path",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-pixdesctest.test.ts",
+   "title": "refuses pixdesctest options before opening any output, with native status for pixdesctest=1",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "title": "(whole file, unedited)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 4279,
+  "details": [
+   {
+    "test": "matches native -vf pixdesctest chains across all 14 formats, sizes and timing scopes as rawvideo and framecrc",
+    "count": 1512,
+    "compares": "exact rawvideo and framecrc bytes of the media backend CLI vs native over 14 formats x 6 sizes x 3 chains x 3 time scopes x 2 muxers; plus 84 checks that native -vf pixdesctest rawvideo equals the input"
+   },
+   {
+    "test": "matches native -filter_complex pixdesctest split branches through the media and timed backends as rawvideo and framecrc",
+    "count": 2016,
+    "compares": "672 native -filter_complex runs, each compared with the media backend (graph), timed producer scheduler (actor) and timed pull scheduler (timed): 4032 exact rawvideo/framecrc outputs"
+   },
+   {
+    "test": "matches native pixdesctest frame by frame through replay streams and activation actors across all 14 formats and sizes",
+    "count": 672,
+    "compares": "336 native runs: replay output planes and pts (stream) and activation actor planes (actor) vs native rawvideo"
+   },
+   {
+    "test": "negotiates every source as native does, keeping its own format through pixdesctest on every path",
+    "count": 73,
+    "compares": "nativeNegotiationOutcome over 17 sources: native showinfo pick and rawvideo bytes vs every path; every source keeps its own format, none refused"
+   },
+   {
+    "test": "refuses pixdesctest options before opening any output, with native status for pixdesctest=1",
+    "count": 6,
+    "compares": "native exit statuses pinned (pixdesctest=1 EINVAL host value, enable= 176, a=b 8, threads=1 0); 18 EdgeFFmpeg refusals with status 1 and no output opened"
+   }
+  ]
+ },
+ "unsupported": [
+  "every option, including enable= (native refuses: AVERROR_PATCHWELCOME) and the generic threads option (native accepts; refused here instead of being ignored)",
+  "runtime commands (enable answers AVERROR_PATCHWELCOME, all others ENOSYS, as native)",
+  "pal8, padded and bit-packed layouts (rgb0, rgb555le, monob, ...), hwaccel formats and formats outside the shared 14-entry negotiation table: refused by the shared negotiators by name",
+  "EdgeFFmpeg exits with status 1 for option refusals where native exits 234/176/8"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.pixdesctest.unit.parse",
+   "file": "tests/unit/video-pixdesctest.test.ts",
+   "name": "parses pixdesctest as an option-free identity operator over the whole negotiation table on every path",
+   "modes": [
+    "linear",
+    "graph"
+   ],
+   "scope": "option-free identity descriptor, no conversion stage for any of the 14 table formats, refusal of pal8/rgb0/rgb555le/monob"
+  },
+  {
+   "id": "filter.pixdesctest.unit.refusal",
+   "file": "tests/unit/video-pixdesctest.test.ts",
+   "name": "refuses every pixdesctest option and enable= with VideoFilterParseError before planning on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "VideoFilterParseError for options and enable= before planning"
+  },
+  {
+   "id": "filter.pixdesctest.unit.scoped-forward",
+   "file": "tests/unit/video-pixdesctest.test.ts",
+   "name": "forwards the frame unchanged on the linear, graph and replay paths within budgets and signals",
+   "modes": [
+    "linear",
+    "graph",
+    "stream"
+   ],
+   "scope": "unchanged forwarding, maxFrameBytes, AbortSignal, frame-shape mismatch, padded and malformed strides, unmutated input"
+  },
+  {
+   "id": "filter.pixdesctest.unit.timed-forward",
+   "file": "tests/unit/video-pixdesctest.test.ts",
+   "name": "forwards the frame unchanged through activation actors and the timed executor and refuses runtime commands",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "unchanged forwarding and native runtime command codes"
+  },
+  {
+   "id": "filter.pixdesctest.differential.linear",
+   "file": "tests/differential/video-pixdesctest.test.ts",
+   "name": "matches native -vf pixdesctest chains across all 14 formats, sizes and timing scopes as rawvideo and framecrc",
+   "modes": [
+    "linear"
+   ],
+   "scope": "-vf pixdesctest, pixdesctest,hflip and format=nv12,pixdesctest over all 14 rawvideo formats, 1x1/2x2/5x3/7x5/8x6/17x9, 3 frames, three -ss/-t scopes, rawvideo and framecrc"
+  },
+  {
+   "id": "filter.pixdesctest.differential.graph",
+   "file": "tests/differential/video-pixdesctest.test.ts",
+   "name": "matches native -filter_complex pixdesctest split branches through the media and timed backends as rawvideo and framecrc",
+   "modes": [
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "two split -filter_complex graphs, all 14 formats and six sizes, media, timed producer and timed pull backends, rawvideo and framecrc, with and without -ss/-frames:v"
+  },
+  {
+   "id": "filter.pixdesctest.differential.stream",
+   "file": "tests/differential/video-pixdesctest.test.ts",
+   "name": "matches native pixdesctest frame by frame through replay streams and activation actors across all 14 formats and sizes",
+   "modes": [
+    "stream",
+    "actor"
+   ],
+   "scope": "createReplayVideoExecution and createFrameActors over four chains, all 14 formats and six sizes, rawvideo bytes and pts"
+  },
+  {
+   "id": "filter.pixdesctest.differential.negotiation",
+   "file": "tests/differential/video-pixdesctest.test.ts",
+   "name": "negotiates every source as native does, keeping its own format through pixdesctest on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "per-source negotiation on tests/helpers/video-negotiation-cases.ts: 17 sources keep their own format"
+  },
+  {
+   "id": "filter.pixdesctest.differential.refusal",
+   "file": "tests/differential/video-pixdesctest.test.ts",
+   "name": "refuses pixdesctest options before opening any output, with native status for pixdesctest=1",
+   "modes": [
+    "linear",
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "option and enable= refusal before any output is opened on the media and timed backends, native statuses pinned"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Identity role with no frame function and no formats(), like copy: native has no query_formats, so every source keeps its own format (17 negotiation sources matched, none refused).",
+  "The descriptor round trip is the identity on the 14 storage formats: 84 checks that native rawvideo equals the input at all six sizes, consistent with the macOS md5 probe in the spec.",
+  "Registry examples: pixdesctest, pixdesctest,hflip, format=nv12,pixdesctest; run on all five paths by the unedited registry test.",
+  "No Linux-gated cases: byte copy only; the implicit format=nv12 conversion runs with -cpuflags 0 natively and scalar arithmetic here.",
+  "Native statuses: EINVAL is read from os.constants.errno on the host for pixdesctest=1; the other refusal statuses are FFERRTAG low bytes, not errno.",
+  "Identity forwards the same frame object, so stride or storage defects are detected by the next materializing operator, not by pixdesctest; unit-tested via pixdesctest,hflip.",
+  "Reference built in the sandbox with --allow-unpinned-reference; sha differs from the linux-x64 pin (5e43da9ad1ee) as expected for a different compiler; tests assert commit 946fcce0 and --disable-x86asm only.",
+  "Environment: sandbox default Node 22.23.5 was rejected by bootstrap; used /opt/node24 (v24.22.3). 4 vCPUs.",
+  "Setup durations: bootstrap 235s (npm 8.5s, submodule 8.6s, reference 218s); baseline typecheck+lint+boundaries+registry test 75s; differential file 25s with --maxWorkers=1; unit+registry 1.2s."
+ ]
+}

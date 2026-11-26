@@ -1,0 +1,14 @@
+Scoped pixdesctest video filter
+
+The pixdesctest descriptor in src/video-ops/pixdesctest.ts follows
+libavfilter/vf_pixdesctest.c (config_props, filter_frame and the
+ff_vf_pixdesctest registration, which has no query_formats): every component
+is read and written back through the pixel descriptor into a fresh buffer, so
+for the storage formats of the negotiation table frames reach the output unchanged.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2009 Stefano Sabatini. LGPL-2.1-or-later.
+See ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete pixdesctest filter: it refuses
+every option, including enable= and the generic threads option, runtime commands, and
+every format without frame storage here (pal8 and padded layouts).
