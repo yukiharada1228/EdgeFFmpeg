@@ -1,0 +1,270 @@
+{
+ "capabilityId": "filter.flanger",
+ "slug": "af-flanger",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/audio/flanger.ts",
+  "packages/avfilter/NOTICE-FLANGER",
+  "tests/unit/flanger.test.ts",
+  "tests/differential/flanger.test.ts",
+  "docs/contributing/flanger.md",
+  "docs/contributing/wave2/af-flanger.json",
+  "packages/avfilter/src/audio/registry.ts"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/audio/registry.ts",
+   "edit": "+1 line: export {flanger} from './flanger.js';"
+  }
+ ],
+ "tests": [
+  {
+   "file": "tests/differential/flanger.test.ts",
+   "name": "matches native framecrc across sources, channel counts, rates and option sweeps into source and f64 outputs",
+   "passed": 1,
+   "failed": 0,
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "file": "tests/differential/flanger.test.ts",
+   "name": "matches native composed chains, frame grouping and output -ss/-t/-frames:a",
+   "passed": 1,
+   "failed": 0,
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "file": "tests/differential/flanger.test.ts",
+   "name": "writes native-identical WAV and raw files from WAV and raw inputs, with output time selection",
+   "passed": 1,
+   "failed": 0,
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "file": "tests/differential/flanger.test.ts",
+   "name": "matches native exactly where width=0 leaves the input unchanged, on every platform",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/flanger.test.ts",
+   "name": "fails explicitly before output where native fails, and for accepted forms that remain unimplemented",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/flanger.test.ts",
+   "name": "refuses flanger state above the buffer budget before opening output",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/flanger.test.ts",
+   "name": "parses triangular shapes, positional and named options, the last value and native ranges",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/flanger.test.ts",
+   "name": "refuses the sinusoidal default, native range errors, enable and unimplemented forms with exact messages",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/flanger.test.ts",
+   "name": "transcribes init and config_input scaling, the triangular LFO table and the LFO-length constraint",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/flanger.test.ts",
+   "name": "negotiates pinned dblp from every input format and keeps counts, packets and reservations",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/flanger.test.ts",
+   "name": "matches a transcription of the C loop for every option family, with identical output for 1/7/29/50-sample splits and owned outputs",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/flanger.test.ts",
+   "name": "enforces allocation, state, format and cancellation limits",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/audio-filter-registry.test.ts",
+   "name": "(whole file)",
+   "passed": 11,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/audio-filter-registry-extension.test.ts",
+   "name": "(whole file)",
+   "passed": 12,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/audio-filter-registry-contract.test.ts",
+   "name": "(whole file)",
+   "passed": 3,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 747,
+  "byteComparisons": 724,
+  "statusComparisons": 23,
+  "linuxGatedByteComparisons": 680,
+  "allPlatformByteComparisons": 44,
+  "compares": "CLI output bytes against .build/reference/ffmpeg run at test time (commit 946fcce0, --disable-x86asm asserted from build-metadata.json): 432 sweep framecrc, 168 composed/time-selection framecrc, 40 frame-grouping f64le, 40 WAV/raw files, 44 width=0 and empty-input framecrc on every platform; 23 refusals against native exit status"
+ },
+ "unsupported": [
+  "shape=sinusoidal (the native default, so bare flanger) - refused: needs libm sin()",
+  "Integer forms of shape/interp constants - refused",
+  "Option expressions, SI suffixes, hexadecimal, inf/nan and min/max/default names - refused",
+  "Timeline enable - refused (native refuses too)",
+  "FLAC input - refused before decoding",
+  "Automatic sample-rate conversion around flanger - refused",
+  "LFO length < 1 sample, >= 2^30, or channels*lfo_length > INT_MAX - refused before output",
+  "AIFF/AU output and non-linux/x64 double arithmetic (except width=0) - no native evidence"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "filter.flanger.framecrc",
+   "file": "tests/differential/flanger.test.ts",
+   "name": "matches native framecrc across sources, channel counts, rates and option sweeps into source and f64 outputs",
+   "modes": [
+    "bit-exact-pcm"
+   ],
+   "scope": "framecrc of u8/s16/s32/f32/f64 raw sources, 1-3 channels, 8000/44100 Hz, eight option sets sweeping every option and both interpolations, source codec and f64 outputs (432 comparisons)",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.flanger.chains",
+   "file": "tests/differential/flanger.test.ts",
+   "name": "matches native composed chains, frame grouping and output -ss/-t/-frames:a",
+   "modes": [
+    "bit-exact-pcm"
+   ],
+   "scope": "six composed chains (asetnsamples=7 and asetnsamples=n=29:p=0 before, volume after, apad before/after) under output -ss/-t/-frames:a, s16/f64 mono/stereo (168), plus 40 frame-grouping comparisons with asetnsamples=n=1|7|29|50:p=0",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.flanger.files",
+   "file": "tests/differential/flanger.test.ts",
+   "name": "writes native-identical WAV and raw files from WAV and raw inputs, with output time selection",
+   "modes": [
+    "bit-exact-pcm"
+   ],
+   "scope": "WAV and raw outputs from raw and WAV inputs in all five PCM formats, with and without output -ss/-t (40)",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "filter.flanger.dry",
+   "file": "tests/differential/flanger.test.ts",
+   "name": "matches native exactly where width=0 leaves the input unchanged, on every platform",
+   "modes": [
+    "bit-exact-pcm"
+   ],
+   "scope": "width=0 (output equals input under any contraction) over five formats, 1/3 channels, with and without -t, plus 4 configured empty inputs (44)"
+  },
+  {
+   "id": "filter.flanger.refusals",
+   "file": "tests/differential/flanger.test.ts",
+   "name": "fails explicitly before output where native fails, and for accepted forms that remain unimplemented",
+   "modes": [
+    "diagnostic"
+   ],
+   "scope": "native exit status for 22 option forms (8 natively accepted but unimplemented, 14 native errors including enable=) and rate conversion; no output file created"
+  },
+  {
+   "id": "filter.flanger.budget",
+   "file": "tests/differential/flanger.test.ts",
+   "name": "refuses flanger state above the buffer budget before opening output",
+   "modes": [
+    "runtime"
+   ],
+   "scope": "PCM plan refuses a 1764000-byte LFO table above maxBufferBytes with resource-budget before output"
+  },
+  {
+   "id": "filter.flanger.unit.syntax",
+   "file": "tests/unit/flanger.test.ts",
+   "name": "parses triangular shapes, positional and named options, the last value and native ranges",
+   "modes": [
+    "semantic"
+   ],
+   "scope": "flanger option syntax, positional/named order, last-wins"
+  },
+  {
+   "id": "filter.flanger.unit.refusals",
+   "file": "tests/unit/flanger.test.ts",
+   "name": "refuses the sinusoidal default, native range errors, enable and unimplemented forms with exact messages",
+   "modes": [
+    "diagnostic"
+   ],
+   "scope": "exact refusal messages for native errors, the sinusoidal default, enable and unimplemented forms"
+  },
+  {
+   "id": "filter.flanger.unit.plan",
+   "file": "tests/unit/flanger.test.ts",
+   "name": "transcribes init and config_input scaling, the triangular LFO table and the LFO-length constraint",
+   "modes": [
+    "numerical"
+   ],
+   "scope": "init/config_input values, triangular LFO table with rint half-even, LFO-length and channel-phase constraints"
+  },
+  {
+   "id": "filter.flanger.unit.planning",
+   "file": "tests/unit/flanger.test.ts",
+   "name": "negotiates pinned dblp from every input format and keeps counts, packets and reservations",
+   "modes": [
+    "api-contract"
+   ],
+   "scope": "dblp negotiation for every input format, requiresScalarRounding, capabilities, planSamples/packetSections/plannedReservations/reservations"
+  },
+  {
+   "id": "filter.flanger.unit.transcription",
+   "file": "tests/unit/flanger.test.ts",
+   "name": "matches a transcription of the C loop for every option family, with identical output for 1/7/29/50-sample splits and owned outputs",
+   "modes": [
+    "numerical"
+   ],
+   "scope": "filter_frame transcription over seven option sets, 1/3 channels, whole and 1/7/29/50-sample splits; ownership; integer input conversion"
+  },
+  {
+   "id": "filter.flanger.unit.limits",
+   "file": "tests/unit/flanger.test.ts",
+   "name": "enforces allocation, state, format and cancellation limits",
+   "modes": [
+    "runtime"
+   ],
+   "scope": "state and frame allocation limits, stable format, invalid frames and AbortSignal"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "No shared edit beyond the registry line was needed.",
+  "Per spec registry notes: formats() is the native array [\"dblp\"]; no negotiate/nativeFormats/flacInput declared.",
+  "The linux-x64 gate on the double-arithmetic cases is a precaution from the determinism notes (macOS FMA contraction); no macOS difference was measured in this sandbox. width=0 cases are exact under contraction and run everywhere.",
+  "Frame-grouping evidence uses asetnsamples=n=N:p=0; the composed asetnsamples=7 chain compares with native running the same chain.",
+  "Integer outputs need -cpuflags 0 (dblp to integer conversion); every differential case passes it.",
+  "Setup durations: first bootstrap attempt failed immediately under sandbox Node v22.23.5 (Node 24+ required); rerun with preinstalled /opt/node24 (v24.22.3): npm 8.9s, submodule 6.0s, reference build, 196.7s total (3m18s wall). Baseline typecheck+lint+boundaries 61s; registry unit tests 4s; flanger differential file ~18s with --maxWorkers=1.",
+  "Environment: FLAC codec artifacts not built (not selected), as expected; no other problems."
+ ]
+}

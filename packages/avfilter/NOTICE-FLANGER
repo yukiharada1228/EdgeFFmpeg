@@ -1,0 +1,25 @@
+flanger triangular-sweep flanger (src/audio/flanger.ts)
+
+src/audio/flanger.ts adapts FFmpeg libavfilter/af_flanger.c: the delay, depth,
+regen, width, speed, shape, phase and interp options with their native ranges
+and shorthand order, init()'s /100 and /1000 scaling and gain formulas,
+config_input()'s (int) max_samples and lfo_length, the FILTER_SINGLE_SAMPLEFMT
+(dblp) format, and filter_frame()'s per-channel delay ring, delay_last
+feedback, shared delay_buf_pos and lfo_pos, channel phase offset, modf
+fractional delay and linear/quadratic interpolation. It also adapts the
+WAVE_TRI branch of libavfilter/generate_wave_table.c (ff_generate_wave_table
+into a float table at phase 3*pi/2).
+
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+af_flanger.c: Copyright (c) 2006 Rob Sykes <robs@users.sourceforge.net>
+generate_wave_table.c: part of FFmpeg (no individual copyright line).
+LGPL-2.1-or-later. See LICENSES/LGPL-2.1-or-later.txt.
+The TypeScript adaptation implements only the triangular LFO and refuses the
+sinusoidal default (it needs libm sin()), accepts only constant numeric option
+values and named shape/interp constants, refuses timeline enable, LFO tables
+whose uint32 index arithmetic could wrap and channel phases beyond int range,
+refuses LFO lengths below one sample before output, always writes a new owned
+output frame, declares the rings, delay_last and LFO table in reserve(),
+enforces explicit allocation limits and AbortSignal, and adds no FFmpeg runtime
+code. The original source and full notices remain in the pinned upstream
+submodule.
