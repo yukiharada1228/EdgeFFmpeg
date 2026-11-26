@@ -88,3 +88,28 @@ it('refuses -c copy (native copy timestamps use 1/90000) and input -ss before an
     }
   }finally{rmSync(root,{recursive:true,force:true});}
 },60000);
+it('leaves FORM DS16 heads undetected where another native probe ties nsp_probe at 100, and matches native -f nsp on them',async()=>{
+  assertReference();
+  const root=mkdtempSync(join(tmpdir(),'edgeffmpeg-nsp-tie-'));let compared=0,refused=0;
+  try{
+    const filesystem=await createNodeFileSystem({root,maxReadBytes:4096,maxWriteBytes:4096}),ffmpeg=new FFmpeg({filesystem,backend:createMediaBackend(),budget});
+    // Bytes 8..11 are skipped by nsp_read_header; there aiff (with 'DS16' as an RB32 size >= 4), iff, wsvqa, rl2 and wc3 also score 100, and the tie detects nothing.
+    const withType=(form:string)=>{const bytes=file(hedr('HEDR',8000,32),chunk('SDAB',0),payload(4*900));bytes.set(text(form),8);return bytes;};
+    for(const form of ['AIFF','AIFC','8SVX','16SV','MAUD','PBM ','ACBM','DEEP','ILBM','RGB8','ANIM','RGBN','WVQA','RLV2','RLV3','MOVE']){
+      const name=`tie-${form.trim()}`;writeFileSync(join(root,`${name}.nsp`),withType(form));
+      expect(nativeRun(['-i',join(root,`${name}.nsp`),'-f','framecrc',join(root,`${name}-native.crc`)]).status,name).toBe(183);
+      const undeclared=await ffmpeg.exec(['-i',`/${name}.nsp`,'-f','framecrc',`/${name}.crc`]);expect(undeclared.exitCode,name).not.toBe(0);expect(existsSync(join(root,`${name}.crc`)),name).toBe(false);refused++;
+      const forced=nativeRun(['-f','nsp','-i',join(root,`${name}.nsp`),'-bitexact','-f','framecrc',join(root,`${name}-forced-native.crc`)]);expect(forced.status,forced.stderr).toBe(0);
+      const declared=await ffmpeg.exec(['-f','nsp','-i',`/${name}.nsp`,'-bitexact','-f','framecrc',`/${name}-forced.crc`]);expect(declared.exitCode,JSON.stringify(declared.diagnostics)).toBe(0);
+      expect(readFileSync(join(root,`${name}-forced.crc`)).equals(readFileSync(join(root,`${name}-forced-native.crc`))),name).toBe(true);compared++;
+    }
+    // Near misses tie with nothing, so both detect nsp.
+    for(const form of ['AIFX','MAUX','EVOM']){
+      const name=`near-${form}`;writeFileSync(join(root,`${name}.nsp`),withType(form));
+      expect(nativeRun(['-i',join(root,`${name}.nsp`),'-bitexact','-f','framecrc',join(root,`${name}-native.crc`)]).status,name).toBe(0);
+      const result=await ffmpeg.exec(['-i',`/${name}.nsp`,'-bitexact','-f','framecrc',`/${name}.crc`]);expect(result.exitCode,JSON.stringify(result.diagnostics)).toBe(0);
+      expect(readFileSync(join(root,`${name}.crc`)).equals(readFileSync(join(root,`${name}-native.crc`))),name).toBe(true);compared++;
+    }
+    expect([compared,refused]).toEqual([16+3,16]);
+  }finally{rmSync(root,{recursive:true,force:true});}
+},120000);

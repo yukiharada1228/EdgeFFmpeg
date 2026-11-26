@@ -21,8 +21,11 @@ async function read(input:ReadHandle,position:bigint,length:number,maxReadBytes:
   while(filled<length){signal?.throwIfAborted();const requested=Math.min(length-filled,maxReadBytes),chunk=await input.readAt(position+BigInt(filled),requested,signal);signal?.throwIfAborted();if(!chunk.length||chunk.length>requested)throw new NspError('invalid-data','Unexpected NSP header read length');bytes.set(chunk,filled);filled+=chunk.length;}
   return bytes;
 }
-/** nsp_probe: 'FORM' at 0 and 'DS16' at 4 (an AIFF FORM carries its size at 4, so the checks are disjoint). */
-export function probeNsp(bytes:Uint8Array):boolean{return bytes.length>=8&&String.fromCharCode(...bytes.subarray(0,8))==='FORMDS16';}
+/** Form types at byte 8 for which aiff_probe (RB32 at 4 >= 4, which 'DS16' is), iff_probe, wsvqa_probe, rl2_probe or wc3_probe also score 100 on a FORM head:
+ * native's probe tie detects nothing (183), so nsp leaves those heads undetected. */
+const tied=new Set(['AIFF','AIFC','8SVX','16SV','MAUD','PBM ','ACBM','DEEP','ILBM','RGB8','ANIM','RGBN','WVQA','RLV2','RLV3','MOVE']),confirmBytes=12;
+/** nsp_probe: 'FORM' at 0 and 'DS16' at 4 (an AIFF FORM carries its size at 4), unless byte 8 starts a form type another 100-score probe claims. */
+export function probeNsp(bytes:Uint8Array):boolean{return bytes.length>=8&&String.fromCharCode(...bytes.subarray(0,8))==='FORMDS16'&&!tied.has(String.fromCharCode(...bytes.subarray(8,12)));}
 /** avio_get_str(pb,size,...): bytes consumed, stopping after the first NUL; native reads a NUL at EOF, so a note that overruns EOF ends there. */
 async function noteLength(input:ReadHandle,position:bigint,size:number,maxReadBytes:number,signal?:AbortSignal):Promise<bigint>{
   let consumed=0;
@@ -74,8 +77,9 @@ export async function openNsp(input:ReadHandle,options:NspOptions):Promise<NspIn
 /** Registered by `export {nsp} from './nsp.js';` in registry.ts. Demux only, as native. */
 export const nsp=defineContainer({
   name:'nsp',
-  // The 'FORM' head overlaps aiff (30) and iff (26), so nsp runs first at 24; confirm reads the 8 bytes nsp_probe inspects and is false for AIFF/AIFC, MAUD and a bare 4-byte FORM.
+  // The 'FORM' head overlaps aiff (30) and iff (26), so nsp runs first at 24; confirm reads the 8 bytes nsp_probe inspects plus the form type at 8, and is false for
+  // AIFF/AIFC, MAUD, a bare 4-byte FORM and a DS16 head whose byte-8 type another native probe also scores 100.
   demux:{probe:{precedence:24,head:bytes=>String.fromCharCode(...bytes)==='FORM',
-    async confirm(input,maxReadBytes,signal){return input.size>=8n&&probeNsp(await read(input,0n,8,maxReadBytes,signal));}},
+    async confirm(input,maxReadBytes,signal){return input.size>=8n&&probeNsp(await read(input,0n,input.size<BigInt(confirmBytes)?Number(input.size):confirmBytes,maxReadBytes,signal));}},
     headerBytes:noteWindow,open:(source,{maxReadBytes,signal,seek})=>openNsp(source,{maxReadBytes,signal,seek})}
 });

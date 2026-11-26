@@ -51,10 +51,14 @@ describe('nsp demuxer',()=>{
     expect((await openNsp(memoryInput(long,requests),{maxReadBytes:4096})).info).toMatchObject({metadata:true,dataOffset:BigInt(12+40+8+5000+8)});
     expect(Math.max(...requests.map(request=>request.length))).toBe(1024);
   });
-  it('mirrors nsp_probe after aiff-overlapping heads, with an 8-byte confirm',async()=>{
+  it('mirrors nsp_probe after aiff-overlapping heads, with a 12-byte confirm',async()=>{
     expect(probeNsp(file())).toBe(true);expect(probeNsp(file().subarray(0,7))).toBe(false);expect(probeNsp(Uint8Array.from(text('FORMDS17')))).toBe(false);
     const requests:Array<{offset:bigint;length:number}>=[];expect(await detectAudioContainer(memoryInput(file(hedr(8000),chunk('SDA_',0)),requests),64)).toBe('nsp');
-    expect(requests).toEqual([{offset:0n,length:4},{offset:0n,length:8}]);
+    expect(requests).toEqual([{offset:0n,length:4},{offset:0n,length:12}]);
+    // A form type at byte 8 that another native probe scores 100 ties with nsp_probe: native detects nothing, so the confirm resolves false.
+    for(const form of ['AIFF','AIFC','8SVX','16SV','MAUD','PBM ','ACBM','DEEP','ILBM','RGB8','ANIM','RGBN','WVQA','RLV2','RLV3','MOVE']){const bytes=file();bytes.set(text(form),8);expect(probeNsp(bytes),form).toBe(false);expect(await nsp.demux.probe!.confirm!(memoryInput(bytes),5,undefined),form).toBe(false);}
+    for(const form of ['AIFX','MAUX','EVOM','\0\0\0\0']){const bytes=file();bytes.set(text(form),8);expect(await nsp.demux.probe!.confirm!(memoryInput(bytes),5,undefined),form).toBe(true);}
+    expect(await nsp.demux.probe!.confirm!(memoryInput(Uint8Array.from(text('FORMDS16MA'))),64,undefined)).toBe(true);
     expect(await detectAudioContainer(memoryInput(file()),3)).toBe('nsp');
     // AIFF and AIFC carry a size at byte 4, so the confirm resolves false and aiff (30) decides; a bare 4-byte FORM or a short FORM confirms false too.
     const aiff=(form:string)=>Uint8Array.from([...text('FORM'),0,0,0,30,...text(form),...new Array(30).fill(0)]);
