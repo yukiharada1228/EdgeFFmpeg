@@ -3765,7 +3765,7 @@ describes the design, the rules and the measurements. The commits are:
 - `e78d1eb`: the report job gives the restored build tree one timestamp, so the
   FATE gate's `make` does not rebuild FFmpeg. `validate:fast` starts the shards
   by the host's measured durations.
-- The commit after `e78d1eb` adds the documentation and skips CI.
+- `3a94931` and the commit after it add only documentation and skip CI.
 
 What is validated did not change, and neither did any test or contract.
 
@@ -3800,20 +3800,24 @@ What is validated did not change, and neither did any test or contract.
   (`workers:types -- --check`, `test:workers`, `workers:bundle`) map onto these
   gates and onto shards `unit-1` and `workers-1` to `-5`. `bootstrap --check`
   passed in the reference job, in all 16 shard jobs and in the report job.
-- A local `validate:fast` on `e78d1eb` is equivalent in the same way to the
-  macOS report at `8f453a8`: differential 705 passed and 24 not-applicable, and
-  contracts 1,120 passed and 35 not-applicable.
+- The local `validate:fast` runs on `e78d1eb` and `3a94931` are equivalent in
+  the same way, by both checks, to the serial macOS report at `8f453a8`. Each
+  had unit 2,933 passed and 11 not-applicable plus the 6 new tests, integration
+  2,081, differential 705 passed and 24 not-applicable, and workers 277.
+  Contracts were 1,120 passed and 35 not-applicable, and developmentValidation
+  passed. `validate:fast` needed no change. Its worktree has a cloned
+  `upstream/ffmpeg`, as [ci.md](ci.md) requires.
 
 Wall times:
 
 - The full pipeline went from 3 h 9 min to 13 min 50 s with a cached reference,
   and 20 min 28 s when the reference is built.
 - The fast lane of `wave2/ci-fast-probe` took 9 min 5 s.
-- Locally, `validate:fast` took 25 min 29 s against 70 to 81 min, on a machine
-  that other work was also loading.
+- Locally, `validate:fast` took 19 min 50 s on `3a94931` and 25 min 29 s on
+  `e78d1eb`, against 70 to 81 min serially. Other work loaded the machine more
+  during the `e78d1eb` run.
 
 The open items of the previous section about CI duration and the
 `foundation`/`workers` job summaries no longer apply, because those jobs are
 gone. New open items are listed in [ci.md](ci.md#open-items). They include one
-native SIGBUS in `video-fillborders` seen only under local parallel load, and
-the local 20-minute target, which was not reached on the shared machine.
+native SIGBUS in `video-fillborders` seen once, under local parallel load.

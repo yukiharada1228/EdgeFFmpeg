@@ -9,8 +9,9 @@ Measured times (details under [Equivalence and timings](#equivalence-and-timings
 - The full CI pipeline took 13 min 50 s with the reference from the cache, and
   20 min 28 s when it built the reference. Before, it took 3 h 9 min.
 - The wave2 fast lane took 9 min 5 s.
-- Locally, `npm run validate:fast` took 25 min 29 s on a 10-core, 16 GB Mac that
-  other work was also loading. A serial `compat:report` takes 70 to 81 min.
+- Locally, `npm run validate:fast` took 19 min 50 s on a 10-core, 16 GB Mac, and
+  25 min 29 s in an earlier run while other work loaded the machine. A serial
+  `compat:report` takes 70 to 81 min.
 
 ## Which lane runs
 
@@ -341,11 +342,13 @@ matched run 45623569626 test by test as well. Its report failed only on
 `fate-execution`, the `make` timestamp problem that `e78d1eb` fixes (see
 [Full pipeline](#full-pipeline)).
 
-### Local: `validate:fast` on `e78d1eb`
+### Local: `validate:fast` on `e78d1eb` and `3a94931`
 
-The run used an Apple M4 Mac mini (10 cores, 16 GB), Node v26.13.1 and
-concurrency 6. `compare.mjs` against the macOS report at `8f453a8` reports
-`EQUIVALENT`:
+Both runs used an Apple M4 Mac mini (10 cores: 4 performance and 6 efficiency;
+16 GB), Node v26.13.1 and the default concurrency, 6. `3a94931` adds only
+documentation to `e78d1eb`, and its run had a clean worktree. For each run,
+`compare.mjs` and the separate raw-JSON check against the macOS report at
+`8f453a8` report `EQUIVALENT`:
 
 - developmentValidation passed on darwin-arm64, with a stable source and
   reference and the same 14 gates.
@@ -367,6 +370,7 @@ concurrency 6. `compare.mjs` against the macOS report at `8f453a8` reports
 | Serial `compat:report`, macOS | 70 min at `8f453a8`, 81 min at `7c5e0e1` | |
 | `validate:fast` on `a477f37`, concurrency 6 | 25 min 0 s | Failed once, on a native crash (open items). |
 | `validate:fast` on `e78d1eb`, concurrency 6 | 25 min 29 s | Shards 1,500 s, report 29 s. |
+| `validate:fast` on `3a94931`, concurrency 6 | 19 min 50 s | Shards 1,162 s, report 27.5 s. |
 
 The fast-lane probe pushed a comment-only change to
 `packages/avfilter/src/video-ops/formats.ts` on top of `e78d1eb`. Its branch
@@ -380,13 +384,18 @@ The longest test slices ran 9.1 min (workers), 9.8 min (integration) and
 
 Locally the run is CPU-bound:
 
-- At concurrency 6, every shard except unit ran 1.6 to 2.3 times slower than
-  its files' serial macOS durations. Unit's 18 s of tests took 88 s, mostly
-  start-up and transform.
-- The shard durations add up to 8,312 s, which is 1,385 s per slot.
-- Other processes used 2 to 4 cores during both runs: another project's Node
+- In the `e78d1eb` run, every shard except unit ran 1.6 to 2.3 times slower
+  than its files' serial macOS durations. Unit's 18 s of tests took 88 s, mostly
+  start-up and transform. The shard durations added up to 8,312 s, which is
+  1,385 s per slot. Other processes used 2 to 4 cores: another project's Node
   processes and `mediaanalysisd`.
-- About 20 minutes would need an otherwise idle machine; that was not measured.
+- In the `3a94931` run, the shards ran 1.3 to 1.75 times slower than their
+  files' serial durations, and unit took 56 s. The shard durations added up to
+  6,367 s, 1,061 s per slot. Six differential shards started first, and the
+  last of them finished after about 650 s. The load average was 3.6 before the start,
+  with a Docker VM and other sessions running. An idle machine was not
+  measured.
+- Neither run reproduced the `video-fillborders` crash below.
 
 ## Open items
 
@@ -422,5 +431,5 @@ Locally the run is CPU-bound:
   `compat:report` or `validate:fast`, because `git status` refuses a symlinked
   submodule path. Clone it with `bootstrap --only submodule --ffmpeg-source`
   (above).
-- **Local target.** About 20 minutes locally was not reached on the shared
-  machine (above).
+- **Local time varies with load.** One run took 19 min 50 s and one took
+  25 min 29 s on the same machine (above).
