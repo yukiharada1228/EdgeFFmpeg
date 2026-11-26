@@ -1,0 +1,15 @@
+Scoped colorize solid HSL colour overlay
+
+The option table, the pixel_fmts negotiation list, the float hsl2rgb and
+hue2rgb helpers, the double rgb2yuv helper with C truncation, the eight-bit
+luma lerp of colorizey_slice8 and the chroma fill of colorize_slice8 in
+src/video-ops/colorize.ts follow libavfilter/vf_colorize.c (lerpf,
+colorizey_slice8, colorize_slice8, hue2rgb, hsl2rgb, rgb2yuv, filter_frame,
+config_input, colorize_options, pixel_fmts).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+The upstream file carries no individual copyright line; it is part of FFmpeg.
+LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete colorize filter: the
+16-bit slice functions, runtime commands and enable= are not implemented.
