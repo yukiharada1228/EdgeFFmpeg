@@ -30,7 +30,7 @@ import type { MediaPacket } from '@edge-ffmpeg/core';
 import { decodePcm, encodePcm, isIntegerPcm, getPcmFormat, isPcmCodec as isPcm } from '@edge-ffmpeg/avcodec';
 import { ExecutionError } from '@edge-ffmpeg/core';
 import type { ReadHandle, ExecutionBackend } from '@edge-ffmpeg/core';
-import {containerFormat,containerOutputListing,containerOutputOptions,detectAudioContainer,outputContainerFor} from '@edge-ffmpeg/containers';
+import {containerFormat,containerOutputListing,containerOutputOptions,containerRefusal,detectAudioContainer,outputContainerFor} from '@edge-ffmpeg/containers';
 import type {ContainerOption,ContainerOutputStream} from '@edge-ffmpeg/containers';
 function requirePcm(codec: string | null): PcmCodec {
   if (codec === null || !isPcm(codec)) throw new ExecutionError('unsupported-command', `Unsupported PCM codec: ${codec}`);
@@ -177,6 +177,7 @@ export function createMediaBackend(options:MediaBackendOptions={}): ExecutionBac
       const outputCodec = requirePcm(codec === 'copy' ? pcmCodec : codec);
       if (!muxer.supports(outputCodec)) throw muxer.refuse?.(outputCodec) ?? new ExecutionError('unsupported-command',`${muxer.label} muxer does not support ${outputCodec}`);
       if (audio.info.metadata && !muxer.dropsMetadata) unsupported(`Input metadata for the ${muxer.label} muxer is not implemented`);
+      if (codec === 'copy' && audio.info.copyRefusal !== undefined) throw containerRefusal(audio.info.copyRefusal);
       await assertOutputPolicy(context,output.url,overwrite,noOverwrite);
       if(rawProbe.failure){if(exitOnError)throw rawProbe.failure;context.reportDiagnostic?.({code:rawProbe.failure.code,message:rawProbe.failure.message});}
       const sourceSampleFormat=getPcmFormat(pcmCodec).sampleFormat,targetSampleFormat=getPcmFormat(outputCodec).sampleFormat;

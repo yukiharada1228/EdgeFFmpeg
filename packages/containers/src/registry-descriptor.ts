@@ -8,6 +8,8 @@ export interface ContainerStreamInfo {
   readonly blockAlign:number;readonly durationSamples:bigint;
   /** True when the native demuxer exports global metadata (tags, comments) for this input: refused unless the muxer sets dropsMetadata, since nothing carries tags to a muxer. */
   readonly metadata?:boolean;
+  /** Refusal message for an output codec of copy (native copy would print packet flags or timestamps the module does not mirror); decoding this input is unaffected. */
+  readonly copyRefusal?:string;
 }
 /** An opened finite input: packets start at an exact sample frame and carry at most maxPacketBytes. */
 export interface ContainerInput<I extends ContainerStreamInfo=ContainerStreamInfo> {readonly info:I;packets(startSample?:bigint,maxPacketBytes?:number):AsyncIterable<MediaPacket>}
