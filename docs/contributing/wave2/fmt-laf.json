@@ -1,0 +1,65 @@
+{
+  "capabilityId": "demuxer.laf",
+  "slug": "fmt-laf",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/laf.ts",
+    "packages/containers/NOTICE-LAF",
+    "packages/containers/src/registry.ts",
+    "docs/contributing/laf-support.md",
+    "docs/contributing/wave2/fmt-laf.json",
+    "tests/unit/laf.test.ts",
+    "tests/differential/laf.test.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/containers/src/registry.ts", "change": "+1 line: export {laf} from './laf.js'; (demux-only, exact LIMITLESS/HEAD probe at precedence 100, packetSpan = sample rate)"}
+  ],
+  "tests": [
+    {"file": "tests/unit/laf.test.ts", "title": "maps quality to codec and the stream position to a single-channel mask as laf_read_header does", "passed": 1, "failed": 0},
+    {"file": "tests/unit/laf.test.ts", "title": "reads the header in bounded reads, checks one bitmask byte per block and drops a truncated final block", "passed": 1, "failed": 0},
+    {"file": "tests/unit/laf.test.ts", "title": "refuses malformed headers with native INVALIDDATA, multi-stream files, zero bitmasks and bad budgets", "passed": 1, "failed": 0},
+    {"file": "tests/unit/laf.test.ts", "title": "checks the abort signal around every read and packet", "passed": 1, "failed": 0},
+    {"file": "tests/unit/laf.test.ts", "title": "probes exactly the 13 bytes laf_probe compares and registers a demux-only descriptor", "passed": 1, "failed": 0},
+    {"file": "tests/unit/laf.test.ts", "title": "demuxes through the PCM backend with small packet budgets and refuses laf output, seeks and bad inputs before any output opens", "passed": 1, "failed": 0},
+    {"file": "tests/differential/laf.test.ts", "title": "matches native LAF copy and decode framecrc, WAV and raw for four qualities at 8000 and 22050 Hz with 0 to 4 blocks and truncated tails", "passed": 1, "failed": 0},
+    {"file": "tests/differential/laf.test.ts", "title": "matches native LAF channel layouts for FC, FL, FR, SL, SR, LFE, -0.0 and unmatched positions in WAV and raw, and refuses non-mono framecrc as before", "passed": 1, "failed": 0},
+    {"file": "tests/differential/laf.test.ts", "title": "matches native LAF packet timing for output -ss, -t and -frames:a, declared -f laf and a header duration", "passed": 1, "failed": 0},
+    {"file": "tests/differential/laf.test.ts", "title": "refuses malformed, multi-stream and seeking LAF before any output and records native exit statuses", "passed": 1, "failed": 0},
+    {"file": "tests/unit/container-registry.test.ts", "title": "(unchanged file, all tests)", "passed": 9, "failed": 0},
+    {"file": "tests/unit/container-registry-extension.test.ts", "title": "(unchanged file, all tests)", "passed": 7, "failed": 0}
+  ],
+  "nativeComparisons": {
+    "count": 422,
+    "compares": "422 byte-exact outputs against native run at test time (batched: one native call per input writes all its outputs): 240 over 48 synthesized files (qualities 0-3 x 8000/22050 Hz x 0-4 blocks with lone-bitmask, partial-sample and near-full truncated tails; copy framecrc, s16le decode framecrc, WAV, copy raw, s32le raw); 54 layout outputs over 12 positions (FC, -0.0, FL, FR, SL, SR, LFE, LFE 255, unmatched, raised, NaN, near-miss) as WAV, copy WAV, s16le and u8 raw plus copy framecrc for the 6 mono positions; 127 timing outputs (output -ss/-t/-frames:a, declared -f laf, -ss past the end, copy and decode framecrc and WAV; declared wrong LIMITLESS); 1 empty stream at the largest f32le rate. In addition, native's channel_layout_name is asserted for 12 positions and native exit statuses for 15 error cases (183 for header failures; 0 for multi-stream and zero bitmasks with native's demux error asserted), 2 undeclared-detection cases (0 with .laf, 183 with .bin), input -ss (0) and the missing laf muxer."
+  },
+  "unsupported": [
+    "files with st_count > 1 (native exposes one mono stream per channel and maps one); refused",
+    "input -ss (laf_read_seek returns -1, generic index seek); refused",
+    "a stored bitmask with bit 0 clear, in any block including the dropped tail (native demux error mid-stream, exit 0); refused up front",
+    "framecrc output for FL/FR/SL/SR/LFE single-speaker layouts: the existing PCM path refuses them (Unknown channel mask for framecrc output); WAV and raw match native",
+    "detection by the .laf extension alone when the probe fails (native extension fallback); refused unless -f laf",
+    "laf muxing (native has no muxer)",
+    "FLAC-path and Workers-runtime evidence (no tests/workers file)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "laf.tables", "file": "tests/unit/laf.test.ts", "name": "maps quality to codec and the stream position to a single-channel mask as laf_read_header does", "modes": ["semantic"], "scope": "Quality 0-3 to pcm_u8/s16le/f32le/s24le, the float == layout chain (FC, FL, FR, SL, SR, LFE; -0.0 equal to 0; NaN, infinity and near misses mono), mode 0/1 accepted, header duration ignored. Synthetic inputs, no native run."},
+    {"id": "laf.bounded-open", "file": "tests/unit/laf.test.ts", "name": "reads the header in bounded reads, checks one bitmask byte per block and drops a truncated final block", "modes": ["semantic"], "scope": "3-byte reads that touch only the header and one bitmask byte per block; block reader offsets with startSample and 6-byte packet budgets; truncated tails dropped. Synthetic inputs."},
+    {"id": "laf.refusals", "file": "tests/unit/laf.test.ts", "name": "refuses malformed headers with native INVALIDDATA, multi-stream files, zero bitmasks and bad budgets", "modes": ["diagnostic"], "scope": "Every header refusal with exit 183, rate limits at both edges for f32le and u8, st_count 2 and 4096 refused as unimplemented, zero bitmasks in first, middle and tail blocks, budgets and short or long reads."},
+    {"id": "laf.copy-decode", "file": "tests/differential/laf.test.ts", "name": "matches native LAF copy and decode framecrc, WAV and raw for four qualities at 8000 and 22050 Hz with 0 to 4 blocks and truncated tails", "modes": ["bit-exact-pcm"], "scope": "48 synthesized single-stream files x 5 outputs byte-exact against the reference built at test time (commit 946fcce0, --disable-x86asm). Integer and -cpuflags 0 float paths, all platforms."},
+    {"id": "laf.layouts", "file": "tests/differential/laf.test.ts", "name": "matches native LAF channel layouts for FC, FL, FR, SL, SR, LFE, -0.0 and unmatched positions in WAV and raw, and refuses non-mono framecrc as before", "modes": ["bit-exact-pcm", "diagnostic"], "scope": "12 positions: WAV (WAVEFORMATEXTENSIBLE masks), copy WAV and raw byte-exact; copy framecrc for mono positions; native layout names asserted; single-speaker framecrc refused by the PCM path before output."},
+    {"id": "laf.timing", "file": "tests/differential/laf.test.ts", "name": "matches native LAF packet timing for output -ss, -t and -frames:a, declared -f laf and a header duration", "modes": ["bit-exact-pcm"], "scope": "Rate-sample packet rows under output -ss/-t/-frames:a and declared -f laf, copy and fixed-volume decode to framecrc and WAV. No input -ss (refused)."},
+    {"id": "laf.error-matrix", "file": "tests/differential/laf.test.ts", "name": "refuses malformed, multi-stream and seeking LAF before any output and records native exit statuses", "modes": ["diagnostic"], "scope": "15 malformed or unsupported inputs with native exit statuses asserted; EdgeFFmpeg exits 183 or 1 and opens no output. Also the largest f32le rate, input -ss refusal and the absence of a muxer."}
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Setup durations: bootstrap (npm 8.8 s, submodule 7.3 s, reference build 210.6 s) 226.6 s total; baseline typecheck+lint+boundaries+container registry unit tests 78 s. The first bootstrap attempt failed immediately because the sandbox default Node was v22.23.5; /opt/node24 (v24.22.3) was used for everything afterwards.",
+    "The differential file runs in about 8 s with --maxWorkers=1 on 4 vCPUs.",
+    "The reference binary differs from the linux-x64 pin (built with --allow-unpinned-reference); the tests assert only the commit and --disable-x86asm from build-metadata.json and never pin a binary sha.",
+    "Mono (FC or any unmatched position) is reported with channelMask null like the other single-channel demuxers; single-speaker layouts are reported as their masks, which the WAV muxer writes as WAVEFORMATEXTENSIBLE exactly as native does.",
+    "Framecrc of single-speaker layouts would need the PCM path's framecrc layout table to name masks such as '1 channels (FL)'; that is a shared edit outside this item and is not requested here, the refusal stands.",
+    "No errno-based native status is involved: every LAF header refusal is AVERROR_INVALIDDATA (183) on every host.",
+    "No linux-gated cases: the module does byte copies and integer arithmetic only; f32le samples reach the existing PCM conversions under -cpuflags 0."
+  ]
+}

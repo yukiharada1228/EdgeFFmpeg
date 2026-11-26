@@ -10,6 +10,7 @@ export {epaf} from './epaf.js';
 export {framecrc} from './formats/framecrc.js';
 export {hash} from './hash/hash-mux.js';
 export {ircam} from './ircam.js';
+export {laf} from './laf.js';
 export {md5} from './hash/hash-mux.js';
 export {nistsphere} from './nistsphere.js';
 export {pvf} from './pvf.js';
