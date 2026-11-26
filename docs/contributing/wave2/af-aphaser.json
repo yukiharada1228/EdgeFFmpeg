@@ -1,0 +1,279 @@
+{
+  "capabilityId": "filter.aphaser",
+  "slug": "af-aphaser",
+  "status": "complete",
+  "filesChanged": [
+    "packages/avfilter/src/audio/aphaser.ts",
+    "packages/avfilter/NOTICE-APHASER",
+    "tests/unit/aphaser.test.ts",
+    "tests/differential/aphaser.test.ts",
+    "docs/contributing/aphaser.md",
+    "docs/contributing/wave2/af-aphaser.json",
+    "packages/avfilter/src/audio/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/avfilter/src/audio/registry.ts",
+      "change": "+1 line: export {aphaser} from './aphaser.js';"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/differential/aphaser.test.ts",
+      "title": "runs against a reference built from commit 946fcce0 with --disable-x86asm",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/aphaser.test.ts",
+      "title": "matches native framecrc for delay, decay, speed and gain sweeps over every native sample format, 1-3 channels at 8000 and 44100 Hz",
+      "passed": 1,
+      "failed": 0,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/aphaser.test.ts",
+      "title": "writes native-identical WAV, raw and framecrc output from raw and WAV input with output -ss, -t and -frames:a, and composes with volume",
+      "passed": 1,
+      "failed": 0,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/aphaser.test.ts",
+      "title": "does not depend on frame grouping: asetnsamples=n=1/7/29/50:p=0 before aphaser matches native and ungrouped output byte for byte",
+      "passed": 1,
+      "failed": 0,
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "file": "tests/differential/aphaser.test.ts",
+      "title": "matches native on every platform for integer input with binary-fraction gains at power-of-two modulation lengths, full-scale s32 on the clipping bound included",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/aphaser.test.ts",
+      "title": "refuses sinusoidal modulation, gains past the clipping bound, delays that round to zero and enable before output, with native status for each case",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/aphaser.test.ts",
+      "title": "parses named and positional options, type=t, and refuses sinusoidal, enable, expressions, clipping gains and out-of-range values with exact messages",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/aphaser.test.ts",
+      "title": "computes buffer lengths and the triangle table from config_output and ff_generate_wave_table, refusing delays that round to zero",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/aphaser.test.ts",
+      "title": "negotiates the native list, plans unchanged counts and packet sections, and reserves one frame plus the delay rings",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/aphaser.test.ts",
+      "title": "refuses rates whose delay rounds to zero in constraint(), before any frame, and accepts every channel count and layout",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/aphaser.test.ts",
+      "title": "matches the C transcription in every kernel format, packed and planar, across 1/7/29/50-sample splits, keeping timestamps and owning output",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/aphaser.test.ts",
+      "title": "keeps every integer output at the s32 and s16 extremes in range when the gains sit exactly on the clipping bound",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/aphaser.test.ts",
+      "title": "converts u8 input to s16, enforces allocation and format limits, refuses non-finite samples and stops on abort",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/audio-filter-registry.test.ts + audio-filter-registry-extension.test.ts + audio-filter-registry-contract.test.ts",
+      "title": "(all, unchanged)",
+      "passed": 26,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 1173,
+    "byteComparisons": 1158,
+    "nativeStatuses": 15,
+    "detail": [
+      "868 framecrc (Linux x64 gate): u8/s16/s32/f32/f64 raw input x 8000/44100 Hz x 1-3 channels x 14 chains (9 sweeps of delay 0.1-5, decay 0-0.99, speed 0.1-2 and gains on/inside the bound; aformat=s16p/s32p/fltp/dblp before; asetnsamples=7 before) x input codec/pcm_s16le/(stereo) pcm_f64le, -cpuflags 0",
+      "196 files (Linux x64 gate): s16/f32 raw and WAV input, 3 chains, output -ss/-t/-frames:a/-ss+-t, WAV/raw/framecrc; aphaser,volume=0.5 on u8 and f32 input",
+      "20 raw outputs (Linux x64 gate) for asetnsamples=n=1/7/29/50:p=0 grouping, plus 16 checks that native grouped output equals ungrouped output",
+      "74 framecrc on every platform: u8/s16/s32/full-scale s32 at 8192 Hz with exact binary-fraction gains on the clipping bound and power-of-two table lengths, 2 empty inputs",
+      "15 native exit statuses: type=s (3 spellings) and 4 gains past the bound (native 0), 3 delays rounding to zero (native 256-EINVAL), enable= x2, delay=6, type=x (native fails), aphaser,volume=0.5 on s16 (native 0); all refused here before output"
+    ]
+  },
+  "unsupported": [
+    "type=sinusoidal (libm sin() table)",
+    "gains past native out_gain clipping condition in_gain/(1-decay) > 1/out_gain (native warns and, for integer kernels, converts out of range with undefined behaviour)",
+    "timeline enable (native refuses too)",
+    "runtime commands (none exposed)",
+    "option expressions, exponents, SI suffixes, signs and escaping",
+    "FLAC input (refused before decoding; flacInput not declared)",
+    "automatic sample-rate conversion around the step",
+    "aphaser,volume=... on s16/s32/dbl input (native merges to flt; refused by the negotiation guard)",
+    "non-finite float samples",
+    "modulation lengths >= 2^30 (sample rates above ~107 MHz)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "filter.aphaser.differential.0",
+      "file": "tests/differential/aphaser.test.ts",
+      "name": "runs against a reference built from commit 946fcce0 with --disable-x86asm",
+      "modes": [
+        "differential"
+      ],
+      "scope": "all"
+    },
+    {
+      "id": "filter.aphaser.differential.1",
+      "file": "tests/differential/aphaser.test.ts",
+      "name": "matches native framecrc for delay, decay, speed and gain sweeps over every native sample format, 1-3 channels at 8000 and 44100 Hz",
+      "modes": [
+        "differential"
+      ],
+      "scope": "linux-x64",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.aphaser.differential.2",
+      "file": "tests/differential/aphaser.test.ts",
+      "name": "writes native-identical WAV, raw and framecrc output from raw and WAV input with output -ss, -t and -frames:a, and composes with volume",
+      "modes": [
+        "differential"
+      ],
+      "scope": "linux-x64",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.aphaser.differential.3",
+      "file": "tests/differential/aphaser.test.ts",
+      "name": "does not depend on frame grouping: asetnsamples=n=1/7/29/50:p=0 before aphaser matches native and ungrouped output byte for byte",
+      "modes": [
+        "differential"
+      ],
+      "scope": "linux-x64",
+      "platforms": [
+        "linux-x64"
+      ]
+    },
+    {
+      "id": "filter.aphaser.differential.4",
+      "file": "tests/differential/aphaser.test.ts",
+      "name": "matches native on every platform for integer input with binary-fraction gains at power-of-two modulation lengths, full-scale s32 on the clipping bound included",
+      "modes": [
+        "differential"
+      ],
+      "scope": "all"
+    },
+    {
+      "id": "filter.aphaser.differential.5",
+      "file": "tests/differential/aphaser.test.ts",
+      "name": "refuses sinusoidal modulation, gains past the clipping bound, delays that round to zero and enable before output, with native status for each case",
+      "modes": [
+        "differential"
+      ],
+      "scope": "all"
+    },
+    {
+      "id": "filter.aphaser.unit.0",
+      "file": "tests/unit/aphaser.test.ts",
+      "name": "parses named and positional options, type=t, and refuses sinusoidal, enable, expressions, clipping gains and out-of-range values with exact messages",
+      "modes": [
+        "unit"
+      ],
+      "scope": "all"
+    },
+    {
+      "id": "filter.aphaser.unit.1",
+      "file": "tests/unit/aphaser.test.ts",
+      "name": "computes buffer lengths and the triangle table from config_output and ff_generate_wave_table, refusing delays that round to zero",
+      "modes": [
+        "unit"
+      ],
+      "scope": "all"
+    },
+    {
+      "id": "filter.aphaser.unit.2",
+      "file": "tests/unit/aphaser.test.ts",
+      "name": "negotiates the native list, plans unchanged counts and packet sections, and reserves one frame plus the delay rings",
+      "modes": [
+        "unit"
+      ],
+      "scope": "all"
+    },
+    {
+      "id": "filter.aphaser.unit.3",
+      "file": "tests/unit/aphaser.test.ts",
+      "name": "refuses rates whose delay rounds to zero in constraint(), before any frame, and accepts every channel count and layout",
+      "modes": [
+        "unit"
+      ],
+      "scope": "all"
+    },
+    {
+      "id": "filter.aphaser.unit.4",
+      "file": "tests/unit/aphaser.test.ts",
+      "name": "matches the C transcription in every kernel format, packed and planar, across 1/7/29/50-sample splits, keeping timestamps and owning output",
+      "modes": [
+        "unit"
+      ],
+      "scope": "all"
+    },
+    {
+      "id": "filter.aphaser.unit.5",
+      "file": "tests/unit/aphaser.test.ts",
+      "name": "keeps every integer output at the s32 and s16 extremes in range when the gains sit exactly on the clipping bound",
+      "modes": [
+        "unit"
+      ],
+      "scope": "all"
+    },
+    {
+      "id": "filter.aphaser.unit.6",
+      "file": "tests/unit/aphaser.test.ts",
+      "name": "converts u8 input to s16, enforces allocation and format limits, refuses non-finite samples and stops on abort",
+      "modes": [
+        "unit"
+      ],
+      "scope": "all"
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "formats() is the native [dbl, dblp, flt, fltp, s32, s32p, s16, s16p]; no negotiate/nativeFormats/flacInput; not transparent.",
+    "The clipping-bound proof (docs/contributing/aphaser.md) shows native's double-evaluated condition keeps every s32/s16 output within (-2^31-1, 2^31) with a margin above 1-2^-14 under double rounding, so the bound is not tightened; a unit test drives full-scale s32/s16 input on the bound.",
+    "The triangle table is computed per sample in the same double operations instead of being held; checked against a transcription of ff_generate_wave_table. reserve() declares 1 frame plus delay_buffer_length*channels*8 state bytes.",
+    "Float-sensitive cases (any non-exact gain, float or integer kernel) are gated to linux-x64 as a precaution; no macOS difference was measured (Linux-only sandbox). The exact-gain integer test at 8192 Hz runs everywhere.",
+    "A one-off mutation of the modulation position made four differential tests fail.",
+    "Setup: Node 24.22.3 from /opt/node24 (sandbox default was 22, which bootstrap refuses). Bootstrap (npm, submodule, reference) 190 s, reference build 175 s; baseline typecheck+lint+boundaries 56 s; baseline registry unit tests 4 s (26 passed). aphaser unit file ~10 s; differential file 23 s with --maxWorkers=1.",
+    "The sandbox ffmpeg differs from the linux-x64 pin (accepted with --allow-unpinned-reference); the tests pin no binary digest."
+  ]
+}
