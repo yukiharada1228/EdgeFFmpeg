@@ -1,0 +1,14 @@
+Scoped Apple Core Audio Format (CAF) muxer
+
+The caff file header, desc, chan, info and data chunks in src/caf.ts follow
+libavformat/cafenc.c (codec_flags, samples_per_packet, caf_write_init,
+caf_write_header, caf_write_trailer), the PCM and G.711 rows of
+ff_codec_caf_tags in libavformat/caf.c, and mov_channel_layout and
+ff_mov_write_chan in libavformat/isom.c.
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2011 Carl Eugen Hoyos (cafenc.c);(c)2007 Justin Ruggles (caf.c);
+(c)2001 Fabrice Bellard,(c)2002 Francois Revol,(c)2006 Baptiste Coudurier
+(isom.c). LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete caf muxer or demuxer.
