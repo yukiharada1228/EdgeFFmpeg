@@ -1,0 +1,235 @@
+{
+ "capabilityId": "filter.median",
+ "slug": "vf-median",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/median.ts",
+  "packages/avfilter/src/video-median.ts",
+  "packages/avfilter/NOTICE-MEDIAN",
+  "tests/unit/video-median.test.ts",
+  "tests/differential/video-median.test.ts",
+  "docs/contributing/median.md",
+  "docs/contributing/wave2/vf-median.json",
+  "packages/avfilter/src/video-ops/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/video-ops/registry.ts: +1 line `import {medianOperator} from './median.js';`",
+  "packages/avfilter/src/video-ops/registry.ts: +1 line ` medianOperator,`"
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-median.test.ts",
+   "name": "parses native defaults, shorthand order, ranges, integer expressions and the float percentile into frozen steps",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-median.test.ts",
+   "name": "clips the radii to filtered planes and truncates the float threshold as config_input does",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-median.test.ts",
+   "name": "selects the clamped window order statistic through the column histograms into owned tight planes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-median.test.ts",
+   "name": "refuses unsupported layouts, wide planes, budgets, malformed storage, settings and cancellation explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-median.test.ts",
+   "name": "budgets linear and graph plans, negotiates native formats and refuses timeline and runtime commands",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "name": "(whole file, unchanged; runs the five median examples on all five paths)",
+   "passed": 8,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-median.test.ts",
+   "name": "runs the sandbox reference build of commit 946fcce0 without x86 assembly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-median.test.ts",
+   "name": "matches native median for every format, radius, vertical radius, percentile, plane mask and small size on the linear and graph planners",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 1176
+  },
+  {
+   "file": "tests/differential/video-median.test.ts",
+   "name": "matches native median with default filter threads and with -filter_threads 1 on sliced frames",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 120
+  },
+  {
+   "file": "tests/differential/video-median.test.ts",
+   "name": "matches native rawvideo and framecrc bytes through the -vf, -filter_complex and timed backend CLIs with and without -ss and -t",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 1728
+  },
+  {
+   "file": "tests/differential/video-median.test.ts",
+   "name": "matches native replayed median branches frame by frame",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 24
+  },
+  {
+   "file": "tests/differential/video-median.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+   "passed": 1,
+   "failed": 0,
+   "comparisons": 89
+  }
+ ],
+ "nativeComparisons": {
+  "count": 3137,
+  "details": [
+   "1176 raw byte comparisons (588 linear + 588 graph): 6 formats x sizes 1x1,2x2,5x3,7x5,8x6,17x9,15x15 x 14 filters, three frames (noise, ramps/edges/impulses, constant)",
+   "120 thread checks: 60 native default -filter_threads vs -filter_threads 1 agreements and 60 linear comparisons at 64x48 and 97x90",
+   "1728 whole-file CLI comparisons, rawvideo and framecrc: 6 formats x 2 sizes x 4 chains x 2 muxers x 6 executions x 3 timings (none, -ss 0.04 input with -t 0.05, output -ss 0.04 -frames:v 1)",
+   "24 createReplayVideoExecution graphs (raw bytes and PTS)",
+   "89 per-source negotiation checks (13 sources byte-exact on every path, 4 gbrap refusals)"
+  ]
+ },
+ "unsupported": [
+  "enable= timeline and every runtime command (ENOSYS; enable answers AVERROR_PATCHWELCOME)",
+  "formats deeper than eight bits and every native format without frame storage (yuva444p, yuva422p, yuv440p, yuvj440p, yuvj411p, yuv411p, yuv410p, gbrap, gray9-16, high-depth YUV/GBR); a gbrap pick from packed RGB with alpha is refused by name before output",
+  "non-decimal percentile expressions",
+  "filtered planes wider than 65534 - radius samples (native uint16 luc cursors would wrap)"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "video.median-reference",
+   "file": "tests/differential/video-median.test.ts",
+   "name": "runs the sandbox reference build of commit 946fcce0 without x86 assembly",
+   "modes": [
+    "reference"
+   ],
+   "scope": "Reference build identity (commit, --disable-x86asm)"
+  },
+  {
+   "id": "video.median-matrix",
+   "file": "tests/differential/video-median.test.ts",
+   "name": "matches native median for every format, radius, vertical radius, percentile, plane mask and small size on the linear and graph planners",
+   "modes": [
+    "linear",
+    "graph"
+   ],
+   "scope": "1,176 linear and graph raw comparisons over 6 formats x 7 sizes x 14 filters"
+  },
+  {
+   "id": "video.median-threads",
+   "file": "tests/differential/video-median.test.ts",
+   "name": "matches native median with default filter threads and with -filter_threads 1 on sliced frames",
+   "modes": [
+    "linear"
+   ],
+   "scope": "60 native default-threads vs -filter_threads 1 agreements and 60 linear comparisons"
+  },
+  {
+   "id": "video.median-cli",
+   "file": "tests/differential/video-median.test.ts",
+   "name": "matches native rawvideo and framecrc bytes through the -vf, -filter_complex and timed backend CLIs with and without -ss and -t",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "1,728 rawvideo and framecrc CLI outputs on linear, graph, stream, actor and timed with three timings"
+  },
+  {
+   "id": "video.median-stream",
+   "file": "tests/differential/video-median.test.ts",
+   "name": "matches native replayed median branches frame by frame",
+   "modes": [
+    "stream"
+   ],
+   "scope": "24 replay graphs, raw bytes and PTS"
+  },
+  {
+   "id": "video.median-negotiation",
+   "file": "tests/differential/video-median.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "Native picks from 17 sources; gbrap refused by name on every path"
+  },
+  {
+   "id": "video.median-options-api",
+   "file": "tests/unit/video-median.test.ts",
+   "name": "parses native defaults, shorthand order, ranges, integer expressions and the float percentile into frozen steps",
+   "modes": [
+    "unit"
+   ],
+   "scope": "Parser and descriptor facts"
+  },
+  {
+   "id": "video.median-plan-api",
+   "file": "tests/unit/video-median.test.ts",
+   "name": "clips the radii to filtered planes and truncates the float threshold as config_input does",
+   "modes": [
+    "unit"
+   ],
+   "scope": "Radius clipping and the float threshold"
+  },
+  {
+   "id": "video.median-frame-api",
+   "file": "tests/unit/video-median.test.ts",
+   "name": "selects the clamped window order statistic through the column histograms into owned tight planes",
+   "modes": [
+    "unit"
+   ],
+   "scope": "Kernel against a brute-force sorted window and hand-computed frames"
+  },
+  {
+   "id": "video.median-refusals",
+   "file": "tests/unit/video-median.test.ts",
+   "name": "refuses unsupported layouts, wide planes, budgets, malformed storage, settings and cancellation explicitly",
+   "modes": [
+    "unit"
+   ],
+   "scope": "Limits and refusals"
+  },
+  {
+   "id": "video.median-plans",
+   "file": "tests/unit/video-median.test.ts",
+   "name": "budgets linear and graph plans, negotiates native formats and refuses timeline and runtime commands",
+   "modes": [
+    "unit"
+   ],
+   "scope": "Plan budgeting, negotiation, command refusal"
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "The spec asked geometry() to refuse planes narrower or shorter than native allows. Native accepts every size: check_params only warns and clips radius/radiusV to (plane-1)/2, down to radius 0 at 1x1 (probed with the sandbox reference, exit 0). The port therefore clips exactly as native does and the matrix compares sizes 1x1 and 2x2 and sizes near 2r+1 byte-exactly; the only size refusal is the uint16 luc wrap for planes wider than 65534 - radius, which has no native comparison.",
+  "t is the native formula (int)((2*r*rv + rv + r) * 2.f * percentile), i.e. ((2r+1)(2rv+1)-1) * percentile in float32, not percentile*(2r+1)*(2rv+1) as the spec summarised; percentile=1 selects the window maximum.",
+  "Native slice threading cannot change the result (nb_threads <= planeheight[1]/(radiusV+1) keeps every slice start inside the plane); verified against native default threads and -filter_threads 1.",
+  "Each filtered plane allocates a transient 544*width byte histogram scratch outside maxFrameBytes, as native allocates per thread.",
+  "No linux-gated cases: integer histograms plus one float32 product, run on every platform.",
+  "Setup: the sandbox had Node 22.23.5; the bootstrap requires Node 24, installed v24.22.3 with `n` in about 4 s. Bootstrap 193.7 s (npm 7.7 s, submodule 5.8 s, reference 180.2 s). Baseline typecheck+lint+boundaries+registry test 58 s, green. The reference differs from the linux-x64 pin, as expected with --allow-unpinned-reference."
+ ]
+}
