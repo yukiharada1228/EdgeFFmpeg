@@ -1,0 +1,18 @@
+Scoped hqx (hq2x/hq3x/hq4x) magnification filter
+
+The n option, the output geometry (w*n by h*n), the single RGB32 pixel format, the rgbtoyuv
+key (init, evaluated per pixel instead of tabulated), yuv_diff, interp_2px/interp_3px on the
+whole 32-bit word, the INTERP_BOOTSTRAP mask shuffle, the hq2x_interp_1x1, hq3x_interp_2x1 and
+hq4x_interp_2x2 pattern tables, their hqx_filter call sites and the edge replication in
+src/video-hqx.ts and src/video-ops/hqx.ts follow libavfilter/vf_hqx.c (hqx_options, rgb2yuv,
+yuv_diff, interp_2px, interp_3px, hq2x_interp_1x1, hq3x_interp_2x1, hq4x_interp_2x2, hqx_filter,
+config_output, filter_frame, init, FILTER_SINGLE_PIXFMT).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2014 Clément Bœsch. vf_hqx.c carries an ISC-style permission notice
+(permission to use, copy, modify, and/or distribute with the copyright and permission notice
+retained; provided "AS IS" without warranty) and is distributed as part of FFmpeg under
+LGPL-2.1-or-later. Copyright (c) the FFmpeg developers.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete hqx filter: slice threading,
+expression-valued options, timeline support and runtime commands are not included.
