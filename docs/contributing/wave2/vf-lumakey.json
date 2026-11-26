@@ -1,0 +1,257 @@
+{
+ "capabilityId": "filter.lumakey",
+ "slug": "vf-lumakey",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/lumakey.ts",
+  "packages/avfilter/NOTICE-LUMAKEY",
+  "tests/unit/video-lumakey.test.ts",
+  "tests/differential/video-lumakey.test.ts",
+  "docs/contributing/lumakey.md",
+  "docs/contributing/wave2/vf-lumakey.json",
+  "packages/avfilter/src/video-ops/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  {
+   "file": "packages/avfilter/src/video-ops/registry.ts",
+   "lines": [
+    "import {lumakeyOperator} from './lumakey.js';",
+    " lumakeyOperator,"
+   ]
+  }
+ ],
+ "paths": [
+  "linear",
+  "graph",
+  "stream",
+  "actor",
+  "timed"
+ ],
+ "tests": [
+  {
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "runs against the reference build of commit 946fcce0 with x86 assembly disabled",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "matches native lumakey frames for every option case, size and luma ramp, with default and single filter threads",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "matches native -vf lumakey rawvideo and framecrc from yuva420p and yuv420p sources with and without time scopes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "matches native -filter_complex lumakey split branches on the graph path and the timed backend",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "matches native lumakey on the stream path through replay execution, activation actors and the multi-input CLI",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "matches native lumakey through the timed backend on the actor and timed paths in rawvideo and framecrc",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "fails like native for out-of-range lumakey options and refuses timeline and unscoped options before opening any output",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the yuva422p and yuva444p picks without storage before output",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-lumakey.test.ts",
+   "name": "parses declared defaults, shorthand, named options, ranges and refusals",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-lumakey.test.ts",
+   "name": "derives the eight-bit bounds as config_input does",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-lumakey.test.ts",
+   "name": "keys alpha from luma into owned tight planes and copies Y, U and V without mutating padded input",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-lumakey.test.ts",
+   "name": "rejects unsupported layouts, budgets, malformed storage, settings and cancellation explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-lumakey.test.ts",
+   "name": "plans lumakey on linear, graph and actor paths, refuses picks without storage by name and refuses runtime commands",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "name": "(whole file, unchanged)",
+   "passed": 8,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 713,
+  "details": [
+   {
+    "test": "matches native lumakey frames for every option case, size and luma ramp, with default and single filter threads",
+    "count": 286,
+    "compares": "compileVideoFilterChain 3-frame rawvideo bytes vs native -vf rawvideo for 11 option cases x 13 yuva420p inputs (6 sizes x {pattern, constant planes} + 16x16 every-value luma ramp): 143 byte matches; plus 143 native default-thread vs -filter_threads 1 agreements"
+   },
+   {
+    "test": "matches native -vf lumakey rawvideo and framecrc from yuva420p and yuv420p sources with and without time scopes",
+    "count": 192,
+    "compares": "media CLI -vf rawvideo and framecrc bytes, yuva420p and yuv420p (implicit conversion, -cpuflags 0, scalar), 6 sizes, 4 chains, with and without -ss/-t"
+   },
+   {
+    "test": "matches native -filter_complex lumakey split branches on the graph path and the timed backend",
+    "count": 96,
+    "compares": "-filter_complex two-output rawvideo and framecrc files on the media (graph) and timed producer (actor) backends, with and without -ss/-frames:v"
+   },
+   {
+    "test": "matches native lumakey on the stream path through replay execution, activation actors and the multi-input CLI",
+    "count": 62,
+    "compares": "createReplayVideoExecution rawvideo (36), createFrameActors (24), multi-input CLI rawvideo/framecrc (2)"
+   },
+   {
+    "test": "matches native lumakey through the timed backend on the actor and timed paths in rawvideo and framecrc",
+    "count": 48,
+    "compares": "createTimedVideoBackend producer (actor) and pull (timed) schedulers, rawvideo and framecrc, with and without -ss/-t"
+   },
+   {
+    "test": "fails like native for out-of-range lumakey options and refuses timeline and unscoped options before opening any output",
+    "count": 12,
+    "compares": "out-of-range option: native non-zero exit with no output file vs EdgeFFmpeg non-zero exit with zero outputs opened on media -vf, media -filter_complex, timed producer and timed pull (6 further scope refusals have no native comparison)"
+   },
+   {
+    "test": "negotiates every accepted source as native does and refuses the yuva422p and yuva444p picks without storage before output",
+    "count": 17,
+    "compares": "native showinfo pick from 17 sources; 113 checks: 5 sources byte-exact on every path, 12 refused by name on every path and CLI backend"
+   }
+  ]
+ },
+ "unsupported": [
+  "yuva422p, yuva444p and every 9-16 bit alpha format: no frame storage; refused by name at plan time. Native picks yuva422p/yuva444p for every non-4:2:0 source (yuv422p, yuv444p, yuvj422p, yuvj444p, gray, rgb24, bgr24, gbrp, rgba, bgra, argb, abgr).",
+  "enable= timeline (refused: 'Lumakey timeline expressions are not implemented')",
+  "Runtime commands threshold/tolerance/softness/enable (refused with the unsupported code)",
+  "Option expressions and constants such as 1/2 or 0x1 (refused: 'Only constant decimal lumakey <option> values are implemented')"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "nodeVersion": "v24.22.3 (/opt/node24 in the sandbox)",
+ "proposedContracts": [
+  {
+   "id": "filter.lumakey.frames",
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "matches native lumakey frames for every option case, size and luma ramp, with default and single filter threads",
+   "modes": [
+    "linear"
+   ],
+   "scope": "yuva420p, every option class, every 8-bit luma value, six sizes, thread-count independence"
+  },
+  {
+   "id": "filter.lumakey.cli",
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "matches native -vf lumakey rawvideo and framecrc from yuva420p and yuv420p sources with and without time scopes",
+   "modes": [
+    "linear"
+   ],
+   "scope": "-vf rawvideo and framecrc, yuv420p implicit conversion, -ss/-t"
+  },
+  {
+   "id": "filter.lumakey.graph",
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "matches native -filter_complex lumakey split branches on the graph path and the timed backend",
+   "modes": [
+    "graph",
+    "actor"
+   ],
+   "scope": "-filter_complex split branches with two outputs on the media and timed producer backends"
+  },
+  {
+   "id": "filter.lumakey.stream",
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "matches native lumakey on the stream path through replay execution, activation actors and the multi-input CLI",
+   "modes": [
+    "stream",
+    "actor"
+   ],
+   "scope": "replay execution, activation actors and the multi-input CLI"
+  },
+  {
+   "id": "filter.lumakey.timed",
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "matches native lumakey through the timed backend on the actor and timed paths in rawvideo and framecrc",
+   "modes": [
+    "actor",
+    "timed"
+   ],
+   "scope": "timed backend producer and pull schedulers, rawvideo and framecrc"
+  },
+  {
+   "id": "filter.lumakey.reject",
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "fails like native for out-of-range lumakey options and refuses timeline and unscoped options before opening any output",
+   "modes": [
+    "linear",
+    "graph",
+    "actor",
+    "timed"
+   ],
+   "scope": "option range parity with native, enable=/threads/expression refusals, no output opened"
+  },
+  {
+   "id": "filter.lumakey.negotiation",
+   "file": "tests/differential/video-lumakey.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the yuva422p and yuva444p picks without storage before output",
+   "modes": [
+    "linear",
+    "graph",
+    "stream",
+    "actor",
+    "timed"
+   ],
+   "scope": "native picks from 17 sources; yuva422p/yuva444p refused by name before output"
+  }
+ ],
+ "setupDurationsSeconds": {
+  "bootstrapTotal": 231,
+  "npm": 7.9,
+  "submodule": 10.7,
+  "referenceBuild": 211.0,
+  "baselineChecks": 71,
+  "baselineRegistryUnit": 2
+ },
+ "sharedEditsNeeded": [],
+ "notes": [
+  "The sandbox reference is an unpinned build (--allow-unpinned-reference): sha256 ac302e4d... differs from the linux-x64 pin in compat/reference-pins.json; commit 946fcce0 and --disable-x86asm are asserted at test time.",
+  "No float-sensitive case: each bound is (a +/- b) * 255 truncated, so is softness * 255 truncated, then integer keying. No case is platform-gated.",
+  "Native default threads and -filter_threads 1 agree on every frame case (143).",
+  "Mutation check: '254 -' for '255 -' failed 6 differential tests, rounding so failed 5, an exclusive upper key bound failed 3.",
+  "The default Node in the sandbox was v22; bootstrap requires Node 24, so /opt/node24 was used.",
+  "Full npm test / npm run check not run, per the wave rules (they need edge-flac.wasm)."
+ ]
+}
