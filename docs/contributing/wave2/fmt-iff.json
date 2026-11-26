@@ -16,19 +16,20 @@
   ],
   "tests": [
     {"file": "tests/unit/iff.test.ts", "tests": 7, "passed": 7},
-    {"file": "tests/differential/iff.test.ts", "tests": 5, "passed": 5, "comparisons": 262, "durationSeconds": 6},
+    {"file": "tests/differential/iff.test.ts", "tests": 6, "passed": 6, "comparisons": 309, "durationSeconds": 6},
     {"file": "tests/differential/iff.test.ts", "name": "matches native IFF MAUD demux for 4 codecs x 3 layouts through copy and decoded framecrc, WAV and raw output", "comparisons": 192},
     {"file": "tests/differential/iff.test.ts", "name": "matches native IFF MAUD timing with output seeks, durations and frame limits, detected without -f or an extension", "comparisons": 20},
     {"file": "tests/differential/iff.test.ts", "name": "refuses IFF NAME metadata for WAV and AIFF output and matches native raw, framecrc and W64 output", "comparisons": 15},
     {"file": "tests/differential/iff.test.ts", "name": "refuses IFF inputs with the native exit status or explicitly before any output exists", "comparisons": 17},
+    {"file": "tests/differential/iff.test.ts", "name": "matches native IFF MAUD mono and stereo layouts under -guess_layout_max and leaves a FORM DS16 MAUD head undetected as native does", "comparisons": 47},
     {"file": "tests/differential/iff.test.ts", "name": "matches native IFF MAUD edge layouts: odd MDAT without its pad byte, empty MDAT, repeated MHDR and MDAT, empty NAME for raw", "comparisons": 18},
     {"file": "tests/unit/container-registry.test.ts", "tests": 9, "passed": 9},
     {"file": "tests/unit/container-registry-extension.test.ts", "tests": 7, "passed": 7}
   ],
   "nativeComparisons": {
-    "total": 262,
-    "byteExact": 236,
-    "nativeStatusMatched": 9,
+    "total": 309,
+    "byteExact": 282,
+    "nativeStatusMatched": 10,
     "nativeSucceedsEdgeRefuses": 14,
     "metadataRefusals": 6,
     "note": "byteExact counts framecrc, WAV, raw and W64 outputs compared byte for byte; nativeSucceedsEdgeRefuses covers the 6 WAV/AIFF metadata refusals and 8 explicit input refusals, with no output created"
@@ -52,14 +53,18 @@
     {"id": "iff.timing", "file": "tests/differential/iff.test.ts", "name": "matches native IFF MAUD timing with output seeks, durations and frame limits, detected without -f or an extension", "modes": ["semantic", "bit-exact"], "scope": "8192-sample packet timing under output -ss/-t/-frames:a for u8 and s16be stereo, copy and fixed-volume decode, detected and forced -f iff. Wave 2 branch wave2/fmt-iff."},
     {"id": "iff.metadata", "file": "tests/differential/iff.test.ts", "name": "refuses IFF NAME metadata for WAV and AIFF output and matches native raw, framecrc and W64 output", "modes": ["semantic", "bit-exact", "diagnostic"], "scope": "NAME, ANNO and AUTH chunks: WAV and AIFF refused before output (native writes them); raw, copy framecrc and W64 byte-exact. Wave 2 branch wave2/fmt-iff."},
     {"id": "iff.refusals", "file": "tests/differential/iff.test.ts", "name": "refuses IFF inputs with the native exit status or explicitly before any output exists", "modes": ["semantic", "diagnostic"], "scope": "Native 176 (unsupported MAUD compression/bits) and 183 (MHDR/CHAN/missing MHDR) statuses matched; 8SVX (with and without compression), 16SV, VHDR in MAUD, MDAT past EOF, partial frame, missing MDAT and input -ss refused with no output where native exits 0. Wave 2 branch wave2/fmt-iff."},
+    {"id": "iff.layout-guess", "file": "tests/differential/iff.test.ts", "name": "matches native IFF MAUD mono and stereo layouts under -guess_layout_max and leaves a FORM DS16 MAUD head undetected as native does", "modes": ["semantic", "bit-exact"], "scope": "MHDR 1/2/3 channels and CHAN mono/stereo overrides under -guess_layout_max 0/1/2 through copy framecrc, decoded framecrc and WAV; a FORM DS16 MAUD head refused undeclared (native probe tie, 183) and read identically with -f iff. Wave 2 branch wave2/fmt-iff."},
     {"id": "iff.layouts", "file": "tests/differential/iff.test.ts", "name": "matches native IFF MAUD edge layouts: odd MDAT without its pad byte, empty MDAT, repeated MHDR and MDAT, empty NAME for raw", "modes": ["semantic", "bit-exact"], "scope": "Odd unpadded and padded MDAT, empty MDAT, last-wins MHDR and MDAT, a 64-byte MHDR and an empty NAME chunk through copy framecrc, decoded framecrc and raw copy. Wave 2 branch wave2/fmt-iff."}
   ],
-  "sharedEditsNeeded": [],
+  "sharedEditsNeeded": [
+    "Stream copy from iff: native keeps iff_read_header's block_align = channels * bits (bits, not bytes), which WAV/W64 (nBlockAlign), AIFF (numSampleFrames = payload / block_align) and CAF (mBytesPerPacket) write; the PCM path needs a native copy block_align on the stream info, or a per-muxer copy refusal, before iff -c copy into those muxers can match or be refused (copyRefusal would also refuse the matching framecrc/raw copies)."
+  ],
   "notes": [
     "Probe precedence 26: the FORM head overlaps aiff (30); the confirm reads 12 bytes and requires MAUD at byte 8, resolving false without reading on shorter input, so AIFF/AIFC and a bare 4-byte FORM keep detecting as aiff (unit-tested; container-registry tests unchanged and passing). Disjoint from nsp's DS16 check at 24.",
     "Native exit statuses 176 (AVERROR_PATCHWELCOME) and 183 (AVERROR_INVALIDDATA) are FFERRTAG values, not errno based, so no host errno mapping was needed.",
     "The sandbox Node was 22.23.5; tests and bootstrap ran with the preinstalled Node 24.22.3 (/opt/node24).",
     "Setup durations: bootstrap 232 s (npm 10.5 s, submodule 7.9 s, reference build about 213 s); baseline typecheck+lint+boundaries plus registry tests 78 s (all passing); the first bootstrap attempt failed immediately under Node 22.",
-    "Evidence is from the sandbox linux-x64 reference build, not the pinned binary; a branch is not compatibility evidence until linux-probe and macOS validation pass."
+    "Evidence is from the sandbox linux-x64 reference build, not the pinned binary; a branch is not compatibility evidence until linux-probe and macOS validation pass.",
+    "Audit (audit-fmt-b): mono/stereo inputs now report masks 0x4/0x3 as native's explicit MONO/STEREO layouts (they diverged under -guess_layout_max 0/1), and the probe no longer claims a FORM DS16 MAUD head, which native leaves undetected because nsp_probe ties at 100. Still open: -c copy into WAV, W64 and AIFF exits 0 with headers that differ from native (block_align = channels * bits); see sharedEditsNeeded. The audit test ran on macOS arm64 against the pinned darwin reference (sha256 1b86106f…ab92, Apple clang 21.0.0), not on the sandbox linux-x64 build; its linux-x64 evidence comes from CI."
   ]
 }

@@ -21,7 +21,8 @@ const codecs:readonly (readonly [number,number,IffCodec])[]=[[8,0,'pcm_u8'],[16,
 const metadataChunks=new Set(['ANNO','TEXT','AUTH','(c) ','NAME']);
 /** Every other chunk iff_read_header interprets: 8SVX, DSD, ILBM/ANIM video and PROP/COMT/DIIN/FVER paths, none mirrored. */
 const foreignChunks=new Set(['VHDR','ABIT','BODY','DBOD','DSD ','DST ','CAMG','CMAP','BMHD','ANHD','DPAN','DPEL','DGBL','DLOC','TVDC','SXHD','FVER','DIIN','PROP','COMT']);
-const formHeader=12,chunkHeader=8,mhdrFields=20,headerBytes=32,packetSamples=1024n*8n,saneChannels=512,invalidData=183,patchWelcome=176;
+/** MHDR 1/2 channels and every CHAN override set AV_CHANNEL_LAYOUT_MONO/STEREO (native order, never guessed); 3 or more stay AV_CHANNEL_ORDER_UNSPEC. */
+const monoMask=0x4,stereoMask=0x3,formHeader=12,chunkHeader=8,mhdrFields=20,headerBytes=32,packetSamples=1024n*8n,saneChannels=512,invalidData=183,patchWelcome=176;
 interface Mhdr {readonly bits:number;readonly rateNum:number;readonly rateDen:number;readonly channels:number;readonly compression:number}
 const tag=(bytes:Uint8Array,offset:number)=>String.fromCharCode(bytes[offset]!,bytes[offset+1]!,bytes[offset+2]!,bytes[offset+3]!);
 async function readAt(input:ReadHandle,position:bigint,length:number,maxReadBytes:number,signal?:AbortSignal):Promise<Uint8Array>{
@@ -34,7 +35,8 @@ export async function probeIff(input:ReadHandle,maxReadBytes:number,signal?:Abor
   signal?.throwIfAborted();
   if(!Number.isSafeInteger(maxReadBytes)||maxReadBytes<1)throw new IffError('resource-limit','Invalid IFF read budget');
   if(input.size<BigInt(formHeader))return false;
-  const bytes=await readAt(input,0n,formHeader,maxReadBytes,signal);return tag(bytes,0)==='FORM'&&tag(bytes,8)==='MAUD';
+  // nsp_probe also scores 100 on 'DS16' at byte 4; native's tie leaves the format undetected (183), so that head is not claimed.
+  const bytes=await readAt(input,0n,formHeader,maxReadBytes,signal);return tag(bytes,0)==='FORM'&&tag(bytes,8)==='MAUD'&&tag(bytes,4)!=='DS16';
 }
 /** Finite range-backed IFF MAUD: the chunk walk of iff_read_header to EOF, reading only chunk headers and the MHDR/CHAN fields, then PCM from MDAT. */
 export async function openIff(input:ReadHandle,options:IffOptions):Promise<IffInput>{
@@ -76,7 +78,7 @@ export async function openIff(input:ReadHandle,options:IffOptions):Promise<IffIn
   const dataBytes=body.end-body.start;
   if(dataBytes%BigInt(channels*width))throw new IffError('unsupported','IFF MAUD trailing partial sample frame is not implemented');
   if(seek>0n)throw new IffError('unsupported','IFF input seek is not implemented');
-  const offset=body.start,raw=await openRawPcm({size:dataBytes,readAt:(at,length,abort)=>input.readAt(offset+at,length,abort)},{codec:codec as PcmCodec,channels,sampleRate,channelMask:null,maxReadBytes,...(signal?{signal}:{})});
+  const offset=body.start,raw=await openRawPcm({size:dataBytes,readAt:(at,length,abort)=>input.readAt(offset+at,length,abort)},{codec:codec as PcmCodec,channels,sampleRate,channelMask:channels===1?monoMask:channels===2?stereoMask:null,maxReadBytes,...(signal?{signal}:{})});
   return Object.freeze({info:Object.freeze({...raw.info,dataOffset:offset,container:'iff' as const,bits:header.bits,compression:header.compression,rateNum:header.rateNum,rateDen:header.rateDen,metadata}),packets:raw.packets});
 }
 /** iff_read_packet reads min(body_end - pos, 1024 * block_align) with block_align = channels * bits (not bytes): 8192 samples. */
@@ -85,7 +87,7 @@ export function iffPacketSpan():bigint{return packetSamples;}
 export const iff=defineContainer({
   name:'iff',
   // The 'FORM' head overlaps aiff (30), so iff runs first at 26 (after nsp at 24) and confirms 'MAUD' at byte 8, which no AIFF/AIFC
-  // file and no bare 4-byte FORM satisfies; disjoint from nsp's DS16 check.
+  // file and no bare 4-byte FORM satisfies; a 'DS16' at byte 4 (nsp's check) is left to native's ambiguous-probe failure.
   demux:{probe:{precedence:26,head:bytes=>String.fromCharCode(...bytes)==='FORM',confirm:probeIff},headerBytes,
     open:(source,{maxReadBytes,signal,seek})=>openIff(source,{maxReadBytes,signal,seek}),packetSpan:iffPacketSpan}
 });

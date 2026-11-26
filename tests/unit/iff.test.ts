@@ -17,7 +17,7 @@ const open=(bytes:Uint8Array,options:{maxReadBytes?:number;seek?:bigint}={},requ
 it('walks MAUD chunks to EOF with bounded reads of chunk headers and the MHDR and CHAN fields only',async()=>{
   const bytes=form('MAUD',chunk('MHDR',mhdr({bits:16,num:44100,den:3,channels:2})),chunk('XTRA',payload(5)),chunk('MDAT',payload(4*300)),chunk('ZZZZ',payload(3))),requests:Array<{offset:bigint;length:number}>=[];
   const input=await open(bytes,{maxReadBytes:7},requests);
-  expect(input.info).toMatchObject({container:'iff',codec:'pcm_s16be',channels:2,sampleRate:14700,channelMask:null,blockAlign:4,durationSamples:300n,dataOffset:BigInt(12+40+14+8),bits:16,compression:0,rateNum:44100,rateDen:3,metadata:false});
+  expect(input.info).toMatchObject({container:'iff',codec:'pcm_s16be',channels:2,sampleRate:14700,channelMask:3,blockAlign:4,durationSamples:300n,dataOffset:BigInt(12+40+14+8),bits:16,compression:0,rateNum:44100,rateDen:3,metadata:false});
   // FORM header (12), then per chunk an 8-byte header; MHDR reads its first 20 bytes; MDAT and the skipped chunks are never read.
   const expected=[[0,12],[12,8],[20,20],[52,8],[66,8],[1274,8]].flatMap(([offset,length])=>{const parts=[];for(let at=0;at<length!;at+=7)parts.push({offset:BigInt(offset!+at),length:Math.min(7,length!-at)});return parts;});
   expect(requests).toEqual(expected);
@@ -50,6 +50,9 @@ it('applies CHAN overrides in chunk order and flags metadata chunks',async()=>{
   expect(await channels(chunk('MHDR',mhdr({channels:1})),chan(6))).toBe(2);
   expect(await channels(chunk('MHDR',mhdr({channels:3})),chan(0xffffffff))).toBe(2);
   expect(await channels(chunk('MHDR',mhdr({channels:3})),chan(6),chunk('MHDR',mhdr({channels:4})))).toBe(4);
+  // MHDR 1/2 channels and every CHAN override are native-order mono/stereo (masks 0x4/0x3); 3 or more channels stay unspecified (null).
+  const mask=async(...chunks:Uint8Array[])=>(await open(form('MAUD',...chunks,chunk('MDAT',payload(12))))).info.channelMask;
+  expect([await mask(chunk('MHDR',mhdr({channels:1}))),await mask(chunk('MHDR',mhdr({channels:2}))),await mask(chunk('MHDR',mhdr({channels:3}))),await mask(chunk('MHDR',mhdr({channels:3})),chan(5)),await mask(chunk('MHDR',mhdr({channels:1})),chan(6))]).toEqual([4,3,null,4,3]);
   await expect(open(form('MAUD',chan(6),chunk('MHDR',mhdr()),chunk('MDAT',payload(2))))).rejects.toEqual(refusal(183));
   await expect(open(form('MAUD',chunk('MHDR',mhdr()),chunk('CHAN',payload(3)),chunk('MDAT',payload(2))))).rejects.toEqual(refusal(183));
   for(const id of ['ANNO','TEXT','AUTH','(c) ','NAME'])expect((await open(form('MAUD',chunk('MHDR',mhdr()),chunk(id,latin('x')),chunk('MDAT',payload(2))))).info.metadata,id).toBe(true);
@@ -84,6 +87,8 @@ it('probes FORM MAUD before aiff and leaves AIFF, AIFC and a bare FORM to aiff',
   expect(await detectAudioContainer(memoryInput(latin('FORM')),64)).toBe('aiff');expect(await detectAudioContainer(memoryInput(form('AIFF',chunk('COMM',payload(18)))),64)).toBe('aiff');
   const requests:Array<{offset:bigint;length:number}>=[];expect(await probeIff(memoryInput(maud,requests),5)).toBe(true);expect(requests).toEqual([{offset:0n,length:5},{offset:5n,length:5},{offset:10n,length:2}]);
   expect(iff.demux.probe.head(latin('FORM'))).toBe(true);expect(iff.demux.probe.head(latin('FRM8'))).toBe(false);
+  // nsp_probe scores 100 on 'DS16' at byte 4 as well: native's probe tie detects nothing, so iff does not claim that head.
+  const tie=maud.slice();tie.set(latin('DS16'),4);expect(await probeIff(memoryInput(tie),64)).toBe(false);
   await expect(probeIff(memoryInput(maud),0)).rejects.toThrow('read budget');
 });
 it('honors cancellation and registers the demux-only descriptor',async()=>{

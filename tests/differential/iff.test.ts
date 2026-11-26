@@ -138,3 +138,29 @@ it('matches native IFF MAUD edge layouts: odd MDAT without its pad byte, empty M
     expect(compared).toBe(6*3);
   }finally{rmSync(root,{recursive:true,force:true});}
 },120000);
+it('matches native IFF MAUD mono and stereo layouts under -guess_layout_max and leaves a FORM DS16 MAUD head undetected as native does',async()=>{
+  const {root,ffmpeg}=await harness('edgeffmpeg-iff-guess-');let compared=0,refused=0;
+  try{
+    // MHDR 1/2 channels and CHAN set native-order mono/stereo, which -guess_layout_max never drops; 3 MHDR channels stay unspecified.
+    const cases:Array<[string,Uint8Array]>=[
+      ['mono',form('MAUD',chunk('MHDR',mhdr({bits:16,channels:1})),chunk('MDAT',payload(2*3000)))],
+      ['stereo',form('MAUD',chunk('MHDR',mhdr({bits:16,channels:2})),chunk('MDAT',payload(4*3000)))],
+      ['three',form('MAUD',chunk('MHDR',mhdr({bits:16,channels:3})),chunk('MDAT',payload(6*3000)))],
+      ['chan-mono',form('MAUD',chunk('MHDR',mhdr({bits:16,channels:3})),chan(1),chunk('MDAT',payload(2*3000)))],
+      ['chan-stereo',form('MAUD',chunk('MHDR',mhdr({bits:16,channels:1})),chan(9),chunk('MDAT',payload(4*3000)))]
+    ];
+    for(const [name,bytes]of cases)for(const guess of ['0','1','2'])for(const [suffix,args]of [['copy.crc',['-c:a','copy','-bitexact','-f','framecrc']],['decode.crc',['-c:a','pcm_s16le','-bitexact','-f','framecrc']],['wav',['-bitexact','-f','wav']]] as const){
+      writeFileSync(join(root,`${name}.iff`),bytes);const out=`${name}-${guess}.${suffix}`;
+      execFileSync(native,['-v','error','-y','-guess_layout_max',guess,'-i',join(root,`${name}.iff`),...args,join(root,`native-${out}`)]);
+      const result=await ffmpeg.exec(['-guess_layout_max',guess,'-i',`/${name}.iff`,...args,`/${out}`]);expect(result.exitCode,`${out} ${JSON.stringify(result.diagnostics)}`).toBe(0);
+      expect(readFileSync(join(root,out)).equals(readFileSync(join(root,`native-${out}`))),out).toBe(true);compared++;
+    }
+    // 'DS16' at byte 4 also satisfies nsp_probe: both score 100 and native detects nothing (183); forced -f iff reads it as MAUD in both.
+    const tie=form('MAUD',chunk('MHDR',mhdr({bits:16,channels:2})),chunk('MDAT',payload(4*900)));tie.set(latin('DS16'),4);writeFileSync(join(root,'tie.iff'),tie);
+    expect(spawnSync(native,['-v','error','-i',join(root,'tie.iff'),'-f','framecrc','-']).status).toBe(183);
+    const undeclared=await ffmpeg.exec(['-i','/tie.iff','-f','framecrc','/tie.crc']);expect(undeclared.exitCode).not.toBe(0);expect(existsSync(join(root,'tie.crc'))).toBe(false);refused++;
+    const expected=execFileSync(native,['-v','error','-f','iff','-i',join(root,'tie.iff'),'-c:a','copy','-bitexact','-f','framecrc','-']),forced=await ffmpeg.exec(['-f','iff','-i','/tie.iff','-c:a','copy','-bitexact','-f','framecrc','/forced.crc']);
+    expect(forced.exitCode,JSON.stringify(forced.diagnostics)).toBe(0);expect(readFileSync(join(root,'forced.crc')).equals(expected)).toBe(true);compared++;
+    expect([compared,refused]).toEqual([5*3*3+1,1]);
+  }finally{rmSync(root,{recursive:true,force:true});}
+},120000);
