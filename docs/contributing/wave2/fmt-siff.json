@@ -1,0 +1,166 @@
+{
+  "capabilityId": "demuxer.siff",
+  "slug": "fmt-siff",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/siff.ts",
+    "packages/containers/NOTICE-SIFF",
+    "packages/containers/src/registry.ts (shared, +1 line)",
+    "docs/contributing/siff-support.md",
+    "docs/contributing/wave2/fmt-siff.json",
+    "tests/unit/siff.test.ts",
+    "tests/differential/siff.test.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/containers/src/registry.ts",
+      "change": "+1 line: export {siff} from './siff.js'; between sds and sox"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/siff.test.ts",
+      "title": "parses the SOUN header with bounded reads that never touch the payload and derives the native packet span",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/siff.test.ts",
+      "title": "follows siff_read_header in its checks, order and native statuses",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/siff.test.ts",
+      "title": "probes exactly the 12 bytes siff_probe inspects, detecting SOUN and VBV1",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/siff.test.ts",
+      "title": "checks the abort signal around every read",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/siff.test.ts",
+      "title": "registers a frozen demux-only descriptor and routes through the backend, refusing copy of a short tail before any output",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/siff.test.ts",
+      "title": "matches native SIFF copy framecrc, decode framecrc, WAV, raw u8, AU and s16le for eight rate and bit layouts with whole packets past 65536 samples",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/siff.test.ts",
+      "title": "matches native SIFF decoding of short final packets and refuses their stream copy, which native flags F=0x3",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/siff.test.ts",
+      "title": "matches native SIFF packet timing for output -ss, -t and -frames:a, declared -f siff and filtered decode",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/differential/siff.test.ts",
+      "title": "refuses VBV1, malformed headers, empty-stream headers and input seeks before any output, with native statuses recorded",
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry.test.ts",
+      "title": "(unchanged file, all tests)",
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry-extension.test.ts",
+      "title": "(unchanged file, all tests)",
+      "passed": 7,
+      "failed": 0
+    },
+    {
+      "file": "tests/unit/container-registry-copy-refusal.test.ts",
+      "title": "(unchanged file, all tests)",
+      "passed": 1,
+      "failed": 0
+    }
+  ],
+  "nativeComparisons": {
+    "count": 253,
+    "compares": "48 byte-exact outputs (8 layouts: 8000/11025/22050 Hz x 8/16 bits, 8000/24 and 11025/32; whole packets, >65536 samples; copy framecrc, decode framecrc, WAV, copy u8, AU, s16le); 64 byte-exact decodes of 16 short-tail inputs (framecrc, WAV, AU, s16le); 140 byte-exact timing outputs (output -t/-ss/-frames:a incl. -ss beyond EOF and -frames:a 0, copy, filtered asetnsamples=n=700:p=0 decode, plain and declared -f siff, framecrc and WAV); 1 empty-BODY copy framecrc. In addition: 16 native copy framecrc outputs asserted to end in F=0x3 (Edge refuses copy), 12 native exit statuses (183 x9, 256-EINVAL x1, 0 x2), native 'Error during demuxing' at EOF with exit 0, and the absent native siff muxer."
+  },
+  "unsupported": [
+    "VBV1 video files (detected, refused with exit 1)",
+    "siff muxing (native has no muxer)",
+    "input -ss (refused)",
+    "headers that natively open as empty streams: bits<8, rate 0 (native fails with EINVAL at the muxer), BODY present but file shorter than 36 bytes (refused, exit 1)",
+    "-c copy of a short final packet (native F=0x3; refused via copyRefusal)",
+    "native 'Error during demuxing' log at EOF is not reproduced",
+    "FLAC-path and Workers-runtime evidence (no tests/workers file)"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "siff.copy-decode",
+      "file": "tests/differential/siff.test.ts",
+      "name": "matches native SIFF copy framecrc, decode framecrc, WAV, raw u8, AU and s16le for eight rate and bit layouts with whole packets past 65536 samples",
+      "modes": [
+        "bit-exact-pcm"
+      ],
+      "scope": "8 layouts x 6 outputs byte-exact, whole native packets of rate*(bits>>3) samples past the 16-bit pts wrap."
+    },
+    {
+      "id": "siff.short-tail",
+      "file": "tests/differential/siff.test.ts",
+      "name": "matches native SIFF decoding of short final packets and refuses their stream copy, which native flags F=0x3",
+      "modes": [
+        "bit-exact-pcm",
+        "diagnostic"
+      ],
+      "scope": "16 short-tail inputs decoded byte-exact to 4 outputs; native copy F=0x3 asserted and Edge copy refused before output."
+    },
+    {
+      "id": "siff.timing",
+      "file": "tests/differential/siff.test.ts",
+      "name": "matches native SIFF packet timing for output -ss, -t and -frames:a, declared -f siff and filtered decode",
+      "modes": [
+        "bit-exact-pcm"
+      ],
+      "scope": "Output -t/-ss/-frames:a on three inputs, copy and decode (plain, filtered, declared), framecrc and WAV. No input -ss (refused)."
+    },
+    {
+      "id": "siff.error-matrix",
+      "file": "tests/differential/siff.test.ts",
+      "name": "refuses VBV1, malformed headers, empty-stream headers and input seeks before any output, with native statuses recorded",
+      "modes": [
+        "diagnostic"
+      ],
+      "scope": "12 malformed or empty-stream headers with native statuses asserted; Edge refuses all before output. Also the input -ss refusal, EOF demux log, empty BODY and absent muxer."
+    },
+    {
+      "id": "siff.header",
+      "file": "tests/unit/siff.test.ts",
+      "name": "follows siff_read_header in its checks, order and native statuses",
+      "modes": [
+        "diagnostic"
+      ],
+      "scope": "Every siff_read_header check in order with statuses, zero padding past EOF, ignored fields, empty-stream refusals, budgets. Synthetic inputs, no native run."
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Setup durations: sandbox Node was 22.23.5 and bootstrap requires Node 24, so Node 24.11.1 was installed from nodejs.org (about 5 s); npm run bootstrap -- --only npm,submodule,reference --allow-unpinned-reference took 248 s (npm 10.6 s, submodule 8.4 s, reference build the rest); baseline typecheck+lint+boundaries+registry unit tests (3 files, 17 tests passed) took 86 s.",
+    "VBV1 is refused with exit 1 rather than native's status: native demuxes VB video (a test file without VBHD gives 183, which the error matrix asserts).",
+    "rate 0 natively fails at the muxer's write_header with AVERROR(EINVAL); the test computes 256-os.constants.errno.EINVAL for native and Edge refuses with exit 1 at open.",
+    "The timing test raises maxBufferBytes and the filesystem read/write budgets to 4096 because asetnsamples=n=700 holds 700 reframed samples; the other tests use 128.",
+    "The differential file runs in about 40 s with --maxWorkers=1 on 4 vCPUs.",
+    "No shared edit beyond the registry line was needed."
+  ]
+}

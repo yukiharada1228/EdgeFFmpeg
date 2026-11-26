@@ -1,0 +1,12 @@
+Scoped Beam Software SIFF (SOUN) demuxer
+
+The probe, the SOUN header checks (SIFF, SOUN, SHDR and its size, rate,
+bits, BODY) and the block_align packet framing in src/siff.ts follow
+libavformat/siff.c (siff_probe, siff_read_header, siff_parse_soun,
+create_audio_stream, siff_read_packet).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2007 Konstantin Shishkov. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation,not the complete siff demuxer:
+VBV1 video files are detected and refused.
