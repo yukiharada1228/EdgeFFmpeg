@@ -1,0 +1,192 @@
+{
+  "capabilityId": "demuxer.sdx",
+  "slug": "fmt-sdx",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/sdx.ts",
+    "packages/containers/NOTICE-SDX",
+    "docs/contributing/sdx-support.md",
+    "tests/unit/sdx.test.ts",
+    "tests/differential/sdx.test.ts",
+    "docs/contributing/wave2/fmt-sdx.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    {
+      "file": "packages/containers/src/registry.ts",
+      "line": "export {sdx} from './sdx.js';",
+      "position": "after export {sds}"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/unit/sdx.test.ts",
+      "tests": 6,
+      "passed": 6,
+      "titles": [
+        "maps the four depths and nothing else to unsigned little-endian PCM",
+        "scans for 0x1a in bounded reads and parses the header without reading the payload",
+        "fails like read_header with INVALIDDATA and refuses the unmirrored forms",
+        "checks the abort signal around every read",
+        "probes the exact SDX: head and registers a demux-only descriptor",
+        "decodes through the PCM backend and refuses copy, input seeks, sdx output and bad inputs before any output opens"
+      ]
+    },
+    {
+      "file": "tests/differential/sdx.test.ts",
+      "tests": 5,
+      "passed": 5,
+      "titles": [
+        "matches native SDX decode framecrc WAV raw and AU for four depths three rates name lengths 0 to 255 and three lengths",
+        "matches native SDX decode with output -ss -t and -frames:a through framecrc and WAV",
+        "refuses SDX -c copy before any output exists while native copies with a 1/90000 time base",
+        "matches native SDX statuses for depth 12 a missing 0x1a and other invalid headers, and refuses unmirrored inputs before output",
+        "matches native -f sdx on free text that native detection would hand to the mov probe"
+      ],
+      "runtimeSeconds": 6,
+      "maxWorkers": 1
+    },
+    {
+      "file": "tests/unit/container-registry*.test.ts",
+      "files": 3,
+      "tests": 17,
+      "passed": 17
+    }
+  ],
+  "nativeComparisons": {
+    "byteExact": 241,
+    "nativeCalls": 90,
+    "statusComparisons": 10,
+    "explicitRefusalsWhereNativeSucceeds": 3,
+    "copyRefusalsAgainstNativeCopy": 8,
+    "breakdown": {
+      "decodeMatrix": 192,
+      "timeSelection": 48,
+      "forcedFormat": 1
+    }
+  },
+  "unsupported": [
+    "muxing (native has no sdx muxer)",
+    "-c copy (native 1/90000 packet timestamps), refused through PREP-COPY",
+    "input -ss",
+    "rate 0 or above INT_MAX (native decoder EINVAL; refused with 234)",
+    "header truncated after the depth byte",
+    "trailing partial sample",
+    "native score-based detection where a higher-scoring probe (e.g. mov on 'free' at byte 4) claims an SDX: file; undeclared EdgeFFmpeg picks sdx",
+    "FLAC path and Workers runtime evidence"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {
+      "id": "sdx.decode",
+      "file": "tests/differential/sdx.test.ts",
+      "name": "matches native SDX decode framecrc WAV raw and AU for four depths three rates name lengths 0 to 255 and three lengths",
+      "modes": [
+        "semantic",
+        "bit-exact-pcm"
+      ],
+      "scope": "48 synthesized inputs (depths 8/16/24/32 x 8000/22050/44100 Hz x names 0/1/17/255 bytes) x 4 decode outputs (framecrc, WAV, s32le, AU) byte-exact against native run at test time. Wave 2 branch wave2/fmt-sdx."
+    },
+    {
+      "id": "sdx.time",
+      "file": "tests/differential/sdx.test.ts",
+      "name": "matches native SDX decode with output -ss -t and -frames:a through framecrc and WAV",
+      "modes": [
+        "semantic",
+        "bit-exact-pcm"
+      ],
+      "scope": "4 inputs x 6 output time profiles x framecrc and WAV, 48 byte-exact comparisons. Wave 2 branch wave2/fmt-sdx."
+    },
+    {
+      "id": "sdx.copy-refusal",
+      "file": "tests/differential/sdx.test.ts",
+      "name": "refuses SDX -c copy before any output exists while native copies with a 1/90000 time base",
+      "modes": [
+        "diagnostic"
+      ],
+      "scope": "Native copy asserted to succeed with #tb 1/90000 and the default packet span; EdgeFFmpeg refuses framecrc and raw copy (exit 1) before output. Wave 2 branch wave2/fmt-sdx."
+    },
+    {
+      "id": "sdx.statuses",
+      "file": "tests/differential/sdx.test.ts",
+      "name": "matches native SDX statuses for depth 12 a missing 0x1a and other invalid headers, and refuses unmirrored inputs before output",
+      "modes": [
+        "diagnostic"
+      ],
+      "scope": "9 native exit statuses (183, host EINVAL mapped to Linux 234) matched with no output; 3 native-accepted inputs refused explicitly. Wave 2 branch wave2/fmt-sdx."
+    },
+    {
+      "id": "sdx.forced",
+      "file": "tests/differential/sdx.test.ts",
+      "name": "matches native -f sdx on free text that native detection would hand to the mov probe",
+      "modes": [
+        "semantic",
+        "bit-exact-pcm"
+      ],
+      "scope": "Native undeclared status 183 (mov probe) asserted; -f sdx framecrc byte-exact. Wave 2 branch wave2/fmt-sdx."
+    },
+    {
+      "id": "sdx.depths",
+      "file": "tests/unit/sdx.test.ts",
+      "name": "maps the four depths and nothing else to unsigned little-endian PCM",
+      "modes": [
+        "semantic"
+      ],
+      "scope": "Depth table and refusals. No native run. Wave 2 branch wave2/fmt-sdx."
+    },
+    {
+      "id": "sdx.header",
+      "file": "tests/unit/sdx.test.ts",
+      "name": "scans for 0x1a in bounded reads and parses the header without reading the payload",
+      "modes": [
+        "semantic"
+      ],
+      "scope": "Header parse at read budgets 1..64, names 0/1/255, bounded requests, packets after a seek. No native run. Wave 2 branch wave2/fmt-sdx."
+    },
+    {
+      "id": "sdx.refusals",
+      "file": "tests/unit/sdx.test.ts",
+      "name": "fails like read_header with INVALIDDATA and refuses the unmirrored forms",
+      "modes": [
+        "diagnostic"
+      ],
+      "scope": "Every refusal with its exit status. No native run. Wave 2 branch wave2/fmt-sdx."
+    },
+    {
+      "id": "sdx.abort",
+      "file": "tests/unit/sdx.test.ts",
+      "name": "checks the abort signal around every read",
+      "modes": [
+        "api"
+      ],
+      "scope": "AbortSignal before, during and after open. No native run. Wave 2 branch wave2/fmt-sdx."
+    },
+    {
+      "id": "sdx.descriptor",
+      "file": "tests/unit/sdx.test.ts",
+      "name": "probes the exact SDX: head and registers a demux-only descriptor",
+      "modes": [
+        "api"
+      ],
+      "scope": "4-byte probe, frozen demux-only descriptor, input seek refusal. No native run. Wave 2 branch wave2/fmt-sdx."
+    },
+    {
+      "id": "sdx.backend",
+      "file": "tests/unit/sdx.test.ts",
+      "name": "decodes through the PCM backend and refuses copy, input seeks, sdx output and bad inputs before any output opens",
+      "modes": [
+        "api"
+      ],
+      "scope": "Backend routing with no output opened on refusal. No native run. Wave 2 branch wave2/fmt-sdx."
+    }
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "Sandbox Node was 22.23.5 and bootstrap requires Node 24, so Node 24.22.3 was installed from the npm 'node@24' package (~6 s) and used for every run.",
+    "Setup durations: bootstrap 281.7 s total (npm 10.5 s, submodule 8.4 s, reference build ~263 s on 4 vCPUs); baseline typecheck+lint+boundaries+registry tests ~86 s.",
+    "Baseline before changes: typecheck, lint, boundaries and tests/unit/container-registry*.test.ts (3 files, 17 tests) passed; all still pass after.",
+    "No linux-gated cases: integer and byte-copy paths only.",
+    "Probe: native mov_probe outscores sdx_probe (50) when bytes 4..7 are an mp4 atom type such as 'free'; this divergence is tested and documented, not mirrored."
+  ]
+}
