@@ -1,0 +1,19 @@
+Scoped colorcontrast video filter
+
+The option table (rc, gm, by, rcw, gmw, byw, pl as AV_OPT_TYPE_FLOAT), pixel_fmts,
+config_input's step and ff_fill_rgba_map offsets, the lerpf helper, the PROCESS
+macro and the eight-bit slice functions colorcontrast_slice8 (gbrp) and
+colorcontrast_slice8p (packed RGB(A)) in src/video-ops/colorcontrast.ts follow
+libavfilter/vf_colorcontrast.c (colorcontrast_options, pixel_fmts, config_input,
+filter_frame, lerpf, PROCESS, colorcontrast_slice8, colorcontrast_slice8p), with
+the av_clipf, av_clip_uint8 and FFMAX3/FFMIN3 semantics of libavutil/common.h and
+libavutil/macros.h, and the AV_OPT_TYPE_FLOAT parsing of libavutil/opt.c
+(set_string_number, write_number).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c) 2021 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation, not the complete colorcontrast filter:
+only the eight-bit formats with frame storage here (rgb24, bgr24, rgba, bgra,
+argb, abgr, gbrp), single-precision arithmetic emulated with Math.fround, no
+timeline and no runtime commands.
