@@ -1,0 +1,67 @@
+{
+  "capabilityId": "demuxer.voc",
+  "slug": "fmt-voc",
+  "status": "complete",
+  "filesChanged": [
+    "packages/containers/src/voc.ts",
+    "packages/containers/NOTICE-VOC",
+    "docs/contributing/voc-support.md",
+    "tests/unit/voc.test.ts",
+    "tests/differential/voc.test.ts",
+    "docs/contributing/wave2/fmt-voc.json",
+    "packages/containers/src/registry.ts"
+  ],
+  "sharedEdits": [
+    {"file": "packages/containers/src/registry.ts", "edit": "+1 line: export {voc} from './voc.js'; (alphabetical, after streamhash)"}
+  ],
+  "tests": [
+    {"file": "tests/unit/voc.test.ts", "title": "parses type 1, type 8 + type 1 and type 9 VOC block chains with bounded reads and integer rate formulas", "passed": 1, "failed": 0},
+    {"file": "tests/unit/voc.test.ts", "title": "accepts only one uniform VOC packet span and refuses unmirrored layouts and fields", "passed": 1, "failed": 0},
+    {"file": "tests/unit/voc.test.ts", "title": "probes the VOC magic and claims only the score-100 version check", "passed": 1, "failed": 0},
+    {"file": "tests/unit/voc.test.ts", "title": "writes native VOC header, first-block and continuation words", "passed": 1, "failed": 0},
+    {"file": "tests/unit/voc.test.ts", "title": "muxes one VOC block per native packet from the framing and writes the terminator", "passed": 1, "failed": 0},
+    {"file": "tests/unit/voc.test.ts", "title": "aborts VOC output exactly once and honors cancellation", "passed": 1, "failed": 0},
+    {"file": "tests/unit/voc.test.ts", "title": "registers the VOC descriptor with native names, codecs, span and seek refusal", "passed": 1, "failed": 0},
+    {"file": "tests/differential/voc.test.ts", "title": "matches native VOC mux bytes from WAV and raw input for 4 codecs x 2 layouts with copy, re-encode, packet regrouping and output time limits", "passed": 1, "failed": 0},
+    {"file": "tests/differential/voc.test.ts", "title": "matches native VOC demux of native-muxed and hand-built files through copy and decoded framecrc, WAV and raw", "passed": 1, "failed": 0},
+    {"file": "tests/differential/voc.test.ts", "title": "refuses VOC inputs and outputs with the native exit status before any output exists", "passed": 1, "failed": 0},
+    {"file": "tests/unit/container-registry.test.ts", "title": "(whole file, unchanged)", "passed": 9, "failed": 0},
+    {"file": "tests/unit/container-registry-extension.test.ts", "title": "(whole file, unchanged)", "passed": 7, "failed": 0}
+  ],
+  "nativeComparisons": {
+    "count": 456,
+    "details": [
+      "180 whole-file mux byte comparisons: 4 codecs x 1/2 channels x 1/777/5000 samples x (WAV copy, WAV re-encode, raw -f voc); 48 asetnsamples/apad/chain/output -ss -t/-frames:a/-t copy cases; 60 rate cases (5 rates x 1/2/3 channels x 4 codecs)",
+      "264 demux comparisons over 47 files (16 native-muxed from raw and WAV, 31 hand-built): decoded framecrc, -bitexact WAV and asetnsamples+-t framecrc for all; copy framecrc, raw copy and VOC copy for the 41 copyable files",
+      "5 header-size refusals: native host ENOSYS, Edge 218",
+      "5 mux codec refusals: 234 on both sides",
+      "2 native-accepted inputs (input -ss, undeclared score-10 file) refused by Edge with exit 1 and no output"
+    ]
+  },
+  "unsupported": [
+    "ADPCM codec tags 1, 2, 3, 0x200 and unknown tags (exit 1)",
+    "Block layouts without one uniform packet span, size-0 blocks, empty voice blocks, repeated type 1/9 blocks (mid-stream codec or rate changes), misplaced or non-4-byte type-8 blocks, block types 3-7 and >9",
+    "Input -ss > 0",
+    "Undeclared detection of files whose version check fails (native score 10); -f voc works",
+    "-c copy of type-1 non-u8 input or type-9 input with a non-native bit width (copyRefusal; decode works)",
+    "More than 255 output channels, pcm_u8 multichannel rate*channels above INT_MAX, packets above the 24-bit block size",
+    "FLAC input to the voc muxer",
+    "Unknown-length / pipe output",
+    "Workers-runtime and macOS arm64 evidence"
+  ],
+  "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+  "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "proposedContracts": [
+    {"id": "voc.bitexact-mux", "file": "tests/differential/voc.test.ts", "name": "matches native VOC mux bytes from WAV and raw input for 4 codecs x 2 layouts with copy, re-encode, packet regrouping and output time limits", "modes": ["semantic", "bit-exact", "bit-exact-pcm"], "scope": "180 whole-file native VOC mux comparisons: u8/s16le/alaw/mulaw x 1/2 channels x 3 lengths from WAV copy, WAV re-encode and raw; asetnsamples=n=700:p=0 (bytes differ from default framing), apad, a filter chain, output -ss/-t/-frames:a; 5 rates x 1/2/3 channels covering the type-1 time constant wrap and the type-8 word."},
+    {"id": "voc.demux", "file": "tests/differential/voc.test.ts", "name": "matches native VOC demux of native-muxed and hand-built files through copy and decoded framecrc, WAV and raw", "modes": ["semantic", "bit-exact", "bit-exact-pcm"], "scope": "47 files: native-muxed from raw and WAV (2048-byte rows from 4096-byte blocks), hand-built type 9 uniform layouts at 1/2/3 channels, single type 1, type 8 stereo + type 1 with terminator and trailing bytes, failed version check with -f voc; decoded/copy framecrc, WAV, raw and VOC copy."},
+    {"id": "voc.refusals", "file": "tests/differential/voc.test.ts", "name": "refuses VOC inputs and outputs with the native exit status before any output exists", "modes": ["semantic", "diagnostic"], "scope": "Header size != 26 (native host ENOSYS mapped to Linux 218), 5 unsupported mux codecs (234, 'unsupported codec'), and Edge-only refusals of input -ss and undeclared score-10 files, with no Edge output created."}
+  ],
+  "sharedEditsNeeded": [],
+  "notes": [
+    "No shared edit beyond the registry line; pcm-framing.ts and framecrc.ts are unchanged and used as provided (planPcmFraming + framePcmPackets).",
+    "The type-8 rate 256000000/(ch*(65536-sr)) can never be 0 (divisor <= 2^24), so ff_voc_get_packet's type-1 fallback after a type-8 block is unreachable; tested with a rate word of 0.",
+    "Differential harness uses maxReadBytes/maxWriteBytes 65536 and maxBufferBytes 65536: with maxBufferBytes 4096 the asetnsamples+apad chain hit 'Reframed audio exceeds the configured buffer budget' (pipeline budget, not voc), and with node filesystem maxReadBytes 4096 below the pipeline's read budget the read failed with 'Invalid Node read range'.",
+    "Environment: sandbox Node was 22.23.5; Node 24.22.3 from /opt/node24 was used for everything.",
+    "Setup durations: bootstrap (npm ci 10.5s, submodule 8.3s, reference build) 240s total; baseline typecheck+lint+boundaries+registry tests 69s; voc differential file ~7s; voc unit file <1s."
+  ]
+}
