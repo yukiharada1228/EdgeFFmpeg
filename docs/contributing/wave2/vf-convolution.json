@@ -1,0 +1,262 @@
+{
+ "capabilityId": "filter.convolution",
+ "slug": "vf-convolution",
+ "status": "complete",
+ "filesChanged": [
+  "packages/avfilter/src/video-ops/convolution.ts",
+  "packages/avfilter/src/video-convolution.ts",
+  "packages/avfilter/NOTICE-CONVOLUTION",
+  "tests/unit/video-convolution.test.ts",
+  "tests/differential/video-convolution.test.ts",
+  "docs/contributing/convolution.md",
+  "docs/contributing/wave2/vf-convolution.json",
+  "packages/avfilter/src/video-ops/registry.ts (shared)"
+ ],
+ "sharedEdits": [
+  "packages/avfilter/src/video-ops/registry.ts: +1 line `import {convolutionOperator} from './convolution.js';`",
+  "packages/avfilter/src/video-ops/registry.ts: +1 line ` convolutionOperator,`"
+ ],
+ "tests": [
+  {
+   "file": "tests/unit/video-convolution.test.ts",
+   "name": "parses native defaults, shorthand order, modes, separators and float rdiv and bias into frozen param_init planes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-convolution.test.ts",
+   "name": "convolves square, row and column taps with mirrored edges, wrapped sums and unfused float rounding into owned tight planes",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-convolution.test.ts",
+   "name": "refuses native null-filter planes, unsupported layouts, budgets, malformed storage, settings and cancellation explicitly",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-convolution.test.ts",
+   "name": "budgets linear and graph plans, negotiates native formats and refuses timeline and runtime commands",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/unit/video-operator-registry.test.ts",
+   "name": "(whole file, unchanged; runs the six convolution examples on all five paths)",
+   "passed": 8,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "matches native integer convolution for every format, mode, matrix size, plane selection and size with default and single filter threads",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "matches native float convolution rdiv, bias and conversion edges on linux-x64",
+   "passed": 1,
+   "failed": 0,
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "matches native integer convolution rawvideo and framecrc through the -vf, -filter_complex and timed backend CLIs with and without -ss/-t",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "matches native float convolution through the -vf, -filter_complex and timed backend CLIs on linux-x64",
+   "passed": 1,
+   "failed": 0,
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "matches native replayed integer convolution branches frame by frame",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "refuses invalid and unimplemented convolution options on every path before opening outputs, with native statuses for native refusals",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "refuses processed identity planes whose rdiv or bias clears the copy, where native calls a null filter, before opening outputs on every path",
+   "passed": 1,
+   "failed": 0
+  },
+  {
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+   "passed": 1,
+   "failed": 0
+  }
+ ],
+ "nativeComparisons": {
+  "count": 4437,
+  "details": [
+   "1428 integer raw byte comparisons (714 linear + 714 graph): 17 integer filters x 6 formats (gray, yuv420p, yuv422p, yuv444p, yuva420p, gbrp) x 7 sizes (1x1, 2x2, 5x3, 7x5, 8x6, 17x9, 40x7) x 3 frames (noise, ramp/edges, constant); plus 504 native default-threads vs -filter_complex_threads 1 agreements for the 12 filters without column mode (all platforms)",
+   "840 float raw byte comparisons (420 linear + 420 graph): 10 float rdiv/bias filters x 6 formats x 7 sizes; plus 252 thread agreements for the 6 filters without column mode (linux-x64 only)",
+   "1728 integer whole-output CLI comparisons: 6 formats x {7x5,17x9} x 4 chains x {rawvideo,framecrc} x 3 timing scopes (none, -ss 0.04 input + -t 0.05, -ss 0.04 -frames:v 1) x 6 executions (-vf linear, -filter_complex graph, two-input stream, timed activation and producer = actor, timed pull = timed)",
+   "288 float whole-output CLI comparisons: 6 formats x 7x5 x 2 chains x 2 muxers x 2 scopes x 6 executions (linux-x64 only)",
+   "24 createReplayVideoExecution graphs (raw bytes and PTS)",
+   "16 native refusal-status observations (10 native refusals: exit 234 EINVAL, 222 ERANGE or 8 option not found from os.constants.errno; 6 natively accepted forms refused here) with 80 EdgeFFmpeg path refusals",
+   "24 null-filter cases: 17 native SIGSEGV observations refused here on 5 paths (85 refusals) and 7 byte matches where the plane is absent",
+   "89 per-source negotiation checks (13 sources byte-exact on every path, 4 packed-alpha sources refused naming gbrap)"
+  ]
+ },
+ "unsupported": [
+  "enable= timeline expressions",
+  "all runtime commands (option commands return ENOSYS, enable returns AVERROR_PATCHWELCOME); native accepts them and reruns param_init",
+  "matrix tokens that are not plain decimal int32 (native sscanf keeps a leading integer or leaves a stale element), more than 49 tokens (native ignores the rest)",
+  "expression or non-decimal rdiv/bias values (constant decimal literals only)",
+  "processed identity square planes with rdiv != 1 or bias != 0, which crash natively (null filter pointer, SIGSEGV)",
+  "9-16 bit formats (filter16_*) and native formats without frame storage here (yuva444p, yuva422p, yuv440p, yuvj440p, yuvj411p, yuv411p, yuv410p, gbrap, gray9-16); negotiated picks such as gbrap from packed RGB with alpha are refused by name",
+  "native column-mode outputs whose 16-column groups overrun the frame linesize (slice threading, -cpuflags 0): EdgeFFmpeg returns the defined mirrored column result, equal to single-threaded native at the default alignment",
+  "no planes option exists natively; per-plane selection is by identity matrices",
+  "EdgeFFmpeg CLI exit status for filter refusals is 1, not native errno status (shared front-end mapping)",
+  "no H.264/MP4 framecrc convolution comparison"
+ ],
+ "linuxReferenceSha256": "ac302e4d39cbc513f34e19f154ee9be432729ef980566d034b5706e17eef893c",
+ "ccVersion": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "proposedContracts": [
+  {
+   "id": "video.convolution-integer-matrix",
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "matches native integer convolution for every format, mode, matrix size, plane selection and size with default and single filter threads",
+   "modes": [
+    "bit-exact-video"
+   ],
+   "scope": "1428 linear/graph raw comparisons over 17 integer filters, 6 formats and 7 sizes, and 504 native thread-agreement checks."
+  },
+  {
+   "id": "video.convolution-float-matrix",
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "matches native float convolution rdiv, bias and conversion edges on linux-x64",
+   "modes": [
+    "bit-exact-video"
+   ],
+   "scope": "840 linear/graph raw comparisons of float rdiv/bias, conversion and rounding edges, and 252 thread-agreement checks.",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "video.convolution-cli",
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "matches native integer convolution rawvideo and framecrc through the -vf, -filter_complex and timed backend CLIs with and without -ss/-t",
+   "modes": [
+    "bit-exact-video",
+    "bit-exact"
+   ],
+   "scope": "1728 rawvideo and framecrc CLI outputs with and without -ss/-t on linear, graph, stream, actor (activation, producer) and timed (pull)."
+  },
+  {
+   "id": "video.convolution-float-cli",
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "matches native float convolution through the -vf, -filter_complex and timed backend CLIs on linux-x64",
+   "modes": [
+    "bit-exact-video",
+    "bit-exact"
+   ],
+   "scope": "288 float rawvideo and framecrc CLI outputs on the five paths.",
+   "platforms": [
+    "linux-x64"
+   ]
+  },
+  {
+   "id": "video.convolution-stream",
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "matches native replayed integer convolution branches frame by frame",
+   "modes": [
+    "bit-exact-video"
+   ],
+   "scope": "24 replay graphs, raw bytes and PTS."
+  },
+  {
+   "id": "video.convolution-refusals",
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "refuses invalid and unimplemented convolution options on every path before opening outputs, with native statuses for native refusals",
+   "modes": [
+    "rejection"
+   ],
+   "scope": "16 forms with native statuses; 80 refusals on five paths with no output opened."
+  },
+  {
+   "id": "video.convolution-null-filter",
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "refuses processed identity planes whose rdiv or bias clears the copy, where native calls a null filter, before opening outputs on every path",
+   "modes": [
+    "rejection",
+    "bit-exact-video"
+   ],
+   "scope": "17 native SIGSEGV cases refused on five paths before output; 7 byte matches where the plane is absent."
+  },
+  {
+   "id": "video.convolution-negotiation",
+   "file": "tests/differential/video-convolution.test.ts",
+   "name": "negotiates every accepted source as native does and refuses the packed-alpha gbrap picks before output on every path",
+   "modes": [
+    "bit-exact-video",
+    "rejection"
+   ],
+   "scope": "Native picks from 17 sources; gbrap refused by name on every path."
+  },
+  {
+   "id": "video.convolution-options-api",
+   "file": "tests/unit/video-convolution.test.ts",
+   "name": "parses native defaults, shorthand order, modes, separators and float rdiv and bias into frozen param_init planes",
+   "modes": [
+    "unit"
+   ],
+   "scope": "Parser, refusals and descriptor facts."
+  },
+  {
+   "id": "video.convolution-frame-api",
+   "file": "tests/unit/video-convolution.test.ts",
+   "name": "convolves square, row and column taps with mirrored edges, wrapped sums and unfused float rounding into owned tight planes",
+   "modes": [
+    "unit"
+   ],
+   "scope": "Kernel semantics on hand-computed and independently referenced frames."
+  },
+  {
+   "id": "video.convolution-limits",
+   "file": "tests/unit/video-convolution.test.ts",
+   "name": "refuses native null-filter planes, unsupported layouts, budgets, malformed storage, settings and cancellation explicitly",
+   "modes": [
+    "unit"
+   ],
+   "scope": "Null-filter refusal, budgets, storage, settings and cancellation."
+  },
+  {
+   "id": "video.convolution-plans",
+   "file": "tests/unit/video-convolution.test.ts",
+   "name": "budgets linear and graph plans, negotiates native formats and refuses timeline and runtime commands",
+   "modes": [
+    "unit"
+   ],
+   "scope": "Plan budgeting, negotiation and command refusal."
+  }
+ ],
+ "sharedEditsNeeded": [],
+ "notes": [
+  "Setup: the sandbox Node was v22.23.5 and bootstrap requires Node 24; /opt/node24 (v24.22.3) was used for every command. bootstrap --only npm,submodule,reference --allow-unpinned-reference took 232.1s (npm 9.7s, submodule 12.6s, reference build 209.8s). Baseline typecheck+lint+boundaries 60s clean; registry unit test 8/8 before changes.",
+  "The sandbox reference (ac302e4d) differs from the linux-x64 pin; the differential tests check only commit 946fcce0 and --disable-x86asm from build-metadata.json.",
+  "Native defect found: an identity square matrix with rdiv != 1 or bias != 0 on a processed plane makes native call a null filter pointer (SIGSEGV), e.g. convolution=0bias=5. Refused here in geometry and frame.",
+  "Native defect found: filter_column writes 16-column groups from every slice start past the row end; when a group passes the linesize (slice threads, -cpuflags 0) native output depends on write order (observed: gray 64x9 and 128x9 default threads vs -filter_threads 1; 8x6, 17x9, 32x9, 33x9 under -cpuflags 0). EdgeFFmpeg returns the defined result; column filters are compared with single-threaded native, and the [THREADS] agreement is asserted for square and row filters only. The negotiation filter avoids column mode because the helper runs native with -cpuflags 0.",
+  "The scope mentions a planes option, but vf_convolution.c declares none (native: Option not found, exit 8). It is refused; per-plane selection uses identity matrices.",
+  "Float gate: no macOS difference was measured (precaution). Mutating the emulation to a fused multiply-add or to a double intermediate fails the float matrix test on this Linux build.",
+  "Differential file runtime: about 22s with --maxWorkers=1 on 4 vCPUs."
+ ]
+}

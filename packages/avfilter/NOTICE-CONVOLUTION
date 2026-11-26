@@ -1,0 +1,17 @@
+Scoped convolution video filter
+
+The option table, matrix parsing, rdiv and bias resolution, identity copy,
+pixel-format list, avpriv_mirror edge setup and the eight-bit square (3x3,
+5x5, 7x7), row and column kernels in src/video-convolution.ts and
+src/video-ops/convolution.ts follow libavfilter/vf_convolution.c
+(convolution_options, pix_fmts, param_init, filter_slice, filter_3x3,
+filter_5x5, filter_7x7, filter_row, filter_column, setup_5x5, setup_7x7,
+setup_row, setup_column), libavfilter/convolution.h (setup_3x3) and
+libavutil/internal.h (avpriv_mirror).
+Fixed FFmpeg commit:946fcce07b6dcd0331c8cc609192aeff5e1924f8
+Copyright (c)2012-2013 Oka Motofumi;(c)2015 Paul B Mahol. LGPL-2.1-or-later.
+See COPYING.LGPLv2.1 and ../../LICENSES/LGPL-2.1-or-later.txt.
+The original source and full notices remain in the pinned upstream submodule.
+This is a scoped TypeScript adaptation of the eight-bit convolution filter,not
+the complete vf_convolution.c family (prewitt, sobel, roberts, kirsch and
+scharr, the 9-16 bit kernels and the x86 assembly are not included).
